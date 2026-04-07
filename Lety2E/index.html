@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>lety2E</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<script src="nav.js"></script>
+
+<main>
+
+  <h1 class="hero-title">lety2E</h1>
+
+  <!-- IMAGEN ANCHO COMPLETO -->
+  <div class="hero-img">
+    <!--
+      Sube la ilustración a: public_html/assets/img/ilustracion.png
+      El HTML la cargará automáticamente desde ahí.
+    -->
+    <img src="assets/img/ilustracion.png" alt="Lety"
+         onerror="this.parentElement.innerHTML='<div class=hero-img-ph><span>2e</span><p>aquí va tu ilustración</p></div>'">
+  </div>
+
+  <!-- BIO -->
+  <div class="bio-center">
+    <p class="bio-text">Estudio, enseño, canto, emprendo, escribo y construyo<br>desde una mente que no sigue el guión neurotípico.<br>Este es el espacio donde todo eso convive.</p>
+    <p class="bio-firma" style="color:var(--P);font-weight:700;font-style:normal;font-family:'DM Sans',sans-serif"><strong>2E</strong>: EA + AAC</p>
+  </div>
+
+  <!-- BOTONES fila 1: 3 -->
+  <div class="btns-top">
+    <a href="/escritos/"     class="nbtn nb-esc">Escritos</a>
+    <a href="/musica/"       class="nbtn nb-cant">Cantos</a>
+    <a href="/la-turquesa/"  class="nbtn nb-playa">La Turquesa</a>
+  </div>
+
+  <!-- BOTONES fila 2: 2 -->
+  <div class="btns-bottom">
+    <a href="https://letymath.com" target="_blank" class="nbtn nb-lm">LetyMath</a>
+    <a href="/aprendiz/"           class="nbtn nb-apr">Apuntes</a>
+  </div>
+
+</main>
+
+<script src="footer.js"></script>
+
+</body>
+</html>
