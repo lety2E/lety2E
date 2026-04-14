@@ -489,8 +489,17 @@ body[data-section="home"] main {
 }
 
 @media (max-width: 768px) {
-  .footer-inner { flex-direction: column; align-items: flex-start; }
-  .footer-row-1 { flex-direction: column; }
+  .footer-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .footer-row-1 {
+    flex-direction: row;
+    gap: 1rem;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+  }
 }
 
 /* ── Utilidades ─────────────────────────────────── */
