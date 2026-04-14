@@ -10,7 +10,7 @@
   /* ── Configuración de secciones ─────────────── */
   const SECTIONS = {
     escritos: {
-      name: 'Escritos',
+      name: 'lety2E Escritos',
       links: [
         { text: 'Historias', href: 'historias/index.html' },
         { text: 'Poemas', href: 'poemas/index.html' },
@@ -19,7 +19,7 @@
       ]
     },
     apuntes: {
-      name: 'Apuntes',
+      name: 'lety2E Apuntes',
       links: [
         { text: 'Historia', href: 'historia-mexico/index.html' },
         { text: 'Física', href: 'fisica/index.html' },
