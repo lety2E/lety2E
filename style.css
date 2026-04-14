@@ -423,8 +423,17 @@ body[data-section="home"] main {
 }
 
 /* ── Responsive general ─────────────────────────── */
-@media (max-width: 500px) {
+@media (max-width: 600px) {
   main { padding: 1.5rem 1rem 2rem; }
+
+  /* Grids en móvil: 2 columnas */
+  .topic-grid,
+  .category-grid,
+  .course-grid,
+  .content-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
 }
 
 /* ================================================
