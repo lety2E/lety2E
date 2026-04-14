@@ -27,6 +27,9 @@
             '</div>' +
             '<span class="footer-brand-name">lety2E</span>' +
           '</a>' +
+          '<a href="https://www.facebook.com/profile.php?id=61575397726538" target="_blank" rel="noopener" class="footer-social" title="Sígueme en Facebook">' +
+            '<span class="social-icon">f</span>' +
+          '</a>' +
         '</div>' +
         '<span class="footer-copy">&copy; ' + year + ' lety2E &nbsp;&middot;&nbsp; todos los derechos reservados</span>' +
       '</div>' +

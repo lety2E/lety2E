@@ -127,11 +127,32 @@
     '<header class="site-nav">' +
       '<div class="nav-inner">' +
         brandHTML +
-        '<nav>' +
+        '<button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">' +
+          '<span></span><span></span><span></span>' +
+        '</button>' +
+        '<nav class="nav-menu">' +
           '<ul class="nav-links">' + linksHTML + '</ul>' +
         '</nav>' +
       '</div>' +
     '</header>';
 
   document.body.insertAdjacentHTML('afterbegin', nav);
+
+  /* Toggle menu en móviles */
+  var toggle = document.querySelector('.nav-toggle');
+  var menu = document.querySelector('.nav-menu');
+  if (toggle && menu) {
+    toggle.addEventListener('click', function() {
+      var isOpen = toggle.getAttribute('aria-expanded') === 'true';
+      toggle.setAttribute('aria-expanded', !isOpen);
+      menu.classList.toggle('open');
+    });
+    /* Cerrar menú al hacer click en un link */
+    menu.querySelectorAll('a').forEach(function(link) {
+      link.addEventListener('click', function() {
+        toggle.setAttribute('aria-expanded', 'false');
+        menu.classList.remove('open');
+      });
+    });
+  }
 })();
