@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Jerarquía de operaciones — Matemáticas 1 — LetyMath</title>
-  <meta name="description" content="Ejemplos, ejercicios y respuestas de jerarquía de operaciones para Matemáticas 1." />
+  <title>{{TITULO}} — Matemáticas {{CURSO}} — LetyMath</title>
+  <meta name="description" content="{{META_DESC}}" />
   <link rel="stylesheet" href="../../style.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" />
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
@@ -61,31 +61,42 @@
       transition: max-height .4s ease, padding .3s ease;
       padding: 0;
     }
-    .collapsible.show {
-      max-height: 8000px;
-      padding: .8rem 0;
-    }
+    .collapsible.show { max-height: 8000px; padding: .8rem 0; }
 
-    /* ── Video ── */
+    /* Video */
     .video-single { max-width: 720px; margin: 0 auto; }
+    .videos-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    @media (max-width: 700px) { .videos-row { grid-template-columns: 1fr; } }
+    .video-label {
+      font-family: var(--font-mono, monospace); font-size: .68rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .07em; color: var(--text-3); margin-bottom: .4rem;
+    }
     .video-wrapper {
       position: relative; padding-bottom: 56.25%; height: 0;
       overflow: hidden; border-radius: var(--r-md); background: #000;
     }
     .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
 
-    /* ── Ejemplo ── */
+    /* Apuntes (opcional) */
+    .reglas-grid { display: grid; grid-template-columns: 1fr 1fr; gap: .85rem; margin: 1rem 0; }
+    @media (max-width: 480px) { .reglas-grid { grid-template-columns: 1fr; } }
+    .regla-card {
+      background: var(--bg-card); border: 1.5px solid var(--border);
+      border-radius: var(--r-sm); padding: .85rem;
+    }
+    .regla-card-title { font-weight: 700; font-size: .85rem; margin-bottom: .4rem; color: var(--course-1); }
+    .regla-card-body { font-size: .82rem; color: var(--text-2); line-height: 1.65; }
+
+    /* Ejemplo */
     .ejemplo-section { margin: 2rem 0 2.5rem; }
     .ejemplo-head {
       display: flex; align-items: center; gap: .65rem;
       margin-bottom: 1rem;
     }
     .ejemplo-head h3 {
-      margin: 0;
-      font-family: var(--font-display);
+      margin: 0; font-family: var(--font-display);
       font-size: 1.2rem; line-height: 1;
-      color: var(--M);
-      font-style: italic;
+      color: var(--M); font-style: italic;
     }
     .ejemplo-block {
       padding: 2rem 1.5rem;
@@ -94,14 +105,13 @@
       border-radius: var(--r-md);
       color: var(--text);
     }
-    .ejemplo-grid {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;
-    }
+    .ejemplo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
     @media (max-width: 700px) { .ejemplo-grid { grid-template-columns: 1fr; } }
     .ejemplo-item { text-align: center; font-size: 1.02rem; }
     .ejemplo-block strong { color: var(--M); font-weight: 700; }
+    .ejemplo-inline { text-align: center; font-size: 1.1rem; line-height: 2.8; }
 
-    /* ── Tarjeta compacta (bloque) ── */
+    /* Mini card (bloque) */
     .mini-card {
       background: var(--bg-card); border: 1.5px solid var(--border);
       border-radius: var(--r-md); overflow: hidden;
@@ -114,16 +124,18 @@
       padding: .8rem 1rem;
       font-size: .9rem; line-height: 2; color: var(--text);
     }
-    .mini-card-body .sol {
-      margin: .3rem 0 1.2rem;
-    }
+    .mini-card-body .sol { margin: .3rem 0 1.2rem; }
     .mini-card-body .sol:last-child { margin-bottom: 0; }
 
-    /* ── Bloques en grid 2 columnas ── */
+    /* Grids de bloques */
+    .bloques-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    @media (max-width: 700px) { .bloques-3 { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 480px) { .bloques-3 { grid-template-columns: 1fr; } }
+
     .bloques-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2rem; }
     @media (max-width: 700px) { .bloques-2 { grid-template-columns: 1fr; } }
 
-    /* ── Nav ── */
+    /* Navegación */
     .topic-nav-btns {
       display: flex; justify-content: space-between; gap: 1rem;
       margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border);
@@ -148,14 +160,17 @@
     <header class="topic-header">
       <p class="breadcrumb">
         <a href="../index.html">Inicio</a> ›
-        <a href="index.html">Matemáticas 1</a> ›
-        Jerarquía de operaciones
+        <a href="index.html">Matemáticas {{CURSO}}</a> ›
+        {{TITULO}}
       </p>
-      <div class="topic-tag">Matemáticas 1 · Tema 2</div>
-      <h1>Jerarquía de operaciones</h1>
+      <div class="topic-tag">Matemáticas {{CURSO}} · Tema {{NUM_TEMA}}</div>
+      <h1>{{TITULO}}</h1>
     </header>
 
-    <!-- ══════════ VIDEO ══════════ -->
+    <!-- ══════════ VIDEO (opcional) ══════════
+    Para 1 video: usa <div class="video-single"> con un <div class="video-wrapper"> adentro.
+    Para 2 videos: usa <div class="videos-row"> con dos bloques, cada uno con <p class="video-label"> y <div class="video-wrapper">.
+    -->
     <section class="section-block">
       <div class="sec-head">
         <div class="sec-icon">
@@ -165,10 +180,29 @@
       </div>
       <div class="video-single">
         <div class="video-wrapper">
-          <iframe src="https://www.youtube.com/embed/VeX9Enr2MIM?rel=0" title="Jerarquía de operaciones" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          <iframe src="https://www.youtube.com/embed/{{VIDEO_ID}}?rel=0" title="{{TITULO}}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
       </div>
     </section>
+
+    <!-- ══════════ APUNTES (opcional — solo si Lety provee contenido) ══════════ -->
+    <!-- <section class="section-block">
+      <div class="sec-head">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+        </div>
+        <h2>Apuntes</h2>
+      </div>
+      <div class="apunte-box">
+        <p style="margin-bottom:1.1rem; line-height:1.75;">...intro...</p>
+        <div class="reglas-grid">
+          <div class="regla-card">
+            <div class="regla-card-title">...título regla...</div>
+            <div class="regla-card-body">...contenido...</div>
+          </div>
+        </div>
+      </div>
+    </section> -->
 
     <!-- ══════════ EJEMPLO ══════════ -->
     <section class="section-block ejemplo-section">
@@ -179,31 +213,34 @@
         <h3>Ejemplo</h3>
       </div>
       <p style="margin-bottom:1rem; line-height:1.75;">
-        Resuelve aplicando la jerarquía de operaciones:
+        {{INTRO_EJEMPLO}}
       </p>
       <div class="ejemplo-block">
+        <!-- Opción A: inline (para ejemplos simples, una línea c/u)
+        <div class="ejemplo-inline">
+          $... = ... = $ <strong>$...$</strong><br>
+          ...
+        </div>
+        -->
+        <!-- Opción B: grid 2 col con aligned (para ejemplos multi-paso) -->
         <div class="ejemplo-grid">
           <div class="ejemplo-item">
             $$\begin{aligned}
-              -5+6(-3+8)-4(-3)(2)-5(-3)^2 &= \\
-              -5+6(5)+24-5(9) &= \\
-              -5+30+24-45 &= \\
-              -50+54 &= \mathbf{4}
+              ... &= \\
+              ... &= \mathbf{...}
             \end{aligned}$$
           </div>
           <div class="ejemplo-item">
             $$\begin{aligned}
-              2[-5(-3(-2+8))] &= \\
-              2[-5(-3(6))] &= \\
-              2[-5(-18)] &= \\
-              2[90] &= \mathbf{180}
+              ... &= \\
+              ... &= \mathbf{...}
             \end{aligned}$$
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ══════════ EJERCICIOS ══════════ -->
+    <!-- ══════════ EJERCICIOS (siempre visibles) ══════════ -->
     <section class="section-block">
       <div class="sec-head">
         <div class="sec-icon">
@@ -212,30 +249,20 @@
         <h2>Ejercicios</h2>
       </div>
       <div>
-        <div class="bloques-2">
+        <div class="{{GRID_CLASS}}">
+          <!-- Usar .bloques-3 (3 col) o .bloques-2 (2 col) según complejidad -->
           <div class="mini-card">
             <div class="mini-card-head">Bloque 1</div>
             <div class="mini-card-body">
-              $4-2(-1)(-5)+6(-1+4)-3(-5)^2=$<br>
-              $5(-2)(3)+4(-1-5)-3+4(-1)^2=$<br>
-              $5[-3(4(-1-2))]=$<br>
-              $-3[2(-5(-4+10))]=$
-            </div>
-          </div>
-          <div class="mini-card">
-            <div class="mini-card-head">Bloque 2</div>
-            <div class="mini-card-body">
-              $8-6(3-4)-2(3)^2+2(6)(-1)=$<br>
-              $3(-2)^4+6-3(-4)(-1)+7(-3+10)=$<br>
-              $4[-3(2(-10+4))]=$<br>
-              $-6[5(-4(3+7))]=$
+              $...=$<br>
+              $...=$
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ══════════ RESPUESTAS ══════════ -->
+    <!-- ══════════ RESPUESTAS (colapsable) ══════════ -->
     <section class="section-block">
       <div class="sec-toggle" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('show');">
         <div class="sec-icon">
@@ -245,89 +272,28 @@
         <span class="chev">▼</span>
       </div>
       <div class="collapsible">
-        <div class="bloques-2">
-
+        <div class="{{GRID_CLASS}}">
           <div class="mini-card">
             <div class="mini-card-head">Bloque 1</div>
             <div class="mini-card-body">
+              <!-- Opción A: una línea con = encadenados (respuestas cortas)
+              $... = ... = $ <strong>$...$</strong><br>
+              $... = ... = $ <strong>$...$</strong>
+              -->
+              <!-- Opción B: multi-línea con aligned (respuestas multi-paso) -->
               <div class="sol">
                 $$\begin{aligned}
-                  4-2(-1)(-5)+6(-1+4)-3(-5)^2 &= \\
-                  4-10+6(3)-3(25) &= \\
-                  4-10+18-75 &= \\
-                  22-85 &= \mathbf{-63}
-                \end{aligned}$$
-              </div>
-              <div class="sol">
-                $$\begin{aligned}
-                  5(-2)(3)+4(-1-5)-3+4(-1)^2 &= \\
-                  -30+4(-6)-3+4(1) &= \\
-                  -30-24-3+4 &= \\
-                  -57+4 &= \mathbf{-53}
-                \end{aligned}$$
-              </div>
-              <div class="sol">
-                $$\begin{aligned}
-                  5[-3(4(-1-2))] &= \\
-                  5[-3(4(-3))] &= \\
-                  5[-3(-12)] &= \\
-                  5[36] &= \mathbf{180}
-                \end{aligned}$$
-              </div>
-              <div class="sol">
-                $$\begin{aligned}
-                  -3[2(-5(-4+10))] &= \\
-                  -3[2(-5(6))] &= \\
-                  -3[2(-30)] &= \\
-                  -3[-60] &= \mathbf{180}
+                  ... &= \\
+                  ... &= \mathbf{...}
                 \end{aligned}$$
               </div>
             </div>
           </div>
-
-          <div class="mini-card">
-            <div class="mini-card-head">Bloque 2</div>
-            <div class="mini-card-body">
-              <div class="sol">
-                $$\begin{aligned}
-                  8-6(3-4)-2(3)^2+2(6)(-1) &= \\
-                  8-6(-1)-2(9)-12 &= \\
-                  8+6-18-12 &= \\
-                  14-30 &= \mathbf{-16}
-                \end{aligned}$$
-              </div>
-              <div class="sol">
-                $$\begin{aligned}
-                  3(-2)^4+6-3(-4)(-1)+7(-3+10) &= \\
-                  3(16)+6-12+7(7) &= \\
-                  48+6-12+49 &= \\
-                  103-12 &= \mathbf{91}
-                \end{aligned}$$
-              </div>
-              <div class="sol">
-                $$\begin{aligned}
-                  4[-3(2(-10+4))] &= \\
-                  4[-3(2(-6))] &= \\
-                  4[-3(-12)] &= \\
-                  4[36] &= \mathbf{144}
-                \end{aligned}$$
-              </div>
-              <div class="sol">
-                $$\begin{aligned}
-                  -6[5(-4(3+7))] &= \\
-                  -6[5(-4(10))] &= \\
-                  -6[5(-40)] &= \\
-                  -6[-200] &= \mathbf{1200}
-                \end{aligned}$$
-              </div>
-            </div>
-          </div>
-
         </div>
       </div>
     </section>
 
-    <!-- ══════════ EJERCICIOS EXTRA ══════════ -->
+    <!-- ══════════ EJERCICIOS EXTRA (colapsable) ══════════ -->
     <section class="section-block">
       <div class="sec-toggle" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('show');">
         <div class="sec-icon">
@@ -337,35 +303,11 @@
         <span class="chev">▼</span>
       </div>
       <div class="collapsible">
-        <div class="bloques-2">
+        <div class="{{GRID_CLASS}}">
           <div class="mini-card">
-            <div class="mini-card-head">Bloque 3</div>
+            <div class="mini-card-head">Bloque N</div>
             <div class="mini-card-body">
-              $-4(-3)(-2)-3(-2+6)+5-4(-3)^2=$<br>
-              $6(2)(-5)+7(8-4)-3+5(2)^3=$<br>
-              $4-3(5)(-2)+6(-9+7)-7(-4)^2=$<br>
-              $-5(4)(3)+6(2-9)-2+8(5)^3=$<br>
-              $7+5(3)(-6)-4(8-5)+9(2)^2=$<br>
-              $-4[-5(-3(-2+8))]=$<br>
-              $7[-3(4(5+1))]=$<br>
-              $-6[5(-2(3-7))]=$<br>
-              $8[-6(2(4+3))]=$<br>
-              $-5[3(-7(6-2))]=$
-            </div>
-          </div>
-          <div class="mini-card">
-            <div class="mini-card-head">Bloque 4</div>
-            <div class="mini-card-body">
-              $-6(5)(-4)+7(2-6)-8+3(4)^2=$<br>
-              $9(3)(-2)-5(7)^3+6(5-1)+2=$<br>
-              $-4+6(-8)^2-3(2-7)+5(3)(-6)=$<br>
-              $8-7(4)(-3)+9(6-2)-5(2)^3=$<br>
-              $-3(2)(5)+6+4(-9+3)-7(3)^2=$<br>
-              $-7[-4(6(-2+9))]=$<br>
-              $6[-5(3(7+4))]=$<br>
-              $-8[3(-6(5-2))]=$<br>
-              $5[-3(2(4+6))]=$<br>
-              $-4[6(-5(1+3))]=$
+              $...=$<br>
             </div>
           </div>
         </div>
@@ -374,8 +316,8 @@
 
     <!-- ══════════ NAVEGACIÓN ══════════ -->
     <div class="topic-nav-btns">
-      <a href="operaciones-basicas.html" class="btn-anterior">← Operaciones básicas</a>
-      <a href="ecuaciones.html" class="btn-siguiente">Ecuaciones →</a>
+      <a href="{{PREV_FILE}}" class="btn-anterior">← {{PREV_TITULO}}</a>
+      <a href="{{NEXT_FILE}}" class="btn-siguiente">{{NEXT_TITULO}} →</a>
     </div>
 
   </main>
