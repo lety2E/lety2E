@@ -1,8 +1,11 @@
 # lety2e.com — Guía de Desarrollo Optimizada
 
-**Última actualización:** Abril 2026  
+**Última actualización:** Abril 2026 (post-migración a GitHub Pages)  
 **Proyecto:** lety2e.com — Sitio personal con Escritos, Apuntes, LetyMath y Cantos  
-**Stack:** HTML5 + CSS3 + Vanilla JS | Hostinger | file:// compatible  
+**Stack:** HTML5 + CSS3 + Vanilla JS | GitHub Pages | file:// compatible  
+**Repo:** `github.com/letymath/lety2E` (branch `main`)  
+**Dominio:** `lety2e.com` (CNAME → GitHub Pages)  
+**Carpeta local de trabajo:** `~/Desktop/lety2E 2/` ← esta es la que está clonada al repo
 
 ---
 
@@ -460,7 +463,7 @@ Por lo tanto, el src debe ser:
 | **Colapsables** | Respuestas y Extras, Ejercicios siempre visibles |
 | **Videos** | 2 lado a lado (grid 2 col) |
 | **Margins** | 2.5rem entre secciones |
-| **Hostinger** | Rutas relativas (file:// compatible) |
+| **GitHub Pages** | Rutas relativas (file:// compatible y servibles desde `/`) |
 
 ---
 
@@ -518,13 +521,39 @@ Por lo tanto, el src debe ser:
 
 ---
 
+## 🚢 Deploy a GitHub Pages
+
+El sitio se publica automáticamente desde el branch `main` del repo `letymath/lety2E`.
+
+### Flujo estándar después de cualquier cambio
+```bash
+cd ~/Desktop/lety2E\ 2/
+git status                       # ver qué cambió
+git add .                        # stage de todo lo modificado
+git commit -m "mensaje claro"    # ej: "favicon: agregar link en páginas de math"
+git push                         # publica a GitHub → Pages actualiza en ~1-2 min
+```
+
+### Archivos críticos del deploy
+- `CNAME` → contiene `lety2e.com` (NO borrar, es el que liga el dominio)
+- `index.html` raíz → portada
+- `favicon.svg` y `favicon.ico` raíz → ícono del sitio
+
+### Verificación después de push
+1. Esperar 1-2 min para que GitHub Pages rebuilde
+2. Abrir `lety2e.com` en **ventana de incógnito** (evita caché)
+3. Si el favicon no aparece, probar `lety2e.com/favicon.svg?v=2` directo
+4. Revisar en GitHub: repo → Settings → Pages → ver status del último deploy
+
+---
+
 ## 💡 Notas Finales
 
 - **Proyecto en crecimiento:** Nuevas secciones agregadas frecuentemente (próxima: Alojamiento)
 - **Minimalista:** La filosofía es "paquetitos" — menos explicación, más estructura
 - **Mantenible:** Un único CSS + Nav + Footer = cambios globales sin duplicados
 - **Responsive:** Compatible con móvil, tablet, desktop
-- **File-compatible:** Funciona tanto con Hostinger como con file:// local
+- **File-compatible:** Funciona tanto servido por GitHub Pages como con file:// local
 
 **Cualquier duda o cambio futuro:** Actualizar este CLAUDE.md para mantener coherencia.
 

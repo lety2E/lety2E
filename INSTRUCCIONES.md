@@ -139,12 +139,15 @@ Todas las URLs son **relativas** para compatibilidad con `file://`:
 
 ## Datos técnicos
 
-- **Hosting:** Hostinger
-- **Dominio:** lety2e.com
+- **Hosting:** GitHub Pages (migrado desde Hostinger en abril 2026)
+- **Repo:** `github.com/letymath/lety2E`, branch `main`
+- **Carpeta local:** `~/Desktop/lety2E 2/` (la que está clonada al repo)
+- **Dominio:** lety2e.com (ligado vía `CNAME`)
 - **Tecnología:** HTML puro + CSS + JS vanilla (sin frameworks)
 - **Fuentes:** Google Fonts (Playfair Display + DM Sans)
 - **KaTeX:** Usado en páginas de LetyMath para fórmulas matemáticas
 - **lety2E Lupian:** Link externo a YouTube (@Lety-lupian)
+- **Deploy:** `git add . && git commit -m "…" && git push` → publica automático en ~1-2 min
 
 ---
 
