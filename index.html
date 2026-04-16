@@ -19,11 +19,14 @@
   <!-- IMAGEN ANCHO COMPLETO -->
   <div class="hero-img">
     <!--
-      Sube la ilustración a: public_html/assets/img/ilustracion.png
+      Sube la ilustración a: public_html/assets/img/ilustracion.webp
       El HTML la cargará automáticamente desde ahí.
     -->
-    <img src="assets/img/ilustracion.png" alt="Lety"
-         onerror="this.parentElement.innerHTML='<div class=hero-img-ph><span>2e</span><p>aquí va tu ilustración</p></div>'">
+    <picture>
+      <source srcset="assets/img/ilustracion.webp" type="image/webp">
+      <img src="assets/img/ilustracion.png" alt="Lety"
+           onerror="this.parentElement.innerHTML='<div class=hero-img-ph><span>2e</span><p>aquí va tu ilustración</p></div>'">
+    </picture>
   </div>
 
   <!-- BIO -->
