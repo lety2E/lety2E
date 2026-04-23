@@ -9,9 +9,10 @@
 
   /* ── Configuración de secciones ─────────────── */
   const SECTIONS = {
-    escritos: {
-      name: 'lety2E Escritos',
+    lupian: {
+      name: 'lety2E Lupián',
       links: [
+        { text: 'Cantos', href: 'https://www.youtube.com/@Lety-lupian/videos', external: true },
         { text: 'Historias', href: 'historias/index.html' },
         { text: 'Poemas', href: 'poemas/index.html' },
         { text: 'Reflexiones', href: 'reflexiones/index.html' },
@@ -42,10 +43,9 @@
   };
 
   const ROOT_LINKS = [
-    { text: 'Escritos', href: 'escritos/index.html' },
-    { text: 'Apuntes', href: 'apuntes/index.html' },
+    { text: 'Lupián', href: 'lupian/index.html' },
     { text: 'Math', href: 'math/index.html' },
-    { text: 'Lupián', href: 'https://www.youtube.com/@Lety-lupian/videos', external: true }
+    { text: 'Apuntes', href: 'apuntes/index.html' }
   ];
 
   /* ── Detectar profundidad (cuántos ../ hay en src) */
