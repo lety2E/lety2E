@@ -893,6 +893,81 @@ body[data-section="home"] main {
 }
 
 /* ================================================
+   APUNTES — grid de tarjetas
+   Cada card: tipo (badge) + título + hint que se
+   intensifica al hover.
+   ================================================ */
+.apuntes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+.apunte-card {
+  position: relative;
+  background: var(--bg-card);
+  border: 2px solid transparent;
+  border-top: 4px solid var(--card-accent, var(--P));
+  border-radius: 14px;
+  padding: 1.5rem 1.4rem 1.6rem;
+  text-decoration: none;
+  color: var(--text);
+  transition: transform .25s ease, box-shadow .25s ease, border-color .25s;
+  display: flex; flex-direction: column; gap: 0.6rem;
+  min-height: 160px;
+  overflow: hidden;
+}
+.apunte-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 28px rgba(74, 0, 128, 0.14);
+  border-color: var(--card-accent, var(--P));
+}
+
+.apunte-tipo {
+  display: inline-block;
+  align-self: flex-start;
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: var(--card-accent, var(--P));
+  color: #fff;
+  opacity: 0.85;
+}
+.apunte-card h3 {
+  font-family: var(--font-display);
+  font-style: italic; font-weight: 900;
+  font-size: 1.35rem;
+  color: var(--text);
+  margin: 0;
+  line-height: 1.25;
+  transition: color .2s;
+}
+.apunte-card:hover h3 { color: var(--card-accent, var(--M)); }
+
+.apunte-hint {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--text-2);
+  line-height: 1.5;
+  opacity: 0.7;
+  transition: opacity .25s ease, transform .25s ease;
+  transform: translateY(2px);
+}
+.apunte-card:hover .apunte-hint {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (max-width: 600px) {
+  .apuntes-grid { grid-template-columns: 1fr; gap: 1.25rem; }
+  .apunte-card { min-height: auto; }
+}
+
+/* ================================================
    VIDEOS CURADOS (Cantos)
    ================================================ */
 .videos-curados {

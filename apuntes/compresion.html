@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Estudiando la Compresión · lety2E</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.9/babel.min.js"></script>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+@keyframes fi{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.animate-fi{animation:fi .3s ease-out}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+const {useState,useEffect} = React;
+const sh=a=>{const b=[...a];for(let i=b.length-1;i>0;i--){const j=0|Math.random()*(i+1);[b[i],b[j]]=[b[j],b[i]];}return b;};
+
+const P={
+threshold:[{l:"Gentle",v:-10},{l:"Moderate",v:-18},{l:"Aggressive",v:-28},{l:"Crush",v:-38}],
+ratio:[{l:"Natural",v:2},{l:"Moderate",v:4},{l:"Heavy",v:6},{l:"Crush",v:8},{l:"Limit",v:10}],
+attack:[{l:"Instant",v:0.1},{l:"Snappy",v:2},{l:"Punchy",v:5},{l:"Medium",v:15},{l:"Slow",v:30},{l:"Lazy",v:50}],
+release:[{l:"Snap",v:40},{l:"Fast",v:100},{l:"Musical",v:250},{l:"Slow",v:500},{l:"Auto",v:-1}],
+knee:[{l:"Hard",v:0},{l:"Medium",v:6},{l:"Soft",v:12},{l:"V.Soft",v:20}],
+mix:[{l:"Dry",v:0},{l:"Subtle",v:25},{l:"Balanced",v:50},{l:"Wet",v:75},{l:"Full",v:100}]
+};
+const Un={threshold:" dB",ratio:":1",attack:" ms",release:" ms",knee:" dB",mix:"%"};
+const Nm={threshold:"Threshold",ratio:"Ratio",attack:"Attack",release:"Release",knee:"Knee",mix:"Mix"};
+
+const GC=[
+{id:"pop",t:"🎤 Pop — Presente y Clara",b:"La cantante susurra en los versos y explota en los coros. Los sintetizadores y la percusión ocupan mucho espacio en la mezcla. Sin compresión la voz desaparece en los versos y satura en los coros. Necesitas que cada sílaba esté al frente, presente y con vida, sin sonar aplastada ni artificial.",h:"Piensa FET (1176): el threshold Moderate trabaja el cuerpo de la voz, no solo los gritos. Ratio 4:1 controla sin aplastar. Ataque Punchy (5ms) es clave: deja pasar el golpe de las consonantes ('p','t','k') que dan claridad a la dicción sobre los sintes. Release Musical (250ms) deja respirar entre frases. Knee Medium suaviza la entrada al compresor.",i:{threshold:-18,ratio:4,attack:5,release:250,knee:6,mix:100},c:"Pop · Voz al frente"},
+{id:"rck",t:"🎸 Rock — Cortar Guitarras",b:"Voz masculina potente sobre guitarras distorsionadas y batería pesada. La voz se pierde entre los riffs: las guitarras ocupan el mismo rango de frecuencia. Cuando el cantante grita en el estribillo se escucha, pero en las estrofas desaparece detrás del muro de sonido. Necesitas que la voz corte esa mezcla densa como un cuchillo.",h:"FET agresivo: necesitas que la voz empuje. Threshold Moderate para comprimir bien el cuerpo vocal. Ratio Heavy (6:1) para que la voz tenga densidad constante contra las guitarras. Ataque Snappy (2ms) es muy rápido pero deja un micro-transitorio que da 'mordida' a la voz. Release Fast (100ms) sigue la energía del rock. Hard Knee: compresión directa, sin sutilezas.",i:{threshold:-18,ratio:6,attack:2,release:100,knee:0,mix:100},c:"Rock · Voz vs guitarras"},
+{id:"bal",t:"🎹 Balada — Emoción Intacta",b:"La cantante interpreta con el corazón: empieza casi hablando sobre un piano suave, va creciendo emocionalmente, y en el clímax da todo con un vibrato hermoso. La dinámica ES la canción. Si comprimes mucho, matas la emoción. Si no comprimes, los susurros no se escuchan y el clímax satura. Necesitas controlar sin que se note absolutamente nada.",h:"Piensa OPTO (LA-2A): compresión que respira con la música. Threshold Gentle (–10dB) solo toca los picos más altos del clímax. Ratio Natural (2:1) es casi imperceptible. Ataque Slow (30ms) deja pasar TODO el transitorio emocional. Release Slow (500ms) suelta gradualmente sin bombeo. Knee Very Soft: la compresión entra tan suavemente que es invisible.",i:{threshold:-10,ratio:2,attack:30,release:500,knee:20,mix:100},c:"Balada · Dinámica emocional"},
+{id:"rap",t:"🎤 Rap — Dicción Rítmica",b:"El rapero tiene un flow rapidísimo con muchas consonantes percusivas. La pista tiene 808s enormes y hi-hats brillantes. Cada sílaba rapeada debe ser perfectamente inteligible: si pierdes una palabra, pierdes el mensaje. La voz necesita sonar in-your-face, moderna, con peso en cada consonante.",h:"FET (1176) es tu arma aquí. Threshold Moderate trabaja todo el verso. Ratio Heavy (6:1) da densidad constante para que ninguna sílaba se pierda detrás del 808. Ataque Punchy (5ms) deja pasar el golpe percusivo de las consonantes ('b','d','g') que hacen el rap inteligible. Release Fast (100ms) suelta rápido para seguir el ritmo. Hard Knee: control directo.",i:{threshold:-18,ratio:6,attack:5,release:100,knee:0,mix:100},c:"Hip-Hop · Cada sílaba cuenta"},
+{id:"aud",t:"📖 Cantautor Acústico",b:"Cantautor con guitarra acústica, grabación íntima. La voz es suave y cálida, con momentos donde sube la intensidad. La guitarra y la voz comparten frecuencias medias. El sonido debe ser natural y orgánico, como si estuvieras en la sala con el artista. Nada debe sonar procesado, pero necesitas que la voz siempre esté por delante de la guitarra.",h:"OPTO es perfecto para esto: transparencia total. Threshold Moderate para trabajar el cuerpo sin exagerar. Ratio Natural (2:1) mantiene la naturalidad orgánica. Ataque Medium (15ms) deja los transitorios intactos para que la voz suene 'real'. Release Auto se adapta al fraseo del cantautor. Knee Soft (12dB) para transiciones graduales e invisibles.",i:{threshold:-18,ratio:2,attack:15,release:-1,knee:12,mix:100},c:"Acústico · Natural e íntimo"},
+{id:"cho",t:"🎶 Solista sobre Coro",b:"Una solista canta sobre un arreglo coral a 4 voces. El coro suena hermoso pero tiende a 'tragarse' a la solista, especialmente en los pasajes fuertes donde todos cantan juntos. Necesitas que la voz principal se separe del coro y se sienta 'más cerca' del oyente, sin destruir la naturalidad.",h:"VCA es ideal: preciso sin colorear. Threshold Gentle (–10dB) solo toca los momentos donde el coro compite con la solista. Ratio Moderate (4:1) da control evidente pero musical. Ataque Medium (15ms) preserva la naturalidad del fraseo. Release Musical (250ms) respira con las frases corales. Knee Medium: balance entre control y musicalidad.",i:{threshold:-10,ratio:4,attack:15,release:250,knee:6,mix:100},c:"Coral · Solista al frente"},
+{id:"str",t:"📺 Cover para Redes",b:"Grabas un cover en tu cuarto para Instagram/TikTok. La pista de acompañamiento suena fuerte y profesional, pero tu voz grabada en casa suena débil, con volumen irregular y se pierde en las partes instrumentales más densas. Necesitas que tu voz suene 'a la altura' del instrumental, consistente y presente.",h:"Tu voz necesita compresión seria para competir con un master profesional. Threshold Aggressive (–28dB) porque la diferencia dinámica es grande. Ratio Moderate (4:1) controla sin destruir tu interpretación. Ataque Punchy (5ms) le da claridad a tu dicción. Release Auto se adapta porque los covers tienen secciones muy variadas. Knee Medium.",i:{threshold:-28,ratio:4,attack:5,release:-1,knee:6,mix:100},c:"Cover · Competir con el track"},
+{id:"com",t:"📻 Voz Épica — Trailer",b:"Imagina la voz de un trailer de película: profunda, ENORME, cada palabra con peso cinematográfico. El instrumental tiene percusión orquestal, cuerdas e impactos. La voz necesita sonar más grande que la vida, ultra-presente, con una densidad que se sienta en el pecho.",h:"FET al máximo: compresión como efecto creativo. Threshold Aggressive (–28dB) trabaja TODO el rango vocal. Ratio Heavy (6:1) aplasta la dinámica para dar densidad brutal. Ataque Punchy (5ms) deja el peso de las consonantes graves. Release Fast (100ms) mantiene la energía entre frases. Hard Knee: compresión inmediata.",i:{threshold:-28,ratio:6,attack:5,release:100,knee:0,mix:100},c:"Cinematic · Voz gigante"},
+{id:"harm",t:"🎵 Armonías Vocales",b:"Tienes tres pistas de armonías vocales (terceras y quintas) que acompañan a la voz principal. Suenan bien individualmente pero juntas tienen volúmenes irregulares: algunas notas sobresalen y rompen el acorde, otras desaparecen. Necesitas que las armonías suenen como una 'cama' suave y consistente que abrace a la voz principal sin competir.",h:"VCA o OPTO: transparencia es clave. Threshold Moderate (–18dB) para nivelar inconsistencias. Ratio Moderate (4:1) iguala las notas sin aplastar. Ataque Medium (15ms) preserva el inicio natural de cada nota. Release Musical (250ms) suelta suavemente. Knee Soft: transición gradual para que suene como 'una sola voz'.",i:{threshold:-18,ratio:4,attack:15,release:250,knee:12,mix:100},c:"Armonías · Cama vocal suave"},
+{id:"dbl",t:"🎙️ Doble Vocal — Grosor",b:"Grabaste la voz principal dos veces (double tracking) para darle grosor. Pero las dos tomas tienen diferencias de volumen: a veces una toma domina y se nota que son dos voces separadas en vez de sonar como 'una voz enorme'. Necesitas que ambas tomas se fusionen en un sonido gordo y cohesivo.",h:"VCA o Digital: precisión total para igualar. Threshold Moderate para trabajar el cuerpo. Ratio Moderate (4:1) nivela diferencias entre tomas. Ataque Medium (15ms) deja el inicio natural. Release Musical (250ms) para que ambas respiren igual. Knee Medium. Aplica la MISMA configuración a ambas tomas.",i:{threshold:-18,ratio:4,attack:15,release:250,knee:6,mix:100},c:"Double · Fusionar tomas"}
+];
+
+const SC=[
+{id:"ny",t:"🏙️ NY Parallel — Densidad",b:"Tu voz suena bien pero le falta 'cuerpo'. Comparada con producciones profesionales se siente delgada y pequeña. Quieres esa sensación de densidad que tiene una voz de radio: grande, llena, que ocupa espacio. La técnica NY mezcla una copia brutalmente comprimida con tu señal seca.",h:"PARALELA NY: La copia se DESTRUYE a propósito. Threshold Crush (–38dB) captura todo. Ratio Crush (8:1) aplasta. Ataque Instant (0.1ms) no deja escapar nada. Release Fast. Hard Knee. PERO el secreto: Mix solo 25% (Subtle). Añades un 'colchón' de densidad debajo de tu voz natural.",tc:"Comp. Paralela",i:{threshold:-38,ratio:8,attack:0.1,release:100,knee:0,mix:25},c:"Paralela · Cuerpo",sm:1},
+{id:"des",t:"✂️ De-Esser — Sibilancia",b:"La voz suena brillante y abierta, pero las 'eses' y las 'ches' pinchan los oídos, especialmente con audífonos. Necesitas un compresor que SOLO actúe en la banda 4–10 kHz, que atrape cada sibilante sin quitar el brillo general.",h:"SIDECHAIN FILTRADO: Threshold Gentle (–10dB) para que solo las sibilantes más agresivas lo disparen. Ratio Limit (10:1) como limitador. Ataque Instant (0.1ms) porque las sibilantes son ultracortas. Release Snap (40ms) suelta inmediatamente. Hard Knee: acción precisa.",tc:"SC De-Essing",i:{threshold:-10,ratio:10,attack:0.1,release:40,knee:0,mix:100},c:"Quirúrgico · Sin sibilancia"},
+{id:"sg",t:"🔗 Serie Glue — Cohesión",b:"Ya pasaste tu voz por un FET rápido que capturó los picos. La voz suena controlada pero todavía 'fragmentada', como si cada frase fuera un evento separado. Necesitas un segundo compresor suave que le dé cohesión y 'pegue' todo como un río continuo.",h:"SERIE 2ª ETAPA: Threshold Gentle (–10dB) solo toca variaciones residuales. Ratio Natural (2:1) casi imperceptible. Ataque Slow (30ms) no interfiere con el primer comp. Release Auto se adapta. Knee Soft: transición invisible. Piensa OPTO o VCA.",tc:"Serie 2ª etapa",i:{threshold:-10,ratio:2,attack:30,release:-1,knee:12,mix:100},c:"Glue · Flujo continuo"},
+{id:"sc2",t:"⚡ Serie Captura — Picos",b:"Tu voz tiene picos impredecibles: consonantes que explotan, notas agudas que se disparan 10 dB. Necesitas un primer compresor rápido que atrape esos picos antes del segundo compresor suave.",h:"SERIE 1ª ETAPA: FET (1176). Threshold Moderate (–18dB) trabaja picos principales. Ratio Heavy (6:1) los controla. Ataque Snappy (2ms) ultrarrápido pero deja micro-transitorio de articulación. Release Fast (100ms) listo para el siguiente pico. Hard Knee: acción inmediata.",tc:"Serie 1ª etapa",i:{threshold:-18,ratio:6,attack:2,release:100,knee:0,mix:100},c:"Captura · Domar picos"},
+{id:"ps",t:"🌊 Paralela Sutil — Terciopelo",b:"Tu voz de balada/jazz suena bonita y natural, pero le falta ese 'terciopelo', esa calidez que escuchas en grabaciones profesionales. No quieres paralela agresiva: quieres algo tan sutil que nadie pueda señalar qué cambiaste, pero todos noten que 'suena mejor'.",h:"PARALELA SUTIL: La copia no se destruye tanto. Threshold Aggressive (–28dB) trabaja el cuerpo. Ratio Heavy (6:1) da densidad. Punchy (5ms) conserva articulación. Musical (250ms) respira. Knee Medium. Mix Subtle (25%): apenas un susurro de señal comprimida debajo.",tc:"Paralela Sutil",i:{threshold:-28,ratio:6,attack:5,release:250,knee:6,mix:25},c:"Sutil · Terciopelo",sm:1},
+{id:"dg",t:"🔔 De-Essing Suave — Aire",b:"Tu voz tiene un brillo hermoso y aéreo que no quieres perder, pero hay sibilancia leve que molesta en ciertas frases. Un de-esser agresivo oscurecería la voz. Necesitas domar las sibilantes sin tocar el espectro brillante.",h:"DE-ESSING CONSERVADOR: Threshold Moderate (–18dB) para captar más sibilantes. Ratio Moderate (4:1) reduce sin limitar: doma pero deja energía natural. Instant (0.1ms) atrapa el transitorio. Fast (100ms) suelta pronto. Knee Medium. Resultado: sibilantes controladas, 'aire' intacto.",tc:"SC De-Essing",i:{threshold:-18,ratio:4,attack:0.1,release:100,knee:6,mix:100},c:"Conservador · Preservar aire"},
+{id:"pa2",t:"💥 Paralela Wall of Sound",b:"Mezcla de hip-hop o electrónica agresiva. El instrumental es un muro de bajos y sintetizadores. Tu voz necesita ser otro muro encima: DOMINANTE. Quieres que la voz sea más grande que todo lo demás combinado.",h:"PARALELA EXTREMA: Todo al máximo en la copia. Threshold Crush (–38dB). Ratio Limit (10:1) como bloque. Instant (0.1ms). Snap (40ms). Hard Knee. Diferencia con NY clásica: Mix Balanced (50%). Mitad y mitad. Es agresivo, es obvio, es exactamente lo que quieres.",tc:"Paralela Extrema",i:{threshold:-38,ratio:10,attack:0.1,release:40,knee:0,mix:50},c:"Extrema · Muro vocal",sm:1},
+{id:"sb",t:"📡 Serie Final — Seda",b:"Tu cadena vocal ya tiene un primer compresor que hizo el trabajo pesado. Ahora falta ese último toque de 'seda': que todo fluya suavemente, como las voces de producciones de primer nivel. El segundo compresor debe ser casi imperceptible.",h:"SERIE 2ª ETAPA (acabado): Threshold Gentle (–10dB), apenas toca. Ratio Natural (2:1). Ataque Slow (30ms). Release Auto. Knee Very Soft (20dB): imposible detectar cuándo actúa. Piensa en 'pulir' un diamante ya cortado. VCA o Digital para cero coloración.",tc:"Serie acabado",i:{threshold:-10,ratio:2,attack:30,release:-1,knee:20,mix:100},c:"Seda · Acabado final"}
+];
+
+const CIRC=[
+{n:"FET",ic:"⚡",m:"1176 / MC77",cl:"border-l-amber-500",bg:"bg-amber-50",bd:"bg-amber-100 text-amber-700",ch:"Rápido · Agresivo · Armónicos",d:"Circuito FET (Field-Effect Transistor): el más rápido, ataques sub-milisegundo.",s:"Armónicos par e impar → saturación y presencia.",bf:"Cortar mezcla, 1ª etapa serie.",ak:"0.02–0.8 ms",fm:"Michael Jackson, Beyoncé."},
+{n:"OPTO",ic:"💡",m:"LA-2A / CL 1B",cl:"border-l-emerald-500",bg:"bg-emerald-50",bd:"bg-emerald-100 text-emerald-700",ch:"Suave · Musical · Natural",d:"Circuito óptico (LDR). Inercia física → suave, program-dependent.",s:"Compresión que 'respira'. Ataque/release dependen de la señal.",bf:"Baladas, voiceover, 2ª etapa serie.",ak:"1–10 ms (variable)",fm:"LA-2A: el más usado en voces."},
+{n:"VCA",ic:"🎛️",m:"SSL G-Bus / dbx 160",cl:"border-l-sky-500",bg:"bg-sky-50",bd:"bg-sky-100 text-sky-700",ch:"Transparente · Preciso",d:"VCA: preciso, predecible, sin color.",s:"Sin armónicos. Control sin alterar timbre.",bf:"Masterización, bus, 2ª etapa serie.",ak:"0.1–30 ms",fm:"SSL G-Bus: el 'glue'."},
+{n:"DIGITAL",ic:"💻",m:"Pro-C / Logic Platinum",cl:"border-l-violet-500",bg:"bg-violet-50",bd:"bg-violet-100 text-violet-700",ch:"Perfecto · Look-Ahead",d:"Digital puro: look-ahead ve la señal ANTES de que llegue.",s:"Cero armónicos, cero coloración.",bf:"Mastering, limitación, de-essing digital.",ak:"0 ms (look-ahead)",fm:"FabFilter Pro-C2, Logic Platinum."}
+];
+
+const TECH=[
+{n:"Compresión en Serie",ic:"🔗",co:"2+ compresores en cadena, cada uno hace poco.",ch:["Señal","→","Comp1 FET","→","Comp2 OPTO/VCA","→","Salida"],p:"Cada uno 2–4 dB. Transparente.",x:"Riesgo sobre-compresión.",tp:"1º FET picos, 2º OPTO/VCA glue."},
+{n:"Paralela (NY Style)",ic:"🏙️",co:"Señal seca + copia crush. Densidad con transitorios intactos.",ch:["Señal","→[Split]","A: Dry","+ B: Crush","→[Mix]","Salida"],p:"Punch + densidad.",x:"Fase. Mix requiere práctica.",tp:"Mix 0%, sube hasta que 'crece'. 20–30%."},
+{n:"SC: De-Essing",ic:"✂️",co:"SC filtrado 4–10 kHz. Solo sibilantes.",ch:["Señal","→","SC: 4–10kHz","→","Comp","→","Salida"],p:"Sin oscurecer.",x:"Threshold bajo = lispea.",tp:"Ratio 8–10:1. Instant, snap."},
+{n:"SC: Anti-Bombeo",ic:"🔇",co:"HPF 80–150 Hz en SC. Graves no disparan comp.",ch:["Señal","→","SC: HPF","→","Comp","→","Sin bombeo"],p:"Evita bombeo por pops.",x:"Corte alto → menos sensible.",tp:"80–150 Hz. 'SC HPF' en plugins."},
+{n:"SC: Enfoque Medios",ic:"🎯",co:"Pasa-banda 1–5 kHz en SC. Responde a presencia vocal.",ch:["Señal","→","SC: 1–5kHz","→","Comp","→","Salida"],p:"Responde a inteligibilidad.",x:"Avanzado.",tp:"Ideal mezclas densas."},
+{n:"Descendente (Downward)",ic:"⬇️",co:"Estándar: REDUCE lo sobre threshold. Baja picos.",ch:["Picos","→","Threshold","→","Reducidos","→","+Makeup"],p:"La más común.",x:"Reduce nivel.",tp:"Sube Makeup Gain para compensar."},
+{n:"Ascendente (Upward)",ic:"⬆️",co:"SUBE lo DEBAJO del threshold. Susurros se amplifican.",ch:["Susurros","→","Threshold","→","Amplificados","→","Detalle"],p:"Revela detalles ocultos.",x:"Amplifica ruido.",tp:"Solo grabación limpia. OTT de Xfer."}
+];
+
+const PD={
+threshold:{t:"Threshold",ic:"📏",df:"Nivel donde actúa. Down: reduce arriba. Up: sube abajo.",an:"Puerta: alta (–10) = solo gigantes. Baja (–38) = todos.",rg:[["–10 dB Gentle","Solo picos. 2ª serie."],["–18 dB Moderate","Estándar vocal."],["–28 dB Aggressive","Nivelación fuerte."],["–38 dB Crush","Paralela/efectos."]]},
+ratio:{t:"Ratio",ic:"⚖️",df:"Cuánto se reduce. 4:1 = cada 4 dB sobre threshold → 1 dB.",an:"Impuesto: 2:1 = poco. 10:1 = casi todo.",rg:[["2:1 Natural","Imperceptible."],["4:1 Moderate","Estándar vocal."],["6:1 Heavy","Rock, hip-hop."],["8:1 Crush","Paralela."],["10:1 Limit","De-essing."]]},
+attack:{t:"Attack",ic:"⏱️",df:"Cuándo empieza tras superar threshold.",an:"Portero: Instant cierra antes. Lazy: ya pasó el golpe.",rg:[["0.1ms Instant","Captura todo."],["2ms Snappy","Micro-transitorio."],["5ms Punchy","Golpe consonante."],["15ms Medium","Balance."],["30ms Slow","Preserva transitorio."],["50ms Lazy","Solo sustain."]]},
+release:{t:"Release",ic:"🔄",df:"Cuándo suelta. Cómo 'respira' la compresión.",an:"Rápido = bombeo. Lento = apretada.",rg:[["40ms Snap","Inmediato."],["100ms Fast","Rítmico."],["250ms Musical","Sweet spot."],["500ms Slow","Sin bombeo."],["Auto","Adaptativo."]]},
+knee:{t:"Knee (Rodilla)",ic:"🦵",df:"Gradualidad. Hard = escalón. Soft = rampa.",an:"Hard = abrupto. Soft = gradual, musical.",rg:[["0dB Hard","FET, de-essing."],["6dB Medium","Estándar."],["12dB Soft","OPTO-style."],["20dB V.Soft","Transparencia."]]},
+mix:{t:"Mix (Dry/Wet)",ic:"🎚️",df:"Señal original vs comprimida. Clave para paralela.",an:"100% = espresso. 25% = café con leche.",rg:[["0% Dry","Bypass."],["25% Subtle","Paralela sutil."],["50% Balanced","Equilibrada."],["75% Wet","Predomina comp."],["100% Full","Insert."]]}
+};
+
+const FL=[
+{q:"¿Circuito del 1176?",a:"FET. Rápido, agresivo, armónicos.",c:0},
+{q:"¿Circuito con célula fotosensible?",a:"OPTO (LDR). Suave, program-dependent.",c:0},
+{q:"¿Circuito más transparente analógico?",a:"VCA. Sin coloración.",c:0},
+{q:"¿Platinum Digital?",a:"Digital puro con look-ahead. Cero color.",c:0},
+{q:"¿Compresión en serie?",a:"2 comps cadena: 1º picos, 2º glue.",c:1},
+{q:"¿Paralela NY?",a:"Seca + copia crush mezclada sutil.",c:1},
+{q:"¿De-Esser?",a:"Comp con SC filtrado 4–10 kHz.",c:1},
+{q:"¿Downward?",a:"Reduce lo sobre threshold.",c:1},
+{q:"¿Upward?",a:"Sube lo debajo threshold.",c:1},
+{q:"¿Ratio 4:1?",a:"Cada 4 dB sobre threshold → 1 dB.",c:2},
+{q:"¿Attack controla?",a:"CUÁNDO empieza, no cuánto.",c:2},
+{q:"¿Release rápido →?",a:"Bombeo (pumping).",c:2},
+{q:"¿Hard vs Soft Knee?",a:"Hard: escalón. Soft: rampa.",c:2},
+{q:"Config: –38, 8:1, 0.1ms, mix 25%?",a:"Paralela NY.",c:3},
+{q:"Config: –10, 10:1, 0.1ms, 40ms?",a:"De-Essing quirúrgico.",c:3},
+{q:"Config: –10, 2:1, 30ms, auto?",a:"2ª etapa serie (Glue).",c:3}
+];
+const CatN=["Circuitos","Técnicas","Parámetros","Config"];
+const CatCl2=["bg-amber-100 text-amber-700","bg-emerald-100 text-emerald-700","bg-sky-100 text-sky-700","bg-violet-100 text-violet-700"];
+
+const MS=[
+{t:"Circuito→Carácter",p:[["FET","Rápido y agresivo"],["OPTO","Suave y musical"],["VCA","Transparente"],["Digital","Look-ahead"],["1176","FET clásico"],["LA-2A","OPTO clásico"]]},
+{t:"Parámetro→Función",p:[["Threshold","Nivel donde actúa"],["Ratio","Cuánto reduce"],["Attack","Cuándo empieza"],["Release","Cuándo suelta"],["Knee","Gradual o abrupta"],["Mix","Dry/Wet"]]},
+{t:"Config→Técnica",p:[["Crush+Mix25%","Paralela NY"],["SC 4-10kHz","De-Essing"],["FET→OPTO","Serie"],["SC HPF","Anti-Bombeo"],["Sube abajo","Upward"],["Baja arriba","Downward"]]}
+];
+
+const QZ=[
+{q:"¿Ataque De-Esser?",o:["Lazy 50ms","Punchy 5ms","Instant 0.1ms"],c:2,w:"Sibilantes ultrarrápidos."},
+{q:"¿Copia paralela NY?",o:["Gentle+full","Crush+mix sutil","Moderate+balanced"],c:1,w:"Crush pero mix sutil."},
+{q:"¿Ratio 10:1?",o:["Entrada×10","10dB→1dB","Amplifica×10"],c:1,w:"Casi limitador."},
+{q:"¿Knee broadcast?",o:["Hard 0dB","Soft 12–20dB","No importa"],c:1,w:"Soft = invisible."},
+{q:"¿2º comp serie?",o:["Captura picos","Da glue","Distorsión"],c:1,w:"Cohesión suave."},
+{q:"¿Release balada?",o:["Snap 40ms","Musical/Slow","Fast 100ms"],c:1,w:"Lento = gradual."},
+{q:"¿Digital vs FET?",o:["Más armónicos","Look-ahead","Mayor color"],c:1,w:"Look-ahead."},
+{q:"¿–38dB en balada?",o:["Sí","No, destruye emoción","Depende ratio"],c:1,w:"Aplasta. Usa –10."},
+{q:"¿Upward?",o:["Reduce sobre","Sube debajo","Solo altas"],c:1,w:"Sube lo silencioso."},
+{q:"¿Banda de-essing?",o:["100–500Hz","1–3kHz","4–10kHz"],c:2,w:"Sibilantes 4–10 kHz."}
+];
+
+function calcGR(th,ra,kn){const e=-6-th;if(e<=0)return 0;return Math.round((kn>0&&e<kn?(e*e)/(2*kn)*(1-1/ra):e*(1-1/ra))*10)/10;}
+
+function analyze(s,id,hasMix){
+const lg=[];let tot=0;const ks=["threshold","ratio","attack","release","knee"];if(hasMix)ks.push("mix");
+ks.forEach(k=>{const sv=s[k],iv=id[k];if(sv===null){lg.push([2,`✗ ${Nm[k]}: No seleccionado.`]);return;}
+const sL=P[k].find(x=>x.v===sv)?.l||sv,iL=P[k].find(x=>x.v===iv)?.l||iv;
+const sD=sv===-1?"Auto":sv+Un[k],iD=iv===-1?"Auto":iv+Un[k];
+if(sv===iv){lg.push([0,`✓ ${Nm[k]}: ${sL} (${sD}) — Perfecto.`]);tot+=100;}
+else{const iS=P[k].findIndex(x=>x.v===sv),iI=P[k].findIndex(x=>x.v===iv),d=Math.abs(iS-iI);tot+=Math.max(0,100-d*30);
+const a=k==="threshold"?(sv>iv?`Alto (${sD}). Apenas actúa.`:`Bajo (${sD}). Sobre-comprime.`):k==="ratio"?(sv<iv?`${sL} suave.`:`${sL} excesivo.`):k==="attack"?(sv<iv?`${sL} rápido.`:`${sL} lento.`):k==="release"?(sv===-1&&iv!==-1?"Auto no ideal.":sv!==-1&&iv===-1?"Fijo no ideal.":sv<iv?`${sL} rápido. Bombeo.`:`${sL} lento.`):k==="knee"?(sv<iv?`${sL} abrupta.`:`${sL} suave.`):(sv<iv?`${sL} seco.`:`${sL} wet.`);
+lg.push([d<=1?1:2,`${d<=1?"⚠":"✗"} ${Nm[k]}: ${sL}→${iL} (${iD}). ${a}`]);}});
+const avg=Math.round(tot/ks.length);
+return{lg,avg,v:avg===100?"★ PERFECTO":avg>=80?"◆ EXCELENTE":avg>=55?"● ACEPTABLE":"○ REVISIÓN"};}
+
+function LCD({g}){const p=Math.min(g/20,1)*100;
+return <div className="bg-gray-950 rounded-xl p-3 border border-gray-700"><div className="text-center text-gray-500 text-[10px] font-mono tracking-widest mb-1">GAIN REDUCTION</div><div className="bg-black rounded-lg p-2 border border-gray-800 font-mono text-center" style={{textShadow:"0 0 10px #22c55e"}}><span className="text-green-400 text-3xl font-bold">–{g.toFixed(1)}</span><span className="text-green-600 ml-1">dB</span></div><div className="mt-2 bg-gray-900 rounded-full h-2 overflow-hidden border border-gray-700"><div className="h-full rounded-full transition-all duration-500" style={{background:g>12?"linear-gradient(90deg,#f59e0b,#ef4444)":g>6?"linear-gradient(90deg,#22c55e,#f59e0b)":"#22c55e",width:p+"%"}}/></div></div>;}
+
+function Sel({pk,sel,onS,ac}){const cls=ac==="a"?"ring-amber-500 bg-amber-500/20 text-amber-300":ac==="e"?"ring-emerald-500 bg-emerald-500/20 text-emerald-300":"ring-blue-500 bg-blue-500/20 text-blue-300";
+return <div className="mb-2"><div className="text-[10px] font-mono text-gray-400 mb-1 uppercase tracking-wider">{pk}</div><div className="flex flex-wrap gap-1.5">{P[pk].map(o=><button key={o.v} onClick={()=>onS(pk,o.v)} className={`px-2 py-1.5 rounded-lg text-xs font-mono border transition-all cursor-pointer ${sel===o.v?"ring-2 "+cls+" border-transparent shadow-lg":"border-gray-700 bg-gray-800/60 text-gray-400 hover:border-gray-500"}`}>{o.l}<span className="block text-[9px] opacity-60">{o.v===-1?"Auto":o.v}{Un[pk]}</span></button>)}</div></div>;}
+
+function Con({r}){if(!r)return null;const cc=["text-green-400","text-amber-400","text-red-400"];
+return <div className="bg-gray-950 rounded-xl p-3 border border-gray-700 font-mono text-xs mt-3 max-h-52 overflow-y-auto"><div className="text-gray-500 mb-2">{">"} compressor_check v3</div>{r.lg.map(([t,m],i)=><div key={i} className={cc[t]+" mb-0.5"}>{m}</div>)}<div className="border-t border-gray-800 mt-2 pt-2"><div className={`font-bold ${r.avg>=80?"text-green-400":r.avg>=55?"text-amber-400":"text-red-400"}`}>Score: {r.avg}% — {r.v}</div></div></div>;}
+
+function Rack({ch,sm}){
+const ini={threshold:null,ratio:null,attack:null,release:null,knee:null,mix:sm?null:100};
+const[s,setS]=useState(ini);const[r,setR]=useState(null);
+const g=s.threshold!==null&&s.ratio!==null?calcGR(s.threshold,s.ratio,s.knee||0):0;
+const set=(k,v)=>{setS(p=>({...p,[k]:v}));setR(null);};
+return <div className="bg-gray-900/80 rounded-2xl p-4 border border-gray-700/50 shadow-2xl">
+<div className="bg-gray-800/50 rounded-xl p-3 mb-3 border border-gray-700/30"><p className="text-gray-300 text-sm leading-relaxed">{ch.b}</p><div className="flex flex-wrap gap-2 mt-2"><span className="text-[10px] font-mono bg-gray-700/50 text-gray-400 px-2 py-0.5 rounded">{ch.c}</span>{ch.tc&&<span className="text-[10px] font-mono bg-blue-900/50 text-blue-400 px-2 py-0.5 rounded">🔧 {ch.tc}</span>}</div></div>
+<div className="grid grid-cols-1 lg:grid-cols-3 gap-3"><div className="lg:col-span-2"><Sel pk="threshold" sel={s.threshold} onS={set}/><Sel pk="ratio" sel={s.ratio} onS={set}/><Sel pk="attack" sel={s.attack} onS={set}/><Sel pk="release" sel={s.release} onS={set}/><Sel pk="knee" sel={s.knee} onS={set} ac="a"/>{sm?<Sel pk="mix" sel={s.mix} onS={set} ac="e"/>:null}</div>
+<div className="space-y-2"><LCD g={g}/><div className="bg-gray-800/50 rounded-xl p-2.5 border border-gray-700/30 text-[11px] font-mono text-amber-400/90 leading-relaxed">💡 {ch.h}</div><button onClick={()=>setR(analyze(s,ch.i,sm))} className="w-full py-2.5 rounded-xl font-mono text-sm font-bold bg-blue-600 hover:bg-blue-500 text-white shadow-lg active:scale-95 cursor-pointer">▶ EJECUTAR</button><button onClick={()=>{setS(ini);setR(null);}} className="w-full py-1.5 rounded-xl font-mono text-xs bg-gray-800 text-gray-400 border border-gray-700 cursor-pointer">↺ RESET</button></div></div>
+<Con r={r}/></div>;}
+
+function RFlash(){const[cards]=useState(()=>sh(FL));const[i,setI]=useState(0);const[f,setF]=useState(false);const[k,setK]=useState(0);const c=cards[i];
+const adv=ok=>{if(ok)setK(x=>x+1);setF(false);setTimeout(()=>setI(x=>(x+1)%cards.length),100);};
+return <div className="max-w-lg mx-auto"><div className="flex justify-between mb-3 text-sm text-gray-500"><span className="font-mono">{i+1}/{cards.length}</span><span className={`text-[10px] px-2 py-0.5 rounded-full font-medium ${CatCl2[c.c]}`}>{CatN[c.c]}</span><span className="font-mono text-emerald-600">{k}✓</span></div>
+<div onClick={()=>setF(!f)} className="cursor-pointer min-h-[160px] bg-white rounded-2xl shadow-md border p-6 flex flex-col items-center justify-center text-center hover:shadow-lg">{!f?<><p className="text-lg font-semibold text-gray-800 mb-2">{c.q}</p><span className="text-xs text-gray-400">Toca para voltear</span></>:<p className="text-sm text-emerald-700 font-medium">{c.a}</p>}</div>
+{f&&<div className="flex gap-3 mt-3"><button onClick={()=>adv(0)} className="flex-1 py-2 rounded-xl bg-red-50 text-red-600 border border-red-200 cursor-pointer font-medium">✗ No</button><button onClick={()=>adv(1)} className="flex-1 py-2 rounded-xl bg-emerald-50 text-emerald-600 border border-emerald-200 cursor-pointer font-medium">✓ Sí</button></div>}</div>;}
+
+function RMatch(){const[si,setSi]=useState(0);const[sL,setSL]=useState(null);const[mt,setMt]=useState([]);const[wr,setWr]=useState(null);const[sR,setSR]=useState(()=>sh(MS[0].p.map(x=>x[1])));
+const ms=MS[si];useEffect(()=>{setMt([]);setSL(null);setWr(null);setSR(sh(ms.p.map(x=>x[1])));},[si]);
+const hr=r=>{if(!sL)return;if(ms.p.find(x=>x[0]===sL)?.[1]===r){setMt(m=>[...m,sL]);setSL(null);}else{setWr(r);setTimeout(()=>setWr(null),400);}};
+return <div className="max-w-2xl mx-auto"><div className="flex flex-wrap gap-2 justify-center mb-4">{MS.map((s,i)=><button key={i} onClick={()=>setSi(i)} className={`px-3 py-1.5 rounded-lg text-xs font-medium cursor-pointer ${si===i?"bg-gray-800 text-white":"bg-gray-100 text-gray-500 hover:bg-gray-200"}`}>{s.t}</button>)}</div>
+{mt.length===ms.p.length?<div className="text-center py-8 bg-emerald-50 rounded-2xl border border-emerald-200"><p className="text-3xl mb-2">🎉</p><p className="text-emerald-700 font-bold">¡Correctas!</p><button onClick={()=>{setMt([]);setSR(sh(ms.p.map(x=>x[1])));}} className="mt-3 px-4 py-1.5 rounded-xl bg-emerald-600 text-white text-sm cursor-pointer">Repetir</button></div>:
+<div className="grid grid-cols-2 gap-3"><div className="space-y-1.5">{ms.p.map(p=>{const m=mt.includes(p[0]);return <button key={p[0]} onClick={()=>!m&&setSL(p[0])} className={`w-full py-2 px-3 rounded-xl text-sm border text-left cursor-pointer font-medium ${m?"bg-emerald-50 border-emerald-200 text-emerald-400 line-through opacity-50":sL===p[0]?"bg-blue-50 border-blue-400 text-blue-700 ring-2 ring-blue-400":"bg-white border-gray-200 text-gray-700 hover:border-blue-300"}`}>{p[0]}</button>})}</div>
+<div className="space-y-1.5">{sR.map(r=>{const m=ms.p.some(p=>mt.includes(p[0])&&p[1]===r);return <button key={r} onClick={()=>!m&&hr(r)} className={`w-full py-2 px-3 rounded-xl text-sm border text-left cursor-pointer ${m?"bg-emerald-50 border-emerald-200 text-emerald-400 line-through opacity-50":wr===r?"bg-red-50 border-red-400 text-red-600":"bg-white border-gray-200 text-gray-600 hover:border-blue-300"}`}>{r}</button>})}</div></div>}</div>;}
+
+function RQuiz(){const[qs]=useState(()=>sh(QZ).slice(0,8));const[i,setI]=useState(0);const[s,setS]=useState(null);const[sc,setSc]=useState(0);const[dn,setDn]=useState(false);
+if(dn)return <div className="max-w-lg mx-auto text-center py-8 bg-white rounded-2xl shadow border"><p className="text-4xl mb-2">{sc>=7?"🏆":sc>=5?"👍":"📚"}</p><p className="text-2xl font-bold text-gray-800">{sc}/{qs.length}</p><button onClick={()=>{setI(0);setS(null);setSc(0);setDn(false);}} className="mt-4 px-5 py-2 rounded-xl bg-gray-800 text-white text-sm cursor-pointer">Reintentar</button></div>;
+const q=qs[i];return <div className="max-w-lg mx-auto"><div className="flex justify-between mb-3 text-sm"><span className="font-mono text-gray-400">{i+1}/{qs.length}</span><span className="font-mono text-emerald-600">{sc}✓</span></div>
+<div className="bg-white rounded-2xl shadow border p-5"><p className="font-semibold text-gray-800 mb-4">{q.q}</p><div className="space-y-2">{q.o.map((o,j)=>{let cl="bg-gray-50 border-gray-200 text-gray-700 hover:border-blue-300 cursor-pointer";if(s!==null){cl=j===q.c?"bg-emerald-50 border-emerald-400 text-emerald-700 ring-2 ring-emerald-400":j===s?"bg-red-50 border-red-400 text-red-600":"bg-gray-50 border-gray-100 text-gray-400";}return <button key={j} onClick={()=>{if(s!==null)return;setS(j);if(j===q.c)setSc(x=>x+1);}} className={`w-full py-2 px-3 rounded-xl text-sm border text-left ${cl}`}>{o}</button>})}</div>
+{s!==null&&<div className={`mt-3 p-3 rounded-xl text-sm ${s===q.c?"bg-emerald-50 text-emerald-700 border border-emerald-200":"bg-amber-50 text-amber-700 border border-amber-200"}`}><b>{s===q.c?"✓ ":"✗ "}</b>{q.w}</div>}
+{s!==null&&<button onClick={()=>{if(i+1>=qs.length){setDn(true);return;}setS(null);setI(x=>x+1);}} className="w-full mt-3 py-2 rounded-xl bg-gray-800 text-white text-sm cursor-pointer">{i+1>=qs.length?"Resultado":"Siguiente →"}</button>}</div></div>;}
+
+function Carousel({items,sm}){const[cs,setCs]=useState(()=>sh(items));const[i,setI]=useState(0);
+return <><div className="flex items-center justify-center gap-3 mb-4">
+<button onClick={()=>setI(x=>x<=0?cs.length-1:x-1)} className="w-9 h-9 rounded-full bg-gray-800 border border-gray-700 text-gray-300 hover:bg-gray-700 cursor-pointer flex items-center justify-center font-bold text-lg">‹</button>
+<div className="text-center min-w-[150px]"><div className="text-sm font-mono text-blue-400">{cs[i].t}</div><div className="text-[10px] text-gray-500 font-mono">{i+1}/{cs.length}</div></div>
+<button onClick={()=>setI(x=>x>=cs.length-1?0:x+1)} className="w-9 h-9 rounded-full bg-gray-800 border border-gray-700 text-gray-300 hover:bg-gray-700 cursor-pointer flex items-center justify-center font-bold text-lg">›</button>
+<button onClick={()=>{setCs(sh(items));setI(0);}} className="px-3 py-1.5 rounded-xl bg-gray-800 border border-gray-700 text-xs font-mono text-gray-400 hover:text-amber-400 cursor-pointer">🎲</button>
+</div><Rack ch={cs[i]} sm={sm==="auto"?!!cs[i].sm:sm} key={cs[i].id+"-"+i}/>
+<div className="flex justify-center gap-1 mt-3">{cs.map((_,j)=><div key={j} className={`w-1.5 h-1.5 rounded-full ${j===i?"bg-blue-500 scale-150":"bg-gray-700"}`}/>)}</div></>;}
+
+function PgParam(){const[ap,setAp]=useState("threshold");const p=PD[ap];
+return <div className="max-w-4xl mx-auto animate-fi"><div className="text-center mb-5"><h2 className="text-2xl font-bold text-gray-800">Diccionario de Parámetros</h2></div>
+<div className="flex flex-wrap justify-center gap-1.5 mb-5">{Object.keys(PD).map(k=><button key={k} onClick={()=>setAp(k)} className={`px-3 py-1.5 rounded-xl text-xs font-medium cursor-pointer ${ap===k?"bg-gray-800 text-white shadow":"bg-gray-100 text-gray-500 hover:bg-gray-200"}`}>{PD[k].ic} {PD[k].t}</button>)}</div>
+<div className="bg-white rounded-2xl shadow-sm border p-5"><div className="flex items-center gap-3 mb-3"><span className="text-2xl">{p.ic}</span><h3 className="text-lg font-bold text-gray-800">{p.t}</h3></div><div className="bg-gray-50 rounded-xl p-3 mb-3"><p className="text-gray-700 text-sm">{p.df}</p></div><div className="bg-blue-50 rounded-xl p-3 mb-4 border border-blue-100"><p className="text-blue-700 text-sm italic">🎯 {p.an}</p></div><h4 className="font-bold text-gray-700 mb-2 text-sm">Rangos:</h4><div className="space-y-1.5">{p.rg.map(([r,u],i)=><div key={i} className="flex flex-col sm:flex-row gap-1.5 bg-gray-50 rounded-xl p-2.5 border border-gray-100"><span className="font-mono text-sm font-bold text-gray-800 sm:min-w-[140px] shrink-0">{r}</span><span className="text-sm text-gray-500">{u}</span></div>)}</div></div></div>;}
+
+function PgReview(){const[a,setA]=useState("f");
+return <div className="max-w-4xl mx-auto animate-fi"><div className="text-center mb-5"><h2 className="text-2xl font-bold text-gray-800">Repaso Interactivo</h2></div>
+<div className="flex justify-center gap-2 mb-6">{[["f","🃏 Flashcards"],["m","🔗 Correlacionar"],["q","❓ Quiz"]].map(([id,lb])=><button key={id} onClick={()=>setA(id)} className={`px-4 py-2 rounded-xl text-sm font-medium cursor-pointer ${a===id?"bg-gray-800 text-white shadow-lg":"bg-white text-gray-500 border hover:border-gray-400"}`}>{lb}</button>)}</div>
+{a==="f"?<RFlash key={Date.now()}/>:a==="m"?<RMatch/>:<RQuiz key={Date.now()}/>}</div>;}
+
+const TABS=[["ci","Circuitos","⚡",false],["te","Técnicas","🔗",false],["pa","Parámetros","📏",false],["re","Repaso","🧠",false],["ge","Desafíos","🎯",true],["sp","Avanzados","🏙️",true]];
+
+function App(){const[tab,setTab]=useState("ci");const dk=TABS.find(t=>t[0]===tab)?.[3];
+return <div className={`min-h-screen transition-colors duration-500 ${dk?"bg-gray-950 text-gray-100":"bg-gray-50 text-gray-800"}`}>
+<header className={`sticky top-0 z-50 backdrop-blur-xl border-b ${dk?"bg-gray-950/80 border-gray-800":"bg-white/80 border-gray-200"}`}><div className="max-w-6xl mx-auto px-3 py-2">
+<div className="flex items-center justify-between mb-1.5"><div className="flex items-center gap-2"><span className="text-xl">🎧</span><div><h1 className={`text-sm font-bold ${dk?"text-white":"text-gray-800"}`}>Estudiando la Compresión</h1><p className="text-[8px] font-mono tracking-wider text-gray-400">por lety2E · hecho con IA</p></div></div><span className={`text-[10px] font-mono px-2 py-0.5 rounded-lg ${dk?"bg-blue-500/20 text-blue-400":"bg-gray-100 text-gray-500"}`}>{dk?"⬤ STUDIO":"◯ MANUAL"}</span></div>
+<nav className="flex gap-0.5 overflow-x-auto -mb-2">{TABS.map(([id,lb,ic])=><button key={id} onClick={()=>setTab(id)} className={`flex items-center gap-1 px-2 py-1.5 rounded-t-lg text-[11px] font-medium whitespace-nowrap border-b-2 cursor-pointer ${tab===id?(dk?"border-blue-500 bg-gray-800/80 text-blue-400":"border-gray-800 bg-white text-gray-800"):(dk?"border-transparent text-gray-500 hover:text-gray-300":"border-transparent text-gray-400 hover:text-gray-600")}`}><span className="text-xs">{ic}</span>{lb}</button>)}</nav>
+</div></header>
+
+<main className="max-w-6xl mx-auto px-3 py-5" key={tab}>
+{tab==="ci"&&<div className="max-w-4xl mx-auto space-y-5 animate-fi"><div className="text-center mb-5"><h2 className="text-2xl font-bold text-gray-800">Arquitecturas de Compresión</h2><p className="text-gray-500 text-sm">Cuatro circuitos fundamentales</p></div>
+{CIRC.map(c=><div key={c.n} className={`bg-white rounded-2xl shadow-sm border border-gray-200 border-l-4 ${c.cl} p-5`}><div className="flex items-center gap-3 mb-3 flex-wrap"><span className="text-2xl">{c.ic}</span><div><h3 className="text-lg font-bold text-gray-800">{c.n}</h3><span className={`text-xs font-mono px-2 py-0.5 rounded-full ${c.bd}`}>{c.m}</span></div><span className="ml-auto text-xs text-gray-400 italic hidden sm:inline">{c.ch}</span></div><div className={`${c.bg} rounded-xl p-3 mb-3`}><p className="text-gray-700 text-sm">{c.d}</p></div><div className="grid md:grid-cols-2 gap-3 text-sm"><div><b className="text-gray-600">Sónico:</b><p className="text-gray-500 mt-1">{c.s}</p></div><div><b className="text-gray-600">Ideal:</b><p className="text-gray-500 mt-1">{c.bf}</p></div><div><b className="text-gray-600">Ataque:</b><p className="text-gray-500 mt-1 font-mono text-xs">{c.ak}</p></div><div><b className="text-gray-600">Famosos:</b><p className="text-gray-500 mt-1 italic">{c.fm}</p></div></div></div>)}</div>}
+
+{tab==="te"&&<div className="max-w-4xl mx-auto space-y-5 animate-fi"><div className="text-center mb-5"><h2 className="text-2xl font-bold text-gray-800">Técnicas de Compresión</h2><p className="text-gray-500 text-sm">Serie, Paralela, Sidechain, Downward, Upward</p></div>
+{TECH.map(t=><div key={t.n} className="bg-white rounded-2xl shadow-sm border p-5"><div className="flex items-center gap-3 mb-3"><span className="text-2xl">{t.ic}</span><h3 className="text-lg font-bold text-gray-800">{t.n}</h3></div><p className="text-gray-600 text-sm mb-3">{t.co}</p><div className="bg-gray-50 rounded-xl p-3 mb-3 font-mono text-[11px] overflow-x-auto"><div className="flex flex-wrap items-center gap-1.5">{t.ch.map((s,i)=><span key={i} className={s.includes("→")||s.startsWith("+")?"text-gray-400":"bg-white border border-gray-200 px-2 py-1 rounded-lg text-gray-700 shadow-sm"}>{s}</span>)}</div></div><div className="grid md:grid-cols-2 gap-3 text-sm mb-3"><div className="bg-emerald-50 rounded-xl p-3"><b className="text-emerald-700">✓ </b><span className="text-emerald-600">{t.p}</span></div><div className="bg-red-50 rounded-xl p-3"><b className="text-red-700">✗ </b><span className="text-red-600">{t.x}</span></div></div><div className="bg-amber-50 border border-amber-200 rounded-xl p-3 text-sm"><b className="text-amber-700">💡 </b><span className="text-amber-700">{t.tp}</span></div></div>)}</div>}
+
+{tab==="pa"&&<PgParam/>}
+{tab==="re"&&<PgReview/>}
+
+{tab==="ge"&&<div className="max-w-5xl mx-auto animate-fi"><div className="text-center mb-3"><h2 className="text-xl font-bold text-gray-100">Desafíos Generales</h2><p className="text-gray-500 text-xs">{GC.length} misiones vocales</p></div><Carousel items={GC} sm={false}/></div>}
+
+{tab==="sp"&&<div className="max-w-5xl mx-auto animate-fi"><div className="text-center mb-3"><h2 className="text-xl font-bold text-gray-100">Desafíos Avanzados</h2><p className="text-gray-500 text-xs">{SC.length} técnicas especializadas</p></div><Carousel items={SC} sm="auto"/></div>}
+</main>
+
+<footer className={`text-center py-3 text-[9px] font-mono ${dk?"text-gray-700":"text-gray-300"}`}>Estudiando la Compresión · lety2E · hecho con IA</footer>
+</div>;}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script>
+</body>
+</html>

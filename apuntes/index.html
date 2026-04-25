@@ -6,7 +6,7 @@
   <title>Apuntes — lety2E</title>
   <link rel="icon" href="../favicon.svg" type="image/svg+xml">
   <link rel="icon" href="../favicon.ico">
-  <meta name="description" content="Apuntes, notas y referencias de Lety sobre lo que le interesa.">
+  <meta name="description" content="Apuntes, infografías y artefactos de Lety sobre lo que le interesa.">
   <link rel="stylesheet" href="../style.css">
 </head>
 <body data-section="apuntes">
@@ -17,7 +17,7 @@
 
   <div class="topic-header">
     <h1>Apuntes</h1>
-    <p>Notas sueltas sobre lo que me interesa. Se van juntando con el tiempo.</p>
+    <p>Notas, infografías y artefactos sobre lo que me interesa.</p>
   </div>
 
   <section class="topic-content">
@@ -25,45 +25,33 @@
     <!--
       INSTRUCCIONES PARA AGREGAR UN APUNTE NUEVO:
 
-      1. Crea el archivo HTML del apunte en esta misma carpeta, ej:
-         apuntes/mi-apunte.html
+      1. Pega el archivo HTML del apunte en esta misma carpeta:
+         lety2E 2/apuntes/mi-apunte.html
 
-      2. Añade una <a class="entrada-item"> a la .lista-organica de abajo
-         siguiendo el patrón. El hint <p> es opcional — úsalo cuando el
-         título no diga de qué va el apunte.
+      2. Añade una <a class="apunte-card"> al .apuntes-grid de abajo
+         siguiendo el patrón. Cambia:
+           - href:       nombre del archivo
+           - --card-accent: color del borde (var(--M), var(--T), var(--P), etc.)
+           - tipo badge: "artefacto" / "infografía" / "texto"
+           - título y hint
 
-      3. Con el tiempo, si un tema se acumula (p.ej. 6 apuntes de física),
-         puedes crear una carpeta (fisica/) y mover esos HTMLs adentro.
+      3. El hint aparece sutil por defecto y se vuelve nítido al pasar el cursor.
     -->
 
-    <div class="lista-organica">
+    <div class="apuntes-grid">
 
-      <!-- EJEMPLOS (descomenta y adapta cuando tengas contenido) -->
-      <!--
-      <a href="historia-mexico.html" class="entrada-item" style="--entry-accent: var(--P);">
-        <h3>Historia de México</h3>
-        <p class="entrada-hint">Línea del tiempo y personajes clave.</p>
+      <a href="mcp.html" class="apunte-card" style="--card-accent: var(--M);">
+        <span class="apunte-tipo">artefacto</span>
+        <h3>MCP</h3>
+        <p class="apunte-hint">Mapa mental, glosario y flashcards del Model Context Protocol.</p>
       </a>
 
-      <a href="fisica-newton.html" class="entrada-item" style="--entry-accent: var(--course-2);">
-        <h3>Leyes de Newton</h3>
-        <p class="entrada-hint">Resumen visual de las tres leyes.</p>
+      <a href="compresion.html" class="apunte-card" style="--card-accent: var(--T);">
+        <span class="apunte-tipo">artefacto</span>
+        <h3>Compresión</h3>
+        <p class="apunte-hint">Compresores vocales y técnicas de compresión, paso a paso.</p>
       </a>
 
-      <a href="ia-transformers.html" class="entrada-item" style="--entry-accent: var(--M);">
-        <h3>Transformers, en simple</h3>
-      </a>
-
-      <a href="eneagrama.html" class="entrada-item" style="--entry-accent: var(--T);">
-        <h3>Eneagrama</h3>
-        <p class="entrada-hint">Los 9 tipos y cómo se ven en la vida diaria.</p>
-      </a>
-      -->
-
-    </div>
-
-    <div class="lista-vacia">
-      Pronto — los primeros apuntes están en camino.
     </div>
 
   </section>
