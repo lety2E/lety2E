@@ -146,7 +146,7 @@ Todas las URLs son **relativas** para compatibilidad con `file://`:
 - **Tecnología:** HTML puro + CSS + JS vanilla (sin frameworks)
 - **Fuentes:** Google Fonts (Playfair Display + DM Sans)
 - **KaTeX:** Usado en páginas de LetyMath para fórmulas matemáticas
-- **lety2E Lupian:** Link externo a YouTube (@Lety-lupian)
+- **lety2E Lupian:** Link externo a YouTube (@Lety2eLupian)
 - **Deploy:** `git add . && git commit -m "…" && git push` → publica automático en ~1-2 min
 
 ---

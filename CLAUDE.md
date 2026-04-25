@@ -111,7 +111,7 @@ const ROOT_LINKS = [
   { href: "escritos/", label: "Escritos", icon: "✍️" },
   { href: "apuntes/", label: "Apuntes", icon: "📚" },
   { href: "math/", label: "LetyMath", icon: "∑" },
-  { href: "https://www.youtube.com/@Lety-lupian", label: "Cantos", icon: "🎵", external: true },
+  { href: "https://www.youtube.com/@Lety2eLupian", label: "Cantos", icon: "🎵", external: true },
 ];
 ```
 
