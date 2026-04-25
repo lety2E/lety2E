@@ -27,7 +27,8 @@
         { text: 'Mat 2', href: 'matematicas-2/index.html' },
         { text: 'Mat 3', href: 'matematicas-3/index.html' },
         { text: 'Mat 4', href: 'matematicas-4/index.html' },
-        { text: 'Mat 5', href: 'matematicas-5/index.html' }
+        { text: 'Mat 5', href: 'matematicas-5/index.html' },
+        { text: 'Optativa', href: 'optativa/index.html' }
       ]
     }
   };
