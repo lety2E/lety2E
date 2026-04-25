@@ -6,6 +6,7 @@
   <title>lety2E</title>
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="icon" href="favicon.ico">
+  <meta name="description" content="lety2E — Escritura, música, matemáticas y apuntes desde una mente que no sigue el guión neurotípico.">
   <link rel="stylesheet" href="style.css">
 </head>
 <body data-section="home">
@@ -16,16 +17,12 @@
 
   <h1 class="hero-title">lety2E</h1>
 
-  <!-- IMAGEN ANCHO COMPLETO -->
-  <div class="hero-img">
-    <!--
-      Sube la ilustración a: public_html/assets/img/ilustracion.webp
-      El HTML la cargará automáticamente desde ahí.
-    -->
+  <!-- HERO HORIZONTAL — ilustración nocturna/mágica -->
+  <div class="hero-horizontal">
     <picture>
-      <source srcset="assets/img/ilustracion.webp" type="image/webp">
-      <img src="assets/img/ilustracion.png" alt="Lety"
-           onerror="this.parentElement.innerHTML='<div class=hero-img-ph><span>2e</span><p>aquí va tu ilustración</p></div>'">
+      <source srcset="assets/img/hero-nocturno.webp" type="image/webp">
+      <img src="assets/img/hero-nocturno.png" alt="Lety en un ambiente nocturno y mágico"
+           onerror="this.parentElement.parentElement.innerHTML='<div class=hero-horizontal-ph><div class=ph-big>2e</div><div class=ph-small>aquí va la ilustración hero</div></div>'">
     </picture>
   </div>
 
@@ -35,15 +32,22 @@
     <p class="bio-firma" style="color:var(--P);font-weight:700;font-style:normal;font-family:'DM Sans',sans-serif"><strong>2E</strong>: EA + ACC</p>
   </div>
 
-  <!-- BOTONES fila 1: 1 -->
-  <div class="btns-top" style="grid-template-columns: 1fr;">
-    <a href="lupian/index.html" class="nbtn nb-lup">Lupián</a>
-  </div>
+  <!-- TARJETAS: Math · Lupián · Apuntes -->
+  <div class="root-cards-grid">
+    <a href="math/index.html" class="root-card" style="--card-accent: var(--P);">
+      <h2>Math</h2>
+      <p>LetyMath — cursos de matemáticas en paquetitos.</p>
+    </a>
 
-  <!-- BOTONES fila 2: 2 -->
-  <div class="btns-bottom">
-    <a href="math/index.html" class="nbtn nb-math">Math</a>
-    <a href="apuntes/index.html" class="nbtn nb-apr">Apuntes</a>
+    <a href="lupian/index.html" class="root-card" style="--card-accent: var(--M);">
+      <h2>Lupián</h2>
+      <p>Cantos y escritos. La parte artística de Lety.</p>
+    </a>
+
+    <a href="apuntes/index.html" class="root-card" style="--card-accent: var(--T);">
+      <h2>Apuntes</h2>
+      <p>Notas sobre lo que me interesa.</p>
+    </a>
   </div>
 
 </main>

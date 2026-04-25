@@ -3,58 +3,74 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>lety2E Apuntes</title>
+  <title>Apuntes — lety2E</title>
   <link rel="icon" href="../favicon.svg" type="image/svg+xml">
   <link rel="icon" href="../favicon.ico">
-  <meta name="description" content="Apuntes, referencias y recursos sobre historia, física, IA, cosmética, eneagrama y más.">
+  <meta name="description" content="Apuntes, notas y referencias de Lety sobre lo que le interesa.">
   <link rel="stylesheet" href="../style.css">
 </head>
 <body data-section="apuntes">
-  <main>
-    <section class="hero-section">
-      <h1>lety2E Apuntes</h1>
-      <p>Recursos, referencias y notas sobre temas que me interesan.</p>
-    </section>
 
-    <div class="topic-grid">
-      <a href="historia-mexico/index.html" class="topic-card" style="--card-accent: #4A0080;">
-        <span class="card-number">📚</span>
-        <h2>Historia</h2>
-        <p>Historia de México y eventos relevantes</p>
+<script src="../nav.js"></script>
+
+<main class="topic-page">
+
+  <div class="topic-header">
+    <h1>Apuntes</h1>
+    <p>Notas sueltas sobre lo que me interesa. Se van juntando con el tiempo.</p>
+  </div>
+
+  <section class="topic-content">
+
+    <!--
+      INSTRUCCIONES PARA AGREGAR UN APUNTE NUEVO:
+
+      1. Crea el archivo HTML del apunte en esta misma carpeta, ej:
+         apuntes/mi-apunte.html
+
+      2. Añade una <a class="entrada-item"> a la .lista-organica de abajo
+         siguiendo el patrón. El hint <p> es opcional — úsalo cuando el
+         título no diga de qué va el apunte.
+
+      3. Con el tiempo, si un tema se acumula (p.ej. 6 apuntes de física),
+         puedes crear una carpeta (fisica/) y mover esos HTMLs adentro.
+    -->
+
+    <div class="lista-organica">
+
+      <!-- EJEMPLOS (descomenta y adapta cuando tengas contenido) -->
+      <!--
+      <a href="historia-mexico.html" class="entrada-item" style="--entry-accent: var(--P);">
+        <h3>Historia de México</h3>
+        <p class="entrada-hint">Línea del tiempo y personajes clave.</p>
       </a>
 
-      <a href="fisica/index.html" class="topic-card" style="--card-accent: #7B2CBF;">
-        <span class="card-number">⚛️</span>
-        <h2>Física</h2>
-        <p>Conceptos y principios fundamentales</p>
+      <a href="fisica-newton.html" class="entrada-item" style="--entry-accent: var(--course-2);">
+        <h3>Leyes de Newton</h3>
+        <p class="entrada-hint">Resumen visual de las tres leyes.</p>
       </a>
 
-      <a href="ia/index.html" class="topic-card" style="--card-accent: #FF00AA;">
-        <span class="card-number">🤖</span>
-        <h2>IA</h2>
-        <p>Inteligencia artificial y aprendizaje automático</p>
+      <a href="ia-transformers.html" class="entrada-item" style="--entry-accent: var(--M);">
+        <h3>Transformers, en simple</h3>
       </a>
 
-      <a href="cosmetica-natural/index.html" class="topic-card" style="--card-accent: #FF6EC7;">
-        <span class="card-number">🌿</span>
-        <h2>Cosmética Natural</h2>
-        <p>Productos naturales y sostenibles</p>
+      <a href="eneagrama.html" class="entrada-item" style="--entry-accent: var(--T);">
+        <h3>Eneagrama</h3>
+        <p class="entrada-hint">Los 9 tipos y cómo se ven en la vida diaria.</p>
       </a>
+      -->
 
-      <a href="eneagrama/index.html" class="topic-card" style="--card-accent: #00DEC8;">
-        <span class="card-number">⭐</span>
-        <h2>Eneagrama</h2>
-        <p>Sistema de personalidad y autoconocimiento</p>
-      </a>
-
-      <a href="bolsa-valores/index.html" class="topic-card" style="--card-accent: #00B8A9;">
-        <span class="card-number">📈</span>
-        <h2>Bolsa de Valores</h2>
-        <p>Conceptos de inversión y finanzas</p>
-      </a>
     </div>
-  </main>
-  <script src="../nav.js"></script>
-  <script src="../footer.js"></script>
+
+    <div class="lista-vacia">
+      Pronto — los primeros apuntes están en camino.
+    </div>
+
+  </section>
+
+</main>
+
+<script src="../footer.js"></script>
+
 </body>
 </html>

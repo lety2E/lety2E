@@ -672,3 +672,292 @@ body[data-section="home"] main {
   color: var(--M); margin-bottom: 0.3rem;
 }
 .page-header p { font-size: 0.95rem; color: var(--text-2); margin: 0; }
+
+/* ================================================
+   HERO HORIZONTAL (portada)
+   Para ilustración nocturna/mágica ancho completo.
+   ================================================ */
+.hero-horizontal {
+  width: 100%;
+  aspect-ratio: 21 / 9;
+  max-height: 70vh;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 2px solid var(--M);
+  background: linear-gradient(135deg, var(--dark) 0%, var(--P) 60%, var(--M) 120%);
+  margin: 0 auto 2.5rem;
+  display: flex; align-items: center; justify-content: center;
+  position: relative;
+}
+.hero-horizontal picture,
+.hero-horizontal img {
+  width: 100%; height: 100%;
+  object-fit: cover; display: block;
+}
+.hero-horizontal-ph {
+  padding: 3rem 2rem; text-align: center;
+  color: rgba(255,255,255,0.6);
+  font-family: var(--font-display); font-style: italic;
+}
+.hero-horizontal-ph .ph-big {
+  font-size: clamp(2rem, 6vw, 3.5rem);
+  color: var(--T); opacity: 0.8; margin-bottom: 0.4rem;
+}
+.hero-horizontal-ph .ph-small {
+  font-size: 0.8rem; color: rgba(255,255,255,0.5);
+  font-family: var(--font-body); font-style: normal;
+  letter-spacing: 0.05em;
+}
+
+/* ================================================
+   TARJETAS RAÍZ (Math · Lupián · Apuntes)
+   ================================================ */
+.root-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  margin-top: 1rem;
+}
+.root-card {
+  background: var(--bg-card);
+  border: 2px solid transparent;
+  border-top: 4px solid var(--card-accent, var(--P));
+  border-radius: 14px;
+  padding: 2rem 1.25rem;
+  text-decoration: none;
+  color: var(--text);
+  transition: transform .22s ease, box-shadow .22s ease, border-color .22s;
+  text-align: center;
+  display: flex; flex-direction: column; align-items: center; gap: 0.4rem;
+}
+.root-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 28px rgba(74, 0, 128, 0.14);
+  border-color: var(--card-accent, var(--P));
+}
+.root-card h2 {
+  font-family: var(--font-display);
+  font-style: italic; font-weight: 900;
+  font-size: 1.6rem;
+  color: var(--card-accent, var(--M));
+  margin: 0;
+}
+.root-card p {
+  font-size: 0.88rem;
+  color: var(--text-2);
+  margin: 0;
+  line-height: 1.5;
+}
+
+@media (max-width: 640px) {
+  .root-cards-grid { grid-template-columns: 1fr; gap: 1rem; }
+  .root-card { padding: 1.5rem 1.25rem; }
+  .hero-horizontal { aspect-ratio: 16 / 11; }
+}
+
+/* ================================================
+   PUERTAS (Lupián index — Cantos · Escritos)
+   Ilustración como elemento principal de nav.
+   ================================================ */
+.puertas-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.75rem;
+  margin-top: 2rem;
+}
+.puerta-card {
+  position: relative;
+  display: block;
+  aspect-ratio: 4 / 5;
+  border-radius: 18px;
+  overflow: hidden;
+  text-decoration: none;
+  background: linear-gradient(160deg, var(--dark) 0%, var(--P) 80%);
+  border: 2px solid var(--border);
+  transition: transform .25s ease, box-shadow .25s ease, border-color .25s;
+  box-shadow: 0 4px 12px rgba(74, 0, 128, 0.08);
+}
+.puerta-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 36px rgba(74, 0, 128, 0.2);
+  border-color: var(--puerta-accent, var(--M));
+}
+.puerta-card picture,
+.puerta-card img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover; display: block;
+  transition: transform .4s ease;
+}
+.puerta-card:hover img { transform: scale(1.03); }
+
+.puerta-ph {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column; gap: 0.6rem;
+  color: rgba(255,255,255,0.6);
+  font-family: var(--font-display); font-style: italic;
+  text-align: center; padding: 2rem;
+}
+.puerta-ph .ph-icon {
+  font-size: 3.5rem;
+  color: var(--puerta-accent, var(--T));
+  opacity: 0.55;
+}
+.puerta-ph .ph-note {
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.45);
+  font-family: var(--font-body); font-style: normal;
+}
+
+.puerta-label {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  padding: 1.5rem 1.5rem 1.25rem;
+  background: linear-gradient(to top, rgba(26,8,40,0.95) 0%, rgba(26,8,40,0.6) 60%, transparent 100%);
+  color: #fff;
+  display: flex; flex-direction: column; align-items: center; gap: 0.25rem;
+}
+.puerta-label h2 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-style: italic; font-weight: 900;
+  font-size: clamp(1.8rem, 4vw, 2.4rem);
+  color: var(--puerta-accent, var(--M));
+  letter-spacing: -0.01em;
+}
+.puerta-label p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.85);
+  font-family: var(--font-body);
+}
+
+@media (max-width: 640px) {
+  .puertas-grid { grid-template-columns: 1fr; gap: 1.25rem; }
+  .puerta-card { aspect-ratio: 5 / 4; }
+}
+
+/* ================================================
+   LISTA ORGÁNICA (Apuntes + Escritos — flat)
+   Entradas individuales con título + hint opcional.
+   ================================================ */
+.lista-organica {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  margin-top: 2rem;
+  max-width: 720px;
+}
+.entrada-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border-s);
+  border-left: 4px solid var(--entry-accent, var(--M));
+  border-radius: 10px;
+  padding: 1.1rem 1.35rem;
+  text-decoration: none;
+  color: var(--text);
+  transition: transform .18s ease, border-color .18s, background .18s;
+  display: block;
+}
+.entrada-item:hover {
+  transform: translateX(4px);
+  background: var(--bg-hover);
+  border-left-color: var(--P);
+}
+.entrada-item h3 {
+  font-family: var(--font-display);
+  font-style: italic; font-weight: 900;
+  font-size: 1.2rem;
+  color: var(--text);
+  margin: 0 0 0.15rem;
+  line-height: 1.3;
+}
+.entrada-item:hover h3 { color: var(--M); }
+.entrada-hint {
+  font-size: 0.88rem;
+  color: var(--text-2);
+  margin: 0;
+  line-height: 1.5;
+}
+.lista-vacia {
+  text-align: center;
+  color: var(--text-3);
+  font-size: 0.9rem;
+  font-style: italic;
+  padding: 2.5rem 1rem;
+  border: 1px dashed var(--border);
+  border-radius: 12px;
+  max-width: 720px;
+  margin: 2rem auto 0;
+}
+
+/* ================================================
+   VIDEOS CURADOS (Cantos)
+   ================================================ */
+.videos-curados {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0 2.5rem;
+}
+.video-cover {
+  background: var(--bg-card);
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--border-s);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.video-cover:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(74, 0, 128, 0.12);
+}
+.video-cover .video-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: var(--dark);
+}
+.video-cover iframe {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  border: 0;
+}
+.video-cover .video-meta {
+  padding: 0.9rem 1.1rem 1rem;
+}
+.video-cover .video-meta h3 {
+  font-family: var(--font-display);
+  font-style: italic; font-weight: 900;
+  font-size: 1.1rem;
+  color: var(--text);
+  margin: 0 0 0.15rem;
+}
+.video-cover .video-meta p {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--text-2);
+}
+.video-slot-placeholder {
+  background: var(--bg-card);
+  border: 2px dashed var(--border);
+  border-radius: 12px;
+  aspect-ratio: 16 / 9;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--text-3);
+  font-style: italic;
+  font-size: 0.9rem;
+  text-align: center;
+  padding: 1rem;
+}
+
+.canal-link {
+  display: inline-block;
+  margin-top: 1rem;
+  font-size: 0.95rem;
+  color: var(--P);
+  border-bottom: 1px dashed var(--P);
+  padding-bottom: 2px;
+  transition: color .15s, border-color .15s;
+}
+.canal-link:hover { color: var(--M); border-bottom-color: var(--M); }

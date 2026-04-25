@@ -12,23 +12,13 @@
     lupian: {
       name: 'lety2E Lupián',
       links: [
-        { text: 'Cantos', href: 'https://www.youtube.com/@Lety-lupian/videos', external: true },
-        { text: 'Historias', href: 'historias/index.html' },
-        { text: 'Poemas', href: 'poemas/index.html' },
-        { text: 'Reflexiones', href: 'reflexiones/index.html' },
-        { text: 'Varios', href: 'varios/index.html' }
+        { text: 'Cantos', href: 'cantos/index.html' },
+        { text: 'Escritos', href: 'escritos/index.html' }
       ]
     },
     apuntes: {
       name: 'lety2E Apuntes',
-      links: [
-        { text: 'Historia', href: 'historia-mexico/index.html' },
-        { text: 'Física', href: 'fisica/index.html' },
-        { text: 'IA', href: 'ia/index.html' },
-        { text: 'Cosmética', href: 'cosmetica-natural/index.html' },
-        { text: 'Eneagrama', href: 'eneagrama/index.html' },
-        { text: 'Bolsa', href: 'bolsa-valores/index.html' }
-      ]
+      links: []
     },
     math: {
       name: 'lety2E Math',
@@ -43,8 +33,8 @@
   };
 
   const ROOT_LINKS = [
-    { text: 'Lupián', href: 'lupian/index.html' },
     { text: 'Math', href: 'math/index.html' },
+    { text: 'Lupián', href: 'lupian/index.html' },
     { text: 'Apuntes', href: 'apuntes/index.html' }
   ];
 
@@ -82,6 +72,11 @@
     brandName = SECTIONS[section].name;
     sectionHref = './index.html';
     links = SECTIONS[section].links;
+    // Si estamos dentro de un HTML de sección (no el index), mostrar volver
+    var isSectionIndex = /\/(index\.html)?$/i.test(path);
+    if (!isSectionIndex && (!links || links.length === 0)) {
+      links = [{ text: '\u2190 Volver', href: './index.html' }];
+    }
   } else if (depth >= 2 && section && SECTIONS[section]) {
     // Subsección: icono → home, nombre → index de sección
     brandName = SECTIONS[section].name;
