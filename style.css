@@ -55,7 +55,7 @@
 
 /* Overrides: secciones con cards blancas */
 body[data-section="apuntes"],
-body[data-section="escritos"] {
+body[data-section="relatos"] {
   --bg-card: #FFFFFF;
   --text:    #2C2C2C;
   --text-2:  #666666;
@@ -1036,3 +1036,76 @@ body[data-section="home"] main {
   transition: color .15s, border-color .15s;
 }
 .canal-link:hover { color: var(--M); border-bottom-color: var(--M); }
+
+/* ================================================
+   PRÓXIMAMENTE / EN CONSTRUCCIÓN (Math vacíos)
+   ================================================ */
+.proximamente-card {
+  max-width: 560px;
+  margin: 3rem auto;
+  padding: 2.5rem 2rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border-s);
+  border-left: 4px solid var(--card-accent, var(--T));
+  border-radius: 14px;
+  text-align: center;
+}
+.proximamente-tag {
+  display: inline-block;
+  font-family: var(--font-mono, 'DM Sans', sans-serif);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--card-accent, var(--T));
+  background: color-mix(in srgb, var(--card-accent, var(--T)) 12%, transparent);
+  padding: 0.3rem 0.85rem;
+  border-radius: 99px;
+  margin-bottom: 1.2rem;
+}
+.proximamente-card h2 {
+  font-family: var(--font-display, 'Playfair Display', serif);
+  font-style: italic;
+  font-weight: 900;
+  font-size: 1.5rem;
+  color: var(--text);
+  margin: 0 0 0.6rem;
+}
+.proximamente-card p {
+  margin: 0;
+  color: var(--text-2);
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+.proximamente-nota {
+  text-align: center;
+  margin: 2rem auto 0;
+  font-size: 0.88rem;
+  color: var(--text-3);
+  font-style: italic;
+}
+
+/* Course-card variant: marca un curso como "próximamente" */
+.course-card.pronto {
+  position: relative;
+  opacity: 0.78;
+}
+.course-card.pronto:hover {
+  opacity: 1;
+}
+.pronto-badge {
+  position: absolute;
+  top: 0.85rem;
+  right: 0.85rem;
+  font-family: var(--font-mono, 'DM Sans', sans-serif);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--card-accent, var(--T));
+  background: color-mix(in srgb, var(--card-accent, var(--T)) 14%, transparent);
+  padding: 0.25rem 0.6rem;
+  border-radius: 99px;
+  z-index: 1;
+}

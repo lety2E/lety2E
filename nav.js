@@ -13,7 +13,7 @@
       name: 'lety2E Lupián',
       links: [
         { text: 'Cantos', href: 'cantos/index.html' },
-        { text: 'Escritos', href: 'escritos/index.html' }
+        { text: 'Relatos', href: 'relatos/index.html' }
       ]
     },
     apuntes: {
