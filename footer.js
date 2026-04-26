@@ -13,7 +13,7 @@
 
   /* ── Calcular rutas base ─────────────────────── */
   var root = depth === 0 ? './' : new Array(depth + 1).join('../');
-  var iconPath = root + 'assets/logos/icono-2e-magenta.png';
+  var iconPath = root + 'assets/logos/icono-2e.png';
   var homePath = root + 'index.html';
 
   /* ── Inyectar ────────────────────────────────── */
