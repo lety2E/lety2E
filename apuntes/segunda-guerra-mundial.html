@@ -44,7 +44,7 @@
       font-style: italic;
       font-weight: 900;
       font-size: 1.9rem;
-      color: var(--M);
+      color: var(--P);
       opacity: 0.82;
       display: block;
     }
@@ -66,12 +66,22 @@
       align-items: center;
       gap: 1.2rem;
     }
+    .header-logo-link { display: flex; align-items: center; flex-shrink: 0; }
     .header-logo {
       height: 58px;
       width: auto;
-      flex-shrink: 0;
       border-radius: 8px;
     }
+    .header-section-link {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-weight: 900;
+      font-size: 1.5rem;
+      color: var(--T);
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+    .header-section-link:hover { opacity: 0.75; }
     .header-text { flex: 1; text-align: center; }
     .page-header h1 {
       font-family: 'Playfair Display', serif;
@@ -511,7 +521,6 @@
       .tab-btn { min-width: 80px; font-size: 0.72rem; }
       .fc-card { height: 210px; }
     }
-    .nav-name { color: var(--P); }
   </style>
 </head>
 <body>
@@ -522,7 +531,10 @@
   </div>
 
   <header class="page-header">
-    <img class="header-logo" src="../assets/logos/lety2e-Apuntes.jpeg" alt="lety2E">
+    <a href="../index.html" class="header-logo-link">
+      <img class="header-logo" src="../assets/logos/lety2e-Apuntes.jpeg" alt="lety2E">
+    </a>
+    <a href="index.html" class="header-section-link">Apuntes</a>
     <div class="header-text">
       <h1>Segunda Guerra Mundial</h1>
       <p>Síntesis Estructural Progresiva · 5 niveles</p>

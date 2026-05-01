@@ -4,10 +4,48 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MCP · Aprendizaje Fractal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
 <script src="https://cdn.tailwindcss.com"></script>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&display=swap');
-body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+:root {
+  --M: #FF00AA; --T: #00DEC8; --P: #4A0080;
+  --dark: #1A0828; --bg: #E8EEF4; --bg-card: #F4F7FA;
+  --txt: #1e0f2e; --txt-2: #3d2255;
+}
+.watermark {
+  position: fixed; top: 0.9rem; right: 1.3rem; z-index: 200;
+  text-align: right; pointer-events: none; user-select: none; line-height: 1;
+}
+.watermark .wm-brand {
+  font-family: 'Playfair Display', serif; font-style: italic; font-weight: 900;
+  font-size: 1.9rem; color: var(--P); opacity: 0.82; display: block;
+}
+.watermark .wm-sub {
+  font-size: 0.68rem; letter-spacing: 0.16em; color: #fff;
+  opacity: 0.55; text-transform: uppercase; display: block; text-align: right;
+}
+.brand-header {
+  background: var(--dark); padding: 1.2rem 1.5rem;
+  display: flex; align-items: center; gap: 1.2rem;
+}
+.brand-logo-link { display: flex; align-items: center; flex-shrink: 0; }
+.brand-header img { height: 58px; width: auto; border-radius: 8px; }
+.brand-section-link {
+  font-family: 'Playfair Display', serif; font-style: italic; font-weight: 900;
+  font-size: 1.5rem; color: var(--T); text-decoration: none; flex-shrink: 0;
+}
+.brand-section-link:hover { opacity: 0.75; }
+.brand-header-text { flex: 1; text-align: center; }
+.brand-header h1 {
+  font-family: 'Playfair Display', serif; font-style: italic; font-weight: 900;
+  font-size: clamp(1.4rem, 3vw, 2.2rem); color: var(--T);
+}
+.brand-header p {
+  color: rgba(255,255,255,0.52); font-size: 0.78rem; margin-top: 0.4rem; letter-spacing: 0.07em;
+}
+#location-tag { background: rgba(74,0,128,0.1) !important; color: var(--P) !important; }
+body { font-family: 'DM Sans', 'Inter', sans-serif; scroll-behavior: smooth; background: var(--bg); }
 .fade-in { animation: fadeIn 0.3s ease-in-out; }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 .panel-content { display: none; max-height: 0; overflow: hidden; transition: all 0.3s ease-in-out; }
@@ -23,7 +61,7 @@ body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
 .details-content { display: none; }
 .details-content.show { display: block; animation: slideDown 0.3s ease-out; }
 @keyframes slideDown { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
-.filter-btn.active { background: #6366f1 !important; color: white !important; }
+.filter-btn.active { background: var(--P) !important; color: white !important; }
 .mm-node, .mm-edge-label { cursor: pointer; transition: all 0.25s ease; }
 .mm-node rect { transition: all 0.25s ease; }
 .mm-node:hover rect { stroke-width: 2.5; filter: drop-shadow(0 4px 8px rgba(99,102,241,0.15)); }
@@ -34,7 +72,24 @@ body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
 .info-panel.empty { background: #fafafa; border-style: dashed; border-color: #e2e8f0; display: flex; align-items: center; justify-content: center; }
 </style>
 </head>
-<body class="bg-white text-slate-800 min-h-screen flex flex-col">
+<body class="text-slate-800 min-h-screen flex flex-col">
+
+<div class="watermark">
+  <span class="wm-brand">lety2E</span>
+  <span class="wm-sub">apuntes</span>
+</div>
+
+<div class="brand-header">
+  <a href="../index.html" class="brand-logo-link">
+    <img src="../assets/logos/lety2e-Apuntes.jpeg" alt="lety2E">
+  </a>
+  <a href="index.html" class="brand-section-link">Apuntes</a>
+  <div class="brand-header-text">
+    <h1>Model Context Protocol</h1>
+    <p>Aprendizaje Fractal · MCP</p>
+  </div>
+</div>
+
 <div id="app" class="flex-1 flex flex-col max-w-4xl mx-auto w-full p-6 md:p-12">
   <nav class="flex items-center justify-between mb-16 text-xs uppercase tracking-[0.2em] text-slate-400 font-bold">
     <div id="nav-buttons" class="flex gap-8"></div>
