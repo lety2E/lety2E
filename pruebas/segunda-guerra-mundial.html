@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Segunda Guerra Mundial — Síntesis Estructural Progresiva</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --M: #FF00AA;
+      --T: #00DEC8;
+      --P: #4A0080;
+      --dark: #1A0828;
+      --bg: #F2DBD5;
+      --bg-card: #FBF2EF;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      background: var(--bg);
+      color: var(--dark);
+      min-height: 100vh;
+    }
+
+    /* ── Header ── */
+    .page-header {
+      background: var(--dark);
+      color: white;
+      padding: 2.2rem 1.5rem 1.8rem;
+      text-align: center;
+    }
+    .page-header h1 {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-weight: 900;
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      color: var(--M);
+    }
+    .page-header p {
+      color: var(--T);
+      font-size: 0.85rem;
+      margin-top: 0.5rem;
+      letter-spacing: 0.06em;
+      opacity: 0.85;
+    }
+
+    /* ── Tabs nav ── */
+    .tabs-nav {
+      display: flex;
+      background: var(--dark);
+      border-top: 1px solid rgba(255,255,255,0.07);
+      overflow-x: auto;
+    }
+    .tab-btn {
+      flex: 1;
+      min-width: 110px;
+      padding: 0.85rem 0.8rem;
+      background: none;
+      border: none;
+      border-bottom: 3px solid transparent;
+      color: rgba(255,255,255,0.45);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      transition: color 0.2s, border-color 0.2s;
+      text-align: center;
+    }
+    .tab-btn:hover { color: rgba(255,255,255,0.8); }
+    .tab-btn.active { color: white; border-bottom-color: var(--M); }
+    .tab-btn .zoom-label {
+      display: block;
+      font-size: 0.62rem;
+      color: var(--T);
+      opacity: 0.65;
+      margin-bottom: 0.25rem;
+      letter-spacing: 0.08em;
+    }
+    .tab-btn.active .zoom-label { opacity: 1; }
+
+    /* ── Tab content ── */
+    .tab-content { display: none; padding: 2rem 1.5rem 3rem; max-width: 860px; margin: 0 auto; }
+    .tab-content.active { display: block; }
+
+    /* ── Level badge ── */
+    .level-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: var(--P);
+      color: white;
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.09em;
+      padding: 0.28rem 0.75rem;
+      border-radius: 20px;
+      margin-bottom: 1.4rem;
+    }
+
+    /* ── Mini cards grid ── */
+    .mini-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1.6rem;
+    }
+    .mini-card {
+      background: var(--bg-card);
+      border-radius: 12px;
+      padding: 1.2rem 1.4rem;
+      border-left: 4px solid var(--accent, var(--M));
+    }
+    .mini-card .card-tag {
+      font-size: 0.63rem;
+      font-weight: 500;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+      color: var(--accent, var(--M));
+      display: block;
+      margin-bottom: 0.4rem;
+    }
+    .mini-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.08rem;
+      font-weight: 900;
+      color: var(--dark);
+      margin-bottom: 0.5rem;
+    }
+    .mini-card p { font-size: 0.87rem; line-height: 1.65; color: #3a1a4a; }
+
+    /* ── Section title ── */
+    .sec-title {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.35rem;
+      font-weight: 900;
+      color: var(--P);
+      margin: 1.8rem 0 0.8rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 2px solid rgba(74,0,128,0.15);
+    }
+
+    /* ── Reveal button ── */
+    .reveal-btn {
+      background: none;
+      border: 1.5px dashed var(--T);
+      color: var(--T);
+      border-radius: 8px;
+      padding: 0.5rem 1rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 500;
+      cursor: pointer;
+      margin-top: 0.9rem;
+      transition: background 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+    .reveal-btn:hover { background: rgba(0,222,200,0.07); }
+    .reveal-icon { transition: transform 0.22s; display: inline-block; }
+    .reveal-btn.open .reveal-icon { transform: rotate(45deg); }
+
+    .reveal-content {
+      display: none;
+      margin-top: 0.85rem;
+      animation: fadeIn 0.28s ease;
+    }
+    .reveal-content.open { display: block; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-5px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .reveal-card {
+      background: linear-gradient(135deg, rgba(255,0,170,0.05), rgba(0,222,200,0.05));
+      border: 1px solid rgba(0,222,200,0.28);
+      border-radius: 10px;
+      padding: 1rem 1.2rem;
+      font-size: 0.88rem;
+      line-height: 1.7;
+      color: #3a1a4a;
+    }
+    .reveal-card strong { color: var(--P); }
+
+    /* ── Timeline ── */
+    .timeline { display: flex; flex-direction: column; gap: 0; margin: 0.5rem 0 0.5rem 0.6rem; }
+    .tl-item {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      padding: 0.65rem 0 0.65rem 1rem;
+      border-left: 2px solid rgba(74,0,128,0.2);
+      position: relative;
+    }
+    .tl-item::before {
+      content: '';
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--M);
+      position: absolute;
+      left: -6px;
+      top: 0.85rem;
+    }
+    .tl-date { font-size: 0.73rem; font-weight: 500; color: var(--M); min-width: 64px; padding-top: 0.1rem; }
+    .tl-text { font-size: 0.87rem; line-height: 1.55; color: #3a1a4a; }
+
+    /* ── Bandos ── */
+    .bandos-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .bando-card {
+      background: var(--bg-card);
+      border-radius: 12px;
+      padding: 1.2rem;
+      border-top: 4px solid var(--accent, var(--M));
+    }
+    .bando-card h4 { font-weight: 500; font-size: 0.9rem; color: var(--accent, var(--M)); margin-bottom: 0.6rem; }
+    .bando-card ul { list-style: none; font-size: 0.84rem; line-height: 1.9; color: #3a1a4a; }
+    .bando-card ul li::before { content: '· '; color: var(--T); }
+
+    /* ── Cifras ── */
+    .cifra-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 0.8rem; margin: 0.5rem 0; }
+    .cifra { background: var(--dark); color: white; border-radius: 10px; padding: 1rem; text-align: center; }
+    .cifra .num {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-weight: 900;
+      font-size: 1.55rem;
+      color: var(--M);
+      display: block;
+    }
+    .cifra .label { font-size: 0.72rem; color: rgba(255,255,255,0.65); margin-top: 0.25rem; }
+
+    /* ── Body text (nivel 4) ── */
+    .body-text { font-size: 0.93rem; line-height: 1.78; color: #2a1035; margin: 0.7rem 0 1rem; }
+
+    /* ── Quote ── */
+    .quote-block {
+      border-left: 4px solid var(--M);
+      margin: 1.2rem 0;
+      padding: 0.8rem 1.2rem;
+      background: rgba(255,0,170,0.04);
+      border-radius: 0 8px 8px 0;
+    }
+    .quote-block p { font-style: italic; font-size: 0.93rem; line-height: 1.65; color: #3a1a4a; }
+    .quote-block cite { display: block; margin-top: 0.4rem; font-size: 0.77rem; color: var(--M); font-style: normal; }
+
+    /* ── Recursos ── */
+    .recursos { background: var(--dark); border-radius: 12px; padding: 1.2rem 1.4rem; margin-top: 1.8rem; }
+    .recursos h4 { color: var(--T); font-size: 0.82rem; font-weight: 500; letter-spacing: 0.09em; margin-bottom: 0.8rem; }
+    .recursos ul { list-style: none; font-size: 0.85rem; line-height: 2; color: rgba(255,255,255,0.72); }
+    .recursos ul li::before { content: '→ '; color: var(--T); }
+
+    @media (max-width: 580px) {
+      .bandos-grid { grid-template-columns: 1fr; }
+      .tab-btn { min-width: 88px; font-size: 0.75rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="page-header">
+    <h1>Segunda Guerra Mundial</h1>
+    <p>Síntesis Estructural Progresiva · 4 niveles de zoom</p>
+  </header>
+
+  <nav class="tabs-nav">
+    <button class="tab-btn active" onclick="showTab('n1', this)">
+      <span class="zoom-label">zoom ×1</span>
+      Panorama
+    </button>
+    <button class="tab-btn" onclick="showTab('n2', this)">
+      <span class="zoom-label">zoom ×2</span>
+      Contexto
+    </button>
+    <button class="tab-btn" onclick="showTab('n3', this)">
+      <span class="zoom-label">zoom ×3</span>
+      Desarrollo
+    </button>
+    <button class="tab-btn" onclick="showTab('n4', this)">
+      <span class="zoom-label">zoom ×4</span>
+      Monografía
+    </button>
+  </nav>
+
+  <!-- ════════════════════════════════
+       NIVEL 1 — PANORAMA
+       ════════════════════════════════ -->
+  <div id="n1" class="tab-content active">
+    <div class="level-badge">◎ Nivel 1 — Panorama general</div>
+
+    <div class="mini-grid">
+      <div class="mini-card" style="--accent: var(--M)">
+        <span class="card-tag">¿Qué fue?</span>
+        <h3>El conflicto más grande</h3>
+        <p>Una guerra global que enfrentó a dos bloques de naciones y cambió el mundo para siempre.</p>
+      </div>
+      <div class="mini-card" style="--accent: var(--T)">
+        <span class="card-tag">¿Cuándo?</span>
+        <h3>1939 — 1945</h3>
+        <p>Seis años de conflicto. Comenzó en Europa y se extendió a Asia, África y los océanos.</p>
+      </div>
+      <div class="mini-card" style="--accent: var(--P)">
+        <span class="card-tag">¿Quiénes?</span>
+        <h3>Aliados vs. Eje</h3>
+        <p>Dos grandes bloques. Más de 30 países involucrados. Millones de soldados y civiles.</p>
+      </div>
+    </div>
+
+    <button class="reveal-btn" onclick="toggleReveal(this)">
+      <span class="reveal-icon">+</span> Descubrir: ¿por qué importa hoy?
+    </button>
+    <div class="reveal-content">
+      <div class="reveal-card">
+        <strong>El mundo que vivimos nació aquí.</strong> La ONU, el Estado de Israel, la Guerra Fría, la división de Europa — todo tiene su origen directo en 1945. Entender la SGM es entender el siglo XX y buena parte del XXI.
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════
+       NIVEL 2 — CONTEXTO
+       ════════════════════════════════ -->
+  <div id="n2" class="tab-content">
+    <div class="level-badge">◎ Nivel 2 — Contexto y estructura</div>
+
+    <div class="mini-grid">
+      <div class="mini-card" style="--accent: var(--M)">
+        <span class="card-tag">¿Qué fue?</span>
+        <h3>El conflicto más grande</h3>
+        <p>Una guerra global (1939–1945) que involucró a más de 30 naciones, causó entre 70–85 millones de muertes y redibujó el mapa político mundial.</p>
+      </div>
+      <div class="mini-card" style="--accent: var(--T)">
+        <span class="card-tag">¿Cuándo?</span>
+        <h3>1939 — 1945</h3>
+        <p>Inicio: invasión alemana a Polonia (1 sep 1939). Fin: capitulación de Japón (2 sep 1945). Europa terminó antes, en mayo 1945.</p>
+      </div>
+      <div class="mini-card" style="--accent: var(--P)">
+        <span class="card-tag">¿Quiénes?</span>
+        <h3>Aliados vs. Eje</h3>
+        <p>Aliados: Reino Unido, Francia, URSS, EE.UU., China. Eje: Alemania Nazi, Italia Fascista, Japón Imperial.</p>
+      </div>
+    </div>
+
+    <h2 class="sec-title">Causas principales</h2>
+    <div class="mini-grid">
+      <div class="mini-card" style="--accent: var(--M)">
+        <span class="card-tag">Económica</span>
+        <h3>Crisis del 29</h3>
+        <p>La Gran Depresión devastó economías y abrió la puerta a líderes extremistas con respuestas simples.</p>
+      </div>
+      <div class="mini-card" style="--accent: var(--T)">
+        <span class="card-tag">Política</span>
+        <h3>Tratado de Versalles</h3>
+        <p>Las condiciones humillantes impuestas a Alemania en 1919 alimentaron el resentimiento y el auge del nazismo.</p>
+      </div>
+      <div class="mini-card" style="--accent: var(--P)">
+        <span class="card-tag">Ideológica</span>
+        <h3>Fascismo y Nazismo</h3>
+        <p>Regímenes totalitarios con ideologías expansionistas y racistas tomaron el control de Alemania e Italia.</p>
+      </div>
+    </div>
+
+    <button class="reveal-btn" onclick="toggleReveal(this)">
+      <span class="reveal-icon">+</span> Descubrir: la causa olvidada
+    </button>
+    <div class="reveal-content">
+      <div class="reveal-card">
+        <strong>La política de apaciguamiento.</strong> Francia y Reino Unido creyeron que ceder territorios a Hitler evitaría la guerra. Los Acuerdos de Múnich (1938) entregaron los Sudetes checos. Chamberlain regresó declarando "paz en nuestro tiempo". Seis meses después, Hitler ocupaba toda Checoslovaquia.
+      </div>
+    </div>
+
+    <h2 class="sec-title">Consecuencias clave</h2>
+    <div class="timeline">
+      <div class="tl-item">
+        <span class="tl-date">1945</span>
+        <span class="tl-text">Fundación de la ONU para prevenir futuros conflictos globales.</span>
+      </div>
+      <div class="tl-item">
+        <span class="tl-date">1947</span>
+        <span class="tl-text">Inicio de la Guerra Fría entre EE.UU. y la URSS.</span>
+      </div>
+      <div class="tl-item">
+        <span class="tl-date">1948</span>
+        <span class="tl-text">Creación del Estado de Israel y la Declaración Universal de Derechos Humanos.</span>
+      </div>
+      <div class="tl-item">
+        <span class="tl-date">1949</span>
+        <span class="tl-text">División de Alemania en RFA (occidental) y RDA (oriental).</span>
+      </div>
+    </div>
+
+    <button class="reveal-btn" onclick="toggleReveal(this)">
+      <span class="reveal-icon">+</span> Descubrir: el costo humano en números
+    </button>
+    <div class="reveal-content">
+      <div class="cifra-row">
+        <div class="cifra"><span class="num">70M+</span><span class="label">Muertes totales</span></div>
+        <div class="cifra"><span class="num">6M</span><span class="label">Víctimas del Holocausto</span></div>
+        <div class="cifra"><span class="num">&gt;50%</span><span class="label">Eran civiles</span></div>
+        <div class="cifra"><span class="num">60+</span><span class="label">Naciones involucradas</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════
+       NIVEL 3 — DESARROLLO
+       ════════════════════════════════ -->
+  <div id="n3" class="tab-content">
+    <div class="level-badge">◎ Nivel 3 — Desarrollo detallado</div>
+
+    <div class="mini-grid">
+      <div class="mini-card" style="--accent: var(--M)">
+        <span class="card-tag">¿Qué fue?</span>
+        <h3>El conflicto más grande</h3>
+        <p>Guerra global (1939–1945) con frentes en Europa, el Pacífico, África del Norte y el Atlántico. La más mortífera de la historia: 70–85 millones de muertes, mayoría civiles.</p>
+      </div>
+      <div class="mini-card" style="--accent: var(--T)">
+        <span class="card-tag">¿Cuándo?</span>
+        <h3>1939 — 1945</h3>
+        <p>Fase europea: sep 1939 – may 1945. Fase Pacífico: dic 1941 – sep 1945. Punto de inflexión: 1942–43 (Stalingrado, El Alamein, Midway).</p>
+      </div>
+      <div class="mini-card" style="--accent: var(--P)">
+        <span class="card-tag">¿Quiénes?</span>
+        <h3>Aliados vs. Eje</h3>
+        <p>Aliados: EE.UU., URSS, Reino Unido, Francia Libre, China. Eje: Alemania, Italia, Japón — con docenas de aliados menores en ambos bandos.</p>
+      </div>
+    </div>
+
+    <h2 class="sec-title">Los dos bandos</h2>
+    <div class="bandos-grid">
+      <div class="bando-card" style="--accent: var(--T)">
+        <h4>Aliados</h4>
+        <ul>
+          <li>Reino Unido — Churchill</li>
+          <li>Unión Soviética — Stalin</li>
+          <li>Estados Unidos — Roosevelt</li>
+          <li>Francia Libre — De Gaulle</li>
+          <li>China — Chiang Kai-shek</li>
+        </ul>
+      </div>
+      <div class="bando-card" style="--accent: var(--M)">
+        <h4>Potencias del Eje</h4>
+        <ul>
+          <li>Alemania Nazi — Hitler</li>
+          <li>Italia Fascista — Mussolini</li>
+          <li>Japón Imperial — Hirohito / Tojo</li>
+          <li>Hungría, Rumanía, Bulgaria</li>
+        </ul>
+      </div>
+    </div>
+
+    <h2 class="sec-title">Fases del conflicto</h2>
+    <div class="timeline">
+      <div class="tl-item">
+        <span class="tl-date">1939–40</span>
+        <span class="tl-text"><strong>Blitzkrieg.</strong> Alemania arrasa Polonia, Bélgica, Países Bajos y Francia en semanas. La "guerra relámpago" sorprende al mundo. Dunkerque.</span>
+      </div>
+      <div class="tl-item">
+        <span class="tl-date">1940–41</span>
+        <span class="tl-text"><strong>Batalla de Inglaterra.</strong> La RAF resiste la ofensiva aérea alemana. Hitler abandona la invasión de Gran Bretaña.</span>
+      </div>
+      <div class="tl-item">
+        <span class="tl-date">1941</span>
+        <span class="tl-text"><strong>Operación Barbarroja + Pearl Harbor.</strong> Alemania invade la URSS con 3 millones de soldados. EE.UU. entra a la guerra en diciembre.</span>
+      </div>
+      <div class="tl-item">
+        <span class="tl-date">1942–43</span>
+        <span class="tl-text"><strong>Punto de inflexión.</strong> Stalingrado (URSS), El Alamein (África) y Midway (Pacífico) — las victorias que cambian el rumbo para siempre.</span>
+      </div>
+      <div class="tl-item">
+        <span class="tl-date">1944</span>
+        <span class="tl-text"><strong>Día D.</strong> 6 de junio — 156,000 soldados aliados desembarcan en Normandía. El Eje retrocede en todos los frentes.</span>
+      </div>
+      <div class="tl-item">
+        <span class="tl-date">1945</span>
+        <span class="tl-text"><strong>Fin.</strong> Alemania se rinde (8 mayo). Bombas atómicas en Hiroshima y Nagasaki. Japón capitula (2 sep).</span>
+      </div>
+    </div>
+
+    <button class="reveal-btn" onclick="toggleReveal(this)">
+      <span class="reveal-icon">+</span> Descubrir: el Holocausto
+    </button>
+    <div class="reveal-content">
+      <div class="reveal-card">
+        <strong>El genocidio más documentado de la historia.</strong> El régimen nazi implementó la "Solución Final" — el exterminio sistemático de judíos europeos y otras minorías. Más de 6 millones de judíos fueron asesinados en campos como Auschwitz, Treblinka y Sobibor. Este crimen llevó a la creación del término "genocidio" y al desarrollo del Derecho Internacional Humanitario moderno.
+      </div>
+    </div>
+
+    <button class="reveal-btn" onclick="toggleReveal(this)">
+      <span class="reveal-icon">+</span> Descubrir: la bomba atómica
+    </button>
+    <div class="reveal-content">
+      <div class="reveal-card">
+        <strong>Proyecto Manhattan.</strong> EE.UU. desarrolló en secreto las primeras armas nucleares. El 6 de agosto de 1945, "Little Boy" destruyó Hiroshima (~80,000 muertes inmediatas). El 9 de agosto, "Fat Man" cayó sobre Nagasaki. Japón se rindió días después. El mundo entró a la Era Nuclear — con consecuencias que persisten hasta hoy.
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════
+       NIVEL 4 — MONOGRAFÍA
+       ════════════════════════════════ -->
+  <div id="n4" class="tab-content">
+    <div class="level-badge">◎ Nivel 4 — Monografía completa</div>
+
+    <h2 class="sec-title">1. Definición y alcance</h2>
+    <p class="body-text">La Segunda Guerra Mundial (1939–1945) fue el conflicto armado de mayor escala en la historia de la humanidad. A diferencia de guerras anteriores, su carácter fue verdaderamente global: los combates se desarrollaron simultáneamente en Europa Occidental y Oriental, el norte de África, el Mediterráneo, el Pacífico, el Atlántico y el Índico.</p>
+    <p class="body-text">Se estima que entre 70 y 85 millones de personas perdieron la vida — aproximadamente el 3% de la población mundial de la época — siendo la primera vez en la historia donde las bajas civiles superaron a las militares. Esto se debió a los bombardeos masivos de ciudades, el bloqueo naval, el hambre deliberada y el exterminio sistemático de poblaciones.</p>
+
+    <button class="reveal-btn" onclick="toggleReveal(this)">
+      <span class="reveal-icon">+</span> Profundizar: el concepto de "guerra total"
+    </button>
+    <div class="reveal-content">
+      <div class="reveal-card">
+        <strong>Guerra total</strong> define la SGM: un conflicto donde se movilizan todos los recursos del Estado — económicos, industriales, científicos, propagandísticos y humanos. Las líneas entre frente militar y retaguardia civil desaparecieron. Las fábricas, los campos agrícolas y hasta las escuelas se convirtieron en parte del esfuerzo bélico. La industria cinematográfica de Hollywood producía propaganda; los científicos competían para desarrollar el radar, los antibióticos y, finalmente, la bomba atómica.
+      </div>
+    </div>
+
+    <h2 class="sec-title">2. Causas profundas</h2>
+    <p class="body-text"><strong>El Tratado de Versalles (1919)</strong> impuso a Alemania condiciones extremadamente punitivas: pérdida del 13% de su territorio, prohibición de tener ejército significativo, y reparaciones económicas devastadoras. John Maynard Keynes, presente en las negociaciones, advirtió que este tratado sembraría las semillas de un nuevo conflicto. Tenía razón.</p>
+    <p class="body-text"><strong>La Gran Depresión (1929)</strong> destruyó la economía global y desacreditó a los gobiernos democráticos liberales. En Alemania, el desempleo alcanzó el 30% en 1932. En ese contexto de desesperación, el mensaje simple y violento del Partido Nazi encontró un suelo fértil.</p>
+    <p class="body-text"><strong>El ascenso del fascismo</strong> no fue solo un fenómeno alemán. Mussolini tomó el poder en Italia en 1922, Franco en España tras una guerra civil (1936–39), y el militarismo ultranacionalista dominaba Japón. Compartían: culto al líder, expansionismo territorial, anticomunismo y desprecio por la democracia parlamentaria.</p>
+
+    <div class="quote-block">
+      <p>"Aquellos que no recuerdan el pasado están condenados a repetirlo."</p>
+      <cite>— George Santayana, filósofo</cite>
+    </div>
+
+    <button class="reveal-btn" onclick="toggleReveal(this)">
+      <span class="reveal-icon">+</span> Profundizar: la política de apaciguamiento
+    </button>
+    <div class="reveal-content">
+      <div class="reveal-card">
+        <strong>Múnich, septiembre de 1938.</strong> Neville Chamberlain y Daladier aceptaron ceder los Sudetes checoslovacos a Hitler a cambio de una promesa de paz. Chamberlain regresó a Londres declarando "paz en nuestro tiempo". Seis meses después, Hitler ocupaba toda Checoslovaquia. El episodio se convirtió en símbolo del fracaso del apaciguamiento y se cita hasta hoy cuando las democracias ceden ante dictadores.
+      </div>
+    </div>
+
+    <h2 class="sec-title">3. Desarrollo del conflicto</h2>
+    <p class="body-text">En la <strong>primera fase (1939–1941)</strong>, el Eje avanzó casi sin resistencia: Polonia cayó en 27 días bajo la Blitzkrieg germano-soviética. En 1940, Francia capituló en solo seis semanas. Solo Gran Bretaña resistió, gracias a la RAF y al Canal de la Mancha.</p>
+    <p class="body-text">La <strong>segunda fase (1941–1942)</strong> cambió la escala del conflicto. La Operación Barbarroja llevó a tres millones de soldados alemanes al interior soviético. Pearl Harbor (7 dic 1941) arrastró a EE.UU. a la guerra. El conflicto ahora abarcaba todos los océanos y continentes.</p>
+    <p class="body-text">La <strong>tercera fase (1942–1944)</strong> fue el punto de inflexión. Stalingrado (200 días de combate urbano, un millón de bajas) quebró la ofensiva alemana en el este. El Día D — 156,000 soldados aliados en Normandía el 6 de junio de 1944 — abrió el frente occidental.</p>
+    <p class="body-text">En la <strong>fase final (1944–1945)</strong>, Alemania fue aplastada entre el avance soviético por el este y los aliados occidentales. Hitler se suicidó el 30 de abril de 1945 en su búnker de Berlín. Alemania capituló el 8 de mayo. En el Pacífico, la resistencia japonesa continuó hasta las bombas atómicas de agosto de 1945.</p>
+
+    <button class="reveal-btn" onclick="toggleReveal(this)">
+      <span class="reveal-icon">+</span> Profundizar: Stalingrado — el punto de quiebre
+    </button>
+    <div class="reveal-content">
+      <div class="reveal-card">
+        <strong>23 agosto 1942 – 2 febrero 1943.</strong> La batalla de Stalingrado fue la más sangrienta de la guerra: ~2 millones de bajas combinadas. El General Zhukov ideó la Operación Urano — cercar al 6º Ejército alemán en vez de expulsarlo frontalmente. Paulus capituló con 91,000 sobrevivientes. Fue la primera gran derrota alemana en el este y marcó el inicio del repliegue que no se detendría hasta Berlín.
+      </div>
+    </div>
+
+    <h2 class="sec-title">4. El Holocausto</h2>
+    <p class="body-text">Paralelo al conflicto militar, el régimen nazi implementó el exterminio sistemático de judíos europeos y otras poblaciones consideradas "indeseables" — romaníes, personas con discapacidad, homosexuales, prisioneros de guerra soviéticos, opositores políticos. La "Solución Final" (Endlösung) fue diseñada en la Conferencia de Wannsee en enero de 1942.</p>
+    <p class="body-text">Los campos de exterminio — Auschwitz-Birkenau, Treblinka, Sobibor, Belzec — operaban como fábricas de muerte industrializadas. Seis millones de judíos — dos tercios del total europeo — fueron asesinados. El término "genocidio" fue acuñado específicamente para describir este crimen por Raphael Lemkin en 1944.</p>
+
+    <h2 class="sec-title">5. Consecuencias y legado</h2>
+    <p class="body-text">La SGM transformó el orden mundial de manera permanente. EE.UU. y la URSS emergieron como las dos superpotencias, inaugurando la Guerra Fría que estructuraría la política internacional durante 45 años. Europa Occidental, devastada, aceptó el Plan Marshall e inició el proceso de integración que eventualmente daría origen a la Unión Europea.</p>
+    <p class="body-text">El legado institucional fue igualmente profundo: la ONU (1945), el Tribunal de Nuremberg —que estableció el precedente de juzgar crímenes de lesa humanidad—, la Declaración Universal de Derechos Humanos (1948) y las Convenciones de Ginebra ampliadas (1949) surgieron directamente de los horrores del conflicto.</p>
+    <p class="body-text">La Era Nuclear comenzó en 1945 y definió la geopolítica posterior. La amenaza de destrucción mutua asegurada paradójicamente evitó una Tercera Guerra Mundial entre las superpotencias, aunque generó docenas de conflictos indirectos: Corea, Vietnam, Angola, Nicaragua.</p>
+
+    <button class="reveal-btn" onclick="toggleReveal(this)">
+      <span class="reveal-icon">+</span> Reflexión final: ¿qué nos enseña?
+    </button>
+    <div class="reveal-content">
+      <div class="reveal-card">
+        <strong>Tres lecciones que siguen vigentes:</strong><br><br>
+        1. <strong>Las democracias deben defenderse.</strong> El apaciguamiento ante el autoritarismo no produce paz, produce invasiones.<br><br>
+        2. <strong>El odio institucionalizado escala.</strong> El Holocausto no empezó con los campos — empezó con leyes discriminatorias, retórica deshumanizante y complicidad silenciosa.<br><br>
+        3. <strong>La cooperación internacional tiene valor real.</strong> La ONU es imperfecta, pero el mundo sin ella sería más peligroso. Las instituciones globales son el legado más duradero de 1945.
+      </div>
+    </div>
+
+    <div class="recursos">
+      <h4>PARA SABER MÁS</h4>
+      <ul>
+        <li>El diario de Ana Frank — Ana Frank (fuente primaria)</li>
+        <li>Maus — Art Spiegelman (novela gráfica, Premio Pulitzer)</li>
+        <li>El hundimiento (2004) — película sobre los últimos días de Hitler</li>
+        <li>Band of Brothers (2001) — serie HBO sobre el Día D</li>
+        <li>Yad Vashem — museo y archivo online del Holocausto</li>
+        <li>Historia de la Segunda Guerra Mundial — John Keegan (texto académico)</li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    function showTab(id, btn) {
+      document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      btn.classList.add('active');
+    }
+
+    function toggleReveal(btn) {
+      const content = btn.nextElementSibling;
+      const isOpen = content.classList.contains('open');
+      content.classList.toggle('open');
+      btn.classList.toggle('open');
+      btn.querySelector('.reveal-icon').textContent = isOpen ? '+' : '×';
+    }
+  </script>
+</body>
+</html>
