@@ -96,11 +96,14 @@ Regla: nunca usar hex directamente en el HTML, siempre `var(--X)`.
 </header>
 ```
 
-- Fondo: `var(--dark)`
+Los tres colores de la marca conviven en el header sobre el fondo oscuro:
+
+- Fondo: `var(--dark)` `#1A0828`
 - Logo → enlace a `../index.html` (inicio del sitio)
-- "Apuntes" → enlace a `index.html` (sección Apuntes): Playfair Italic 900, `color: var(--T)`, 1.5rem
-- `h1`: Playfair Italic 900, `color: var(--T)`, `clamp(1.6rem, 3.5vw, 2.6rem)`
-- `p`: blanco 52% opacidad, 0.78rem
+- "Apuntes" → enlace a `index.html` (sección Apuntes): Playfair Italic 900, `color: var(--T)` turquesa, 1.5rem
+- `h1`: Playfair Italic 900, `color: var(--T)` turquesa, `clamp(1.6rem, 3.5vw, 2.6rem)`
+- `p` subtítulo: `color: var(--M)` magenta, 0.78rem
+- Watermark `lety2E`: `color: var(--P)` morado (fijo, esquina superior derecha)
 
 ---
 
@@ -118,11 +121,12 @@ Regla: nunca usar hex directamente en el HTML, siempre `var(--X)`.
 </nav>
 ```
 
-- Fondo: `#3D4A1E` (verde olivo militar) — **cambiar por el color del tema si no es historia**
-- Borde inferior: 2px, turquesa 20% opacidad
-- Tab activo: texto blanco + borde inferior `var(--M)`
-- Tab inactivo: blanco 38% opacidad
-- `.zoom-label`: turquesa, 0.6rem, indica el nivel de profundidad
+- Fondo: `#C8D5E2` — azul niebla más intenso que el cuerpo (`#E8EEF4`), contrasta con el header oscuro
+- Borde inferior: 2px, negro 10% opacidad
+- Tab activo: texto negro + borde inferior `var(--P)` morado + `font-weight: 700`
+- Tab inactivo: negro 40% opacidad
+- Hover: negro 75% opacidad
+- `.zoom-label`: negro 40% opacidad, 0.6rem
 
 ---
 

@@ -91,7 +91,7 @@
       color: var(--T);
     }
     .page-header p {
-      color: rgba(255,255,255,0.52);
+      color: var(--M);
       font-size: 0.78rem;
       margin-top: 0.4rem;
       letter-spacing: 0.07em;
@@ -100,8 +100,8 @@
     /* ── Tabs nav ── */
     .tabs-nav {
       display: flex;
-      background: #3D4A1E;
-      border-bottom: 2px solid rgba(0,222,200,0.2);
+      background: #C8D5E2;
+      border-bottom: 2px solid rgba(0,0,0,0.1);
       overflow-x: auto;
     }
     .tab-btn {
@@ -111,7 +111,7 @@
       background: none;
       border: none;
       border-bottom: 3px solid transparent;
-      color: rgba(255,255,255,0.38);
+      color: rgba(0,0,0,0.4);
       font-family: 'DM Sans', sans-serif;
       font-size: 0.8rem;
       font-weight: 500;
@@ -121,17 +121,17 @@
       text-align: center;
       margin-bottom: -2px;
     }
-    .tab-btn:hover { color: rgba(255,255,255,0.82); }
-    .tab-btn.active { color: #fff; border-bottom-color: var(--M); }
+    .tab-btn:hover { color: rgba(0,0,0,0.75); }
+    .tab-btn.active { color: #000; border-bottom-color: var(--P); font-weight: 700; }
     .tab-btn .zoom-label {
       display: block;
       font-size: 0.6rem;
-      color: var(--T);
-      opacity: 0.5;
+      color: #000;
+      opacity: 0.4;
       margin-bottom: 0.2rem;
       letter-spacing: 0.09em;
     }
-    .tab-btn.active .zoom-label { opacity: 0.9; }
+    .tab-btn.active .zoom-label { opacity: 0.8; }
 
     /* ── Tab content ── */
     .tab-content { display: none; padding: 2rem 1.5rem 3.5rem; max-width: 820px; margin: 0 auto; }
