@@ -7,6 +7,47 @@ Referencia canónica: `apuntes/segunda-guerra-mundial.html`
 
 ---
 
+## Lógica pedagógica — el zoom progresivo
+
+> Prototipo de referencia: `apuntes/segunda-guerra-mundial.html`
+> Fue construido con la skill `letymath-html` a partir de un documento real de Lety.
+
+La idea central es un **zoom progresivo**: el apunte se lee como si acercaras una lupa al tema. Cada pestaña es un nivel más cercano. El estudiante puede quedarse en N1 si quiere lo esencial, o ir hasta N4 si quiere profundidad real. N5 siempre es práctica.
+
+### Los niveles (el esqueleto fijo)
+
+| Nivel | Zoom | Pregunta que responde |
+|---|---|---|
+| N1 | ×1 | ¿De qué va esto? Panorama mínimo, ideas clave. |
+| N2 | ×2 | ¿Por qué / cómo funciona? Estructura interna, causas, lógica. |
+| N3 | ×3 | ¿Qué pasó exactamente? Detalle, desarrollo, casos concretos. |
+| N4 | ×4 | ¿Qué significa? Análisis, consecuencias, debate, legado. |
+| N5 | ×5 | Actividad pura: flashcards + quiz. Sin contenido nuevo. |
+
+El número de niveles puede reducirse (3 o 4) si el tema es menos extenso. N5 siempre existe.
+
+### Los componentes (lo flexible)
+
+Lo que va **dentro** de cada nivel depende de la naturaleza del contenido. No se fuerzan componentes — se eligen los que sirven:
+
+| Tipo de contenido | Componentes que funcionan bien |
+|---|---|
+| Historia, política, social | `.timeline`, `.bandos-grid`, `.cifra-row`, `.quote-block` |
+| Ciencia, técnica, tecnología | `.reveal-btn` para procesos paso a paso, `.mini-card` con definiciones, `.recursos` |
+| Matemáticas, lógica | Ejemplos resueltos en `.reveal-content`, fórmulas, ejercicios progresivos |
+| Arte, música, literatura | `.quote-block`, imágenes en mini-cards, comparativas en `.bandos-grid` |
+| Cualquier tema | `.mini-grid` + `.mini-card` siempre funcionan como entrada a un nivel |
+
+### Reglas que no cambian
+
+- N1 funciona solo: alguien que solo lo vea sale con una idea clara del tema.
+- Cada nivel añade profundidad — no repite lo del anterior.
+- N5 es siempre actividad. Nunca más texto expositivo ahí.
+- Los componentes se eligen por lo que el contenido pide, no por llenar espacio.
+- Si algo no existe todavía, se marca `próximamente` — nunca se inventa contenido.
+
+---
+
 ## Checklist para replicar en un tema nuevo
 
 1. Duplicar `apuntes/segunda-guerra-mundial.html` → `apuntes/nombre-del-tema.html`
