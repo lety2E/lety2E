@@ -100,8 +100,8 @@
     /* ── Tabs nav ── */
     .tabs-nav {
       display: flex;
-      background: #EFE5DD;
-      border-bottom: 2px solid rgba(0,0,0,0.1);
+      background: var(--M);
+      border-bottom: 2px solid rgba(0,0,0,0.15);
       overflow-x: auto;
     }
     .tab-btn {
@@ -111,7 +111,7 @@
       background: none;
       border: none;
       border-bottom: 3px solid transparent;
-      color: rgba(0,0,0,0.4);
+      color: rgba(0,0,0,0.6);
       font-family: 'DM Sans', sans-serif;
       font-size: 0.8rem;
       font-weight: 500;
@@ -121,17 +121,17 @@
       text-align: center;
       margin-bottom: -2px;
     }
-    .tab-btn:hover { color: rgba(0,0,0,0.75); }
-    .tab-btn.active { color: #000; border-bottom-color: var(--P); font-weight: 700; }
+    .tab-btn:hover { color: #000; }
+    .tab-btn.active { color: #000; border-bottom-color: var(--dark); font-weight: 700; }
     .tab-btn .zoom-label {
       display: block;
       font-size: 0.6rem;
       color: #000;
-      opacity: 0.4;
+      opacity: 0.55;
       margin-bottom: 0.2rem;
       letter-spacing: 0.09em;
     }
-    .tab-btn.active .zoom-label { opacity: 0.8; }
+    .tab-btn.active .zoom-label { opacity: 0.9; }
 
     /* ── Tab content ── */
     .tab-content { display: none; padding: 2rem 1.5rem 3.5rem; max-width: 820px; margin: 0 auto; }
