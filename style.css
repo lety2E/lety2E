@@ -51,9 +51,22 @@
   --course-4:  #FF6EC7;
   --course-5:  #00DEC8;
   --course-opt:#00B8A9;
+
+  /* ── Sistema de color por sección ──
+     Default (artísticas: home/lupian): magenta principal, turquesa hover */
+  --section-color: var(--M);
+  --section-hover: var(--T);
 }
 
-/* Overrides: secciones con cards blancas */
+/* Secciones académicas (Math, Apuntes y subsecciones): turquesa principal, magenta hover */
+body[data-section="math"],
+body[data-section="apuntes"],
+body[data-section="letymath"] {
+  --section-color: var(--T);
+  --section-hover: var(--M);
+}
+
+/* Overrides: secciones con cards blancas y texto neutro */
 body[data-section="apuntes"],
 body[data-section="relatos"] {
   --bg-card: #FFFFFF;
@@ -88,7 +101,7 @@ h1, h2, h3, h4 {
   font-style: italic;
   line-height: 1.25;
 }
-h1            { color: var(--P); }
+h1            { color: var(--section-color); }
 h2, h3, h4    { color: var(--M); }
 h1 { font-size: 2rem;   margin-bottom: 0.6em; }
 h2 { font-size: 1.5rem; margin-top: 2em;   margin-bottom: 0.5em; }
@@ -122,17 +135,20 @@ p  { margin-bottom: 1em; }
   display: flex; align-items: center;
 }
 .nav-icon-link { margin-right: 10px; }
-.nav-name-link:hover .nav-name { color: var(--T); }
+.nav-name-link:hover .nav-name { color: var(--section-hover); }
 .nav-badge {
   width: 40px; height: 40px;
   border-radius: 7px;
   flex-shrink: 0;
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
+  overflow: hidden;
 }
+.nav-badge .nav-badge-svg {
+  width: 100%; height: 100%; display: block;
+}
+.nav-badge .nav-badge-svg rect { transition: fill 0.2s; }
+.nav-icon-link:hover .nav-badge .nav-badge-svg rect { fill: var(--section-hover); }
 .nav-name {
-  color: var(--M);
+  color: var(--section-color);
   font-family: var(--font-display);
   font-style: italic; font-weight: 700;
   font-size: 1.1rem;
@@ -142,14 +158,14 @@ p  { margin-bottom: 1em; }
   margin: 0; padding: 0;
 }
 .nav-links a {
-  color: var(--T);
+  color: var(--section-color);
   text-decoration: none;
   font-size: 0.95rem;
   font-family: var(--font-body);
   transition: color 0.2s;
 }
 .nav-links a:hover {
-  color: var(--M);
+  color: var(--section-hover);
 }
 nav { margin-left: auto; }
 
@@ -249,7 +265,7 @@ body[data-section="home"] main {
 .hero-section h1 {
   font-size: 2.5rem;
   margin-bottom: 1rem;
-  color: var(--P);
+  color: var(--section-color);
   font-family: var(--font-display);
   font-style: italic;
 }
@@ -345,7 +361,7 @@ body[data-section="home"] main {
 .subject-header h1 {
   font-size: 2.5rem;
   margin-bottom: 1rem;
-  color: var(--P);
+  color: var(--section-color);
   font-family: var(--font-display);
   font-style: italic;
 }
@@ -557,7 +573,7 @@ body[data-section="home"] main {
   font-family: var(--font-display);
   font-style: italic; font-weight: 900;
   font-size: clamp(3rem, 10vw, 5rem);
-  color: var(--P);
+  color: var(--section-color);
   letter-spacing: -0.03em;
   line-height: 1;
   text-align: center;

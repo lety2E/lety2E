@@ -60,6 +60,15 @@
   var iconPath = root + 'assets/logos/icono-2e.png';
   var homePath = root + 'index.html';
 
+  /* ── Logo: secciones académicas (math/apuntes) usan SVG turquesa ── */
+  var isAcademia = (section === 'math' || section === 'apuntes');
+  var badgeBg = isAcademia
+    ? '<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" class="nav-badge-svg" aria-hidden="true">'
+        + '<rect width="100" height="100" rx="18" fill="#00DEC8"/>'
+        + '<text x="50" y="73" text-anchor="middle" font-family="Playfair Display, Georgia, serif" font-style="italic" font-weight="900" font-size="58" fill="#4A0080">2E</text>'
+      + '</svg>'
+    : '';
+
   /* ── Determinar contenido del nav ────────────── */
   var brandName, sectionHref, links;
 
@@ -98,13 +107,17 @@
   }
 
   /* ── Inyectar ────────────────────────────────── */
+  var badgeHTML = isAcademia
+    ? '<div class="nav-badge nav-badge-academia">' + badgeBg + '</div>'
+    : '<div class="nav-badge" style="background-image:url(\'' + iconPath + '\')"></div>';
+
   var brandHTML;
   if (sectionHref) {
     // Sección/subsección: icono → home, nombre → índice de sección
     brandHTML =
       '<div class="nav-brand">' +
         '<a href="' + homePath + '" class="nav-icon-link" aria-label="Ir a lety2E inicio">' +
-          '<div class="nav-badge" style="background-image:url(\'' + iconPath + '\')"></div>' +
+          badgeHTML +
         '</a>' +
         '<a href="' + sectionHref + '" class="nav-name-link">' +
           '<span class="nav-name">' + brandName + '</span>' +
@@ -114,7 +127,7 @@
     // Raíz: todo va a home
     brandHTML =
       '<a href="' + homePath + '" class="nav-brand">' +
-        '<div class="nav-badge" style="background-image:url(\'' + iconPath + '\')"></div>' +
+        badgeHTML +
         '<span class="nav-name">' + brandName + '</span>' +
       '</a>';
   }

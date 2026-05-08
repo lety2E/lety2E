@@ -69,9 +69,12 @@
     .header-logo-link { display: flex; align-items: center; flex-shrink: 0; }
     .header-logo {
       height: 58px;
-      width: auto;
+      width: 58px;
       border-radius: 8px;
+      display: block;
     }
+    .header-logo rect { transition: fill 0.2s; }
+    .header-logo-link:hover .header-logo rect { fill: var(--M); }
     .header-section-link {
       font-family: 'Playfair Display', serif;
       font-style: italic;
@@ -80,8 +83,9 @@
       color: var(--T);
       text-decoration: none;
       flex-shrink: 0;
+      transition: color 0.2s;
     }
-    .header-section-link:hover { opacity: 0.75; }
+    .header-section-link:hover { color: var(--M); }
     .header-text { flex: 1; text-align: center; }
     .page-header h1 {
       font-family: 'Playfair Display', serif;
@@ -91,17 +95,18 @@
       color: var(--T);
     }
     .page-header p {
-      color: var(--M);
+      color: var(--T);
       font-size: 0.78rem;
       margin-top: 0.4rem;
       letter-spacing: 0.07em;
+      opacity: 0.85;
     }
 
     /* ── Tabs nav ── */
     .tabs-nav {
       display: flex;
-      background: var(--M);
-      border-bottom: 2px solid rgba(0,0,0,0.15);
+      background: var(--dark);
+      border-bottom: 2px solid rgba(0,0,0,0.2);
       overflow-x: auto;
     }
     .tab-btn {
@@ -111,7 +116,7 @@
       background: none;
       border: none;
       border-bottom: 3px solid transparent;
-      color: rgba(0,0,0,0.6);
+      color: rgba(0, 222, 200, 0.55);
       font-family: 'DM Sans', sans-serif;
       font-size: 0.8rem;
       font-weight: 500;
@@ -121,13 +126,13 @@
       text-align: center;
       margin-bottom: -2px;
     }
-    .tab-btn:hover { color: #000; }
-    .tab-btn.active { color: #000; border-bottom-color: var(--dark); font-weight: 700; }
+    .tab-btn:hover { color: var(--T); }
+    .tab-btn.active { color: var(--T); border-bottom-color: var(--M); font-weight: 700; }
     .tab-btn .zoom-label {
       display: block;
       font-size: 0.6rem;
-      color: #000;
-      opacity: 0.55;
+      color: var(--T);
+      opacity: 0.5;
       margin-bottom: 0.2rem;
       letter-spacing: 0.09em;
     }
@@ -547,8 +552,11 @@
   </div>
 
   <header class="page-header">
-    <a href="../index.html" class="header-logo-link">
-      <img class="header-logo" src="../assets/logos/lety2e-Apuntes.jpeg" alt="lety2E">
+    <a href="../index.html" class="header-logo-link" aria-label="Ir a lety2E inicio">
+      <svg class="header-logo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect width="100" height="100" rx="14" fill="#00DEC8"/>
+        <text x="50" y="73" text-anchor="middle" font-family="Playfair Display, Georgia, serif" font-style="italic" font-weight="900" font-size="58" fill="#4A0080">2E</text>
+      </svg>
     </a>
     <a href="index.html" class="header-section-link">Apuntes</a>
     <div class="header-text">
