@@ -63,7 +63,8 @@ body[data-section="math"],
 body[data-section="apuntes"],
 body[data-section="letymath"] {
   --section-color: var(--T);
-  --section-hover: var(--P);
+  --section-hover: var(--M);
+  --logo-text: var(--P);
   --heading-color: var(--P);
 }
 
@@ -153,7 +154,7 @@ p  { margin-bottom: 1em; }
   transition: fill 0.2s;
 }
 .badge-text {
-  fill: var(--section-hover);
+  fill: var(--logo-text, var(--section-hover));
   transition: fill 0.2s;
 }
 a.nav-icon-link:hover .badge-bg,
