@@ -136,23 +136,56 @@ p  { margin-bottom: 1em; }
   display: flex; align-items: center;
 }
 .nav-icon-link { margin-right: 10px; }
-.nav-name-link:hover .nav-name { color: var(--section-hover); }
 .nav-badge {
   width: 40px; height: 40px;
   border-radius: 7px;
   flex-shrink: 0;
   overflow: hidden;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 .nav-badge .nav-badge-svg {
   width: 100%; height: 100%; display: block;
 }
-.nav-badge .nav-badge-svg rect { transition: fill 0.2s; }
-.nav-icon-link:hover .nav-badge .nav-badge-svg rect { fill: var(--section-hover); }
+.badge-bg {
+  fill: var(--section-color);
+  transition: fill 0.2s;
+}
+.badge-text {
+  fill: var(--section-hover);
+  transition: fill 0.2s;
+}
+a.nav-icon-link:hover .badge-bg,
+a.nav-brand:hover .badge-bg,
+a.footer-brand:hover .badge-bg {
+  fill: var(--section-hover);
+}
+a.nav-icon-link:hover .badge-text,
+a.nav-brand:hover .badge-text,
+a.footer-brand:hover .badge-text {
+  fill: var(--section-color);
+}
 .nav-name {
   color: var(--section-color);
   font-family: var(--font-display);
   font-style: italic; font-weight: 700;
   font-size: 1.1rem;
+  transition: color 0.2s;
+}
+a.nav-name-link:hover .nav-name,
+a.nav-brand:hover .nav-name {
+  color: var(--section-hover);
+}
+.footer-brand-name {
+  color: var(--section-color);
+  font-family: var(--font-display);
+  font-style: italic; font-weight: 700;
+  font-size: 1.1rem;
+  transition: color 0.2s;
+}
+a.footer-brand:hover .footer-brand-name {
+  color: var(--section-hover);
 }
 .nav-links {
   display: flex; gap: 2rem; list-style: none;
@@ -477,13 +510,13 @@ body[data-section="home"] main {
   object-fit: contain;
 }
 .footer-brand-name {
-  color: var(--M);
+  color: var(--section-color);
   font-family: var(--font-display);
   font-style: italic; font-weight: 700;
   font-size: 1.1rem;
 }
 .footer-copy {
-  color: var(--T);
+  color: var(--section-color);
   font-size: 0.85rem;
 }
 .footer-social {
@@ -496,12 +529,12 @@ body[data-section="home"] main {
   background: rgba(255, 255, 255, 0.1);
   text-decoration: none;
   transition: all 0.2s ease;
-  color: var(--T);
+  color: var(--section-color);
   font-weight: bold;
   font-size: 1.2rem;
 }
 .footer-social:hover {
-  background: var(--M);
+  background: var(--section-hover);
   color: white;
   transform: translateY(-2px);
 }

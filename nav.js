@@ -10,18 +10,18 @@
   /* ── Configuración de secciones ─────────────── */
   const SECTIONS = {
     lupian: {
-      name: 'lety2E Lupián',
+      name: 'Lupián',
       links: [
         { text: 'Cantos', href: 'cantos/index.html' },
         { text: 'Relatos', href: 'relatos/index.html' }
       ]
     },
     apuntes: {
-      name: 'lety2E Apuntes',
+      name: 'Apuntes',
       links: []
     },
     math: {
-      name: 'lety2E Math',
+      name: 'Math',
       links: [
         { text: 'Mat 1', href: 'matematicas-1/index.html' },
         { text: 'Mat 2', href: 'matematicas-2/index.html' },
@@ -57,17 +57,8 @@
 
   /* ── Calcular rutas base ─────────────────────── */
   var root = depth === 0 ? './' : new Array(depth + 1).join('../');
-  var iconPath = root + 'assets/logos/icono-2e.png';
+  var iconPath = root + 'assets/logos/lety2E-madre-v3.png';
   var homePath = root + 'index.html';
-
-  /* ── Logo: secciones académicas (math/apuntes) usan SVG turquesa ── */
-  var isAcademia = (section === 'math' || section === 'apuntes');
-  var badgeBg = isAcademia
-    ? '<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" class="nav-badge-svg" aria-hidden="true">'
-        + '<rect width="100" height="100" rx="18" fill="#00DEC8"/>'
-        + '<text x="50" y="73" text-anchor="middle" font-family="Playfair Display, Georgia, serif" font-style="italic" font-weight="900" font-size="58" fill="#4A0080">2E</text>'
-      + '</svg>'
-    : '';
 
   /* ── Determinar contenido del nav ────────────── */
   var brandName, sectionHref, links;
@@ -106,30 +97,49 @@
     linksHTML += '<li><a href="' + l.href + '"' + attrs + '>' + l.text + '</a></li>';
   }
 
-  /* ── Inyectar ────────────────────────────────── */
-  var badgeHTML = isAcademia
-    ? '<div class="nav-badge nav-badge-academia">' + badgeBg + '</div>'
-    : '<div class="nav-badge" style="background-image:url(\'' + iconPath + '\')"></div>';
+  /* ── Logo unificado en SVG ── */
+  var badgeHTML = 
+    '<div class="nav-badge">' +
+      '<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" class="nav-badge-svg" aria-hidden="true">' +
+        '<rect width="100" height="100" rx="18" class="badge-bg"/>' +
+        '<text x="50" y="73" text-anchor="middle" font-family="Playfair Display, Georgia, serif" font-style="italic" font-weight="900" font-size="58" class="badge-text">2E</text>' +
+      '</svg>' +
+    '</div>';
 
   var brandHTML;
+  var isHomeIndex = (depth === 0);
+  // isSectionIndex was defined above but we might need it
+  var isSectionIndex = (depth === 1 && /\/(index\.html)?$/i.test(path));
+
+  // Determine if logo should be a link
+  var logoTag = isHomeIndex ? 'div' : 'a';
+  var logoHref = isHomeIndex ? '' : ' href="' + homePath + '" aria-label="Ir a lety2E inicio"';
+  
+  var logoElement = 
+    '<' + logoTag + logoHref + ' class="nav-icon-link">' +
+      badgeHTML +
+    '</' + logoTag + '>';
+
   if (sectionHref) {
-    // Sección/subsección: icono → home, nombre → índice de sección
+    // Determine if name should be a link
+    var nameTag = isSectionIndex ? 'div' : 'a';
+    var nameHref = isSectionIndex ? '' : ' href="' + sectionHref + '"';
+    
     brandHTML =
       '<div class="nav-brand">' +
-        '<a href="' + homePath + '" class="nav-icon-link" aria-label="Ir a lety2E inicio">' +
-          badgeHTML +
-        '</a>' +
-        '<a href="' + sectionHref + '" class="nav-name-link">' +
+        logoElement +
+        '<' + nameTag + nameHref + ' class="nav-name-link">' +
           '<span class="nav-name">' + brandName + '</span>' +
-        '</a>' +
+        '</' + nameTag + '>' +
       '</div>';
   } else {
-    // Raíz: todo va a home
+    // Root: the whole thing is inside a wrapper
+    // We'll wrap both logo and text in nav-brand. If we're on Home, it's a div.
     brandHTML =
-      '<a href="' + homePath + '" class="nav-brand">' +
+      '<' + logoTag + logoHref + ' class="nav-brand">' +
         badgeHTML +
         '<span class="nav-name">' + brandName + '</span>' +
-      '</a>';
+      '</' + logoTag + '>';
   }
 
   var nav =
