@@ -570,6 +570,40 @@
       .tab-btn { min-width: 80px; font-size: 0.72rem; }
       .fc-card { height: 210px; }
     }
+
+    /* ── Tab Navigation Footer ── */
+    .tab-nav-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1.5rem;
+      margin-top: 3.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(74,0,128,0.08);
+    }
+    .tab-nav-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg-card);
+      border: 1.5px solid rgba(74,0,128,0.12);
+      border-radius: 50%;
+      width: 54px;
+      height: 54px;
+      color: var(--P);
+      text-decoration: none;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+    }
+    .tab-nav-btn:hover {
+      background: white;
+      border-color: var(--M);
+      color: var(--M);
+      transform: scale(1.08);
+      box-shadow: 0 4px 12px rgba(74,0,128,0.1);
+    }
+    .tab-nav-btn svg { width: 26px; height: 26px; }
+    .tab-nav-btn.next { margin-left: auto; }
   </style>
 </head>
 <body data-section="apuntes">
@@ -594,7 +628,7 @@
     <a href="index.html" class="header-back-link" aria-label="Volver a la lista de apuntes">
       <span>Volver</span>
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M5 12h14m-7-7 7 7-7 7"/>
+        <path d="M19 12H5m7 7-7-7 7-7"/>
       </svg>
     </a>
   </header>
@@ -643,6 +677,11 @@
     <div class="reveal-content">
       <div class="reveal-card">
         <strong>El mundo que vivimos nació aquí.</strong> La ONU, el Estado de Israel, la Guerra Fría, la división de Europa — todo tiene su origen directo en 1945. Entender la SGM es entender el siglo XX y buena parte del XXI.
+      </div>
+    </div>
+    <div class="tab-nav-footer">
+      <div class="tab-nav-btn next" onclick="switchTab('n2')" aria-label="Siguiente">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
       </div>
     </div>
   </div>
@@ -709,6 +748,14 @@
         <div class="cifra"><span class="num">6M</span><span class="label">Víctimas del Holocausto</span></div>
         <div class="cifra"><span class="num">&gt;50%</span><span class="label">Eran civiles</span></div>
         <div class="cifra"><span class="num">60+</span><span class="label">Naciones involucradas</span></div>
+      </div>
+    </div>
+    <div class="tab-nav-footer">
+      <div class="tab-nav-btn prev" onclick="switchTab('n1')" aria-label="Anterior">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5m7 7-7-7 7-7"/></svg>
+      </div>
+      <div class="tab-nav-btn next" onclick="switchTab('n3')" aria-label="Siguiente">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
       </div>
     </div>
   </div>
@@ -778,6 +825,14 @@
     <div class="reveal-content">
       <div class="reveal-card">
         <strong>Proyecto Manhattan.</strong> EE.UU. desarrolló en secreto las primeras armas nucleares. "Little Boy" destruyó Hiroshima el 6 agosto 1945 (~80,000 muertes inmediatas). "Fat Man" cayó sobre Nagasaki el 9 agosto. Japón se rindió días después.
+      </div>
+    </div>
+    <div class="tab-nav-footer">
+      <div class="tab-nav-btn prev" onclick="switchTab('n2')" aria-label="Anterior">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5m7 7-7-7 7-7"/></svg>
+      </div>
+      <div class="tab-nav-btn next" onclick="switchTab('n4')" aria-label="Siguiente">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
       </div>
     </div>
   </div>
@@ -856,6 +911,14 @@
         <li>Historia de la Segunda Guerra Mundial — John Keegan</li>
       </ul>
     </div>
+    <div class="tab-nav-footer">
+      <div class="tab-nav-btn prev" onclick="switchTab('n3')" aria-label="Anterior">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5m7 7-7-7 7-7"/></svg>
+      </div>
+      <div class="tab-nav-btn next" onclick="switchTab('n5')" aria-label="Siguiente">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+      </div>
+    </div>
   </div>
 
   <!-- ════════ NIVEL 5 — ACTIVIDAD ════════ -->
@@ -895,6 +958,14 @@
       <div class="quiz-divider"><hr><span>Quiz — 40 preguntas</span><hr></div>
       <div id="quiz-container"></div>
     </div>
+    <div class="tab-nav-footer">
+      <div class="tab-nav-btn prev" onclick="switchTab('n4')" aria-label="Anterior">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5m7 7-7-7 7-7"/></svg>
+      </div>
+      <a href="index.html" class="tab-nav-btn next" style="border-color: var(--T);" aria-label="Volver a Apuntes">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      </a>
+    </div>
   </div>
 
   <script>
@@ -904,6 +975,12 @@
       document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
       document.getElementById(id).classList.add('active');
       btn.classList.add('active');
+    }
+
+    function switchTab(id) {
+      const btn = document.querySelector(`.tab-btn[onclick*="'${id}'"]`);
+      showTab(id, btn);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     /* ── Reveals ── */
