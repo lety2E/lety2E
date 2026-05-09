@@ -63,7 +63,7 @@ body[data-section="math"],
 body[data-section="apuntes"],
 body[data-section="letymath"] {
   --section-color: var(--T);
-  --section-hover: var(--M);
+  --section-hover: var(--P);
   --heading-color: var(--P);
 }
 
