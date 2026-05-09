@@ -132,6 +132,29 @@
     }
     .tab-btn:hover { color: var(--M); }
     .tab-btn.active { color: var(--M); border-bottom-color: var(--M); font-weight: 700; }
+
+    .header-back-link {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: var(--T);
+      text-decoration: none;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      transition: all 0.2s;
+      flex-shrink: 0;
+      text-transform: uppercase;
+    }
+    .header-back-link:hover {
+      color: var(--M);
+      transform: translateX(4px);
+    }
+    .header-back-link svg {
+      width: 18px;
+      height: 18px;
+    }
+
     .tab-btn .zoom-label {
       display: block;
       font-size: 0.6rem;
@@ -568,6 +591,12 @@
       <h1>Segunda Guerra Mundial</h1>
       <p>Síntesis Estructural Progresiva · 5 niveles</p>
     </div>
+    <a href="index.html" class="header-back-link" aria-label="Volver a la lista de apuntes">
+      <span>Volver</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 12h14m-7-7 7 7-7 7"/>
+      </svg>
+    </a>
   </header>
 
   <nav class="tabs-nav">
