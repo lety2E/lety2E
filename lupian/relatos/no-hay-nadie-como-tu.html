@@ -22,37 +22,28 @@
     <h1>No hay nadie como tú</h1>
   </div>
 
-  <div class="story-card-container" id="card-container" onclick="this.querySelector('.story-card').classList.toggle('flipped')">
-    <div class="story-card">
-      
-      <!-- FRENTE: El Texto -->
-      <div class="story-card-front relato-hoja">
-        <div class="notebook-text">
-          <div class="body-text">
-            <p>En cuanto a la letra de esa canción, <em>No hay nadie como tú</em>, me gustó la parte que dice:</p>
-            <p><strong>"hay mentalidades horizontales, verticales y diagonales"</strong>.</p>
-            <p>¿Cómo será la mía? ¿Qué forma geométrica tendrá?</p>
-            <p>Hay quienes me han dicho que es algo cuadrada, pero el cuadrado, aunque es regular, no es un polígono tan interesante.</p>
-            <p>Si tuviera que elegir una figura geométrica, tal vez escogería un <strong>heptadecágono</strong> (polígono regular de 17 lados), porque así mi venerado <strong>Carl Gauss</strong> la observaría por horas para descifrarla y plasmarla en un papel con regla y compás.</p>
-          </div>
-        </div>
+  <article class="relato-reader">
+    
+    <div class="reader-paper">
+      <div class="body-text">
+        <p>En cuanto a la letra de esa canción, <em>No hay nadie como tú</em>, me gustó la parte que dice:</p>
+        <p style="text-align: center; font-family: var(--font-display); font-size: 1.5rem; margin: 2.5rem 0; color: var(--P);">
+          "Hay mentalidades horizontales, verticales y diagonales".
+        </p>
+        <p>¿Cómo será la mía? ¿Qué forma geométrica tendrá?</p>
+        <p>Hay quienes me han dicho que es algo cuadrada, pero el cuadrado, aunque es regular, no es un polígono tan interesante.</p>
+        <p>Si tuviera que elegir una figura geométrica, tal vez escogería un <strong>heptadecágono</strong> (polígono regular de 17 lados), porque así mi venerado <strong>Carl Gauss</strong> la observaría por horas para descifrarla y plasmarla en un papel con regla y compás.</p>
       </div>
-
-      <!-- ATRÁS: La Imagen -->
-      <div class="story-card-back" style="padding: 0; overflow: hidden; background: #fafafa;">
-        <img src="assets/heptadecagono-gauss.png" alt="Heptadecágono de Gauss" style="width: 100%; height: 100%; object-fit: cover;">
-      </div>
-
     </div>
-  </div>
 
-  <!-- Botón de giro externo -->
-  <div class="flip-control-container">
-    <button class="flip-btn" onclick="document.getElementById('card-container').querySelector('.story-card').classList.toggle('flipped')" aria-label="Girar para ver imagen">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5m7 7-7-7 7-7"/></svg>
-    </button>
-  </div>
+    <div class="reader-illustration">
+      <img src="assets/heptadecagono-gauss.png" alt="Heptadecágono de Gauss">
+      <div class="illustration-caption">
+        Ilustración: El heptadecágono regular y la genialidad de Gauss.
+      </div>
+    </div>
+
+  </article>
 
 </main>
 

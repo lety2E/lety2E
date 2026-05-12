@@ -43,11 +43,6 @@
       { text: 'Gráfica con tabulación', href: 'grafica-tabulacion.html' },
       { text: 'Pendiente y ordenada', href: 'pendiente-ordenada.html' },
       { text: 'Área y perímetro', href: 'area-perimetro.html' }
-    ],
-    'apuntes': [
-      { text: 'MCP', href: 'mcp.html' },
-      { text: 'Compresión', href: 'compresion.html' },
-      { text: 'Segunda Guerra Mundial', href: 'segunda-guerra-mundial.html' }
     ]
   };
 
@@ -89,20 +84,8 @@
     sectionHref = './index.html';
     links = SECTIONS[section].links;
     var isSectionIndex = /\/(index\.html)?$/i.test(path);
-    
-    if (!isSectionIndex) {
-      if (section === 'apuntes' && COURSE_TOPICS['apuntes']) {
-        links = [{
-          text: 'Temas',
-          isDropdown: true,
-          items: COURSE_TOPICS['apuntes'].map(function(t) {
-            var isCurrent = path.indexOf(t.href) !== -1;
-            return { text: t.text, href: t.href, active: isCurrent };
-          })
-        }];
-      } else if (!links || links.length === 0) {
-        links = [{ text: '\u2190 Volver', href: './index.html' }];
-      }
+    if (!isSectionIndex && (!links || links.length === 0)) {
+      links = [{ text: '\u2190 Volver', href: './index.html' }];
     }
   } else if (depth >= 2 && section && SECTIONS[section]) {
     brandName = SECTIONS[section].name;
