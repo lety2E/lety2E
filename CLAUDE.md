@@ -81,7 +81,7 @@ lety2E 2/
     │   └── area-perimetro.html        [Tema 8 — con SVG triángulos]
     ├── matematicas-2/      [Solo placeholder]
     ├── matematicas-3/      [Solo placeholder]
-    ├── matematicas-4/      [3 temas iniciales + index]
+    ├── matematicas-4/      [próximamente]
     ├── matematicas-5/      [Solo placeholder]
     └── optativa/           [Solo placeholder]
 ```

@@ -55,7 +55,7 @@ lety2E 2/
     ├── matematicas-1/      ← operaciones-basicas + jerarquia
     ├── matematicas-2/      ← placeholder próximamente
     ├── matematicas-3/      ← placeholder próximamente
-    ├── matematicas-4/      ← evaluacion + representacion + función escalonada
+    ├── matematicas-4/      ← en construcción (próximamente)
     ├── matematicas-5/      ← placeholder próximamente
     └── optativa/           ← placeholder próximamente
 ```

@@ -33,6 +33,24 @@
     }
   };
 
+  const COURSE_TOPICS = {
+    'matematicas-1': [
+      { text: 'Operaciones básicas', href: 'operaciones-basicas.html' },
+      { text: 'Jerarquía de operaciones', href: 'jerarquia.html' },
+      { text: 'Ecuaciones', href: 'ecuaciones.html' },
+      { text: 'Monomios', href: 'monomios.html' },
+      { text: 'Expresiones algebraicas', href: 'expresiones-algebraicas.html' },
+      { text: 'Gráfica con tabulación', href: 'grafica-tabulacion.html' },
+      { text: 'Pendiente y ordenada', href: 'pendiente-ordenada.html' },
+      { text: 'Área y perímetro', href: 'area-perimetro.html' }
+    ],
+    'apuntes': [
+      { text: 'MCP', href: 'mcp.html' },
+      { text: 'Compresión', href: 'compresion.html' },
+      { text: 'Segunda Guerra Mundial', href: 'segunda-guerra-mundial.html' }
+    ]
+  };
+
   const ROOT_LINKS = [
     { text: 'Math', href: 'math/index.html' },
     { text: 'Lupián', href: 'lupian/index.html' },
@@ -44,7 +62,7 @@
   var depth = (scriptSrc.match(/\.\.\//g) || []).length;
   // depth 0 = raíz, 1 = sección, 2 = subsección
 
-  /* ── Detectar sección actual ─────────────────── */
+  /* ── Detectar sección actual ─────────────────────── */
   var path = window.location.pathname.toLowerCase();
   var section = null;
   var keys = Object.keys(SECTIONS);
@@ -55,34 +73,58 @@
     }
   }
 
-  /* ── Calcular rutas base ─────────────────────── */
+  /* ── Calcular rutas base ─────────────────────────── */
   var root = depth === 0 ? './' : new Array(depth + 1).join('../');
-  var iconPath = root + 'assets/logos/lety2E-madre-v3.png';
   var homePath = root + 'index.html';
 
-  /* ── Determinar contenido del nav ────────────── */
+  /* ── Determinar contenido del nav ────────────────── */
   var brandName, sectionHref, links;
 
   if (depth === 0) {
-    // Raíz: icono y nombre van al mismo lugar
     brandName = 'lety2E';
-    sectionHref = null;  // no hay sección, todo va a home
+    sectionHref = null;
     links = ROOT_LINKS;
   } else if (depth === 1 && section && SECTIONS[section]) {
-    // Sección: icono → home, nombre → aquí mismo (index de sección)
     brandName = SECTIONS[section].name;
     sectionHref = './index.html';
     links = SECTIONS[section].links;
-    // Si estamos dentro de un HTML de sección (no el index), mostrar volver
     var isSectionIndex = /\/(index\.html)?$/i.test(path);
-    if (!isSectionIndex && (!links || links.length === 0)) {
-      links = [{ text: '\u2190 Volver', href: './index.html' }];
+    
+    if (!isSectionIndex) {
+      if (section === 'apuntes' && COURSE_TOPICS['apuntes']) {
+        links = [{
+          text: 'Temas',
+          isDropdown: true,
+          items: COURSE_TOPICS['apuntes'].map(function(t) {
+            var isCurrent = path.indexOf(t.href) !== -1;
+            return { text: t.text, href: t.href, active: isCurrent };
+          })
+        }];
+      } else if (!links || links.length === 0) {
+        links = [{ text: '\u2190 Volver', href: './index.html' }];
+      }
     }
   } else if (depth >= 2 && section && SECTIONS[section]) {
-    // Subsección: icono → home, nombre → index de sección
     brandName = SECTIONS[section].name;
     sectionHref = '../index.html';
-    links = [{ text: '\u2190 Volver', href: '../index.html' }];
+    
+    // Buscar si estamos en un curso con temas registrados
+    var pathParts = path.split('/');
+    var courseId = pathParts[pathParts.length - 2];
+    
+    if (section === 'math' && COURSE_TOPICS[courseId]) {
+      // Si tenemos temas para este curso, creamos un dropdown
+      links = [{
+        text: 'Temas',
+        isDropdown: true,
+        items: COURSE_TOPICS[courseId].map(function(t) {
+          var isCurrent = path.indexOf(t.href) !== -1;
+          return { text: t.text, href: t.href, active: isCurrent };
+        })
+      }];
+    } else {
+      links = [{ text: '\u2190 Volver', href: '../index.html' }];
+    }
   } else {
     brandName = 'lety2E';
     sectionHref = null;
@@ -93,8 +135,24 @@
   var linksHTML = '';
   for (var j = 0; j < links.length; j++) {
     var l = links[j];
-    var attrs = l.external ? ' target="_blank" rel="noopener"' : '';
-    linksHTML += '<li><a href="' + l.href + '"' + attrs + '>' + l.text + '</a></li>';
+    if (l.isDropdown) {
+      linksHTML += '<li class="nav-dropdown">';
+      linksHTML += '<a class="dropdown-toggle">' + l.text + '</a>';
+      linksHTML += '<ul class="dropdown-content">';
+      for (var k = 0; k < l.items.length; k++) {
+        var item = l.items[k];
+        if (item.isDivider) {
+          linksHTML += '<li class="dropdown-divider"></li>';
+        } else {
+          var activeClass = item.active ? ' class="active"' : '';
+          linksHTML += '<li><a href="' + item.href + '"' + activeClass + '>' + item.text + '</a></li>';
+        }
+      }
+      linksHTML += '</ul></li>';
+    } else {
+      var attrs = l.external ? ' target="_blank" rel="noopener"' : '';
+      linksHTML += '<li><a href="' + l.href + '"' + attrs + '>' + l.text + '</a></li>';
+    }
   }
 
   /* ── Logo unificado en SVG ── */
@@ -108,7 +166,6 @@
 
   var brandHTML;
   var isHomeIndex = (depth === 0);
-  // isSectionIndex was defined above but we might need it
   var isSectionIndex = (depth === 1 && /\/(index\.html)?$/i.test(path));
 
   // Determine if logo should be a link
@@ -133,8 +190,6 @@
         '</' + nameTag + '>' +
       '</div>';
   } else {
-    // Root: the whole thing is inside a wrapper
-    // We'll wrap both logo and text in nav-brand. If we're on Home, it's a div.
     brandHTML =
       '<' + logoTag + logoHref + ' class="nav-brand">' +
         badgeHTML +
