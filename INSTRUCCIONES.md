@@ -155,16 +155,8 @@ Todas relativas para compatibilidad con `file://`:
 - **Fuentes:** Google Fonts (Playfair Display + DM Sans)
 - **KaTeX:** Usado en páginas de LetyMath para fórmulas matemáticas
 - **Cantos:** Videos embebidos + link al canal externo `@Lety2eLupian`
-- **Deploy:** `git add . && git commit -m "…" && git push` → publica automático en ~1-2 min
 
----
-
-## Issues conocidos del deploy
-
-- VS Code "Unable to create HEAD.lock" → `rm -f .git/HEAD.lock` y reintentar.
-- "This repository moved" → `git remote set-url origin https://github.com/letymath/lety2E.git`.
-- DNS intermitente → toggle wifi/VPN.
-- Caché de favicon → abrir en incógnito o `?v=2`.
+> **Deploy y troubleshooting:** ver `CLAUDE.md` (sección 🚢 Deploy).
 
 ---
 
