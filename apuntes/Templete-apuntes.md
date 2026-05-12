@@ -120,11 +120,11 @@ Regla: nunca usar hex directamente en el HTML, siempre `var(--X)`.
   <a href="index.html" class="header-section-link">Apuntes</a>
 
   <div class="dropdown">
-    <button class="dropbtn" id="dropbtn">
+    <button class="dropbtn" id="dropbtn" onclick="toggleDropdown(event)">
       <span id="active-level">Nivel 1</span>
       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
     </button>
-    <div class="dropdown-content">
+    <div class="dropdown-content" id="dropdown-content">
       <a href="javascript:void(0)" onclick="switchTab('n1')">Nivel 1 — Panorama</a>
       <a href="javascript:void(0)" onclick="switchTab('n2')">Nivel 2 — ...</a>
       <!-- ... -->
@@ -336,6 +336,7 @@ const quizData = [
 | Función | Qué hace |
 |---|---|
 | `showTab(id, btn)` | Activa el tab, desactiva los demás |
+| `toggleDropdown(e)` | Alterna visibilidad del menú nivel (vía clase `.show`) |
 | `toggleReveal(btn)` | Abre/cierra `.reveal-content` con animación |
 | `fcFlip()` | Voltea la flashcard (toggle `.flipped`) |
 | `fcNav(dir)` | Navega entre flashcards (+1 / -1) |

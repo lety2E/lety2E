@@ -114,7 +114,12 @@
       color: var(--M);
       padding-left: 1.5rem;
     }
-    .dropdown:hover .dropdown-content {
+    @media (hover: hover) {
+      .dropdown:hover .dropdown-content {
+        display: block;
+      }
+    }
+    .dropdown-content.show {
       display: block;
     }
 
@@ -511,11 +516,11 @@
     <a href="index.html" class="header-section-link">Apuntes</a>
 
     <div class="dropdown">
-      <button class="dropbtn" id="dropbtn">
+      <button class="dropbtn" id="dropbtn" onclick="toggleDropdown(event)">
         <span id="active-level">Nivel 1</span>
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
       </button>
-      <div class="dropdown-content">
+      <div class="dropdown-content" id="dropdown-content">
         <a href="javascript:void(0)" onclick="switchTab('n1')">Nivel 1 — Panorama</a>
         <a href="javascript:void(0)" onclick="switchTab('n2')">Nivel 2 — Arquitectura</a>
         <a href="javascript:void(0)" onclick="switchTab('n3')">Nivel 3 — Primitivas</a>
@@ -954,6 +959,22 @@
       btn.classList.add('active');
     }
 
+    /* ── Dropdown Toggle ── */
+    function toggleDropdown(e) {
+      e.stopPropagation();
+      document.getElementById('dropdown-content').classList.toggle('show');
+    }
+
+    // Cerrar dropdown al hacer click fuera
+    window.onclick = function(event) {
+      if (!event.target.matches('.dropbtn') && !event.target.closest('.dropbtn')) {
+        const content = document.getElementById('dropdown-content');
+        if (content.classList.contains('show')) {
+          content.classList.remove('show');
+        }
+      }
+    }
+
     function switchTab(id) {
       const btn = document.querySelector(`.tab-btn[onclick*="'${id}'"]`);
       showTab(id, btn);
@@ -967,6 +988,9 @@
         'n5': 'Nivel 5'
       };
       document.getElementById('active-level').textContent = levelNames[id] || 'Menú';
+      
+      // Cerrar dropdown
+      document.getElementById('dropdown-content').classList.remove('show');
       
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
