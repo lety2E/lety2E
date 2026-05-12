@@ -1373,13 +1373,13 @@ body[data-section="relatos"].relato-morado .topic-header h1 {
 }
 
 .reader-paper .body-text {
-  font-size: 1.25rem;
-  line-height: 1.85;
+  font-size: 1.35rem;
+  line-height: 1.9;
   color: #333;
 }
 
 .reader-paper .body-text p {
-  margin-bottom: 1.8rem;
+  margin-bottom: 2rem;
 }
 
 .reader-illustration {
@@ -1412,8 +1412,8 @@ body[data-section="relatos"].relato-morado .topic-header h1 {
     border-radius: 16px;
   }
   .reader-paper .body-text {
-    font-size: 1.12rem;
-    line-height: 1.75;
+    font-size: 1.25rem;
+    line-height: 1.8;
   }
 }
 .story-card-front img {
