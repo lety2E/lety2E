@@ -26,11 +26,9 @@
 - Cuerpo: DM Sans 300/400/500 (Google Fonts)
 
 **Logos:** en `assets/logos/`
-- `icono-2e.png` — ícono base
-- `lety2E-madre-v3.png` — wordmark principal
-- `lety2e-Math-v3.png` / `lety2e-Lupian-v3.png` / `lety2e-Apuntes.jpeg` — brandings por sección
+- `icono-2e.png` — usado por `footer.js`
 
-> Nota: El nav y footer usan un SVG inline con el badge "2E" (generado por `nav.js` y `footer.js`), ya no las imágenes PNG.
+> El nav y footer usan un SVG inline con el badge "2E" (generado por `nav.js` y `footer.js`).
 
 ---
 
@@ -115,8 +113,6 @@ lety2E 2/
 2. Editar título, videos, fórmulas, ejercicios.
 3. Añadir card al `index.html` del curso.
 4. Si era el primer tema del curso, quitar el `.proximamente-card` del index del curso y la `.pronto` de la portada de Math.
-
-> ⚠️ `math/TEMPLATE-TOPICO.html` está **obsoleto** — no refleja el formato "paquetito" actual. Usar temas reales como referencia.
 
 ### Nueva sección al sitio
 1. Crear carpeta + `index.html` con `body data-section="nueva"`.
