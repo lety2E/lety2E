@@ -60,12 +60,22 @@ lety2E 2/
 │
 ├── lupian/                 [Sección artística]
 │   ├── index.html          [2 puertas: Cantos · Relatos]
-│   ├── cantos/index.html
-│   └── relatos/index.html
+│   ├── assets/             [lety-cantos.jpeg, lety-relatos.jpeg]
+│   ├── cantos/index.html   [3 covers + link al canal]
+│   └── relatos/
+│       ├── index.html      [Lista orgánica de relatos]
+│       ├── no-hay-nadie-como-tu.html
+│       ├── chapulina.html
+│       ├── pues-que-no-estas-cabal.html
+│       ├── primeros-zapatos-de-teresa.html
+│       └── assets/         [heptadecagono-gauss.png]
 │
 ├── apuntes/                [Grid de apunte-cards]
 │   ├── index.html
-│   └── *.html              [Cada apunte como artefacto self-contained]
+│   ├── Templete-apuntes.md [Guía para crear apuntes nuevos]
+│   ├── mcp.html            [Artefacto: Model Context Protocol]
+│   ├── compresion.html     [Artefacto: Compresión vocal]
+│   └── segunda-guerra-mundial.html  [Referencia canónica del template]
 │
 └── math/                   [LetyMath]
     ├── index.html          [Grid de 6 course-cards]
@@ -81,12 +91,28 @@ lety2E 2/
     │   └── area-perimetro.html        [Tema 8 — con SVG triángulos]
     ├── matematicas-2/      [Solo placeholder]
     ├── matematicas-3/      [Solo placeholder]
-    ├── matematicas-4/      [próximamente]
+    ├── matematicas-4/      [Solo placeholder]
     ├── matematicas-5/      [Solo placeholder]
     └── optativa/           [Solo placeholder]
 ```
 
 **Principio:** una sola fuente de verdad por archivo (style/nav/footer). Variaciones por `body[data-section]`.
+
+### Valores de `data-section`
+
+| Valor | Dónde se usa |
+|-------|-------------|
+| `home` | Portada (`index.html`) |
+| `math` | Todo dentro de `math/` (índices **y** temas) |
+| `lupian` | `lupian/index.html` y `lupian/cantos/` |
+| `relatos` | `lupian/relatos/` |
+| `apuntes` | `apuntes/index.html` |
+
+> ⚠️ Siempre usar `"math"` para temas de Math (nunca `"letymath"` — se unificó en mayo 2026).
+
+### Estilos inline en temas de Math
+
+Los temas individuales de Math (ej. `operaciones-basicas.html`) llevan un bloque `<style>` inline con clases específicas del patrón paquetito (`.topic-tag`, `.sec-head`, `.sec-toggle`, `.collapsible`, `.ejemplo-block`, `.mini-card`, `.bloques-2`/`.bloques-3`, `.btn-anterior`, `.btn-siguiente`, etc.). Esto es intencional: cada tema es semi-autónomo. `style.css` provee la base (variables, nav, footer, layout), y el `<style>` inline añade los componentes del paquetito.
 
 ---
 
@@ -95,15 +121,46 @@ lety2E 2/
 ### Colores (variables en `style.css`)
 
 ```css
---M:  #FF00AA      /* Magenta primario — logo, hovers, accent fuerte */
---T:  #00DEC8      /* Turquesa — links, accent claro */
---P:  #4A0080      /* Morado — accent secundario */
---dark: #1A0828    /* Fondo nav/footer */
---bg:   #F2DBD5    /* Fondo body rosado */
---bg-card: #FBF2EF /* Fondo card */
---course-1: #4A0080 /* Alias de --P para encabezados Math */
---border: #E0C4BC  /* Borde de cards y grid de SVG */
+/* Marca */
+--M:        #FF00AA   /* Magenta primario — logo, hovers, accent fuerte */
+--T:        #00DEC8   /* Turquesa — links, accent claro */
+--P:        #4A0080   /* Morado — accent secundario */
+
+/* Superficies */
+--bg:       #FBF2EF   /* Fondo body (rosado muy claro) */
+--bg-card:  #FFFFFF   /* Fondo card (blanco puro) */
+--bg-hover: #FBF2EF   /* Hover de cards/items */
+--dark:     #1A0828   /* Fondo nav/footer */
+
+/* Texto */
+--text:     #3D2525   /* Texto principal */
+--text-2:   #6E4F4F   /* Texto secundario */
+--text-3:   #A08080   /* Texto terciario (hints, placeholders) */
+
+/* Bordes */
+--border:   #E0C4BC   /* Borde principal (cards, grid SVG) */
+--border-s: #EDD8D0   /* Borde suave */
+
+/* Accent (alias de --P para Math) */
+--accent:       #4A0080
+--accent-light: #F0E0F5
+
+/* Cursos */
+--course-1: #4A0080  --course-2: #7B2CBF  --course-3: #FF00AA
+--course-4: #FF6EC7  --course-5: #00DEC8  --course-opt: #00B8A9
 ```
+
+### Sistema de color por sección
+
+El CSS usa `--section-color` y `--section-hover` para invertir la paleta según la sección:
+
+| Secciones | `--section-color` | `--section-hover` | Headings |
+|-----------|-------------------|-------------------|----------|
+| Home, Lupián (artísticas) | Magenta | Turquesa | Magenta |
+| Math, Apuntes (académicas) | Turquesa | Magenta | Morado (`--P`) |
+| Relatos | Magenta* | Turquesa | Magenta (excepto `.relato-morado` → Morado) |
+
+\* Relatos tiene `data-section="relatos"` con override a cards blancas y texto neutro, igual que Apuntes.
 
 **Regla:** NUNCA inventar colores fuera del palette. Excepción: los pills de fórmula (ver § Estilo de resoluciones).
 
@@ -400,14 +457,16 @@ git push                         # GitHub Pages rebuilea en 1-2 min
 
 | Archivo                    | Propósito                                       |
 |----------------------------|-------------------------------------------------|
-| `CLAUDE.md`                | Esta guía                                        |
+| `CLAUDE.md`                | Esta guía (detallada)                            |
 | `INSTRUCCIONES.md`         | Resumen corto de arquitectura                   |
-| `style.css`                | Estilos únicos del sitio                         |
+| `style.css`                | Estilos base del sitio                           |
 | `nav.js`                   | Navegación auto-detect                          |
 | `footer.js`                | Footer auto-detect                              |
 | `CNAME`                    | Liga lety2e.com (NO borrar)                      |
 | `favicon.svg` / `.ico`     | Ícono del sitio                                  |
+| `.gitignore`               | Excluye `.DS_Store`, `*.py`, `*.csv`             |
+| `apuntes/Templete-apuntes.md` | Guía para crear apuntes de historia           |
 
 ---
 
-*Guía mantenida por Claude · sincronizada con el estado actual del repo*
+*Guía mantenida por Claude · sincronizada con el estado actual del repo · Mayo 2026*

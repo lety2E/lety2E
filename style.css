@@ -60,8 +60,7 @@
 
 /* Secciones académicas (Math, Apuntes y subsecciones): turquesa principal, magenta hover */
 body[data-section="math"],
-body[data-section="apuntes"],
-body[data-section="letymath"] {
+body[data-section="apuntes"] {
   --section-color: var(--T);
   --section-hover: var(--M);
   --logo-text: var(--P);

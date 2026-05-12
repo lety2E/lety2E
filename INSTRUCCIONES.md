@@ -13,17 +13,24 @@
 | Turquesa  | `#00DEC8` | Links nav, accent claro                   |
 | Morado    | `#4A0080` | Badges subsección, accent por defecto     |
 | Dark      | `#1A0828` | Fondo nav/footer                          |
-| Bg body   | `#F2DBD5` | Fondo general rosado                      |
-| Bg card   | `#FBF2EF` | Fondo de cards (blanco en apuntes/relatos)|
+| Bg body   | `#FBF2EF` | Fondo general (rosado muy claro)          |
+| Bg card   | `#FFFFFF` | Fondo de cards (blanco puro)              |
+| Texto     | `#3D2525` | Texto principal                           |
+| Texto 2   | `#6E4F4F` | Texto secundario                          |
+| Border    | `#E0C4BC` | Bordes de cards                           |
+
+**Sistema de secciones:** las secciones artísticas (Home, Lupián) usan magenta como color principal y turquesa en hovers; las académicas (Math, Apuntes) invierten: turquesa principal, magenta en hovers, headings morados.
 
 **Tipografía:**
 - Display/Logo: Playfair Display Italic 900 (Google Fonts)
 - Cuerpo: DM Sans 300/400/500 (Google Fonts)
 
 **Logos:** en `assets/logos/`
-- `icono-2e-magenta.png` — usado en nav
-- `icono-2e-morado.png`
-- `wordmark-lety2e-claro.png` / `wordmark-lety2e-oscuro.png`
+- `icono-2e.png` — ícono base
+- `lety2E-madre-v3.png` — wordmark principal
+- `lety2e-Math-v3.png` / `lety2e-Lupian-v3.png` / `lety2e-Apuntes.jpeg` — brandings por sección
+
+> Nota: El nav y footer usan un SVG inline con el badge "2E" (generado por `nav.js` y `footer.js`), ya no las imágenes PNG.
 
 ---
 
@@ -43,19 +50,21 @@ lety2E 2/
 │   ├── index.html          ← 2 puertas grandes
 │   ├── assets/             ← lety-cantos.jpeg, lety-relatos.jpeg
 │   ├── cantos/             ← 3 covers + link al canal @Lety2eLupian
-│   └── relatos/            ← Escritos, audio, imagen, video (lista plana)
+│   └── relatos/            ← 4 relatos (lista plana, crece orgánicamente)
 │
-├── apuntes/                ← Notas
+├── apuntes/                ← Notas (self-contained, no usan nav.js/footer.js)
 │   ├── index.html          ← Grid de apunte-cards con hover hint
+│   ├── Templete-apuntes.md ← Guía para crear apuntes nuevos
 │   ├── mcp.html            ← Artefacto self-contained
-│   └── compresion.html     ← Artefacto self-contained
+│   ├── compresion.html     ← Artefacto self-contained
+│   └── segunda-guerra-mundial.html ← Referencia canónica del template
 │
 └── math/                   ← lety2E Math
     ├── index.html          ← 6 cards (Mat 1-5 + Optativa); vacíos llevan badge "próximamente"
-    ├── matematicas-1/      ← operaciones-basicas + jerarquia
+    ├── matematicas-1/      ← 8 temas (operaciones → área y perímetro) — en crecimiento
     ├── matematicas-2/      ← placeholder próximamente
     ├── matematicas-3/      ← placeholder próximamente
-    ├── matematicas-4/      ← en construcción (próximamente)
+    ├── matematicas-4/      ← placeholder próximamente
     ├── matematicas-5/      ← placeholder próximamente
     └── optativa/           ← placeholder próximamente
 ```
@@ -87,8 +96,10 @@ lety2E 2/
 ## Cómo agregar contenido
 
 ### Nuevo apunte
-1. Pegar el `.html` self-contained en `apuntes/`.
-2. Añadir un `<a class="apunte-card">` al grid en `apuntes/index.html` con tipo (artefacto / infografía / texto), título y hint.
+1. Los apuntes son **self-contained**: todo su CSS y JS va inline dentro del `.html` (no usan `style.css`, `nav.js` ni `footer.js`).
+2. Usar `apuntes/Templete-apuntes.md` como guía y `segunda-guerra-mundial.html` como referencia canónica.
+3. Pegar el `.html` en `apuntes/`.
+4. Añadir un `<a class="apunte-card">` al grid en `apuntes/index.html` con tipo (artefacto / infografía / texto), título y hint.
 
 ### Nuevo relato
 1. Pegar el archivo en `lupian/relatos/` (puede ser .html, .mp3, .mp4, imagen).
@@ -99,10 +110,12 @@ lety2E 2/
 2. Añadir un `<article class="video-cover">` con su iframe en `lupian/cantos/index.html`.
 
 ### Nuevo tema de Math
-1. Copiar `math/TEMPLATE-TOPICO.html` → `tema-nuevo.html` en la carpeta del curso.
+1. Usar como referencia un tema existente de `math/matematicas-1/` (ej. `operaciones-basicas.html`) — el patrón "paquetito" documentado en `CLAUDE.md`.
 2. Editar título, videos, fórmulas, ejercicios.
 3. Añadir card al `index.html` del curso.
 4. Si era el primer tema del curso, quitar el `.proximamente-card` del index del curso y la `.pronto` de la portada de Math.
+
+> ⚠️ `math/TEMPLATE-TOPICO.html` está **obsoleto** — no refleja el formato "paquetito" actual. Usar temas reales como referencia.
 
 ### Nueva sección al sitio
 1. Crear carpeta + `index.html` con `body data-section="nueva"`.
@@ -160,9 +173,11 @@ Todas relativas para compatibilidad con `file://`:
 
 ## Pendientes / planeado
 
-- Llenar Mat 2, 3, 5 y Optativa con temas reales (cuando estén, **revisar las descripciones** de cada curso porque las actuales son del sitio viejo y no coinciden — ej: Mat 5 es derivadas/integrales, no álgebra lineal).
+- Mat 1: en crecimiento activo — se siguen agregando temas.
+- Llenar Mat 2, 3, 5 y Optativa con temas reales cuando estén listos.
+- Mat 5: descripción pendiente de definir por Lety (actualmente tiene texto genérico).
 - Posibles secciones futuras: Alojamiento (renta vacacional), etc.
 
 ---
 
-*Última actualización: Abril 2026 (post-restructura Lupián/Relatos/Math)*
+*Última actualización: Mayo 2026*
