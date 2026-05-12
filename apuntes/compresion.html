@@ -29,34 +29,7 @@
       min-height: 100vh;
     }
 
-    .watermark {
-      position: fixed;
-      top: 0.9rem;
-      right: 1.3rem;
-      z-index: 100;
-      text-align: right;
-      pointer-events: none;
-      user-select: none;
-      line-height: 1;
-    }
-    .watermark .wm-brand {
-      font-family: 'Playfair Display', serif;
-      font-style: italic;
-      font-weight: 900;
-      font-size: 1.9rem;
-      color: var(--P);
-      opacity: 0.82;
-      display: block;
-    }
-    .watermark .wm-sub {
-      font-size: 0.68rem;
-      letter-spacing: 0.16em;
-      color: var(--dark);
-      opacity: 0.55;
-      text-transform: uppercase;
-      display: block;
-      text-align: right;
-    }
+
 
     .page-header {
       background: var(--dark);
@@ -82,84 +55,120 @@
       transition: color 0.2s;
     }
     .header-section-link:hover { color: var(--M); }
-    .header-text { flex: 1; text-align: center; }
-    .page-header h1 {
+    /* ── Dropdown Menu ── */
+    .dropdown {
+      position: relative;
+      display: inline-block;
+      margin-left: auto;
+    }
+    .dropbtn {
+      background: rgba(0, 222, 200, 0.08);
+      color: var(--T);
+      padding: 0.5rem 1rem;
+      font-size: 0.85rem;
+      font-weight: 500;
+      border: 1.5px solid rgba(0, 222, 200, 0.4);
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.2s;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .dropbtn:hover {
+      background: var(--T);
+      color: var(--dark);
+      border-color: var(--T);
+    }
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      right: 0;
+      background: var(--dark);
+      min-width: 200px;
+      box-shadow: 0px 8px 24px rgba(0,0,0,0.5);
+      z-index: 1000;
+      border-radius: 10px;
+      border: 1px solid rgba(0, 222, 200, 0.2);
+      margin-top: 0.5rem;
+      overflow: hidden;
+      animation: fadeInDown 0.2s ease;
+    }
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .dropdown-content a {
+      color: var(--T);
+      padding: 0.9rem 1.2rem;
+      text-decoration: none;
+      display: block;
+      font-size: 0.85rem;
+      transition: all 0.2s;
+      border-bottom: 1px solid rgba(0, 222, 200, 0.05);
+    }
+    .dropdown-content a:last-child { border-bottom: none; }
+    .dropdown-content a:hover {
+      background: rgba(0, 222, 200, 0.12);
+      color: var(--M);
+      padding-left: 1.5rem;
+    }
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    /* ── Body Title ── */
+    .note-title-container {
+      max-width: 820px;
+      margin: 3rem auto 1.5rem;
+      padding: 0 1.5rem;
+      text-align: center;
+    }
+    .note-title-container h1 {
       font-family: 'Playfair Display', serif;
       font-style: italic;
       font-weight: 900;
-      font-size: clamp(1.6rem, 3.5vw, 2.6rem);
-      color: var(--T);
+      font-size: clamp(2.2rem, 6vw, 3.8rem);
+      color: var(--P);
+      line-height: 1.1;
+      margin-bottom: 0.6rem;
     }
-    .page-header p {
-      color: var(--T);
-      font-size: 0.78rem;
-      margin-top: 0.4rem;
-      letter-spacing: 0.07em;
-      opacity: 0.85;
+    .note-title-container p {
+      color: var(--txt-2);
+      font-size: 0.95rem;
+      opacity: 0.8;
+      letter-spacing: 0.05em;
     }
 
     @media (max-width: 650px) {
       .page-header {
         padding: 0.7rem 0.9rem;
-        gap: 0.6rem;
+        gap: 0.8rem;
       }
       .header-logo {
-        height: 36px;
-        width: 36px;
+        height: 38px;
+        width: 38px;
       }
       .header-section-link {
         font-size: 1.1rem;
       }
-      .header-text {
-        text-align: left;
+      .dropbtn {
+        padding: 0.4rem 0.7rem;
+        font-size: 0.75rem;
       }
-      .page-header h1 {
-        font-size: 1.05rem;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        max-width: 140px;
+      .note-title-container {
+        margin: 2rem auto 1rem;
       }
-      .page-header p {
-        display: none;
-      }
-      .header-back-link span {
-        display: none;
-      }
-      .header-back-link svg {
-        width: 22px;
-        height: 22px;
+      .note-title-container h1 {
+        font-size: 1.8rem;
       }
     }
 
+    /* ── Tabs nav (ahora oculto por defecto para usar el dropdown, pero mantenemos lógica) ── */
     .tabs-nav {
-      display: flex;
-      background: var(--dark);
-      border-bottom: 2px solid rgba(0,0,0,0.2);
-      overflow-x: auto;
-      margin-left: 0;
-      scrollbar-width: none; /* Firefox */
+      display: none; 
     }
-    .tabs-nav::-webkit-scrollbar { display: none; } /* Chrome/Safari */
-    .tab-btn {
-      flex: 1;
-      min-width: 100px;
-      padding: 0.8rem 0.7rem;
-      background: none;
-      border: none;
-      border-bottom: 3px solid transparent;
-      color: rgba(0, 222, 200, 0.55);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 0.8rem;
-      font-weight: 500;
-      letter-spacing: 0.03em;
-      cursor: pointer;
-      transition: color 0.2s, border-color 0.2s;
-      text-align: center;
-      margin-bottom: -2px;
-    }
-    .tab-btn:hover { color: var(--M); }
-    .tab-btn.active { color: var(--M); border-bottom-color: var(--M); font-weight: 700; }
 
     .header-back-link {
       display: flex;
@@ -490,10 +499,7 @@
 </head>
 <body data-section="apuntes">
 
-  <div class="watermark">
-    <span class="wm-brand">lety2E</span>
-    <span class="wm-sub">apuntes</span>
-  </div>
+
 
   <header class="page-header">
     <a href="../index.html" class="header-logo-link" aria-label="Ir a lety2E inicio">
@@ -503,17 +509,27 @@
       </svg>
     </a>
     <a href="index.html" class="header-section-link">Apuntes</a>
-    <div class="header-text">
-      <h1>Compresión de Audio</h1>
-      <p>Producción vocal · 5 niveles</p>
+
+    <div class="dropdown">
+      <button class="dropbtn" id="dropbtn">
+        <span id="active-level">Nivel 1</span>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+      </button>
+      <div class="dropdown-content">
+        <a href="javascript:void(0)" onclick="switchTab('n1')">Nivel 1 — Panorama</a>
+        <a href="javascript:void(0)" onclick="switchTab('n2')">Nivel 2 — Circuitos</a>
+        <a href="javascript:void(0)" onclick="switchTab('n3')">Nivel 3 — Parámetros</a>
+        <a href="javascript:void(0)" onclick="switchTab('n4')">Nivel 4 — Técnicas</a>
+        <a href="javascript:void(0)" onclick="switchTab('n5')">Nivel 5 — Actividad</a>
+        <a href="index.html" style="color: var(--M); border-top: 1px solid rgba(255,0,170,0.2);">← Volver a Apuntes</a>
+      </div>
     </div>
-    <a href="index.html" class="header-back-link" aria-label="Volver a la lista de apuntes">
-      <span>Volver</span>
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M19 12H5m7 7-7-7 7-7"/>
-      </svg>
-    </a>
   </header>
+
+  <div class="note-title-container">
+    <h1>Compresión de Audio</h1>
+    <p>Producción vocal · 5 niveles</p>
+  </div>
 
   <nav class="tabs-nav">
     <button class="tab-btn active" onclick="showTab('n1', this)">
@@ -997,6 +1013,17 @@
     function switchTab(id) {
       const btn = document.querySelector(`.tab-btn[onclick*="'${id}'"]`);
       showTab(id, btn);
+      
+      // Actualizar texto del dropdown
+      const levelNames = {
+        'n1': 'Nivel 1',
+        'n2': 'Nivel 2',
+        'n3': 'Nivel 3',
+        'n4': 'Nivel 4',
+        'n5': 'Nivel 5'
+      };
+      document.getElementById('active-level').textContent = levelNames[id] || 'Menú';
+      
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 

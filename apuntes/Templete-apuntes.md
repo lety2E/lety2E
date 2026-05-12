@@ -64,10 +64,10 @@ Lo que va **dentro** de cada nivel depende de la naturaleza del contenido. No se
 ## Paleta de colores
 
 ```css
---M:       #FF00AA   /* magenta — bordes mini-card, puntos timeline, barra progreso, citas */
---T:       #00DEC8   /* turquesa — h1 header, links, label de respuesta en flashcard */
---P:       #4A0080   /* morado — badges, sec-title, frente flashcard, wm-brand */
---dark:    #1A0828   /* fondo header, cifras, recursos */
+--M:       #FF00AA   /* magenta — bordes mini-card, puntos timeline, barra progreso, citas, hovers */
+--T:       #00DEC8   /* turquesa — h1 header, links, label de respuesta en flashcard, dropdown border */
+--P:       #4A0080   /* morado — títulos de nota (en cuerpo), badges, sec-title, frente flashcard */
+--dark:    #1A0828   /* fondo header, cifras, recursos, dropdown background */
 --bg:      #E8EEF4   /* azul niebla — fondo de página */
 --bg-card: #F4F7FA   /* blanco azulado — mini-cards, quiz */
 --txt:     #1e0f2e   /* texto principal */
@@ -98,31 +98,19 @@ Regla: nunca usar hex directamente en el HTML, siempre `var(--X)`.
 </head>
 
 <body>
-  .watermark              — fijo, esquina superior derecha
-  <header .page-header>  — logo + título, fondo --dark
-  <nav .tabs-nav>        — botones de nivel (5 tabs)
+  <header .page-header>  — logo + sección + selector de nivel (dropdown)
+  <div .note-title-container> — título del apunte y subtítulo (morado --P)
   5 × <div .tab-content> — uno por nivel
 </body>
 ```
 
 ---
 
-## Watermark (esquina superior derecha)
 
-```html
-<div class="watermark">
-  <span class="wm-brand">lety2E</span>
-  <span class="wm-sub">apuntes</span>
-</div>
-```
-
-- Posición: `fixed`, `top: 0.9rem`, `right: 1.3rem`
-- `.wm-brand`: Playfair Italic 900, `color: var(--P)`, 1.9rem, opacidad 82%
-- `.wm-sub`: DM Sans caps, 0.68rem, `color: var(--dark)`, opacidad 55%
 
 ---
 
-## Header
+## Header (Logo + Navegación)
 
 ```html
 <header class="page-header">
@@ -130,21 +118,36 @@ Regla: nunca usar hex directamente en el HTML, siempre `var(--X)`.
     <img class="header-logo" src="../assets/logos/lety2e-Apuntes.jpeg" alt="lety2E">
   </a>
   <a href="index.html" class="header-section-link">Apuntes</a>
-  <div class="header-text">
-    <h1>Título del tema</h1>
-    <p>Materia · N niveles</p>
+
+  <div class="dropdown">
+    <button class="dropbtn" id="dropbtn">
+      <span id="active-level">Nivel 1</span>
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+    </button>
+    <div class="dropdown-content">
+      <a href="javascript:void(0)" onclick="switchTab('n1')">Nivel 1 — Panorama</a>
+      <a href="javascript:void(0)" onclick="switchTab('n2')">Nivel 2 — ...</a>
+      <!-- ... -->
+      <a href="index.html" style="color: var(--M); border-top: 1px solid rgba(255,0,170,0.2);">← Volver a Apuntes</a>
+    </div>
   </div>
 </header>
 ```
 
-Los tres colores de la marca conviven en el header sobre el fondo oscuro:
+---
 
-- Fondo: `var(--dark)` `#1A0828`
-- Logo → enlace a `../index.html` (inicio del sitio)
-- "Apuntes" → enlace a `index.html` (sección Apuntes): Playfair Italic 900, `color: var(--T)` turquesa, 1.5rem
-- `h1`: Playfair Italic 900, `color: var(--T)` turquesa, `clamp(1.6rem, 3.5vw, 2.6rem)`
-- `p` subtítulo: `color: var(--M)` magenta, 0.78rem
-- Watermark `lety2E`: `color: var(--P)` morado (fijo, esquina superior derecha)
+## Título del apunte (en el cuerpo)
+
+```html
+<div class="note-title-container">
+  <h1>Título del tema</h1>
+  <p>Materia · N niveles</p>
+</div>
+```
+
+- `h1`: Playfair Italic 900, `color: var(--P)` morado, centrado.
+- `p`: DM Sans, `color: var(--txt-2)`, opacidad 0.8.
+
 
 ---
 
