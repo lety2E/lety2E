@@ -157,10 +157,12 @@ El CSS usa `--section-color` y `--section-hover` para invertir la paleta según 
 | Secciones | `--section-color` | `--section-hover` | Headings |
 |-----------|-------------------|-------------------|----------|
 | Home, Lupián (artísticas) | Magenta | Turquesa | Magenta |
-| Math, Apuntes (académicas) | Turquesa | Magenta | Morado (`--P`) |
-| Relatos | Magenta* | Turquesa | Magenta (excepto `.relato-morado` → Morado) |
+| Math | Turquesa | Magenta | Morado (`--P`) |
+| Apuntes | Turquesa | Magenta | Morado (`--P`)* |
+| Relatos | Magenta** | Turquesa | Magenta (excepto `.relato-morado` → Morado) |
 
-\* Relatos tiene `data-section="relatos"` con override a cards blancas y texto neutro, igual que Apuntes.
+\* En Apuntes, el `h1` del cuerpo es morado; el header es minimalista con dropdown.
+\** Relatos tiene `data-section="relatos"` con override a cards blancas y texto neutro.
 
 **Regla:** NUNCA inventar colores fuera del palette. Excepción: los pills de fórmula (ver § Estilo de resoluciones).
 

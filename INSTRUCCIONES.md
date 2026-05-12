@@ -19,7 +19,7 @@
 | Texto 2   | `#6E4F4F` | Texto secundario                          |
 | Border    | `#E0C4BC` | Bordes de cards                           |
 
-**Sistema de secciones:** las secciones artísticas (Home, Lupián) usan magenta como color principal y turquesa en hovers; las académicas (Math, Apuntes) invierten: turquesa principal, magenta en hovers, headings morados.
+**Sistema de secciones:** las secciones artísticas (Home, Lupián) usan magenta como color principal y turquesa en hovers; las académicas (Math, Apuntes) invierten: turquesa principal, magenta en hovers. En **Apuntes**, el título del tema en el cuerpo usa morado (`--P`).
 
 **Tipografía:**
 - Display/Logo: Playfair Display Italic 900 (Google Fonts)
@@ -95,11 +95,12 @@ lety2E 2/
 
 ## Cómo agregar contenido
 
-### Nuevo apunte
 1. Los apuntes son **self-contained**: todo su CSS y JS va inline dentro del `.html` (no usan `style.css`, `nav.js` ni `footer.js`).
-2. Usar `apuntes/Templete-apuntes.md` como guía y `segunda-guerra-mundial.html` como referencia canónica.
-3. Pegar el `.html` en `apuntes/`.
-4. Añadir un `<a class="apunte-card">` al grid en `apuntes/index.html` con tipo (artefacto / infografía / texto), título y hint.
+2. Tienen un **Header minimalista** con logo, nombre de sección y un **selector de nivel (dropdown)**.
+3. El **Título del tema** va en el cuerpo del apunte, centrado y en color morado (`--P`).
+4. Usar `apuntes/Templete-apuntes.md` como guía y `segunda-guerra-mundial.html` como referencia canónica.
+5. Pegar el `.html` en `apuntes/`.
+6. Añadir un `<a class="apunte-card">` al grid en `apuntes/index.html`.
 
 ### Nuevo relato
 1. Pegar el archivo en `lupian/relatos/` (puede ser .html, .mp3, .mp4, imagen).
