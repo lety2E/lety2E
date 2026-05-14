@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ecuaciones con ángulos — Matemáticas 1 — LetyMath</title>
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../../favicon.ico">
+  <meta name="description" content="Ecuaciones lineales aplicadas a triángulos: encontrar el valor de x y los ángulos sabiendo que suman 180°." />
+  <link rel="stylesheet" href="../../style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" />
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body, {
+      delimiters: [
+        {left:'$$', right:'$$', display:true},
+        {left:'$', right:'$', display:false}
+      ]
+    });"></script>
+
+  <style>
+    .topic-tag {
+      display: inline-flex; align-items: center; gap: .35rem;
+      padding: .22rem .75rem; border-radius: 99px;
+      background: var(--accent-light); color: var(--accent);
+      font-size: .78rem; font-weight: 700; letter-spacing: .03em;
+      margin-bottom: .55rem;
+    }
+    .topic-tag::before {
+      content: ''; width: 7px; height: 7px; border-radius: 50%;
+      background: var(--accent); display: inline-block;
+    }
+
+    .section-block { margin-bottom: 2.5rem; }
+    .section-block:last-child { margin-bottom: 0; }
+
+    .sec-head {
+      display: flex; align-items: center; gap: .65rem;
+      margin-bottom: 1.1rem;
+    }
+    .sec-head h2 { margin: 0; font-size: 1.2rem; line-height: 1; }
+    .sec-icon {
+      width: 30px; height: 30px; border-radius: 8px;
+      display: grid; place-items: center; flex-shrink: 0;
+      background: var(--accent);
+    }
+    .sec-icon svg { width: 15px; height: 15px; stroke: #fff; fill: none; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+
+    .sec-toggle {
+      display: flex; align-items: center; gap: .65rem;
+      cursor: pointer; user-select: none;
+      padding: .8rem 0; margin: 0 0 .4rem;
+    }
+    .sec-toggle h2 { margin: 0; font-size: 1.2rem; line-height: 1; }
+    .sec-toggle .chev {
+      margin-left: auto; font-size: .75rem; color: var(--text-3);
+      transition: transform .25s;
+    }
+    .sec-toggle.open .chev { transform: rotate(180deg); }
+
+    .collapsible {
+      max-height: 0; overflow: hidden;
+      transition: max-height .4s ease, padding .3s ease;
+      padding: 0;
+    }
+    .collapsible.show { max-height: 30000px; padding: .8rem 0; }
+
+    /* Bloque de triángulo (grafica + info) */
+    .tri-block {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      background: var(--bg-card);
+      border: 1.5px solid var(--border);
+      border-radius: var(--r-md);
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      align-items: center;
+    }
+    .tri-block:last-child { margin-bottom: 0; }
+    @media (max-width: 700px) {
+      .tri-block { grid-template-columns: 1fr; }
+    }
+
+    .tri-info { min-width: 0; }
+    .tri-info h3 {
+      margin: 0 0 .8rem; font-size: 1.05rem;
+      color: var(--course-1); font-family: var(--font-display);
+    }
+    .tri-info h4 {
+      margin: 1.2rem 0 .4rem; font-size: .95rem;
+      color: var(--course-1);
+    }
+    .tri-info h4:first-of-type { margin-top: 0; }
+    .tri-info strong { color: var(--M); font-weight: 700; }
+
+    /* Fórmulas tipo pill */
+    .formula-pill {
+      display: inline-block;
+      background: #FFF1A8;
+      padding: .25rem .75rem;
+      border-radius: 99px;
+      font-size: .9rem;
+      font-weight: 600;
+      color: var(--text);
+      margin: .35rem 0;
+      border: 1.5px solid #F5DC6A;
+    }
+    .formula-pill.salmon {
+      background: #FFD9B8;
+      border-color: #F5B584;
+    }
+    .resultado-pill {
+      display: inline-block;
+      background: #FFD0E5;
+      padding: .15rem .65rem;
+      border-radius: 99px;
+      font-weight: 700;
+      color: var(--M);
+      border: 1.5px solid #FF8AC0;
+    }
+
+    /* Lista de ángulos (resultado) */
+    .ang-list {
+      list-style: none; padding: 0; margin: .4rem 0 0;
+      font-size: .92rem; line-height: 2;
+    }
+    .ang-list li { padding: .15rem 0; }
+    .ang-list li::before {
+      content: '•'; color: var(--M); font-weight: 700;
+      margin-right: .5rem;
+    }
+
+    .tri-grafica {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .grafica-svg {
+      width: 100%;
+      max-width: 260px;
+      max-height: 220px;
+      height: auto;
+      display: block;
+    }
+
+    /* Grid de ejercicios (solo diagramas) */
+    .ejer-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.2rem;
+    }
+    @media (max-width: 700px) {
+      .ejer-grid { grid-template-columns: 1fr; }
+    }
+    .ejer-card {
+      background: var(--bg-card); border: 1.5px solid var(--border);
+      border-radius: var(--r-md); overflow: hidden;
+      display: flex; flex-direction: column;
+    }
+    .ejer-card-head {
+      padding: .4rem .8rem; background: var(--course-1);
+      font-family: var(--font-display); font-size: .85rem; color: #fff; font-weight: 700;
+    }
+    .ejer-card-body {
+      padding: .9rem; display: flex; align-items: center; justify-content: center;
+      min-height: 180px;
+    }
+
+    /* Navegación */
+    .topic-nav-btns {
+      display: flex; justify-content: space-between; gap: 1rem;
+      margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border);
+    }
+    .btn-anterior, .btn-siguiente {
+      display: inline-flex; align-items: center; gap: .5rem;
+      padding: .65rem 1.4rem; border-radius: 99px;
+      font-weight: 700; font-size: .9rem; transition: background .2s, transform .18s;
+    }
+    .btn-anterior {
+      background: transparent; color: var(--accent);
+      border: 2px solid var(--accent);
+    }
+    .btn-anterior:hover { background: var(--accent-light); transform: translateX(-3px); }
+    .btn-siguiente { background: var(--accent); color: #fff; }
+    .btn-siguiente:hover { background: var(--M); color: #fff; transform: translateX(3px); }
+  </style>
+</head>
+<body data-section="math">
+  <main class="topic-content">
+
+    <header class="topic-header">
+      <p class="breadcrumb">
+        <a href="../index.html">Inicio</a> ›
+        <a href="index.html">Matemáticas 1</a> ›
+        Ecuaciones con ángulos
+      </p>
+      <div class="topic-tag">Matemáticas 1 · Tema 9</div>
+      <h1>Ecuaciones con ángulos</h1>
+      <p style="font-size:1.05rem; color:var(--text-2); margin-top:.4rem; font-style:italic;">Aplicar ecuaciones lineales a triángulos sabiendo que sus ángulos suman 180°</p>
+    </header>
+
+    <!-- ══════════ EJEMPLO ══════════ -->
+    <section class="section-block">
+      <div class="sec-head">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        </div>
+        <h2>Ejemplo</h2>
+      </div>
+      <p style="margin-bottom:1rem; line-height:1.75;">
+        Encontrar los valores de los ángulos del siguiente triángulo.
+      </p>
+
+      <div class="tri-block">
+        <div class="tri-grafica">
+          <svg viewBox="0 0 220 150" xmlns="http://www.w3.org/2000/svg" class="grafica-svg" role="img" aria-label="Triángulo con ángulos 2x+10, 3x, x">
+            <polygon points="15,130 200,130 75,25" fill="none" stroke="#1A0828" stroke-width="2" stroke-linejoin="round"/>
+            <text x="40" y="120" font-family="DM Sans, sans-serif" font-size="13" fill="#1A0828" font-weight="600">2x+10</text>
+            <text x="178" y="122" font-family="DM Sans, sans-serif" font-size="13" fill="#1A0828" font-weight="600">x</text>
+            <text x="68" y="55" font-family="DM Sans, sans-serif" font-size="13" fill="#1A0828" font-weight="600">3x</text>
+          </svg>
+        </div>
+        <div class="tri-info">
+          <h4>1. Plantear la ecuación</h4>
+          <div class="formula-pill">suma de ángulos $= 180°$</div>
+          <p style="margin:.6rem 0 .3rem; font-size:.95rem;">
+            $$\begin{aligned}(2x+10) + 3x + x &= 180 \\ 6x + 10 &= 180 \\ 6x &= 170 \\ x &= \tfrac{170}{6} = \tfrac{85}{3}\end{aligned}$$
+          </p>
+          <p style="margin:.3rem 0; font-size:.95rem;">$x = $ <span class="resultado-pill">$\tfrac{85}{3} \approx 28.33°$</span></p>
+
+          <h4 style="margin-top:1.4rem">2. Calcular cada ángulo</h4>
+          <ul class="ang-list">
+            <li>Áng. $x \approx \mathbf{28.33°}$</li>
+            <li>Áng. $3x = 3\left(\tfrac{85}{3}\right) = \tfrac{255}{3} = \mathbf{85°}$</li>
+            <li>Áng. $2x+10 = 2\left(\tfrac{85}{3}\right) + 10 = \tfrac{170}{3} + \tfrac{30}{3} = \tfrac{200}{3} \approx \mathbf{66.66°}$</li>
+          </ul>
+
+          <p style="margin-top:1rem; font-size:.88rem; color:var(--text-2); font-style:italic;">Comprobación: $28.33 + 85 + 66.66 \approx 180°$ ✓</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ EJERCICIOS ══════════ -->
+    <section class="section-block">
+      <div class="sec-head">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+        </div>
+        <h2>Ejercicios</h2>
+      </div>
+      <p style="margin-bottom:1rem; line-height:1.75;">
+        Encontrar los valores de los ángulos de cada triángulo.
+      </p>
+      <div class="ejer-grid">
+
+        <div class="ejer-card">
+          <div class="ejer-card-head">Triángulo 1</div>
+          <div class="ejer-card-body">
+            <svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" class="grafica-svg" role="img" aria-label="Triángulo 1: ángulos 2x, x, 3x-15">
+              <polygon points="20,130 180,130 95,25" fill="none" stroke="#1A0828" stroke-width="2" stroke-linejoin="round"/>
+              <text x="42" y="122" font-family="DM Sans, sans-serif" font-size="13" fill="#1A0828" font-weight="600">2x</text>
+              <text x="85" y="55" font-family="DM Sans, sans-serif" font-size="13" fill="#1A0828" font-weight="600">x</text>
+              <text x="135" y="122" font-family="DM Sans, sans-serif" font-size="13" fill="#1A0828" font-weight="600">3x−15</text>
+            </svg>
+          </div>
+        </div>
+
+        <div class="ejer-card">
+          <div class="ejer-card-head">Triángulo 2</div>
+          <div class="ejer-card-body">
+            <svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" class="grafica-svg" role="img" aria-label="Triángulo 2 isósceles: ángulos x+30, 4x, 4x">
+              <polygon points="50,130 150,130 100,25" fill="none" stroke="#1A0828" stroke-width="2" stroke-linejoin="round"/>
+              <text x="85" y="55" font-family="DM Sans, sans-serif" font-size="13" fill="#1A0828" font-weight="600">x+30</text>
+              <text x="60" y="122" font-family="DM Sans, sans-serif" font-size="13" fill="#1A0828" font-weight="600">4x</text>
+              <text x="128" y="122" font-family="DM Sans, sans-serif" font-size="13" fill="#1A0828" font-weight="600">4x</text>
+            </svg>
+          </div>
+        </div>
+
+        <div class="ejer-card">
+          <div class="ejer-card-head">Triángulo 3</div>
+          <div class="ejer-card-body">
+            <svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" class="grafica-svg" role="img" aria-label="Triángulo 3 rectángulo: ángulos x, 90°, 2x-10">
+              <polygon points="30,130 180,130 30,25" fill="none" stroke="#1A0828" stroke-width="2" stroke-linejoin="round"/>
+              <!-- marca de ángulo recto -->
+              <polyline points="30,118 42,118 42,130" fill="none" stroke="#1A0828" stroke-width="1.5"/>
+              <text x="40" y="48" font-family="DM Sans, sans-serif" font-size="13" fill="#1A0828" font-weight="600">x</text>
+              <text x="130" y="122" font-family="DM Sans, sans-serif" font-size="13" fill="#1A0828" font-weight="600">2x−10</text>
+            </svg>
+          </div>
+        </div>
+
+        <div class="ejer-card">
+          <div class="ejer-card-head">Triángulo 4</div>
+          <div class="ejer-card-body">
+            <svg viewBox="0 0 230 130" xmlns="http://www.w3.org/2000/svg" class="grafica-svg" role="img" aria-label="Triángulo 4 obtuso: ángulos x, 5x-20, 3x">
+              <polygon points="15,55 70,100 215,100" fill="none" stroke="#1A0828" stroke-width="2" stroke-linejoin="round"/>
+              <text x="28" y="60" font-family="DM Sans, sans-serif" font-size="13" fill="#1A0828" font-weight="600">x</text>
+              <text x="90" y="90" font-family="DM Sans, sans-serif" font-size="13" fill="#1A0828" font-weight="600">5x−20</text>
+              <text x="190" y="92" font-family="DM Sans, sans-serif" font-size="13" fill="#1A0828" font-weight="600">3x</text>
+            </svg>
+          </div>
+        </div>
+
+        <div class="ejer-card">
+          <div class="ejer-card-head">Triángulo 5</div>
+          <div class="ejer-card-body">
+            <svg viewBox="0 0 200 130" xmlns="http://www.w3.org/2000/svg" class="grafica-svg" role="img" aria-label="Triángulo 5: ángulos x, 2x, 3x-20">
+              <polygon points="20,110 180,110 95,25" fill="none" stroke="#1A0828" stroke-width="2" stroke-linejoin="round"/>
+              <text x="38" y="102" font-family="DM Sans, sans-serif" font-size="13" fill="#1A0828" font-weight="600">x</text>
+              <text x="85" y="58" font-family="DM Sans, sans-serif" font-size="13" fill="#1A0828" font-weight="600">2x</text>
+              <text x="135" y="102" font-family="DM Sans, sans-serif" font-size="13" fill="#1A0828" font-weight="600">3x−20</text>
+            </svg>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══════════ RESPUESTAS ══════════ -->
+    <section class="section-block">
+      <div class="sec-toggle" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('show');">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <h2>Respuestas</h2>
+        <span class="chev">▼</span>
+      </div>
+      <div class="collapsible">
+
+        <!-- T1 -->
+        <div class="tri-block">
+          <div class="tri-grafica">
+            <svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" class="grafica-svg" role="img" aria-label="Triángulo 1 — respuesta">
+              <polygon points="20,130 180,130 95,25" fill="#FF00AA" fill-opacity="0.10" stroke="#1A0828" stroke-width="2" stroke-linejoin="round"/>
+              <text x="42" y="122" font-family="DM Sans, sans-serif" font-size="13" fill="#1A0828" font-weight="600">2x</text>
+              <text x="85" y="55" font-family="DM Sans, sans-serif" font-size="13" fill="#1A0828" font-weight="600">x</text>
+              <text x="135" y="122" font-family="DM Sans, sans-serif" font-size="13" fill="#1A0828" font-weight="600">3x−15</text>
+            </svg>
+          </div>
+          <div class="tri-info">
+            <h3>Triángulo 1</h3>
+            <h4>1. Plantear la ecuación</h4>
+            <p style="margin:.3rem 0; font-size:.95rem;">
+              $$\begin{aligned} 2x + x + (3x - 15) &= 180 \\ 6x - 15 &= 180 \\ 6x &= 195 \\ x &= \mathbf{32.5°} \end{aligned}$$
+            </p>
+            <h4>2. Calcular cada ángulo</h4>
+            <ul class="ang-list">
+              <li>Áng. $x = \mathbf{32.5°}$</li>
+              <li>Áng. $2x = 2(32.5) = \mathbf{65°}$</li>
+              <li>Áng. $3x-15 = 3(32.5) - 15 = \mathbf{82.5°}$</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- T2 -->
+        <div class="tri-block">
+          <div class="tri-grafica">
+            <svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" class="grafica-svg" role="img" aria-label="Triángulo 2 — respuesta">
+              <polygon points="50,130 150,130 100,25" fill="#FF00AA" fill-opacity="0.10" stroke="#1A0828" stroke-width="2" stroke-linejoin="round"/>
+              <text x="85" y="55" font-family="DM Sans, sans-serif" font-size="13" fill="#1A0828" font-weight="600">x+30</text>
+              <text x="60" y="122" font-family="DM Sans, sans-serif" font-size="13" fill="#1A0828" font-weight="600">4x</text>
+              <text x="128" y="122" font-family="DM Sans, sans-serif" font-size="13" fill="#1A0828" font-weight="600">4x</text>
+            </svg>
+          </div>
+          <div class="tri-info">
+            <h3>Triángulo 2</h3>
+            <h4>1. Plantear la ecuación</h4>
+            <p style="margin:.3rem 0; font-size:.95rem;">
+              $$\begin{aligned} 4x + 4x + (x + 30) &= 180 \\ 9x + 30 &= 180 \\ 9x &= 150 \\ x &= \tfrac{50}{3} \end{aligned}$$
+            </p>
+            <p style="margin:.3rem 0; font-size:.95rem;">$x = $ <span class="resultado-pill">$\tfrac{50}{3} \approx 16.66°$</span></p>
+            <h4>2. Calcular cada ángulo</h4>
+            <ul class="ang-list">
+              <li>Áng. $4x = 4\left(\tfrac{50}{3}\right) = \tfrac{200}{3} \approx \mathbf{66.66°}$</li>
+              <li>Áng. $x+30 = \tfrac{50}{3} + \tfrac{90}{3} = \tfrac{140}{3} \approx \mathbf{46.66°}$</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- T3 -->
+        <div class="tri-block">
+          <div class="tri-grafica">
+            <svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" class="grafica-svg" role="img" aria-label="Triángulo 3 — respuesta">
+              <polygon points="30,130 180,130 30,25" fill="#FF00AA" fill-opacity="0.10" stroke="#1A0828" stroke-width="2" stroke-linejoin="round"/>
+              <polyline points="30,118 42,118 42,130" fill="none" stroke="#1A0828" stroke-width="1.5"/>
+              <text x="40" y="48" font-family="DM Sans, sans-serif" font-size="13" fill="#1A0828" font-weight="600">x</text>
+              <text x="130" y="122" font-family="DM Sans, sans-serif" font-size="13" fill="#1A0828" font-weight="600">2x−10</text>
+            </svg>
+          </div>
+          <div class="tri-info">
+            <h3>Triángulo 3</h3>
+            <h4>1. Plantear la ecuación</h4>
+            <p style="margin:.3rem 0; font-size:.95rem;">
+              $$\begin{aligned} x + (2x - 10) + 90 &= 180 \\ 3x + 80 &= 180 \\ 3x &= 100 \\ x &= \tfrac{100}{3} \end{aligned}$$
+            </p>
+            <p style="margin:.3rem 0; font-size:.95rem;">$x = $ <span class="resultado-pill">$\tfrac{100}{3} \approx 33.33°$</span></p>
+            <h4>2. Calcular cada ángulo</h4>
+            <ul class="ang-list">
+              <li>Áng. $x \approx \mathbf{33.33°}$</li>
+              <li>Áng. recto $= \mathbf{90°}$</li>
+              <li>Áng. $2x-10 = \tfrac{200}{3} - \tfrac{30}{3} = \tfrac{170}{3} \approx \mathbf{56.66°}$</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- T4 -->
+        <div class="tri-block">
+          <div class="tri-grafica">
+            <svg viewBox="0 0 230 130" xmlns="http://www.w3.org/2000/svg" class="grafica-svg" role="img" aria-label="Triángulo 4 — respuesta">
+              <polygon points="15,55 70,100 215,100" fill="#FF00AA" fill-opacity="0.10" stroke="#1A0828" stroke-width="2" stroke-linejoin="round"/>
+              <text x="28" y="60" font-family="DM Sans, sans-serif" font-size="13" fill="#1A0828" font-weight="600">x</text>
+              <text x="90" y="90" font-family="DM Sans, sans-serif" font-size="13" fill="#1A0828" font-weight="600">5x−20</text>
+              <text x="190" y="92" font-family="DM Sans, sans-serif" font-size="13" fill="#1A0828" font-weight="600">3x</text>
+            </svg>
+          </div>
+          <div class="tri-info">
+            <h3>Triángulo 4</h3>
+            <h4>1. Plantear la ecuación</h4>
+            <p style="margin:.3rem 0; font-size:.95rem;">
+              $$\begin{aligned} x + (5x - 20) + 3x &= 180 \\ 9x - 20 &= 180 \\ 9x &= 200 \\ x &= \tfrac{200}{9} \end{aligned}$$
+            </p>
+            <p style="margin:.3rem 0; font-size:.95rem;">$x = $ <span class="resultado-pill">$\tfrac{200}{9} \approx 22.22°$</span></p>
+            <h4>2. Calcular cada ángulo</h4>
+            <ul class="ang-list">
+              <li>Áng. $x \approx \mathbf{22.22°}$</li>
+              <li>Áng. $3x = 3\left(\tfrac{200}{9}\right) = \tfrac{200}{3} \approx \mathbf{66.66°}$</li>
+              <li>Áng. $5x-20 = \tfrac{1000}{9} - \tfrac{180}{9} = \tfrac{820}{9} \approx \mathbf{91.11°}$</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- T5 -->
+        <div class="tri-block">
+          <div class="tri-grafica">
+            <svg viewBox="0 0 200 130" xmlns="http://www.w3.org/2000/svg" class="grafica-svg" role="img" aria-label="Triángulo 5 — respuesta">
+              <polygon points="20,110 180,110 95,25" fill="#FF00AA" fill-opacity="0.10" stroke="#1A0828" stroke-width="2" stroke-linejoin="round"/>
+              <text x="38" y="102" font-family="DM Sans, sans-serif" font-size="13" fill="#1A0828" font-weight="600">x</text>
+              <text x="85" y="58" font-family="DM Sans, sans-serif" font-size="13" fill="#1A0828" font-weight="600">2x</text>
+              <text x="135" y="102" font-family="DM Sans, sans-serif" font-size="13" fill="#1A0828" font-weight="600">3x−20</text>
+            </svg>
+          </div>
+          <div class="tri-info">
+            <h3>Triángulo 5</h3>
+            <h4>1. Plantear la ecuación</h4>
+            <p style="margin:.3rem 0; font-size:.95rem;">
+              $$\begin{aligned} x + 2x + (3x - 20) &= 180 \\ 6x - 20 &= 180 \\ 6x &= 200 \\ x &= \tfrac{100}{3} \end{aligned}$$
+            </p>
+            <p style="margin:.3rem 0; font-size:.95rem;">$x = $ <span class="resultado-pill">$\tfrac{100}{3} \approx 33.33°$</span></p>
+            <h4>2. Calcular cada ángulo</h4>
+            <ul class="ang-list">
+              <li>Áng. $x \approx \mathbf{33.33°}$</li>
+              <li>Áng. $2x = 2\left(\tfrac{100}{3}\right) = \tfrac{200}{3} \approx \mathbf{66.66°}$</li>
+              <li>Áng. $3x-20 = 3\left(\tfrac{100}{3}\right) - 20 = 100 - 20 = \mathbf{80°}$</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══════════ NAVEGACIÓN ══════════ -->
+    <div class="topic-nav-btns">
+      <a href="area-perimetro.html" class="btn-anterior">← Área y perímetro</a>
+      <a href="reglas-exponentes.html" class="btn-siguiente">Reglas de exponentes →</a>
+    </div>
+
+  </main>
+  <script src="../../nav.js"></script>
+  <script src="../../footer.js"></script>
+</body>
+</html>

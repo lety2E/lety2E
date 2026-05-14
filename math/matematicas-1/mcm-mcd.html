@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>mcm y MCD — Matemáticas 1 — LetyMath</title>
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../../favicon.ico">
+  <meta name="description" content="Mínimo Común Múltiplo (mcm) y Máximo Común Divisor (MCD) por descomposición en factores primos." />
+  <link rel="stylesheet" href="../../style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" />
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body, {
+      delimiters: [
+        {left:'$$', right:'$$', display:true},
+        {left:'$', right:'$', display:false}
+      ]
+    });"></script>
+
+  <style>
+    .topic-tag {
+      display: inline-flex; align-items: center; gap: .35rem;
+      padding: .22rem .75rem; border-radius: 99px;
+      background: var(--accent-light); color: var(--accent);
+      font-size: .78rem; font-weight: 700; letter-spacing: .03em;
+      margin-bottom: .55rem;
+    }
+    .topic-tag::before {
+      content: ''; width: 7px; height: 7px; border-radius: 50%;
+      background: var(--accent); display: inline-block;
+    }
+
+    .section-block { margin-bottom: 2.5rem; }
+    .section-block:last-child { margin-bottom: 0; }
+
+    .sec-head { display: flex; align-items: center; gap: .65rem; margin-bottom: 1.1rem; }
+    .sec-head h2 { margin: 0; font-size: 1.2rem; line-height: 1; }
+    .sec-icon {
+      width: 30px; height: 30px; border-radius: 8px;
+      display: grid; place-items: center; flex-shrink: 0;
+      background: var(--accent);
+    }
+    .sec-icon svg { width: 15px; height: 15px; stroke: #fff; fill: none; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+
+    .sec-toggle {
+      display: flex; align-items: center; gap: .65rem;
+      cursor: pointer; user-select: none;
+      padding: .8rem 0; margin: 0 0 .4rem;
+    }
+    .sec-toggle h2 { margin: 0; font-size: 1.2rem; line-height: 1; }
+    .sec-toggle .chev { margin-left: auto; font-size: .75rem; color: var(--text-3); transition: transform .25s; }
+    .sec-toggle.open .chev { transform: rotate(180deg); }
+
+    .collapsible {
+      max-height: 0; overflow: hidden;
+      transition: max-height .4s ease, padding .3s ease;
+      padding: 0;
+    }
+    .collapsible.show { max-height: 30000px; padding: .8rem 0; }
+
+    /* Concepto cards */
+    .concepto-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.2rem;
+    }
+    @media (max-width: 700px) {
+      .concepto-grid { grid-template-columns: 1fr; }
+    }
+    .concepto-card {
+      background: var(--bg-card);
+      border: 1.5px solid var(--border);
+      border-radius: var(--r-md);
+      overflow: hidden;
+    }
+    .concepto-card-head {
+      padding: .55rem .9rem; background: var(--course-1);
+      font-family: var(--font-display); font-size: .95rem; color: #fff; font-weight: 700;
+      text-align: center;
+    }
+    .concepto-card-body { padding: 1rem 1.1rem; font-size: .92rem; line-height: 1.65; }
+    .concepto-card-body p { margin: .35rem 0; }
+    .concepto-card-body p strong { color: var(--M); }
+
+    /* Bloques de ejercicios */
+    .bloques-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2rem; }
+    @media (max-width: 700px) { .bloques-2 { grid-template-columns: 1fr; } }
+    .bloques-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+    @media (max-width: 900px) { .bloques-4 { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 500px) { .bloques-4 { grid-template-columns: 1fr; } }
+
+    .mini-card {
+      background: var(--bg-card); border: 1.5px solid var(--border);
+      border-radius: var(--r-md); overflow: hidden;
+    }
+    .mini-card-head {
+      padding: .4rem .8rem; background: var(--course-1);
+      font-family: var(--font-display); font-size: .85rem; color: #fff; font-weight: 700;
+      text-align: center;
+    }
+    .mini-card-body { padding: .9rem 1.1rem; font-size: .95rem; line-height: 2; }
+    .mini-card-body ul { list-style: none; padding: 0; margin: 0; }
+    .mini-card-body ul li { padding: .15rem 0; }
+    .mini-card-body strong { color: var(--M); font-weight: 700; }
+
+    /* Pills */
+    .resultado-pill {
+      display: inline-block;
+      background: #FFD0E5;
+      padding: .15rem .6rem;
+      border-radius: 99px;
+      font-weight: 700;
+      color: var(--M);
+      border: 1.5px solid #FF8AC0;
+      font-size: .92rem;
+    }
+
+    /* Subtítulo de grupo en respuestas */
+    .grupo-titulo {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      color: var(--accent);
+      font-weight: 700;
+      margin: 1.5rem 0 .8rem;
+      padding-bottom: .35rem;
+      border-bottom: 2px solid var(--accent);
+      display: inline-block;
+    }
+    .grupo-titulo:first-child { margin-top: 0; }
+
+    /* Tabla de factorización */
+    .factor-block {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 1.2rem;
+      align-items: start;
+      padding: 1rem;
+      background: var(--bg-card);
+      border: 1.5px solid var(--border);
+      border-radius: var(--r-md);
+      margin-bottom: 1rem;
+    }
+    @media (max-width: 600px) {
+      .factor-block { grid-template-columns: 1fr; }
+    }
+    .factor-block:last-child { margin-bottom: 0; }
+
+    .factor-table {
+      border-collapse: collapse;
+      font-family: var(--font-mono, monospace);
+      font-size: .98rem;
+      color: var(--text);
+    }
+    .factor-table td {
+      padding: .25rem .7rem;
+      text-align: center;
+      min-width: 2.5rem;
+    }
+    .factor-table td.divider {
+      border-left: 2px solid var(--M);
+      color: var(--M);
+      font-weight: 700;
+    }
+    .factor-table tr td { border-bottom: 1px dashed var(--border); }
+    .factor-table tr:last-child td { border-bottom: none; }
+
+    .factor-resultado {
+      align-self: center;
+      font-size: .95rem;
+      line-height: 2;
+    }
+    .factor-resultado .ej-label {
+      font-weight: 700; color: var(--course-1);
+      font-family: var(--font-display); font-size: 1rem;
+      display: block; margin-bottom: .35rem;
+    }
+
+    /* Navegación */
+    .topic-nav-btns {
+      display: flex; justify-content: space-between; gap: 1rem;
+      margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border);
+    }
+    .btn-anterior, .btn-siguiente {
+      display: inline-flex; align-items: center; gap: .5rem;
+      padding: .65rem 1.4rem; border-radius: 99px;
+      font-weight: 700; font-size: .9rem; transition: background .2s, transform .18s;
+    }
+    .btn-anterior {
+      background: transparent; color: var(--accent);
+      border: 2px solid var(--accent);
+    }
+    .btn-anterior:hover { background: var(--accent-light); transform: translateX(-3px); }
+    .btn-siguiente { background: var(--accent); color: #fff; }
+    .btn-siguiente:hover { background: var(--M); color: #fff; transform: translateX(3px); }
+  </style>
+</head>
+<body data-section="math">
+  <main class="topic-content">
+
+    <header class="topic-header">
+      <p class="breadcrumb">
+        <a href="../index.html">Inicio</a> ›
+        <a href="index.html">Matemáticas 1</a> ›
+        mcm y MCD
+      </p>
+      <div class="topic-tag">Matemáticas 1 · Tema 11</div>
+      <h1>mcm y MCD</h1>
+      <p style="font-size:1.05rem; color:var(--text-2); margin-top:.4rem; font-style:italic;">Mínimo común múltiplo y máximo común divisor por descomposición en factores primos</p>
+    </header>
+
+    <!-- ══════════ CONCEPTOS ══════════ -->
+    <section class="section-block">
+      <div class="sec-head">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+        </div>
+        <h2>Conceptos</h2>
+      </div>
+      <div class="concepto-grid">
+        <div class="concepto-card">
+          <div class="concepto-card-head">mcm — mínimo común múltiplo</div>
+          <div class="concepto-card-body">
+            <p>El número <strong>más pequeño</strong> (distinto de cero) que es múltiplo de todos los números del grupo.</p>
+            <p style="font-style:italic; color:var(--text-2);">Se descompone hasta llegar a $1$ en todas las columnas.</p>
+          </div>
+        </div>
+        <div class="concepto-card">
+          <div class="concepto-card-head">MCD — máximo común divisor</div>
+          <div class="concepto-card-body">
+            <p>El <strong>mayor número</strong> que divide exactamente a todos los números del grupo.</p>
+            <p style="font-style:italic; color:var(--text-2);">Se descompone solo por factores que dividan a <strong>todos</strong> los números a la vez.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ EJEMPLOS ══════════ -->
+    <section class="section-block">
+      <div class="sec-head">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        </div>
+        <h2>Ejemplos</h2>
+      </div>
+
+      <div class="factor-block">
+        <table class="factor-table">
+          <tr><td>10</td><td>18</td><td>25</td><td class="divider">2</td></tr>
+          <tr><td>5</td><td>9</td><td>25</td><td class="divider">3</td></tr>
+          <tr><td>5</td><td>3</td><td>25</td><td class="divider">3</td></tr>
+          <tr><td>5</td><td>1</td><td>25</td><td class="divider">5</td></tr>
+          <tr><td>1</td><td>1</td><td>5</td><td class="divider">5</td></tr>
+          <tr><td>1</td><td>1</td><td>1</td><td class="divider"></td></tr>
+        </table>
+        <div class="factor-resultado">
+          <span class="ej-label">mcm (10, 18, 25)</span>
+          $\text{mcm} = 2 \cdot 3^2 \cdot 5^2$<br>
+          $\text{mcm} = 2 \cdot 9 \cdot 25$<br>
+          $\text{mcm} = $ <span class="resultado-pill">$450$</span>
+        </div>
+      </div>
+
+      <div class="factor-block">
+        <table class="factor-table">
+          <tr><td>120</td><td>90</td><td>180</td><td class="divider">2</td></tr>
+          <tr><td>60</td><td>45</td><td>90</td><td class="divider">3</td></tr>
+          <tr><td>20</td><td>15</td><td>30</td><td class="divider">5</td></tr>
+          <tr><td>4</td><td>3</td><td>6</td><td class="divider"></td></tr>
+        </table>
+        <div class="factor-resultado">
+          <span class="ej-label">MCD (120, 90, 180)</span>
+          $\text{MCD} = 2 \cdot 3 \cdot 5$<br>
+          $\text{MCD} = $ <span class="resultado-pill">$30$</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ EJERCICIOS ══════════ -->
+    <section class="section-block">
+      <div class="sec-head">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+        </div>
+        <h2>Ejercicios</h2>
+      </div>
+      <p style="margin-bottom:1rem; line-height:1.75;">Encuentra el mcm o MCD según se indique.</p>
+      <div class="bloques-2">
+        <div class="mini-card">
+          <div class="mini-card-head">mcm</div>
+          <div class="mini-card-body">
+            <ul>
+              <li>mcm $(40, 50, 15)$</li>
+              <li>mcm $(18, 45, 20)$</li>
+              <li>mcm $(40, 75, 9)$</li>
+              <li>mcm $(10, 14, 20)$</li>
+            </ul>
+          </div>
+        </div>
+        <div class="mini-card">
+          <div class="mini-card-head">MCD</div>
+          <div class="mini-card-body">
+            <ul>
+              <li>MCD $(300, 60, 40)$</li>
+              <li>MCD $(250, 100, 75)$</li>
+              <li>MCD $(180, 72, 60)$</li>
+              <li>MCD $(100, 150, 300)$</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ RESPUESTAS ══════════ -->
+    <section class="section-block">
+      <div class="sec-toggle" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('show');">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <h2>Respuestas</h2>
+        <span class="chev">▼</span>
+      </div>
+      <div class="collapsible">
+
+        <h3 class="grupo-titulo">mcm</h3>
+
+        <div class="factor-block">
+          <table class="factor-table">
+            <tr><td>40</td><td>50</td><td>15</td><td class="divider">2</td></tr>
+            <tr><td>20</td><td>25</td><td>15</td><td class="divider">2</td></tr>
+            <tr><td>10</td><td>25</td><td>15</td><td class="divider">2</td></tr>
+            <tr><td>5</td><td>25</td><td>15</td><td class="divider">3</td></tr>
+            <tr><td>5</td><td>25</td><td>5</td><td class="divider">5</td></tr>
+            <tr><td>1</td><td>5</td><td>1</td><td class="divider">5</td></tr>
+            <tr><td>1</td><td>1</td><td>1</td><td class="divider"></td></tr>
+          </table>
+          <div class="factor-resultado">
+            <span class="ej-label">mcm $(40, 50, 15)$</span>
+            $\text{mcm} = 2^3 \cdot 3 \cdot 5^2 = $ <span class="resultado-pill">$600$</span>
+          </div>
+        </div>
+
+        <div class="factor-block">
+          <table class="factor-table">
+            <tr><td>18</td><td>45</td><td>20</td><td class="divider">2</td></tr>
+            <tr><td>9</td><td>45</td><td>10</td><td class="divider">2</td></tr>
+            <tr><td>9</td><td>45</td><td>5</td><td class="divider">3</td></tr>
+            <tr><td>3</td><td>15</td><td>5</td><td class="divider">3</td></tr>
+            <tr><td>1</td><td>5</td><td>5</td><td class="divider">5</td></tr>
+            <tr><td>1</td><td>1</td><td>1</td><td class="divider"></td></tr>
+          </table>
+          <div class="factor-resultado">
+            <span class="ej-label">mcm $(18, 45, 20)$</span>
+            $\text{mcm} = 2^2 \cdot 3^2 \cdot 5 = $ <span class="resultado-pill">$180$</span>
+          </div>
+        </div>
+
+        <div class="factor-block">
+          <table class="factor-table">
+            <tr><td>40</td><td>75</td><td>9</td><td class="divider">2</td></tr>
+            <tr><td>20</td><td>75</td><td>9</td><td class="divider">2</td></tr>
+            <tr><td>10</td><td>75</td><td>9</td><td class="divider">2</td></tr>
+            <tr><td>5</td><td>75</td><td>9</td><td class="divider">3</td></tr>
+            <tr><td>5</td><td>25</td><td>3</td><td class="divider">3</td></tr>
+            <tr><td>5</td><td>25</td><td>1</td><td class="divider">5</td></tr>
+            <tr><td>1</td><td>5</td><td>1</td><td class="divider">5</td></tr>
+            <tr><td>1</td><td>1</td><td>1</td><td class="divider"></td></tr>
+          </table>
+          <div class="factor-resultado">
+            <span class="ej-label">mcm $(40, 75, 9)$</span>
+            $\text{mcm} = 2^3 \cdot 3^2 \cdot 5^2 = $ <span class="resultado-pill">$1{,}800$</span>
+          </div>
+        </div>
+
+        <div class="factor-block">
+          <table class="factor-table">
+            <tr><td>10</td><td>14</td><td>20</td><td class="divider">2</td></tr>
+            <tr><td>5</td><td>7</td><td>10</td><td class="divider">2</td></tr>
+            <tr><td>5</td><td>7</td><td>5</td><td class="divider">5</td></tr>
+            <tr><td>1</td><td>7</td><td>1</td><td class="divider">7</td></tr>
+            <tr><td>1</td><td>1</td><td>1</td><td class="divider"></td></tr>
+          </table>
+          <div class="factor-resultado">
+            <span class="ej-label">mcm $(10, 14, 20)$</span>
+            $\text{mcm} = 2^2 \cdot 5 \cdot 7 = $ <span class="resultado-pill">$140$</span>
+          </div>
+        </div>
+
+        <h3 class="grupo-titulo">MCD</h3>
+
+        <div class="factor-block">
+          <table class="factor-table">
+            <tr><td>300</td><td>60</td><td>40</td><td class="divider">2</td></tr>
+            <tr><td>150</td><td>30</td><td>20</td><td class="divider">2</td></tr>
+            <tr><td>75</td><td>15</td><td>10</td><td class="divider">5</td></tr>
+            <tr><td>15</td><td>3</td><td>2</td><td class="divider"></td></tr>
+          </table>
+          <div class="factor-resultado">
+            <span class="ej-label">MCD $(300, 60, 40)$</span>
+            $\text{MCD} = 2^2 \cdot 5 = $ <span class="resultado-pill">$20$</span>
+          </div>
+        </div>
+
+        <div class="factor-block">
+          <table class="factor-table">
+            <tr><td>250</td><td>100</td><td>75</td><td class="divider">5</td></tr>
+            <tr><td>50</td><td>20</td><td>15</td><td class="divider">5</td></tr>
+            <tr><td>10</td><td>4</td><td>3</td><td class="divider"></td></tr>
+          </table>
+          <div class="factor-resultado">
+            <span class="ej-label">MCD $(250, 100, 75)$</span>
+            $\text{MCD} = 5^2 = $ <span class="resultado-pill">$25$</span>
+          </div>
+        </div>
+
+        <div class="factor-block">
+          <table class="factor-table">
+            <tr><td>180</td><td>72</td><td>60</td><td class="divider">2</td></tr>
+            <tr><td>90</td><td>36</td><td>30</td><td class="divider">2</td></tr>
+            <tr><td>45</td><td>18</td><td>15</td><td class="divider">3</td></tr>
+            <tr><td>15</td><td>6</td><td>5</td><td class="divider"></td></tr>
+          </table>
+          <div class="factor-resultado">
+            <span class="ej-label">MCD $(180, 72, 60)$</span>
+            $\text{MCD} = 2^2 \cdot 3 = $ <span class="resultado-pill">$12$</span>
+          </div>
+        </div>
+
+        <div class="factor-block">
+          <table class="factor-table">
+            <tr><td>100</td><td>150</td><td>300</td><td class="divider">2</td></tr>
+            <tr><td>50</td><td>75</td><td>150</td><td class="divider">5</td></tr>
+            <tr><td>10</td><td>15</td><td>30</td><td class="divider">5</td></tr>
+            <tr><td>2</td><td>3</td><td>6</td><td class="divider"></td></tr>
+          </table>
+          <div class="factor-resultado">
+            <span class="ej-label">MCD $(100, 150, 300)$</span>
+            $\text{MCD} = 2 \cdot 5^2 = $ <span class="resultado-pill">$50$</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══════════ EJERCICIOS EXTRA ══════════ -->
+    <section class="section-block">
+      <div class="sec-toggle" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('show');">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+        </div>
+        <h2>Ejercicios extra</h2>
+        <span class="chev">▼</span>
+      </div>
+      <div class="collapsible">
+        <div class="bloques-2">
+          <div class="mini-card">
+            <div class="mini-card-head">Bloque A · mcm</div>
+            <div class="mini-card-body">
+              <ul>
+                <li>mcm $(12, 15, 20)$</li>
+                <li>mcm $(6, 8, 10)$</li>
+                <li>mcm $(45, 54, 60)$</li>
+                <li>mcm $(24, 36, 48)$</li>
+              </ul>
+            </div>
+          </div>
+          <div class="mini-card">
+            <div class="mini-card-head">Bloque B · MCD</div>
+            <div class="mini-card-body">
+              <ul>
+                <li>MCD $(48, 72, 84)$</li>
+                <li>MCD $(105, 120, 150)$</li>
+                <li>MCD $(32, 64, 96)$</li>
+                <li>MCD $(200, 400, 600)$</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ NAVEGACIÓN ══════════ -->
+    <div class="topic-nav-btns">
+      <a href="reglas-exponentes.html" class="btn-anterior">← Reglas de exponentes</a>
+      <span></span>
+    </div>
+
+  </main>
+  <script src="../../nav.js"></script>
+  <script src="../../footer.js"></script>
+</body>
+</html>
