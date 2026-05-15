@@ -1624,7 +1624,7 @@ body[data-section="math"] .katex svg {
 @media (max-width: 600px) {
   body[data-section="math"] .ejemplo-block  { padding: 1.4rem 1rem; }
   body[data-section="math"] .ejemplo-item   { font-size: .95rem; }
-  body[data-section="math"] .mini-card-body { padding: .85rem .9rem; font-size: .85rem; line-height: 1.95; }
+  body[data-section="math"] .mini-card-body { padding: .85rem .9rem; font-size: .85rem; line-height: 2.2; }
   body[data-section="math"] .mini-card-head { font-size: .82rem; padding: .4rem .75rem; }
 
   body[data-section="math"] .topic-header h1 { font-size: 1.85rem; }
@@ -1635,6 +1635,12 @@ body[data-section="math"] .katex svg {
   body[data-section="math"] .mini-card-body .katex-display { font-size: .85em; }
   body[data-section="math"] .ejemplo-item   .katex         { font-size: .92em; }
   body[data-section="math"] .ejemplo-item   .katex-display { font-size: .88em; }
+
+  /* Las filas de ejercicio (.ej-line, .sol) deben tener line-height suficiente
+     para que el vinculum (barra superior) de \sqrt{\dfrac{}{}} no choque con
+     la fila anterior. 2.4 funciona como mínimo radical-safe. */
+  body[data-section="math"] .mini-card-body .ej-line,
+  body[data-section="math"] .mini-card-body .sol { line-height: 2.4; }
 
   /* Tablas dentro de temas math: nunca exceden el ancho del contenedor.
      Cubre .factor-table, .tabla-x-y, .guide-table, .apunte-table, .rep-table. */
@@ -1665,19 +1671,28 @@ body[data-section="math"] .katex svg {
   body[data-section="math"] .mini-card-body .katex-display { font-size: .76em; }
   body[data-section="math"] .ejemplo-item   .katex         { font-size: .85em; }
   body[data-section="math"] .ejemplo-item   .katex-display { font-size: .8em; }
+  /* Mantén line-height radical-safe incluso en móvil estándar */
+  body[data-section="math"] .mini-card-body .ej-line,
+  body[data-section="math"] .mini-card-body .sol { line-height: 2.3; }
 }
 
 /* Pantallas muy angostas (iPhone SE / mini, ~360–390px):
    reducción más agresiva para fracciones anidadas (\dfrac dentro de
    \dfrac) y ecuaciones largas con varias operaciones. */
 @media (max-width: 400px) {
-  body[data-section="math"] .mini-card-body { padding: .75rem .7rem; font-size: .8rem; }
+  body[data-section="math"] .mini-card-body { padding: .75rem .65rem; font-size: .8rem; }
   body[data-section="math"] .mini-card-body .katex         { font-size: .74em; }
   body[data-section="math"] .mini-card-body .katex-display { font-size: .7em; }
   body[data-section="math"] .ejemplo-block  { padding: 1.2rem .8rem; }
   body[data-section="math"] .ejemplo-item   { font-size: .9rem; }
   body[data-section="math"] .ejemplo-item   .katex         { font-size: .78em; }
   body[data-section="math"] .ejemplo-item   .katex-display { font-size: .74em; }
+  body[data-section="math"] .mini-card-body .ej-line,
+  body[data-section="math"] .mini-card-body .sol { line-height: 2.2; }
+
+  /* Tag de tema (Mat 2 · Tema 1) más chico para que no sobresalga */
+  body[data-section="math"] .topic-tag { font-size: .72rem; padding: .2rem .65rem; }
+  body[data-section="math"] .topic-header h1 { font-size: 1.7rem; }
 }
 
 /* ── Indicador sutil de scroll horizontal (técnica "scrolling

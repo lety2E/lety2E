@@ -178,6 +178,48 @@ KaTeX: ver template en cualquier tema existente — patrón estándar `katex@0.1
 
 ---
 
+## 📱 Mobile-safety (muchos alumnos lo ven en celular — IMPORTANTE)
+
+**Regla núm. 1**: cada renglón de ejercicio dentro de `.mini-card-body` debe ser un bloque (`<div class="ej-line">` o `<div class="sol">`), **NUNCA** `$...$<br>$...$<br>`. Con `<br>` y line-height ajustado por la media query global, las raíces tipo `\sqrt{\dfrac{a}{b}}` se traslapan con la fila anterior (la barra superior del √ queda oculta tras la fila previa).
+
+✅ **Patrón correcto** para ejercicios:
+```html
+<div class="mini-card-body">
+  <div class="ej-line">$-\dfrac{4}{8} + \dfrac{1}{4} =$</div>
+  <div class="ej-line">$\sqrt{\dfrac{25}{36}} =$</div>
+</div>
+```
+
+CSS en el `<style>` del tema:
+```css
+.mini-card-body { line-height: 1.6; }
+.mini-card-body .ej-line {
+  padding: .6rem 0;
+  border-bottom: 1px solid var(--border-s);
+  line-height: 2.2; /* radical-safe */
+}
+.mini-card-body .ej-line:last-child { border-bottom: none; padding-bottom: .25rem; }
+.mini-card-body .ej-line:first-child { padding-top: .25rem; }
+```
+
+❌ **Anti-patrón** (causa raíces invisibles y cards sobresaliendo en móvil):
+```html
+<div class="mini-card-body" style="line-height: 4.2">  <!-- ¡NO! -->
+  $\sqrt{\dfrac{25}{36}} =$<br>
+  $\dfrac{3}{4} \div \dfrac{-2}{6} =$<br>
+</div>
+```
+
+**Por qué**: la media query global en `style.css` hace `body[data-section="math"] .mini-card-body { line-height: 2.2 }` en móvil. Eso es suficiente para `$$...$$` y filas simples, pero `\sqrt{\dfrac{}{}}` necesita aún más altura. Por eso `.ej-line`/`.sol` traen su propia `line-height: 2.4` radical-safe (declarada también globalmente para garantizarlo en todas las páginas).
+
+**Antes de commit, verificar en viewport 390×844 (iPhone 12) y 360×800 (Android medio)**:
+- Las cards no se salen del contenedor
+- Cada `\sqrt` muestra su barra superior completa
+- Las fracciones no se traslapan verticalmente
+- El topic-tag y el `<h1>` caben sin overflow horizontal
+
+---
+
 ## 🚢 Deploy
 
 ```bash

@@ -103,7 +103,7 @@
     }
     .mini-card-body {
       padding: .8rem 1rem;
-      font-size: .9rem; line-height: 4.2; color: var(--text);
+      font-size: .9rem; line-height: 1.6; color: var(--text);
       text-align: center;
     }
     .mini-card-body.left { text-align: left; }
@@ -117,6 +117,18 @@
       border-bottom: none;
     }
     .mini-card-body strong { color: var(--M); font-weight: 700; }
+
+    /* ── Fila de ejercicio (bloque para fracciones anidadas / raíces) ── */
+    .mini-card-body .ej-line {
+      padding: .7rem 0;
+      border-bottom: 1px solid var(--border-s);
+      line-height: 2.6; /* generoso por fracciones compuestas tipo dfrac sobre dfrac */
+    }
+    .mini-card-body .ej-line:last-child {
+      border-bottom: none;
+      padding-bottom: .25rem;
+    }
+    .mini-card-body .ej-line:first-child { padding-top: .25rem; }
 
     /* ── Espaciado en procedimientos ── */
     .mini-card-body .katex-display {
@@ -258,40 +270,40 @@
         <div class="mini-card">
           <div class="mini-card-head">Bloque 1</div>
           <div class="mini-card-body">
-            $\dfrac{1}{4}-\dfrac{6}{5}+\dfrac{6}{4}+\dfrac{3}{5}-\dfrac{7}{10}=$<br>
-            $\left(\dfrac{1}{2}\right)^3-4\left(\dfrac{3}{2}-\dfrac{5}{6}\right)-\dfrac{1}{4}=$<br>
-            $\dfrac{2}{3}\left[\dfrac{1}{2}+4\left(3-\dfrac{2}{5}\right)\right]=$<br>
-            $\dfrac{\dfrac{3}{5}\left[\dfrac{1}{2}-4\right]^2}{\dfrac{3}{2}-2\left(\dfrac{1}{6}\right)}=$
+            <div class="ej-line">$\dfrac{1}{4}-\dfrac{6}{5}+\dfrac{6}{4}+\dfrac{3}{5}-\dfrac{7}{10}=$</div>
+            <div class="ej-line">$\left(\dfrac{1}{2}\right)^3-4\left(\dfrac{3}{2}-\dfrac{5}{6}\right)-\dfrac{1}{4}=$</div>
+            <div class="ej-line">$\dfrac{2}{3}\left[\dfrac{1}{2}+4\left(3-\dfrac{2}{5}\right)\right]=$</div>
+            <div class="ej-line">$\dfrac{\dfrac{3}{5}\left[\dfrac{1}{2}-4\right]^2}{\dfrac{3}{2}-2\left(\dfrac{1}{6}\right)}=$</div>
           </div>
         </div>
 
         <div class="mini-card">
           <div class="mini-card-head">Bloque 2</div>
           <div class="mini-card-body">
-            $-\dfrac{2}{4}+\dfrac{6}{3}-\dfrac{8}{4}-\dfrac{7}{3}+\dfrac{1}{6}=$<br>
-            $\left(\dfrac{2}{5}\right)^2-\dfrac{3}{5}-4\left(\dfrac{1}{2}-3\right)=$<br>
-            $-\dfrac{2}{3}\left[\dfrac{4}{5}-6\left(2-\dfrac{1}{3}\right)\right]=$<br>
-            $\dfrac{\dfrac{5}{3}\left[\dfrac{1}{3}-2\right]^2}{\dfrac{1}{5}-3\left(\dfrac{2}{6}\right)}=$
+            <div class="ej-line">$-\dfrac{2}{4}+\dfrac{6}{3}-\dfrac{8}{4}-\dfrac{7}{3}+\dfrac{1}{6}=$</div>
+            <div class="ej-line">$\left(\dfrac{2}{5}\right)^2-\dfrac{3}{5}-4\left(\dfrac{1}{2}-3\right)=$</div>
+            <div class="ej-line">$-\dfrac{2}{3}\left[\dfrac{4}{5}-6\left(2-\dfrac{1}{3}\right)\right]=$</div>
+            <div class="ej-line">$\dfrac{\dfrac{5}{3}\left[\dfrac{1}{3}-2\right]^2}{\dfrac{1}{5}-3\left(\dfrac{2}{6}\right)}=$</div>
           </div>
         </div>
 
         <div class="mini-card">
           <div class="mini-card-head">Bloque 3</div>
           <div class="mini-card-body">
-            $-\dfrac{8}{3}-\dfrac{2}{3}+\dfrac{7}{4}-\dfrac{9}{4}-\dfrac{3}{15}=$<br>
-            $\dfrac{2}{3}-\left(\dfrac{1}{4}\right)^2-3\left(-\dfrac{1}{2}-\dfrac{3}{4}\right)=$<br>
-            $-\dfrac{4}{5}\left[-\dfrac{2}{3}-\dfrac{2}{5}\left(\dfrac{3}{4}+1\right)\right]=$<br>
-            $\dfrac{\dfrac{3}{4}\left[\dfrac{1}{5}-3\right]^2}{\dfrac{5}{2}-5\left(\dfrac{2}{4}\right)}=$
+            <div class="ej-line">$-\dfrac{8}{3}-\dfrac{2}{3}+\dfrac{7}{4}-\dfrac{9}{4}-\dfrac{3}{15}=$</div>
+            <div class="ej-line">$\dfrac{2}{3}-\left(\dfrac{1}{4}\right)^2-3\left(-\dfrac{1}{2}-\dfrac{3}{4}\right)=$</div>
+            <div class="ej-line">$-\dfrac{4}{5}\left[-\dfrac{2}{3}-\dfrac{2}{5}\left(\dfrac{3}{4}+1\right)\right]=$</div>
+            <div class="ej-line">$\dfrac{\dfrac{3}{4}\left[\dfrac{1}{5}-3\right]^2}{\dfrac{5}{2}-5\left(\dfrac{2}{4}\right)}=$</div>
           </div>
         </div>
 
         <div class="mini-card">
           <div class="mini-card-head">Bloque 4</div>
           <div class="mini-card-body">
-            $\dfrac{2}{6}-\dfrac{3}{5}+\dfrac{4}{2}-\dfrac{3}{5}-\dfrac{1}{2}=$<br>
-            $\dfrac{3}{4}-\dfrac{2}{5}\left(\dfrac{1}{3}-\dfrac{4}{6}\right)+\left(\dfrac{2}{3}\right)^2=$<br>
-            $\dfrac{6}{3}\left[4-5\left(-\dfrac{3}{2}-2\right)\right]=$<br>
-            $\dfrac{-\dfrac{5}{6}\left[\dfrac{1}{2}-5\right]^2}{\dfrac{3}{4}-5\left(\dfrac{1}{10}\right)}=$
+            <div class="ej-line">$\dfrac{2}{6}-\dfrac{3}{5}+\dfrac{4}{2}-\dfrac{3}{5}-\dfrac{1}{2}=$</div>
+            <div class="ej-line">$\dfrac{3}{4}-\dfrac{2}{5}\left(\dfrac{1}{3}-\dfrac{4}{6}\right)+\left(\dfrac{2}{3}\right)^2=$</div>
+            <div class="ej-line">$\dfrac{6}{3}\left[4-5\left(-\dfrac{3}{2}-2\right)\right]=$</div>
+            <div class="ej-line">$\dfrac{-\dfrac{5}{6}\left[\dfrac{1}{2}-5\right]^2}{\dfrac{3}{4}-5\left(\dfrac{1}{10}\right)}=$</div>
           </div>
         </div>
 
