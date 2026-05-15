@@ -1612,10 +1612,12 @@ body[data-section="math"] .mini-card-body svg,
 body[data-section="math"] .ejemplo-block  svg {
   max-width: 100%;
 }
-/* Asegura que KaTeX no herede ningún height extraño */
+/* KaTeX renderea el surd √ con un SVG que usa preserveAspectRatio="none"
+   y altura inline en em. Sólo le quitamos el max-width: 100% (porque
+   los SVGs del surd suelen tener width en em y necesitan poder crecer);
+   NUNCA tocar height — colapsaría la casilla de la raíz. */
 body[data-section="math"] .katex svg {
   max-width: none;
-  height: unset;
 }
 
 /* Refinos móvil: respiración interna + tipografía un toque
