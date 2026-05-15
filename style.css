@@ -1615,6 +1615,13 @@ body[data-section="relatos"].relato-morado .topic-header h1 {
 
   .topic-header h1 { font-size: 1.85rem; }
 
+  /* Achicar las ecuaciones KaTeX para que el renglón completo
+     se vea sin necesidad de scroll horizontal. */
+  .mini-card-body .katex         { font-size: .9em; }
+  .mini-card-body .katex-display { font-size: .85em; }
+  .ejemplo-item   .katex         { font-size: .92em; }
+  .ejemplo-item   .katex-display { font-size: .88em; }
+
   /* Botones prev/next se apilan en pantallas muy angostas. */
   .topic-nav-btns {
     flex-direction: column-reverse;
@@ -1625,4 +1632,16 @@ body[data-section="relatos"].relato-morado .topic-header h1 {
     justify-content: center;
     width: 100%;
   }
+}
+
+/* Pantallas muy angostas (iPhone SE / mini, ~375px o menos):
+   reducir un poco más para que las ecuaciones largas quepan. */
+@media (max-width: 400px) {
+  .mini-card-body { padding: .75rem .7rem; font-size: .8rem; }
+  .mini-card-body .katex         { font-size: .82em; }
+  .mini-card-body .katex-display { font-size: .78em; }
+  .ejemplo-block  { padding: 1.2rem .8rem; }
+  .ejemplo-item   { font-size: .9rem; }
+  .ejemplo-item   .katex         { font-size: .85em; }
+  .ejemplo-item   .katex-display { font-size: .82em; }
 }
