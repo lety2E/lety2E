@@ -1559,28 +1559,33 @@ body[data-section="relatos"].relato-morado .topic-header h1 {
 
 /* ================================================
    MATH TOPICS — Fixes de visualización en móvil
-   Aplica a páginas de tema bajo math/ que usan
-   .mini-card, .ejemplo-block, .bloques-2/3 y KaTeX.
+   Aplica SOLO a páginas con body[data-section="math"]
+   que usan .mini-card, .ejemplo-block, .bloques-2/3 y KaTeX.
    ------------------------------------------------
-   Problema raíz: el default `min-width: auto` en
-   items de grid permite que ecuaciones largas
-   (KaTeX inline o display) los hagan crecer más allá
-   del ancho de su columna y se salgan del fondo
-   blanco de la tarjeta en pantallas angostas.
+   IMPORTANTE: Todos los selectores van precedidos por
+   body[data-section="math"] para ganarle en especificidad
+   a los <style> inline de cada archivo de tema (que se
+   cargan DESPUÉS de style.css y sobrescribirían reglas
+   menos específicas).
+   ------------------------------------------------
+   Problema raíz: el default `min-width: auto` en items
+   de grid permite que ecuaciones largas (KaTeX inline
+   o display) los hagan crecer más allá del ancho de su
+   columna y se salgan del fondo blanco de la tarjeta.
    ================================================ */
 
 /* Que cada celda del grid respete el ancho de su columna. */
-.bloques-2 > *,
-.bloques-3 > *,
-.ejemplo-grid > * {
+body[data-section="math"] .bloques-2 > *,
+body[data-section="math"] .bloques-3 > *,
+body[data-section="math"] .ejemplo-grid > * {
   min-width: 0;
 }
 
 /* Display math ($$...$$) → scroll horizontal interno
    en vez de desbordar la tarjeta. */
-.ejemplo-block .katex-display,
-.ejemplo-item  .katex-display,
-.mini-card-body .katex-display {
+body[data-section="math"] .ejemplo-block .katex-display,
+body[data-section="math"] .ejemplo-item  .katex-display,
+body[data-section="math"] .mini-card-body .katex-display {
   overflow-x: auto;
   overflow-y: hidden;
   padding: .35em .15em;
@@ -1591,67 +1596,88 @@ body[data-section="relatos"].relato-morado .topic-header h1 {
 /* Inline math ($...$) muy ancho hace scroll dentro
    del cuerpo de la card (que ya tiene overflow:hidden,
    así que el scroll queda contenido). */
-.mini-card-body,
-.ejemplo-item {
+body[data-section="math"] .mini-card-body,
+body[data-section="math"] .ejemplo-item {
   overflow-x: auto;
 }
 
 /* SVG y media dentro de tarjetas → siempre dentro del ancho. */
-.mini-card-body img,
-.mini-card-body svg,
-.ejemplo-block  img,
-.ejemplo-block  svg {
+body[data-section="math"] .mini-card-body img,
+body[data-section="math"] .mini-card-body svg,
+body[data-section="math"] .ejemplo-block  img,
+body[data-section="math"] .ejemplo-block  svg {
   max-width: 100%;
   height: auto;
 }
 
 /* Refinos móvil: respiración interna + tipografía un toque
-   menor para que las ecuaciones quepan más holgadas. */
+   menor para que las ecuaciones quepan más holgadas.
+   Escalado en 3 pasos para adaptarse del iPhone SE al Pro Max. */
 @media (max-width: 600px) {
-  .ejemplo-block  { padding: 1.4rem 1rem; }
-  .ejemplo-item   { font-size: .95rem; }
-  .mini-card-body { padding: .85rem .9rem; font-size: .85rem; line-height: 1.95; }
-  .mini-card-head { font-size: .82rem; padding: .4rem .75rem; }
+  body[data-section="math"] .ejemplo-block  { padding: 1.4rem 1rem; }
+  body[data-section="math"] .ejemplo-item   { font-size: .95rem; }
+  body[data-section="math"] .mini-card-body { padding: .85rem .9rem; font-size: .85rem; line-height: 1.95; }
+  body[data-section="math"] .mini-card-head { font-size: .82rem; padding: .4rem .75rem; }
 
-  .topic-header h1 { font-size: 1.85rem; }
+  body[data-section="math"] .topic-header h1 { font-size: 1.85rem; }
 
-  /* Achicar las ecuaciones KaTeX para que el renglón completo
+  /* Achicar ecuaciones KaTeX para que el renglón completo
      se vea sin necesidad de scroll horizontal. */
-  .mini-card-body .katex         { font-size: .9em; }
-  .mini-card-body .katex-display { font-size: .85em; }
-  .ejemplo-item   .katex         { font-size: .92em; }
-  .ejemplo-item   .katex-display { font-size: .88em; }
+  body[data-section="math"] .mini-card-body .katex         { font-size: .9em; }
+  body[data-section="math"] .mini-card-body .katex-display { font-size: .85em; }
+  body[data-section="math"] .ejemplo-item   .katex         { font-size: .92em; }
+  body[data-section="math"] .ejemplo-item   .katex-display { font-size: .88em; }
+
+  /* Tablas dentro de temas math: nunca exceden el ancho del contenedor.
+     Cubre .factor-table, .tabla-x-y, .guide-table, .apunte-table, .rep-table. */
+  body[data-section="math"] .topic-content table {
+    max-width: 100%;
+    table-layout: auto;
+    word-break: break-word;
+  }
+  body[data-section="math"] .topic-content table .katex {
+    font-size: .88em;
+  }
 
   /* Botones prev/next se apilan en pantallas muy angostas. */
-  .topic-nav-btns {
+  body[data-section="math"] .topic-nav-btns {
     flex-direction: column-reverse;
     gap: .75rem;
   }
-  .topic-nav-btns .btn-anterior,
-  .topic-nav-btns .btn-siguiente {
+  body[data-section="math"] .topic-nav-btns .btn-anterior,
+  body[data-section="math"] .topic-nav-btns .btn-siguiente {
     justify-content: center;
     width: 100%;
   }
 }
 
-/* Pantallas muy angostas (iPhone SE / mini, ~375px o menos):
-   reducir un poco más para que las ecuaciones largas quepan. */
+/* Móvil estándar (iPhone 12/13/14, Android medianos: ~390–460px). */
+@media (max-width: 460px) {
+  body[data-section="math"] .mini-card-body .katex         { font-size: .82em; }
+  body[data-section="math"] .mini-card-body .katex-display { font-size: .76em; }
+  body[data-section="math"] .ejemplo-item   .katex         { font-size: .85em; }
+  body[data-section="math"] .ejemplo-item   .katex-display { font-size: .8em; }
+}
+
+/* Pantallas muy angostas (iPhone SE / mini, ~360–390px):
+   reducción más agresiva para fracciones anidadas (\dfrac dentro de
+   \dfrac) y ecuaciones largas con varias operaciones. */
 @media (max-width: 400px) {
-  .mini-card-body { padding: .75rem .7rem; font-size: .8rem; }
-  .mini-card-body .katex         { font-size: .82em; }
-  .mini-card-body .katex-display { font-size: .78em; }
-  .ejemplo-block  { padding: 1.2rem .8rem; }
-  .ejemplo-item   { font-size: .9rem; }
-  .ejemplo-item   .katex         { font-size: .85em; }
-  .ejemplo-item   .katex-display { font-size: .82em; }
+  body[data-section="math"] .mini-card-body { padding: .75rem .7rem; font-size: .8rem; }
+  body[data-section="math"] .mini-card-body .katex         { font-size: .74em; }
+  body[data-section="math"] .mini-card-body .katex-display { font-size: .7em; }
+  body[data-section="math"] .ejemplo-block  { padding: 1.2rem .8rem; }
+  body[data-section="math"] .ejemplo-item   { font-size: .9rem; }
+  body[data-section="math"] .ejemplo-item   .katex         { font-size: .78em; }
+  body[data-section="math"] .ejemplo-item   .katex-display { font-size: .74em; }
 }
 
 /* ── Indicador sutil de scroll horizontal (técnica "scrolling
    shadows"): aparece una sombrita lila SOLO en el lado donde hay
    contenido oculto, y se desvanece al llegar al borde. */
 @media (max-width: 600px) {
-  .mini-card-body,
-  .ejemplo-item {
+  body[data-section="math"] .mini-card-body,
+  body[data-section="math"] .ejemplo-item {
     background:
       /* Capas blancas que ocultan la sombra cuando NO hay scroll
          a ese lado (background-attachment: local → se mueven con el contenido). */
@@ -1666,10 +1692,10 @@ body[data-section="relatos"].relato-morado .topic-header h1 {
   }
 
   /* Barrita de scroll discreta cuando es visible. */
-  .mini-card-body::-webkit-scrollbar,
-  .ejemplo-item::-webkit-scrollbar { height: 4px; }
-  .mini-card-body::-webkit-scrollbar-thumb,
-  .ejemplo-item::-webkit-scrollbar-thumb {
+  body[data-section="math"] .mini-card-body::-webkit-scrollbar,
+  body[data-section="math"] .ejemplo-item::-webkit-scrollbar { height: 4px; }
+  body[data-section="math"] .mini-card-body::-webkit-scrollbar-thumb,
+  body[data-section="math"] .ejemplo-item::-webkit-scrollbar-thumb {
     background: rgba(74,0,128,.25);
     border-radius: 2px;
   }
