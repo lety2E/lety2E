@@ -1601,13 +1601,21 @@ body[data-section="math"] .ejemplo-item {
   overflow-x: auto;
 }
 
-/* SVG y media dentro de tarjetas → siempre dentro del ancho. */
+/* SVG y media dentro de tarjetas → siempre dentro del ancho.
+   height: auto NO se aplica a svg porque colapsa los SVG de KaTeX (viewBox muy ancho). */
 body[data-section="math"] .mini-card-body img,
-body[data-section="math"] .mini-card-body svg,
-body[data-section="math"] .ejemplo-block  img,
-body[data-section="math"] .ejemplo-block  svg {
+body[data-section="math"] .ejemplo-block  img {
   max-width: 100%;
   height: auto;
+}
+body[data-section="math"] .mini-card-body svg,
+body[data-section="math"] .ejemplo-block  svg {
+  max-width: 100%;
+}
+/* Asegura que KaTeX no herede ningún height extraño */
+body[data-section="math"] .katex svg {
+  max-width: none;
+  height: unset;
 }
 
 /* Refinos móvil: respiración interna + tipografía un toque
