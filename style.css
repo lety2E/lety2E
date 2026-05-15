@@ -1645,3 +1645,32 @@ body[data-section="relatos"].relato-morado .topic-header h1 {
   .ejemplo-item   .katex         { font-size: .85em; }
   .ejemplo-item   .katex-display { font-size: .82em; }
 }
+
+/* ── Indicador sutil de scroll horizontal (técnica "scrolling
+   shadows"): aparece una sombrita lila SOLO en el lado donde hay
+   contenido oculto, y se desvanece al llegar al borde. */
+@media (max-width: 600px) {
+  .mini-card-body,
+  .ejemplo-item {
+    background:
+      /* Capas blancas que ocultan la sombra cuando NO hay scroll
+         a ese lado (background-attachment: local → se mueven con el contenido). */
+      linear-gradient(90deg, var(--bg-card) 30%, rgba(255,255,255,0)) 0 0 / 24px 100%,
+      linear-gradient(90deg, rgba(255,255,255,0), var(--bg-card) 70%) 100% 0 / 24px 100%,
+      /* Sombras lila que se revelan cuando hay contenido oculto
+         (background-attachment: scroll → fijas respecto al contenedor). */
+      radial-gradient(farthest-side at 0 50%, rgba(74,0,128,.18), transparent) 0 0 / 12px 100%,
+      radial-gradient(farthest-side at 100% 50%, rgba(74,0,128,.18), transparent) 100% 0 / 12px 100%;
+    background-repeat: no-repeat;
+    background-attachment: local, local, scroll, scroll;
+  }
+
+  /* Barrita de scroll discreta cuando es visible. */
+  .mini-card-body::-webkit-scrollbar,
+  .ejemplo-item::-webkit-scrollbar { height: 4px; }
+  .mini-card-body::-webkit-scrollbar-thumb,
+  .ejemplo-item::-webkit-scrollbar-thumb {
+    background: rgba(74,0,128,.25);
+    border-radius: 2px;
+  }
+}
