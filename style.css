@@ -1556,3 +1556,73 @@ body[data-section="relatos"].relato-morado .topic-header h1 {
   border-radius: 99px;
   z-index: 1;
 }
+
+/* ================================================
+   MATH TOPICS — Fixes de visualización en móvil
+   Aplica a páginas de tema bajo math/ que usan
+   .mini-card, .ejemplo-block, .bloques-2/3 y KaTeX.
+   ------------------------------------------------
+   Problema raíz: el default `min-width: auto` en
+   items de grid permite que ecuaciones largas
+   (KaTeX inline o display) los hagan crecer más allá
+   del ancho de su columna y se salgan del fondo
+   blanco de la tarjeta en pantallas angostas.
+   ================================================ */
+
+/* Que cada celda del grid respete el ancho de su columna. */
+.bloques-2 > *,
+.bloques-3 > *,
+.ejemplo-grid > * {
+  min-width: 0;
+}
+
+/* Display math ($$...$$) → scroll horizontal interno
+   en vez de desbordar la tarjeta. */
+.ejemplo-block .katex-display,
+.ejemplo-item  .katex-display,
+.mini-card-body .katex-display {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: .35em .15em;
+  margin: .4em 0;
+  scrollbar-width: thin;
+}
+
+/* Inline math ($...$) muy ancho hace scroll dentro
+   del cuerpo de la card (que ya tiene overflow:hidden,
+   así que el scroll queda contenido). */
+.mini-card-body,
+.ejemplo-item {
+  overflow-x: auto;
+}
+
+/* SVG y media dentro de tarjetas → siempre dentro del ancho. */
+.mini-card-body img,
+.mini-card-body svg,
+.ejemplo-block  img,
+.ejemplo-block  svg {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Refinos móvil: respiración interna + tipografía un toque
+   menor para que las ecuaciones quepan más holgadas. */
+@media (max-width: 600px) {
+  .ejemplo-block  { padding: 1.4rem 1rem; }
+  .ejemplo-item   { font-size: .95rem; }
+  .mini-card-body { padding: .85rem .9rem; font-size: .85rem; line-height: 1.95; }
+  .mini-card-head { font-size: .82rem; padding: .4rem .75rem; }
+
+  .topic-header h1 { font-size: 1.85rem; }
+
+  /* Botones prev/next se apilan en pantallas muy angostas. */
+  .topic-nav-btns {
+    flex-direction: column-reverse;
+    gap: .75rem;
+  }
+  .topic-nav-btns .btn-anterior,
+  .topic-nav-btns .btn-siguiente {
+    justify-content: center;
+    width: 100%;
+  }
+}
