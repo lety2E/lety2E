@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Álgebra con fracciones — Matemáticas 2 — lety2e</title>
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../../favicon.ico">
+  <meta name="description" content="Operaciones algebraicas con fracciones: multiplicación, división, potencias, raíces, jerarquía y simplificación — Matemáticas 2." />
+  <link rel="stylesheet" href="../../style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" />
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body, {
+      delimiters: [
+        {left:'$$', right:'$$', display:true},
+        {left:'$', right:'$', display:false}
+      ]
+    });"></script>
+
+  <style>
+    .topic-tag {
+      display: inline-flex; align-items: center; gap: .35rem;
+      padding: .22rem .75rem; border-radius: 99px;
+      background: var(--accent-light); color: var(--accent);
+      font-size: .78rem; font-weight: 700; letter-spacing: .03em;
+      margin-bottom: .55rem;
+    }
+    .topic-tag::before {
+      content: ''; width: 7px; height: 7px; border-radius: 50%;
+      background: var(--accent); display: inline-block;
+    }
+
+    .section-block { margin-bottom: 2.5rem; }
+    .section-block:last-child { margin-bottom: 0; }
+
+    .sec-head {
+      display: flex; align-items: center; gap: .65rem;
+      margin-bottom: 1.1rem;
+    }
+    .sec-head h2 { margin: 0; font-size: 1.2rem; line-height: 1; }
+    .sec-icon {
+      width: 30px; height: 30px; border-radius: 8px;
+      display: grid; place-items: center; flex-shrink: 0;
+      background: var(--accent);
+    }
+    .sec-icon svg { width: 15px; height: 15px; stroke: #fff; fill: none; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+
+    .sec-toggle {
+      display: flex; align-items: center; gap: .65rem;
+      cursor: pointer; user-select: none;
+      padding: .8rem 0; margin: 0 0 .4rem;
+    }
+    .sec-toggle h2 { margin: 0; font-size: 1.2rem; line-height: 1; }
+    .sec-toggle .chev {
+      margin-left: auto; font-size: .75rem; color: var(--text-3);
+      transition: transform .25s;
+    }
+    .sec-toggle.open .chev { transform: rotate(180deg); }
+
+    .collapsible {
+      max-height: 0; overflow: hidden;
+      transition: max-height .5s ease, padding .3s ease;
+    }
+    .collapsible.show { max-height: 20000px; padding: .8rem 0; }
+
+    /* ── Apunte tabla ── */
+    .apunte-table { width: 100%; border-collapse: collapse; }
+    .apunte-table td {
+      padding: .7rem 1rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: middle;
+    }
+    .apunte-table tr:last-child td { border-bottom: none; }
+    .apunte-table .lbl {
+      white-space: nowrap; width: 1%;
+      font-weight: 700; color: var(--T);
+      font-size: .82rem; letter-spacing: .03em;
+      text-transform: uppercase; padding-right: 1.4rem;
+    }
+    .apunte-table .formula { text-align: center; }
+
+    /* ── Ejemplos ── */
+    .ej-tipo {
+      font-weight: 700; color: var(--T);
+      font-size: .75rem; letter-spacing: .07em;
+      text-transform: uppercase; margin-bottom: -.2rem;
+      display: block;
+    }
+    .ej-bloque {
+      padding: 1rem 1.2rem;
+      background: var(--bg-card);
+      border: 1.5px solid var(--border);
+      border-radius: var(--r-md);
+    }
+    .ej-bloque .katex-display { margin: .4em 0 !important; }
+
+    /* ── Grids ── */
+    .bloques-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2rem; }
+    @media (max-width: 700px) { .bloques-2 { grid-template-columns: 1fr; } }
+
+    /* ── Mini card bloques de ejercicios ── */
+    .mini-card {
+      background: var(--bg-card); border: 1.5px solid var(--border);
+      border-radius: var(--r-md); overflow: hidden;
+    }
+    .mini-card-head {
+      padding: .4rem .8rem; background: var(--course-1);
+      font-family: var(--font-display); font-size: .85rem;
+      color: #fff; font-weight: 700;
+    }
+    .mini-card-body {
+      padding: .8rem 1rem;
+      font-size: .9rem; line-height: 3.8; color: var(--text);
+      text-align: center;
+    }
+    .mini-card-body .sol {
+      margin: 0; padding: .55rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .mini-card-body .sol:last-child { border-bottom: none; padding-bottom: 0; }
+    .mini-card-body strong, .mini-card-body .sol strong { color: var(--M); }
+    .mini-card-body .katex-display { margin: .3em 0 !important; }
+
+    /* ── Extras 4 col ── */
+    .extras-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: .3rem 1.5rem;
+    }
+    .extras-grid li {
+      list-style: none;
+      padding: .4rem 0;
+      font-size: .9rem;
+      border-bottom: 1px solid var(--border);
+      text-align: center;
+    }
+    .extras-grid li .katex-display { margin: .3em 0 !important; }
+    @media (max-width: 700px) { .extras-grid { grid-template-columns: repeat(2, 1fr); } }
+
+    /* ── Nav ── */
+    .topic-nav-btns {
+      display: flex; justify-content: space-between; gap: 1rem;
+      margin-top: 2.5rem; padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+    }
+    .btn-anterior, .btn-siguiente {
+      display: inline-flex; align-items: center; gap: .5rem;
+      padding: .65rem 1.4rem; border-radius: 99px;
+      font-weight: 700; font-size: .9rem;
+      transition: background .2s, transform .18s;
+      text-decoration: none;
+    }
+    .btn-anterior {
+      background: transparent; color: var(--accent);
+      border: 2px solid var(--accent);
+    }
+    .btn-anterior:hover { background: var(--accent-light); transform: translateX(-3px); }
+    .btn-siguiente { background: var(--accent); color: #fff; }
+    .btn-siguiente:hover { background: var(--M); color: #fff; transform: translateX(3px); }
+  </style>
+</head>
+<body data-section="math">
+
+  <script src="../../nav.js"></script>
+
+  <main class="topic-content">
+
+    <header class="topic-header">
+      <p class="breadcrumb">
+        <a href="../index.html">Inicio</a> ›
+        <a href="index.html">Matemáticas 2</a> ›
+        Álgebra con fracciones
+      </p>
+      <div class="topic-tag">Matemáticas 2 · Tema 4</div>
+      <h1>Álgebra con fracciones</h1>
+    </header>
+
+    <!-- ══════════ MINI APUNTE ══════════ -->
+    <section class="section-block">
+      <div class="sec-head">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        </div>
+        <h2>Mini apunte</h2>
+      </div>
+      <div class="mini-card">
+        <div class="mini-card-body left" style="line-height:1;">
+          <table class="apunte-table">
+            <tr>
+              <td class="lbl">Multiplicación</td>
+              <td class="formula">$(x^a)(x^b) = x^{a+b}$ — los exponentes se suman</td>
+            </tr>
+            <tr>
+              <td class="lbl">División</td>
+              <td class="formula">$\dfrac{x^a}{x^b} = x^{a-b}$ — producto cruzado o ley de la herradura; exponentes se restan</td>
+            </tr>
+            <tr>
+              <td class="lbl">Potencias</td>
+              <td class="formula">$(x^a)^b = x^{a \cdot b}$ — los exponentes se multiplican</td>
+            </tr>
+            <tr>
+              <td class="lbl">Raíces</td>
+              <td class="formula">$\sqrt[n]{x^a} = x^{a \div n}$ — el exponente se divide entre el índice</td>
+            </tr>
+            <tr>
+              <td class="lbl">Jerarquía</td>
+              <td class="formula">Potencias y raíces → Multiplicación y división → Suma y resta</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ EJEMPLOS ══════════ -->
+    <section class="section-block">
+      <div class="sec-head">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+        </div>
+        <h2>Ejemplos</h2>
+      </div>
+      <div class="bloques-2">
+
+        <div class="ej-bloque">
+          <span class="ej-tipo">Multiplicación</span>
+          $$\left(\frac{5x^8b^3}{6a^4b^2}\right)\!\left(\frac{-4x^2b}{3a^5c}\right) = \frac{-20x^{10}b^4}{18a^9b^2c} = \mathbf{\dfrac{-10x^{10}b^2}{9a^9c}}$$
+        </div>
+
+        <div class="ej-bloque">
+          <span class="ej-tipo">División</span>
+          $$\dfrac{\dfrac{8x^7y^3a}{a^4}}{\dfrac{6x^2}{-4a^3y}} = \frac{-32x^7y^4a^4}{6a^4x^2} = \mathbf{\dfrac{-16x^5y^4}{3}}$$
+        </div>
+
+        <div class="ej-bloque">
+          <span class="ej-tipo">Potenciación</span>
+          $$\left(\frac{4x^3y^2b^6}{8x^4y^3b^2}\right)^{\!2} = \frac{16x^6y^4b^{12}}{64x^8y^6b^4} = \mathbf{\dfrac{b^8}{4x^2y^2}}$$
+        </div>
+
+        <div class="ej-bloque">
+          <span class="ej-tipo">Radicación</span>
+          $$\sqrt{\frac{25x^6y^4b^2}{36x^8}} = \frac{5x^3y^2b}{6x^4} = \mathbf{\dfrac{5y^2b}{6x}}$$
+        </div>
+
+        <div class="ej-bloque">
+          <span class="ej-tipo">Jerarquía — potencia primero</span>
+          $$\begin{aligned}
+          \frac{8x}{3} - 4\left(\frac{5}{x^2}\right)^{\!3} &= \frac{8x}{3} - \frac{4 \cdot 125}{x^6} \\[14pt]
+          &= \frac{8x}{3} - \frac{500}{x^6} \\[14pt]
+          &= \mathbf{\dfrac{8x^7 - 1500}{3x^6}}
+          \end{aligned}$$
+        </div>
+
+        <div class="ej-bloque">
+          <span class="ej-tipo">Binomio al cuadrado</span>
+          $$\begin{aligned}
+          \left(\frac{3x^2}{2} + \frac{8x^5}{3}\right)^{\!2} &= \left(\frac{3x^2}{2}\right)^{\!2} + 2\!\left(\frac{3x^2}{2}\right)\!\left(\frac{8x^5}{3}\right) + \left(\frac{8x^5}{3}\right)^{\!2} \\[14pt]
+          &= \frac{9x^4}{4} + \frac{48x^7}{6} + \frac{64x^{10}}{9} \\[14pt]
+          &= \mathbf{\dfrac{9x^4}{4} + 8x^7 + \dfrac{64x^{10}}{9}}
+          \end{aligned}$$
+        </div>
+
+        <div class="ej-bloque" style="grid-column: 1 / -1;">
+          <span class="ej-tipo">Simplificación — factorizar y cancelar</span>
+          $$\frac{x^2-2x-3}{x^2+5x+4} = \frac{(x-3)(x+1)}{(x+4)(x+1)} = \mathbf{\dfrac{x-3}{x+4}}$$
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══════════ EJERCICIOS ══════════ -->
+    <section class="section-block">
+      <div class="sec-head">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+        </div>
+        <h2>Ejercicios</h2>
+      </div>
+      <div class="bloques-2">
+
+        <!-- B1 -->
+        <div class="mini-card">
+          <div class="mini-card-head">Bloque 1</div>
+          <div class="mini-card-body">
+            <div class="sol">$\left(\dfrac{5x^4b}{3a^3b}\right)\!\left(\dfrac{-6x^2a}{b^4}\right)$</div>
+            <div class="sol">$\dfrac{\dfrac{3x^5y^2a}{b^3}}{\dfrac{4xb^2}{-3ab}}$</div>
+            <div class="sol">$\left(\dfrac{5x^2y^3b^4}{-2y^5a}\right)^{\!3}$</div>
+            <div class="sol">$\sqrt{\dfrac{36x^{12}b^4}{4y^2a^6}}$</div>
+            <div class="sol">$\dfrac{7x}{2} - 5\left(\dfrac{2}{x^3}\right)^{\!2}$</div>
+            <div class="sol">$\left(\dfrac{4x^2}{3} + \dfrac{5x}{4}\right)^{\!2}$</div>
+            <div class="sol">$\dfrac{x^2+6x+5}{x^2+3x-10}$</div>
+          </div>
+        </div>
+
+        <!-- B2 -->
+        <div class="mini-card">
+          <div class="mini-card-head">Bloque 2</div>
+          <div class="mini-card-body">
+            <div class="sol">$\left(\dfrac{-6x^7y}{2x^5}\right)\!\left(\dfrac{-5x^8y}{3bax}\right)$</div>
+            <div class="sol">$\dfrac{\dfrac{-2x^4y^3b}{a^2}}{\dfrac{5x^3b}{2a^2b}}$</div>
+            <div class="sol">$\left(\dfrac{6x^3y^4}{-2y^8a^3x}\right)^{\!2}$</div>
+            <div class="sol">$\sqrt[3]{\dfrac{-8x^9a^3}{125y^6}}$</div>
+            <div class="sol">$\dfrac{2x}{3} - 4\left(\dfrac{5}{x^4}\right)^{\!2}$</div>
+            <div class="sol">$\left(\dfrac{6x^3}{2} - \dfrac{4x^2}{6}\right)^{\!2}$</div>
+            <div class="sol">$\dfrac{x^2+2x-3}{x^2-3x+2}$</div>
+          </div>
+        </div>
+
+        <!-- B3 -->
+        <div class="mini-card">
+          <div class="mini-card-head">Bloque 3</div>
+          <div class="mini-card-body">
+            <div class="sol">$\left(\dfrac{-2x^5b^3}{5xb}\right)\!\left(\dfrac{-2a^3x}{4b^3}\right)$</div>
+            <div class="sol">$\dfrac{\dfrac{-4x^3ya}{b^2}}{\dfrac{5xb}{6a^3}}$</div>
+            <div class="sol">$\left(\dfrac{4x^3y^2a}{6x^7a}\right)^{\!2}$</div>
+            <div class="sol">$\sqrt{\dfrac{25x^6b^8}{4y^6x^4}}$</div>
+            <div class="sol">$\dfrac{2x}{3} - 6\left(\dfrac{3}{x^4}\right)^{\!2}$</div>
+            <div class="sol">$\left(\dfrac{5x^3}{2} + \dfrac{4x}{3}\right)^{\!2}$</div>
+            <div class="sol">$\dfrac{x^2-6x+8}{x^2+x-20}$</div>
+          </div>
+        </div>
+
+        <!-- B4 -->
+        <div class="mini-card">
+          <div class="mini-card-head">Bloque 4</div>
+          <div class="mini-card-body">
+            <div class="sol">$\left(\dfrac{5x^4a^3}{2a^6}\right)\!\left(\dfrac{-3x^8}{ya^2}\right)$</div>
+            <div class="sol">$\dfrac{\dfrac{-4x^5y^3a}{2a}}{\dfrac{5x^7}{10x^9y^4}}$</div>
+            <div class="sol">$\left(\dfrac{-4x^6y^3}{5x^7b^3}\right)^{\!3}$</div>
+            <div class="sol">$\sqrt[3]{\dfrac{64x^{12}a^6}{1000a^3}}$</div>
+            <div class="sol">$\dfrac{3x}{5} - 4\left(\dfrac{2}{x^5}\right)^{\!2}$</div>
+            <div class="sol">$\left(\dfrac{3x^8}{2} - \dfrac{5x^4}{3}\right)^{\!2}$</div>
+            <div class="sol">$\dfrac{x^2-6x+8}{x^2+4x-12}$</div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══════════ RESOLUCIONES ══════════ -->
+    <section class="section-block">
+      <div class="sec-toggle" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('show');">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <h2>Resoluciones</h2>
+        <span class="chev">▼</span>
+      </div>
+      <div class="collapsible">
+        <div class="bloques-2">
+
+          <!-- B1 -->
+          <div class="mini-card">
+            <div class="mini-card-head">Bloque 1</div>
+            <div class="mini-card-body">
+              <div class="sol">$$\frac{-30x^6ba}{3a^3b^5} = \mathbf{\dfrac{-10x^6}{a^2b^4}}$$</div>
+              <div class="sol">$$\frac{-9x^5y^2a^2b}{4b^5x} = \mathbf{\dfrac{-9x^4y^2a^2}{4b^4}}$$</div>
+              <div class="sol">$$\frac{125x^6y^9b^{12}}{-8y^{15}a^3} = \mathbf{\dfrac{-125x^6b^{12}}{8y^6a^3}}$$</div>
+              <div class="sol">$$\frac{6x^6b^2}{2ya^3} = \mathbf{\dfrac{3x^6b^2}{ya^3}}$$</div>
+              <div class="sol">$$\begin{aligned}
+                \frac{7x}{2} - \frac{20}{x^6} &= \mathbf{\dfrac{7x^7-40}{2x^6}}
+              \end{aligned}$$</div>
+              <div class="sol">$$\begin{aligned}
+                \left(\tfrac{4x^2}{3}\right)^{\!2} + 2\!\left(\tfrac{4x^2}{3}\right)\!\left(\tfrac{5x}{4}\right) + \left(\tfrac{5x}{4}\right)^{\!2} \\[14pt]
+                = \mathbf{\dfrac{16x^4}{9} + \dfrac{10x^3}{3} + \dfrac{25x^2}{16}}
+              \end{aligned}$$</div>
+              <div class="sol">$$\frac{(x+5)(x+1)}{(x+5)(x-2)} = \mathbf{\dfrac{x+1}{x-2}}$$</div>
+            </div>
+          </div>
+
+          <!-- B2 -->
+          <div class="mini-card">
+            <div class="mini-card-head">Bloque 2</div>
+            <div class="mini-card-body">
+              <div class="sol">$$\frac{30x^{15}y^2}{6x^6ba} = \mathbf{\dfrac{5x^9y^2}{ba}}$$</div>
+              <div class="sol">$$\frac{-4x^4y^3b^2a^2}{5a^2x^3b} = \mathbf{\dfrac{-4xy^3b}{5}}$$</div>
+              <div class="sol">$$\frac{36x^6y^8}{4y^{16}a^6x^2} = \mathbf{\dfrac{9x^4}{y^8a^6}}$$</div>
+              <div class="sol">$$\mathbf{\dfrac{-2x^3a}{5y^2}}$$</div>
+              <div class="sol">$$\begin{aligned}
+                \frac{2x}{3} - \frac{100}{x^8} &= \mathbf{\dfrac{2x^9-300}{3x^8}}
+              \end{aligned}$$</div>
+              <div class="sol">$$\begin{aligned}
+                \left(\tfrac{6x^3}{2}\right)^{\!2} + 2\!\left(\tfrac{6x^3}{2}\right)\!\left(\tfrac{-4x^2}{6}\right) + \left(\tfrac{-4x^2}{6}\right)^{\!2} \\[14pt]
+                = \mathbf{9x^6 - 4x^5 + \dfrac{4x^4}{9}}
+              \end{aligned}$$</div>
+              <div class="sol">$$\frac{(x-1)(x+3)}{(x-2)(x-1)} = \mathbf{\dfrac{x+3}{x-2}}$$</div>
+            </div>
+          </div>
+
+          <!-- B3 -->
+          <div class="mini-card">
+            <div class="mini-card-head">Bloque 3</div>
+            <div class="mini-card-body">
+              <div class="sol">$$\frac{4x^6a^3b^3}{20xb^4} = \mathbf{\dfrac{x^5a^3}{5b}}$$</div>
+              <div class="sol">$$\frac{-24a^4x^3y}{5b^3x} = \mathbf{\dfrac{-24a^4x^2y}{5b^3}}$$</div>
+              <div class="sol">$$\frac{16x^6y^4a^2}{36x^{14}a^2} = \mathbf{\dfrac{4y^4}{9x^8}}$$</div>
+              <div class="sol">$$\mathbf{\dfrac{5xb^4}{2y^3}}$$</div>
+              <div class="sol">$$\begin{aligned}
+                \frac{2x}{3} - \frac{54}{x^8} &= \mathbf{\dfrac{2x^9-162}{3x^8}}
+              \end{aligned}$$</div>
+              <div class="sol">$$\mathbf{\dfrac{25x^6}{4} + \dfrac{20x^4}{3} + \dfrac{16x^2}{9}}$$</div>
+              <div class="sol">$$\frac{(x-4)(x-2)}{(x-4)(x+5)} = \mathbf{\dfrac{x-2}{x+5}}$$</div>
+            </div>
+          </div>
+
+          <!-- B4 -->
+          <div class="mini-card">
+            <div class="mini-card-head">Bloque 4</div>
+            <div class="mini-card-body">
+              <div class="sol">$$\frac{-15x^{12}a^3}{2a^8y} = \mathbf{\dfrac{-15x^{12}}{2a^5y}}$$</div>
+              <div class="sol">$$\frac{-40x^{14}y^7a}{10ax^7} = \mathbf{-4x^7y^7}$$</div>
+              <div class="sol">$$\frac{-64x^{18}y^9}{125x^{21}b^9} = \mathbf{\dfrac{-64y^9}{125x^3b^9}}$$</div>
+              <div class="sol">$$\frac{4x^4a^2}{10a} = \mathbf{\dfrac{2x^4a}{5}}$$</div>
+              <div class="sol">$$\begin{aligned}
+                \frac{3x}{5} - \frac{16}{x^{10}} &= \mathbf{\dfrac{3x^{11}-80}{5x^{10}}}
+              \end{aligned}$$</div>
+              <div class="sol">$$\mathbf{\dfrac{9x^{16}}{4} - 5x^{12} + \dfrac{25x^8}{9}}$$</div>
+              <div class="sol">$$\frac{(x-4)(x-2)}{(x+6)(x-2)} = \mathbf{\dfrac{x-4}{x+6}}$$</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ EXTRAS ══════════ -->
+    <section class="section-block">
+      <div class="sec-toggle" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('show');">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </div>
+        <h2>Ejercicios extra</h2>
+        <span class="chev">▼</span>
+      </div>
+      <div class="collapsible">
+        <ul class="extras-grid">
+          <li>$\left(\dfrac{7a^8}{6a^3c}\right)\!\left(\dfrac{-9x^4a}{c^7}\right)$</li>
+          <li>$\left(\dfrac{5a^8}{12a^2c}\right)\!\left(\dfrac{-6c^3a}{c^5}\right)$</li>
+          <li>$\left(\dfrac{4x^3}{5a^4b}\right)\!\left(\dfrac{-6x^2b}{b^6}\right)$</li>
+          <li>$\left(\dfrac{5x^2}{6a^2b}\right)\!\left(\dfrac{-4x^3a}{b^5}\right)$</li>
+
+          <li>$\dfrac{\dfrac{6x^8y^3}{c^5}}{\dfrac{8xc^4}{-7xc}}$</li>
+          <li>$\dfrac{\dfrac{-x^4y^3}{3c^4}}{\dfrac{7xc^3}{-5yc}}$</li>
+          <li>$\dfrac{\dfrac{5x^6y^2}{b^5}}{\dfrac{7xb^3}{-6y^3}}$</li>
+          <li>$\dfrac{\dfrac{7x^7y^2}{b^4}}{\dfrac{3xb^3}{-5xy}}$</li>
+
+          <li>$\left(\dfrac{2x^5y^3c^6}{-5y^9a}\right)^{\!3}$</li>
+          <li>$\left(\dfrac{6x^3y^4c^5}{-5y^8c}\right)^{\!3}$</li>
+          <li>$\left(\dfrac{3x^3y^5b^6}{-2y^7a}\right)^{\!3}$</li>
+          <li>$\left(\dfrac{4x^4y^2b^5}{-3y^6a}\right)^{\!3}$</li>
+
+          <li>$\sqrt{\dfrac{81x^{14}c^6}{36c^6a^8}}$</li>
+          <li>$\sqrt[3]{\dfrac{-10x^{12}c^6}{64y^3a^9}}$</li>
+          <li>$\sqrt{\dfrac{36x^{14}b^8}{25y^4a^6}}$</li>
+          <li>$\sqrt[3]{\dfrac{-48x^{15}a^9}{27y^6a^3}}$</li>
+
+          <li>$-\dfrac{10x}{6} + 2\left(\dfrac{4}{x^7}\right)^{\!3}$</li>
+          <li>$-\dfrac{7x}{4} - 5\left(\dfrac{2}{x^4}\right)^{\!2}$</li>
+          <li>$\dfrac{11x}{5} - 3\left(\dfrac{5}{x^5}\right)^{\!3}$</li>
+          <li>$\dfrac{9x}{6} - 4\left(\dfrac{6}{x^6}\right)^{\!2}$</li>
+
+          <li>$\left(\dfrac{5x^2}{7} + \dfrac{3x}{4}\right)^{\!2}$</li>
+          <li>$\left(\dfrac{4x^3}{5} - \dfrac{7x}{6}\right)^{\!2}$</li>
+          <li>$\left(\dfrac{7x^2}{8} + \dfrac{5x}{6}\right)^{\!2}$</li>
+          <li>$\left(\dfrac{5x^2}{7} - \dfrac{4x}{3}\right)^{\!2}$</li>
+
+          <li>$\dfrac{x^2-8x+15}{x^2-x-20}$</li>
+          <li>$\dfrac{x^2-4x+5}{x^2-3x-10}$</li>
+          <li>$\dfrac{x^2+6x+9}{x^2-x-12}$</li>
+          <li>$\dfrac{x^2-7x+10}{x^2+6x-16}$</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ══════════ NAV ══════════ -->
+    <div class="topic-nav-btns">
+      <a href="representacion-fracciones.html" class="btn-anterior">← Representación de fracciones</a>
+    </div>
+
+  </main>
+
+  <script src="../../footer.js"></script>
+</body>
+</html>
