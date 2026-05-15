@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Representación de fracciones — Matemáticas 2 — lety2e</title>
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../../favicon.ico">
+  <meta name="description" content="Representación de números mixtos: fracción impropia, equivalentes, geométrica, decimal y recta numérica — Matemáticas 2." />
+  <link rel="stylesheet" href="../../style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" />
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body, {
+      delimiters: [
+        {left:'$$', right:'$$', display:true},
+        {left:'$', right:'$', display:false}
+      ]
+    });"></script>
+
+  <style>
+    .topic-tag {
+      display: inline-flex; align-items: center; gap: .35rem;
+      padding: .22rem .75rem; border-radius: 99px;
+      background: var(--accent-light); color: var(--accent);
+      font-size: .78rem; font-weight: 700; letter-spacing: .03em;
+      margin-bottom: .55rem;
+    }
+    .topic-tag::before {
+      content: ''; width: 7px; height: 7px; border-radius: 50%;
+      background: var(--accent); display: inline-block;
+    }
+
+    .section-block { margin-bottom: 2.5rem; }
+    .section-block:last-child { margin-bottom: 0; }
+
+    .sec-head {
+      display: flex; align-items: center; gap: .65rem;
+      margin-bottom: 1.1rem;
+    }
+    .sec-head h2 { margin: 0; font-size: 1.2rem; line-height: 1; }
+    .sec-icon {
+      width: 30px; height: 30px; border-radius: 8px;
+      display: grid; place-items: center; flex-shrink: 0;
+      background: var(--accent);
+    }
+    .sec-icon svg { width: 15px; height: 15px; stroke: #fff; fill: none; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+
+    .sec-toggle {
+      display: flex; align-items: center; gap: .65rem;
+      cursor: pointer; user-select: none;
+      padding: .8rem 0; margin: 0 0 .4rem;
+    }
+    .sec-toggle h2 { margin: 0; font-size: 1.2rem; line-height: 1; }
+    .sec-toggle .chev {
+      margin-left: auto; font-size: .75rem; color: var(--text-3);
+      transition: transform .25s;
+    }
+    .sec-toggle.open .chev { transform: rotate(180deg); }
+
+    .collapsible {
+      max-height: 0; overflow: hidden;
+      transition: max-height .5s ease, padding .3s ease;
+    }
+    .collapsible.show { max-height: 20000px; padding: .8rem 0; }
+
+    /* ── Apunte steps ── */
+    .steps-list {
+      list-style: none; padding: 0; margin: 0;
+      display: flex; flex-direction: column; gap: .7rem;
+    }
+    .steps-list li {
+      display: flex; align-items: baseline; gap: .8rem;
+      padding: .65rem 1rem;
+      background: var(--bg-card); border: 1.5px solid var(--border);
+      border-radius: var(--r-md);
+      font-size: .93rem; line-height: 1.55;
+    }
+    .step-num {
+      font-weight: 800; color: var(--T); font-size: .85rem;
+      flex-shrink: 0; min-width: 1.1rem;
+    }
+
+    /* ── Tabla de representación ── */
+    .rep-wrap { overflow-x: auto; border-radius: var(--r-md); }
+    .rep-table {
+      border-collapse: collapse;
+      min-width: 640px; width: 100%;
+      font-size: .88rem;
+    }
+    .rep-table th {
+      background: var(--accent-light);
+      color: var(--accent);
+      font-size: .75rem; font-weight: 700;
+      letter-spacing: .05em; text-transform: uppercase;
+      padding: .55rem .8rem;
+      border: 1px solid var(--border);
+      text-align: center; white-space: nowrap;
+    }
+    .rep-table td {
+      padding: .7rem .9rem;
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      text-align: center;
+      vertical-align: middle;
+    }
+    .rep-table tr:hover td { background: var(--bg); }
+    .rep-table td.blank {
+      background: var(--bg);
+      min-width: 90px; min-height: 54px;
+    }
+    .rep-table td svg { display: block; margin: 0 auto; }
+
+    .instruccion {
+      font-size: .88rem; color: var(--text-2);
+      margin-bottom: 1rem;
+    }
+
+    /* ── Extras columnas ── */
+    .extras-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: .3rem 1.5rem;
+    }
+    .extras-grid li {
+      list-style: none;
+      padding: .35rem 0;
+      font-size: .92rem;
+      border-bottom: 1px solid var(--border);
+    }
+    @media (max-width: 600px) {
+      .extras-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    /* ── Nav ── */
+    .topic-nav-btns {
+      display: flex; justify-content: space-between; gap: 1rem;
+      margin-top: 2.5rem; padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+    }
+    .btn-anterior, .btn-siguiente {
+      display: inline-flex; align-items: center; gap: .5rem;
+      padding: .65rem 1.4rem; border-radius: 99px;
+      font-weight: 700; font-size: .9rem;
+      transition: background .2s, transform .18s;
+      text-decoration: none;
+    }
+    .btn-anterior {
+      background: transparent; color: var(--accent);
+      border: 2px solid var(--accent);
+    }
+    .btn-anterior:hover { background: var(--accent-light); transform: translateX(-3px); }
+    .btn-siguiente { background: var(--accent); color: #fff; }
+    .btn-siguiente:hover { background: var(--M); color: #fff; transform: translateX(3px); }
+  </style>
+</head>
+<body data-section="math">
+
+  <script src="../../nav.js"></script>
+
+  <main class="topic-content">
+
+    <header class="topic-header">
+      <p class="breadcrumb">
+        <a href="../index.html">Inicio</a> ›
+        <a href="index.html">Matemáticas 2</a> ›
+        Representación de fracciones
+      </p>
+      <div class="topic-tag">Matemáticas 2 · Tema 3</div>
+      <h1>Representación de fracciones</h1>
+    </header>
+
+    <!-- ══════════ MINI APUNTE ══════════ -->
+    <section class="section-block">
+      <div class="sec-head">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        </div>
+        <h2>Mini apunte</h2>
+      </div>
+      <p style="font-size:.9rem;color:var(--text-2);margin-bottom:.9rem;">
+        Representa cada número mixto de cuatro formas distintas:
+      </p>
+      <ul class="steps-list">
+        <li><span class="step-num">1.</span>Expresa el número mixto como <strong>fracción impropia</strong>. Escribe también al menos dos fracciones equivalentes.</li>
+        <li><span class="step-num">2.</span><strong>Representación geométrica</strong> — dibuja rectángulos divididos en partes iguales y sombrea las correspondientes.</li>
+        <li><span class="step-num">3.</span>Convierte el número mixto en su equivalente <strong>decimal</strong>.</li>
+        <li><span class="step-num">4.</span>Marca y localiza el número mixto en la <strong>recta numérica</strong>.</li>
+      </ul>
+    </section>
+
+    <!-- ══════════ EJEMPLOS ══════════ -->
+    <section class="section-block">
+      <div class="sec-head">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+        </div>
+        <h2>Ejemplos</h2>
+      </div>
+      <div class="rep-wrap">
+        <table class="rep-table">
+          <thead>
+            <tr>
+              <th>Número mixto</th>
+              <th>Fracciones equivalentes</th>
+              <th>Geométrica</th>
+              <th>Decimal</th>
+              <th>Recta numérica</th>
+            </tr>
+          </thead>
+          <tbody>
+
+            <!-- Ejemplo 1: 1 2/3 -->
+            <tr>
+              <td>$1\dfrac{2}{3}$</td>
+              <td>$\dfrac{5}{3} = \dfrac{10}{6} = \dfrac{15}{9}$</td>
+              <td>
+                <!-- 2 rects, d=3, [all, top-2] filled, green -->
+                <svg viewBox="0 0 62 46" width="62" height="46" xmlns="http://www.w3.org/2000/svg">
+                  <!-- Rect 1: 3 sections, all filled -->
+                  <rect x="2" y="2" width="24" height="42" fill="#6ABF80"/>
+                  <rect x="2" y="2" width="24" height="42" fill="none" stroke="#444" stroke-width="1"/>
+                  <line x1="2" y1="16" x2="26" y2="16" stroke="#444" stroke-width=".8"/>
+                  <line x1="2" y1="30" x2="26" y2="30" stroke="#444" stroke-width=".8"/>
+                  <!-- Rect 2: top 2 of 3 filled -->
+                  <rect x="36" y="2" width="24" height="42" fill="white"/>
+                  <rect x="36" y="2" width="24" height="28" fill="#6ABF80"/>
+                  <rect x="36" y="2" width="24" height="42" fill="none" stroke="#444" stroke-width="1"/>
+                  <line x1="36" y1="16" x2="60" y2="16" stroke="#444" stroke-width=".8"/>
+                  <line x1="36" y1="30" x2="60" y2="30" stroke="#444" stroke-width=".8"/>
+                </svg>
+              </td>
+              <td>$1.6\overline{6}$</td>
+              <td>
+                <!-- number line 0 to 2, dot at 1.667 -->
+                <svg viewBox="0 0 140 30" width="140" height="30" xmlns="http://www.w3.org/2000/svg">
+                  <line x1="10" y1="14" x2="130" y2="14" stroke="#555" stroke-width="1.5"/>
+                  <line x1="10" y1="10" x2="10" y2="18" stroke="#555" stroke-width="1.5"/>
+                  <line x1="70" y1="10" x2="70" y2="18" stroke="#555" stroke-width="1.5"/>
+                  <line x1="130" y1="10" x2="130" y2="18" stroke="#555" stroke-width="1.5"/>
+                  <text x="10" y="27" text-anchor="middle" font-size="9" fill="#555">0</text>
+                  <text x="70" y="27" text-anchor="middle" font-size="9" fill="#555">1</text>
+                  <text x="130" y="27" text-anchor="middle" font-size="9" fill="#555">2</text>
+                  <!-- thirds marks at x=30, 50, 90, 110 (approx) -->
+                  <line x1="30" y1="12" x2="30" y2="16" stroke="#7B9FCC" stroke-width=".8"/>
+                  <line x1="50" y1="12" x2="50" y2="16" stroke="#7B9FCC" stroke-width=".8"/>
+                  <line x1="90" y1="12" x2="90" y2="16" stroke="#7B9FCC" stroke-width=".8"/>
+                  <line x1="110" y1="12" x2="110" y2="16" stroke="#7B9FCC" stroke-width=".8"/>
+                  <!-- dot at 1.667: x = 10 + 1.667*60 = 110 -->
+                  <circle cx="110" cy="14" r="3.5" fill="#FF00AA"/>
+                </svg>
+              </td>
+            </tr>
+
+            <!-- Ejemplo 2: 1 1/2 -->
+            <tr>
+              <td>$1\dfrac{1}{2}$</td>
+              <td>$\dfrac{3}{2} = \dfrac{6}{4} = \dfrac{9}{6}$</td>
+              <td>
+                <!-- 2 rects, d=2, [all, top-1] filled, orange -->
+                <svg viewBox="0 0 62 34" width="62" height="34" xmlns="http://www.w3.org/2000/svg">
+                  <!-- Rect 1: 2 sections, all filled -->
+                  <rect x="2" y="2" width="24" height="30" fill="#F0A050"/>
+                  <rect x="2" y="2" width="24" height="30" fill="none" stroke="#444" stroke-width="1"/>
+                  <line x1="2" y1="17" x2="26" y2="17" stroke="#444" stroke-width=".8"/>
+                  <!-- Rect 2: top 1 of 2 filled -->
+                  <rect x="36" y="2" width="24" height="30" fill="white"/>
+                  <rect x="36" y="2" width="24" height="15" fill="#F0A050"/>
+                  <rect x="36" y="2" width="24" height="30" fill="none" stroke="#444" stroke-width="1"/>
+                  <line x1="36" y1="17" x2="60" y2="17" stroke="#444" stroke-width=".8"/>
+                </svg>
+              </td>
+              <td>$1.5$</td>
+              <td>
+                <!-- number line 0 to 2, dot at 1.5 -->
+                <svg viewBox="0 0 140 30" width="140" height="30" xmlns="http://www.w3.org/2000/svg">
+                  <line x1="10" y1="14" x2="130" y2="14" stroke="#555" stroke-width="1.5"/>
+                  <line x1="10" y1="10" x2="10" y2="18" stroke="#555" stroke-width="1.5"/>
+                  <line x1="70" y1="10" x2="70" y2="18" stroke="#555" stroke-width="1.5"/>
+                  <line x1="130" y1="10" x2="130" y2="18" stroke="#555" stroke-width="1.5"/>
+                  <text x="10" y="27" text-anchor="middle" font-size="9" fill="#555">0</text>
+                  <text x="70" y="27" text-anchor="middle" font-size="9" fill="#555">1</text>
+                  <text x="130" y="27" text-anchor="middle" font-size="9" fill="#555">2</text>
+                  <line x1="40" y1="12" x2="40" y2="16" stroke="#7B9FCC" stroke-width=".8"/>
+                  <line x1="100" y1="12" x2="100" y2="16" stroke="#7B9FCC" stroke-width=".8"/>
+                  <!-- dot at 1.5: x = 10 + 1.5*60 = 100 -->
+                  <circle cx="100" cy="14" r="3.5" fill="#FF00AA"/>
+                </svg>
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ══════════ EJERCICIOS ══════════ -->
+    <section class="section-block">
+      <div class="sec-head">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+        </div>
+        <h2>Ejercicios</h2>
+      </div>
+      <p class="instruccion">Completa la tabla con la información correspondiente para cada número mixto.</p>
+      <div class="rep-wrap">
+        <table class="rep-table">
+          <thead>
+            <tr>
+              <th>Número mixto</th>
+              <th>Fracciones equivalentes</th>
+              <th>Geométrica</th>
+              <th>Decimal</th>
+              <th>Recta numérica</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Fila 1: dado número mixto -->
+            <tr>
+              <td>$2\dfrac{1}{4}$</td>
+              <td class="blank"></td>
+              <td class="blank"></td>
+              <td class="blank"></td>
+              <td class="blank"></td>
+            </tr>
+            <!-- Fila 2: dadas fracciones equivalentes -->
+            <tr>
+              <td class="blank"></td>
+              <td>$\dfrac{5}{2} = \dfrac{10}{4} = \dfrac{15}{6}$</td>
+              <td class="blank"></td>
+              <td class="blank"></td>
+              <td class="blank"></td>
+            </tr>
+            <!-- Fila 3: dado decimal -->
+            <tr>
+              <td class="blank"></td>
+              <td class="blank"></td>
+              <td class="blank"></td>
+              <td>$1.2$</td>
+              <td class="blank"></td>
+            </tr>
+            <!-- Fila 4: dada geométrica (2×2 grids) -->
+            <tr>
+              <td class="blank"></td>
+              <td class="blank"></td>
+              <td>
+                <!-- 2×2 grid groups: group1 all filled, group2 top row filled -->
+                <svg viewBox="0 0 66 32" width="66" height="32" xmlns="http://www.w3.org/2000/svg">
+                  <!-- Group 1: all 4 cells filled -->
+                  <rect x="2" y="2" width="28" height="28" fill="#AAAAAA"/>
+                  <rect x="2" y="2" width="28" height="28" fill="none" stroke="#444" stroke-width="1"/>
+                  <line x1="16" y1="2" x2="16" y2="30" stroke="#444" stroke-width=".8"/>
+                  <line x1="2" y1="16" x2="30" y2="16" stroke="#444" stroke-width=".8"/>
+                  <!-- Group 2: only top row (y=2 to y=16) filled -->
+                  <rect x="36" y="2" width="28" height="28" fill="white"/>
+                  <rect x="36" y="2" width="28" height="14" fill="#AAAAAA"/>
+                  <rect x="36" y="2" width="28" height="28" fill="none" stroke="#444" stroke-width="1"/>
+                  <line x1="50" y1="2" x2="50" y2="30" stroke="#444" stroke-width=".8"/>
+                  <line x1="36" y1="16" x2="64" y2="16" stroke="#444" stroke-width=".8"/>
+                </svg>
+              </td>
+              <td class="blank"></td>
+              <td class="blank"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ══════════ RESOLUCIONES ══════════ -->
+    <section class="section-block">
+      <div class="sec-toggle" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('show');">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <h2>Resoluciones</h2>
+        <span class="chev">▼</span>
+      </div>
+      <div class="collapsible">
+        <div class="rep-wrap">
+          <table class="rep-table">
+            <thead>
+              <tr>
+                <th>Número mixto</th>
+                <th>Fracciones equivalentes</th>
+                <th>Geométrica</th>
+                <th>Decimal</th>
+                <th>Recta numérica</th>
+              </tr>
+            </thead>
+            <tbody>
+
+              <!-- Res 1: 2 1/4 -->
+              <tr>
+                <td>$2\dfrac{1}{4}$</td>
+                <td>$\dfrac{9}{4} = \dfrac{18}{8} = \dfrac{27}{12}$</td>
+                <td>
+                  <!-- 3 rects, d=4, [4,4,1] filled, gray -->
+                  <svg viewBox="0 0 90 54" width="90" height="54" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Rect 1: all 4 filled -->
+                    <rect x="2" y="2" width="22" height="50" fill="#AAAAAA"/>
+                    <rect x="2" y="2" width="22" height="50" fill="none" stroke="#444" stroke-width="1"/>
+                    <line x1="2" y1="14" x2="24" y2="14" stroke="#444" stroke-width=".8"/>
+                    <line x1="2" y1="27" x2="24" y2="27" stroke="#444" stroke-width=".8"/>
+                    <line x1="2" y1="39" x2="24" y2="39" stroke="#444" stroke-width=".8"/>
+                    <!-- Rect 2: all 4 filled -->
+                    <rect x="32" y="2" width="22" height="50" fill="#AAAAAA"/>
+                    <rect x="32" y="2" width="22" height="50" fill="none" stroke="#444" stroke-width="1"/>
+                    <line x1="32" y1="14" x2="54" y2="14" stroke="#444" stroke-width=".8"/>
+                    <line x1="32" y1="27" x2="54" y2="27" stroke="#444" stroke-width=".8"/>
+                    <line x1="32" y1="39" x2="54" y2="39" stroke="#444" stroke-width=".8"/>
+                    <!-- Rect 3: top 1 of 4 filled -->
+                    <rect x="62" y="2" width="22" height="50" fill="white"/>
+                    <rect x="62" y="2" width="22" height="12" fill="#AAAAAA"/>
+                    <rect x="62" y="2" width="22" height="50" fill="none" stroke="#444" stroke-width="1"/>
+                    <line x1="62" y1="14" x2="84" y2="14" stroke="#444" stroke-width=".8"/>
+                    <line x1="62" y1="27" x2="84" y2="27" stroke="#444" stroke-width=".8"/>
+                    <line x1="62" y1="39" x2="84" y2="39" stroke="#444" stroke-width=".8"/>
+                  </svg>
+                </td>
+                <td>$2.25$</td>
+                <td>
+                  <!-- 0 to 3, dot at 2.25: x = 10 + 2.25*40 = 100 -->
+                  <svg viewBox="0 0 140 30" width="140" height="30" xmlns="http://www.w3.org/2000/svg">
+                    <line x1="10" y1="14" x2="130" y2="14" stroke="#555" stroke-width="1.5"/>
+                    <line x1="10" y1="10" x2="10" y2="18" stroke="#555" stroke-width="1.5"/>
+                    <line x1="50" y1="10" x2="50" y2="18" stroke="#555" stroke-width="1.5"/>
+                    <line x1="90" y1="10" x2="90" y2="18" stroke="#555" stroke-width="1.5"/>
+                    <line x1="130" y1="10" x2="130" y2="18" stroke="#555" stroke-width="1.5"/>
+                    <text x="10" y="27" text-anchor="middle" font-size="9" fill="#555">0</text>
+                    <text x="50" y="27" text-anchor="middle" font-size="9" fill="#555">1</text>
+                    <text x="90" y="27" text-anchor="middle" font-size="9" fill="#555">2</text>
+                    <text x="130" y="27" text-anchor="middle" font-size="9" fill="#555">3</text>
+                    <line x1="20" y1="12" x2="20" y2="16" stroke="#7B9FCC" stroke-width=".8"/>
+                    <line x1="30" y1="12" x2="30" y2="16" stroke="#7B9FCC" stroke-width=".8"/>
+                    <line x1="40" y1="12" x2="40" y2="16" stroke="#7B9FCC" stroke-width=".8"/>
+                    <line x1="60" y1="12" x2="60" y2="16" stroke="#7B9FCC" stroke-width=".8"/>
+                    <line x1="70" y1="12" x2="70" y2="16" stroke="#7B9FCC" stroke-width=".8"/>
+                    <line x1="80" y1="12" x2="80" y2="16" stroke="#7B9FCC" stroke-width=".8"/>
+                    <line x1="100" y1="12" x2="100" y2="16" stroke="#7B9FCC" stroke-width=".8"/>
+                    <line x1="110" y1="12" x2="110" y2="16" stroke="#7B9FCC" stroke-width=".8"/>
+                    <line x1="120" y1="12" x2="120" y2="16" stroke="#7B9FCC" stroke-width=".8"/>
+                    <circle cx="100" cy="14" r="3.5" fill="#FF00AA"/>
+                  </svg>
+                </td>
+              </tr>
+
+              <!-- Res 2: 2 1/2 -->
+              <tr>
+                <td>$2\dfrac{1}{2}$</td>
+                <td>$\dfrac{5}{2} = \dfrac{10}{4} = \dfrac{15}{6}$</td>
+                <td>
+                  <!-- 3 rects, d=2, [2,2,1] filled, gray -->
+                  <svg viewBox="0 0 90 34" width="90" height="34" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Rect 1: all 2 filled -->
+                    <rect x="2" y="2" width="22" height="30" fill="#AAAAAA"/>
+                    <rect x="2" y="2" width="22" height="30" fill="none" stroke="#444" stroke-width="1"/>
+                    <line x1="2" y1="17" x2="24" y2="17" stroke="#444" stroke-width=".8"/>
+                    <!-- Rect 2: all 2 filled -->
+                    <rect x="32" y="2" width="22" height="30" fill="#AAAAAA"/>
+                    <rect x="32" y="2" width="22" height="30" fill="none" stroke="#444" stroke-width="1"/>
+                    <line x1="32" y1="17" x2="54" y2="17" stroke="#444" stroke-width=".8"/>
+                    <!-- Rect 3: top 1 of 2 filled -->
+                    <rect x="62" y="2" width="22" height="30" fill="white"/>
+                    <rect x="62" y="2" width="22" height="15" fill="#AAAAAA"/>
+                    <rect x="62" y="2" width="22" height="30" fill="none" stroke="#444" stroke-width="1"/>
+                    <line x1="62" y1="17" x2="84" y2="17" stroke="#444" stroke-width=".8"/>
+                  </svg>
+                </td>
+                <td>$2.5$</td>
+                <td>
+                  <!-- 0 to 3, dot at 2.5: x = 10 + 2.5*40 = 110 -->
+                  <svg viewBox="0 0 140 30" width="140" height="30" xmlns="http://www.w3.org/2000/svg">
+                    <line x1="10" y1="14" x2="130" y2="14" stroke="#555" stroke-width="1.5"/>
+                    <line x1="10" y1="10" x2="10" y2="18" stroke="#555" stroke-width="1.5"/>
+                    <line x1="50" y1="10" x2="50" y2="18" stroke="#555" stroke-width="1.5"/>
+                    <line x1="90" y1="10" x2="90" y2="18" stroke="#555" stroke-width="1.5"/>
+                    <line x1="130" y1="10" x2="130" y2="18" stroke="#555" stroke-width="1.5"/>
+                    <text x="10" y="27" text-anchor="middle" font-size="9" fill="#555">0</text>
+                    <text x="50" y="27" text-anchor="middle" font-size="9" fill="#555">1</text>
+                    <text x="90" y="27" text-anchor="middle" font-size="9" fill="#555">2</text>
+                    <text x="130" y="27" text-anchor="middle" font-size="9" fill="#555">3</text>
+                    <line x1="30" y1="12" x2="30" y2="16" stroke="#7B9FCC" stroke-width=".8"/>
+                    <line x1="70" y1="12" x2="70" y2="16" stroke="#7B9FCC" stroke-width=".8"/>
+                    <line x1="110" y1="12" x2="110" y2="16" stroke="#7B9FCC" stroke-width=".8"/>
+                    <circle cx="110" cy="14" r="3.5" fill="#FF00AA"/>
+                  </svg>
+                </td>
+              </tr>
+
+              <!-- Res 3: 1 1/5 -->
+              <tr>
+                <td>$1\dfrac{1}{5}$</td>
+                <td>$\dfrac{6}{5} = \dfrac{12}{10} = \dfrac{18}{15}$</td>
+                <td>
+                  <!-- 2 rects, d=5, [5,1] filled, gray -->
+                  <svg viewBox="0 0 62 62" width="62" height="62" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Rect 1: all 5 filled -->
+                    <rect x="2" y="2" width="24" height="58" fill="#AAAAAA"/>
+                    <rect x="2" y="2" width="24" height="58" fill="none" stroke="#444" stroke-width="1"/>
+                    <line x1="2" y1="14" x2="26" y2="14" stroke="#444" stroke-width=".8"/>
+                    <line x1="2" y1="26" x2="26" y2="26" stroke="#444" stroke-width=".8"/>
+                    <line x1="2" y1="38" x2="26" y2="38" stroke="#444" stroke-width=".8"/>
+                    <line x1="2" y1="50" x2="26" y2="50" stroke="#444" stroke-width=".8"/>
+                    <!-- Rect 2: top 1 of 5 filled -->
+                    <rect x="36" y="2" width="24" height="58" fill="white"/>
+                    <rect x="36" y="2" width="24" height="12" fill="#AAAAAA"/>
+                    <rect x="36" y="2" width="24" height="58" fill="none" stroke="#444" stroke-width="1"/>
+                    <line x1="36" y1="14" x2="60" y2="14" stroke="#444" stroke-width=".8"/>
+                    <line x1="36" y1="26" x2="60" y2="26" stroke="#444" stroke-width=".8"/>
+                    <line x1="36" y1="38" x2="60" y2="38" stroke="#444" stroke-width=".8"/>
+                    <line x1="36" y1="50" x2="60" y2="50" stroke="#444" stroke-width=".8"/>
+                  </svg>
+                </td>
+                <td>$1.2$</td>
+                <td>
+                  <!-- 0 to 2, dot at 1.2: x = 10 + 1.2*60 = 82 -->
+                  <svg viewBox="0 0 140 30" width="140" height="30" xmlns="http://www.w3.org/2000/svg">
+                    <line x1="10" y1="14" x2="130" y2="14" stroke="#555" stroke-width="1.5"/>
+                    <line x1="10" y1="10" x2="10" y2="18" stroke="#555" stroke-width="1.5"/>
+                    <line x1="70" y1="10" x2="70" y2="18" stroke="#555" stroke-width="1.5"/>
+                    <line x1="130" y1="10" x2="130" y2="18" stroke="#555" stroke-width="1.5"/>
+                    <text x="10" y="27" text-anchor="middle" font-size="9" fill="#555">0</text>
+                    <text x="70" y="27" text-anchor="middle" font-size="9" fill="#555">1</text>
+                    <text x="130" y="27" text-anchor="middle" font-size="9" fill="#555">2</text>
+                    <line x1="22" y1="12" x2="22" y2="16" stroke="#7B9FCC" stroke-width=".8"/>
+                    <line x1="34" y1="12" x2="34" y2="16" stroke="#7B9FCC" stroke-width=".8"/>
+                    <line x1="46" y1="12" x2="46" y2="16" stroke="#7B9FCC" stroke-width=".8"/>
+                    <line x1="58" y1="12" x2="58" y2="16" stroke="#7B9FCC" stroke-width=".8"/>
+                    <line x1="82" y1="12" x2="82" y2="16" stroke="#7B9FCC" stroke-width=".8"/>
+                    <line x1="94" y1="12" x2="94" y2="16" stroke="#7B9FCC" stroke-width=".8"/>
+                    <line x1="106" y1="12" x2="106" y2="16" stroke="#7B9FCC" stroke-width=".8"/>
+                    <line x1="118" y1="12" x2="118" y2="16" stroke="#7B9FCC" stroke-width=".8"/>
+                    <circle cx="82" cy="14" r="3.5" fill="#FF00AA"/>
+                  </svg>
+                </td>
+              </tr>
+
+              <!-- Res 4: 1 1/2 -->
+              <tr>
+                <td>$1\dfrac{1}{2}$</td>
+                <td>$\dfrac{3}{2} = \dfrac{6}{4} = \dfrac{9}{6}$</td>
+                <td>
+                  <!-- 2 rects, d=2, [2,1] filled, gray -->
+                  <svg viewBox="0 0 62 34" width="62" height="34" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Rect 1: all 2 filled -->
+                    <rect x="2" y="2" width="24" height="30" fill="#AAAAAA"/>
+                    <rect x="2" y="2" width="24" height="30" fill="none" stroke="#444" stroke-width="1"/>
+                    <line x1="2" y1="17" x2="26" y2="17" stroke="#444" stroke-width=".8"/>
+                    <!-- Rect 2: top 1 of 2 filled -->
+                    <rect x="36" y="2" width="24" height="30" fill="white"/>
+                    <rect x="36" y="2" width="24" height="15" fill="#AAAAAA"/>
+                    <rect x="36" y="2" width="24" height="30" fill="none" stroke="#444" stroke-width="1"/>
+                    <line x1="36" y1="17" x2="60" y2="17" stroke="#444" stroke-width=".8"/>
+                  </svg>
+                </td>
+                <td>$1.5$</td>
+                <td>
+                  <!-- 0 to 2, dot at 1.5: x = 10 + 1.5*60 = 100 -->
+                  <svg viewBox="0 0 140 30" width="140" height="30" xmlns="http://www.w3.org/2000/svg">
+                    <line x1="10" y1="14" x2="130" y2="14" stroke="#555" stroke-width="1.5"/>
+                    <line x1="10" y1="10" x2="10" y2="18" stroke="#555" stroke-width="1.5"/>
+                    <line x1="70" y1="10" x2="70" y2="18" stroke="#555" stroke-width="1.5"/>
+                    <line x1="130" y1="10" x2="130" y2="18" stroke="#555" stroke-width="1.5"/>
+                    <text x="10" y="27" text-anchor="middle" font-size="9" fill="#555">0</text>
+                    <text x="70" y="27" text-anchor="middle" font-size="9" fill="#555">1</text>
+                    <text x="130" y="27" text-anchor="middle" font-size="9" fill="#555">2</text>
+                    <line x1="40" y1="12" x2="40" y2="16" stroke="#7B9FCC" stroke-width=".8"/>
+                    <line x1="100" y1="12" x2="100" y2="16" stroke="#7B9FCC" stroke-width=".8"/>
+                    <circle cx="100" cy="14" r="3.5" fill="#FF00AA"/>
+                  </svg>
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ EXTRAS ══════════ -->
+    <section class="section-block">
+      <div class="sec-toggle" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('show');">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </div>
+        <h2>Ejercicios extra</h2>
+        <span class="chev">▼</span>
+      </div>
+      <div class="collapsible">
+        <p style="font-size:.88rem;color:var(--text-2);margin-bottom:.9rem;">
+          Realiza la representación completa (fracciones equivalentes, geométrica, decimal y recta numérica) para cada número mixto.
+        </p>
+        <ul class="extras-grid">
+          <li>$2\dfrac{1}{2}$</li>
+          <li>$3\dfrac{2}{5}$</li>
+          <li>$4\dfrac{1}{2}$</li>
+          <li>$5\dfrac{1}{3}$</li>
+          <li>$3\dfrac{3}{4}$</li>
+          <li>$2\dfrac{1}{3}$</li>
+          <li>$5\dfrac{2}{3}$</li>
+          <li>$4\dfrac{3}{4}$</li>
+          <li>$3\dfrac{1}{6}$</li>
+          <li>$5\dfrac{1}{4}$</li>
+          <li>$2\dfrac{5}{6}$</li>
+          <li>$4\dfrac{2}{3}$</li>
+          <li>$2\dfrac{3}{4}$</li>
+          <li>$2\dfrac{2}{5}$</li>
+          <li>$3\dfrac{1}{2}$</li>
+          <li>$3\dfrac{1}{3}$</li>
+          <li>$3\dfrac{1}{5}$</li>
+          <li>$2\dfrac{3}{5}$</li>
+          <li>$2\dfrac{4}{5}$</li>
+          <li>$3\dfrac{1}{4}$</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ══════════ NAV ══════════ -->
+    <div class="topic-nav-btns">
+      <a href="jerarquia-fracciones.html" class="btn-anterior">← Jerarquía con fracciones</a>
+    </div>
+
+  </main>
+
+  <script src="../../footer.js"></script>
+</body>
+</html>

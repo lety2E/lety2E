@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Operaciones con fracciones — Matemáticas 2 — lety2e</title>
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../../favicon.ico">
+  <meta name="description" content="Suma, resta, multiplicación, división, potencias y raíces de fracciones — Matemáticas 2." />
+  <link rel="stylesheet" href="../../style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" />
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body, {
+      delimiters: [
+        {left:'$$', right:'$$', display:true},
+        {left:'$', right:'$', display:false}
+      ]
+    });"></script>
+
+  <style>
+    .topic-tag {
+      display: inline-flex; align-items: center; gap: .35rem;
+      padding: .22rem .75rem; border-radius: 99px;
+      background: var(--accent-light); color: var(--accent);
+      font-size: .78rem; font-weight: 700; letter-spacing: .03em;
+      margin-bottom: .55rem;
+    }
+    .topic-tag::before {
+      content: ''; width: 7px; height: 7px; border-radius: 50%;
+      background: var(--accent); display: inline-block;
+    }
+
+    .section-block { margin-bottom: 2.5rem; }
+    .section-block:last-child { margin-bottom: 0; }
+
+    .sec-head {
+      display: flex; align-items: center; gap: .65rem;
+      margin-bottom: 1.1rem;
+    }
+    .sec-head h2 { margin: 0; font-size: 1.2rem; line-height: 1; }
+    .sec-icon {
+      width: 30px; height: 30px; border-radius: 8px;
+      display: grid; place-items: center; flex-shrink: 0;
+      background: var(--accent);
+    }
+    .sec-icon svg { width: 15px; height: 15px; stroke: #fff; fill: none; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+
+    .sec-toggle {
+      display: flex; align-items: center; gap: .65rem;
+      cursor: pointer; user-select: none;
+      padding: .8rem 0; margin: 0 0 .4rem;
+    }
+    .sec-toggle h2 { margin: 0; font-size: 1.2rem; line-height: 1; }
+    .sec-toggle .chev {
+      margin-left: auto; font-size: .75rem; color: var(--text-3);
+      transition: transform .25s;
+    }
+    .sec-toggle.open .chev { transform: rotate(180deg); }
+
+    .collapsible {
+      max-height: 0; overflow: hidden;
+      transition: max-height .5s ease, padding .3s ease;
+      padding: 0;
+    }
+    .collapsible.show {
+      max-height: 20000px;
+      padding: .8rem 0;
+    }
+
+    /* ── Video ── */
+    .video-single { max-width: 720px; margin: 0 auto; }
+    .video-wrapper {
+      position: relative; padding-bottom: 56.25%; height: 0;
+      overflow: hidden; border-radius: var(--r-md); background: #000;
+    }
+    .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+
+    /* ── Ejemplo ── */
+    .ejemplo-section { margin: 2rem 0 2.5rem; }
+    .ejemplo-head {
+      display: flex; align-items: center; gap: .65rem;
+      margin-bottom: 1rem;
+    }
+    .ejemplo-head h3 {
+      margin: 0;
+      font-family: var(--font-display);
+      font-size: 1.2rem; line-height: 1;
+      color: var(--M);
+      font-style: italic;
+    }
+
+    /* ── Tarjeta compacta ── */
+    .mini-card {
+      background: var(--bg-card); border: 1.5px solid var(--border);
+      border-radius: var(--r-md); overflow: hidden;
+    }
+    .mini-card-head {
+      padding: .4rem .8rem; background: var(--course-1);
+      font-family: var(--font-display); font-size: .85rem; color: #fff; font-weight: 700;
+    }
+    .mini-card-body {
+      padding: .8rem 1rem;
+      font-size: .9rem; line-height: 4.2; color: var(--text);
+      text-align: center;
+    }
+    .mini-card-body.left { text-align: left; }
+    .mini-card-body .sol {
+      margin: 0;
+      padding: .7rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .mini-card-body .sol:last-child { border-bottom: none; padding-bottom: 0; }
+    .mini-card-body strong { color: var(--M); font-weight: 700; }
+
+    /* ── Apunte tabla de reglas ── */
+    .apunte-table {
+      width: 100%; border-collapse: collapse;
+    }
+    .apunte-table td {
+      padding: .7rem 1rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: middle;
+    }
+    .apunte-table tr:last-child td { border-bottom: none; }
+    .apunte-table .lbl {
+      white-space: nowrap; width: 1%;
+      font-weight: 700; color: var(--T);
+      font-size: .85rem; letter-spacing: .02em;
+      text-transform: uppercase;
+      padding-right: 1.4rem;
+    }
+    .apunte-table .formula { text-align: center; }
+
+    /* ── Etiqueta de tipo en ejemplos ── */
+    .ej-tipo {
+      font-weight: 700; color: var(--T);
+      font-size: .78rem; letter-spacing: .06em;
+      text-transform: uppercase; margin-bottom: -.4rem;
+      display: block;
+    }
+    .ej-bloque {
+      padding: 1.2rem 1.5rem;
+      background: var(--bg-card);
+      border: 1.5px solid var(--border);
+      border-radius: var(--r-md);
+    }
+    .ej-bloque .katex-display { margin: .4em 0 !important; }
+    .ej-row {
+      padding: .6rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .ej-row:last-child { border-bottom: none; padding-bottom: 0; }
+
+    /* ── Grid 2 columnas ── */
+    .bloques-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2rem; }
+    @media (max-width: 700px) { .bloques-2 { grid-template-columns: 1fr; } }
+
+    /* ── Respuestas: espaciado ── */
+    .sol .katex-display { margin: .5em 0 !important; }
+
+    /* ── Nav ── */
+    .topic-nav-btns {
+      display: flex; justify-content: space-between; gap: 1rem;
+      margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border);
+    }
+    .btn-anterior, .btn-siguiente {
+      display: inline-flex; align-items: center; gap: .5rem;
+      padding: .65rem 1.4rem; border-radius: 99px;
+      font-weight: 700; font-size: .9rem; transition: background .2s, transform .18s;
+    }
+    .btn-anterior {
+      background: transparent; color: var(--accent);
+      border: 2px solid var(--accent);
+    }
+    .btn-anterior:hover { background: var(--accent-light); transform: translateX(-3px); }
+    .btn-siguiente { background: var(--accent); color: #fff; }
+    .btn-siguiente:hover { background: var(--M); color: #fff; transform: translateX(3px); }
+  </style>
+</head>
+<body data-section="math">
+
+  <script src="../../nav.js"></script>
+
+  <main class="topic-content">
+
+    <header class="topic-header">
+      <p class="breadcrumb">
+        <a href="../index.html">Inicio</a> ›
+        <a href="index.html">Matemáticas 2</a> ›
+        Operaciones con fracciones
+      </p>
+      <div class="topic-tag">Matemáticas 2 · Tema 1</div>
+      <h1>Operaciones con fracciones</h1>
+    </header>
+
+    <!-- ══════════ VIDEO ══════════ -->
+    <section class="section-block">
+      <div class="sec-head">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3" stroke-width="0" fill="white"/></svg>
+        </div>
+        <h2>Video</h2>
+      </div>
+      <div class="video-single">
+        <div class="video-wrapper">
+          <iframe src="https://www.youtube.com/embed/ljrLthTPmKU?rel=0" title="Operaciones con fracciones" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ MINI APUNTE ══════════ -->
+    <section class="section-block">
+      <div class="sec-head">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        </div>
+        <h2>Mini apunte</h2>
+      </div>
+      <div class="mini-card">
+        <div class="mini-card-body" style="padding:0; line-height:1;">
+          <table class="apunte-table">
+            <tr>
+              <td class="lbl">Suma y resta</td>
+              <td class="formula">$\dfrac{a}{b} \pm \dfrac{c}{d} = \dfrac{ad \pm cb}{bd}$</td>
+            </tr>
+            <tr>
+              <td class="lbl">Multiplicación</td>
+              <td class="formula">$\dfrac{a}{b}\left(\dfrac{c}{d}\right) = \dfrac{ac}{bd}$</td>
+            </tr>
+            <tr>
+              <td class="lbl">División</td>
+              <td class="formula">$\dfrac{a}{b} \div \dfrac{c}{d} = \dfrac{ad}{bc}$ &ensp;ó&ensp; $\dfrac{\dfrac{a}{b}}{\dfrac{c}{d}} = \dfrac{ad}{bc}$</td>
+            </tr>
+            <tr>
+              <td class="lbl">Potencia</td>
+              <td class="formula">$\left(\dfrac{a}{b}\right)^n = \dfrac{a^n}{b^n}$</td>
+            </tr>
+            <tr>
+              <td class="lbl">Raíces</td>
+              <td class="formula">$\sqrt[n]{\dfrac{a}{b}} = \dfrac{\sqrt[n]{a}}{\sqrt[n]{b}}$</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <p style="margin-top:.8rem; font-size:.88rem; color:var(--text-2);">
+        Todas las fracciones se deben simplificar al menos: mitades, terceras y quintas.
+      </p>
+    </section>
+
+    <!-- ══════════ EJEMPLOS ══════════ -->
+    <section class="section-block ejemplo-section">
+      <div class="ejemplo-head">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        </div>
+        <h3>Ejemplos</h3>
+      </div>
+      <div class="ej-bloque">
+
+        <div class="ej-row">
+          <span class="ej-tipo">Suma y resta</span>
+          $$-\dfrac{3}{4} - \dfrac{8}{6} = \dfrac{-18-32}{24} = \dfrac{-50}{24} = \mathbf{-\dfrac{25}{12}}$$
+        </div>
+
+        <div class="ej-row">
+          <span class="ej-tipo">Multiplicación</span>
+          $$-\dfrac{5}{8}\left(\dfrac{1}{2}\right)\left(\dfrac{4}{10}\right) = \dfrac{-20}{160} = \dfrac{-10}{80} = \mathbf{-\dfrac{1}{8}}$$
+        </div>
+
+        <div class="ej-row">
+          <span class="ej-tipo">División</span>
+          $$\dfrac{3}{4} \div \dfrac{8}{12} = \dfrac{36}{32} = \dfrac{18}{16} = \mathbf{\dfrac{9}{8}} \qquad \text{ó} \qquad \dfrac{\dfrac{3}{4}}{\dfrac{8}{12}} = \dfrac{36}{32} = \mathbf{\dfrac{9}{8}}$$
+        </div>
+
+        <div class="ej-row">
+          <span class="ej-tipo">Potencia</span>
+          $$\left(\dfrac{5}{-3}\right)^3 = \dfrac{(5)^3}{(-3)^3} = \mathbf{\dfrac{125}{-27}}$$
+        </div>
+
+        <div class="ej-row">
+          <span class="ej-tipo">Raíces</span>
+          $$\sqrt{\dfrac{36}{25}} = \dfrac{\sqrt{36}}{\sqrt{25}} = \mathbf{\dfrac{6}{5}}$$
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══════════ EJERCICIOS ══════════ -->
+    <section class="section-block">
+      <div class="sec-head">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+        </div>
+        <h2>Ejercicios</h2>
+      </div>
+      <div class="bloques-2">
+
+        <div class="mini-card">
+          <div class="mini-card-head">Bloque 1</div>
+          <div class="mini-card-body">
+            $-\dfrac{4}{8} + \dfrac{1}{4} =$<br>
+            $\dfrac{4}{3}\left(\dfrac{5}{15}\right) =$<br>
+            $\dfrac{3}{4} \div \dfrac{-2}{6} =$<br>
+            $\left(\dfrac{2}{5}\right)^2 =$<br>
+            $\sqrt{\dfrac{25}{36}} =$<br>
+            $-\dfrac{2}{4} - \dfrac{5}{3} =$<br>
+            $\dfrac{2}{4}\left(\dfrac{7}{14}\right)\left(\dfrac{-1}{3}\right) =$<br>
+            $\dfrac{-\frac{1}{2}}{-\frac{4}{6}} =$<br>
+            $\left(\dfrac{1}{-5}\right)^3 =$<br>
+            $\sqrt[3]{\dfrac{-8}{1000}} =$
+          </div>
+        </div>
+
+        <div class="mini-card">
+          <div class="mini-card-head">Bloque 2</div>
+          <div class="mini-card-body">
+            $\dfrac{3}{6} - \dfrac{2}{5} =$<br>
+            $-\dfrac{1}{3}\left(-\dfrac{2}{4}\right) =$<br>
+            $-\dfrac{1}{2} \div \dfrac{5}{3} =$<br>
+            $\left(\dfrac{-1}{4}\right)^2 =$<br>
+            $\sqrt{\dfrac{49}{4}} =$<br>
+            $-\dfrac{3}{5} - \dfrac{2}{10} =$<br>
+            $-\dfrac{3}{9}\left(\dfrac{4}{5}\right)\left(\dfrac{1}{3}\right) =$<br>
+            $\dfrac{-\frac{2}{5}}{-\frac{4}{3}} =$<br>
+            $\left(-\dfrac{2}{5}\right)^3 =$<br>
+            $\sqrt[3]{\dfrac{-64}{125}} =$
+          </div>
+        </div>
+
+        <div class="mini-card">
+          <div class="mini-card-head">Bloque 3</div>
+          <div class="mini-card-body">
+            $-\dfrac{3}{5} - \dfrac{2}{4} =$<br>
+            $-\dfrac{2}{5}\left(-\dfrac{4}{6}\right) =$<br>
+            $-\dfrac{2}{3} \div \dfrac{1}{4} =$<br>
+            $\left(-\dfrac{1}{3}\right)^2 =$<br>
+            $\sqrt{\dfrac{81}{49}} =$<br>
+            $\dfrac{7}{10} - \dfrac{6}{10} =$<br>
+            $-\dfrac{2}{3}\left(-\dfrac{9}{6}\right)\left(\dfrac{-1}{3}\right) =$<br>
+            $\dfrac{-\frac{1}{3}}{\frac{2}{6}} =$<br>
+            $\left(\dfrac{4}{6}\right)^3 =$<br>
+            $\sqrt[3]{\dfrac{-1}{8}} =$
+          </div>
+        </div>
+
+        <div class="mini-card">
+          <div class="mini-card-head">Bloque 4</div>
+          <div class="mini-card-body">
+            $-\dfrac{2}{8} + \dfrac{6}{9} =$<br>
+            $-\dfrac{6}{3}\left(\dfrac{5}{20}\right) =$<br>
+            $\dfrac{-6}{4} \div \dfrac{3}{-5} =$<br>
+            $\left(-\dfrac{2}{4}\right)^2 =$<br>
+            $\sqrt{\dfrac{4}{49}} =$<br>
+            $-\dfrac{4}{5} - \dfrac{6}{9} =$<br>
+            $\dfrac{4}{8}\left(\dfrac{1}{4}\right)\left(\dfrac{-3}{2}\right) =$<br>
+            $\dfrac{\frac{2}{3}}{-\frac{5}{4}} =$<br>
+            $\left(-\dfrac{3}{5}\right)^3 =$<br>
+            $\sqrt[3]{\dfrac{-125}{1000}} =$
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══════════ RESPUESTAS ══════════ -->
+    <section class="section-block">
+      <div class="sec-toggle" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('show');">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <h2>Respuestas</h2>
+        <span class="chev">▼</span>
+      </div>
+      <div class="collapsible">
+        <div class="bloques-2">
+
+          <div class="mini-card">
+            <div class="mini-card-head">Bloque 1</div>
+            <div class="mini-card-body">
+              <div class="sol">$$-\dfrac{4}{8} + \dfrac{1}{4} = \dfrac{-16+8}{32} = \dfrac{-8}{32} = \mathbf{-\dfrac{1}{4}}$$</div>
+              <div class="sol">$$\dfrac{4}{3}\left(\dfrac{5}{15}\right) = \dfrac{20}{45} = \mathbf{\dfrac{4}{9}}$$</div>
+              <div class="sol">$$\dfrac{3}{4} \div \dfrac{-2}{6} = \dfrac{18}{-8} = \mathbf{-\dfrac{9}{4}}$$</div>
+              <div class="sol">$$\left(\dfrac{2}{5}\right)^2 = \dfrac{(2)^2}{(5)^2} = \mathbf{\dfrac{4}{25}}$$</div>
+              <div class="sol">$$\sqrt{\dfrac{25}{36}} = \dfrac{\sqrt{25}}{\sqrt{36}} = \mathbf{\dfrac{5}{6}}$$</div>
+              <div class="sol">$$-\dfrac{2}{4} - \dfrac{5}{3} = \dfrac{-6-20}{12} = \dfrac{-26}{12} = \mathbf{-\dfrac{13}{6}}$$</div>
+              <div class="sol">$$\dfrac{2}{4}\left(\dfrac{7}{14}\right)\left(\dfrac{-1}{3}\right) = \dfrac{-14}{168} = \mathbf{-\dfrac{1}{12}}$$</div>
+              <div class="sol">$$\dfrac{-\frac{1}{2}}{-\frac{4}{6}} = \dfrac{-6}{-8} = \mathbf{\dfrac{3}{4}}$$</div>
+              <div class="sol">$$\left(\dfrac{1}{-5}\right)^3 = \dfrac{(1)^3}{(-5)^3} = \mathbf{-\dfrac{1}{125}}$$</div>
+              <div class="sol">$$\sqrt[3]{\dfrac{-8}{1000}} = \dfrac{\sqrt[3]{-8}}{\sqrt[3]{1000}} = \mathbf{-\dfrac{2}{10}}$$</div>
+            </div>
+          </div>
+
+          <div class="mini-card">
+            <div class="mini-card-head">Bloque 2</div>
+            <div class="mini-card-body">
+              <div class="sol">$$\dfrac{3}{6} - \dfrac{2}{5} = \dfrac{15-12}{30} = \dfrac{3}{30} = \mathbf{\dfrac{1}{10}}$$</div>
+              <div class="sol">$$-\dfrac{1}{3}\left(-\dfrac{2}{4}\right) = \dfrac{2}{12} = \mathbf{\dfrac{1}{6}}$$</div>
+              <div class="sol">$$-\dfrac{1}{2} \div \dfrac{5}{3} = \mathbf{-\dfrac{3}{10}}$$</div>
+              <div class="sol">$$\left(\dfrac{-1}{4}\right)^2 = \dfrac{(-1)^2}{(4)^2} = \mathbf{\dfrac{1}{16}}$$</div>
+              <div class="sol">$$\sqrt{\dfrac{49}{4}} = \dfrac{\sqrt{49}}{\sqrt{4}} = \mathbf{\dfrac{7}{2}}$$</div>
+              <div class="sol">$$-\dfrac{3}{5} - \dfrac{2}{10} = \dfrac{-30-10}{50} = \dfrac{-40}{50} = \mathbf{-\dfrac{4}{5}}$$</div>
+              <div class="sol">$$-\dfrac{3}{9}\left(\dfrac{4}{5}\right)\left(\dfrac{1}{3}\right) = \dfrac{-12}{135} = \mathbf{-\dfrac{4}{45}}$$</div>
+              <div class="sol">$$\dfrac{-\frac{2}{5}}{-\frac{4}{3}} = \dfrac{-6}{-20} = \mathbf{\dfrac{3}{10}}$$</div>
+              <div class="sol">$$\left(-\dfrac{2}{5}\right)^3 = \dfrac{(-2)^3}{(5)^3} = \mathbf{-\dfrac{8}{125}}$$</div>
+              <div class="sol">$$\sqrt[3]{\dfrac{-64}{125}} = \dfrac{\sqrt[3]{-64}}{\sqrt[3]{125}} = \mathbf{-\dfrac{4}{5}}$$</div>
+            </div>
+          </div>
+
+          <div class="mini-card">
+            <div class="mini-card-head">Bloque 3</div>
+            <div class="mini-card-body">
+              <div class="sol">$$-\dfrac{3}{5} - \dfrac{2}{4} = \dfrac{-12-10}{20} = \dfrac{-22}{20} = \mathbf{-\dfrac{11}{10}}$$</div>
+              <div class="sol">$$-\dfrac{2}{5}\left(-\dfrac{4}{6}\right) = \dfrac{8}{30} = \mathbf{\dfrac{4}{15}}$$</div>
+              <div class="sol">$$-\dfrac{2}{3} \div \dfrac{1}{4} = \mathbf{-\dfrac{8}{3}}$$</div>
+              <div class="sol">$$\left(-\dfrac{1}{3}\right)^2 = \dfrac{(-1)^2}{(3)^2} = \mathbf{\dfrac{1}{9}}$$</div>
+              <div class="sol">$$\sqrt{\dfrac{81}{49}} = \dfrac{\sqrt{81}}{\sqrt{49}} = \mathbf{\dfrac{9}{7}}$$</div>
+              <div class="sol">$$\dfrac{7}{10} - \dfrac{6}{10} = \dfrac{70-60}{100} = \dfrac{10}{100} = \mathbf{\dfrac{1}{10}}$$</div>
+              <div class="sol">$$-\dfrac{2}{3}\left(-\dfrac{9}{6}\right)\left(\dfrac{-1}{3}\right) = \dfrac{-18}{54} = \mathbf{-\dfrac{1}{3}}$$</div>
+              <div class="sol">$$\dfrac{-\frac{1}{3}}{\frac{2}{6}} = \dfrac{-6}{6} = \mathbf{-1}$$</div>
+              <div class="sol">$$\left(\dfrac{4}{6}\right)^3 = \dfrac{(4)^3}{(6)^3} = \dfrac{64}{216} = \mathbf{\dfrac{8}{27}}$$</div>
+              <div class="sol">$$\sqrt[3]{\dfrac{-1}{8}} = \dfrac{\sqrt[3]{-1}}{\sqrt[3]{8}} = \mathbf{-\dfrac{1}{2}}$$</div>
+            </div>
+          </div>
+
+          <div class="mini-card">
+            <div class="mini-card-head">Bloque 4</div>
+            <div class="mini-card-body">
+              <div class="sol">$$-\dfrac{2}{8} + \dfrac{6}{9} = \dfrac{-18+48}{72} = \dfrac{30}{72} = \mathbf{\dfrac{5}{12}}$$</div>
+              <div class="sol">$$-\dfrac{6}{3}\left(\dfrac{5}{20}\right) = \dfrac{-30}{60} = \mathbf{-\dfrac{1}{2}}$$</div>
+              <div class="sol">$$\dfrac{-6}{4} \div \dfrac{3}{-5} = \dfrac{30}{12} = \mathbf{\dfrac{15}{6}} = \mathbf{\dfrac{5}{2}}$$</div>
+              <div class="sol">$$\left(-\dfrac{2}{4}\right)^2 = \dfrac{(-2)^2}{(4)^2} = \dfrac{4}{16} = \mathbf{\dfrac{1}{4}}$$</div>
+              <div class="sol">$$\sqrt{\dfrac{4}{49}} = \dfrac{\sqrt{4}}{\sqrt{49}} = \mathbf{\dfrac{2}{7}}$$</div>
+              <div class="sol">$$-\dfrac{4}{5} - \dfrac{6}{9} = \dfrac{-36-30}{45} = \dfrac{-66}{45} = \mathbf{-\dfrac{22}{15}}$$</div>
+              <div class="sol">$$\dfrac{4}{8}\left(\dfrac{1}{4}\right)\left(\dfrac{-3}{2}\right) = \dfrac{-12}{64} = \mathbf{-\dfrac{3}{16}}$$</div>
+              <div class="sol">$$\dfrac{\frac{2}{3}}{-\frac{5}{4}} = \mathbf{-\dfrac{8}{15}}$$</div>
+              <div class="sol">$$\left(-\dfrac{3}{5}\right)^3 = \dfrac{(-3)^3}{(5)^3} = \mathbf{-\dfrac{27}{125}}$$</div>
+              <div class="sol">$$\sqrt[3]{\dfrac{-125}{1000}} = \dfrac{\sqrt[3]{-125}}{\sqrt[3]{1000}} = \mathbf{-\dfrac{5}{10}} = \mathbf{-\dfrac{1}{2}}$$</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ EXTRAS ══════════ -->
+    <section class="section-block">
+      <div class="sec-toggle" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('show');">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <h2>Ejercicios extra</h2>
+        <span class="chev">▼</span>
+      </div>
+      <div class="collapsible">
+        <div class="bloques-2">
+
+          <div class="mini-card">
+            <div class="mini-card-head">Bloque 5</div>
+            <div class="mini-card-body">
+              $-\dfrac{7}{14} + \dfrac{3}{7} =$<br>
+              $-\dfrac{5}{10} - \dfrac{3}{4} =$<br>
+              $\dfrac{6}{5}\left(\dfrac{7}{25}\right) =$<br>
+              $\dfrac{4}{9}\left(\dfrac{5}{15}\right)\left(-\dfrac{3}{8}\right) =$<br>
+              $\dfrac{3}{5} \div -\dfrac{5}{8} =$<br>
+              $-\dfrac{4}{7} \div -\dfrac{6}{9} =$<br>
+              $\left(\dfrac{2}{3}\right)^2 =$<br>
+              $\left(-\dfrac{3}{8}\right)^3 =$<br>
+              $\sqrt{\dfrac{49}{81}} =$<br>
+              $\sqrt[3]{-\dfrac{64}{125}} =$
+            </div>
+          </div>
+
+          <div class="mini-card">
+            <div class="mini-card-head">Bloque 6</div>
+            <div class="mini-card-body">
+              $-\dfrac{8}{16} + \dfrac{5}{10} =$<br>
+              $-\dfrac{2}{5} - \dfrac{4}{7} =$<br>
+              $\dfrac{5}{6}\left(\dfrac{8}{24}\right) =$<br>
+              $\dfrac{7}{9}\left(\dfrac{3}{12}\right)\left(-\dfrac{4}{5}\right) =$<br>
+              $\dfrac{3}{4} \div -\dfrac{7}{10} =$<br>
+              $-\dfrac{5}{6} \div -\dfrac{7}{8} =$<br>
+              $\left(\dfrac{5}{8}\right)^2 =$<br>
+              $\left(-\dfrac{4}{9}\right)^3 =$<br>
+              $\sqrt{\dfrac{16}{49}} =$<br>
+              $\sqrt[3]{-\dfrac{27}{64}} =$
+            </div>
+          </div>
+
+          <div class="mini-card">
+            <div class="mini-card-head">Bloque 7</div>
+            <div class="mini-card-body">
+              $-\dfrac{9}{18} + \dfrac{4}{9} =$<br>
+              $-\dfrac{7}{14} - \dfrac{2}{5} =$<br>
+              $\dfrac{3}{7}\left(\dfrac{4}{21}\right) =$<br>
+              $\dfrac{5}{11}\left(\dfrac{2}{14}\right)\left(-\dfrac{5}{9}\right) =$<br>
+              $\dfrac{5}{6} \div -\dfrac{3}{4} =$<br>
+              $-\dfrac{2}{3} \div -\dfrac{5}{8} =$<br>
+              $\left(\dfrac{4}{9}\right)^2 =$<br>
+              $\left(-\dfrac{5}{8}\right)^3 =$<br>
+              $\sqrt{\dfrac{36}{49}} =$<br>
+              $\sqrt[3]{-\dfrac{125}{216}} =$
+            </div>
+          </div>
+
+          <div class="mini-card">
+            <div class="mini-card-head">Bloque 8</div>
+            <div class="mini-card-body">
+              $-\dfrac{5}{12} + \dfrac{3}{8} =$<br>
+              $-\dfrac{3}{7} - \dfrac{1}{4} =$<br>
+              $\dfrac{8}{9}\left(\dfrac{5}{27}\right) =$<br>
+              $\dfrac{4}{7}\left(\dfrac{6}{20}\right)\left(-\dfrac{3}{5}\right) =$<br>
+              $\dfrac{7}{10} \div -\dfrac{2}{5} =$<br>
+              $-\dfrac{4}{9} \div -\dfrac{3}{7} =$<br>
+              $\left(\dfrac{3}{8}\right)^2 =$<br>
+              $\left(-\dfrac{4}{11}\right)^3 =$<br>
+              $\sqrt{\dfrac{25}{64}} =$<br>
+              $\sqrt[3]{-\dfrac{8}{27}} =$
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ NAV ══════════ -->
+    <div class="topic-nav-btns">
+      <a href="index.html" class="btn-anterior">← Matemáticas 2</a>
+      <a href="jerarquia-fracciones.html" class="btn-siguiente">Jerarquía con fracciones →</a>
+    </div>
+
+  </main>
+
+  <script src="../../footer.js"></script>
+
+</body>
+</html>

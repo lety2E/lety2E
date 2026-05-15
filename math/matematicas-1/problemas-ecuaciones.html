@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Problemas de ecuaciones — Matemáticas 1 — lety2e</title>
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../../favicon.ico">
+  <meta name="description" content="Plantear y resolver ecuaciones lineales a partir de problemas en lenguaje común — Matemáticas 1." />
+  <link rel="stylesheet" href="../../style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" />
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body, {
+      delimiters: [
+        {left:'$$', right:'$$', display:true},
+        {left:'$', right:'$', display:false}
+      ]
+    });"></script>
+
+  <style>
+    .topic-tag {
+      display: inline-flex; align-items: center; gap: .35rem;
+      padding: .22rem .75rem; border-radius: 99px;
+      background: var(--accent-light); color: var(--accent);
+      font-size: .78rem; font-weight: 700; letter-spacing: .03em;
+      margin-bottom: .55rem;
+    }
+    .topic-tag::before {
+      content: ''; width: 7px; height: 7px; border-radius: 50%;
+      background: var(--accent); display: inline-block;
+    }
+
+    .section-block { margin-bottom: 2.5rem; }
+    .section-block:last-child { margin-bottom: 0; }
+
+    .sec-head {
+      display: flex; align-items: center; gap: .65rem;
+      margin-bottom: 1.1rem;
+    }
+    .sec-head h2 { margin: 0; font-size: 1.2rem; line-height: 1; }
+    .sec-icon {
+      width: 30px; height: 30px; border-radius: 8px;
+      display: grid; place-items: center; flex-shrink: 0;
+      background: var(--accent);
+    }
+    .sec-icon svg { width: 15px; height: 15px; stroke: #fff; fill: none; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+
+    .sec-toggle {
+      display: flex; align-items: center; gap: .65rem;
+      cursor: pointer; user-select: none;
+      padding: .8rem 0; margin: 0 0 .4rem;
+    }
+    .sec-toggle h2 { margin: 0; font-size: 1.2rem; line-height: 1; }
+    .sec-toggle .chev {
+      margin-left: auto; font-size: .75rem; color: var(--text-3);
+      transition: transform .25s;
+    }
+    .sec-toggle.open .chev { transform: rotate(180deg); }
+
+    .collapsible {
+      max-height: 0; overflow: hidden;
+      transition: max-height .4s ease, padding .3s ease;
+      padding: 0;
+    }
+    .collapsible.show {
+      max-height: 8000px;
+      padding: .8rem 0;
+    }
+
+    /* ── Ejemplo ── */
+    .ejemplo-section { margin: 2rem 0 2.5rem; }
+    .ejemplo-head {
+      display: flex; align-items: center; gap: .65rem;
+      margin-bottom: 1rem;
+    }
+    .ejemplo-head h3 {
+      margin: 0;
+      font-family: var(--font-display);
+      font-size: 1.2rem; line-height: 1;
+      color: var(--M);
+      font-style: italic;
+    }
+    .ejemplo-block {
+      padding: 2rem 1.5rem;
+      background: var(--bg-card);
+      border: 1.5px solid var(--border);
+      border-radius: var(--r-md);
+      color: var(--text);
+    }
+    .ejemplo-3col {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
+    }
+    @media (max-width: 750px) { .ejemplo-3col { grid-template-columns: 1fr; } }
+    .ejemplo-item {
+      text-align: center; font-size: 1rem;
+    }
+    .ejemplo-item .frase {
+      font-style: italic; color: var(--text-2);
+      margin-bottom: .9rem; font-size: .93rem; line-height: 1.5;
+      display: block;
+    }
+    .ejemplo-block strong { color: var(--M); font-weight: 700; }
+
+    /* ── Tarjeta compacta (bloque) ── */
+    .mini-card {
+      background: var(--bg-card); border: 1.5px solid var(--border);
+      border-radius: var(--r-md); overflow: hidden;
+    }
+    .mini-card-head {
+      padding: .4rem .8rem; background: var(--course-1);
+      font-family: var(--font-display); font-size: .85rem; color: #fff; font-weight: 700;
+    }
+    .mini-card-body {
+      padding: .8rem 1rem;
+      font-size: .9rem; line-height: 2; color: var(--text);
+    }
+    .mini-card-body .sol {
+      margin: .3rem 0 0;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .mini-card-body .sol:last-child {
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+
+    /* ── Bloques en grid 2 columnas ── */
+    .bloques-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2rem; }
+    @media (max-width: 700px) { .bloques-2 { grid-template-columns: 1fr; } }
+
+    /* ── Nav ── */
+    .topic-nav-btns {
+      display: flex; justify-content: space-between; gap: 1rem;
+      margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border);
+    }
+    .btn-anterior, .btn-siguiente {
+      display: inline-flex; align-items: center; gap: .5rem;
+      padding: .65rem 1.4rem; border-radius: 99px;
+      font-weight: 700; font-size: .9rem; transition: background .2s, transform .18s;
+    }
+    .btn-anterior {
+      background: transparent; color: var(--accent);
+      border: 2px solid var(--accent);
+    }
+    .btn-anterior:hover { background: var(--accent-light); transform: translateX(-3px); }
+    .btn-siguiente { background: var(--accent); color: #fff; }
+    .btn-siguiente:hover { background: var(--M); color: #fff; transform: translateX(3px); }
+  </style>
+</head>
+<body data-section="math">
+
+  <script src="../../nav.js"></script>
+
+  <main class="topic-content">
+
+    <header class="topic-header">
+      <p class="breadcrumb">
+        <a href="../index.html">Inicio</a> ›
+        <a href="index.html">Matemáticas 1</a> ›
+        Problemas de ecuaciones
+      </p>
+      <div class="topic-tag">Matemáticas 1 · Tema 13</div>
+      <h1>Problemas de ecuaciones</h1>
+    </header>
+
+    <!-- ══════════ EJEMPLOS ══════════ -->
+    <section class="section-block ejemplo-section">
+      <div class="ejemplo-head">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        </div>
+        <h3>Ejemplos</h3>
+      </div>
+      <div class="ejemplo-block">
+        <div class="ejemplo-3col">
+
+          <div class="ejemplo-item">
+            <span class="frase">El doble de un número más cuatro es igual a catorce.</span>
+            $$\begin{aligned}
+              2x + 4 &= 14 \\
+              2x &= 14 - 4 \\
+              2x &= 10 \\
+              x &= \frac{10}{2} \\
+              x &= \mathbf{5}
+            \end{aligned}$$
+          </div>
+
+          <div class="ejemplo-item">
+            <span class="frase">El cuadrado de un número es igual a cien.</span>
+            $$\begin{aligned}
+              x^2 &= 100 \\
+              x &= \sqrt{100} \\
+              x &= \mathbf{10}
+            \end{aligned}$$
+          </div>
+
+          <div class="ejemplo-item">
+            <span class="frase">La raíz cuadrada de un número es igual a siete.</span>
+            $$\begin{aligned}
+              \sqrt{x} &= 7 \\
+              x &= 7^2 \\
+              x &= \mathbf{49}
+            \end{aligned}$$
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ EJERCICIOS ══════════ -->
+    <section class="section-block">
+      <div class="sec-head">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+        </div>
+        <h2>Ejercicios</h2>
+      </div>
+      <div class="bloques-2">
+
+        <div class="mini-card">
+          <div class="mini-card-head">Bloque 1</div>
+          <div class="mini-card-body">
+            Un número más veinte es igual a cuarenta.<br>
+            Un número menos doce es igual a cinco.<br>
+            El triple de un número es igual a cuarenta y cinco.<br>
+            El doble de un número es igual a treinta y seis.<br>
+            El cuadrado de un número es igual a cien.<br>
+            La raíz cúbica de veintisiete es igual a un número.<br>
+            El doble de un número más cuatro es igual a catorce.
+          </div>
+        </div>
+
+        <div class="mini-card">
+          <div class="mini-card-head">Bloque 2</div>
+          <div class="mini-card-body">
+            Dos más el triple de un número es igual a veintitrés.<br>
+            La mitad de un número más diez es igual a veinte.<br>
+            Un tercio de un número menos uno es igual a cinco.<br>
+            La suma de dos números consecutivos es igual a siete.<br>
+            El triple de un número menos ocho es igual a diez.<br>
+            El cuadrado de un número menos dos es igual a siete.<br>
+            La raíz cuadrada de un número más cinco es igual a doce.
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══════════ RESPUESTAS ══════════ -->
+    <section class="section-block">
+      <div class="sec-toggle" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('show');">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <h2>Respuestas</h2>
+        <span class="chev">▼</span>
+      </div>
+      <div class="collapsible">
+        <div class="bloques-2">
+
+          <div class="mini-card">
+            <div class="mini-card-head">Bloque 1</div>
+            <div class="mini-card-body">
+              <div class="sol">
+                $$\begin{aligned} x + 20 &= 40 \\ x &= \mathbf{20} \end{aligned}$$
+              </div>
+              <div class="sol">
+                $$\begin{aligned} x - 12 &= 5 \\ x &= \mathbf{17} \end{aligned}$$
+              </div>
+              <div class="sol">
+                $$\begin{aligned} 3x &= 45 \\ x &= \mathbf{15} \end{aligned}$$
+              </div>
+              <div class="sol">
+                $$\begin{aligned} 2x &= 36 \\ x &= \mathbf{18} \end{aligned}$$
+              </div>
+              <div class="sol">
+                $$\begin{aligned} x^2 &= 100 \\ x &= \mathbf{10} \end{aligned}$$
+              </div>
+              <div class="sol">
+                $$\begin{aligned} x &= \sqrt[3]{27} \\ x &= \mathbf{3} \end{aligned}$$
+              </div>
+              <div class="sol">
+                $$\begin{aligned} 2x + 4 &= 14 \\ 2x &= 10 \\ x &= \mathbf{5} \end{aligned}$$
+              </div>
+            </div>
+          </div>
+
+          <div class="mini-card">
+            <div class="mini-card-head">Bloque 2</div>
+            <div class="mini-card-body">
+              <div class="sol">
+                $$\begin{aligned} 2 + 3x &= 23 \\ 3x &= 21 \\ x &= \mathbf{7} \end{aligned}$$
+              </div>
+              <div class="sol">
+                $$\begin{aligned} \frac{x}{2} + 10 &= 20 \\ \frac{x}{2} &= 10 \\ x &= \mathbf{20} \end{aligned}$$
+              </div>
+              <div class="sol">
+                $$\begin{aligned} \frac{x}{3} - 1 &= 5 \\ \frac{x}{3} &= 6 \\ x &= \mathbf{18} \end{aligned}$$
+              </div>
+              <div class="sol">
+                $$\begin{aligned} x + (x+1) &= 7 \\ 2x + 1 &= 7 \\ x &= \mathbf{3} \end{aligned}$$
+              </div>
+              <div class="sol">
+                $$\begin{aligned} 3x - 8 &= 10 \\ 3x &= 18 \\ x &= \mathbf{6} \end{aligned}$$
+              </div>
+              <div class="sol">
+                $$\begin{aligned} x^2 - 2 &= 7 \\ x^2 &= 9 \\ x &= \mathbf{3} \end{aligned}$$
+              </div>
+              <div class="sol">
+                $$\begin{aligned} \sqrt{x} + 5 &= 12 \\ \sqrt{x} &= 7 \\ x &= \mathbf{49} \end{aligned}$$
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ EXTRAS ══════════ -->
+    <section class="section-block">
+      <div class="sec-toggle" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('show');">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <h2>Ejercicios extra</h2>
+        <span class="chev">▼</span>
+      </div>
+      <div class="collapsible">
+        <div class="bloques-2">
+
+          <div class="mini-card">
+            <div class="mini-card-head">Bloque 3</div>
+            <div class="mini-card-body">
+              El quíntuple de un número menos diez es igual a quince.<br>
+              Siete veces un número más tres es igual a veinticuatro.<br>
+              El doble de la suma de un número más tres es igual a doce.<br>
+              Un número dividido entre cuatro más seis es igual a nueve.
+            </div>
+          </div>
+
+          <div class="mini-card">
+            <div class="mini-card-head">Bloque 4</div>
+            <div class="mini-card-body">
+              La diferencia de un número y ocho por tres es igual a nueve.<br>
+              El cuádruple de un número es igual al mismo número más doce.<br>
+              La suma de tres números consecutivos es igual a quince.<br>
+              El doble de un número menos siete es igual a veintiuno.
+            </div>
+          </div>
+
+          <div class="mini-card">
+            <div class="mini-card-head">Bloque 5</div>
+            <div class="mini-card-body">
+              Un número disminuido en siete es igual a ocho.<br>
+              El cuádruple de un número menos seis es igual a dieciocho.<br>
+              La mitad de un número aumentada en ocho es igual a doce.<br>
+              La suma de un número y su mitad es igual a quince.
+            </div>
+          </div>
+
+          <div class="mini-card">
+            <div class="mini-card-head">Bloque 6</div>
+            <div class="mini-card-body">
+              Cinco veces la diferencia de un número y dos es igual a veinte.<br>
+              El cuadrado de un número aumentado en siete es igual a dieciséis.<br>
+              El triple de un número aumentado en su mitad es veinte.<br>
+              La raíz cuadrada de la suma de un número y cuatro es igual a tres.
+            </div>
+          </div>
+
+          <div class="mini-card">
+            <div class="mini-card-head">Bloque 7</div>
+            <div class="mini-card-body">
+              El triple de la suma de un número y uno es igual a veintiuno.<br>
+              Un número más su tercera parte es igual a ocho.<br>
+              El doble de un número disminuido en cinco es igual a once.<br>
+              El quíntuple de un número aumentado en dos es igual a doce.
+            </div>
+          </div>
+
+          <div class="mini-card">
+            <div class="mini-card-head">Bloque 8</div>
+            <div class="mini-card-body">
+              La raíz cúbica de un número más dos es igual a cinco.<br>
+              Un número menos su cuarta parte es igual a nueve.<br>
+              El triple de la diferencia de un número y cuatro es igual a quince.<br>
+              La suma de un número y su doble es igual a veinticuatro.
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ NAV ══════════ -->
+    <div class="topic-nav-btns">
+      <a href="lenguaje-algebraico.html" class="btn-anterior">← Lenguaje algebraico</a>
+    </div>
+
+  </main>
+
+  <script src="../../footer.js"></script>
+
+</body>
+</html>

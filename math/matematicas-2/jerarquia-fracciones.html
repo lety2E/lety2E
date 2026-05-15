@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jerarquía con fracciones — Matemáticas 2 — lety2e</title>
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../../favicon.ico">
+  <meta name="description" content="Jerarquía de operaciones con fracciones: potencias, paréntesis y fracciones compuestas — Matemáticas 2." />
+  <link rel="stylesheet" href="../../style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" />
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body, {
+      delimiters: [
+        {left:'$$', right:'$$', display:true},
+        {left:'$', right:'$', display:false}
+      ]
+    });"></script>
+
+  <style>
+    .topic-tag {
+      display: inline-flex; align-items: center; gap: .35rem;
+      padding: .22rem .75rem; border-radius: 99px;
+      background: var(--accent-light); color: var(--accent);
+      font-size: .78rem; font-weight: 700; letter-spacing: .03em;
+      margin-bottom: .55rem;
+    }
+    .topic-tag::before {
+      content: ''; width: 7px; height: 7px; border-radius: 50%;
+      background: var(--accent); display: inline-block;
+    }
+
+    .section-block { margin-bottom: 2.5rem; }
+    .section-block:last-child { margin-bottom: 0; }
+
+    .sec-head {
+      display: flex; align-items: center; gap: .65rem;
+      margin-bottom: 1.1rem;
+    }
+    .sec-head h2 { margin: 0; font-size: 1.2rem; line-height: 1; }
+    .sec-icon {
+      width: 30px; height: 30px; border-radius: 8px;
+      display: grid; place-items: center; flex-shrink: 0;
+      background: var(--accent);
+    }
+    .sec-icon svg { width: 15px; height: 15px; stroke: #fff; fill: none; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+
+    .sec-toggle {
+      display: flex; align-items: center; gap: .65rem;
+      cursor: pointer; user-select: none;
+      padding: .8rem 0; margin: 0 0 .4rem;
+    }
+    .sec-toggle h2 { margin: 0; font-size: 1.2rem; line-height: 1; }
+    .sec-toggle .chev {
+      margin-left: auto; font-size: .75rem; color: var(--text-3);
+      transition: transform .25s;
+    }
+    .sec-toggle.open .chev { transform: rotate(180deg); }
+
+    .collapsible {
+      max-height: 0; overflow: hidden;
+      transition: max-height .5s ease, padding .3s ease;
+      padding: 0;
+    }
+    .collapsible.show {
+      max-height: 20000px;
+      padding: .8rem 0;
+    }
+
+    /* ── Video ── */
+    .video-single { max-width: 720px; margin: 0 auto; }
+    .video-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+    @media (max-width: 700px) { .video-pair { grid-template-columns: 1fr; } }
+    .video-wrapper {
+      position: relative; padding-bottom: 56.25%; height: 0;
+      overflow: hidden; border-radius: var(--r-md); background: #000;
+    }
+    .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+
+    /* ── Ejemplo ── */
+    .ejemplo-section { margin: 2rem 0 2.5rem; }
+    .ejemplo-head {
+      display: flex; align-items: center; gap: .65rem;
+      margin-bottom: 1rem;
+    }
+    .ejemplo-head h3 {
+      margin: 0;
+      font-family: var(--font-display);
+      font-size: 1.2rem; line-height: 1;
+      color: var(--M);
+      font-style: italic;
+    }
+
+    /* ── Tarjeta compacta ── */
+    .mini-card {
+      background: var(--bg-card); border: 1.5px solid var(--border);
+      border-radius: var(--r-md); overflow: hidden;
+    }
+    .mini-card-head {
+      padding: .4rem .8rem; background: var(--course-1);
+      font-family: var(--font-display); font-size: .85rem; color: #fff; font-weight: 700;
+    }
+    .mini-card-body {
+      padding: .8rem 1rem;
+      font-size: .9rem; line-height: 4.2; color: var(--text);
+      text-align: center;
+    }
+    .mini-card-body.left { text-align: left; }
+    .mini-card-body .sol {
+      margin: .3rem 0 0;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .mini-card-body .sol:last-child {
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+    .mini-card-body strong { color: var(--M); font-weight: 700; }
+
+    /* ── Espaciado en procedimientos ── */
+    .mini-card-body .katex-display {
+      margin: 1.4em 0 !important;
+    }
+    .sol .katex .mtd {
+      padding-top: 18px !important;
+      padding-bottom: 18px !important;
+    }
+
+    /* ── Grid 2 columnas ── */
+    .bloques-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2rem; }
+    @media (max-width: 700px) { .bloques-2 { grid-template-columns: 1fr; } }
+
+    /* ── Nav ── */
+    .topic-nav-btns {
+      display: flex; justify-content: space-between; gap: 1rem;
+      margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border);
+    }
+    .btn-anterior, .btn-siguiente {
+      display: inline-flex; align-items: center; gap: .5rem;
+      padding: .65rem 1.4rem; border-radius: 99px;
+      font-weight: 700; font-size: .9rem; transition: background .2s, transform .18s;
+    }
+    .btn-anterior {
+      background: transparent; color: var(--accent);
+      border: 2px solid var(--accent);
+    }
+    .btn-anterior:hover { background: var(--accent-light); transform: translateX(-3px); }
+    .btn-siguiente { background: var(--accent); color: #fff; }
+    .btn-siguiente:hover { background: var(--M); color: #fff; transform: translateX(3px); }
+  </style>
+</head>
+<body data-section="math">
+
+  <script src="../../nav.js"></script>
+
+  <main class="topic-content">
+
+    <header class="topic-header">
+      <p class="breadcrumb">
+        <a href="../index.html">Inicio</a> ›
+        <a href="index.html">Matemáticas 2</a> ›
+        Jerarquía con fracciones
+      </p>
+      <div class="topic-tag">Matemáticas 2 · Tema 2</div>
+      <h1>Jerarquía con fracciones</h1>
+    </header>
+
+    <!-- ══════════ VIDEO ══════════ -->
+    <section class="section-block">
+      <div class="sec-head">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3" stroke-width="0" fill="white"/></svg>
+        </div>
+        <h2>Video</h2>
+      </div>
+      <div class="video-pair">
+        <div class="video-wrapper">
+          <iframe src="https://www.youtube.com/embed/_VhiAI578eU?rel=0" title="Jerarquía con fracciones — parte 1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <div class="video-wrapper">
+          <iframe src="https://www.youtube.com/embed/e3ZMH5G-cSg?rel=0" title="Jerarquía con fracciones — parte 2" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ EJEMPLOS ══════════ -->
+    <section class="section-block ejemplo-section">
+      <div class="ejemplo-head">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        </div>
+        <h3>Ejemplos</h3>
+      </div>
+      <div class="bloques-2">
+
+        <div class="mini-card">
+          <div class="mini-card-head">Ejemplo 1</div>
+          <div class="mini-card-body">
+            $$\begin{aligned}
+              \frac{1}{3} + \frac{4}{5} - \frac{6}{3} + \frac{3}{6} - \frac{6}{5} &= \\[14pt]
+              -\frac{5}{3} - \frac{2}{5} + \frac{3}{6} &= \\[14pt]
+              \frac{-50 - 12 + 15}{30} &= \mathbf{-\frac{47}{30}}
+            \end{aligned}$$
+          </div>
+        </div>
+
+        <div class="mini-card">
+          <div class="mini-card-head">Ejemplo 2</div>
+          <div class="mini-card-body">
+            $$\begin{aligned}
+              \left(\frac{3}{5}\right)^2 - 2\left(\frac{1}{3} - \frac{4}{5}\right) - \frac{3}{2} &= \\[14pt]
+              \frac{9}{25} - \frac{2}{1}\left(\frac{5-12}{15}\right) - \frac{3}{2} &= \\[14pt]
+              \frac{9}{25} - \frac{2}{1}\left(-\frac{7}{15}\right) - \frac{3}{2} &= \\[14pt]
+              \frac{9}{25} + \frac{14}{15} - \frac{3}{2} &= \\[14pt]
+              \frac{54 + 140 - 225}{150} &= \mathbf{-\frac{31}{150}}
+            \end{aligned}$$
+          </div>
+        </div>
+
+        <div class="mini-card">
+          <div class="mini-card-head">Ejemplo 3</div>
+          <div class="mini-card-body">
+            $$\begin{aligned}
+              \frac{1}{2}\left[\frac{3}{4} - 5\left(2 - \frac{1}{3}\right)\right] &= \\[14pt]
+              \frac{1}{2}\left[\frac{3}{4} - \frac{5}{1}\left(\frac{5}{3}\right)\right] &= \\[14pt]
+              \frac{1}{2}\left[\frac{3}{4} - \frac{25}{3}\right] &= \\[14pt]
+              \frac{1}{2}\left[\frac{9 - 100}{12}\right] &= \mathbf{-\frac{91}{24}}
+            \end{aligned}$$
+          </div>
+        </div>
+
+        <div class="mini-card">
+          <div class="mini-card-head">Ejemplo 4</div>
+          <div class="mini-card-body">
+            $$\begin{aligned}
+              \frac{\dfrac{3}{2}\left[\dfrac{1}{4}-3\right]^2}{\dfrac{2}{5}-3\left(\dfrac{1}{4}\right)} &= \\[14pt]
+              \frac{\dfrac{3}{2}\left[\dfrac{1-12}{4}\right]^2}{\dfrac{2}{5}-\dfrac{3}{4}} &= \\[14pt]
+              \frac{\dfrac{3}{2}\left[\dfrac{-11}{4}\right]^2}{\dfrac{8-15}{20}} &= \\[14pt]
+              \frac{\dfrac{3}{2}\left[\dfrac{121}{16}\right]}{-\dfrac{7}{20}} = \frac{\dfrac{363}{32}}{-\dfrac{7}{20}} &= \mathbf{-\frac{1815}{56}}
+            \end{aligned}$$
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══════════ EJERCICIOS ══════════ -->
+    <section class="section-block">
+      <div class="sec-head">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+        </div>
+        <h2>Ejercicios</h2>
+      </div>
+      <div class="bloques-2">
+
+        <div class="mini-card">
+          <div class="mini-card-head">Bloque 1</div>
+          <div class="mini-card-body">
+            $\dfrac{1}{4}-\dfrac{6}{5}+\dfrac{6}{4}+\dfrac{3}{5}-\dfrac{7}{10}=$<br>
+            $\left(\dfrac{1}{2}\right)^3-4\left(\dfrac{3}{2}-\dfrac{5}{6}\right)-\dfrac{1}{4}=$<br>
+            $\dfrac{2}{3}\left[\dfrac{1}{2}+4\left(3-\dfrac{2}{5}\right)\right]=$<br>
+            $\dfrac{\dfrac{3}{5}\left[\dfrac{1}{2}-4\right]^2}{\dfrac{3}{2}-2\left(\dfrac{1}{6}\right)}=$
+          </div>
+        </div>
+
+        <div class="mini-card">
+          <div class="mini-card-head">Bloque 2</div>
+          <div class="mini-card-body">
+            $-\dfrac{2}{4}+\dfrac{6}{3}-\dfrac{8}{4}-\dfrac{7}{3}+\dfrac{1}{6}=$<br>
+            $\left(\dfrac{2}{5}\right)^2-\dfrac{3}{5}-4\left(\dfrac{1}{2}-3\right)=$<br>
+            $-\dfrac{2}{3}\left[\dfrac{4}{5}-6\left(2-\dfrac{1}{3}\right)\right]=$<br>
+            $\dfrac{\dfrac{5}{3}\left[\dfrac{1}{3}-2\right]^2}{\dfrac{1}{5}-3\left(\dfrac{2}{6}\right)}=$
+          </div>
+        </div>
+
+        <div class="mini-card">
+          <div class="mini-card-head">Bloque 3</div>
+          <div class="mini-card-body">
+            $-\dfrac{8}{3}-\dfrac{2}{3}+\dfrac{7}{4}-\dfrac{9}{4}-\dfrac{3}{15}=$<br>
+            $\dfrac{2}{3}-\left(\dfrac{1}{4}\right)^2-3\left(-\dfrac{1}{2}-\dfrac{3}{4}\right)=$<br>
+            $-\dfrac{4}{5}\left[-\dfrac{2}{3}-\dfrac{2}{5}\left(\dfrac{3}{4}+1\right)\right]=$<br>
+            $\dfrac{\dfrac{3}{4}\left[\dfrac{1}{5}-3\right]^2}{\dfrac{5}{2}-5\left(\dfrac{2}{4}\right)}=$
+          </div>
+        </div>
+
+        <div class="mini-card">
+          <div class="mini-card-head">Bloque 4</div>
+          <div class="mini-card-body">
+            $\dfrac{2}{6}-\dfrac{3}{5}+\dfrac{4}{2}-\dfrac{3}{5}-\dfrac{1}{2}=$<br>
+            $\dfrac{3}{4}-\dfrac{2}{5}\left(\dfrac{1}{3}-\dfrac{4}{6}\right)+\left(\dfrac{2}{3}\right)^2=$<br>
+            $\dfrac{6}{3}\left[4-5\left(-\dfrac{3}{2}-2\right)\right]=$<br>
+            $\dfrac{-\dfrac{5}{6}\left[\dfrac{1}{2}-5\right]^2}{\dfrac{3}{4}-5\left(\dfrac{1}{10}\right)}=$
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══════════ RESPUESTAS ══════════ -->
+    <section class="section-block">
+      <div class="sec-toggle" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('show');">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <h2>Respuestas</h2>
+        <span class="chev">▼</span>
+      </div>
+      <div class="collapsible">
+        <div class="bloques-2">
+
+          <!-- ── Bloque 1 ── -->
+          <div class="mini-card">
+            <div class="mini-card-head">Bloque 1</div>
+            <div class="mini-card-body">
+              <div class="sol">
+                $$\begin{aligned}
+                  \tfrac{1}{4}-\tfrac{6}{5}+\tfrac{6}{4}+\tfrac{3}{5}-\tfrac{7}{10} &= \\[14pt]
+                  \tfrac{7}{4}-\tfrac{3}{5}-\tfrac{7}{10} &= \\[14pt]
+                  \tfrac{35-12-14}{20} &= \mathbf{\tfrac{9}{20}}
+                \end{aligned}$$
+              </div>
+              <div class="sol">
+                $$\begin{aligned}
+                  \left(\tfrac{1}{2}\right)^3-4\left(\tfrac{3}{2}-\tfrac{5}{6}\right)-\tfrac{1}{4} &= \\[14pt]
+                  \tfrac{1}{8}-4\left(\tfrac{9-5}{6}\right)-\tfrac{1}{4} &= \\[14pt]
+                  \tfrac{1}{8}-\tfrac{16}{6}-\tfrac{1}{4} &= \\[14pt]
+                  \tfrac{3-64-6}{24} &= \mathbf{-\tfrac{67}{24}}
+                \end{aligned}$$
+              </div>
+              <div class="sol">
+                $$\begin{aligned}
+                  \tfrac{2}{3}\!\left[\tfrac{1}{2}+4\!\left(3-\tfrac{2}{5}\right)\right] &= \\[14pt]
+                  \tfrac{2}{3}\!\left[\tfrac{1}{2}+4\!\left(\tfrac{13}{5}\right)\right] &= \\[14pt]
+                  \tfrac{2}{3}\!\left[\tfrac{1}{2}+\tfrac{52}{5}\right] &= \\[14pt]
+                  \tfrac{2}{3}\!\left[\tfrac{5+104}{10}\right] &= \mathbf{\tfrac{109}{15}}
+                \end{aligned}$$
+              </div>
+              <div class="sol">
+                $$\begin{aligned}
+                  \frac{\tfrac{3}{5}\left[\tfrac{1}{2}-4\right]^2}{\tfrac{3}{2}-2\!\left(\tfrac{1}{6}\right)} &= \\[14pt]
+                  \frac{\tfrac{3}{5}\left[-\tfrac{7}{2}\right]^2}{\tfrac{3}{2}-\tfrac{2}{6}} &= \\[14pt]
+                  \frac{\tfrac{3}{5}\cdot\tfrac{49}{4}}{\tfrac{9-2}{6}} &= \\[14pt]
+                  \frac{\tfrac{147}{20}}{\tfrac{7}{6}} = \tfrac{882}{140} &= \mathbf{\tfrac{63}{10}}
+                \end{aligned}$$
+              </div>
+            </div>
+          </div>
+
+          <!-- ── Bloque 2 ── -->
+          <div class="mini-card">
+            <div class="mini-card-head">Bloque 2</div>
+            <div class="mini-card-body">
+              <div class="sol">
+                $$\begin{aligned}
+                  -\tfrac{2}{4}+\tfrac{6}{3}-\tfrac{8}{4}-\tfrac{7}{3}+\tfrac{1}{6} &= \\[14pt]
+                  -\tfrac{10}{4}-\tfrac{1}{3}+\tfrac{1}{6} &= \\[14pt]
+                  \tfrac{-30-4+2}{12} &= \\[14pt]
+                  -\tfrac{32}{12} &= \mathbf{-\tfrac{8}{3}}
+                \end{aligned}$$
+              </div>
+              <div class="sol">
+                $$\begin{aligned}
+                  \left(\tfrac{2}{5}\right)^2-\tfrac{3}{5}-4\!\left(\tfrac{1}{2}-3\right) &= \\[14pt]
+                  \tfrac{4}{25}-\tfrac{3}{5}-4\!\left(-\tfrac{5}{2}\right) &= \\[14pt]
+                  \tfrac{4}{25}-\tfrac{3}{5}+10 &= \\[14pt]
+                  \tfrac{8-30+500}{50} &= \mathbf{\tfrac{239}{25}}
+                \end{aligned}$$
+              </div>
+              <div class="sol">
+                $$\begin{aligned}
+                  -\tfrac{2}{3}\!\left[\tfrac{4}{5}-6\!\left(2-\tfrac{1}{3}\right)\right] &= \\[14pt]
+                  -\tfrac{2}{3}\!\left[\tfrac{4}{5}-6\!\left(\tfrac{5}{3}\right)\right] &= \\[14pt]
+                  -\tfrac{2}{3}\!\left[\tfrac{4}{5}-10\right] &= \\[14pt]
+                  -\tfrac{2}{3}\!\left[-\tfrac{46}{5}\right] &= \mathbf{\tfrac{92}{15}}
+                \end{aligned}$$
+              </div>
+              <div class="sol">
+                $$\begin{aligned}
+                  \frac{\tfrac{5}{3}\left[\tfrac{1}{3}-2\right]^2}{\tfrac{1}{5}-3\!\left(\tfrac{2}{6}\right)} &= \\[14pt]
+                  \frac{\tfrac{5}{3}\left[-\tfrac{5}{3}\right]^2}{\tfrac{1}{5}-1} &= \\[14pt]
+                  \frac{\tfrac{5}{3}\cdot\tfrac{25}{9}}{-\tfrac{4}{5}} &= \\[14pt]
+                  \frac{\tfrac{125}{27}}{-\tfrac{4}{5}} &= \mathbf{-\tfrac{625}{108}}
+                \end{aligned}$$
+              </div>
+            </div>
+          </div>
+
+          <!-- ── Bloque 3 ── -->
+          <div class="mini-card">
+            <div class="mini-card-head">Bloque 3</div>
+            <div class="mini-card-body">
+              <div class="sol">
+                $$\begin{aligned}
+                  -\tfrac{8}{3}-\tfrac{2}{3}+\tfrac{7}{4}-\tfrac{9}{4}-\tfrac{3}{15} &= \\[14pt]
+                  -\tfrac{10}{3}-\tfrac{2}{4}-\tfrac{3}{15} &= \\[14pt]
+                  \tfrac{-200-30-12}{60} &= \mathbf{-\tfrac{121}{30}}
+                \end{aligned}$$
+              </div>
+              <div class="sol">
+                $$\begin{aligned}
+                  \tfrac{2}{3}-\!\left(\tfrac{1}{4}\right)^2-3\!\left(-\tfrac{1}{2}-\tfrac{3}{4}\right) &= \\[14pt]
+                  \tfrac{2}{3}-\tfrac{1}{16}-3\!\left(-\tfrac{5}{4}\right) &= \\[14pt]
+                  \tfrac{2}{3}-\tfrac{1}{16}+\tfrac{15}{4} &= \\[14pt]
+                  \tfrac{32-3+180}{48} &= \mathbf{\tfrac{209}{48}}
+                \end{aligned}$$
+              </div>
+              <div class="sol">
+                $$\begin{aligned}
+                  -\tfrac{4}{5}\!\left[-\tfrac{2}{3}-\tfrac{2}{5}\!\left(\tfrac{3}{4}+1\right)\right] &= \\[14pt]
+                  -\tfrac{4}{5}\!\left[-\tfrac{2}{3}-\tfrac{2}{5}\!\left(\tfrac{7}{4}\right)\right] &= \\[14pt]
+                  -\tfrac{4}{5}\!\left[-\tfrac{2}{3}-\tfrac{14}{20}\right] &= \\[14pt]
+                  -\tfrac{4}{5}\!\left[-\tfrac{82}{60}\right] &= \mathbf{\tfrac{82}{75}}
+                \end{aligned}$$
+              </div>
+              <div class="sol">
+                $$\begin{aligned}
+                  \frac{\tfrac{3}{4}\left[\tfrac{1}{5}-3\right]^2}{\tfrac{5}{2}-5\!\left(\tfrac{2}{4}\right)} &= \\[14pt]
+                  \frac{\tfrac{3}{4}\left[-\tfrac{14}{5}\right]^2}{\tfrac{5}{2}-\tfrac{5}{2}} &= \\[14pt]
+                  \frac{\tfrac{3}{4}\cdot\tfrac{196}{25}}{0} &= \mathbf{\text{Indeterminado}}
+                \end{aligned}$$
+              </div>
+            </div>
+          </div>
+
+          <!-- ── Bloque 4 ── -->
+          <div class="mini-card">
+            <div class="mini-card-head">Bloque 4</div>
+            <div class="mini-card-body">
+              <div class="sol">
+                $$\begin{aligned}
+                  \tfrac{2}{6}-\tfrac{3}{5}+\tfrac{4}{2}-\tfrac{3}{5}-\tfrac{1}{2} &= \\[14pt]
+                  \tfrac{1}{3}-\tfrac{6}{5}+\tfrac{3}{2} &= \\[14pt]
+                  \tfrac{10-36+45}{30} &= \mathbf{\tfrac{19}{30}}
+                \end{aligned}$$
+              </div>
+              <div class="sol">
+                $$\begin{aligned}
+                  \tfrac{3}{4}-\tfrac{2}{5}\!\left(\tfrac{1}{3}-\tfrac{4}{6}\right)+\!\left(\tfrac{2}{3}\right)^2 &= \\[14pt]
+                  \tfrac{3}{4}-\tfrac{2}{5}\!\left(-\tfrac{1}{3}\right)+\tfrac{4}{9} &= \\[14pt]
+                  \tfrac{3}{4}+\tfrac{2}{15}+\tfrac{4}{9} &= \\[14pt]
+                  \tfrac{135+24+80}{180} &= \mathbf{\tfrac{239}{180}}
+                \end{aligned}$$
+              </div>
+              <div class="sol">
+                $$\begin{aligned}
+                  \tfrac{6}{3}\!\left[4-5\!\left(-\tfrac{3}{2}-2\right)\right] &= \\[14pt]
+                  2\!\left[4-5\!\left(-\tfrac{7}{2}\right)\right] &= \\[14pt]
+                  2\!\left[4+\tfrac{35}{2}\right] &= \\[14pt]
+                  2\!\left[\tfrac{43}{2}\right] &= \mathbf{43}
+                \end{aligned}$$
+              </div>
+              <div class="sol">
+                $$\begin{aligned}
+                  \frac{-\tfrac{5}{6}\left[\tfrac{1}{2}-5\right]^2}{\tfrac{3}{4}-5\!\left(\tfrac{1}{10}\right)} &= \\[14pt]
+                  \frac{-\tfrac{5}{6}\left[-\tfrac{9}{2}\right]^2}{\tfrac{3}{4}-\tfrac{5}{10}} &= \\[14pt]
+                  \frac{-\tfrac{5}{6}\cdot\tfrac{81}{4}}{\tfrac{1}{4}} &= \\[14pt]
+                  \frac{-\tfrac{405}{24}}{\tfrac{1}{4}} = -\tfrac{1620}{24} &= \mathbf{-\tfrac{135}{2}}
+                \end{aligned}$$
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ EXTRAS ══════════ -->
+    <section class="section-block">
+      <div class="sec-toggle" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('show');">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <h2>Ejercicios extra</h2>
+        <span class="chev">▼</span>
+      </div>
+      <div class="collapsible">
+        <div class="bloques-2">
+
+          <div class="mini-card">
+            <div class="mini-card-head">Bloque A</div>
+            <div class="mini-card-body">
+              <div class="sol">$\dfrac{7}{3} + \dfrac{3}{4} + \dfrac{6}{5} - \dfrac{8}{4} - \dfrac{2}{5} = \mathbf{\dfrac{127}{60}}$</div>
+              <div class="sol">$-\dfrac{3}{5} + \left(\dfrac{2}{5}\right)^2 - 4\!\left(-\dfrac{1}{3} - \dfrac{4}{5}\right) = \mathbf{\dfrac{307}{75}}$</div>
+              <div class="sol">$\dfrac{5}{6}\!\left[-\dfrac{3}{4} + \dfrac{3}{6}\!\left(\dfrac{4}{5} - 1\right)\right] = \mathbf{-\dfrac{17}{24}}$</div>
+              <div class="sol">$-\dfrac{4}{5} + \dfrac{3}{2} + \dfrac{4}{5} + \dfrac{3}{8} - \dfrac{6}{8} = \mathbf{\dfrac{9}{8}}$</div>
+              <div class="sol">$-\dfrac{6}{4} + \dfrac{4}{5} - \dfrac{5}{6} - \dfrac{7}{4} - \dfrac{1}{12} = \mathbf{-\dfrac{10}{3}}$</div>
+              <div class="sol">$\dfrac{4}{7} + \left(-\dfrac{3}{6}\right)^2 - 5\!\left(-\dfrac{2}{4} + \dfrac{5}{6}\right) = \mathbf{-\dfrac{23}{28}}$</div>
+              <div class="sol">$-\dfrac{6}{7}\!\left[-\dfrac{4}{5} - \dfrac{4}{7}\!\left(\dfrac{5}{6} + 1\right)\right] = \mathbf{\dfrac{6}{5}}$</div>
+              <div class="sol">$\dfrac{5}{8} - \left(\dfrac{4}{7}\right)^2 + 6\!\left(-\dfrac{3}{5} + \dfrac{6}{7}\right) = \mathbf{\dfrac{717}{392}}$</div>
+            </div>
+          </div>
+
+          <div class="mini-card">
+            <div class="mini-card-head">Bloque B</div>
+            <div class="mini-card-body">
+              <div class="sol">$\dfrac{1}{2} + \dfrac{1}{4} - \dfrac{1}{8} = \mathbf{\dfrac{5}{8}}$</div>
+              <div class="sol">$\dfrac{3}{5} \div \dfrac{2}{3} + \dfrac{1}{10} = \mathbf{1}$</div>
+              <div class="sol">$\left(\dfrac{2}{3} - \dfrac{1}{4}\right) \cdot \dfrac{12}{5} = \mathbf{1}$</div>
+              <div class="sol">$\dfrac{4}{3} - \left[\dfrac{1}{2}\cdot\left(\dfrac{1}{4} + \dfrac{1}{3}\right)\right] = \mathbf{\dfrac{25}{24}}$</div>
+              <div class="sol">$\dfrac{\dfrac{3}{4} - \dfrac{1}{2}}{\dfrac{1}{8} + \dfrac{1}{4}} = \mathbf{\dfrac{2}{3}}$</div>
+              <div class="sol">$\left(\dfrac{1}{2}\right)^2 + \dfrac{3}{4}\cdot\dfrac{1}{3} = \mathbf{\dfrac{1}{2}}$</div>
+              <div class="sol">$\dfrac{2}{5}\cdot\left(\dfrac{1}{2} + \dfrac{1}{3}\right) - \dfrac{1}{10} = \mathbf{\dfrac{7}{30}}$</div>
+              <div class="sol">$\dfrac{5}{6} \div \left(1 - \dfrac{1}{3}\right) + \dfrac{1}{4} = \mathbf{\dfrac{3}{2}}$</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ NAV ══════════ -->
+    <div class="topic-nav-btns">
+      <a href="operaciones-fracciones.html" class="btn-anterior">← Operaciones con fracciones</a>
+    </div>
+
+  </main>
+
+  <script src="../../footer.js"></script>
+
+</body>
+</html>
