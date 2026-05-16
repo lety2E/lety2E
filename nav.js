@@ -37,17 +37,17 @@
     'matematicas-1': [
       { text: 'Operaciones básicas', href: 'operaciones-basicas.html' },
       { text: 'Jerarquía de operaciones', href: 'jerarquia.html' },
-      { text: 'Lenguaje algebraico', href: 'lenguaje-algebraico.html' },
       { text: 'Ecuaciones', href: 'ecuaciones.html' },
-      { text: 'Ecuaciones con ángulos', href: 'ecuaciones-angulos.html' },
-      { text: 'Problemas de ecuaciones', href: 'problemas-ecuaciones.html' },
       { text: 'Monomios', href: 'monomios.html' },
       { text: 'Expresiones algebraicas', href: 'expresiones-algebraicas.html' },
-      { text: 'mcm y MCD', href: 'mcm-mcd.html' },
-      { text: 'Reglas de exponentes', href: 'reglas-exponentes.html' },
       { text: 'Gráfica con tabulación', href: 'grafica-tabulacion.html' },
       { text: 'Pendiente y ordenada', href: 'pendiente-ordenada.html' },
-      { text: 'Área y perímetro', href: 'area-perimetro.html' }
+      { text: 'Área y perímetro', href: 'area-perimetro.html' },
+      { text: 'Ecuaciones con ángulos', href: 'ecuaciones-angulos.html' },
+      { text: 'Reglas de exponentes', href: 'reglas-exponentes.html' },
+      { text: 'mcm y MCD', href: 'mcm-mcd.html' },
+      { text: 'Lenguaje algebraico', href: 'lenguaje-algebraico.html' },
+      { text: 'Problemas de ecuaciones', href: 'problemas-ecuaciones.html' }
     ]
   };
 
