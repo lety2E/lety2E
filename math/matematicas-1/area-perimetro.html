@@ -149,6 +149,8 @@
       font-family: var(--font-display);
       text-transform: uppercase; letter-spacing: .03em;
     }
+    /* Que el pill amarillo se ajuste al contenido y no se estire en el grid */
+    .formula-line .formula-pill { justify-self: start; }
     @media (max-width: 480px) {
       .formula-line { grid-template-columns: 1fr; gap: .15rem; }
     }
