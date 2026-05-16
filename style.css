@@ -1593,12 +1593,22 @@ body[data-section="math"] .mini-card-body .katex-display {
   scrollbar-width: thin;
 }
 
-/* Inline math ($...$) muy ancho hace scroll dentro
-   del cuerpo de la card (que ya tiene overflow:hidden,
-   así que el scroll queda contenido). */
-body[data-section="math"] .mini-card-body,
-body[data-section="math"] .ejemplo-item {
-  overflow-x: auto;
+/* Inline math ($...$) NUNCA se parte en dos renglones.
+   Si una ecuación es más ancha que el celular, sale del ancho
+   del viewport y el usuario hace pinch-zoom + pan para verla.
+   Decisión consciente: preferimos que se "salga" del móvil
+   antes que cortar una ecuación al medio (que confunde al alumno). */
+body[data-section="math"] .katex {
+  white-space: nowrap;
+}
+
+/* Filas de ejercicio / ejemplo: tampoco rompen renglón.
+   Cubre el caso "$ecuación$ <strong>$resultado$</strong>" donde
+   el espacio HTML entre los dos $..$ podría wrap-ear y separar
+   el resultado de su ecuación. */
+body[data-section="math"] .ej-line,
+body[data-section="math"] .sol {
+  white-space: nowrap;
 }
 
 /* SVG y media dentro de tarjetas → siempre dentro del ancho.
@@ -1697,31 +1707,9 @@ body[data-section="math"] .katex svg {
   body[data-section="math"] .topic-header h1 { font-size: 1.7rem; }
 }
 
-/* ── Indicador sutil de scroll horizontal (técnica "scrolling
-   shadows"): aparece una sombrita lila SOLO en el lado donde hay
-   contenido oculto, y se desvanece al llegar al borde. */
-@media (max-width: 600px) {
-  body[data-section="math"] .mini-card-body,
-  body[data-section="math"] .ejemplo-item {
-    background:
-      /* Capas blancas que ocultan la sombra cuando NO hay scroll
-         a ese lado (background-attachment: local → se mueven con el contenido). */
-      linear-gradient(90deg, var(--bg-card) 30%, rgba(255,255,255,0)) 0 0 / 24px 100%,
-      linear-gradient(90deg, rgba(255,255,255,0), var(--bg-card) 70%) 100% 0 / 24px 100%,
-      /* Sombras lila que se revelan cuando hay contenido oculto
-         (background-attachment: scroll → fijas respecto al contenedor). */
-      radial-gradient(farthest-side at 0 50%, rgba(74,0,128,.18), transparent) 0 0 / 12px 100%,
-      radial-gradient(farthest-side at 100% 50%, rgba(74,0,128,.18), transparent) 100% 0 / 12px 100%;
-    background-repeat: no-repeat;
-    background-attachment: local, local, scroll, scroll;
-  }
-
-  /* Barrita de scroll discreta cuando es visible. */
-  body[data-section="math"] .mini-card-body::-webkit-scrollbar,
-  body[data-section="math"] .ejemplo-item::-webkit-scrollbar { height: 4px; }
-  body[data-section="math"] .mini-card-body::-webkit-scrollbar-thumb,
-  body[data-section="math"] .ejemplo-item::-webkit-scrollbar-thumb {
-    background: rgba(74,0,128,.25);
-    border-radius: 2px;
-  }
-}
+/* (Eliminado: scroll-shadow horizontal en cards.
+   Antes las cards hacían scroll horizontal interno cuando una
+   ecuación no cabía; ahora con .katex { white-space: nowrap }
+   las ecuaciones simplemente se salen del ancho del móvil y el
+   usuario hace pinch-zoom de la página completa. Las cards ya
+   no tienen scroll interno, así que la sombra ya no aplica.) */

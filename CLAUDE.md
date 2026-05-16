@@ -218,6 +218,29 @@ CSS en el `<style>` del tema:
 - Las fracciones no se traslapan verticalmente
 - El topic-tag y el `<h1>` caben sin overflow horizontal
 
+### Regla núm. 2 — ecuaciones jamás se parten al medio
+
+KaTeX por defecto puede romper una ecuación inline en dos renglones cuando no cabe (rompe en `=` o en un `−` binario). Esto confunde al alumno porque parece otra operación. **Solución global** en `style.css`:
+
+```css
+body[data-section="math"] .katex { white-space: nowrap; }
+body[data-section="math"] .ej-line,
+body[data-section="math"] .sol   { white-space: nowrap; }
+```
+
+Consecuencia consciente: si una ecuación es más ancha que el celular, **se sale** del ancho del viewport y la página entera permite pinch-zoom + pan. Las cards NO tienen scroll horizontal interno (se removió el `overflow-x: auto` y las scroll-shadows). Mejor que el alumno haga zoom a que vea una ecuación cortada.
+
+Por eso también el **bloque Ejemplo** (no sólo los ejercicios) debe usar `.ej-line`:
+
+```html
+<div class="ejemplo-block">
+  <div class="ej-line">$2(-3)(4) = -6(4) = $ <strong>$-24$</strong></div>
+  <div class="ej-line">$\sqrt{36} = $ <strong>$\pm 6$</strong></div>
+</div>
+```
+
+❌ NO usar `$...$<br>$...$<br>` dentro de `.ejemplo-block` — el espacio HTML entre la ecuación y `<strong>$resultado$</strong>` sí es breakable y separa el resultado de su ecuación.
+
 ---
 
 ## 🚢 Deploy
