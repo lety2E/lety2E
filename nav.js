@@ -213,3 +213,78 @@
     });
   }
 })();
+
+/* ================================================
+   Auto-fit KaTeX en páginas de Math
+   ------------------------------------------------
+   Para cada fórmula KaTeX (inline o display) mide su
+   ancho real vs el ancho disponible de su contenedor.
+   Si se sale, reduce su font-size justo lo necesario
+   para que quepa. Sin wrap, sin scroll horizontal,
+   sin pinch-zoom: la fórmula se ajusta sola.
+   Solo corre cuando body[data-section="math"].
+   ================================================ */
+(function () {
+  'use strict';
+  if (!document.body || document.body.getAttribute('data-section') !== 'math') return;
+
+  /* Encuentra el ancestro no-KaTeX donde la fórmula debe caber. */
+  function findContainer(el) {
+    var p = el.parentElement;
+    while (p && (p.classList.contains('katex') || p.classList.contains('katex-display'))) {
+      p = p.parentElement;
+    }
+    return p;
+  }
+
+  /* Ajusta una fórmula. Reset siempre antes de medir. */
+  function fitOne(el) {
+    el.style.fontSize = '';
+    var container = findContainer(el);
+    if (!container) return;
+    var cs = window.getComputedStyle(container);
+    var pl = parseFloat(cs.paddingLeft) || 0;
+    var pr = parseFloat(cs.paddingRight) || 0;
+    var availW = container.clientWidth - pl - pr;
+    if (availW <= 0) return;
+    var elW = el.scrollWidth;
+    if (elW <= availW) return; /* ya cabe, no tocar */
+    var ratio = availW / elW;
+    var base = parseFloat(window.getComputedStyle(el).fontSize) || 16;
+    /* 0.98 = pequeño margen de seguridad para evitar bordes pegados */
+    el.style.fontSize = (base * ratio * 0.98).toFixed(2) + 'px';
+  }
+
+  function fitAll() {
+    var nodes = document.querySelectorAll('.katex');
+    for (var i = 0; i < nodes.length; i++) {
+      /* Solo el .katex más externo: si su padre ya está dentro de otro .katex,
+         es un span interno (no debería pasar, pero por si acaso) y lo saltamos. */
+      if (nodes[i].parentElement && nodes[i].parentElement.closest('.katex')) continue;
+      fitOne(nodes[i]);
+    }
+  }
+
+  /* KaTeX auto-render dispara en DOMContentLoaded / load. Corremos
+     varias veces para asegurar que ya rendereó todas las fórmulas. */
+  function schedule() {
+    fitAll();
+    setTimeout(fitAll, 80);
+    setTimeout(fitAll, 300);
+    setTimeout(fitAll, 900);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', schedule);
+  } else {
+    schedule();
+  }
+  window.addEventListener('load', fitAll);
+
+  /* Resize / rotación: re-ajustar con debounce. */
+  var resizeTimer = null;
+  window.addEventListener('resize', function () {
+    if (resizeTimer) clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(fitAll, 120);
+  });
+})();
