@@ -105,6 +105,14 @@
       font-style: italic; font-size: .85rem;
       color: var(--text-2); margin-bottom: .6rem;
     }
+    /* Pasos del despeje en vertical (uno por renglón, sin flechas) */
+    .despeje-steps { margin: .2rem 0 .4rem; }
+    .despeje-steps .ej-line {
+      padding: .35rem 0;
+      line-height: 2.4; /* radical/fracción-safe */
+    }
+    .despeje-steps .ej-line:first-child { padding-top: .15rem; }
+    .despeje-steps .ej-line:last-child  { padding-bottom: .15rem; }
 
     .tabulacion-tabla-row {
       display: grid;
@@ -241,7 +249,11 @@
         <div class="tabulacion-info">
           <p class="tabulacion-eq"><strong>Ecuación original:</strong> $4x + 2y = 6$</p>
           <p class="tabulacion-despeje">Despeje de $y$:</p>
-          $$2y = 6 - 4x \implies y = \frac{6 - 4x}{2} \implies \mathbf{y = 3 - 2x}$$
+          <div class="despeje-steps">
+            <div class="ej-line">$2y = 6 - 4x$</div>
+            <div class="ej-line">$y = \dfrac{6 - 4x}{2}$</div>
+            <div class="ej-line">$\mathbf{y = 3 - 2x}$</div>
+          </div>
           <p class="tabulacion-despeje" style="margin-top:.8rem">Tabulación y procedimiento:</p>
           <div class="tabulacion-tabla-row">
             <table class="tabla-x-y">
@@ -341,7 +353,11 @@
           <div class="tabulacion-info">
             <p class="tabulacion-eq"><strong>Ecuación original:</strong> $6x + 2y = 10$</p>
             <p class="tabulacion-despeje">Despeje de $y$:</p>
-            $$2y = 10 - 6x \implies y = \frac{10 - 6x}{2} \implies \mathbf{y = 5 - 3x}$$
+            <div class="despeje-steps">
+              <div class="ej-line">$2y = 10 - 6x$</div>
+              <div class="ej-line">$y = \dfrac{10 - 6x}{2}$</div>
+              <div class="ej-line">$\mathbf{y = 5 - 3x}$</div>
+            </div>
             <p class="tabulacion-despeje" style="margin-top:.8rem">Tabulación y procedimiento:</p>
             <div class="tabulacion-tabla-row">
               <table class="tabla-x-y">
@@ -407,7 +423,11 @@
           <div class="tabulacion-info">
             <p class="tabulacion-eq"><strong>Ecuación original:</strong> $10x + 5y = 20$</p>
             <p class="tabulacion-despeje">Despeje de $y$:</p>
-            $$5y = 20 - 10x \implies y = \frac{20 - 10x}{5} \implies \mathbf{y = 4 - 2x}$$
+            <div class="despeje-steps">
+              <div class="ej-line">$5y = 20 - 10x$</div>
+              <div class="ej-line">$y = \dfrac{20 - 10x}{5}$</div>
+              <div class="ej-line">$\mathbf{y = 4 - 2x}$</div>
+            </div>
             <p class="tabulacion-despeje" style="margin-top:.8rem">Tabulación y procedimiento:</p>
             <div class="tabulacion-tabla-row">
               <table class="tabla-x-y">
@@ -469,7 +489,11 @@
           <div class="tabulacion-info">
             <p class="tabulacion-eq"><strong>Ecuación original:</strong> $12x + 4y = 8$</p>
             <p class="tabulacion-despeje">Despeje de $y$:</p>
-            $$4y = 8 - 12x \implies y = \frac{8 - 12x}{4} \implies \mathbf{y = 2 - 3x}$$
+            <div class="despeje-steps">
+              <div class="ej-line">$4y = 8 - 12x$</div>
+              <div class="ej-line">$y = \dfrac{8 - 12x}{4}$</div>
+              <div class="ej-line">$\mathbf{y = 2 - 3x}$</div>
+            </div>
             <p class="tabulacion-despeje" style="margin-top:.8rem">Tabulación y procedimiento:</p>
             <div class="tabulacion-tabla-row">
               <table class="tabla-x-y">
@@ -535,7 +559,11 @@
           <div class="tabulacion-info">
             <p class="tabulacion-eq"><strong>Ecuación original:</strong> $15x + 3y = 9$</p>
             <p class="tabulacion-despeje">Despeje de $y$:</p>
-            $$3y = 9 - 15x \implies y = \frac{9 - 15x}{3} \implies \mathbf{y = 3 - 5x}$$
+            <div class="despeje-steps">
+              <div class="ej-line">$3y = 9 - 15x$</div>
+              <div class="ej-line">$y = \dfrac{9 - 15x}{3}$</div>
+              <div class="ej-line">$\mathbf{y = 3 - 5x}$</div>
+            </div>
             <p class="tabulacion-despeje" style="margin-top:.8rem">Tabulación y procedimiento:</p>
             <div class="tabulacion-tabla-row">
               <table class="tabla-x-y">
