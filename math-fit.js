@@ -1,91 +1,103 @@
-/* math-fit.js — auto-escala ecuaciones KaTeX que se desbordan de su contenedor.
-   Red de seguridad para ecuaciones extra-largas (reducción de polinomios, etc.).
-   El CSS de mobile ya reduce font-size en general; este script se encarga sólo
-   de los casos extremos en los que aún así no caben.
+/* math-fit.js — auto-escala cualquier ecuación KaTeX que se desborde de su
+   contenedor visual real, sin importar la estructura HTML del tema.
 
-   Estrategia: para cada .katex renderizado, comparar su scrollWidth contra el
-   ancho disponible del contenedor padre (.ej-line, .sol, .ejemplo-inline,
-   .ejemplo-block, .mini-card-body). Si excede, aplica font-size escalado.
+   Estrategia universal: para cada .katex / .ej-line / .sol, subir por el árbol
+   hasta encontrar el primer ancestro de tipo block/flex/grid que NO tenga
+   white-space: nowrap. Ese es el ancho visual disponible. Si el contenido
+   excede ese ancho, aplica font-size reducido proporcionalmente.
 
-   Se ejecuta al cargar, después de que KaTeX termina de renderear, y en cada
-   resize del viewport (con debounce). */
+   Cubre temas con cualquier wrapper: .ejemplo-block, .mini-card-body,
+   .ejemplo-item, .ejemplo-inline, .tri-info, .apunte-box, <p> directos, etc. */
 (function () {
   'use strict';
 
   if (document.body && document.body.getAttribute('data-section') !== 'math') return;
 
-  var CONTAINER_SELECTORS = [
-    '.ej-line',
-    '.sol',
-    '.ejemplo-inline',
-    '.ejemplo-item',
-    '.ejemplo-block',
-    '.mini-card-body'
-  ];
+  // Wrappers internos que agrupan un renglón completo (.ej-line/.sol con
+  // nowrap): cuando los detectemos, escalamos el wrapper completo para que
+  // el .katex + <strong> resultado se reduzcan juntos.
+  var LINE_SELECTOR = '.ej-line, .sol';
+
+  /** Sube hasta encontrar el primer ancestro block/flex/grid sin nowrap. */
+  function findWidthAncestor(el) {
+    var current = el.parentElement;
+    while (current && current !== document.documentElement) {
+      var cs = window.getComputedStyle(current);
+      var d = cs.display;
+      var isBlock = (d === 'block' || d === 'flex' || d === 'grid' ||
+                     d === 'list-item' || d === 'table' || d === 'table-cell');
+      var notNowrap = cs.whiteSpace !== 'nowrap';
+      if (isBlock && notNowrap && current.clientWidth > 0) {
+        return current;
+      }
+      current = current.parentElement;
+    }
+    return null;
+  }
+
+  function availableWidth(card) {
+    var cs = window.getComputedStyle(card);
+    return card.clientWidth
+      - (parseFloat(cs.paddingLeft)  || 0)
+      - (parseFloat(cs.paddingRight) || 0)
+      - 4; // colchón
+  }
+
+  function scaleToFit(el, maxW) {
+    var w = el.scrollWidth;
+    if (w > maxW) {
+      var ratio = maxW / w;
+      if (ratio < 0.5) ratio = 0.5; // mínimo legible
+      var sz = parseFloat(window.getComputedStyle(el).fontSize);
+      el.style.fontSize = (sz * ratio * 0.98).toFixed(2) + 'px';
+      el.dataset.mf = '1';
+      return true;
+    }
+    return false;
+  }
 
   function fit() {
     // Reset: borrar font-size inline previo para re-medir limpio.
-    document.querySelectorAll('.katex').forEach(function (el) {
-      if (el.dataset.mfApplied === '1') {
-        el.style.fontSize = '';
-        el.dataset.mfApplied = '0';
-      }
+    document.querySelectorAll('[data-mf="1"]').forEach(function (el) {
+      el.style.fontSize = '';
+      el.dataset.mf = '0';
+    });
+    void document.body.offsetWidth; // reflow
+
+    // (a) Escalar renglones .ej-line / .sol (que agrupan katex + <strong>)
+    //     contra su ancestro block sin nowrap.
+    document.querySelectorAll(LINE_SELECTOR).forEach(function (line) {
+      var anc = findWidthAncestor(line);
+      if (!anc) return;
+      var maxW = availableWidth(anc);
+      if (maxW > 0) scaleToFit(line, maxW);
     });
 
-    // Reflow forzado: las medidas siguientes serán con CSS original.
-    void document.body.offsetWidth;
-
-    document.querySelectorAll('.katex').forEach(function (el) {
-      // Buscar el contenedor más cercano relevante.
-      var container = null;
-      for (var i = 0; i < CONTAINER_SELECTORS.length; i++) {
-        var c = el.closest(CONTAINER_SELECTORS[i]);
-        if (c) { container = c; break; }
-      }
-      if (!container) return;
-
-      // Ancho disponible (restando padding horizontal del contenedor).
-      var cs = window.getComputedStyle(container);
-      var padL = parseFloat(cs.paddingLeft) || 0;
-      var padR = parseFloat(cs.paddingRight) || 0;
-      var maxW = container.clientWidth - padL - padR - 4; // 4px de margen
-      if (maxW <= 0) return;
-
-      var w = el.scrollWidth;
-      if (w > maxW) {
-        var ratio = maxW / w;
-        // Limita la reducción a 50% mínimo para no volver ilegible.
-        if (ratio < 0.5) ratio = 0.5;
-        var current = parseFloat(window.getComputedStyle(el).fontSize);
-        el.style.fontSize = (current * ratio * 0.98).toFixed(2) + 'px';
-        el.dataset.mfApplied = '1';
-      }
+    // (b) Para .katex sueltos (sin .ej-line/.sol padre): escalar el .katex
+    //     individual contra su ancestro block sin nowrap.
+    document.querySelectorAll('.katex').forEach(function (eq) {
+      if (eq.closest(LINE_SELECTOR)) return; // ya manejado en (a)
+      var anc = findWidthAncestor(eq);
+      if (!anc) return;
+      var maxW = availableWidth(anc);
+      if (maxW > 0) scaleToFit(eq, maxW);
     });
   }
 
   function whenKatexReady(cb) {
-    // Intenta cuando KaTeX ya renderizó al menos una ecuación visible.
-    if (document.querySelectorAll('.katex').length > 0) {
-      cb();
-    } else {
-      setTimeout(function () { whenKatexReady(cb); }, 80);
-    }
+    if (document.querySelectorAll('.katex').length > 0) cb();
+    else setTimeout(function () { whenKatexReady(cb); }, 80);
   }
 
   function init() {
-    // Doble pasada: una rápida, otra después de que cargan fuentes web.
     whenKatexReady(fit);
     setTimeout(fit, 400);
-    setTimeout(fit, 1200);
+    setTimeout(fit, 1200); // después de carga de fuentes web
   }
 
-  if (document.readyState === 'complete') {
-    init();
-  } else {
-    window.addEventListener('load', init);
-  }
+  if (document.readyState === 'complete') init();
+  else window.addEventListener('load', init);
 
-  // Re-fit en resize y cambio de orientación, con debounce.
   var resizeTimer;
   function scheduleFit() {
     clearTimeout(resizeTimer);
