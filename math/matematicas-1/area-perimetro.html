@@ -173,6 +173,42 @@
       width: 100%; max-width: 140px; height: auto; display: block;
     }
 
+    /* Ejercicios: lista unificada con divisores discretos */
+    .ejercicios-list {
+      background: var(--bg-card);
+      border: 1.5px solid var(--border);
+      border-radius: var(--r-md);
+      padding: .1rem 1.2rem;
+      font-size: .95rem;
+    }
+    .ej-row {
+      padding: .85rem 0;
+      border-bottom: 1px solid var(--border-s);
+    }
+    .ej-row:last-child { border-bottom: none; }
+
+    /* Respuestas: tri-blocks sin card, separados por línea discreta */
+    .collapsible .tri-block {
+      background: transparent;
+      border: none;
+      border-top: 1px solid var(--border-s);
+      border-radius: 0;
+      padding: 1.6rem 0;
+      margin-bottom: 0;
+    }
+    .collapsible .tri-block:first-of-type {
+      border-top: none;
+      padding-top: .5rem;
+    }
+    .collapsible .tri-block:last-of-type {
+      padding-bottom: .5rem;
+    }
+    .collapsible .vert-list {
+      font-weight: 700; color: var(--course-1);
+      font-size: .95rem; margin: 0 0 .6rem;
+      font-family: var(--font-display);
+    }
+
     /* Cálculo vertical de m y n: 2 columnas en desktop, apiladas en móvil */
     .mn-grid {
       display: grid;
@@ -443,22 +479,12 @@
       <p style="margin-bottom:1rem; line-height:1.75;">
         Encontrar el área y el perímetro de los triángulos con vértices en los puntos:
       </p>
-      <div class="bloques-2">
-        <div class="mini-card">
-          <div class="mini-card-head">Bloque 1</div>
-          <div class="mini-card-body">
-            $(-1,2), (3,7), (6,2)$<br>
-            $(-4,-1), (-1,5), (2,-1)$<br>
-            $(-2,3), (0,5), (4,3)$
-          </div>
-        </div>
-        <div class="mini-card">
-          <div class="mini-card-head">Bloque 2</div>
-          <div class="mini-card-body">
-            $(0,4), (2,-3), (7,4)$<br>
-            $(-3,7), (0,4), (-3,-1)$
-          </div>
-        </div>
+      <div class="ejercicios-list">
+        <div class="ej-row">$(-1,2), (3,7), (6,2)$</div>
+        <div class="ej-row">$(-4,-1), (-1,5), (2,-1)$</div>
+        <div class="ej-row">$(-2,3), (0,5), (4,3)$</div>
+        <div class="ej-row">$(0,4), (2,-3), (7,4)$</div>
+        <div class="ej-row">$(-3,7), (0,4), (-3,-1)$</div>
       </div>
     </section>
 
@@ -476,7 +502,6 @@
         <!-- Resol B1.1: (-1,2),(3,7),(6,2) -->
         <div class="tri-block">
           <div class="tri-info">
-            <h3>Bloque 1 · Ej. 1</h3>
             <p class="vert-list">$(-1,2), (3,7), (6,2)$</p>
             <p style="margin:.5rem 0 .2rem; font-size:.95rem;">$a = \dfrac{7(5)}{2} = \dfrac{35}{2} = $ <span class="resultado-pill">$17.5 \; u^2$</span></p>
             <div class="mn-grid">
@@ -514,7 +539,6 @@
         <!-- Resol B1.2: (-4,-1),(-1,5),(2,-1) -->
         <div class="tri-block">
           <div class="tri-info">
-            <h3>Bloque 1 · Ej. 2</h3>
             <p class="vert-list">$(-4,-1), (-1,5), (2,-1)$</p>
             <p style="margin:.5rem 0 .2rem; font-size:.95rem;">$a = \dfrac{6(6)}{2} = \dfrac{36}{2} = $ <span class="resultado-pill">$18 \; u^2$</span></p>
             <div class="mn-grid">
@@ -552,7 +576,6 @@
         <!-- Resol B1.3: (-2,3),(0,5),(4,3) -->
         <div class="tri-block">
           <div class="tri-info">
-            <h3>Bloque 1 · Ej. 3</h3>
             <p class="vert-list">$(-2,3), (0,5), (4,3)$</p>
             <p style="margin:.5rem 0 .2rem; font-size:.95rem;">$a = \dfrac{6(2)}{2} = \dfrac{12}{2} = $ <span class="resultado-pill">$6 \; u^2$</span></p>
             <div class="mn-grid">
@@ -590,7 +613,6 @@
         <!-- Resol B2.1: (0,4),(2,-3),(7,4) -->
         <div class="tri-block">
           <div class="tri-info">
-            <h3>Bloque 2 · Ej. 1</h3>
             <p class="vert-list">$(0,4), (2,-3), (7,4)$</p>
             <p style="margin:.5rem 0 .2rem; font-size:.95rem;">$a = \dfrac{7(7)}{2} = \dfrac{49}{2} = $ <span class="resultado-pill">$24.5 \; u^2$</span></p>
             <div class="mn-grid">
@@ -628,7 +650,6 @@
         <!-- Resol B2.2: (-3,7),(0,4),(-3,-1) — base vertical -->
         <div class="tri-block">
           <div class="tri-info">
-            <h3>Bloque 2 · Ej. 2</h3>
             <p class="vert-list">$(-3,7), (0,4), (-3,-1)$</p>
             <p style="margin:.4rem 0 .2rem; font-size:.88rem; font-style:italic; color:var(--text-3);">base vertical en $x=-3$, $h$ = distancia horizontal al vértice</p>
             <p style="margin:.2rem 0; font-size:.95rem;">$a = \dfrac{8(3)}{2} = \dfrac{24}{2} = $ <span class="resultado-pill">$12 \; u^2$</span></p>
@@ -677,27 +698,17 @@
         <span class="chev">▼</span>
       </div>
       <div class="collapsible">
-        <div class="bloques-2">
-          <div class="mini-card">
-            <div class="mini-card-head">Bloque A</div>
-            <div class="mini-card-body">
-              $(2,3), (8,3), (5,9)$<br>
-              $(4,6), (4,1), (9,4)$<br>
-              $(0,2), (7,2), (3,8)$<br>
-              $(3,5), (3,-5), (8,0)$<br>
-              $(-4,-2), (6,-2), (1,4)$
-            </div>
-          </div>
-          <div class="mini-card">
-            <div class="mini-card-head">Bloque B</div>
-            <div class="mini-card-body">
-              $(2,3), (2,9), (7,6)$<br>
-              $(0,0), (11,0), (5,6)$<br>
-              $(-3,4), (-3,-4), (5,0)$<br>
-              $(1,-3), (10,-3), (6,2)$<br>
-              $(7,5), (7,-5), (3,0)$
-            </div>
-          </div>
+        <div class="ejercicios-list">
+          <div class="ej-row">$(2,3), (8,3), (5,9)$</div>
+          <div class="ej-row">$(4,6), (4,1), (9,4)$</div>
+          <div class="ej-row">$(0,2), (7,2), (3,8)$</div>
+          <div class="ej-row">$(3,5), (3,-5), (8,0)$</div>
+          <div class="ej-row">$(-4,-2), (6,-2), (1,4)$</div>
+          <div class="ej-row">$(2,3), (2,9), (7,6)$</div>
+          <div class="ej-row">$(0,0), (11,0), (5,6)$</div>
+          <div class="ej-row">$(-3,4), (-3,-4), (5,0)$</div>
+          <div class="ej-row">$(1,-3), (10,-3), (6,2)$</div>
+          <div class="ej-row">$(7,5), (7,-5), (3,0)$</div>
         </div>
       </div>
     </section>
