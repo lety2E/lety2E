@@ -101,6 +101,96 @@
     .tri-info strong { color: var(--M); font-weight: 700; }
     .tri-info .vert-list { font-family: var(--font-mono, monospace); font-size: .9rem; color: var(--text-2); }
 
+    /* ── Sección Apuntes (repaso de fórmulas al inicio) ── */
+    .apunte-box { /* contenedor semántico, sin estilos extra */ }
+    .apunte-intro {
+      margin: 0 0 1rem; line-height: 1.7;
+      font-size: .95rem; color: var(--text);
+    }
+    .apunte-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    .apunte-grid .span-full { grid-column: 1 / -1; }
+    @media (max-width: 600px) {
+      .apunte-grid { grid-template-columns: 1fr; }
+    }
+    .apunte-card {
+      background: var(--bg-card);
+      border: 1.5px solid var(--border);
+      border-radius: var(--r-md);
+      padding: 1rem 1.1rem;
+    }
+    .apunte-card-title {
+      font-weight: 700; font-size: .78rem;
+      color: var(--course-1); margin-bottom: .55rem;
+      text-transform: uppercase; letter-spacing: .04em;
+      font-family: var(--font-display);
+    }
+    .apunte-nota {
+      font-size: .78rem; color: var(--text-2);
+      font-style: italic; margin: .5rem 0 0;
+    }
+    /* Fórmulas plain (sin pill background) */
+    .apunte-formulas-plain {
+      display: flex; flex-direction: column;
+      gap: .55rem; margin-top: .3rem;
+    }
+    .formula-line {
+      display: grid;
+      grid-template-columns: 90px 1fr;
+      align-items: center;
+      gap: .9rem;
+    }
+    .formula-label {
+      font-size: .78rem; font-weight: 700;
+      color: var(--text-2);
+      font-family: var(--font-display);
+      text-transform: uppercase; letter-spacing: .03em;
+    }
+    @media (max-width: 480px) {
+      .formula-line { grid-template-columns: 1fr; gap: .15rem; }
+    }
+    /* Resolución dentro de la tarjeta ejemplo de Pitágoras */
+    .pita-card .ej-line {
+      padding: .25rem 0;
+      line-height: 2.4;
+      font-size: .95rem;
+    }
+    .pita-card .ej-line:first-child { padding-top: .1rem; }
+    .pita-card .ej-line:last-child  { padding-bottom: .1rem; }
+    .pita-row {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 1.1rem;
+      align-items: center;
+    }
+    @media (max-width: 480px) {
+      .pita-row { grid-template-columns: 1fr; justify-items: center; }
+    }
+    .pita-svg {
+      width: 100%; max-width: 140px; height: auto; display: block;
+    }
+
+    /* Cálculo vertical de m y n: 2 columnas en desktop, apiladas en móvil */
+    .mn-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.2rem;
+      margin: .4rem 0;
+    }
+    @media (max-width: 700px) {
+      .mn-grid { grid-template-columns: 1fr; gap: .2rem; }
+    }
+    .mn-col .ej-line {
+      padding: .25rem 0;
+      line-height: 2.4; /* radical-safe */
+      font-size: .92rem;
+    }
+    .mn-col .ej-line:first-child { padding-top: .1rem; }
+    .mn-col .ej-line:last-child  { padding-bottom: .1rem; }
+
     /* Fórmulas tipo pill (amarillo cremoso / salmón) */
     .formula-pill {
       display: inline-block;
@@ -196,6 +286,77 @@
       <p style="font-size:1.05rem; color:var(--text-2); margin-top:.4rem; font-style:italic;">Triángulos en el plano cartesiano</p>
     </header>
 
+    <!-- ══════════ APUNTES (repaso de fórmulas) ══════════ -->
+    <section class="section-block">
+      <div class="sec-head">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+        </div>
+        <h2>Apuntes</h2>
+      </div>
+      <div class="apunte-box">
+        <p class="apunte-intro">
+          Para calcular el área y el perímetro de un triángulo en el plano necesitamos tres
+          fórmulas. Las dos primeras dan el área y el perímetro; la tercera, el
+          <strong>teorema de Pitágoras</strong>, sirve para encontrar los lados cuando
+          conocemos los catetos.
+        </p>
+        <div class="apunte-grid">
+          <div class="apunte-card span-full">
+            <div class="apunte-card-title">Fórmulas</div>
+            <div class="apunte-formulas-plain">
+              <div class="formula-line">
+                <span class="formula-label">Área</span>
+                <span>$\text{área} = \dfrac{\text{base} \cdot \text{altura}}{2}$</span>
+              </div>
+              <div class="formula-line">
+                <span class="formula-label">Perímetro</span>
+                <span>$P = b + m + n$</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="apunte-card pita-card">
+            <div class="apunte-card-title">Teorema de Pitágoras</div>
+            <div class="pita-row">
+              <svg viewBox="0 0 140 110" xmlns="http://www.w3.org/2000/svg" class="pita-svg" role="img" aria-label="Triángulo rectángulo con catetos a y b, hipotenusa c">
+                <polygon points="20,90 120,90 20,20" fill="#FF00AA" fill-opacity="0.12" stroke="#FF00AA" stroke-width="2" stroke-linejoin="round"/>
+                <polyline points="20,80 30,80 30,90" fill="none" stroke="#7B5A50" stroke-width="1"/>
+                <text x="13" y="58" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" font-style="italic" text-anchor="end">a</text>
+                <text x="70" y="105" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" font-style="italic" text-anchor="middle">b</text>
+                <text x="78" y="50" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" font-style="italic" text-anchor="middle">c</text>
+              </svg>
+              <div>
+                <div style="font-size:1rem">$c = \sqrt{a^2 + b^2}$</div>
+                <p class="apunte-nota">
+                  La hipotenusa $c$ es el lado opuesto al ángulo recto.
+                  Conociendo los catetos $a$ y $b$ (distancias horizontal y vertical), encontramos $c$.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="apunte-card pita-card">
+            <div class="apunte-card-title">Ejemplo</div>
+            <div class="pita-row">
+              <svg viewBox="0 0 140 110" xmlns="http://www.w3.org/2000/svg" class="pita-svg" role="img" aria-label="Triángulo rectángulo 3-4-5">
+                <polygon points="20,90 120,90 20,20" fill="#FF00AA" fill-opacity="0.12" stroke="#FF00AA" stroke-width="2" stroke-linejoin="round"/>
+                <polyline points="20,80 30,80 30,90" fill="none" stroke="#7B5A50" stroke-width="1"/>
+                <text x="13" y="58" font-family="DM Sans, sans-serif" font-size="13" fill="#1A0828" font-weight="700" text-anchor="end">3</text>
+                <text x="70" y="105" font-family="DM Sans, sans-serif" font-size="13" fill="#1A0828" font-weight="700" text-anchor="middle">4</text>
+                <text x="78" y="50" font-family="DM Sans, sans-serif" font-size="13" fill="#1A0828" font-style="italic" text-anchor="middle">c</text>
+              </svg>
+              <div>
+                <div class="ej-line">$c = \sqrt{3^2 + 4^2}$</div>
+                <div class="ej-line">$= \sqrt{9 + 16}$</div>
+                <div class="ej-line">$= \sqrt{25} = $ <span class="resultado-pill">$5$</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- ══════════ EJEMPLO ══════════ -->
     <section class="section-block ejemplo-section">
       <div class="sec-head">
@@ -251,17 +412,21 @@
         </div>
         <div class="tri-info">
           <h4>1. Cálculo del área</h4>
-          <div class="formula-pill salmon">$\text{área} = \dfrac{\text{base} \cdot \text{altura}}{2}$</div>
-          <p style="margin:.6rem 0 .3rem; font-size:.92rem;">$b = 4-(-2) = 6$ &nbsp;·&nbsp; $h = 7-3 = 4$</p>
           <p style="margin:.3rem 0; font-size:.95rem;">$a = \dfrac{6(4)}{2} = \dfrac{24}{2} = $ <span class="resultado-pill">$12 \; u^2$</span></p>
 
           <h4 style="margin-top:1.4rem">2. Cálculo del perímetro</h4>
-          <div class="formula-pill">$c = \sqrt{a^2 + b^2}$ <span class="nota">distancia entre dos puntos</span></div>
-          <div class="formula-pill salmon" style="margin-top:.3rem">$\text{perímetro} = \text{base} + m + n$</div>
-          <p style="margin:.6rem 0 .3rem; font-size:.92rem;">
-            $m = \sqrt{4^2 + 2^2} = \sqrt{16+4} = \sqrt{20} = 4.47$<br>
-            $n = \sqrt{4^2 + 4^2} = \sqrt{16+16} = \sqrt{32} = 5.65$
-          </p>
+          <div class="mn-grid">
+            <div class="mn-col">
+              <div class="ej-line">$m = \sqrt{4^2 + 2^2}$</div>
+              <div class="ej-line">$= \sqrt{16+4}$</div>
+              <div class="ej-line">$= \sqrt{20} = 4.47$</div>
+            </div>
+            <div class="mn-col">
+              <div class="ej-line">$n = \sqrt{4^2 + 4^2}$</div>
+              <div class="ej-line">$= \sqrt{16+16}$</div>
+              <div class="ej-line">$= \sqrt{32} = 5.65$</div>
+            </div>
+          </div>
           <p style="margin:.3rem 0; font-size:.95rem;">$P = 6 + 4.47 + 5.65 = $ <span class="resultado-pill">$16.12 \; u$</span></p>
         </div>
       </div>
@@ -313,14 +478,19 @@
           <div class="tri-info">
             <h3>Bloque 1 · Ej. 1</h3>
             <p class="vert-list">$(-1,2), (3,7), (6,2)$</p>
-            <div class="formula-pill salmon">$\text{área} = \dfrac{b \cdot h}{2}$</div>
-            <p style="margin:.5rem 0 .2rem; font-size:.92rem;">$b = 7$ &nbsp;·&nbsp; $h = 5$</p>
-            <p style="margin:.2rem 0; font-size:.95rem;">$a = \dfrac{7(5)}{2} = \dfrac{35}{2} = $ <span class="resultado-pill">$17.5 \; u^2$</span></p>
-            <div class="formula-pill" style="margin-top:.9rem">$P = b + m + n$</div>
-            <p style="margin:.5rem 0 .2rem; font-size:.92rem;">
-              $m = \sqrt{4^2 + 5^2} = \sqrt{16+25} = \sqrt{41} = 6.40$<br>
-              $n = \sqrt{3^2 + 5^2} = \sqrt{9+25} = \sqrt{34} = 5.83$
-            </p>
+            <p style="margin:.5rem 0 .2rem; font-size:.95rem;">$a = \dfrac{7(5)}{2} = \dfrac{35}{2} = $ <span class="resultado-pill">$17.5 \; u^2$</span></p>
+            <div class="mn-grid">
+              <div class="mn-col">
+                <div class="ej-line">$m = \sqrt{4^2 + 5^2}$</div>
+                <div class="ej-line">$= \sqrt{16+25}$</div>
+                <div class="ej-line">$= \sqrt{41} = 6.40$</div>
+              </div>
+              <div class="mn-col">
+                <div class="ej-line">$n = \sqrt{3^2 + 5^2}$</div>
+                <div class="ej-line">$= \sqrt{9+25}$</div>
+                <div class="ej-line">$= \sqrt{34} = 5.83$</div>
+              </div>
+            </div>
             <p style="margin:.2rem 0; font-size:.95rem;">$P = 7 + 6.40 + 5.83 = $ <span class="resultado-pill">$19.23 \; u$</span></p>
           </div>
           <div class="tri-grafica">
@@ -346,14 +516,19 @@
           <div class="tri-info">
             <h3>Bloque 1 · Ej. 2</h3>
             <p class="vert-list">$(-4,-1), (-1,5), (2,-1)$</p>
-            <div class="formula-pill salmon">$\text{área} = \dfrac{b \cdot h}{2}$</div>
-            <p style="margin:.5rem 0 .2rem; font-size:.92rem;">$b = 6$ &nbsp;·&nbsp; $h = 6$</p>
-            <p style="margin:.2rem 0; font-size:.95rem;">$a = \dfrac{6(6)}{2} = \dfrac{36}{2} = $ <span class="resultado-pill">$18 \; u^2$</span></p>
-            <div class="formula-pill" style="margin-top:.9rem">$P = b + m + n$</div>
-            <p style="margin:.5rem 0 .2rem; font-size:.92rem;">
-              $m = \sqrt{3^2 + 6^2} = \sqrt{9+36} = \sqrt{45} = 6.71$<br>
-              $n = \sqrt{3^2 + 6^2} = \sqrt{9+36} = \sqrt{45} = 6.71$
-            </p>
+            <p style="margin:.5rem 0 .2rem; font-size:.95rem;">$a = \dfrac{6(6)}{2} = \dfrac{36}{2} = $ <span class="resultado-pill">$18 \; u^2$</span></p>
+            <div class="mn-grid">
+              <div class="mn-col">
+                <div class="ej-line">$m = \sqrt{3^2 + 6^2}$</div>
+                <div class="ej-line">$= \sqrt{9+36}$</div>
+                <div class="ej-line">$= \sqrt{45} = 6.71$</div>
+              </div>
+              <div class="mn-col">
+                <div class="ej-line">$n = \sqrt{3^2 + 6^2}$</div>
+                <div class="ej-line">$= \sqrt{9+36}$</div>
+                <div class="ej-line">$= \sqrt{45} = 6.71$</div>
+              </div>
+            </div>
             <p style="margin:.2rem 0; font-size:.95rem;">$P = 6 + 6.71 + 6.71 = $ <span class="resultado-pill">$19.42 \; u$</span></p>
           </div>
           <div class="tri-grafica">
@@ -379,14 +554,19 @@
           <div class="tri-info">
             <h3>Bloque 1 · Ej. 3</h3>
             <p class="vert-list">$(-2,3), (0,5), (4,3)$</p>
-            <div class="formula-pill salmon">$\text{área} = \dfrac{b \cdot h}{2}$</div>
-            <p style="margin:.5rem 0 .2rem; font-size:.92rem;">$b = 6$ &nbsp;·&nbsp; $h = 2$</p>
-            <p style="margin:.2rem 0; font-size:.95rem;">$a = \dfrac{6(2)}{2} = \dfrac{12}{2} = $ <span class="resultado-pill">$6 \; u^2$</span></p>
-            <div class="formula-pill" style="margin-top:.9rem">$P = b + m + n$</div>
-            <p style="margin:.5rem 0 .2rem; font-size:.92rem;">
-              $m = \sqrt{2^2 + 2^2} = \sqrt{4+4} = \sqrt{8} = 2.83$<br>
-              $n = \sqrt{4^2 + 2^2} = \sqrt{16+4} = \sqrt{20} = 4.47$
-            </p>
+            <p style="margin:.5rem 0 .2rem; font-size:.95rem;">$a = \dfrac{6(2)}{2} = \dfrac{12}{2} = $ <span class="resultado-pill">$6 \; u^2$</span></p>
+            <div class="mn-grid">
+              <div class="mn-col">
+                <div class="ej-line">$m = \sqrt{2^2 + 2^2}$</div>
+                <div class="ej-line">$= \sqrt{4+4}$</div>
+                <div class="ej-line">$= \sqrt{8} = 2.83$</div>
+              </div>
+              <div class="mn-col">
+                <div class="ej-line">$n = \sqrt{4^2 + 2^2}$</div>
+                <div class="ej-line">$= \sqrt{16+4}$</div>
+                <div class="ej-line">$= \sqrt{20} = 4.47$</div>
+              </div>
+            </div>
             <p style="margin:.2rem 0; font-size:.95rem;">$P = 6 + 2.83 + 4.47 = $ <span class="resultado-pill">$13.30 \; u$</span></p>
           </div>
           <div class="tri-grafica">
@@ -412,14 +592,19 @@
           <div class="tri-info">
             <h3>Bloque 2 · Ej. 1</h3>
             <p class="vert-list">$(0,4), (2,-3), (7,4)$</p>
-            <div class="formula-pill salmon">$\text{área} = \dfrac{b \cdot h}{2}$</div>
-            <p style="margin:.5rem 0 .2rem; font-size:.92rem;">$b = 7$ &nbsp;·&nbsp; $h = 7$</p>
-            <p style="margin:.2rem 0; font-size:.95rem;">$a = \dfrac{7(7)}{2} = \dfrac{49}{2} = $ <span class="resultado-pill">$24.5 \; u^2$</span></p>
-            <div class="formula-pill" style="margin-top:.9rem">$P = b + m + n$</div>
-            <p style="margin:.5rem 0 .2rem; font-size:.92rem;">
-              $m = \sqrt{2^2 + 7^2} = \sqrt{4+49} = \sqrt{53} = 7.28$<br>
-              $n = \sqrt{5^2 + 7^2} = \sqrt{25+49} = \sqrt{74} = 8.60$
-            </p>
+            <p style="margin:.5rem 0 .2rem; font-size:.95rem;">$a = \dfrac{7(7)}{2} = \dfrac{49}{2} = $ <span class="resultado-pill">$24.5 \; u^2$</span></p>
+            <div class="mn-grid">
+              <div class="mn-col">
+                <div class="ej-line">$m = \sqrt{2^2 + 7^2}$</div>
+                <div class="ej-line">$= \sqrt{4+49}$</div>
+                <div class="ej-line">$= \sqrt{53} = 7.28$</div>
+              </div>
+              <div class="mn-col">
+                <div class="ej-line">$n = \sqrt{5^2 + 7^2}$</div>
+                <div class="ej-line">$= \sqrt{25+49}$</div>
+                <div class="ej-line">$= \sqrt{74} = 8.60$</div>
+              </div>
+            </div>
             <p style="margin:.2rem 0; font-size:.95rem;">$P = 7 + 7.28 + 8.60 = $ <span class="resultado-pill">$22.88 \; u$</span></p>
           </div>
           <div class="tri-grafica">
@@ -445,15 +630,20 @@
           <div class="tri-info">
             <h3>Bloque 2 · Ej. 2</h3>
             <p class="vert-list">$(-3,7), (0,4), (-3,-1)$</p>
-            <div class="formula-pill salmon">$\text{área} = \dfrac{b \cdot h}{2}$</div>
-            <p style="margin:.5rem 0 .2rem; font-size:.88rem; font-style:italic; color:var(--text-3);">base vertical en $x=-3$, $h$ = distancia horizontal al vértice</p>
-            <p style="margin:.2rem 0; font-size:.92rem;">$b = 8$ &nbsp;·&nbsp; $h = 3$</p>
+            <p style="margin:.4rem 0 .2rem; font-size:.88rem; font-style:italic; color:var(--text-3);">base vertical en $x=-3$, $h$ = distancia horizontal al vértice</p>
             <p style="margin:.2rem 0; font-size:.95rem;">$a = \dfrac{8(3)}{2} = \dfrac{24}{2} = $ <span class="resultado-pill">$12 \; u^2$</span></p>
-            <div class="formula-pill" style="margin-top:.9rem">$P = b + m + n$</div>
-            <p style="margin:.5rem 0 .2rem; font-size:.92rem;">
-              $m = \sqrt{3^2 + 3^2} = \sqrt{9+9} = \sqrt{18} = 4.24$<br>
-              $n = \sqrt{3^2 + 5^2} = \sqrt{9+25} = \sqrt{34} = 5.83$
-            </p>
+            <div class="mn-grid">
+              <div class="mn-col">
+                <div class="ej-line">$m = \sqrt{3^2 + 3^2}$</div>
+                <div class="ej-line">$= \sqrt{9+9}$</div>
+                <div class="ej-line">$= \sqrt{18} = 4.24$</div>
+              </div>
+              <div class="mn-col">
+                <div class="ej-line">$n = \sqrt{3^2 + 5^2}$</div>
+                <div class="ej-line">$= \sqrt{9+25}$</div>
+                <div class="ej-line">$= \sqrt{34} = 5.83$</div>
+              </div>
+            </div>
             <p style="margin:.2rem 0; font-size:.95rem;">$P = 8 + 4.24 + 5.83 = $ <span class="resultado-pill">$18.07 \; u$</span></p>
           </div>
           <div class="tri-grafica">
