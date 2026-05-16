@@ -1647,6 +1647,10 @@ body[data-section="math"] .katex svg {
   body[data-section="math"] .mini-card-body .katex-display { font-size: .85em; }
   body[data-section="math"] .ejemplo-item   .katex         { font-size: .92em; }
   body[data-section="math"] .ejemplo-item   .katex-display { font-size: .88em; }
+  /* También aplicar a .ejemplo-block directo (cuando no usa .ejemplo-item):
+     cubre .ej-line, .ejemplo-inline, etc. */
+  body[data-section="math"] .ejemplo-block  .katex         { font-size: .92em; }
+  body[data-section="math"] .ejemplo-block  .katex-display { font-size: .88em; }
 
   /* Las filas de ejercicio (.ej-line, .sol) deben tener line-height suficiente
      para que el vinculum (barra superior) de \sqrt{\dfrac{}{}} no choque con
@@ -1683,6 +1687,8 @@ body[data-section="math"] .katex svg {
   body[data-section="math"] .mini-card-body .katex-display { font-size: .76em; }
   body[data-section="math"] .ejemplo-item   .katex         { font-size: .85em; }
   body[data-section="math"] .ejemplo-item   .katex-display { font-size: .8em; }
+  body[data-section="math"] .ejemplo-block  .katex         { font-size: .85em; }
+  body[data-section="math"] .ejemplo-block  .katex-display { font-size: .8em; }
   /* Mantén line-height radical-safe incluso en móvil estándar */
   body[data-section="math"] .mini-card-body .ej-line,
   body[data-section="math"] .mini-card-body .sol { line-height: 2.3; }
@@ -1699,6 +1705,8 @@ body[data-section="math"] .katex svg {
   body[data-section="math"] .ejemplo-item   { font-size: .9rem; }
   body[data-section="math"] .ejemplo-item   .katex         { font-size: .78em; }
   body[data-section="math"] .ejemplo-item   .katex-display { font-size: .74em; }
+  body[data-section="math"] .ejemplo-block  .katex         { font-size: .78em; }
+  body[data-section="math"] .ejemplo-block  .katex-display { font-size: .74em; }
   body[data-section="math"] .mini-card-body .ej-line,
   body[data-section="math"] .mini-card-body .sol { line-height: 2.2; }
 
