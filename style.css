@@ -1651,6 +1651,10 @@ body[data-section="math"] .katex svg {
      cubre .ej-line, .ejemplo-inline, etc. */
   body[data-section="math"] .ejemplo-block  .katex         { font-size: .92em; }
   body[data-section="math"] .ejemplo-block  .katex-display { font-size: .88em; }
+  /* Matemáticas 2 usa .ej-bloque y .apunte-table; mismo tratamiento. */
+  body[data-section="math"] .ej-bloque      .katex         { font-size: .92em; }
+  body[data-section="math"] .ej-bloque      .katex-display { font-size: .88em; }
+  body[data-section="math"] .apunte-table   .katex         { font-size: .92em; }
 
   /* Las filas de ejercicio (.ej-line, .sol) deben tener line-height suficiente
      para que el vinculum (barra superior) de \sqrt{\dfrac{}{}} no choque con
@@ -1689,6 +1693,9 @@ body[data-section="math"] .katex svg {
   body[data-section="math"] .ejemplo-item   .katex-display { font-size: .8em; }
   body[data-section="math"] .ejemplo-block  .katex         { font-size: .85em; }
   body[data-section="math"] .ejemplo-block  .katex-display { font-size: .8em; }
+  body[data-section="math"] .ej-bloque      .katex         { font-size: .85em; }
+  body[data-section="math"] .ej-bloque      .katex-display { font-size: .8em; }
+  body[data-section="math"] .apunte-table   .katex         { font-size: .82em; }
   /* Mantén line-height radical-safe incluso en móvil estándar */
   body[data-section="math"] .mini-card-body .ej-line,
   body[data-section="math"] .mini-card-body .sol { line-height: 2.3; }
@@ -1707,6 +1714,10 @@ body[data-section="math"] .katex svg {
   body[data-section="math"] .ejemplo-item   .katex-display { font-size: .74em; }
   body[data-section="math"] .ejemplo-block  .katex         { font-size: .78em; }
   body[data-section="math"] .ejemplo-block  .katex-display { font-size: .74em; }
+  body[data-section="math"] .ej-bloque      .katex         { font-size: .78em; }
+  body[data-section="math"] .ej-bloque      .katex-display { font-size: .74em; }
+  body[data-section="math"] .apunte-table   .katex         { font-size: .74em; }
+  body[data-section="math"] .apunte-table   .lbl           { font-size: .74rem; padding-right: .8rem; }
   body[data-section="math"] .mini-card-body .ej-line,
   body[data-section="math"] .mini-card-body .sol { line-height: 2.2; }
 
