@@ -136,13 +136,19 @@
     .mini-card-body .ej-line:first-child { padding-top: .15rem; }
 
     /* ── Enunciado en respuestas ── */
+    /* Anula nowrap global: el enunciado es texto, puede partir en móvil */
+    .mini-card-body .sol { white-space: normal; }
     .mini-card-body .sol .frase {
       display: block;
       font-style: italic;
       color: var(--text-2);
-      font-size: .88rem;
-      margin-bottom: .1rem;
+      font-size: .84rem;
+      line-height: 1.45;
+      margin-bottom: .4rem;
+      white-space: normal;
     }
+    /* Ecuaciones un poco más grandes dentro de .sol */
+    .mini-card-body .sol .katex-display { font-size: 1.05em; margin: .4rem 0 .2rem; }
 
     /* ── Bloques en grid 2 columnas ── */
     .bloques-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2rem; }
