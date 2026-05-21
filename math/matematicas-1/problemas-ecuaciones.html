@@ -147,8 +147,11 @@
       margin-bottom: .4rem;
       white-space: normal;
     }
-    /* Ecuaciones un poco más grandes dentro de .sol */
-    .mini-card-body .sol .katex-display { font-size: 1.05em; margin: .4rem 0 .2rem; }
+    /* Ecuaciones más grandes dentro de .sol */
+    .mini-card-body .sol .katex-display { font-size: 1.15em; margin: .5rem 0 .25rem; }
+    @media (max-width: 700px) {
+      .mini-card-body .sol .katex-display { font-size: 1.25em; }
+    }
 
     /* ── Bloques en grid 2 columnas ── */
     .bloques-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2rem; }
