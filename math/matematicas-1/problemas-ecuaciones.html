@@ -126,6 +126,24 @@
       border-bottom: none;
     }
 
+    /* ── Líneas separadoras en ejercicios/extras ── */
+    .mini-card-body .ej-line {
+      padding: .55rem 0;
+      border-bottom: 1px solid var(--border);
+      line-height: 2.2;
+    }
+    .mini-card-body .ej-line:last-child { border-bottom: none; padding-bottom: .15rem; }
+    .mini-card-body .ej-line:first-child { padding-top: .15rem; }
+
+    /* ── Enunciado en respuestas ── */
+    .mini-card-body .sol .frase {
+      display: block;
+      font-style: italic;
+      color: var(--text-2);
+      font-size: .88rem;
+      margin-bottom: .1rem;
+    }
+
     /* ── Bloques en grid 2 columnas ── */
     .bloques-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2rem; }
     @media (max-width: 700px) { .bloques-2 { grid-template-columns: 1fr; } }
@@ -222,26 +240,26 @@
         <div class="mini-card">
           <div class="mini-card-head">Bloque 1</div>
           <div class="mini-card-body">
-            Un número más veinte es igual a cuarenta.<br>
-            Un número menos doce es igual a cinco.<br>
-            El triple de un número es igual a cuarenta y cinco.<br>
-            El doble de un número es igual a treinta y seis.<br>
-            El cuadrado de un número es igual a cien.<br>
-            La raíz cúbica de veintisiete es igual a un número.<br>
-            El doble de un número más cuatro es igual a catorce.
+            <div class="ej-line">Un número más veinte es igual a cuarenta.</div>
+            <div class="ej-line">Un número menos doce es igual a cinco.</div>
+            <div class="ej-line">El triple de un número es igual a cuarenta y cinco.</div>
+            <div class="ej-line">El doble de un número es igual a treinta y seis.</div>
+            <div class="ej-line">El cuadrado de un número es igual a cien.</div>
+            <div class="ej-line">La raíz cúbica de veintisiete es igual a un número.</div>
+            <div class="ej-line">El doble de un número más cuatro es igual a catorce.</div>
           </div>
         </div>
 
         <div class="mini-card">
           <div class="mini-card-head">Bloque 2</div>
           <div class="mini-card-body">
-            Dos más el triple de un número es igual a veintitrés.<br>
-            La mitad de un número más diez es igual a veinte.<br>
-            Un tercio de un número menos uno es igual a cinco.<br>
-            La suma de dos números consecutivos es igual a siete.<br>
-            El triple de un número menos ocho es igual a diez.<br>
-            El cuadrado de un número menos dos es igual a siete.<br>
-            La raíz cuadrada de un número más cinco es igual a doce.
+            <div class="ej-line">Dos más el triple de un número es igual a veintitrés.</div>
+            <div class="ej-line">La mitad de un número más diez es igual a veinte.</div>
+            <div class="ej-line">Un tercio de un número menos uno es igual a cinco.</div>
+            <div class="ej-line">La suma de dos números consecutivos es igual a siete.</div>
+            <div class="ej-line">El triple de un número menos ocho es igual a diez.</div>
+            <div class="ej-line">El cuadrado de un número menos dos es igual a siete.</div>
+            <div class="ej-line">La raíz cuadrada de un número más cinco es igual a doce.</div>
           </div>
         </div>
 
@@ -264,24 +282,31 @@
             <div class="mini-card-head">Bloque 1</div>
             <div class="mini-card-body">
               <div class="sol">
+                <span class="frase">Un número más veinte es igual a cuarenta.</span>
                 $$\begin{aligned} x + 20 &= 40 \\ x &= \mathbf{20} \end{aligned}$$
               </div>
               <div class="sol">
+                <span class="frase">Un número menos doce es igual a cinco.</span>
                 $$\begin{aligned} x - 12 &= 5 \\ x &= \mathbf{17} \end{aligned}$$
               </div>
               <div class="sol">
+                <span class="frase">El triple de un número es igual a cuarenta y cinco.</span>
                 $$\begin{aligned} 3x &= 45 \\ x &= \mathbf{15} \end{aligned}$$
               </div>
               <div class="sol">
+                <span class="frase">El doble de un número es igual a treinta y seis.</span>
                 $$\begin{aligned} 2x &= 36 \\ x &= \mathbf{18} \end{aligned}$$
               </div>
               <div class="sol">
+                <span class="frase">El cuadrado de un número es igual a cien.</span>
                 $$\begin{aligned} x^2 &= 100 \\ x &= \mathbf{10} \end{aligned}$$
               </div>
               <div class="sol">
+                <span class="frase">La raíz cúbica de veintisiete es igual a un número.</span>
                 $$\begin{aligned} x &= \sqrt[3]{27} \\ x &= \mathbf{3} \end{aligned}$$
               </div>
               <div class="sol">
+                <span class="frase">El doble de un número más cuatro es igual a catorce.</span>
                 $$\begin{aligned} 2x + 4 &= 14 \\ 2x &= 10 \\ x &= \mathbf{5} \end{aligned}$$
               </div>
             </div>
@@ -291,24 +316,31 @@
             <div class="mini-card-head">Bloque 2</div>
             <div class="mini-card-body">
               <div class="sol">
+                <span class="frase">Dos más el triple de un número es igual a veintitrés.</span>
                 $$\begin{aligned} 2 + 3x &= 23 \\ 3x &= 21 \\ x &= \mathbf{7} \end{aligned}$$
               </div>
               <div class="sol">
+                <span class="frase">La mitad de un número más diez es igual a veinte.</span>
                 $$\begin{aligned} \frac{x}{2} + 10 &= 20 \\ \frac{x}{2} &= 10 \\ x &= \mathbf{20} \end{aligned}$$
               </div>
               <div class="sol">
+                <span class="frase">Un tercio de un número menos uno es igual a cinco.</span>
                 $$\begin{aligned} \frac{x}{3} - 1 &= 5 \\ \frac{x}{3} &= 6 \\ x &= \mathbf{18} \end{aligned}$$
               </div>
               <div class="sol">
+                <span class="frase">La suma de dos números consecutivos es igual a siete.</span>
                 $$\begin{aligned} x + (x+1) &= 7 \\ 2x + 1 &= 7 \\ x &= \mathbf{3} \end{aligned}$$
               </div>
               <div class="sol">
+                <span class="frase">El triple de un número menos ocho es igual a diez.</span>
                 $$\begin{aligned} 3x - 8 &= 10 \\ 3x &= 18 \\ x &= \mathbf{6} \end{aligned}$$
               </div>
               <div class="sol">
+                <span class="frase">El cuadrado de un número menos dos es igual a siete.</span>
                 $$\begin{aligned} x^2 - 2 &= 7 \\ x^2 &= 9 \\ x &= \mathbf{3} \end{aligned}$$
               </div>
               <div class="sol">
+                <span class="frase">La raíz cuadrada de un número más cinco es igual a doce.</span>
                 $$\begin{aligned} \sqrt{x} + 5 &= 12 \\ \sqrt{x} &= 7 \\ x &= \mathbf{49} \end{aligned}$$
               </div>
             </div>
@@ -333,60 +365,60 @@
           <div class="mini-card">
             <div class="mini-card-head">Bloque 3</div>
             <div class="mini-card-body">
-              El quíntuple de un número menos diez es igual a quince.<br>
-              Siete veces un número más tres es igual a veinticuatro.<br>
-              El doble de la suma de un número más tres es igual a doce.<br>
-              Un número dividido entre cuatro más seis es igual a nueve.
+              <div class="ej-line">El quíntuple de un número menos diez es igual a quince.</div>
+              <div class="ej-line">Siete veces un número más tres es igual a veinticuatro.</div>
+              <div class="ej-line">El doble de la suma de un número más tres es igual a doce.</div>
+              <div class="ej-line">Un número dividido entre cuatro más seis es igual a nueve.</div>
             </div>
           </div>
 
           <div class="mini-card">
             <div class="mini-card-head">Bloque 4</div>
             <div class="mini-card-body">
-              La diferencia de un número y ocho por tres es igual a nueve.<br>
-              El cuádruple de un número es igual al mismo número más doce.<br>
-              La suma de tres números consecutivos es igual a quince.<br>
-              El doble de un número menos siete es igual a veintiuno.
+              <div class="ej-line">La diferencia de un número y ocho por tres es igual a nueve.</div>
+              <div class="ej-line">El cuádruple de un número es igual al mismo número más doce.</div>
+              <div class="ej-line">La suma de tres números consecutivos es igual a quince.</div>
+              <div class="ej-line">El doble de un número menos siete es igual a veintiuno.</div>
             </div>
           </div>
 
           <div class="mini-card">
             <div class="mini-card-head">Bloque 5</div>
             <div class="mini-card-body">
-              Un número disminuido en siete es igual a ocho.<br>
-              El cuádruple de un número menos seis es igual a dieciocho.<br>
-              La mitad de un número aumentada en ocho es igual a doce.<br>
-              La suma de un número y su mitad es igual a quince.
+              <div class="ej-line">Un número disminuido en siete es igual a ocho.</div>
+              <div class="ej-line">El cuádruple de un número menos seis es igual a dieciocho.</div>
+              <div class="ej-line">La mitad de un número aumentada en ocho es igual a doce.</div>
+              <div class="ej-line">La suma de un número y su mitad es igual a quince.</div>
             </div>
           </div>
 
           <div class="mini-card">
             <div class="mini-card-head">Bloque 6</div>
             <div class="mini-card-body">
-              Cinco veces la diferencia de un número y dos es igual a veinte.<br>
-              El cuadrado de un número aumentado en siete es igual a dieciséis.<br>
-              El triple de un número aumentado en su mitad es veinte.<br>
-              La raíz cuadrada de la suma de un número y cuatro es igual a tres.
+              <div class="ej-line">Cinco veces la diferencia de un número y dos es igual a veinte.</div>
+              <div class="ej-line">El cuadrado de un número aumentado en siete es igual a dieciséis.</div>
+              <div class="ej-line">El triple de un número aumentado en su mitad es veinte.</div>
+              <div class="ej-line">La raíz cuadrada de la suma de un número y cuatro es igual a tres.</div>
             </div>
           </div>
 
           <div class="mini-card">
             <div class="mini-card-head">Bloque 7</div>
             <div class="mini-card-body">
-              El triple de la suma de un número y uno es igual a veintiuno.<br>
-              Un número más su tercera parte es igual a ocho.<br>
-              El doble de un número disminuido en cinco es igual a once.<br>
-              El quíntuple de un número aumentado en dos es igual a doce.
+              <div class="ej-line">El triple de la suma de un número y uno es igual a veintiuno.</div>
+              <div class="ej-line">Un número más su tercera parte es igual a ocho.</div>
+              <div class="ej-line">El doble de un número disminuido en cinco es igual a once.</div>
+              <div class="ej-line">El quíntuple de un número aumentado en dos es igual a doce.</div>
             </div>
           </div>
 
           <div class="mini-card">
             <div class="mini-card-head">Bloque 8</div>
             <div class="mini-card-body">
-              La raíz cúbica de un número más dos es igual a cinco.<br>
-              Un número menos su cuarta parte es igual a nueve.<br>
-              El triple de la diferencia de un número y cuatro es igual a quince.<br>
-              La suma de un número y su doble es igual a veinticuatro.
+              <div class="ej-line">La raíz cúbica de un número más dos es igual a cinco.</div>
+              <div class="ej-line">Un número menos su cuarta parte es igual a nueve.</div>
+              <div class="ej-line">El triple de la diferencia de un número y cuatro es igual a quince.</div>
+              <div class="ej-line">La suma de un número y su doble es igual a veinticuatro.</div>
             </div>
           </div>
 
