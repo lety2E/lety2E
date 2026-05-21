@@ -94,8 +94,10 @@
     }
     @media (max-width: 700px) { .ejemplo-grid { grid-template-columns: 1fr; } }
     .ejemplo-col { font-size: .97rem; line-height: 1.9; }
-    .ejemplo-col .frase { color: var(--text-2); }
-    .ejemplo-col .expr { color: var(--M); font-weight: 700; }
+    .ejemplo-col .frase,
+    .mini-card-body .frase { color: var(--text-2); }
+    .ejemplo-col .expr,
+    .mini-card-body .expr { color: var(--M); font-weight: 700; }
 
     /* ── Tarjeta compacta (bloque) ── */
     .mini-card {
@@ -140,6 +142,18 @@
       display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2rem;
     }
     @media (max-width: 700px) { .extras-grid { grid-template-columns: 1fr; } }
+
+    /* ── Líneas separadoras en mini-card-body y ejemplo-col ── */
+    .mini-card-body .ej-line,
+    .ejemplo-col .ej-line {
+      padding: .55rem 0;
+      border-bottom: 1px solid var(--border);
+      line-height: 2.2;
+    }
+    .mini-card-body .ej-line:last-child,
+    .ejemplo-col .ej-line:last-child { border-bottom: none; padding-bottom: .15rem; }
+    .mini-card-body .ej-line:first-child,
+    .ejemplo-col .ej-line:first-child { padding-top: .15rem; }
 
     /* ── Respuestas inline ── */
     .resp-line { margin: .1rem 0; }
@@ -247,18 +261,18 @@
       <div class="ejemplo-block">
         <div class="ejemplo-grid">
           <div class="ejemplo-col">
-            <div><span class="frase">Un número cualquiera:</span> <span class="expr">$x$</span></div>
-            <div><span class="frase">La suma de dos números:</span> <span class="expr">$x + y$</span></div>
-            <div><span class="frase">El producto de dos números:</span> <span class="expr">$xy$</span></div>
-            <div><span class="frase">Un número aumentado en 15:</span> <span class="expr">$x + 15$</span></div>
-            <div><span class="frase">El doble de un número:</span> <span class="expr">$2x$</span></div>
+            <div class="ej-line"><span class="frase">Un número cualquiera:</span> <span class="expr">$x$</span></div>
+            <div class="ej-line"><span class="frase">La suma de dos números:</span> <span class="expr">$x + y$</span></div>
+            <div class="ej-line"><span class="frase">El producto de dos números:</span> <span class="expr">$xy$</span></div>
+            <div class="ej-line"><span class="frase">Un número aumentado en quince:</span> <span class="expr">$x + 15$</span></div>
+            <div class="ej-line"><span class="frase">El doble de un número:</span> <span class="expr">$2x$</span></div>
           </div>
           <div class="ejemplo-col">
-            <div><span class="frase">La diferencia de dos números:</span> <span class="expr">$x - y$</span></div>
-            <div><span class="frase">El cociente de dos números:</span> <span class="expr">$\dfrac{x}{y}$</span></div>
-            <div><span class="frase">El cuadrado de un número:</span> <span class="expr">$x^2$</span></div>
-            <div><span class="frase">Dos números consecutivos:</span> <span class="expr">$x,\ x+1$</span></div>
-            <div><span class="frase">La mitad de la suma de dos números:</span> <span class="expr">$\dfrac{x+y}{2}$</span></div>
+            <div class="ej-line"><span class="frase">La diferencia de dos números:</span> <span class="expr">$x - y$</span></div>
+            <div class="ej-line"><span class="frase">El cociente de dos números:</span> <span class="expr">$\dfrac{x}{y}$</span></div>
+            <div class="ej-line"><span class="frase">El cuadrado de un número:</span> <span class="expr">$x^2$</span></div>
+            <div class="ej-line"><span class="frase">Dos números consecutivos:</span> <span class="expr">$x,\ x+1$</span></div>
+            <div class="ej-line"><span class="frase">La mitad de la suma de dos números:</span> <span class="expr">$\dfrac{x+y}{2}$</span></div>
           </div>
         </div>
       </div>
@@ -277,32 +291,32 @@
         <div class="mini-card">
           <div class="mini-card-head">Bloque 1</div>
           <div class="mini-card-body">
-            La diferencia de dos números.<br>
-            El producto de dos números.<br>
-            El cociente de dos números.<br>
-            El cubo de un número.<br>
-            El doble de un número.<br>
-            La tercera parte de un número.<br>
-            Un número aumentado en 5.<br>
-            La suma de los cuadrados de dos números.<br>
-            El cuadrado de la suma de dos números.<br>
-            El producto de tres números.
+            <div class="ej-line">La diferencia de dos números.</div>
+            <div class="ej-line">El producto de dos números.</div>
+            <div class="ej-line">El cociente de dos números.</div>
+            <div class="ej-line">El cubo de un número.</div>
+            <div class="ej-line">El doble de un número.</div>
+            <div class="ej-line">La tercera parte de un número.</div>
+            <div class="ej-line">Un número aumentado en cinco.</div>
+            <div class="ej-line">La suma de los cuadrados de dos números.</div>
+            <div class="ej-line">El cuadrado de la suma de dos números.</div>
+            <div class="ej-line">El producto de tres números.</div>
           </div>
         </div>
 
         <div class="mini-card">
           <div class="mini-card-head">Bloque 2</div>
           <div class="mini-card-body">
-            El doble de un número más el triple de otro.<br>
-            Un número par.<br>
-            Un número impar.<br>
-            Tres números consecutivos.<br>
-            El antecesor de un número.<br>
-            El cuadrado de un número par.<br>
-            La suma de tres números consecutivos.<br>
-            El producto de un número y su sucesor.<br>
-            La diferencia de los cubos de dos números.<br>
-            La cuarta parte de la suma de dos números.
+            <div class="ej-line">El doble de un número más el triple de otro.</div>
+            <div class="ej-line">Un número par.</div>
+            <div class="ej-line">Un número impar.</div>
+            <div class="ej-line">Tres números consecutivos.</div>
+            <div class="ej-line">El antecesor de un número.</div>
+            <div class="ej-line">El cuadrado de un número par.</div>
+            <div class="ej-line">La suma de tres números consecutivos.</div>
+            <div class="ej-line">El producto de un número y su sucesor.</div>
+            <div class="ej-line">La diferencia de los cubos de dos números.</div>
+            <div class="ej-line">La cuarta parte de la suma de dos números.</div>
           </div>
         </div>
 
@@ -324,32 +338,32 @@
           <div class="mini-card">
             <div class="mini-card-head">Bloque 1</div>
             <div class="mini-card-body">
-              $x - y$<br>
-              $x \cdot y$<br>
-              $\dfrac{x}{y}$<br>
-              $x^3$<br>
-              $2x$<br>
-              $\dfrac{x}{3}$<br>
-              $x + 5$<br>
-              $x^2 + y^2$<br>
-              $(x + y)^2$<br>
-              $x \cdot y \cdot z$
+              <div class="ej-line"><span class="frase">La diferencia de dos números:</span> <span class="expr">$x - y$</span></div>
+              <div class="ej-line"><span class="frase">El producto de dos números:</span> <span class="expr">$x \cdot y$</span></div>
+              <div class="ej-line"><span class="frase">El cociente de dos números:</span> <span class="expr">$\dfrac{x}{y}$</span></div>
+              <div class="ej-line"><span class="frase">El cubo de un número:</span> <span class="expr">$x^3$</span></div>
+              <div class="ej-line"><span class="frase">El doble de un número:</span> <span class="expr">$2x$</span></div>
+              <div class="ej-line"><span class="frase">La tercera parte de un número:</span> <span class="expr">$\dfrac{x}{3}$</span></div>
+              <div class="ej-line"><span class="frase">Un número aumentado en cinco:</span> <span class="expr">$x + 5$</span></div>
+              <div class="ej-line"><span class="frase">La suma de los cuadrados de dos números:</span> <span class="expr">$x^2 + y^2$</span></div>
+              <div class="ej-line"><span class="frase">El cuadrado de la suma de dos números:</span> <span class="expr">$(x + y)^2$</span></div>
+              <div class="ej-line"><span class="frase">El producto de tres números:</span> <span class="expr">$x \cdot y \cdot z$</span></div>
             </div>
           </div>
 
           <div class="mini-card">
             <div class="mini-card-head">Bloque 2</div>
             <div class="mini-card-body">
-              $2x + 3y$<br>
-              $2n$<br>
-              $2n + 1$<br>
-              $x,\ x+1,\ x+2$<br>
-              $x - 1$<br>
-              $(2n)^2$<br>
-              $x + (x+1) + (x+2)$<br>
-              $x(x + 1)$<br>
-              $x^3 - y^3$<br>
-              $\dfrac{x + y}{4}$
+              <div class="ej-line"><span class="frase">El doble de un número más el triple de otro:</span> <span class="expr">$2x + 3y$</span></div>
+              <div class="ej-line"><span class="frase">Un número par:</span> <span class="expr">$2n$</span></div>
+              <div class="ej-line"><span class="frase">Un número impar:</span> <span class="expr">$2n + 1$</span></div>
+              <div class="ej-line"><span class="frase">Tres números consecutivos:</span> <span class="expr">$x,\ x+1,\ x+2$</span></div>
+              <div class="ej-line"><span class="frase">El antecesor de un número:</span> <span class="expr">$x - 1$</span></div>
+              <div class="ej-line"><span class="frase">El cuadrado de un número par:</span> <span class="expr">$(2n)^2$</span></div>
+              <div class="ej-line"><span class="frase">La suma de tres números consecutivos:</span> <span class="expr">$x + (x+1) + (x+2)$</span></div>
+              <div class="ej-line"><span class="frase">El producto de un número y su sucesor:</span> <span class="expr">$x(x + 1)$</span></div>
+              <div class="ej-line"><span class="frase">La diferencia de los cubos de dos números:</span> <span class="expr">$x^3 - y^3$</span></div>
+              <div class="ej-line"><span class="frase">La cuarta parte de la suma de dos números:</span> <span class="expr">$\dfrac{x + y}{4}$</span></div>
             </div>
           </div>
 
@@ -372,44 +386,44 @@
           <div class="mini-card">
             <div class="mini-card-head">Bloque A — Refuerzo</div>
             <div class="mini-card-body">
-              El quíntuplo de un número.<br>
-              El triple de un número disminuido en 10.<br>
-              Un número disminuido en su mitad.<br>
-              El doble del cuadrado de un número.<br>
-              El triple del sucesor de un número.
+              <div class="ej-line">El quíntuplo de un número.</div>
+              <div class="ej-line">El triple de un número disminuido en 10.</div>
+              <div class="ej-line">Un número disminuido en su mitad.</div>
+              <div class="ej-line">El doble del cuadrado de un número.</div>
+              <div class="ej-line">El triple del sucesor de un número.</div>
             </div>
           </div>
 
           <div class="mini-card">
             <div class="mini-card-head">Bloque B — Relaciones</div>
             <div class="mini-card-body">
-              El cociente de la suma entre la diferencia.<br>
-              La suma de un número y su inverso.<br>
-              El cuadrado de un número más el mismo número.<br>
-              La mitad de la diferencia de dos números.<br>
-              El doble de la suma de tres números.
+              <div class="ej-line">El cociente de la suma entre la diferencia.</div>
+              <div class="ej-line">La suma de un número y su inverso.</div>
+              <div class="ej-line">El cuadrado de un número más el mismo número.</div>
+              <div class="ej-line">La mitad de la diferencia de dos números.</div>
+              <div class="ej-line">El doble de la suma de tres números.</div>
             </div>
           </div>
 
           <div class="mini-card">
             <div class="mini-card-head">Bloque C — Potencias y raíces</div>
             <div class="mini-card-body">
-              El cuadrado de la diferencia de dos números.<br>
-              La raíz cuadrada de un número más 7.<br>
-              La suma de un número y su cuadrado.<br>
-              El cubo de la tercera parte de un número.<br>
-              La raíz cúbica del producto de dos números.
+              <div class="ej-line">El cuadrado de la diferencia de dos números.</div>
+              <div class="ej-line">La raíz cuadrada de un número más 7.</div>
+              <div class="ej-line">La suma de un número y su cuadrado.</div>
+              <div class="ej-line">El cubo de la tercera parte de un número.</div>
+              <div class="ej-line">La raíz cúbica del producto de dos números.</div>
             </div>
           </div>
 
           <div class="mini-card">
             <div class="mini-card-head">Bloque D — Consecutivos y especiales</div>
             <div class="mini-card-body">
-              La suma de dos números pares consecutivos.<br>
-              El producto de dos números consecutivos.<br>
-              La diferencia entre un número y su antecesor.<br>
-              Tres números impares consecutivos.<br>
-              El cuadrado del sucesor de un número.
+              <div class="ej-line">La suma de dos números pares consecutivos.</div>
+              <div class="ej-line">El producto de dos números consecutivos.</div>
+              <div class="ej-line">La diferencia entre un número y su antecesor.</div>
+              <div class="ej-line">Tres números impares consecutivos.</div>
+              <div class="ej-line">El cuadrado del sucesor de un número.</div>
             </div>
           </div>
 
