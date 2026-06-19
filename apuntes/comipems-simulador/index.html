@@ -1776,6 +1776,12 @@ function shuffle(arr) {
   return a;
 }
 function pick(arr, n) { return shuffle(arr).slice(0, n); }
+// Baraja las opciones de una pregunta para que la correcta no quede siempre
+// en la misma posición (el banco tiende a poner la correcta en la A).
+function shuffleOptions(q) {
+  const order = shuffle(q.options.map((_, i) => i));
+  return { ...q, options: order.map(i => q.options[i]), correct: order.indexOf(q.correct) };
+}
 function qKey(subj, n) { return `${subj}:${n}`; }
 function findQuestion(key) {
   const [subj, n] = key.split(':');
@@ -1909,7 +1915,7 @@ function startQuiz(blockId) {
   });
   state.mode = 'quiz';
   state.blockId = blockId;
-  state.questions = shuffle(selected);
+  state.questions = shuffle(selected).map(shuffleOptions);
   state.answers = {};
   state.index = 0;
   renderQuiz();
@@ -1926,7 +1932,7 @@ function startExam() {
   });
   state.mode = 'quiz';
   state.blockId = 'examen';
-  state.questions = shuffle(selected);
+  state.questions = shuffle(selected).map(shuffleOptions);
   state.answers = {};
   state.index = 0;
   state.examEndsAt = Date.now() + EXAM_SECONDS * 1000;
@@ -1962,7 +1968,7 @@ function startErrorsReview() {
   });
   state.mode = 'quiz';
   state.blockId = 'errores';
-  state.questions = shuffle(selected);
+  state.questions = shuffle(selected).map(shuffleOptions);
   state.answers = {};
   state.index = 0;
   renderQuiz();
@@ -2176,7 +2182,7 @@ function reviewWrongOnly() {
   });
   state.mode = 'quiz';
   state.blockId = 'errores';
-  state.questions = shuffle(wrong);
+  state.questions = shuffle(wrong).map(shuffleOptions);
   state.answers = {};
   state.index = 0;
   renderQuiz();
