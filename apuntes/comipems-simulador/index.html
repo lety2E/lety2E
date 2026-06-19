@@ -1,0 +1,2198 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simulador COMIPEMS · Ingreso a bachillerato — lety2E</title>
+  <meta name="description" content="Simulador del examen único de ingreso a bachillerato (COMIPEMS / ECOEMS). Practica por bloques y repasa tus errores.">
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../../favicon.ico">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <style>
+    :root {
+      --M: #FF00AA;
+      --T: #00DEC8;
+      --P: #4A0080;
+      --dark: #1A0828;
+      --bg:      #FBF2EF;
+      --bg-card: #FFFFFF;
+      --border-s: #EFD8D0;
+      --txt:     #1e0f2e;
+      --txt-2:   #5a3f78;
+      --ok: #1FBA77;
+      --bad: #E03B6A;
+    }
+    @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;600;700&family=Playfair+Display:wght@900&display=swap');
+
+    * { box-sizing: border-box; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      background: var(--bg);
+      color: var(--txt);
+      min-height: 100vh;
+      margin: 0;
+    }
+    main {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 2rem 1.25rem 4rem;
+    }
+    .page-h1 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-size: clamp(1.8rem, 5vw, 2.6rem);
+      color: var(--P);
+      margin: 0 0 .25rem;
+      line-height: 1.1;
+    }
+    .page-sub {
+      color: var(--txt-2);
+      margin: 0 0 2rem;
+      font-size: .95rem;
+    }
+
+    /* Tabs */
+    .tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .35rem;
+      border-bottom: 2px solid var(--border-s);
+      margin-bottom: 1.5rem;
+    }
+    .tab-btn {
+      background: none;
+      border: none;
+      padding: .8rem .9rem;
+      font: inherit;
+      font-weight: 600;
+      color: var(--txt-2);
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      margin-bottom: -2px;
+      white-space: nowrap;
+      transition: color .15s, border-color .15s;
+      font-size: .95rem;
+    }
+    .tab-btn:hover { color: var(--dark); }
+    .tab-btn.active {
+      color: var(--tab-accent, var(--P));
+      border-bottom-color: var(--tab-accent, var(--P));
+    }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    .panel-block {
+      background: var(--bg-card);
+      border: 1px solid var(--border-s);
+      border-left: 6px solid var(--accent, var(--T));
+      border-radius: 14px;
+      padding: 1.8rem 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .panel-block h2 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-size: 1.6rem;
+      margin: 0 0 .3rem;
+      color: var(--dark);
+      line-height: 1.1;
+    }
+    .panel-block .panel-subtitle {
+      margin: 0 0 .35rem;
+      color: var(--accent, var(--T));
+      font-weight: 600;
+      font-size: .95rem;
+    }
+    .panel-block .panel-count {
+      margin: 0 0 1.3rem;
+      color: var(--txt-2);
+      font-size: .9rem;
+    }
+    .panel-block .composition {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 1.3rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: .4rem;
+    }
+    .panel-block .composition li {
+      background: var(--bg);
+      border: 1px solid var(--border-s);
+      padding: .3rem .7rem;
+      border-radius: 16px;
+      font-size: .82rem;
+      color: var(--txt-2);
+    }
+    .panel-block .composition li strong { color: var(--dark); }
+    .btn-start {
+      background: var(--accent, var(--T));
+      color: var(--dark);
+      border: none;
+      padding: .9rem 1.5rem;
+      border-radius: 10px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 1rem;
+      transition: filter .15s;
+    }
+    .btn-start:hover { filter: brightness(0.9); }
+
+    .errors-card {
+      background: #FFE9F2;
+      border: 1px dashed var(--M);
+      border-radius: 14px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+    .errors-card-text strong { color: var(--M); }
+    .errors-card-text p { margin: .2rem 0 0; font-size: .85rem; color: var(--txt-2); }
+    .btn-errors {
+      background: var(--M);
+      color: white;
+      border: none;
+      padding: .6rem 1rem;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+      flex-shrink: 0;
+    }
+    .btn-errors:hover { background: var(--P); }
+    .btn-errors:disabled { background: #bbb; cursor: not-allowed; }
+
+    .history-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-s);
+      border-radius: 14px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+    .history-card h3 { margin: 0 0 .6rem; font-size: 1rem; color: var(--P); font-weight: 600; }
+    .history-list { list-style: none; padding: 0; margin: 0; font-size: .85rem; color: var(--txt-2); }
+    .history-list li { padding: .25rem 0; border-bottom: 1px solid var(--border-s); display: flex; justify-content: space-between; }
+    .history-list li:last-child { border-bottom: none; }
+
+    .quiz-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.25rem;
+      gap: .75rem;
+      flex-wrap: wrap;
+    }
+    .quiz-progress { font-size: .85rem; color: var(--txt-2); }
+    .quiz-progress strong { color: var(--dark); }
+    .subject-tag {
+      display: inline-block;
+      background: var(--P);
+      color: white;
+      padding: .25rem .6rem;
+      border-radius: 6px;
+      font-size: .75rem;
+      letter-spacing: .03em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+    .btn-exit {
+      background: none;
+      border: 1px solid var(--border-s);
+      color: var(--txt-2);
+      padding: .35rem .7rem;
+      border-radius: 6px;
+      font-size: .8rem;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    .btn-exit:hover { color: var(--bad); border-color: var(--bad); }
+
+    .progress-bar {
+      background: var(--border-s);
+      height: 6px;
+      border-radius: 3px;
+      overflow: hidden;
+      margin-bottom: 1.5rem;
+    }
+    .progress-bar-fill {
+      background: var(--T);
+      height: 100%;
+      width: 0%;
+      transition: width .3s;
+    }
+
+    .question-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-s);
+      border-radius: 14px;
+      padding: 1.5rem;
+      margin-bottom: 1.25rem;
+    }
+    .question-num { color: var(--T); font-weight: 700; font-size: 1.1rem; margin-bottom: .5rem; }
+    .question-text {
+      font-size: 1.05rem;
+      line-height: 1.55;
+      color: var(--dark);
+      margin-bottom: 1.1rem;
+    }
+    .options { list-style: none; padding: 0; margin: 0; display: grid; gap: .55rem; }
+    .option-btn {
+      display: flex;
+      align-items: flex-start;
+      gap: .8rem;
+      padding: .85rem 1rem;
+      background: var(--bg-card);
+      border: 2px solid var(--border-s);
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all .15s;
+      font: inherit;
+      color: var(--txt);
+      text-align: left;
+      width: 100%;
+      line-height: 1.45;
+    }
+    .option-btn:hover { border-color: var(--T); background: #F7FDFC; }
+    .option-btn.selected { border-color: var(--T); background: #E6FBF8; }
+    .option-btn.correct { border-color: var(--ok); background: #E6F8EF; }
+    .option-btn.wrong { border-color: var(--bad); background: #FCE6EE; }
+    .option-btn:disabled { cursor: default; }
+    .option-letter { font-weight: 700; color: var(--P); flex-shrink: 0; min-width: 1.4rem; }
+    .option-btn.correct .option-letter { color: var(--ok); }
+    .option-btn.wrong .option-letter { color: var(--bad); }
+    .option-text { flex: 1; }
+
+    .feedback {
+      margin-top: 1rem;
+      padding: .8rem 1rem;
+      border-radius: 8px;
+      font-size: .9rem;
+      display: none;
+    }
+    .feedback.show { display: block; }
+    .feedback.ok { background: #E6F8EF; color: #0E7A48; border-left: 4px solid var(--ok); }
+    .feedback.bad { background: #FCE6EE; color: #9B1239; border-left: 4px solid var(--bad); }
+    .feedback-exp {
+      margin-top: .6rem;
+      padding-top: .6rem;
+      border-top: 1px solid currentColor;
+      opacity: .85;
+      font-weight: 400;
+      line-height: 1.5;
+    }
+
+    .quiz-nav { display: flex; justify-content: space-between; gap: .75rem; margin-top: 1rem; }
+    .btn {
+      background: var(--T);
+      color: var(--dark);
+      border: none;
+      padding: .75rem 1.4rem;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: .95rem;
+      transition: all .15s;
+    }
+    .btn:hover { background: var(--P); color: white; }
+    .btn:disabled { background: #ddd; color: #999; cursor: not-allowed; }
+    .btn-secondary { background: transparent; color: var(--txt-2); border: 1px solid var(--border-s); }
+    .btn-secondary:hover { color: var(--dark); background: white; }
+
+    .results-hero {
+      background: var(--bg-card);
+      border: 1px solid var(--border-s);
+      border-radius: 14px;
+      padding: 1.8rem 1.5rem;
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+    .results-score {
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-size: 3.5rem;
+      color: var(--P);
+      line-height: 1;
+      margin: .5rem 0;
+    }
+    .results-score .total { color: var(--txt-2); font-size: 2rem; }
+    .results-pct { font-size: 1.1rem; color: var(--T); font-weight: 600; }
+    .results-pct.bad { color: var(--bad); }
+    .results-pct.ok { color: var(--ok); }
+
+    .results-breakdown {
+      background: var(--bg-card);
+      border: 1px solid var(--border-s);
+      border-radius: 14px;
+      padding: 1.2rem 1.4rem;
+      margin-bottom: 1.5rem;
+    }
+    .results-breakdown h3 { margin: 0 0 .8rem; font-size: 1rem; color: var(--P); }
+    .breakdown-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: .5rem 0;
+      border-bottom: 1px solid var(--border-s);
+      font-size: .92rem;
+    }
+    .breakdown-row:last-child { border-bottom: none; }
+    .breakdown-bar {
+      flex: 1;
+      margin: 0 1rem;
+      background: var(--border-s);
+      height: 6px;
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .breakdown-bar-fill { background: var(--T); height: 100%; }
+    .breakdown-score { font-weight: 600; color: var(--dark); min-width: 3.5rem; text-align: right; }
+
+    .results-errors {
+      background: #FFF6FA;
+      border: 1px solid #FFD0E5;
+      border-radius: 14px;
+      padding: 1.2rem 1.4rem;
+      margin-bottom: 1.5rem;
+    }
+    .results-errors h3 { margin: 0 0 .8rem; font-size: 1rem; color: var(--M); }
+    .error-item { padding: .6rem 0; border-bottom: 1px solid #FFD0E5; font-size: .9rem; }
+    .error-item:last-child { border-bottom: none; }
+    .error-num { color: var(--M); font-weight: 700; }
+    .error-detail { color: var(--txt-2); font-size: .82rem; margin-top: .2rem; }
+    .error-detail .ok-text { color: var(--ok); }
+    .error-detail .bad-text { color: var(--bad); text-decoration: line-through; }
+
+    .results-actions { display: grid; gap: .6rem; grid-template-columns: 1fr 1fr; }
+    .btn-big { padding: 1rem; font-size: 1rem; border-radius: 10px; }
+
+    @media (max-width: 540px) {
+      main { padding: 1.25rem 1rem 3rem; }
+      .question-card { padding: 1.1rem; }
+      .results-actions { grid-template-columns: 1fr; }
+      .results-score { font-size: 2.8rem; }
+      .results-score .total { font-size: 1.6rem; }
+    }
+    .katex { white-space: nowrap; }
+
+    /* Cronómetro del examen completo */
+    .exam-timer {
+      font-variant-numeric: tabular-nums;
+      font-weight: 700;
+      color: var(--P);
+      background: var(--bg);
+      border: 1px solid var(--border-s);
+      padding: .3rem .6rem;
+      border-radius: 8px;
+      font-size: .9rem;
+      white-space: nowrap;
+    }
+    .exam-panel {
+      border-left-color: var(--P);
+      background: linear-gradient(180deg, #F7EEFF, #FFFFFF);
+    }
+
+    .footer-mini {
+      text-align: center;
+      padding: 2rem 0 1rem;
+      font-size: .75rem;
+      color: var(--txt-2);
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+
+<main id="app"></main>
+
+<div class="footer-mini">
+  Simulador de práctica para el examen único de ingreso a bachillerato (COMIPEMS / ECOEMS).<br>
+  Preguntas representativas del nivel y temario — no son los reactivos oficiales literales.
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+
+<script>
+// ───────────────────────────────────────────
+// BANCO DE PREGUNTAS
+// Notación: $...$ para fórmulas KaTeX.
+// ───────────────────────────────────────────
+const QUESTIONS = {
+
+  verbal: [
+    { n:1, text:"Elige el sinónimo de <strong>efímero</strong>.",
+      options:["Eterno","Pasajero","Sólido","Profundo"], correct:1,
+      explanation:"Efímero significa que dura poco tiempo; su sinónimo es pasajero o fugaz." },
+    { n:2, text:"Elige el antónimo de <strong>prolijo</strong>.",
+      options:["Detallado","Cuidadoso","Descuidado","Extenso"], correct:2,
+      explanation:"Prolijo significa muy cuidadoso y esmerado; su antónimo es descuidado." },
+    { n:3, text:"Completa la analogía: MÉDICO es a HOSPITAL como MAESTRO es a…",
+      options:["Escuela","Alumno","Libro","Examen"], correct:0,
+      explanation:"Relación de profesional con su lugar de trabajo: el maestro trabaja en la escuela." },
+    { n:4, text:"Completa la analogía: PEZ es a ESCAMA como AVE es a…",
+      options:["Nido","Pluma","Vuelo","Pico"], correct:1,
+      explanation:"Relación de animal con lo que recubre su cuerpo: al pez la escama, al ave la pluma." },
+    { n:5, text:"Elige el sinónimo de <strong>vacilar</strong>.",
+      options:["Decidir","Dudar","Afirmar","Correr"], correct:1,
+      explanation:"Vacilar es titubear o dudar antes de actuar." },
+    { n:6, text:"¿Qué significa <strong>hipótesis</strong>?",
+      options:["Una conclusión ya comprobada","Una suposición que se intenta comprobar","Una ley científica","Un experimento"], correct:1,
+      explanation:"Una hipótesis es una suposición provisional que se pone a prueba para comprobarla o rechazarla." },
+    { n:7, text:"Elige el antónimo de <strong>magnánimo</strong>.",
+      options:["Generoso","Mezquino","Grande","Noble"], correct:1,
+      explanation:"Magnánimo es generoso y noble; su antónimo es mezquino o tacaño." },
+    { n:8, text:"Completa: «No asistió a la reunión ____ estaba enfermo».",
+      options:["aunque","porque","sino","pero"], correct:1,
+      explanation:"Se necesita una conjunción causal: «porque» introduce el motivo de la ausencia." },
+    { n:9, text:"Completa la analogía: AGUA es a SED como COMIDA es a…",
+      options:["Hambre","Plato","Cocina","Sabor"], correct:0,
+      explanation:"El agua sacia la sed; la comida sacia el hambre. Relación de necesidad y satisfacción." },
+    { n:10, text:"Elige el sinónimo de <strong>íntegro</strong> (referido a una persona).",
+      options:["Parcial","Honesto","Débil","Falso"], correct:1,
+      explanation:"Una persona íntegra es honrada y recta; sinónimo de honesto." },
+    { n:11, text:"Elige el sinónimo de <strong>abundante</strong>.",
+      options:["Escaso","Copioso","Pequeño","Único"], correct:1,
+      explanation:"Abundante es que hay mucho de algo; sinónimo de copioso." },
+    { n:12, text:"Elige el antónimo de <strong>generoso</strong>.",
+      options:["Dadivoso","Tacaño","Amable","Espléndido"], correct:1,
+      explanation:"Generoso es quien comparte con desprendimiento; su antónimo es tacaño." },
+    { n:13, text:"Completa la analogía: LIBRO es a LEER como MÚSICA es a…",
+      options:["Escuchar","Escribir","Comprar","Guardar"], correct:0,
+      explanation:"El libro se lee; la música se escucha. Relación de objeto con su acción." },
+    { n:14, text:"Elige el sinónimo de <strong>valiente</strong>.",
+      options:["Cobarde","Audaz","Tímido","Débil"], correct:1,
+      explanation:"Valiente es quien enfrenta el peligro; sinónimo de audaz o intrépido." },
+    { n:15, text:"Elige el antónimo de <strong>claro</strong> (en cuanto a luz).",
+      options:["Oscuro","Limpio","Blanco","Nítido"], correct:0,
+      explanation:"Lo opuesto a claro es oscuro." },
+    { n:16, text:"Elige el sinónimo de <strong>rápido</strong>.",
+      options:["Veloz","Lento","Quieto","Pesado"], correct:0,
+      explanation:"Rápido y veloz significan lo mismo: que va de prisa." },
+    { n:17, text:"Completa la analogía: GUANTE es a MANO como ZAPATO es a…",
+      options:["Pie","Calcetín","Suelo","Cordón"], correct:0,
+      explanation:"El guante cubre la mano; el zapato cubre el pie." },
+    { n:18, text:"Elige el sinónimo de <strong>comenzar</strong>.",
+      options:["Terminar","Iniciar","Detener","Cerrar"], correct:1,
+      explanation:"Comenzar e iniciar significan empezar algo." },
+    { n:19, text:"Elige el antónimo de <strong>humilde</strong>.",
+      options:["Sencillo","Soberbio","Modesto","Pobre"], correct:1,
+      explanation:"Humilde es modesto y sencillo; su antónimo es soberbio o arrogante." },
+    { n:20, text:"Elige el sinónimo de <strong>obstáculo</strong>.",
+      options:["Ayuda","Impedimento","Camino","Meta"], correct:1,
+      explanation:"Un obstáculo es algo que estorba; sinónimo de impedimento o barrera." },
+    { n:21, text:"Completa: «Estudió mucho, ____ aprobó el examen».",
+      options:["por eso","aunque","pero","ni"], correct:0,
+      explanation:"Se expresa una consecuencia: «por eso» indica el resultado de estudiar." },
+    { n:22, text:"Completa la analogía: FRÍO es a CALIENTE como SECO es a…",
+      options:["Húmedo","Árido","Tibio","Duro"], correct:0,
+      explanation:"Frío y caliente son opuestos; seco y húmedo también lo son." },
+    { n:23, text:"Elige el sinónimo de <strong>antiguo</strong>.",
+      options:["Nuevo","Viejo","Moderno","Actual"], correct:1,
+      explanation:"Antiguo es lo que tiene mucho tiempo; sinónimo de viejo." },
+    { n:24, text:"Elige el antónimo de <strong>aumentar</strong>.",
+      options:["Crecer","Disminuir","Subir","Sumar"], correct:1,
+      explanation:"Aumentar es hacer más grande; su antónimo es disminuir." },
+    { n:25, text:"Elige el sinónimo de <strong>alegría</strong>.",
+      options:["Tristeza","Júbilo","Enojo","Miedo"], correct:1,
+      explanation:"Alegría y júbilo expresan un sentimiento de felicidad." },
+    { n:26, text:"¿Qué significa el refrán «A caballo regalado no se le ve el colmillo»?",
+      options:["No hay que criticar lo que se recibe gratis","Los caballos son muy caros","Siempre revisa los dientes","Nunca aceptes regalos"], correct:0,
+      explanation:"Significa que no debemos poner defectos a algo que nos regalan." },
+    { n:27, text:"Completa la analogía: ABEJA es a PANAL como PÁJARO es a…",
+      options:["Nido","Cielo","Árbol","Huevo"], correct:0,
+      explanation:"La abeja vive en el panal; el pájaro, en el nido. Relación de animal con su hogar." },
+    { n:28, text:"Elige el sinónimo de <strong>necesario</strong>.",
+      options:["Opcional","Imprescindible","Inútil","Adicional"], correct:1,
+      explanation:"Necesario es lo que hace falta; sinónimo de imprescindible." },
+    { n:29, text:"Elige el antónimo de <strong>permitir</strong>.",
+      options:["Dejar","Prohibir","Aceptar","Autorizar"], correct:1,
+      explanation:"Permitir es dejar hacer algo; su antónimo es prohibir." },
+    { n:30, text:"Elige el sinónimo de <strong>famoso</strong>.",
+      options:["Desconocido","Célebre","Común","Anónimo"], correct:1,
+      explanation:"Famoso y célebre describen a alguien muy conocido." },
+    { n:31, text:"Completa: «No solo llegó tarde, ____ tampoco avisó».",
+      options:["sino que","porque","aunque","pero"], correct:0,
+      explanation:"«No solo… sino que…» es la estructura correcta para añadir información." },
+    { n:32, text:"¿Qué significa <strong>perspicaz</strong>?",
+      options:["Torpe","Agudo o astuto","Lento","Distraído"], correct:1,
+      explanation:"Perspicaz es quien comprende las cosas con rapidez y agudeza." },
+    { n:33, text:"Completa la analogía: MÉDICO es a ENFERMEDAD como BOMBERO es a…",
+      options:["Incendio","Agua","Casa","Escalera"], correct:0,
+      explanation:"El médico combate la enfermedad; el bombero combate el incendio." },
+    { n:34, text:"Elige el sinónimo de <strong>tranquilo</strong>.",
+      options:["Nervioso","Sereno","Agitado","Inquieto"], correct:1,
+      explanation:"Tranquilo y sereno expresan calma." },
+    { n:35, text:"Elige el antónimo de <strong>verdad</strong>.",
+      options:["Certeza","Mentira","Realidad","Hecho"], correct:1,
+      explanation:"Lo opuesto a la verdad es la mentira." },
+    { n:36, text:"Elige el sinónimo de <strong>ayudar</strong>.",
+      options:["Estorbar","Auxiliar","Ignorar","Dañar"], correct:1,
+      explanation:"Ayudar y auxiliar significan prestar apoyo a alguien." },
+    { n:37, text:"¿Qué significa <strong>efusivo</strong>?",
+      options:["Frío y distante","Muy expresivo y cariñoso","Callado","Serio"], correct:1,
+      explanation:"Efusivo es quien muestra sus afectos de forma muy intensa." },
+    { n:38, text:"Completa la analogía: PINTOR es a PINCEL como ESCRITOR es a…",
+      options:["Pluma","Libro","Papel","Lector"], correct:0,
+      explanation:"El pintor usa el pincel; el escritor usa la pluma. Relación con su herramienta." },
+    { n:39, text:"Elige el sinónimo de <strong>diminuto</strong>.",
+      options:["Enorme","Minúsculo","Grande","Mediano"], correct:1,
+      explanation:"Diminuto y minúsculo describen algo muy pequeño." },
+    { n:40, text:"Elige el antónimo de <strong>optimista</strong>.",
+      options:["Positivo","Pesimista","Alegre","Confiado"], correct:1,
+      explanation:"Optimista ve el lado bueno; su antónimo es pesimista." },
+  ],
+
+  habMate: [
+    { n:1, text:"¿Qué número continúa la serie? 2, 4, 8, 16, …",
+      options:["24","32","20","64"], correct:1,
+      explanation:"Cada término se multiplica por 2: 16 × 2 = 32." },
+    { n:2, text:"¿Qué número continúa la serie? 3, 6, 11, 18, …",
+      options:["25","27","24","29"], correct:1,
+      explanation:"Las diferencias aumentan: +3, +5, +7… el siguiente es +9: 18 + 9 = 27." },
+    { n:3, text:"Si 5 lápices cuestan $20, ¿cuánto cuestan 8 lápices?",
+      options:["$28","$32","$30","$36"], correct:1,
+      explanation:"Cada lápiz cuesta $20 ÷ 5 = $4. Entonces 8 × $4 = $32." },
+    { n:4, text:"¿Qué número sigue? 1, 1, 2, 3, 5, 8, …",
+      options:["11","13","12","10"], correct:1,
+      explanation:"Sucesión de Fibonacci: cada término es la suma de los dos anteriores. 5 + 8 = 13." },
+    { n:5, text:"Un tren recorre 240 km en 3 horas. ¿Cuál es su velocidad promedio?",
+      options:["60 km/h","80 km/h","90 km/h","120 km/h"], correct:1,
+      explanation:"Velocidad = distancia ÷ tiempo = 240 ÷ 3 = 80 km/h." },
+    { n:6, text:"¿Cuánto es la mitad de la tercera parte de 90?",
+      options:["15","30","45","10"], correct:0,
+      explanation:"La tercera parte de 90 es 30; su mitad es 15." },
+    { n:7, text:"¿Qué número continúa? 100, 50, 25, …",
+      options:["6","12.5","5","10"], correct:1,
+      explanation:"Cada término se divide entre 2: 25 ÷ 2 = 12.5." },
+    { n:8, text:"Si A es mayor que B, y B es mayor que C, entonces…",
+      options:["A es menor que C","A es mayor que C","A es igual a C","No se puede saber"], correct:1,
+      explanation:"Por transitividad: si A > B y B > C, entonces A > C." },
+    { n:9, text:"¿Cuántos minutos hay en 2.5 horas?",
+      options:["125","150","120","160"], correct:1,
+      explanation:"Cada hora tiene 60 minutos: 2.5 × 60 = 150 minutos." },
+    { n:10, text:"Un artículo de $250 tiene 20% de descuento. ¿Cuál es su precio final?",
+      options:["$200","$230","$180","$210"], correct:0,
+      explanation:"El 20% de $250 es $50. Precio final: 250 − 50 = $200." },
+    { n:11, text:"¿Qué número continúa la serie? 5, 10, 15, 20, …",
+      options:["25","30","22","24"], correct:0,
+      explanation:"Aumenta de 5 en 5: 20 + 5 = 25." },
+    { n:12, text:"¿Qué número continúa la serie? 1, 4, 9, 16, …",
+      options:["25","20","24","18"], correct:0,
+      explanation:"Son los cuadrados: 1², 2², 3², 4²… el siguiente es 5² = 25." },
+    { n:13, text:"Si 3 obreros levantan un muro en 6 días, ¿cuántos días tardarían 6 obreros (al mismo ritmo)?",
+      options:["3","12","6","2"], correct:0,
+      explanation:"Al doble de obreros, la mitad del tiempo: 6 ÷ 2 = 3 días." },
+    { n:14, text:"¿Qué número falta? 7, 14, 28, ___, 112.",
+      options:["56","42","50","60"], correct:0,
+      explanation:"Cada término se multiplica por 2: 28 × 2 = 56 (y 56 × 2 = 112)." },
+    { n:15, text:"El doble de un número es 18. ¿Cuál es el número?",
+      options:["9","36","16","20"], correct:0,
+      explanation:"Si el doble es 18, el número es 18 ÷ 2 = 9." },
+    { n:16, text:"¿Qué número continúa? 81, 27, 9, …",
+      options:["3","6","1","4"], correct:0,
+      explanation:"Cada término se divide entre 3: 9 ÷ 3 = 3." },
+    { n:17, text:"Si un kilo de manzanas cuesta $30, ¿cuánto cuestan 2.5 kilos?",
+      options:["$75","$60","$90","$70"], correct:0,
+      explanation:"$30 × 2.5 = $75." },
+    { n:18, text:"¿Cuántos cuartos (1/4) hay en 3 enteros?",
+      options:["12","4","6","9"], correct:0,
+      explanation:"Cada entero tiene 4 cuartos: 3 × 4 = 12." },
+    { n:19, text:"Una caja con 24 chocolates se reparte en partes iguales entre 6 niños. ¿Cuántos toca a cada uno?",
+      options:["4","6","3","8"], correct:0,
+      explanation:"24 ÷ 6 = 4 chocolates por niño." },
+    { n:20, text:"¿Qué letra continúa? A, C, E, G, …",
+      options:["I","H","J","F"], correct:0,
+      explanation:"Se salta una letra cada vez (A, _, C, _, E…); después de G sigue la I." },
+    { n:21, text:"Si hoy es martes, ¿qué día será dentro de 10 días?",
+      options:["Viernes","Jueves","Sábado","Lunes"], correct:0,
+      explanation:"10 días = 1 semana (7) + 3 días. Martes + 3 = viernes." },
+    { n:22, text:"¿Qué porcentaje representa 25 de 50?",
+      options:["50%","25%","75%","100%"], correct:0,
+      explanation:"25 es la mitad de 50, es decir, el 50%." },
+    { n:23, text:"Un número más su mitad da 30. ¿Cuál es el número?",
+      options:["20","15","10","25"], correct:0,
+      explanation:"Número + mitad = 30 equivale a 1.5 veces el número; 30 ÷ 1.5 = 20." },
+    { n:24, text:"¿Qué número continúa? 2, 5, 10, 17, …",
+      options:["26","24","28","22"], correct:0,
+      explanation:"Las diferencias crecen: +3, +5, +7… el siguiente es +9: 17 + 9 = 26." },
+    { n:25, text:"¿Cuántos minutos hay de las 8:15 a las 9:00?",
+      options:["45","60","30","15"], correct:0,
+      explanation:"De 8:15 a 9:00 faltan 45 minutos." },
+    { n:26, text:"Si 4 → 16 y 5 → 25, entonces 6 → ?",
+      options:["36","30","12","24"], correct:0,
+      explanation:"Cada número se eleva al cuadrado: 6² = 36." },
+    { n:27, text:"En una bolsa hay 3 canicas rojas y 2 azules. ¿Qué fracción son azules?",
+      options:["2/5","3/5","2/3","1/2"], correct:0,
+      explanation:"Hay 5 canicas en total y 2 azules: 2/5." },
+    { n:28, text:"¿Cuál es el promedio de 10, 20 y 30?",
+      options:["20","15","25","30"], correct:0,
+      explanation:"Se suman (60) y se dividen entre 3: 60 ÷ 3 = 20." },
+    { n:29, text:"Un pastel se parte en 8 rebanadas y se comen 3. ¿Qué fracción queda?",
+      options:["5/8","3/8","1/2","5/3"], correct:0,
+      explanation:"De 8 rebanadas quedan 5: 5/8." },
+    { n:30, text:"¿Qué número continúa? 100, 90, 81, …",
+      options:["73","72","71","70"], correct:0,
+      explanation:"Se resta uno menos cada vez: −10, −9, −8… 81 − 8 = 73." },
+    { n:31, text:"Si un coche gasta 8 litros cada 100 km, ¿cuántos litros gasta en 250 km?",
+      options:["20","16","24","18"], correct:0,
+      explanation:"8 litros × 2.5 = 20 litros." },
+    { n:32, text:"¿Cuánto es el triple de 12, menos 6?",
+      options:["30","36","42","24"], correct:0,
+      explanation:"Triple de 12 = 36; 36 − 6 = 30." },
+    { n:33, text:"¿Qué número continúa? 1, 2, 4, 7, 11, …",
+      options:["16","15","14","17"], correct:0,
+      explanation:"Las diferencias suben: +1, +2, +3, +4… el siguiente es +5: 11 + 5 = 16." },
+    { n:34, text:"Una pizza cuesta $120 y se divide entre 4 amigos. ¿Cuánto paga cada uno?",
+      options:["$30","$40","$24","$60"], correct:0,
+      explanation:"$120 ÷ 4 = $30." },
+    { n:35, text:"¿Cuántos lados tiene un hexágono?",
+      options:["6","5","8","7"], correct:0,
+      explanation:"El prefijo «hexa» significa seis: el hexágono tiene 6 lados." },
+    { n:36, text:"¿Cuánto es el 50% de 80 más el 25% de 80?",
+      options:["60","40","80","50"], correct:0,
+      explanation:"50% de 80 = 40; 25% de 80 = 20. Suma: 40 + 20 = 60." },
+    { n:37, text:"¿Qué número continúa? 3, 9, 27, …",
+      options:["81","54","36","72"], correct:0,
+      explanation:"Cada término se multiplica por 3: 27 × 3 = 81." },
+    { n:38, text:"¿Cuál es el siguiente número par después del 48?",
+      options:["50","49","52","46"], correct:0,
+      explanation:"Los pares van de 2 en 2: después de 48 sigue 50." },
+    { n:39, text:"Se reparten 60 dulces en partes iguales entre 5 niños. ¿Cuántos toca a cada uno?",
+      options:["12","10","15","6"], correct:0,
+      explanation:"60 ÷ 5 = 12 dulces por niño." },
+    { n:40, text:"Cuando un reloj marca las 3:00 en punto, ¿qué ángulo forman sus manecillas?",
+      options:["90°","180°","45°","60°"], correct:0,
+      explanation:"A las 3:00 las manecillas forman un ángulo recto de 90°." },
+  ],
+
+  espanol: [
+    { n:1, text:"¿Cuál de las siguientes es una palabra <strong>aguda</strong> con acento ortográfico?",
+      options:["árbol","café","lápiz","examen"], correct:1,
+      explanation:"«Café» es aguda (la fuerza va en la última sílaba) y lleva tilde por terminar en vocal." },
+    { n:2, text:"¿Cuál de las siguientes palabras es un <strong>sustantivo</strong>?",
+      options:["correr","rápido","libertad","muy"], correct:2,
+      explanation:"«Libertad» nombra una cosa o concepto, por eso es sustantivo. Correr es verbo, rápido adjetivo y muy adverbio." },
+    { n:3, text:"En la oración «Los niños juegan en el parque», ¿cuál es el sujeto?",
+      options:["en el parque","juegan","los niños","parque"], correct:2,
+      explanation:"El sujeto es quien realiza la acción: «los niños»." },
+    { n:4, text:"En «Tú vienes mañana», la palabra «tú» es un…",
+      options:["artículo","pronombre","verbo","adjetivo"], correct:1,
+      explanation:"«Tú» es un pronombre personal que sustituye al nombre de la persona." },
+    { n:5, text:"¿Cuál oración está escrita correctamente?",
+      options:["Haber si vienes","A ver si vienes","Haver si vienes","A haber si vienes"], correct:1,
+      explanation:"La forma correcta es «A ver si vienes» (de mirar/comprobar), no «haber»." },
+    { n:6, text:"¿Cuál es el plural correcto de <strong>lápiz</strong>?",
+      options:["lápizes","lápices","lapizs","lápizs"], correct:1,
+      explanation:"La z final cambia a c antes de -es: lápiz → lápices." },
+    { n:7, text:"¿Qué figura retórica hay en «tus ojos son dos luceros»?",
+      options:["Metáfora","Hipérbole","Ironía","Anáfora"], correct:0,
+      explanation:"Es una metáfora: se identifican los ojos con luceros sin usar «como»." },
+    { n:8, text:"¿Cuál palabra lleva <strong>diéresis</strong>?",
+      options:["pingüino","guitarra","guerra","águila"], correct:0,
+      explanation:"En «pingüino» la diéresis (ü) indica que la u sí se pronuncia." },
+    { n:9, text:"¿Cuál verbo está en copretérito (pretérito imperfecto)?",
+      options:["canté","cantaba","cantaré","cante"], correct:1,
+      explanation:"«Cantaba» expresa una acción pasada en desarrollo: es copretérito." },
+    { n:10, text:"¿Para qué se usa principalmente la coma en una enumeración?",
+      options:["Para terminar una idea completa","Para separar los elementos de una lista","Para iniciar una pregunta","Para unir dos textos largos"], correct:1,
+      explanation:"La coma separa elementos de una serie o enumeración: «manzanas, peras, uvas y plátanos»." },
+    { n:11, text:"¿Cuál es una palabra <strong>grave (llana)</strong> con acento ortográfico?",
+      options:["árbol","café","canción","reloj"], correct:0,
+      explanation:"«Árbol» es grave (fuerza en la penúltima sílaba) y lleva tilde por terminar en «l»." },
+    { n:12, text:"¿Cuál de las siguientes palabras es un <strong>verbo</strong>?",
+      options:["rápidamente","saltar","azul","mesa"], correct:1,
+      explanation:"«Saltar» expresa una acción, por eso es verbo (está en infinitivo)." },
+    { n:13, text:"¿Cuál de las siguientes palabras es un <strong>adjetivo</strong>?",
+      options:["correr","bonito","casa","lentamente"], correct:1,
+      explanation:"«Bonito» describe una cualidad de un sustantivo, por eso es adjetivo." },
+    { n:14, text:"¿Cuál de las siguientes palabras es un <strong>adverbio</strong>?",
+      options:["perro","lentamente","verde","cantar"], correct:1,
+      explanation:"«Lentamente» indica el modo de una acción; los adverbios suelen terminar en -mente." },
+    { n:15, text:"¿Cuál palabra está escrita correctamente?",
+      options:["examen","exámen","examén","eksamen"], correct:0,
+      explanation:"«Examen» es grave terminada en «n», así que no lleva tilde. (Su plural, «exámenes», sí.)" },
+    { n:16, text:"¿Cuál es el plural correcto de <strong>rubí</strong>?",
+      options:["rubís","rubíes","rubis","rubises"], correct:1,
+      explanation:"Muchas palabras terminadas en «í» acentuada hacen el plural con «-es»: rubíes." },
+    { n:17, text:"¿Cuál palabra es <strong>esdrújula</strong>?",
+      options:["camión","sábado","feliz","cantar"], correct:1,
+      explanation:"«Sábado» lleva la fuerza en la antepenúltima sílaba; todas las esdrújulas se acentúan." },
+    { n:18, text:"¿Cómo se escribe correctamente el nombre del animal?",
+      options:["vaca","baca","vacka","baka"], correct:0,
+      explanation:"El animal se escribe «vaca», con «v». «Baca» (con b) es el portaequipajes del auto." },
+    { n:19, text:"¿Cuál es el sujeto en «María canta una canción»?",
+      options:["una canción","canta","María","canción"], correct:2,
+      explanation:"El sujeto es quien realiza la acción: «María»." },
+    { n:20, text:"¿Cuál es el predicado en «El perro corre en el jardín»?",
+      options:["El perro","corre en el jardín","jardín","el perro corre"], correct:1,
+      explanation:"El predicado es lo que se dice del sujeto: «corre en el jardín»." },
+    { n:21, text:"La palabra «rápidamente» es un…",
+      options:["sustantivo","adverbio","adjetivo","verbo"], correct:1,
+      explanation:"Indica cómo se hace una acción, por eso es adverbio de modo." },
+    { n:22, text:"¿Cuál oración usa correctamente «haya»?",
+      options:["Espero que haya comida","Espero que halla comida","Espero que aya comida","Espero que allá comida"], correct:0,
+      explanation:"«Haya» es del verbo haber. «Halla» es de hallar (encontrar) y «allá» indica lugar." },
+    { n:23, text:"¿Cuál es el género de la palabra «agua»?",
+      options:["femenino","masculino","neutro","no tiene"], correct:0,
+      explanation:"«Agua» es femenina («el agua clara»); se usa «el» solo para evitar la cacofonía." },
+    { n:24, text:"¿Cuál es un sinónimo de «casa» en el sentido de vivienda?",
+      options:["hogar","calle","auto","árbol"], correct:0,
+      explanation:"«Hogar» es sinónimo de casa como lugar donde se vive." },
+    { n:25, text:"¿Qué signos se usan para expresar emoción, sorpresa o una orden?",
+      options:["el punto","los signos de admiración (¡ !)","la coma","el guion"], correct:1,
+      explanation:"Los signos de admiración o exclamación (¡ !) marcan emoción o énfasis." },
+    { n:26, text:"¿Cómo se escribe correctamente la palabra que nombra una parte del esqueleto?",
+      options:["hueso","ueso","gueso","jueso"], correct:0,
+      explanation:"Se escribe «hueso», con «h» inicial (las palabras que empiezan con «hue-» llevan h)." },
+    { n:27, text:"¿En qué tiempo está el verbo «comeré»?",
+      options:["presente","futuro","pasado","copretérito"], correct:1,
+      explanation:"«Comeré» indica una acción que ocurrirá después: tiempo futuro." },
+    { n:28, text:"¿Cuál de las siguientes formas verbales es un <strong>infinitivo</strong>?",
+      options:["comiendo","comido","comer","come"], correct:2,
+      explanation:"El infinitivo termina en -ar, -er o -ir: «comer»." },
+    { n:29, text:"Una palabra que une oraciones o ideas (y, pero, porque) es una…",
+      options:["conjunción","preposición","interjección","artículo"], correct:0,
+      explanation:"Las conjunciones enlazan palabras u oraciones: y, pero, porque, aunque…" },
+    { n:30, text:"¿Cuál de las siguientes es una <strong>preposición</strong>?",
+      options:["rápido","de","correr","bonito"], correct:1,
+      explanation:"«De» es preposición; relaciona palabras: «la casa de Ana»." },
+    { n:31, text:"El acento que sí se escribe (la tilde) se llama acento…",
+      options:["prosódico","ortográfico","tónico","mudo"], correct:1,
+      explanation:"El acento ortográfico es la tilde que se escribe; el prosódico solo se pronuncia." },
+    { n:32, text:"¿Cuál oración está en plural?",
+      options:["El niño juega","Los niños juegan","Ella corre","Yo leo"], correct:1,
+      explanation:"«Los niños juegan» tiene sujeto y verbo en plural." },
+    { n:33, text:"¿Qué figura retórica hay en «te lo he dicho mil veces»?",
+      options:["hipérbole","metáfora","símil","personificación"], correct:0,
+      explanation:"Es una hipérbole: una exageración (no son literalmente mil veces)." },
+    { n:34, text:"El símil o comparación se reconoce porque usa la palabra…",
+      options:["«como»","«es»","«y»","«pero»"], correct:0,
+      explanation:"El símil compara usando «como»: «fuerte como un toro»." },
+    { n:35, text:"¿Cuál es el artículo en «la mesa es nueva»?",
+      options:["mesa","la","nueva","es"], correct:1,
+      explanation:"«La» es el artículo que acompaña al sustantivo «mesa»." },
+    { n:36, text:"¿Cuál palabra tiene un <strong>diptongo</strong>?",
+      options:["aire","caoba","león","poeta"], correct:0,
+      explanation:"En «ai-re» dos vocales van juntas en la misma sílaba: eso es un diptongo." },
+    { n:37, text:"¿Cuál palabra tiene un <strong>hiato</strong>?",
+      options:["maíz","peine","causa","reina"], correct:0,
+      explanation:"En «ma-íz» las vocales se separan en sílabas distintas: es un hiato." },
+    { n:38, text:"¿Cuál es el antónimo de «subir»?",
+      options:["ascender","bajar","elevar","trepar"], correct:1,
+      explanation:"Lo opuesto a subir es bajar." },
+    { n:39, text:"¿Cuál es el núcleo del sujeto en «Mis dos hermanos llegaron»?",
+      options:["Mis","dos","hermanos","llegaron"], correct:2,
+      explanation:"El núcleo del sujeto es el sustantivo principal: «hermanos»." },
+    { n:40, text:"El texto breve que narra hechos ficticios con pocos personajes es un…",
+      options:["cuento","ensayo","noticia","instructivo"], correct:0,
+      explanation:"El cuento es una narración breve y ficticia. El ensayo reflexiona y la noticia informa hechos reales." },
+  ],
+
+  matematicas: [
+    { n:1, text:"Resuelve para x: $3x + 5 = 20$.",
+      options:["3","5","15","45"], correct:1,
+      explanation:"$3x = 20 - 5 = 15$, entonces $x = 15 ÷ 3 = 5$." },
+    { n:2, text:"¿Cuál es el área de un triángulo de base 6 y altura 4?",
+      options:["24","12","10","20"], correct:1,
+      explanation:"Área $= \\dfrac{base \\times altura}{2} = \\dfrac{6 \\times 4}{2} = 12$." },
+    { n:3, text:"Resuelve: $\\dfrac{2}{3} + \\dfrac{1}{6}$.",
+      options:["$\\dfrac{3}{9}$","$\\dfrac{5}{6}$","$\\dfrac{1}{2}$","$\\dfrac{3}{6}$"], correct:1,
+      explanation:"Con común denominador 6: $\\dfrac{4}{6} + \\dfrac{1}{6} = \\dfrac{5}{6}$." },
+    { n:4, text:"¿Cuánto es $(-3)(-4)$?",
+      options:["−12","12","−7","7"], correct:1,
+      explanation:"Menos por menos da más: $(-3)(-4) = 12$." },
+    { n:5, text:"¿Cuál es el 15% de 200?",
+      options:["15","30","45","20"], correct:1,
+      explanation:"$200 \\times 0.15 = 30$." },
+    { n:6, text:"¿Cuál es el perímetro de un cuadrado de lado 7?",
+      options:["49","28","14","21"], correct:1,
+      explanation:"El perímetro es la suma de los 4 lados: $4 \\times 7 = 28$." },
+    { n:7, text:"Resuelve: $x^2 = 49$.",
+      options:["$x = \\pm 7$","$x = 7$","$x = 24.5$","$x = \\pm 24$"], correct:0,
+      explanation:"Las soluciones son $+7$ y $-7$, porque $7^2 = 49$ y $(-7)^2 = 49$." },
+    { n:8, text:"Si 1 km = 1000 m, ¿cuántos metros son 3.5 km?",
+      options:["350","3500","35000","3.5"], correct:1,
+      explanation:"$3.5 \\times 1000 = 3500$ metros." },
+    { n:9, text:"En un triángulo rectángulo los catetos miden 3 y 4. ¿Cuánto mide la hipotenusa?",
+      options:["5","7","6","25"], correct:0,
+      explanation:"Teorema de Pitágoras: $\\sqrt{3^2 + 4^2} = \\sqrt{9+16} = \\sqrt{25} = 5$." },
+    { n:10, text:"Simplifica: $2(x + 3)$.",
+      options:["$2x + 3$","$2x + 6$","$x + 6$","$2x + 5$"], correct:1,
+      explanation:"Propiedad distributiva: $2 \\cdot x + 2 \\cdot 3 = 2x + 6$." },
+    { n:11, text:"Resuelve para x: $x - 7 = 12$.",
+      options:["19","5","84","-5"], correct:0,
+      explanation:"Se suma 7 en ambos lados: $x = 12 + 7 = 19$." },
+    { n:12, text:"¿Cuánto es $\\dfrac{3}{4}$ de 100?",
+      options:["75","25","50","30"], correct:0,
+      explanation:"$\\dfrac{3}{4} \\times 100 = 75$." },
+    { n:13, text:"Convierte 0.5 a fracción.",
+      options:["$\\dfrac{1}{2}$","$\\dfrac{1}{5}$","$\\dfrac{5}{1}$","$\\dfrac{2}{3}$"], correct:0,
+      explanation:"0.5 equivale a la mitad: $\\dfrac{1}{2}$." },
+    { n:14, text:"Resuelve para x: $4x = 36$.",
+      options:["9","32","40","8"], correct:0,
+      explanation:"$x = 36 ÷ 4 = 9$." },
+    { n:15, text:"¿Cuál es el área de un rectángulo de 5 × 8?",
+      options:["40","13","26","45"], correct:0,
+      explanation:"Área = base × altura = $5 \\times 8 = 40$." },
+    { n:16, text:"¿Cuánto es $2^3$ (dos al cubo)?",
+      options:["8","6","9","4"], correct:0,
+      explanation:"$2^3 = 2 \\times 2 \\times 2 = 8$." },
+    { n:17, text:"Resuelve: $\\dfrac{1}{2} + \\dfrac{1}{4}$.",
+      options:["$\\dfrac{3}{4}$","$\\dfrac{2}{6}$","$\\dfrac{1}{2}$","$\\dfrac{2}{4}$"], correct:0,
+      explanation:"Con denominador 4: $\\dfrac{2}{4} + \\dfrac{1}{4} = \\dfrac{3}{4}$." },
+    { n:18, text:"¿Cuál es el máximo común divisor (MCD) de 12 y 18?",
+      options:["6","3","2","36"], correct:0,
+      explanation:"El mayor número que divide a 12 y a 18 es 6." },
+    { n:19, text:"¿Cuál es el mínimo común múltiplo (mcm) de 4 y 6?",
+      options:["12","24","2","10"], correct:0,
+      explanation:"El menor múltiplo común de 4 y 6 es 12." },
+    { n:20, text:"Resuelve para x: $2x + 3 = 11$.",
+      options:["4","7","3","8"], correct:0,
+      explanation:"$2x = 11 - 3 = 8$, entonces $x = 4$." },
+    { n:21, text:"¿Cuánto es el 10% de 350?",
+      options:["35","3.5","350","70"], correct:0,
+      explanation:"El 10% se obtiene dividiendo entre 10: $350 ÷ 10 = 35$." },
+    { n:22, text:"¿Cuál es el volumen de un cubo de lado 3?",
+      options:["27","9","12","6"], correct:0,
+      explanation:"Volumen del cubo = lado³ = $3^3 = 27$." },
+    { n:23, text:"¿Cuánto suman los ángulos internos de un triángulo?",
+      options:["180°","360°","90°","270°"], correct:0,
+      explanation:"Los ángulos internos de cualquier triángulo suman 180°." },
+    { n:24, text:"Resuelve: $-5 + 8$.",
+      options:["3","-3","13","-13"], correct:0,
+      explanation:"Al sumar 8 a $-5$ el resultado es positivo: $3$." },
+    { n:25, text:"Simplifica la fracción $\\dfrac{4}{8}$.",
+      options:["$\\dfrac{1}{2}$","$\\dfrac{2}{4}$","$\\dfrac{4}{8}$","$\\dfrac{8}{4}$"], correct:0,
+      explanation:"Dividiendo arriba y abajo entre 4 queda $\\dfrac{1}{2}$." },
+    { n:26, text:"¿Cuánto es $7 \\times 8$?",
+      options:["56","54","64","49"], correct:0,
+      explanation:"$7 \\times 8 = 56$." },
+    { n:27, text:"¿Cuál es la raíz cuadrada de 81?",
+      options:["9","8","18","27"], correct:0,
+      explanation:"$9 \\times 9 = 81$, por lo que $\\sqrt{81} = 9$." },
+    { n:28, text:"Resuelve para x: $\\dfrac{x}{3} = 6$.",
+      options:["18","2","9","3"], correct:0,
+      explanation:"Multiplicando ambos lados por 3: $x = 6 \\times 3 = 18$." },
+    { n:29, text:"¿Cuánto es $0.25 \\times 100$?",
+      options:["25","2.5","250","0.25"], correct:0,
+      explanation:"$0.25 \\times 100 = 25$." },
+    { n:30, text:"¿Cuál es el perímetro de un triángulo equilátero de lado 5?",
+      options:["15","10","25","20"], correct:0,
+      explanation:"Tiene 3 lados iguales: $3 \\times 5 = 15$." },
+    { n:31, text:"¿Cuál es el resultado de $(5 + 3) \\times 2$?",
+      options:["16","11","13","10"], correct:0,
+      explanation:"Primero el paréntesis: $8 \\times 2 = 16$." },
+    { n:32, text:"¿Cuál es la mitad de $\\dfrac{3}{4}$?",
+      options:["$\\dfrac{3}{8}$","$\\dfrac{3}{2}$","$\\dfrac{6}{4}$","$\\dfrac{1}{4}$"], correct:0,
+      explanation:"La mitad equivale a multiplicar por $\\dfrac{1}{2}$: $\\dfrac{3}{4} \\times \\dfrac{1}{2} = \\dfrac{3}{8}$." },
+    { n:33, text:"¿Cuántos centímetros hay en 2 metros?",
+      options:["200","20","2000","2"], correct:0,
+      explanation:"Cada metro tiene 100 cm: $2 \\times 100 = 200$ cm." },
+    { n:34, text:"Resuelve la proporción: $\\dfrac{2}{4} = \\dfrac{x}{8}$.",
+      options:["4","2","8","16"], correct:0,
+      explanation:"$\\dfrac{2}{4} = \\dfrac{1}{2}$; la mitad de 8 es 4, así que $x = 4$." },
+    { n:35, text:"¿Cuánto es $15 ÷ 0.5$?",
+      options:["30","7.5","15","10"], correct:0,
+      explanation:"Dividir entre 0.5 es lo mismo que multiplicar por 2: $15 \\times 2 = 30$." },
+    { n:36, text:"¿Cuál de los siguientes es un número primo?",
+      options:["11","9","15","21"], correct:0,
+      explanation:"11 solo es divisible entre 1 y entre sí mismo: es primo. Los demás tienen más divisores." },
+    { n:37, text:"¿Cuál es el área de un círculo de radio 1? (usa $\\pi \\approx 3.14$)",
+      options:["3.14","6.28","1","9.42"], correct:0,
+      explanation:"Área $= \\pi r^2 = 3.14 \\times 1^2 = 3.14$." },
+    { n:38, text:"¿Cuánto es $100 - 37$?",
+      options:["63","73","67","57"], correct:0,
+      explanation:"$100 - 37 = 63$." },
+    { n:39, text:"Resuelve para x: $3(x - 2) = 9$.",
+      options:["5","3","9","11"], correct:0,
+      explanation:"$3x - 6 = 9 \\Rightarrow 3x = 15 \\Rightarrow x = 5$." },
+    { n:40, text:"¿Cuál es la pendiente de la recta $y = 2x + 1$?",
+      options:["2","1","3","0"], correct:0,
+      explanation:"En $y = mx + b$, la pendiente es $m$; aquí $m = 2$." },
+  ],
+
+  fisica: [
+    { n:1, text:"¿Cuál es la unidad de fuerza en el Sistema Internacional?",
+      options:["Joule","Newton","Watt","Pascal"], correct:1,
+      explanation:"La fuerza se mide en newtons (N). El joule es energía, el watt potencia y el pascal presión." },
+    { n:2, text:"La velocidad se define como…",
+      options:["distancia × tiempo","distancia ÷ tiempo","masa × aceleración","tiempo ÷ distancia"], correct:1,
+      explanation:"Velocidad = distancia recorrida dividida entre el tiempo empleado." },
+    { n:3, text:"Un cuerpo en caída libre acelera debido a la…",
+      options:["fricción","gravedad","inercia","empuje"], correct:1,
+      explanation:"La gravedad atrae los cuerpos hacia la Tierra con una aceleración aproximada de 9.8 m/s²." },
+    { n:4, text:"Según la primera ley de Newton (inercia), un cuerpo en reposo…",
+      options:["se mueve por sí solo","permanece en reposo si ninguna fuerza actúa sobre él","acelera siempre","gira constantemente"], correct:1,
+      explanation:"Un cuerpo conserva su estado de reposo o movimiento mientras no actúe una fuerza neta sobre él." },
+    { n:5, text:"La energía que tiene un cuerpo por estar en movimiento se llama…",
+      options:["potencial","cinética","química","térmica"], correct:1,
+      explanation:"La energía cinética depende de la masa y la velocidad del cuerpo en movimiento." },
+    { n:6, text:"¿Qué instrumento se usa para medir la temperatura?",
+      options:["Barómetro","Termómetro","Amperímetro","Dinamómetro"], correct:1,
+      explanation:"El termómetro mide la temperatura. El barómetro mide presión y el amperímetro corriente." },
+    { n:7, text:"¿En qué unidad se mide la corriente eléctrica?",
+      options:["Volts","Amperes","Ohms","Watts"], correct:1,
+      explanation:"La corriente eléctrica se mide en amperes (A). Los volts miden voltaje y los ohms resistencia." },
+    { n:8, text:"El sonido es una onda de tipo…",
+      options:["electromagnética","mecánica","luminosa","gravitacional"], correct:1,
+      explanation:"El sonido es una onda mecánica: necesita un medio (aire, agua, sólido) para propagarse." },
+    { n:9, text:"¿Cuál es la fórmula de la densidad?",
+      options:["masa × volumen","masa ÷ volumen","volumen ÷ masa","masa + volumen"], correct:1,
+      explanation:"Densidad = masa ÷ volumen." },
+    { n:10, text:"La unidad de potencia en el Sistema Internacional es el…",
+      options:["watt","newton","joule","ampere"], correct:0,
+      explanation:"La potencia se mide en watts (W), que equivalen a joules por segundo." },
+    { n:11, text:"La unidad de energía en el Sistema Internacional es el…",
+      options:["joule","newton","watt","ampere"], correct:0,
+      explanation:"La energía y el trabajo se miden en joules (J)." },
+    { n:12, text:"La aceleración de la gravedad en la Tierra es aproximadamente…",
+      options:["9.8 m/s²","1 m/s²","100 m/s²","0 m/s²"], correct:0,
+      explanation:"Cerca de la superficie, la gravedad acelera los cuerpos a unos 9.8 m/s²." },
+    { n:13, text:"¿Cómo se expresa la segunda ley de Newton?",
+      options:["F = m·a","E = mc²","v = d/t","P = F/A"], correct:0,
+      explanation:"La fuerza es igual a la masa por la aceleración: F = m·a." },
+    { n:14, text:"¿Qué magnitud mide un dinamómetro?",
+      options:["la fuerza","la temperatura","el tiempo","la masa"], correct:0,
+      explanation:"El dinamómetro mide fuerzas (por ejemplo, el peso) mediante un resorte." },
+    { n:15, text:"La velocidad de la luz es de aproximadamente…",
+      options:["300 000 km/s","300 km/s","3 000 km/s","30 km/s"], correct:0,
+      explanation:"La luz viaja a unos 300 000 kilómetros por segundo en el vacío." },
+    { n:16, text:"Un cuerpo flota en un líquido cuando su densidad es ____ que la del líquido.",
+      options:["menor","mayor","igual","el doble"], correct:0,
+      explanation:"Si el cuerpo es menos denso que el líquido, flota." },
+    { n:17, text:"La energía potencial gravitatoria depende de la masa, la gravedad y la…",
+      options:["altura","velocidad","temperatura","carga"], correct:0,
+      explanation:"A mayor altura, mayor energía potencial gravitatoria." },
+    { n:18, text:"El cambio de estado de sólido a líquido se llama…",
+      options:["fusión","evaporación","condensación","sublimación"], correct:0,
+      explanation:"La fusión es el paso de sólido a líquido (como el hielo que se derrite)." },
+    { n:19, text:"El cambio de estado de líquido a gas se llama…",
+      options:["evaporación","fusión","solidificación","condensación"], correct:0,
+      explanation:"La evaporación (o ebullición) es el paso de líquido a gas." },
+    { n:20, text:"La unidad de presión en el Sistema Internacional es el…",
+      options:["pascal","newton","joule","watt"], correct:0,
+      explanation:"La presión se mide en pascales (Pa)." },
+    { n:21, text:"El rebote de la luz al chocar con una superficie se llama…",
+      options:["reflexión","refracción","difracción","absorción"], correct:0,
+      explanation:"La reflexión es el cambio de dirección de la luz al rebotar (como en un espejo)." },
+    { n:22, text:"Un imán atrae principalmente al…",
+      options:["hierro","plástico","madera","vidrio"], correct:0,
+      explanation:"Los imanes atraen materiales ferromagnéticos como el hierro." },
+    { n:23, text:"La tercera ley de Newton dice que a toda acción corresponde una…",
+      options:["reacción","aceleración","fricción","masa"], correct:0,
+      explanation:"A cada fuerza (acción) le corresponde otra igual y de sentido contrario (reacción)." },
+    { n:24, text:"La fricción es una fuerza que…",
+      options:["se opone al movimiento","acelera todo cuerpo","atrae los imanes","produce luz"], correct:0,
+      explanation:"La fricción se opone al deslizamiento entre dos superficies en contacto." },
+    { n:25, text:"En física, se realiza trabajo cuando una fuerza produce un…",
+      options:["desplazamiento","sonido","color","olor"], correct:0,
+      explanation:"Hay trabajo mecánico solo si la fuerza mueve el objeto cierta distancia." },
+    { n:26, text:"La unidad de carga eléctrica es el…",
+      options:["coulomb","volt","ohm","watt"], correct:0,
+      explanation:"La carga eléctrica se mide en coulombs (C)." },
+    { n:27, text:"El sonido viaja más rápido en…",
+      options:["los sólidos","el vacío","el aire","el espacio"], correct:0,
+      explanation:"En los sólidos las partículas están más juntas, por eso el sonido se propaga más rápido." },
+    { n:28, text:"¿Puede propagarse el sonido en el vacío?",
+      options:["No","Sí","Solo de noche","Solo si es muy fuerte"], correct:0,
+      explanation:"El sonido necesita un medio material; en el vacío no hay partículas que lo transmitan." },
+    { n:29, text:"La temperatura se mide comúnmente en grados…",
+      options:["Celsius","newton","joule","pascal"], correct:0,
+      explanation:"En la vida diaria la temperatura se mide en grados Celsius (°C)." },
+    { n:30, text:"La energía que el Sol envía a la Tierra es principalmente…",
+      options:["luminosa y térmica","sonora","mecánica","eléctrica de la red"], correct:0,
+      explanation:"Del Sol recibimos sobre todo luz (energía luminosa) y calor (energía térmica)." },
+    { n:31, text:"Un objeto colocado a mayor altura tiene mayor energía…",
+      options:["potencial","cinética","sonora","eléctrica"], correct:0,
+      explanation:"La energía potencial gravitatoria aumenta con la altura." },
+    { n:32, text:"El peso de un cuerpo depende de su masa y de la…",
+      options:["gravedad","temperatura","forma","altura solamente"], correct:0,
+      explanation:"Peso = masa × gravedad; por eso en la Luna pesamos menos." },
+    { n:33, text:"La óptica es la parte de la física que estudia…",
+      options:["la luz","el sonido","el calor","los imanes"], correct:0,
+      explanation:"La óptica estudia la luz y sus fenómenos (reflexión, refracción, etc.)." },
+    { n:34, text:"Si empujas una pared con fuerza pero no se mueve, el trabajo mecánico es…",
+      options:["cero","máximo","negativo","infinito"], correct:0,
+      explanation:"Sin desplazamiento no hay trabajo mecánico, aunque apliques fuerza." },
+    { n:35, text:"El instrumento para medir el voltaje es el…",
+      options:["voltímetro","amperímetro","termómetro","barómetro"], correct:0,
+      explanation:"El voltímetro mide la diferencia de potencial (voltaje)." },
+    { n:36, text:"La corriente eléctrica que cambia de sentido periódicamente se llama corriente…",
+      options:["alterna","directa","continua","estática"], correct:0,
+      explanation:"La corriente alterna (CA) es la que llega a los enchufes de las casas." },
+    { n:37, text:"Las ondas que no necesitan un medio para propagarse son las…",
+      options:["electromagnéticas","mecánicas","sonoras","sísmicas"], correct:0,
+      explanation:"Las ondas electromagnéticas (como la luz) pueden viajar incluso en el vacío." },
+    { n:38, text:"Un espejo plano forma una imagen…",
+      options:["virtual","real","siempre invertida","borrosa"], correct:0,
+      explanation:"El espejo plano forma una imagen virtual, del mismo tamaño y derecha." },
+    { n:39, text:"La rapidez es una cantidad…",
+      options:["escalar","vectorial","imaginaria","negativa"], correct:0,
+      explanation:"La rapidez solo tiene magnitud (escalar); la velocidad además tiene dirección (vectorial)." },
+    { n:40, text:"La inercia de un cuerpo depende de su…",
+      options:["masa","color","altura","temperatura"], correct:0,
+      explanation:"A mayor masa, mayor inercia (mayor resistencia a cambiar su movimiento)." },
+  ],
+
+  quimica: [
+    { n:1, text:"¿Cuál es el símbolo químico del oro?",
+      options:["Au","Ag","Fe","O"], correct:0,
+      explanation:"El oro es Au (del latín aurum). Ag es plata, Fe hierro y O oxígeno." },
+    { n:2, text:"La molécula de agua está formada por…",
+      options:["hidrógeno y oxígeno","carbono y oxígeno","nitrógeno e hidrógeno","sodio y cloro"], correct:0,
+      explanation:"El agua es H₂O: dos átomos de hidrógeno y uno de oxígeno." },
+    { n:3, text:"La tabla periódica organiza los elementos según su…",
+      options:["color","número atómico","tamaño","peso de la muestra"], correct:1,
+      explanation:"Los elementos se ordenan por número atómico creciente (número de protones)." },
+    { n:4, text:"¿Cuál de los siguientes es un cambio <strong>químico</strong>?",
+      options:["Hervir agua","La oxidación del hierro","Romper un vidrio","Derretir hielo"], correct:1,
+      explanation:"La oxidación forma una sustancia nueva (óxido), por eso es un cambio químico. Los demás son físicos." },
+    { n:5, text:"Un pH menor a 7 indica que la sustancia es…",
+      options:["básica","ácida","neutra","salada"], correct:1,
+      explanation:"En la escala de pH, los valores menores a 7 son ácidos; 7 es neutro y mayores a 7 básicos." },
+    { n:6, text:"¿Cuál partícula del átomo tiene carga negativa?",
+      options:["Protón","Electrón","Neutrón","Núcleo"], correct:1,
+      explanation:"El electrón tiene carga negativa; el protón positiva y el neutrón no tiene carga." },
+    { n:7, text:"El número atómico de un elemento indica la cantidad de…",
+      options:["neutrones","protones","moléculas","enlaces"], correct:1,
+      explanation:"El número atómico es el número de protones en el núcleo del átomo." },
+    { n:8, text:"La sal común (NaCl) es un ejemplo de…",
+      options:["elemento","compuesto","mezcla","átomo"], correct:1,
+      explanation:"Es un compuesto: dos elementos distintos (sodio y cloro) unidos químicamente." },
+    { n:9, text:"¿Cuál estado de la materia tiene forma y volumen definidos?",
+      options:["Sólido","Líquido","Gas","Plasma"], correct:0,
+      explanation:"El sólido mantiene forma y volumen propios; el líquido solo el volumen y el gas ninguno." },
+    { n:10, text:"El enlace en el que dos átomos comparten electrones se llama…",
+      options:["iónico","covalente","metálico","puente de hidrógeno"], correct:1,
+      explanation:"En el enlace covalente los átomos comparten pares de electrones; en el iónico se transfieren." },
+    { n:11, text:"¿Cuál es el símbolo químico del sodio?",
+      options:["Na","So","Sd","S"], correct:0,
+      explanation:"El sodio es Na (del latín natrium)." },
+    { n:12, text:"¿Cuál es el gas que necesitamos para vivir y tomamos del aire al respirar?",
+      options:["oxígeno","nitrógeno","dióxido de carbono","helio"], correct:0,
+      explanation:"Inhalamos oxígeno (O₂), indispensable para la respiración celular." },
+    { n:13, text:"¿Qué gas exhalamos principalmente al respirar?",
+      options:["dióxido de carbono","oxígeno","hidrógeno","ozono"], correct:0,
+      explanation:"Expulsamos dióxido de carbono (CO₂), producto de la respiración." },
+    { n:14, text:"El cambio de estado de gas a líquido se llama…",
+      options:["condensación","fusión","evaporación","sublimación"], correct:0,
+      explanation:"La condensación es el paso de gas a líquido (como el rocío)." },
+    { n:15, text:"¿Cuál es el símbolo químico del hierro?",
+      options:["Fe","Hi","H","Ir"], correct:0,
+      explanation:"El hierro es Fe (del latín ferrum)." },
+    { n:16, text:"¿Cuál es la fórmula del dióxido de carbono?",
+      options:["CO₂","H₂O","O₂","CO"], correct:0,
+      explanation:"El dióxido de carbono es CO₂: un carbono y dos oxígenos." },
+    { n:17, text:"Una mezcla en la que no se distinguen sus componentes a simple vista es…",
+      options:["homogénea","heterogénea","un elemento","un átomo"], correct:0,
+      explanation:"En una mezcla homogénea los componentes se ven uniformes (como el agua con sal)." },
+    { n:18, text:"El aire es una mezcla formada principalmente por nitrógeno y…",
+      options:["oxígeno","hidrógeno","cloro","helio"], correct:0,
+      explanation:"El aire es ~78% nitrógeno y ~21% oxígeno." },
+    { n:19, text:"La unidad más pequeña de un elemento que conserva sus propiedades es el…",
+      options:["átomo","célula","ion","cristal"], correct:0,
+      explanation:"El átomo es la unidad básica de un elemento químico." },
+    { n:20, text:"El número de masa de un átomo es la suma de protones y…",
+      options:["neutrones","electrones","iones","moléculas"], correct:0,
+      explanation:"El número de masa = protones + neutrones (las partículas del núcleo)." },
+    { n:21, text:"Los gases nobles se caracterizan por ser…",
+      options:["poco reactivos","muy reactivos","siempre líquidos","metálicos"], correct:0,
+      explanation:"Los gases nobles (helio, neón…) casi no reaccionan porque son estables." },
+    { n:22, text:"¿Cuál es el símbolo químico del carbono?",
+      options:["C","Ca","Co","Cr"], correct:0,
+      explanation:"El carbono se representa con la letra C." },
+    { n:23, text:"Una sustancia con pH igual a 7 es…",
+      options:["neutra","ácida","básica","salina"], correct:0,
+      explanation:"Un pH de 7 indica una sustancia neutra, como el agua pura." },
+    { n:24, text:"El paso directo de sólido a gas (sin pasar por líquido) se llama…",
+      options:["sublimación","fusión","evaporación","condensación"], correct:0,
+      explanation:"La sublimación es el cambio directo de sólido a gas (como el hielo seco)." },
+    { n:25, text:"¿Quién ordenó originalmente los elementos en la tabla periódica?",
+      options:["Mendeléiev","Newton","Darwin","Einstein"], correct:0,
+      explanation:"Dmitri Mendeléiev ordenó los elementos según sus propiedades en 1869." },
+    { n:26, text:"En general, los metales son…",
+      options:["buenos conductores","aislantes","gaseosos","frágiles como el vidrio"], correct:0,
+      explanation:"Los metales conducen bien el calor y la electricidad, y son maleables." },
+    { n:27, text:"La sal de mesa se forma con el metal sodio y el no metal…",
+      options:["cloro","oxígeno","carbono","azufre"], correct:0,
+      explanation:"La sal común es cloruro de sodio (NaCl): sodio + cloro." },
+    { n:28, text:"El cobre se usa mucho en cables porque es buen conductor de…",
+      options:["la electricidad","solo el sonido","solo la luz","ningún tipo de energía"], correct:0,
+      explanation:"El cobre conduce muy bien la electricidad, por eso se usa en cables." },
+    { n:29, text:"Una reacción química que libera calor se llama…",
+      options:["exotérmica","endotérmica","neutra","catalítica"], correct:0,
+      explanation:"Las reacciones exotérmicas liberan energía en forma de calor (como la combustión)." },
+    { n:30, text:"Una reacción química que absorbe calor se llama…",
+      options:["endotérmica","exotérmica","iónica","neutra"], correct:0,
+      explanation:"Las reacciones endotérmicas necesitan absorber calor para ocurrir." },
+    { n:31, text:"El ácido que da el sabor agrio al jugo de limón es el ácido…",
+      options:["cítrico","sulfúrico","clorhídrico","acético"], correct:0,
+      explanation:"Los cítricos como el limón contienen ácido cítrico." },
+    { n:32, text:"¿Cuál es el símbolo químico del potasio?",
+      options:["K","P","Po","Pt"], correct:0,
+      explanation:"El potasio es K (del latín kalium)." },
+    { n:33, text:"La sustancia formada por un solo tipo de átomo es un…",
+      options:["elemento","compuesto","mezcla","coloide"], correct:0,
+      explanation:"Un elemento está formado por átomos iguales (como el oro o el oxígeno)." },
+    { n:34, text:"El cambio de estado de líquido a sólido se llama…",
+      options:["solidificación","fusión","evaporación","sublimación"], correct:0,
+      explanation:"La solidificación (o congelación) es el paso de líquido a sólido." },
+    { n:35, text:"El número que identifica a un elemento y nunca cambia es su número…",
+      options:["atómico","de masa","de neutrones","de oxidación"], correct:0,
+      explanation:"El número atómico (cantidad de protones) define a cada elemento." },
+    { n:36, text:"¿Cuál es el símbolo químico del nitrógeno?",
+      options:["N","Ni","Na","Ne"], correct:0,
+      explanation:"El nitrógeno se representa con la letra N." },
+    { n:37, text:"Una solución (disolución) está formada por un soluto y un…",
+      options:["disolvente","precipitado","cristal","gas noble"], correct:0,
+      explanation:"En una disolución, el soluto se disuelve en el disolvente (como sal en agua)." },
+    { n:38, text:"La oxidación es un proceso en el que un átomo ____ electrones.",
+      options:["pierde","gana","duplica","conserva"], correct:0,
+      explanation:"Oxidarse significa perder electrones; reducirse, ganarlos." },
+    { n:39, text:"El principal gas responsable del efecto invernadero es el…",
+      options:["dióxido de carbono","oxígeno","nitrógeno","argón"], correct:0,
+      explanation:"El CO₂ retiene el calor en la atmósfera y contribuye al calentamiento global." },
+    { n:40, text:"Los tres estados de la materia más comunes son sólido, líquido y…",
+      options:["gaseoso","plasma","coloidal","iónico"], correct:0,
+      explanation:"A nivel básico se estudian tres estados: sólido, líquido y gaseoso." },
+  ],
+
+  biologia: [
+    { n:1, text:"¿Cuál es la unidad básica de la vida?",
+      options:["El átomo","La célula","El tejido","El órgano"], correct:1,
+      explanation:"La célula es la unidad estructural y funcional de todos los seres vivos." },
+    { n:2, text:"¿Qué organelo produce la energía de la célula (respiración celular)?",
+      options:["Núcleo","Mitocondria","Ribosoma","Vacuola"], correct:1,
+      explanation:"En la mitocondria ocurre la respiración celular, que produce ATP (energía)." },
+    { n:3, text:"¿Mediante qué proceso las plantas producen su propio alimento?",
+      options:["Respiración","Fotosíntesis","Digestión","Fermentación"], correct:1,
+      explanation:"En la fotosíntesis la planta transforma CO₂, agua y luz en glucosa y oxígeno." },
+    { n:4, text:"¿Qué molécula contiene la información genética?",
+      options:["Proteína","ADN","Glucosa","Lípido"], correct:1,
+      explanation:"El ADN (ácido desoxirribonucleico) guarda la información hereditaria." },
+    { n:5, text:"¿Quién formuló las leyes de la herencia?",
+      options:["Darwin","Mendel","Pasteur","Lamarck"], correct:1,
+      explanation:"Gregor Mendel, con sus experimentos en chícharos, estableció las leyes de la herencia." },
+    { n:6, text:"La teoría de la evolución por selección natural fue propuesta por…",
+      options:["Mendel","Darwin","Linneo","Watson"], correct:1,
+      explanation:"Charles Darwin propuso la evolución de las especies por selección natural." },
+    { n:7, text:"A los organismos que fabrican su propio alimento se les llama…",
+      options:["heterótrofos","autótrofos","descomponedores","carnívoros"], correct:1,
+      explanation:"Los autótrofos (como las plantas) producen su alimento; los heterótrofos lo obtienen de otros seres." },
+    { n:8, text:"¿Qué sistema del cuerpo se encarga de transportar la sangre?",
+      options:["Digestivo","Circulatorio","Nervioso","Respiratorio"], correct:1,
+      explanation:"El sistema circulatorio, con el corazón y los vasos sanguíneos, transporta la sangre." },
+    { n:9, text:"¿Qué tipo de división celular produce los gametos (células sexuales)?",
+      options:["Mitosis","Meiosis","Gemación","Bipartición"], correct:1,
+      explanation:"La meiosis produce células con la mitad de cromosomas: los gametos (óvulos y espermatozoides)." },
+    { n:10, text:"Un conjunto de organismos de la misma especie en un mismo lugar es una…",
+      options:["comunidad","población","ecosistema","bioma"], correct:1,
+      explanation:"Una población es el grupo de individuos de la misma especie que vive en un área." },
+    { n:11, text:"¿Qué órgano del cuerpo humano bombea la sangre?",
+      options:["el corazón","el pulmón","el hígado","el riñón"], correct:0,
+      explanation:"El corazón impulsa la sangre por todo el cuerpo." },
+    { n:12, text:"¿Qué parte de la célula controla y dirige sus funciones?",
+      options:["el núcleo","la membrana","el citoplasma","la vacuola"], correct:0,
+      explanation:"El núcleo coordina las funciones de la célula y guarda el ADN." },
+    { n:13, text:"Los seres vivos formados por una sola célula son…",
+      options:["unicelulares","pluricelulares","acelulares","invertebrados"], correct:0,
+      explanation:"Unicelulares = de una sola célula (como las bacterias)." },
+    { n:14, text:"¿Qué estructura da rigidez a la célula vegetal y no existe en la animal?",
+      options:["la pared celular","la membrana","el núcleo","la mitocondria"], correct:0,
+      explanation:"La pared celular es una capa rígida exclusiva de las células vegetales." },
+    { n:15, text:"El intercambio de gases con el aire (respiración) ocurre en los…",
+      options:["pulmones","riñones","intestinos","huesos"], correct:0,
+      explanation:"En los pulmones la sangre toma oxígeno y libera dióxido de carbono." },
+    { n:16, text:"Los organismos que se alimentan de otros seres vivos son…",
+      options:["heterótrofos","autótrofos","productores","fotosintéticos"], correct:0,
+      explanation:"Los heterótrofos no fabrican su alimento; lo obtienen de otros organismos." },
+    { n:17, text:"La rama de la biología que clasifica a los seres vivos es la…",
+      options:["taxonomía","ecología","genética","anatomía"], correct:0,
+      explanation:"La taxonomía agrupa y nombra a los seres vivos según sus características." },
+    { n:18, text:"El pigmento verde que permite a las plantas captar la luz es la…",
+      options:["clorofila","hemoglobina","melanina","queratina"], correct:0,
+      explanation:"La clorofila capta la luz solar para la fotosíntesis." },
+    { n:19, text:"El conjunto de seres vivos y su medio físico forman un…",
+      options:["ecosistema","población","individuo","órgano"], correct:0,
+      explanation:"Un ecosistema incluye a los seres vivos y los factores físicos (agua, suelo, clima)." },
+    { n:20, text:"Los animales que se alimentan únicamente de plantas son…",
+      options:["herbívoros","carnívoros","omnívoros","carroñeros"], correct:0,
+      explanation:"Los herbívoros comen vegetales (como la vaca o el conejo)." },
+    { n:21, text:"Los animales que comen tanto plantas como animales son…",
+      options:["omnívoros","herbívoros","carnívoros","insectívoros"], correct:0,
+      explanation:"Los omnívoros tienen dieta mixta (como el ser humano o el cerdo)." },
+    { n:22, text:"¿Qué estructura NO tiene la célula animal?",
+      options:["pared celular","núcleo","membrana","mitocondria"], correct:0,
+      explanation:"La célula animal carece de pared celular; solo tiene membrana." },
+    { n:23, text:"El ADN se encuentra principalmente en el…",
+      options:["núcleo","citoplasma","ribosoma","aparato de Golgi"], correct:0,
+      explanation:"En las células con núcleo, el ADN se ubica dentro de él." },
+    { n:24, text:"Los cromosomas están formados principalmente por…",
+      options:["ADN","agua","grasa","calcio"], correct:0,
+      explanation:"Los cromosomas son ADN compactado con proteínas." },
+    { n:25, text:"El ser humano tiene ____ pares de cromosomas.",
+      options:["23","46","12","24"], correct:0,
+      explanation:"Tenemos 23 pares (46 cromosomas en total)." },
+    { n:26, text:"La principal función de los glóbulos rojos es transportar…",
+      options:["oxígeno","grasa","azúcar","desechos sólidos"], correct:0,
+      explanation:"Los glóbulos rojos llevan oxígeno a todo el cuerpo gracias a la hemoglobina." },
+    { n:27, text:"El sistema que coordina el cuerpo y procesa la información es el…",
+      options:["nervioso","digestivo","circulatorio","óseo"], correct:0,
+      explanation:"El sistema nervioso recibe estímulos y controla las respuestas del cuerpo." },
+    { n:28, text:"La unidad funcional del sistema nervioso es la…",
+      options:["neurona","médula","sinapsis","dendrita"], correct:0,
+      explanation:"La neurona es la célula que transmite los impulsos nerviosos." },
+    { n:29, text:"El proceso por el cual el cuerpo descompone los alimentos se llama…",
+      options:["digestión","respiración","circulación","excreción"], correct:0,
+      explanation:"La digestión transforma los alimentos en nutrientes que el cuerpo absorbe." },
+    { n:30, text:"Los organismos que descomponen la materia muerta (hongos y bacterias) son…",
+      options:["descomponedores","productores","herbívoros","autótrofos"], correct:0,
+      explanation:"Los descomponedores reciclan la materia orgánica del ecosistema." },
+    { n:31, text:"La reproducción que requiere la unión de dos progenitores es…",
+      options:["sexual","asexual","por gemación","por esporas"], correct:0,
+      explanation:"En la reproducción sexual se combinan los gametos de dos progenitores." },
+    { n:32, text:"La reproducción en la que un solo organismo origina copias de sí mismo es…",
+      options:["asexual","sexual","cruzada","meiótica"], correct:0,
+      explanation:"En la reproducción asexual la descendencia proviene de un solo progenitor." },
+    { n:33, text:"Las bacterias son organismos…",
+      options:["procariotas","eucariotas","pluricelulares complejos","vertebrados"], correct:0,
+      explanation:"Las bacterias son procariotas: células sin núcleo definido." },
+    { n:34, text:"¿Qué parte de la planta absorbe agua y nutrientes del suelo?",
+      options:["la raíz","la hoja","la flor","el fruto"], correct:0,
+      explanation:"La raíz fija la planta y absorbe agua y minerales del suelo." },
+    { n:35, text:"¿En qué parte de la planta ocurre principalmente la fotosíntesis?",
+      options:["la hoja","la raíz","el tallo","la semilla"], correct:0,
+      explanation:"Las hojas contienen clorofila, donde ocurre la fotosíntesis." },
+    { n:36, text:"Los animales que tienen columna vertebral se llaman…",
+      options:["vertebrados","invertebrados","artrópodos","moluscos"], correct:0,
+      explanation:"Los vertebrados (peces, aves, mamíferos…) poseen columna vertebral." },
+    { n:37, text:"Los insectos pertenecen al grupo de los…",
+      options:["artrópodos","vertebrados","mamíferos","anfibios"], correct:0,
+      explanation:"Los insectos son artrópodos: invertebrados con patas articuladas y exoesqueleto." },
+    { n:38, text:"Un cambio en el material genético que puede heredarse es una…",
+      options:["mutación","digestión","respiración","circulación"], correct:0,
+      explanation:"Las mutaciones son cambios en el ADN que pueden pasar a la descendencia." },
+    { n:39, text:"La capacidad de los seres vivos de responder a los estímulos del medio se llama…",
+      options:["irritabilidad","nutrición","excreción","fotosíntesis"], correct:0,
+      explanation:"La irritabilidad o sensibilidad es la respuesta a estímulos (luz, calor, etc.)." },
+    { n:40, text:"El conjunto de poblaciones de distintas especies que conviven en un lugar forma una…",
+      options:["comunidad","población","célula","especie"], correct:0,
+      explanation:"Una comunidad reúne a las distintas especies que habitan en una misma zona." },
+  ],
+
+  historia: [
+    { n:1, text:"¿En qué año inició la Independencia de México?",
+      options:["1810","1910","1821","1521"], correct:0,
+      explanation:"La Independencia comenzó el 16 de septiembre de 1810 con el Grito de Dolores." },
+    { n:2, text:"¿Quién inició el movimiento de Independencia de México?",
+      options:["Benito Juárez","Miguel Hidalgo","José María Morelos","Francisco I. Madero"], correct:1,
+      explanation:"El cura Miguel Hidalgo dio el Grito de Dolores en 1810." },
+    { n:3, text:"¿En qué año inició la Revolución Mexicana?",
+      options:["1810","1910","1920","1857"], correct:1,
+      explanation:"La Revolución Mexicana inició en 1910, encabezada por Francisco I. Madero." },
+    { n:4, text:"La conquista de Tenochtitlan por los españoles ocurrió en…",
+      options:["1492","1521","1519","1810"], correct:1,
+      explanation:"Tenochtitlan cayó en 1521. En 1519 llegó Cortés y en 1492 Colón a América." },
+    { n:5, text:"Benito Juárez es reconocido principalmente por…",
+      options:["la Independencia","las Leyes de Reforma","la Conquista","la Revolución"], correct:1,
+      explanation:"Juárez impulsó las Leyes de Reforma, que separaron la Iglesia del Estado." },
+    { n:6, text:"¿En qué año inició la Primera Guerra Mundial?",
+      options:["1914","1939","1918","1900"], correct:0,
+      explanation:"La Primera Guerra Mundial inició en 1914 y terminó en 1918." },
+    { n:7, text:"¿En qué año inició la Revolución Francesa?",
+      options:["1789","1810","1492","1917"], correct:0,
+      explanation:"La Revolución Francesa comenzó en 1789 con la toma de la Bastilla." },
+    { n:8, text:"¿En qué año cayó el Muro de Berlín?",
+      options:["1989","1945","1969","2000"], correct:0,
+      explanation:"El Muro de Berlín cayó en 1989, símbolo del fin de la Guerra Fría." },
+    { n:9, text:"¿Qué cultura prehispánica construyó Chichén Itzá?",
+      options:["Azteca","Maya","Olmeca","Inca"], correct:1,
+      explanation:"Chichén Itzá fue una gran ciudad de la cultura maya, en la península de Yucatán." },
+    { n:10, text:"¿En qué año llegó Cristóbal Colón a América?",
+      options:["1521","1492","1810","1453"], correct:1,
+      explanation:"Colón llegó a América el 12 de octubre de 1492." },
+    { n:11, text:"¿En qué año terminó la Segunda Guerra Mundial?",
+      options:["1945","1939","1918","1950"], correct:0,
+      explanation:"La Segunda Guerra Mundial terminó en 1945." },
+    { n:12, text:"¿Quién consumó la Independencia de México en 1821?",
+      options:["Agustín de Iturbide","Miguel Hidalgo","José María Morelos","Benito Juárez"], correct:0,
+      explanation:"Iturbide, junto con Vicente Guerrero, consumó la Independencia en 1821." },
+    { n:13, text:"La Revolución Mexicana se levantó contra el gobierno de…",
+      options:["Porfirio Díaz","Benito Juárez","Maximiliano","Miguel Hidalgo"], correct:0,
+      explanation:"La Revolución de 1910 buscó terminar con la larga dictadura de Porfirio Díaz." },
+    { n:14, text:"El imperio que dominaba Tenochtitlan al llegar los españoles era el…",
+      options:["azteca (mexica)","maya","inca","olmeca"], correct:0,
+      explanation:"Los mexicas o aztecas tenían su capital en Tenochtitlan." },
+    { n:15, text:"¿Cuál cultura es considerada la «madre» de las civilizaciones de Mesoamérica?",
+      options:["olmeca","azteca","maya","zapoteca"], correct:0,
+      explanation:"La olmeca es la cultura más antigua y base de las demás mesoamericanas." },
+    { n:16, text:"Maximiliano de Habsburgo gobernó México durante el…",
+      options:["Segundo Imperio","Porfiriato","Virreinato","movimiento de Independencia"], correct:0,
+      explanation:"Maximiliano fue emperador durante el Segundo Imperio Mexicano (1864–1867)." },
+    { n:17, text:"¿En qué año se promulgó la Constitución vigente en México?",
+      options:["1917","1857","1821","1910"], correct:0,
+      explanation:"La Constitución actual se promulgó el 5 de febrero de 1917." },
+    { n:18, text:"El descubrimiento de América se atribuye al viaje de…",
+      options:["Cristóbal Colón","Hernán Cortés","Marco Polo","Américo Vespucio"], correct:0,
+      explanation:"Cristóbal Colón llegó a América en 1492 buscando una ruta a las Indias." },
+    { n:19, text:"¿Qué civilización antigua construyó las grandes pirámides de Guiza?",
+      options:["los egipcios","los griegos","los romanos","los mayas"], correct:0,
+      explanation:"Las pirámides de Egipto fueron construidas por la civilización egipcia." },
+    { n:20, text:"La democracia tuvo su origen en la antigua…",
+      options:["Grecia","Roma","Egipto","China"], correct:0,
+      explanation:"La democracia nació en la ciudad-Estado de Atenas, en la antigua Grecia." },
+    { n:21, text:"El imperio que construyó una extensa red de caminos en Sudamérica fue el…",
+      options:["inca","maya","azteca","olmeca"], correct:0,
+      explanation:"El Imperio inca, en los Andes, destacó por sus caminos y la ciudad de Machu Picchu." },
+    { n:22, text:"La caída del Imperio Romano de Occidente ocurrió en el año…",
+      options:["476","1492","1066","1000"], correct:0,
+      explanation:"En el año 476 cayó el Imperio Romano de Occidente, fin de la Edad Antigua." },
+    { n:23, text:"La Guerra de Independencia de Estados Unidos fue contra…",
+      options:["Inglaterra","Francia","España","México"], correct:0,
+      explanation:"Las trece colonias se independizaron de Inglaterra (Reino Unido) en 1776." },
+    { n:24, text:"El periodo de gobierno largo y autoritario de Porfirio Díaz se conoce como…",
+      options:["Porfiriato","Reforma","Independencia","Revolución"], correct:0,
+      explanation:"El Porfiriato abarca las décadas en que Díaz gobernó México (1876–1911)." },
+    { n:25, text:"La conquista del Imperio Azteca fue encabezada por…",
+      options:["Hernán Cortés","Francisco Pizarro","Cristóbal Colón","Vasco de Gama"], correct:0,
+      explanation:"Hernán Cortés dirigió la conquista de Tenochtitlan en 1521." },
+    { n:26, text:"¿En qué país comenzó la Revolución Industrial?",
+      options:["Inglaterra","Francia","Alemania","Estados Unidos"], correct:0,
+      explanation:"La Revolución Industrial inició en Inglaterra a fines del siglo XVIII." },
+    { n:27, text:"El muro que dividió a Alemania durante la Guerra Fría estaba en la ciudad de…",
+      options:["Berlín","París","Roma","Moscú"], correct:0,
+      explanation:"El Muro de Berlín separó la ciudad de 1961 a 1989." },
+    { n:28, text:"El líder revolucionario del sur de México, con el lema «Tierra y Libertad», fue…",
+      options:["Emiliano Zapata","Pancho Villa","Francisco I. Madero","Venustiano Carranza"], correct:0,
+      explanation:"Emiliano Zapata encabezó la lucha agraria en el sur del país." },
+    { n:29, text:"El líder revolucionario que combatió en el norte de México fue…",
+      options:["Francisco «Pancho» Villa","Emiliano Zapata","Benito Juárez","Agustín de Iturbide"], correct:0,
+      explanation:"Pancho Villa dirigió la División del Norte durante la Revolución." },
+    { n:30, text:"¿En qué año terminó la Primera Guerra Mundial?",
+      options:["1918","1945","1914","1939"], correct:0,
+      explanation:"La Primera Guerra Mundial terminó en 1918." },
+    { n:31, text:"El documento de 1789 que proclamó la libertad e igualdad en Francia fue la Declaración de los Derechos del…",
+      options:["Hombre y del Ciudadano","Niño","Trabajador","Pueblo"], correct:0,
+      explanation:"La Declaración de los Derechos del Hombre y del Ciudadano surgió en la Revolución Francesa." },
+    { n:32, text:"La cultura maya destacó por sus grandes avances en…",
+      options:["astronomía y matemáticas","navegación oceánica","la máquina de vapor","la industria del acero"], correct:0,
+      explanation:"Los mayas crearon un calendario preciso y usaron el concepto del cero." },
+    { n:33, text:"El periodo de la historia anterior a la invención de la escritura se llama…",
+      options:["Prehistoria","Edad Media","Edad Moderna","Antigüedad"], correct:0,
+      explanation:"La Prehistoria abarca desde los primeros humanos hasta la aparición de la escritura." },
+    { n:34, text:"¿Quién decretó la abolición de la esclavitud durante la Independencia de México?",
+      options:["Miguel Hidalgo","Porfirio Díaz","Maximiliano","Hernán Cortés"], correct:0,
+      explanation:"Miguel Hidalgo decretó la abolición de la esclavitud en 1810." },
+    { n:35, text:"La Edad Media va de la caída del Imperio Romano hasta el…",
+      options:["descubrimiento de América","nacimiento de Cristo","inicio del Imperio Romano","siglo XX"], correct:0,
+      explanation:"La Edad Media abarca del año 476 hasta 1492 aproximadamente." },
+    { n:36, text:"¿Cuál era el nombre de la capital del Imperio Azteca?",
+      options:["Tenochtitlan","Cuzco","Chichén Itzá","Palenque"], correct:0,
+      explanation:"Tenochtitlan, fundada en un lago, fue la capital mexica." },
+    { n:37, text:"La antigua ciudad conocida como «donde los hombres se hacen dioses» es…",
+      options:["Teotihuacan","Palenque","Monte Albán","Tula"], correct:0,
+      explanation:"Teotihuacan, con sus pirámides del Sol y la Luna, recibe ese nombre náhuatl." },
+    { n:38, text:"El movimiento cultural europeo que revivió el arte y la ciencia clásicos fue el…",
+      options:["Renacimiento","Romanticismo","Feudalismo","Barroco"], correct:0,
+      explanation:"El Renacimiento (siglos XV–XVI) retomó los ideales de Grecia y Roma." },
+    { n:39, text:"La Guerra Fría fue una rivalidad entre Estados Unidos y…",
+      options:["la Unión Soviética","Alemania","China","Inglaterra"], correct:0,
+      explanation:"La Guerra Fría enfrentó a Estados Unidos y la Unión Soviética (URSS)." },
+    { n:40, text:"La Revolución Mexicana se considera el primer gran movimiento social del siglo…",
+      options:["XX","XIX","XVIII","XXI"], correct:0,
+      explanation:"Iniciada en 1910, fue el primer gran movimiento social del siglo XX." },
+  ],
+
+  geografia: [
+    { n:1, text:"El planeta Tierra forma parte del sistema…",
+      options:["lunar","solar","galáctico","estelar"], correct:1,
+      explanation:"La Tierra pertenece al Sistema Solar, que tiene al Sol como estrella central." },
+    { n:2, text:"¿Cómo se llama la capa de gases que rodea la Tierra?",
+      options:["Litosfera","Atmósfera","Hidrosfera","Biosfera"], correct:1,
+      explanation:"La atmósfera es la capa gaseosa; la litosfera es la parte sólida y la hidrosfera el agua." },
+    { n:3, text:"El río Amazonas, el más caudaloso del mundo, se encuentra en…",
+      options:["África","Sudamérica","Asia","Europa"], correct:1,
+      explanation:"El Amazonas recorre Sudamérica, principalmente Brasil y Perú." },
+    { n:4, text:"¿Qué línea imaginaria divide la Tierra en hemisferio norte y sur?",
+      options:["Meridiano","Ecuador","Trópico","Eje"], correct:1,
+      explanation:"El ecuador es la línea que divide la Tierra en dos hemisferios, norte y sur." },
+    { n:5, text:"¿Cuál es el continente más extenso del mundo?",
+      options:["América","Asia","África","Europa"], correct:1,
+      explanation:"Asia es el continente más grande tanto en superficie como en población." },
+    { n:6, text:"¿Cuál es la capa más interna y caliente de la Tierra?",
+      options:["Corteza","Núcleo","Manto","Atmósfera"], correct:1,
+      explanation:"El núcleo es la capa central y la más caliente del planeta." },
+    { n:7, text:"¿Qué movimiento de la Tierra produce el día y la noche?",
+      options:["Traslación","Rotación","Nutación","Precesión"], correct:1,
+      explanation:"La rotación (giro sobre su propio eje) produce el día y la noche en unas 24 horas." },
+    { n:8, text:"El movimiento de las placas tectónicas explica principalmente…",
+      options:["las mareas","los sismos","las estaciones","los eclipses"], correct:1,
+      explanation:"El choque y desplazamiento de las placas tectónicas provoca sismos y forma montañas." },
+    { n:9, text:"¿Con qué país colinda México al norte?",
+      options:["Guatemala","Estados Unidos","Belice","Sólo el océano"], correct:1,
+      explanation:"Al norte México limita con Estados Unidos; al sur con Guatemala y Belice." },
+    { n:10, text:"¿Qué coordenada mide la distancia al norte o sur del ecuador?",
+      options:["Longitud","Latitud","Altitud","Meridiano"], correct:1,
+      explanation:"La latitud mide al norte o sur del ecuador; la longitud, al este u oeste del meridiano de Greenwich." },
+    { n:11, text:"¿Cuál es el océano más extenso del planeta?",
+      options:["Pacífico","Atlántico","Índico","Ártico"], correct:0,
+      explanation:"El océano Pacífico es el más grande y profundo de la Tierra." },
+    { n:12, text:"¿Cuál es la capital de México?",
+      options:["Ciudad de México","Guadalajara","Monterrey","Puebla"], correct:0,
+      explanation:"La capital del país es la Ciudad de México (CDMX)." },
+    { n:13, text:"La línea imaginaria que va de polo a polo y mide al este y oeste se llama…",
+      options:["meridiano","paralelo","ecuador","trópico"], correct:0,
+      explanation:"Los meridianos son líneas verticales que miden la longitud." },
+    { n:14, text:"El meridiano de referencia, marcado como 0°, es el de…",
+      options:["Greenwich","París","Cáncer","Capricornio"], correct:0,
+      explanation:"El meridiano de Greenwich (Inglaterra) es el punto de partida de la longitud." },
+    { n:15, text:"La mayor reserva de agua dulce de la Tierra se encuentra en…",
+      options:["los glaciares y casquetes polares","los océanos","la atmósfera","los mares salados"], correct:0,
+      explanation:"La mayor parte del agua dulce está congelada en glaciares y polos. El agua de mar es salada." },
+    { n:16, text:"La capa sólida y superficial de la Tierra, donde vivimos, es la…",
+      options:["corteza","manto","núcleo","atmósfera"], correct:0,
+      explanation:"La corteza es la capa más externa y delgada del planeta." },
+    { n:17, text:"Los climas cálidos predominan en las zonas cercanas al…",
+      options:["ecuador","polo norte","polo sur","círculo polar"], correct:0,
+      explanation:"Cerca del ecuador los rayos del Sol llegan más directos, por eso hace más calor." },
+    { n:18, text:"La montaña más alta del mundo es el monte…",
+      options:["Everest","Kilimanjaro","Aconcagua","Popocatépetl"], correct:0,
+      explanation:"El Everest, en la cordillera del Himalaya, es la cumbre más alta (8 849 m)." },
+    { n:19, text:"El desierto cálido más extenso del mundo es el…",
+      options:["Sahara","Gobi","Atacama","de Sonora"], correct:0,
+      explanation:"El Sahara, en el norte de África, es el mayor desierto cálido." },
+    { n:20, text:"México se localiza en el continente…",
+      options:["americano","europeo","asiático","africano"], correct:0,
+      explanation:"México está en América del Norte." },
+    { n:21, text:"El movimiento de la Tierra alrededor del Sol se llama…",
+      options:["traslación","rotación","precesión","órbita lunar"], correct:0,
+      explanation:"La traslación es el recorrido de la Tierra alrededor del Sol." },
+    { n:22, text:"La traslación de la Tierra dura aproximadamente…",
+      options:["365 días","24 horas","30 días","28 días"], correct:0,
+      explanation:"La Tierra tarda unos 365 días (un año) en dar la vuelta al Sol." },
+    { n:23, text:"El instrumento que señala los puntos cardinales es la…",
+      options:["brújula","regla","lupa","báscula"], correct:0,
+      explanation:"La brújula tiene una aguja imantada que apunta al norte." },
+    { n:24, text:"Los cuatro puntos cardinales son norte, sur, este y…",
+      options:["oeste","centro","arriba","cenit"], correct:0,
+      explanation:"Los puntos cardinales son norte, sur, este y oeste." },
+    { n:25, text:"La ciencia que estudia y elabora los mapas se llama…",
+      options:["cartografía","geología","biología","astronomía"], correct:0,
+      explanation:"La cartografía se encarga del trazado y estudio de los mapas." },
+    { n:26, text:"La capa de ozono protege a los seres vivos de los rayos…",
+      options:["ultravioleta","infrarrojos","de luz visible","del suelo"], correct:0,
+      explanation:"La capa de ozono absorbe la radiación ultravioleta dañina del Sol." },
+    { n:27, text:"El río que marca buena parte de la frontera norte de México con Estados Unidos es el…",
+      options:["Bravo","Amazonas","Nilo","Balsas"], correct:0,
+      explanation:"El río Bravo (Río Grande) marca la frontera entre México y EUA." },
+    { n:28, text:"El volcán activo cercano a la Ciudad de México es el…",
+      options:["Popocatépetl","Everest","Vesubio","Etna"], correct:0,
+      explanation:"El Popocatépetl es un volcán activo en el centro de México." },
+    { n:29, text:"La mayor parte de la superficie de la Tierra está cubierta por…",
+      options:["agua","desiertos","bosques","hielo"], correct:0,
+      explanation:"Cerca del 70% de la superficie terrestre es agua (sobre todo océanos)." },
+    { n:30, text:"El conjunto de condiciones del tiempo en una región a lo largo de muchos años es el…",
+      options:["clima","relieve","suelo","viento"], correct:0,
+      explanation:"El clima es el promedio del estado del tiempo durante años; el «tiempo» es de un día." },
+    { n:31, text:"La península del sureste de México, famosa por la cultura maya y sus playas, es…",
+      options:["Yucatán","Baja California","la Florida","Italia"], correct:0,
+      explanation:"La península de Yucatán está en el sureste mexicano." },
+    { n:32, text:"Los países más poblados del mundo (China e India) se ubican en el continente…",
+      options:["asiático","americano","europeo","africano"], correct:0,
+      explanation:"Asia concentra la mayor población mundial, con China e India a la cabeza." },
+    { n:33, text:"La línea imaginaria horizontal, paralela al ecuador, se llama…",
+      options:["paralelo","meridiano","eje","órbita"], correct:0,
+      explanation:"Los paralelos son líneas horizontales que miden la latitud." },
+    { n:34, text:"Las estaciones del año se deben a la inclinación del eje terrestre y a la…",
+      options:["traslación","rotación","Luna","marea"], correct:0,
+      explanation:"La inclinación del eje, combinada con la traslación, produce las estaciones." },
+    { n:35, text:"La ciencia que estudia a la población humana (cuántos son, dónde viven) es la…",
+      options:["demografía","geología","zoología","botánica"], correct:0,
+      explanation:"La demografía estudia el tamaño y la distribución de la población." },
+    { n:36, text:"Un conjunto de montañas unidas y alineadas forma una…",
+      options:["cordillera o sierra","llanura","meseta","valle"], correct:0,
+      explanation:"Una cordillera o sierra es una cadena de montañas." },
+    { n:37, text:"La capa de la atmósfera más cercana al suelo, donde ocurren los fenómenos del clima, es la…",
+      options:["tropósfera","estratosfera","ionosfera","exosfera"], correct:0,
+      explanation:"En la tropósfera ocurren las nubes, la lluvia y el clima." },
+    { n:38, text:"Una gran extensión de agua salada, menor que un océano, es un…",
+      options:["mar","río","lago","manantial"], correct:0,
+      explanation:"El mar es una masa de agua salada de menor tamaño que el océano." },
+    { n:39, text:"Egipto se localiza en el continente…",
+      options:["africano","asiático","europeo","americano"], correct:0,
+      explanation:"Egipto está en el noreste de África." },
+    { n:40, text:"Las coordenadas geográficas combinan la latitud con la…",
+      options:["longitud","altitud","temperatura","presión"], correct:0,
+      explanation:"Latitud y longitud permiten ubicar cualquier punto de la Tierra." },
+  ],
+
+  civica: [
+    { n:1, text:"¿Cuál de los siguientes es un derecho fundamental de toda persona?",
+      options:["Votar a los 10 años","La educación","Conducir un auto","No pagar impuestos"], correct:1,
+      explanation:"La educación es un derecho humano reconocido en la Constitución." },
+    { n:2, text:"¿Qué documento establece los derechos y obligaciones de los mexicanos?",
+      options:["La Biblia","La Constitución","El reglamento escolar","El periódico oficial"], correct:1,
+      explanation:"La Constitución Política es la ley suprema que rige al país." },
+    { n:3, text:"En una democracia, el poder reside en…",
+      options:["el ejército","el pueblo","el rey","los jueces"], correct:1,
+      explanation:"Democracia significa «gobierno del pueblo»: el poder proviene de los ciudadanos." },
+    { n:4, text:"El valor que implica tratar a todas las personas sin discriminar es la…",
+      options:["igualdad","competencia","obediencia","riqueza"], correct:0,
+      explanation:"La igualdad reconoce los mismos derechos y dignidad para todas las personas." },
+    { n:5, text:"¿En qué tres poderes se divide el gobierno de México?",
+      options:["Ejecutivo, Legislativo y Judicial","Federal y estatal","Civil y militar","Público y privado"], correct:0,
+      explanation:"El poder se divide en Ejecutivo (gobierna), Legislativo (hace leyes) y Judicial (las aplica)." },
+    { n:6, text:"¿A qué edad se obtiene la ciudadanía mexicana?",
+      options:["15 años","18 años","21 años","16 años"], correct:1,
+      explanation:"Se es ciudadano mexicano al cumplir 18 años, con los derechos y obligaciones correspondientes." },
+    { n:7, text:"Respetar las ideas distintas a las nuestras es practicar la…",
+      options:["intolerancia","tolerancia","indiferencia","sumisión"], correct:1,
+      explanation:"La tolerancia es respetar opiniones, creencias y formas de vida diferentes a las propias." },
+    { n:8, text:"Una característica de los derechos humanos es que son…",
+      options:["negociables","universales","sólo para adultos","temporales"], correct:1,
+      explanation:"Los derechos humanos son universales: corresponden a todas las personas sin excepción." },
+    { n:9, text:"La equidad de género busca…",
+      options:["que sólo las mujeres trabajen","igualdad de oportunidades entre hombres y mujeres","eliminar a los hombres","separar a las personas por sexo"], correct:1,
+      explanation:"La equidad de género busca las mismas oportunidades y derechos para mujeres y hombres." },
+    { n:10, text:"El cuidado del medio ambiente es una responsabilidad de…",
+      options:["sólo el gobierno","todas las personas","nadie","sólo los científicos"], correct:1,
+      explanation:"Cuidar el ambiente es una responsabilidad compartida por toda la sociedad." },
+    { n:11, text:"El respeto y cumplimiento de las leyes y normas se llama…",
+      options:["legalidad","anarquía","rebeldía","desorden"], correct:0,
+      explanation:"La legalidad es actuar conforme a las leyes establecidas." },
+    { n:12, text:"El derecho a expresar libremente las ideas se llama libertad de…",
+      options:["expresión","comercio","tránsito","reunión"], correct:0,
+      explanation:"La libertad de expresión permite decir y publicar opiniones sin censura." },
+    { n:13, text:"La institución que organiza las elecciones en México es el…",
+      options:["INE","IMSS","SAT","INEGI"], correct:0,
+      explanation:"El Instituto Nacional Electoral (INE) organiza y vigila las elecciones." },
+    { n:14, text:"Cumplir con lo que nos corresponde y hacernos cargo de nuestros actos es ser…",
+      options:["responsable","indiferente","egoísta","impuntual"], correct:0,
+      explanation:"La responsabilidad es cumplir nuestros deberes y asumir las consecuencias." },
+    { n:15, text:"El valor que consiste en decir y actuar con la verdad es la…",
+      options:["honestidad","envidia","pereza","avaricia"], correct:0,
+      explanation:"La honestidad implica ser sincero y actuar con rectitud." },
+    { n:16, text:"La forma de gobierno en la que los ciudadanos eligen a sus representantes es la…",
+      options:["democracia representativa","monarquía absoluta","dictadura","oligarquía"], correct:0,
+      explanation:"En la democracia representativa el pueblo elige a quienes lo gobiernan mediante el voto." },
+    { n:17, text:"El conjunto de reglas para la convivencia dentro de la escuela es el…",
+      options:["reglamento escolar","código penal","tratado internacional","contrato laboral"], correct:0,
+      explanation:"El reglamento escolar establece normas de convivencia en la escuela." },
+    { n:18, text:"Las personas menores de 18 años cuentan con derechos especiales: los derechos de la…",
+      options:["niñez","tercera edad","ciudadanía","propiedad"], correct:0,
+      explanation:"Niñas, niños y adolescentes tienen derechos especiales que protegen su desarrollo." },
+    { n:19, text:"La intervención de la gente en las decisiones y asuntos públicos se llama participación…",
+      options:["ciudadana","militar","privada","empresarial"], correct:0,
+      explanation:"La participación ciudadana es involucrarse en los asuntos de la comunidad y el país." },
+    { n:20, text:"El documento que acredita la identidad y nacionalidad de una persona al nacer es el…",
+      options:["acta de nacimiento","pasaporte","título profesional","contrato"], correct:0,
+      explanation:"El acta de nacimiento registra el nacimiento y la identidad de la persona." },
+    { n:21, text:"Cuidar el entorno y no contaminar es una muestra de responsabilidad…",
+      options:["ambiental","militar","comercial","religiosa"], correct:0,
+      explanation:"La responsabilidad ambiental es proteger la naturaleza para todos." },
+    { n:22, text:"La capacidad de ponerse en el lugar del otro y comprender sus sentimientos es la…",
+      options:["empatía","apatía","indiferencia","soberbia"], correct:0,
+      explanation:"La empatía es entender y compartir lo que siente otra persona." },
+    { n:23, text:"La discriminación consiste en…",
+      options:["tratar de forma injusta por las diferencias","respetar a todas las personas","ayudar a los demás","convivir en paz"], correct:0,
+      explanation:"Discriminar es excluir o tratar peor a alguien por su origen, sexo, religión, etc." },
+    { n:24, text:"El poder del Estado encargado de aplicar e interpretar las leyes es el…",
+      options:["judicial","ejecutivo","legislativo","electoral"], correct:0,
+      explanation:"El Poder Judicial imparte justicia y aplica las leyes." },
+    { n:25, text:"El poder del Estado encargado de elaborar las leyes es el…",
+      options:["legislativo","ejecutivo","judicial","municipal"], correct:0,
+      explanation:"El Poder Legislativo (diputados y senadores) crea las leyes." },
+    { n:26, text:"El poder del Estado encargado de gobernar y hacer cumplir las leyes es el…",
+      options:["ejecutivo","legislativo","judicial","electoral"], correct:0,
+      explanation:"El Poder Ejecutivo, encabezado por el Presidente, gobierna y aplica las leyes." },
+    { n:27, text:"El conjunto de personas que comparten un territorio, una cultura y una historia forman una…",
+      options:["nación","empresa","escuela","familia"], correct:0,
+      explanation:"Una nación reúne a quienes comparten territorio, cultura, lengua e historia." },
+    { n:28, text:"Convivir respetando las reglas y a las demás personas se llama…",
+      options:["convivencia pacífica","competencia","violencia","exclusión"], correct:0,
+      explanation:"La convivencia pacífica se basa en el respeto y la resolución no violenta de conflictos." },
+    { n:29, text:"La igualdad ante la ley significa que…",
+      options:["todos deben cumplirla y ser tratados igual por ella","solo los ricos la cumplen","los adultos no la cumplen","nadie la cumple"], correct:0,
+      explanation:"Ante la ley, todas las personas tienen los mismos derechos y obligaciones." },
+    { n:30, text:"Resolver los conflictos hablando y sin recurrir a la violencia se llama…",
+      options:["diálogo","pelea","castigo","silencio"], correct:0,
+      explanation:"El diálogo busca acuerdos mediante la palabra y el respeto mutuo." },
+    { n:31, text:"El cuidado de la propia salud (alimentarse e higiene) es una responsabilidad…",
+      options:["personal","del vecino","solo del gobierno","de la escuela"], correct:0,
+      explanation:"Cuidar la salud propia es, en primer lugar, una responsabilidad personal." },
+    { n:32, text:"Ayudar a quien lo necesita sin esperar nada a cambio es ser…",
+      options:["solidario","egoísta","indiferente","competitivo"], correct:0,
+      explanation:"La solidaridad es apoyar a los demás, sobre todo a quienes más lo requieren." },
+    { n:33, text:"La diversidad cultural de México se refiere a la variedad de…",
+      options:["lenguas y costumbres","automóviles","edificios","monedas"], correct:0,
+      explanation:"México es diverso en lenguas, tradiciones, comidas y costumbres." },
+    { n:34, text:"Los pueblos originarios de México son las comunidades…",
+      options:["indígenas","extranjeras","de migrantes recientes","urbanas modernas"], correct:0,
+      explanation:"Los pueblos indígenas son los descendientes de las culturas originarias del país." },
+    { n:35, text:"El derecho a votar y a ser votado es un derecho…",
+      options:["político","laboral","ambiental","comercial"], correct:0,
+      explanation:"Votar y ser votado son derechos políticos de la ciudadanía." },
+    { n:36, text:"La máxima autoridad del Poder Ejecutivo federal en México es el o la…",
+      options:["Presidente de la República","Gobernador","Diputado","Juez"], correct:0,
+      explanation:"El Poder Ejecutivo federal lo encabeza la Presidencia de la República." },
+    { n:37, text:"Respetar las creencias y prácticas religiosas de cada persona es la libertad…",
+      options:["religiosa (de culto)","de comercio","de tránsito","de prensa"], correct:0,
+      explanation:"La libertad religiosa permite a cada quien elegir y practicar su religión, o ninguna." },
+    { n:38, text:"La regla «no hagas a otros lo que no quieres para ti» promueve el…",
+      options:["respeto mutuo","egoísmo","individualismo","conflicto"], correct:0,
+      explanation:"Esta regla fomenta tratar a los demás con el mismo respeto que esperamos recibir." },
+    { n:39, text:"Las normas obligatorias que se aplican a todo el país son las…",
+      options:["leyes","costumbres","modas","opiniones"], correct:0,
+      explanation:"Las leyes son normas obligatorias dictadas por la autoridad para toda la sociedad." },
+    { n:40, text:"Cuando una persona cumple sus deberes y hace valer sus derechos, ejerce su…",
+      options:["ciudadanía","rebeldía","indiferencia","pasividad"], correct:0,
+      explanation:"Ejercer la ciudadanía es cumplir obligaciones y exigir derechos de forma responsable." },
+  ],
+
+};
+
+// ───────────────────────────────────────────
+// CONFIGURACIÓN DE BLOQUES
+// count = cuántas preguntas se eligen al azar del banco en cada ronda
+// ───────────────────────────────────────────
+const BLOCKS = {
+  razonamiento: {
+    title: "Bloque 1 · Razonamiento",
+    subtitle: "Habilidades intelectuales básicas",
+    accent: "#4A0080",
+    composition: [
+      { subject: "verbal", count: 6, label: "Hab. verbal" },
+      { subject: "habMate", count: 6, label: "Hab. matemática" },
+    ],
+  },
+  lenguajeMate: {
+    title: "Bloque 2 · Español y Matemáticas",
+    subtitle: "Lenguaje y cálculo",
+    accent: "#FF00AA",
+    composition: [
+      { subject: "espanol", count: 6, label: "Español" },
+      { subject: "matematicas", count: 6, label: "Matemáticas" },
+    ],
+  },
+  naturales: {
+    title: "Bloque 3 · Ciencias Naturales",
+    subtitle: "Física · Química · Biología",
+    accent: "#00DEC8",
+    composition: [
+      { subject: "fisica", count: 5, label: "Física" },
+      { subject: "quimica", count: 5, label: "Química" },
+      { subject: "biologia", count: 5, label: "Biología" },
+    ],
+  },
+  sociales: {
+    title: "Bloque 4 · Ciencias Sociales",
+    subtitle: "Historia · Geografía · Civismo",
+    accent: "#E8830C",
+    composition: [
+      { subject: "historia", count: 5, label: "Historia" },
+      { subject: "geografia", count: 5, label: "Geografía" },
+      { subject: "civica", count: 5, label: "Form. Cívica y Ética" },
+    ],
+  },
+};
+
+const SUBJECT_LABELS = {
+  verbal: "Habilidad verbal",
+  habMate: "Habilidad matemática",
+  espanol: "Español",
+  matematicas: "Matemáticas",
+  fisica: "Física",
+  quimica: "Química",
+  biologia: "Biología",
+  historia: "Historia",
+  geografia: "Geografía",
+  civica: "Formación Cívica y Ética",
+};
+
+// Composición del EXAMEN COMPLETO: 128 reactivos, como el examen real
+const EXAM_COMPOSITION = [
+  { subject: "verbal",      count: 16 },
+  { subject: "habMate",     count: 16 },
+  { subject: "espanol",     count: 12 },
+  { subject: "matematicas", count: 12 },
+  { subject: "fisica",      count: 12 },
+  { subject: "quimica",     count: 12 },
+  { subject: "biologia",    count: 12 },
+  { subject: "historia",    count: 12 },
+  { subject: "geografia",   count: 12 },
+  { subject: "civica",      count: 12 },
+];
+const EXAM_SECONDS = 3 * 60 * 60; // 3 horas
+
+// Título legible para cualquier modo (bloque, errores o examen)
+function titleFor(id) {
+  if (id === 'errores') return 'Repaso de errores';
+  if (id === 'examen') return 'Examen completo';
+  return BLOCKS[id] ? BLOCKS[id].title : id;
+}
+
+// Formato de tiempo h:mm:ss para el cronómetro
+function fmtTime(s) {
+  const h = Math.floor(s / 3600), m = Math.floor((s % 3600) / 60), sec = s % 60;
+  return `${h}:${String(m).padStart(2,'0')}:${String(sec).padStart(2,'0')}`;
+}
+
+// ───────────────────────────────────────────
+// ESTADO GLOBAL
+// ───────────────────────────────────────────
+const STORAGE_KEY = 'comipems-sim-v1';
+const state = {
+  mode: 'landing',
+  blockId: null,
+  activeTab: 'razonamiento',
+  questions: [],
+  answers: {},
+  index: 0,
+  examEndsAt: null,
+};
+let examTimer = null;
+
+function loadStore() {
+  try {
+    return JSON.parse(localStorage.getItem(STORAGE_KEY)) || { errors: {}, history: [] };
+  } catch { return { errors: {}, history: [] }; }
+}
+function saveStore(store) { localStorage.setItem(STORAGE_KEY, JSON.stringify(store)); }
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+function pick(arr, n) { return shuffle(arr).slice(0, n); }
+function qKey(subj, n) { return `${subj}:${n}`; }
+function findQuestion(key) {
+  const [subj, n] = key.split(':');
+  return { subject: subj, ...QUESTIONS[subj].find(q => q.n === parseInt(n)) };
+}
+
+function renderMath(el) {
+  if (window.renderMathInElement) {
+    renderMathInElement(el, {
+      delimiters: [
+        { left: '$$', right: '$$', display: true },
+        { left: '$', right: '$', display: false },
+      ],
+      throwOnError: false,
+    });
+  }
+}
+
+// ───────────────────────────────────────────
+// LANDING
+// ───────────────────────────────────────────
+function renderLanding() {
+  const store = loadStore();
+  const errorCount = Object.keys(store.errors).length;
+  const recent = store.history.slice(-5).reverse();
+  const activeTab = state.activeTab || 'razonamiento';
+
+  let html = `
+    <h1 class="page-h1">Simulador COMIPEMS</h1>
+    <p class="page-sub">Examen de ingreso a bachillerato · practica por bloques y repasa lo que falles</p>
+    <div class="tabs" role="tablist">
+  `;
+
+  for (const [id, b] of Object.entries(BLOCKS)) {
+    const isActive = id === activeTab;
+    html += `<button class="tab-btn ${isActive ? 'active' : ''}" style="--tab-accent:${b.accent}" onclick="switchTab('${id}')">${b.title.replace(/^Bloque \d+ · /, '')}</button>`;
+  }
+  html += `<button class="tab-btn ${activeTab==='examen'?'active':''}" style="--tab-accent:var(--P)" onclick="switchTab('examen')">Examen completo</button>`;
+  html += `<button class="tab-btn ${activeTab==='errores'?'active':''}" style="--tab-accent:var(--M)" onclick="switchTab('errores')">Errores${errorCount?` (${errorCount})`:''}</button>`;
+  html += `</div>`;
+
+  for (const [id, b] of Object.entries(BLOCKS)) {
+    const isActive = id === activeTab;
+    const total = b.composition.reduce((s, c) => s + c.count, 0);
+    html += `
+      <div class="tab-panel ${isActive?'active':''}" id="panel-${id}">
+        <div class="panel-block" style="--accent:${b.accent}">
+          <p class="panel-subtitle">${b.subtitle}</p>
+          <h2>${b.title}</h2>
+          <p class="panel-count">${total} preguntas · selección aleatoria del banco</p>
+          <ul class="composition">
+            ${b.composition.map(c => `<li><strong>${c.count}</strong> ${c.label}</li>`).join('')}
+          </ul>
+          <button class="btn-start" onclick="startQuiz('${id}')">Empezar ronda →</button>
+        </div>
+      </div>
+    `;
+  }
+
+  // Panel del examen completo
+  html += `<div class="tab-panel ${activeTab==='examen'?'active':''}" id="panel-examen">
+    <div class="panel-block exam-panel" style="--accent:var(--P)">
+      <p class="panel-subtitle">Simulacro del examen real</p>
+      <h2>Examen completo</h2>
+      <p class="panel-count">128 preguntas · 3 horas · cronómetro en cuenta regresiva</p>
+      <ul class="composition">
+        <li><strong>16</strong> Hab. verbal</li>
+        <li><strong>16</strong> Hab. matemática</li>
+        <li><strong>12</strong> Español</li>
+        <li><strong>12</strong> Matemáticas</li>
+        <li><strong>12</strong> Física</li>
+        <li><strong>12</strong> Química</li>
+        <li><strong>12</strong> Biología</li>
+        <li><strong>12</strong> Historia</li>
+        <li><strong>12</strong> Geografía</li>
+        <li><strong>12</strong> Cívica y Ética</li>
+      </ul>
+      <button class="btn-start" onclick="if(confirm('Vas a iniciar el examen completo: 128 preguntas y 3 horas de cronómetro. ¿Comenzar?')) startExam()">Iniciar examen completo →</button>
+    </div>
+  </div>`;
+
+  html += `<div class="tab-panel ${activeTab==='errores'?'active':''}" id="panel-errores">
+    <div class="errors-card">
+      <div class="errors-card-text">
+        <strong>Repasar mis errores</strong>
+        <p>${errorCount === 0 ? 'Aún no tienes errores guardados. Resuelve un bloque primero.' :
+            `${errorCount} pregunta${errorCount === 1 ? '' : 's'} guardada${errorCount === 1 ? '' : 's'} de rondas anteriores.`}</p>
+      </div>
+      <button class="btn-errors" ${errorCount === 0 ? 'disabled' : ''} onclick="startErrorsReview()">Repasar →</button>
+    </div>
+    ${errorCount > 0 ? `<div style="text-align:center; margin-top: 1rem;">
+      <button class="btn-secondary btn" onclick="clearErrors()">Limpiar errores guardados</button>
+    </div>` : ''}
+  </div>`;
+
+  if (recent.length) {
+    html += `<div class="history-card"><h3>Rondas recientes</h3><ul class="history-list">`;
+    recent.forEach(h => {
+      const block = titleFor(h.blockId);
+      const pct = Math.round(100 * h.score / h.total);
+      html += `<li><span>${block}</span><span><strong>${h.score}/${h.total}</strong> · ${pct}%</span></li>`;
+    });
+    html += `</ul></div>`;
+  }
+
+  document.getElementById('app').innerHTML = html;
+}
+
+function switchTab(id) { state.activeTab = id; renderLanding(); }
+
+function clearErrors() {
+  if (!confirm('¿Borrar todos los errores guardados?')) return;
+  const store = loadStore();
+  store.errors = {};
+  saveStore(store);
+  renderLanding();
+}
+
+// ───────────────────────────────────────────
+// QUIZ
+// ───────────────────────────────────────────
+function startQuiz(blockId) {
+  stopTimer();
+  const block = BLOCKS[blockId];
+  const selected = [];
+  block.composition.forEach(c => {
+    const pool = QUESTIONS[c.subject];
+    pick(pool, c.count).forEach(q => {
+      selected.push({ subject: c.subject, label: c.label, ...q });
+    });
+  });
+  state.mode = 'quiz';
+  state.blockId = blockId;
+  state.questions = shuffle(selected);
+  state.answers = {};
+  state.index = 0;
+  renderQuiz();
+}
+
+// ─── EXAMEN COMPLETO (128 reactivos, cronometrado) ───
+function startExam() {
+  stopTimer();
+  const selected = [];
+  EXAM_COMPOSITION.forEach(c => {
+    pick(QUESTIONS[c.subject], c.count).forEach(q => {
+      selected.push({ subject: c.subject, label: SUBJECT_LABELS[c.subject], ...q });
+    });
+  });
+  state.mode = 'quiz';
+  state.blockId = 'examen';
+  state.questions = shuffle(selected);
+  state.answers = {};
+  state.index = 0;
+  state.examEndsAt = Date.now() + EXAM_SECONDS * 1000;
+  startTimer();
+  renderQuiz();
+}
+
+function startTimer() {
+  stopTimer();
+  examTimer = setInterval(() => {
+    const remain = Math.max(0, Math.floor((state.examEndsAt - Date.now()) / 1000));
+    const el = document.getElementById('exam-timer');
+    if (el) {
+      el.textContent = fmtTime(remain);
+      if (remain <= 600) el.style.color = 'var(--bad)'; // últimos 10 min en rojo
+    }
+    if (remain <= 0) { stopTimer(); finishQuiz(); }
+  }, 1000);
+}
+
+function stopTimer() {
+  if (examTimer) { clearInterval(examTimer); examTimer = null; }
+}
+
+function startErrorsReview() {
+  stopTimer();
+  const store = loadStore();
+  const keys = Object.keys(store.errors);
+  if (keys.length === 0) return;
+  const selected = keys.map(k => {
+    const q = findQuestion(k);
+    return { ...q, label: SUBJECT_LABELS[q.subject] || q.subject };
+  });
+  state.mode = 'quiz';
+  state.blockId = 'errores';
+  state.questions = shuffle(selected);
+  state.answers = {};
+  state.index = 0;
+  renderQuiz();
+}
+
+function renderQuiz() {
+  const total = state.questions.length;
+  const q = state.questions[state.index];
+  const key = qKey(q.subject, q.n);
+  const userAns = state.answers[key];
+  const answered = userAns !== undefined;
+  const headerTitle = titleFor(state.blockId);
+  const progressPct = (state.index / total) * 100;
+  const isExam = state.blockId === 'examen';
+  const remain = isExam ? Math.max(0, Math.floor((state.examEndsAt - Date.now()) / 1000)) : 0;
+
+  let html = `
+    <div class="quiz-header">
+      <div class="quiz-progress"><strong>${headerTitle}</strong> · Pregunta ${state.index + 1} de ${total}</div>
+      <div style="display:flex; align-items:center; gap:.6rem;">
+        ${isExam ? `<span class="exam-timer" id="exam-timer" title="Tiempo restante">⏱ ${fmtTime(remain)}</span>` : ''}
+        <button class="btn-exit" onclick="confirmExit()">Salir</button>
+      </div>
+    </div>
+    <div class="progress-bar"><div class="progress-bar-fill" style="width: ${progressPct}%"></div></div>
+
+    <div class="question-card">
+      <div class="question-num">
+        <span class="subject-tag" style="background:${blockColorFor(q.subject)}">${q.label || SUBJECT_LABELS[q.subject]}</span>
+      </div>
+      <div class="question-text">${q.text}</div>
+
+      <div class="options" id="options-container">
+        ${q.options.map((opt, i) => {
+          const letter = ['A','B','C','D'][i];
+          let cls = 'option-btn';
+          if (answered) {
+            if (i === q.correct) cls += ' correct';
+            else if (i === userAns) cls += ' wrong';
+          } else if (userAns === i) {
+            cls += ' selected';
+          }
+          return `<button class="${cls}" ${answered ? 'disabled' : ''} onclick="selectOption(${i})">
+            <span class="option-letter">${letter})</span>
+            <span class="option-text">${opt}</span>
+          </button>`;
+        }).join('')}
+      </div>
+
+      ${answered ? renderFeedback(q, userAns) : ''}
+    </div>
+
+    <div class="quiz-nav">
+      <button class="btn btn-secondary" ${state.index === 0 ? 'disabled' : ''} onclick="navQuiz(-1)">← Anterior</button>
+      ${state.index === total - 1
+        ? `<button class="btn" ${!answered ? 'disabled' : ''} onclick="finishQuiz()">Ver resultados</button>`
+        : `<button class="btn" ${!answered ? 'disabled' : ''} onclick="navQuiz(1)">Siguiente →</button>`}
+    </div>
+  `;
+
+  const app = document.getElementById('app');
+  app.innerHTML = html;
+  renderMath(app);
+}
+
+function blockColorFor(subj) {
+  for (const b of Object.values(BLOCKS)) {
+    if (b.composition.some(c => c.subject === subj)) return b.accent;
+  }
+  return '#4A0080';
+}
+
+function renderFeedback(q, userAns) {
+  const correctLetter = ['A','B','C','D'][q.correct];
+  const exp = q.explanation ? `<div class="feedback-exp">${q.explanation}</div>` : '';
+  if (userAns === q.correct) {
+    return `<div class="feedback ok show">✓ Correcto.${exp}</div>`;
+  }
+  return `<div class="feedback bad show">✗ La respuesta correcta es <strong>${correctLetter})</strong>.${exp}</div>`;
+}
+
+function selectOption(i) {
+  const q = state.questions[state.index];
+  const key = qKey(q.subject, q.n);
+  if (state.answers[key] !== undefined) return;
+  state.answers[key] = i;
+
+  const store = loadStore();
+  if (i !== q.correct) {
+    store.errors[key] = (store.errors[key] || 0) + 1;
+  } else if (store.errors[key]) {
+    delete store.errors[key];
+  }
+  saveStore(store);
+  renderQuiz();
+}
+
+function navQuiz(delta) { state.index += delta; renderQuiz(); }
+
+function confirmExit() {
+  const msg = state.blockId === 'examen'
+    ? '¿Salir del examen? Se perderá tu avance y el tiempo.'
+    : '¿Salir de la ronda? Tus respuestas se perderán.';
+  if (confirm(msg)) {
+    stopTimer();
+    state.mode = 'landing';
+    renderLanding();
+  }
+}
+
+// ───────────────────────────────────────────
+// RESULTADOS
+// ───────────────────────────────────────────
+function finishQuiz() {
+  stopTimer();
+  state.mode = 'results';
+  let score = 0;
+  const perSubject = {};
+  const errors = [];
+
+  state.questions.forEach(q => {
+    const key = qKey(q.subject, q.n);
+    const ans = state.answers[key];
+    const subj = q.subject;
+    perSubject[subj] = perSubject[subj] || { ok: 0, total: 0, label: q.label || SUBJECT_LABELS[subj] };
+    perSubject[subj].total++;
+    if (ans === q.correct) { score++; perSubject[subj].ok++; }
+    else { errors.push({ q, ans }); }
+  });
+
+  const store = loadStore();
+  store.history.push({ date: new Date().toISOString(), blockId: state.blockId, score, total: state.questions.length });
+  if (store.history.length > 20) store.history = store.history.slice(-20);
+  saveStore(store);
+
+  renderResults(score, perSubject, errors);
+}
+
+function renderResults(score, perSubject, errors) {
+  const total = state.questions.length;
+  const pct = Math.round(100 * score / total);
+  const pctClass = pct >= 70 ? 'ok' : pct >= 50 ? '' : 'bad';
+  const blockTitle = titleFor(state.blockId);
+
+  let html = `
+    <div class="results-hero">
+      <p class="page-sub" style="margin:0">${blockTitle}</p>
+      <div class="results-score">${score}<span class="total">/${total}</span></div>
+      <div class="results-pct ${pctClass}">${pct}% de aciertos</div>
+    </div>
+  `;
+
+  html += `<div class="results-breakdown"><h3>Desglose por materia</h3>`;
+  for (const data of Object.values(perSubject)) {
+    const sPct = Math.round(100 * data.ok / data.total);
+    html += `<div class="breakdown-row">
+      <span>${data.label}</span>
+      <div class="breakdown-bar"><div class="breakdown-bar-fill" style="width:${sPct}%; background:${sPct>=70?'#1FBA77':sPct>=50?'#00DEC8':'#E03B6A'}"></div></div>
+      <span class="breakdown-score">${data.ok}/${data.total}</span>
+    </div>`;
+  }
+  html += `</div>`;
+
+  if (errors.length) {
+    html += `<div class="results-errors"><h3>Lo que fallaste (${errors.length})</h3>`;
+    errors.forEach(({ q, ans }) => {
+      const letterAns = ans === undefined ? '—' : ['A','B','C','D'][ans];
+      const letterOk = ['A','B','C','D'][q.correct];
+      html += `<div class="error-item">
+        <div><span class="error-num">${q.label || SUBJECT_LABELS[q.subject]}</span> — ${stripHtml(q.text).slice(0,120)}${stripHtml(q.text).length>120?'...':''}</div>
+        <div class="error-detail">Marcaste: <span class="bad-text">${letterAns}</span> · Correcta: <span class="ok-text"><strong>${letterOk}</strong></span></div>
+      </div>`;
+    });
+    html += `</div>`;
+  } else {
+    html += `<div class="results-errors" style="background:#E6F8EF; border-color:#1FBA77">
+      <h3 style="color:#0E7A48">🎉 ¡Sin errores! Perfecto.</h3>
+    </div>`;
+  }
+
+  html += `<div class="results-actions">`;
+  if (errors.length) {
+    html += `<button class="btn btn-big" onclick="reviewWrongOnly()">Repasar sólo lo fallado</button>`;
+  }
+  if (state.blockId === 'examen') {
+    html += `<button class="btn btn-big" onclick="startExam()">Otro examen completo</button>`;
+  } else if (state.blockId !== 'errores') {
+    html += `<button class="btn btn-big" onclick="startQuiz('${state.blockId}')">Nueva ronda</button>`;
+  } else {
+    html += `<button class="btn btn-big" onclick="startErrorsReview()">Otra ronda de errores</button>`;
+  }
+  html += `<button class="btn btn-big btn-secondary" style="grid-column: 1/-1" onclick="goLanding()">← Volver al inicio</button>`;
+  html += `</div>`;
+
+  const app = document.getElementById('app');
+  app.innerHTML = html;
+  renderMath(app);
+}
+
+function stripHtml(s) {
+  const tmp = document.createElement('div');
+  tmp.innerHTML = s;
+  return tmp.textContent || tmp.innerText || '';
+}
+
+function reviewWrongOnly() {
+  stopTimer();
+  const wrong = state.questions.filter(q => {
+    const ans = state.answers[qKey(q.subject, q.n)];
+    return ans !== q.correct;
+  });
+  state.mode = 'quiz';
+  state.blockId = 'errores';
+  state.questions = shuffle(wrong);
+  state.answers = {};
+  state.index = 0;
+  renderQuiz();
+}
+
+function goLanding() {
+  stopTimer();
+  state.mode = 'landing';
+  state.blockId = null;
+  state.questions = [];
+  state.answers = {};
+  state.index = 0;
+  renderLanding();
+}
+
+renderLanding();
+</script>
+</body>
+</html>
