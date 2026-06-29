@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "lety2e",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["/tmp/lety_serve.py"],
+      "port": 8765
+    }
+  ]
+}

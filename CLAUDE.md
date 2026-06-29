@@ -164,6 +164,11 @@ Para rectas y triángulos: SVG inline (no TikZ, no libs externas — file:// com
 
 ## 🚀 Workflow para agregar un tema de Math
 
+**Cómo llega el contenido (división de trabajo con Lety):**
+- **Migración (lo común):** Lety genera el borrador (código LaTeX/HTML) **con Gemini + sus capturas** (lo hace en Gemini para ahorrar tokens; el borrador no se queda ahí) y lo sube al **doc de Drive, un tema por pestaña**. Luego avisa: *"checa el tema X de tal curso"* + enlaces de YouTube. Claude revisa, arma el HTML y sube.
+- **Desde cero:** algunos temas no vienen de capturas; se arman entre los dos con el mismo formato.
+- Referencia para Lety: `Sistema (cómo funciona).md` en la raíz.
+
 Detalle procedimental completo en `.claude/skills/letymath-html/SKILL.md` (skill on-demand). Aquí el resumen:
 
 1. Verificar header `# N nombre` vs `\textbf{...}` interno en el doc LaTeX.
@@ -251,6 +256,8 @@ git add . && git commit -m "..." && git push   # GitHub Pages rebuilea en 1-2 mi
 ```
 
 Verificar en **incógnito**. Si el favicon no aparece: `lety2e.com/favicon.svg?v=2`.
+
+**Bitácora:** al hacer commit de un cambio terminado, agregar también un renglón en `Bitácora.md` (raíz del proyecto, lo más reciente arriba). Los pendientes van en `Notas por revisar.md`, no en la bitácora.
 
 ### Issues conocidos
 - VS Code "Unable to create HEAD.lock" → `rm -f .git/HEAD.lock`.
