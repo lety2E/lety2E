@@ -1,15 +1,22 @@
 # Notas por revisar — lety2E 2
 
-> Cosas a revisar, ideas, acciones y recordatorios de este proyecto, a la mano.
-> La llenamos los dos: anota lo que se te ocurra, o pídeme que lo anote.
+> Corto y concreto (media cuartilla). Lety escribe libre en Apple Notes; yo mantengo este archivo.
+> Al cotejar: lo nuevo entra, lo hecho sale. Lo accionable concreto vive en Recordatorios.
 
-## ⭐ PRIORIDAD — Migrar Matemáticas 5
+## ▸ Para hacer
+**⭐ Prioridad — Migrar Matemáticas 5**
+- Empezar la migración de los temas de **Mat 5** (semestre que Lety quiere dar en **ago 2026**; hoy está vacío / *próximamente*).
+  - Mat 5 en realidad es **Derivadas/Integrales** → al subir el 1er tema, corregir la descripción de la card (la actual es genérica del sitio viejo) y quitar `.proximamente-card` + `.pronto`.
 
-- [ ] **Empezar la migración de los temas de Matemáticas 5.** Es el semestre que Lety quiere dar en **agosto 2026**. Mat 5 hoy está vacío (*próximamente*).
-  - Ojo: Mat 5 en realidad es **Derivadas/Integrales** — al subir el 1er tema, corregir la descripción de la card (la actual es genérica/del sitio viejo) y quitar `.proximamente-card` + `.pronto`.
+**📚 Math — cursos por completar (al 29 jun 2026)**
+- **Matemáticas 3, 4 y Optativa**: aún sin temas (marcados *próximamente*).
+- **Descripciones de cursos desactualizadas** (vienen del sitio viejo; ej. Mat 5 = Derivadas/Integrales). Reescribir cuando los temas existan.
+- Al subir el primer tema de un curso vacío: quitar `.proximamente-card` de su index y `.pronto` de la portada.
 
-## 📚 Math — cursos por completar (al 29 jun 2026)
+## ◇ Para pensar
+_(vacío)_
 
-- [ ] **Matemáticas 3, 4 y Optativa**: aún sin temas (están marcados como *próximamente*).
-- [ ] **Descripciones de cursos desactualizadas**: las actuales vienen del sitio viejo y no coinciden con el contenido real (ej. Mat 5 sería Derivadas/Integrales). Reescribirlas cuando los temas existan.
-- [ ] **Recordatorio al subir el primer tema de un curso vacío**: quitar la `.proximamente-card` de su index y el `.pronto` de la portada.
+## ✅ Ya en Recordatorios
+- Sección Math de lety2E
+- Migración letymath a Math
+- Migración de letyMath a Lety2E

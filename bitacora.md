@@ -5,8 +5,12 @@
 
 ---
 
+## 2026-07-02
+- Limpieza del repo: borradas 7 copias de trabajo viejas (`.claude/worktrees/`, todas ya incorporadas a `main`) y sus ramas. Descartado `temario-biologicas.html` (huérfano de mayo, decisión de Lety).
+- Commit del renombre `Bitácora.md` → `bitacora.md` (estándar del sistema) y su referencia en `CLAUDE.md`.
+
 ## 2026-06-29
-- Organizado el sistema del proyecto para trabajar siempre desde Code: creada `Bitácora.md` y `Sistema (cómo funciona).md`; `Notas por revisar.md` poblado con pendientes reales.
+- Organizado el sistema del proyecto para trabajar siempre desde Code: creada `bitacora.md` y `Sistema (cómo funciona).md`; `Notas por revisar.md` poblado con pendientes reales.
 - `CLAUDE.md`: agregada la regla de bitácora y el flujo de trabajo de Math (borrador con Gemini + capturas → doc en Drive un tema por pestaña → Claude arma el HTML y sube; + modo "desde cero").
 - Definida la **prioridad**: empezar a migrar **Matemáticas 5** (semestre de agosto 2026).
 

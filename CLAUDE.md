@@ -257,7 +257,7 @@ git add . && git commit -m "..." && git push   # GitHub Pages rebuilea en 1-2 mi
 
 Verificar en **incógnito**. Si el favicon no aparece: `lety2e.com/favicon.svg?v=2`.
 
-**Bitácora:** al hacer commit de un cambio terminado, agregar también un renglón en `Bitácora.md` (raíz del proyecto, lo más reciente arriba). Los pendientes van en `Notas por revisar.md`, no en la bitácora.
+**Bitácora:** al hacer commit de un cambio terminado, agregar también un renglón en `bitacora.md` (raíz del proyecto, lo más reciente arriba). Los pendientes van en `Notas por revisar.md`, no en la bitácora.
 
 ### Issues conocidos
 - VS Code "Unable to create HEAD.lock" → `rm -f .git/HEAD.lock`.
