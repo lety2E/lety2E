@@ -6,6 +6,7 @@
 ---
 
 ## 2026-07-02
+- **Simulador UNAM publicado:** ya tiene su card en el índice de Apuntes (antes solo se llegaba por URL directa).
 - Puesta a punto para trabajar desde Claude Code (revisión completa del proyecto):
   - Retirado `INSTRUCCIONES.md` (desactualizado y duplicaba a `CLAUDE.md`); lo único que faltaba —cómo agregar apuntes, relatos, cantos y secciones— ahora vive en `CLAUDE.md`.
   - Corregida la URL del repo en los docs (`lety2E/lety2E`, la real).
