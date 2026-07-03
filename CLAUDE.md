@@ -1,7 +1,7 @@
 # lety2e.com — Guía de Desarrollo
 
 **Proyecto:** Sitio personal de Lety (Math · Lupián · Apuntes) · HTML + CSS + JS vanilla · GitHub Pages
-**Repo:** `github.com/letymath/lety2E` (branch `main`) · **Dominio:** `lety2e.com`
+**Repo:** `github.com/lety2E/lety2E` (branch `main`) · **Dominio:** `lety2e.com`
 **Local:** `~/Desktop/lety2E 2/`
 
 > Esta guía documenta **decisiones, preferencias y fuentes externas** que no se pueden inferir leyendo el código. La estructura, paleta y rutas se ven directamente en el repo (`ls`, `style.css`, `nav.js`).
@@ -53,7 +53,7 @@ La estructura de carpetas se ve con `ls`. Lo importante saber:
 | `math` | Todo dentro de `math/` (índices **y** temas) — siempre `math`, nunca `letymath` |
 | `lupian` | `lupian/index.html` y `lupian/cantos/` |
 | `relatos` | `lupian/relatos/` |
-| `apuntes` | `apuntes/index.html` |
+| `apuntes` | Todo dentro de `apuntes/` (index y artefactos) |
 
 ### Sistema de color por sección
 
@@ -183,6 +183,15 @@ KaTeX: ver template en cualquier tema existente — patrón estándar `katex@0.1
 
 ---
 
+## ➕ Agregar contenido no-Math (resumen)
+
+- **Apunte nuevo:** archivo self-contained en `apuntes/` (guía: `apuntes/Templete-apuntes.md`; referencia canónica: `segunda-guerra-mundial.html`) + card `<a class="apunte-card">` en `apuntes/index.html`.
+- **Relato nuevo:** archivo en `lupian/relatos/` (.html, .mp3, .mp4 o imagen) + `<a class="entrada-item">` en `.lista-organica` del index de relatos.
+- **Cover de cantos:** `<article class="video-cover">` con iframe de YouTube en `lupian/cantos/index.html` (canal: `@Lety2eLupian`).
+- **Sección nueva:** carpeta + `index.html` con su `data-section` + alta en `SECTIONS`/`ROOT_LINKS` de `nav.js` + card en el `index.html` raíz.
+
+---
+
 ## 📱 Mobile-safety (muchos alumnos lo ven en celular — IMPORTANTE)
 
 **Regla núm. 1**: cada renglón de ejercicio dentro de `.mini-card-body` debe ser un bloque (`<div class="ej-line">` o `<div class="sol">`), **NUNCA** `$...$<br>$...$<br>`. Con `<br>` y line-height ajustado por la media query global, las raíces tipo `\sqrt{\dfrac{a}{b}}` se traslapan con la fila anterior (la barra superior del √ queda oculta tras la fila previa).
@@ -257,6 +266,12 @@ git add . && git commit -m "..." && git push   # GitHub Pages rebuilea en 1-2 mi
 
 Verificar en **incógnito**. Si el favicon no aparece: `lety2e.com/favicon.svg?v=2`.
 
+### Preview local (antes de publicar)
+
+- Arrancar: `python3 .claude/serve.py &` → sirve el sitio en `http://127.0.0.1:8765/` (la ruta del proyecto va fija dentro del script).
+- Verificar con `curl` y/o abriendo esa URL en Chrome (MCP de Chrome).
+- El **panel de preview** de la app (preview_start / `.claude/launch.json`) hoy **no funciona aquí**: macOS le bloquea la carpeta Desktop a ese proceso y responde 500. No insistir por esa vía. Si algún día se quiere el panel: dar a la app Claude "Acceso total al disco" (Ajustes del Sistema → Privacidad y seguridad) y copiar `.claude/serve.py` a `/tmp/lety_serve.py`.
+
 **Bitácora:** al hacer commit de un cambio terminado, agregar también un renglón en `bitacora.md` (raíz del proyecto, lo más reciente arriba). Los pendientes van en `Notas por revisar.md`, no en la bitácora.
 
 ### Issues conocidos
@@ -285,4 +300,4 @@ Verificar en **incógnito**. Si el favicon no aparece: `lety2e.com/favicon.svg?v
 
 ---
 
-*Guía mantenida por Claude · Mayo 2026*
+*Guía mantenida por Claude · Julio 2026*

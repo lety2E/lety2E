@@ -1,5 +1,6 @@
 .DS_Store
 *.py
+!.claude/serve.py
 *.csv
 
 # Cowork / Claude Code: generados por sesión local, no van al repo

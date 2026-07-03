@@ -11,33 +11,33 @@ Lety migra su sitio letymath.com a lety2e.com. Tiene todas sus lecciones transcr
 
 ## Referencias canónicas
 
-Antes de empezar cualquier trabajo, leer:
+Antes de empezar cualquier trabajo, leer (rutas relativas a la raíz del repo):
 - `references/template.html` — plantilla base con todos los estilos v6
-- `/sessions/cool-pensive-ramanujan/mnt/Lety2E/math/matematicas-1/operaciones-basicas.html` — tema 1, sin video (vs. con videos cortos), bloques de 6×6, respuestas en una línea
-- `/sessions/cool-pensive-ramanujan/mnt/Lety2E/math/matematicas-1/jerarquia.html` — tema 2, con 1 video, bloques de 2×4, respuestas multi-línea con `\begin{aligned}`
+- `math/matematicas-1/operaciones-basicas.html` — tema 1, sin video (vs. con videos cortos), bloques de 6×6, respuestas en una línea
+- `math/matematicas-1/jerarquia.html` — tema 2, con 1 video, bloques de 2×4, respuestas multi-línea con `\begin{aligned}`
 
-Estos dos archivos son el ground truth. Si algo en esta skill contradice el HTML ya aprobado, el HTML gana.
+Estos dos archivos son el ground truth. Si algo en esta skill contradice el HTML ya aprobado, el HTML gana. (Más referencias canónicas en `CLAUDE.md` § Paquetitos.)
 
 ## Workflow
 
 ### 1. Obtener el contenido LaTeX del tema
 
-```bash
-# Parsear el doc de Drive a texto plano (solo si no existe ya)
-jq -r '.[0].text' /ruta/al/archivo.txt | python3 -c "import json,sys; d=json.load(sys.stdin); print(d['text'])" > /tmp/latex_content.txt
+Leer el doc de Drive (ID en Contexto) con el conector de Google Drive (`read_file_content`).
+Lety sube **un tema por pestaña**; cada tema empieza con `# N nombre`.
+Verificar que el header coincida con el `\textbf{...}` interno — si discrepan (contenido
+duplicado de otro tema), **avisar a Lety y saltar el tema** (regla de `CLAUDE.md`).
 
-# Encontrar rango de líneas del tema
-grep -n "^# [0-9]" /tmp/latex_content.txt
-
-# Extraer (ejemplo para tema que va de línea X a Y-1)
-sed -n "X,Yp" /tmp/latex_content.txt > /tmp/tema.tex
-```
+Para aislar el tema, volcar el texto a un archivo temporal en el scratchpad y extraer
+el rango de líneas entre su `# N nombre` y el siguiente.
 
 Si el usuario ya te dio el contenido directo (pegado o en archivo), usar ese.
 
-### 2. Preguntar por el video (si aplica)
+### 2. Video (si aplica)
 
-No todos los temas tienen video. Si no sabes, pregunta al usuario: "¿Este tema tiene video de YouTube? Si sí, pásame el link."
+No todos los temas tienen video:
+1. Buscar el slug del tema en `~/Desktop/capturas/lista_videos_youtube.csv`.
+2. Si no aparece, preguntar al usuario: "¿Este tema tiene video de YouTube? Si sí, pásame el link." (Lety a veces los pasa directo en el chat.)
+3. Si no hay video, omitir la sección de Video — no es error.
 
 Formato del link: `https://youtu.be/XXXXX` → extraer ID `XXXXX` para usar en `https://www.youtube.com/embed/XXXXX?rel=0`.
 
@@ -115,7 +115,7 @@ Copiar `references/template.html` y reemplazar placeholders. Secciones en orden:
 
 ### 7. Paths y archivos
 
-- Carpeta: `/sessions/cool-pensive-ramanujan/mnt/Lety2E/math/matematicas-1/`
+- Carpeta: `math/<curso>/` en el repo (ej. `math/matematicas-1/`)
 - Nombre del archivo: kebab-case sin tildes, ej. `jerarquia.html`, `ecuaciones.html`, `expresiones-algebraicas.html`
 - Links CSS/JS: `../../style.css`, `../../nav.js`, `../../footer.js` (depth 2)
 - Orden según numeración en el doc de Lety (tema 2 = jerarquia, tema 3 = ecuaciones, etc.)
@@ -134,13 +134,15 @@ Tabla de orden (actualizar `index.html` si es nuevo):
 7. pendiente-ordenada
 8. area-perimetro
 9. ecuaciones-angulos
-10. regla-exponentes
+10. reglas-exponentes
 11. mcm-mcd
 12. lenguaje-algebraico
-13. problemas-ecuaciones-lineales
-14. divisibilidad
-15. sistemas-numeracion
+13. problemas-ecuaciones
+14. divisibilidad        (aún no existe)
+15. sistemas-numeracion  (aún no existe)
 ```
+
+Los nombres 1-13 son los archivos reales en `math/matematicas-1/` — ante la duda, `ls` manda.
 
 En los botones:
 ```html
@@ -156,7 +158,7 @@ En los botones:
 - `--course-1` / `--P` / `--accent` = `#4A0080` (morado — headers, iconos)
 - `--M` = `#FF00AA` (rosa — títulos, acentos, resultados strong)
 - `--T` = `#00DEC8` (turquesa — disponible si hace falta)
-- `--bg-card` = `#FBF2EF` (fondo de tarjetas)
+- `--bg-card` = `#FFFFFF` (fondo de tarjetas; `--bg` = `#FBF2EF` es el fondo general de la página)
 - `--border` = `#E0C4BC`
 - `--accent-light` = `#F0E0F5`
 
@@ -189,5 +191,5 @@ En los botones:
 - Lety es la creadora — llama a su metodología "paquetitos"
 - Prefiere iterar visualmente. Si dudas sobre el diseño, generar y preguntar
 - Odia la numeración interna, los colores inventados, los gradientes raros
-- Los cambios se ven directo en su carpeta (no hay deploy manual para preview local)
+- Preview local: `python3 .claude/serve.py &` → `http://127.0.0.1:8765/` (receta completa en `CLAUDE.md` § Preview local). Verificar en móvil 390×844 y 360×800 antes de commit (reglas en `CLAUDE.md` § Mobile-safety)
 - Ella puede proveer apuntes, videos, o ajustes al orden de los temas
