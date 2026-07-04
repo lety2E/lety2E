@@ -6,9 +6,18 @@
 Es el **sitio web de Lety** (lety2e.com): HTML + CSS + JS vanilla, publicado en GitHub Pages.
 
 ## Dónde está el manual completo
-El manual detallado de este proyecto vive en **`CLAUDE.md`** (en esta misma carpeta):
+El manual **técnico** detallado vive en **`CLAUDE.md`** (en esta misma carpeta):
 filosofía, arquitectura, estilos, fuentes de contenido y el flujo para publicar.
 **Si eres una IA trabajando aquí —seas Claude u otra— lee `CLAUDE.md` antes de tocar nada.**
+El manual **para Lety** (cómo se reparte el trabajo entre ella y Claude, pieza por pieza)
+es **`Manual lety2E.md`**.
+
+## Archivos del sistema de Lety (junto al código)
+Además del sitio (HTML/CSS/JS), en la raíz conviven las piezas estándar del sistema:
+- **`Pendientes lety2E.md`** — la bandeja de pendientes (tres secciones ▸/◇/✅). No la borres.
+- **`bitacora lety2E.md`** — el diario del proyecto. No la borres.
+- **`Manual lety2E.md`** — el manual para Lety (espejo humano).
+- **`Recursos lety2E/`** — material reutilizable (plantillas, snippets, prompts; nombres libres, sin índice).
 
 ## Cómo quiero que trabajes aquí
 - Lety no es muy técnica: explica en simple y guíala paso a paso.

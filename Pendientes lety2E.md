@@ -1,4 +1,4 @@
-# Notas por revisar — lety2E 2
+# Pendientes — lety2E
 
 > Corto y concreto (media cuartilla). Lety escribe libre en Apple Notes; yo mantengo este archivo.
 > Al cotejar: lo nuevo entra, lo hecho sale. Lo accionable concreto vive en Recordatorios.

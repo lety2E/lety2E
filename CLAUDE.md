@@ -2,7 +2,7 @@
 
 **Proyecto:** Sitio personal de Lety (Math · Lupián · Apuntes) · HTML + CSS + JS vanilla · GitHub Pages
 **Repo:** `github.com/lety2E/lety2E` (branch `main`) · **Dominio:** `lety2e.com`
-**Local:** `~/Desktop/lety2E 2/`
+**Local:** `~/Desktop/lety2E/`
 
 > Esta guía documenta **decisiones, preferencias y fuentes externas** que no se pueden inferir leyendo el código. La estructura, paleta y rutas se ven directamente en el repo (`ls`, `style.css`, `nav.js`).
 
@@ -260,7 +260,7 @@ Por eso también el **bloque Ejemplo** (no sólo los ejercicios) debe usar `.ej-
 ## 🚢 Deploy
 
 ```bash
-cd ~/Desktop/lety2E\ 2/
+cd ~/Desktop/lety2E/
 git add . && git commit -m "..." && git push   # GitHub Pages rebuilea en 1-2 min
 ```
 
@@ -272,7 +272,7 @@ Verificar en **incógnito**. Si el favicon no aparece: `lety2e.com/favicon.svg?v
 - Verificar con `curl` y/o abriendo esa URL en Chrome (MCP de Chrome).
 - El **panel de preview** de la app (preview_start / `.claude/launch.json`) hoy **no funciona aquí**: macOS le bloquea la carpeta Desktop a ese proceso y responde 500. No insistir por esa vía. Si algún día se quiere el panel: dar a la app Claude "Acceso total al disco" (Ajustes del Sistema → Privacidad y seguridad) y copiar `.claude/serve.py` a `/tmp/lety_serve.py`.
 
-**Bitácora:** al hacer commit de un cambio terminado, agregar también un renglón en `bitacora.md` (raíz del proyecto, lo más reciente arriba). Los pendientes van en `Notas por revisar.md`, no en la bitácora.
+**Bitácora:** al hacer commit de un cambio terminado, agregar también un renglón en `bitacora lety2E.md` (raíz del proyecto, lo más reciente arriba). Los pendientes van en `Pendientes lety2E.md`, no en la bitácora.
 
 ### Issues conocidos
 - VS Code "Unable to create HEAD.lock" → `rm -f .git/HEAD.lock`.

@@ -1,4 +1,10 @@
-# Sistema — cómo funciona lety2E
+# Manual — lety2E
+
+> Cómo funciona este proyecto, explicado para el humano que lo usa.
+> (Las IAs tienen su espejo técnico en `CLAUDE.md`; el portable es `AGENTS.md`.)
+>
+> *Sistema diseñado por Lety, operado en conjunto con Claude —
+> dos inteligencias, una humana y una artificial.*
 
 > Cómo construimos el sitio entre Lety y Claude. La idea es repartir el trabajo
 > para no gastar tokens de más y que cada quien haga lo que mejor le sale.
@@ -62,3 +68,13 @@ cada tipo se suma cuando hay material real (nunca se inventa para llenar).
 ---
 
 *Archivo de referencia rápida. El detalle técnico para Claude vive en `CLAUDE.md`.*
+
+---
+
+## Frases y conceptos que debo recordar
+
+- La bandeja de este proyecto ahora se llama **Pendientes** (archivo `Pendientes lety2E.md`); antes se llamaba "Notas por revisar". Al chat se le dice **"revisa mis pendientes"**.
+- **No confundir:** `Pendientes lety2E.md` = la bandeja del proyecto (sus 3 secciones ▸ Para hacer / ◇ Para pensar / ✅ Ya en Recordatorios) · **Recordatorios** (la app) = lo accionable ya escalado · el viejo `Pendientes.md` global está **jubilado** desde jun-2026.
+- **Bitácora:** siempre `bitacora …` (minúscula, sin acento) + nombre del proyecto → `bitacora lety2E.md`.
+- **`Manual lety2E.md`** = este archivo, para mí (Lety); **`AGENTS.md`** = el espejo portable para las IAs; **`CLAUDE.md`** = el manual técnico detallado. Esos dos nombres (`AGENTS.md`, `CLAUDE.md`) nunca cambian.
+- **`Recursos lety2E/`** = lo reutilizable a la mano: plantillas, snippets, prompts. No es pendiente ni historial: es la caja de herramientas. Sin índice; los nombres de adentro se deciden sobre la marcha.
