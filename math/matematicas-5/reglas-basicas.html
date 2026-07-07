@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reglas básicas de derivación — Matemáticas 5 — LetyMath</title>
+  <meta name="description" content="Reglas básicas de derivación: constante, función lineal, potencia y suma. Ejemplos, ejercicios y respuestas paso a paso." />
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../../favicon.ico">
+  <link rel="stylesheet" href="../../style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" />
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body, {
+      delimiters: [
+        {left:'$$', right:'$$', display:true},
+        {left:'$', right:'$', display:false}
+      ]
+    });"></script>
+
+  <style>
+    .topic-tag {
+      display: inline-flex; align-items: center; gap: .35rem;
+      padding: .22rem .75rem; border-radius: 99px;
+      background: var(--accent-light); color: var(--accent);
+      font-size: .78rem; font-weight: 700; letter-spacing: .03em;
+      margin-bottom: .55rem;
+    }
+    .topic-tag::before {
+      content: ''; width: 7px; height: 7px; border-radius: 50%;
+      background: var(--accent); display: inline-block;
+    }
+
+    .section-block { margin-bottom: 2.5rem; }
+    .section-block:last-child { margin-bottom: 0; }
+
+    .sec-head {
+      display: flex; align-items: center; gap: .65rem;
+      margin-bottom: 1.1rem;
+    }
+    .sec-head h2 { margin: 0; font-size: 1.2rem; line-height: 1; }
+    .sec-icon {
+      width: 30px; height: 30px; border-radius: 8px;
+      display: grid; place-items: center; flex-shrink: 0;
+      background: var(--accent);
+    }
+    .sec-icon svg { width: 15px; height: 15px; stroke: #fff; fill: none; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+
+    .sec-toggle {
+      display: flex; align-items: center; gap: .65rem;
+      cursor: pointer; user-select: none;
+      padding: .8rem 0; margin: 0 0 .4rem;
+    }
+    .sec-toggle h2 { margin: 0; font-size: 1.2rem; line-height: 1; }
+    .sec-toggle .chev {
+      margin-left: auto; font-size: .75rem; color: var(--text-3);
+      transition: transform .25s;
+    }
+    .sec-toggle.open .chev { transform: rotate(180deg); }
+
+    .collapsible {
+      max-height: 0; overflow: hidden;
+      transition: max-height .4s ease, padding .3s ease;
+      padding: 0;
+    }
+    .collapsible.show { max-height: 12000px; padding: .8rem 0; }
+
+    /* Video */
+    .videos-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    @media (max-width: 700px) { .videos-row { grid-template-columns: 1fr; } }
+    .video-label {
+      font-family: var(--font-mono, monospace); font-size: .68rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .07em; color: var(--text-3); margin-bottom: .4rem;
+    }
+    .video-wrapper {
+      position: relative; padding-bottom: 56.25%; height: 0;
+      overflow: hidden; border-radius: var(--r-md); background: #000;
+    }
+    .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+
+    /* Apuntes */
+    .reglas-grid { display: grid; grid-template-columns: 1fr 1fr; gap: .85rem; margin: 1rem 0; }
+    @media (max-width: 480px) { .reglas-grid { grid-template-columns: 1fr; } }
+    .regla-card {
+      background: var(--bg-card); border: 1.5px solid var(--border);
+      border-radius: var(--r-sm); padding: .85rem;
+    }
+    .regla-card-title { font-weight: 700; font-size: .85rem; margin-bottom: .4rem; color: var(--course-1); }
+    .regla-card-body { font-size: .82rem; color: var(--text-2); line-height: 1.65; }
+
+    /* Ejemplo */
+    .ejemplo-section { margin: 2rem 0 2.5rem; }
+    .ejemplo-head {
+      display: flex; align-items: center; gap: .65rem;
+      margin-bottom: 1rem;
+    }
+    .ejemplo-head h3 {
+      margin: 0; font-family: var(--font-display);
+      font-size: 1.2rem; line-height: 1;
+      color: var(--M); font-style: italic;
+    }
+    .ejemplo-block {
+      padding: 2rem 1.5rem;
+      background: var(--bg-card);
+      border: 1.5px solid var(--border);
+      border-radius: var(--r-md);
+      color: var(--text);
+    }
+    .ejemplo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem 2rem; }
+    @media (max-width: 700px) { .ejemplo-grid { grid-template-columns: 1fr; } }
+    .ejemplo-item { text-align: center; font-size: 1.02rem; }
+    .ejemplo-block strong { color: var(--M); font-weight: 700; }
+
+    /* Mini card (bloque) */
+    .mini-card {
+      background: var(--bg-card); border: 1.5px solid var(--border);
+      border-radius: var(--r-md); overflow: hidden;
+    }
+    .mini-card-head {
+      padding: .4rem .8rem; background: var(--course-1);
+      font-family: var(--font-display); font-size: .85rem; color: #fff; font-weight: 700;
+    }
+    .mini-card-body {
+      padding: .8rem 1rem;
+      font-size: .9rem; line-height: 1.6; color: var(--text);
+    }
+    .mini-card-body .ej-line {
+      padding: .6rem 0;
+      border-bottom: 1px solid var(--border-s);
+      line-height: 2.2;
+    }
+    .mini-card-body .ej-line:last-child { border-bottom: none; padding-bottom: .25rem; }
+    .mini-card-body .ej-line:first-child { padding-top: .25rem; }
+    .mini-card-body .sol {
+      padding: .4rem 0 .6rem;
+      border-bottom: 1px solid var(--border-s);
+    }
+    .mini-card-body .sol:last-child { border-bottom: none; padding-bottom: .1rem; }
+
+    /* Grid de bloques */
+    .bloques-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2rem; }
+    @media (max-width: 700px) { .bloques-2 { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body data-section="math">
+  <main class="topic-content">
+
+    <header class="topic-header">
+      <p class="breadcrumb">
+        <a href="../index.html">Inicio</a> ›
+        <a href="index.html">Matemáticas 5</a> ›
+        Reglas básicas de derivación
+      </p>
+      <div class="topic-tag">Matemáticas 5 · Tema 1</div>
+      <h1>Reglas básicas de derivación</h1>
+    </header>
+
+    <!-- ══════════ VIDEOS ══════════ -->
+    <section class="section-block">
+      <div class="sec-head">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3" stroke-width="0" fill="white"/></svg>
+        </div>
+        <h2>Videos</h2>
+      </div>
+      <div class="videos-row">
+        <div>
+          <p class="video-label">Video 1 — Reglas básicas</p>
+          <div class="video-wrapper">
+            <iframe src="https://www.youtube.com/embed/O9M3BoYb0kk?rel=0" title="Reglas básicas de derivación" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+        </div>
+        <div>
+          <p class="video-label">Video 2 — Con x en el denominador</p>
+          <div class="video-wrapper">
+            <iframe src="https://www.youtube.com/embed/wQ3w8kdQ8xc?rel=0" title="Derivadas con x en el denominador" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ APUNTES ══════════ -->
+    <section class="section-block">
+      <div class="sec-head">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+        </div>
+        <h2>Apuntes</h2>
+      </div>
+      <div class="apunte-box">
+        <div class="reglas-grid">
+          <div class="regla-card">
+            <div class="regla-card-title">Derivada de una constante</div>
+            <div class="regla-card-body">$f(x) = c \;\rightarrow\; f'(x) = 0$</div>
+          </div>
+          <div class="regla-card">
+            <div class="regla-card-title">Derivada de una función lineal</div>
+            <div class="regla-card-body">$f(x) = ax \;\rightarrow\; f'(x) = a$</div>
+          </div>
+          <div class="regla-card">
+            <div class="regla-card-title">Regla de la potencia</div>
+            <div class="regla-card-body">$f(x) = ax^n \;\rightarrow\; f'(x) = anx^{n-1}$</div>
+          </div>
+          <div class="regla-card">
+            <div class="regla-card-title">Regla de la suma y resta</div>
+            <div class="regla-card-body">$f = f_1 + f_2 + f_3 \;\rightarrow\; f' = f_1' + f_2' + f_3'$</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ EJEMPLO ══════════ -->
+    <section class="section-block ejemplo-section">
+      <div class="ejemplo-head">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        </div>
+        <h3>Ejemplo</h3>
+      </div>
+      <p style="margin-bottom:1rem; line-height:1.75;">
+        Deriva las siguientes funciones aplicando las reglas básicas:
+      </p>
+      <div class="ejemplo-block">
+        <div class="ejemplo-grid">
+          <div class="ejemplo-item">
+            $$\begin{aligned}
+              f(x) &= 5 \\
+              \mathbf{f'(x)} &= \mathbf{0}
+            \end{aligned}$$
+          </div>
+          <div class="ejemplo-item">
+            $$\begin{aligned}
+              g(x) &= -3x \\
+              \mathbf{g'(x)} &= \mathbf{-3}
+            \end{aligned}$$
+          </div>
+          <div class="ejemplo-item">
+            $$\begin{aligned}
+              h(x) &= 5x^4 - 7x^3 + 3x^2 - 2x + 7 \\
+              h'(x) &= 5(4)x^{4-1} - 7(3)x^{3-1} + 3(2)x^{2-1} - 2 \\
+              \mathbf{h'(x)} &= \mathbf{20x^3 - 21x^2 + 6x - 2}
+            \end{aligned}$$
+          </div>
+          <div class="ejemplo-item">
+            $$\begin{aligned}
+              f(x) &= \frac{3}{x^4} \\
+              f(x) &= 3x^{-4} \\
+              f'(x) &= 3(-4)x^{-4-1} \\
+              f'(x) &= -12x^{-5} \\
+              \mathbf{f'(x)} &= \mathbf{-\frac{12}{x^5}}
+            \end{aligned}$$
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ EJERCICIOS (siempre visibles) ══════════ -->
+    <section class="section-block">
+      <div class="sec-head">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+        </div>
+        <h2>Ejercicios</h2>
+      </div>
+      <div class="bloques-2">
+        <div class="mini-card">
+          <div class="mini-card-head">Bloque 1</div>
+          <div class="mini-card-body">
+            <div class="ej-line">$f(x) = 5x^6 - 3x^4 + 2x^3 - 5x - 4$</div>
+            <div class="ej-line">$f(x) = -4x^8 - 6x^5 + 3x^4 - 2x^3 + x + 2$</div>
+            <div class="ej-line">$f(x) = 3x^5 + 2x^4 - 7x^3 + 5x^2 - 4x$</div>
+            <div class="ej-line">$f(x) = 6x^4 - 5x^3 + 4x^2 - 6x - 1$</div>
+          </div>
+        </div>
+        <div class="mini-card">
+          <div class="mini-card-head">Bloque 2</div>
+          <div class="mini-card-body">
+            <div class="ej-line">$f(x) = \dfrac{5}{x^2} + \dfrac{3}{x^4} - \dfrac{2}{x^7}$</div>
+            <div class="ej-line">$f(x) = -\dfrac{6}{x^4} - \dfrac{3}{x^5} + \dfrac{7}{x^2}$</div>
+            <div class="ej-line">$f(x) = -\dfrac{1}{x^6} + \dfrac{4}{x^3} - \dfrac{2}{x^5}$</div>
+            <div class="ej-line">$f(x) = -\dfrac{2}{x^8} - \dfrac{3}{x^5} + \dfrac{8}{x^4}$</div>
+          </div>
+        </div>
+        <div class="mini-card">
+          <div class="mini-card-head">Bloque 3</div>
+          <div class="mini-card-body">
+            <div class="ej-line">$f(x) = 3x^4 - 2x + \dfrac{5}{x^2} - 7$</div>
+            <div class="ej-line">$f(x) = -x^5 + \dfrac{1}{x^4} + 6x - 12$</div>
+            <div class="ej-line">$f(x) = \dfrac{4}{x^3} - 2x^2 + 5x + 3$</div>
+            <div class="ej-line">$f(x) = 6x^6 - x + \dfrac{2}{x^5} + 9$</div>
+          </div>
+        </div>
+        <div class="mini-card">
+          <div class="mini-card-head">Bloque 4</div>
+          <div class="mini-card-body">
+            <div class="ej-line">$f(x) = -\dfrac{1}{x^8} + 5x^3 - 4x + 2$</div>
+            <div class="ej-line">$f(x) = 2x^7 - \dfrac{3}{x^5} + x^2 - 10$</div>
+            <div class="ej-line">$f(x) = 4x^4 - 6x^2 + \dfrac{8}{x} - 5$</div>
+            <div class="ej-line">$f(x) = -\dfrac{2}{x^6} + 3x^5 - 7x + 1$</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ RESPUESTAS (colapsable) ══════════ -->
+    <section class="section-block">
+      <div class="sec-toggle" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('show');">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <h2>Respuestas</h2>
+        <span class="chev">▼</span>
+      </div>
+      <div class="collapsible">
+        <div class="bloques-2">
+          <div class="mini-card">
+            <div class="mini-card-head">Bloque 1</div>
+            <div class="mini-card-body">
+              <div class="sol">
+                $$\begin{aligned}
+                  f(x) &= 5x^6 - 3x^4 + 2x^3 - 5x - 4 \\
+                  f'(x) &= 5(6)x^{5} - 3(4)x^{3} + 2(3)x^{2} - 5 \\
+                  \mathbf{f'(x)} &= \mathbf{30x^5 - 12x^3 + 6x^2 - 5}
+                \end{aligned}$$
+              </div>
+              <div class="sol">
+                $$\begin{aligned}
+                  f(x) &= -4x^8 - 6x^5 + 3x^4 - 2x^3 + x + 2 \\
+                  f'(x) &= -4(8)x^7 - 6(5)x^4 + 3(4)x^3 - 2(3)x^2 + 1 \\
+                  \mathbf{f'(x)} &= \mathbf{-32x^7 - 30x^4 + 12x^3 - 6x^2 + 1}
+                \end{aligned}$$
+              </div>
+              <div class="sol">
+                $$\begin{aligned}
+                  f(x) &= 3x^5 + 2x^4 - 7x^3 + 5x^2 - 4x \\
+                  f'(x) &= 3(5)x^4 + 2(4)x^3 - 7(3)x^2 + 5(2)x - 4 \\
+                  \mathbf{f'(x)} &= \mathbf{15x^4 + 8x^3 - 21x^2 + 10x - 4}
+                \end{aligned}$$
+              </div>
+              <div class="sol">
+                $$\begin{aligned}
+                  f(x) &= 6x^4 - 5x^3 + 4x^2 - 6x - 1 \\
+                  f'(x) &= 6(4)x^3 - 5(3)x^2 + 4(2)x - 6 \\
+                  \mathbf{f'(x)} &= \mathbf{24x^3 - 15x^2 + 8x - 6}
+                \end{aligned}$$
+              </div>
+            </div>
+          </div>
+          <div class="mini-card">
+            <div class="mini-card-head">Bloque 2</div>
+            <div class="mini-card-body">
+              <div class="sol">
+                $$\begin{aligned}
+                  f(x) &= \frac{5}{x^2} + \frac{3}{x^4} - \frac{2}{x^7} \\
+                  f(x) &= 5x^{-2} + 3x^{-4} - 2x^{-7} \\
+                  f'(x) &= 5(-2)x^{-3} + 3(-4)x^{-5} - 2(-7)x^{-8} \\
+                  f'(x) &= -10x^{-3} - 12x^{-5} + 14x^{-8} \\
+                  \mathbf{f'(x)} &= \mathbf{-\frac{10}{x^3} - \frac{12}{x^5} + \frac{14}{x^8}}
+                \end{aligned}$$
+              </div>
+              <div class="sol">
+                $$\begin{aligned}
+                  f(x) &= -\frac{6}{x^4} - \frac{3}{x^5} + \frac{7}{x^2} \\
+                  f(x) &= -6x^{-4} - 3x^{-5} + 7x^{-2} \\
+                  f'(x) &= -6(-4)x^{-5} - 3(-5)x^{-6} + 7(-2)x^{-3} \\
+                  f'(x) &= 24x^{-5} + 15x^{-6} - 14x^{-3} \\
+                  \mathbf{f'(x)} &= \mathbf{\frac{24}{x^5} + \frac{15}{x^6} - \frac{14}{x^3}}
+                \end{aligned}$$
+              </div>
+              <div class="sol">
+                $$\begin{aligned}
+                  f(x) &= -\frac{1}{x^6} + \frac{4}{x^3} - \frac{2}{x^5} \\
+                  f(x) &= -x^{-6} + 4x^{-3} - 2x^{-5} \\
+                  f'(x) &= -(-6)x^{-7} + 4(-3)x^{-4} - 2(-5)x^{-6} \\
+                  f'(x) &= 6x^{-7} - 12x^{-4} + 10x^{-6} \\
+                  \mathbf{f'(x)} &= \mathbf{\frac{6}{x^7} - \frac{12}{x^4} + \frac{10}{x^6}}
+                \end{aligned}$$
+              </div>
+              <div class="sol">
+                $$\begin{aligned}
+                  f(x) &= -\frac{2}{x^8} - \frac{3}{x^5} + \frac{8}{x^4} \\
+                  f(x) &= -2x^{-8} - 3x^{-5} + 8x^{-4} \\
+                  f'(x) &= -2(-8)x^{-9} - 3(-5)x^{-6} + 8(-4)x^{-5} \\
+                  f'(x) &= 16x^{-9} + 15x^{-6} - 32x^{-5} \\
+                  \mathbf{f'(x)} &= \mathbf{\frac{16}{x^9} + \frac{15}{x^6} - \frac{32}{x^5}}
+                \end{aligned}$$
+              </div>
+            </div>
+          </div>
+          <div class="mini-card">
+            <div class="mini-card-head">Bloque 3</div>
+            <div class="mini-card-body">
+              <div class="sol">
+                $$\begin{aligned}
+                  f(x) &= 3x^4 - 2x + \frac{5}{x^2} - 7 \\
+                  f(x) &= 3x^4 - 2x + 5x^{-2} - 7 \\
+                  f'(x) &= 3(4)x^3 - 2 + 5(-2)x^{-3} \\
+                  f'(x) &= 12x^3 - 2 - 10x^{-3} \\
+                  \mathbf{f'(x)} &= \mathbf{12x^3 - 2 - \frac{10}{x^3}}
+                \end{aligned}$$
+              </div>
+              <div class="sol">
+                $$\begin{aligned}
+                  f(x) &= -x^5 + \frac{1}{x^4} + 6x - 12 \\
+                  f(x) &= -x^5 + x^{-4} + 6x - 12 \\
+                  f'(x) &= -5x^4 - 4x^{-5} + 6 \\
+                  \mathbf{f'(x)} &= \mathbf{-5x^4 - \frac{4}{x^5} + 6}
+                \end{aligned}$$
+              </div>
+              <div class="sol">
+                $$\begin{aligned}
+                  f(x) &= \frac{4}{x^3} - 2x^2 + 5x + 3 \\
+                  f(x) &= 4x^{-3} - 2x^2 + 5x + 3 \\
+                  f'(x) &= 4(-3)x^{-4} - 2(2)x + 5 \\
+                  f'(x) &= -12x^{-4} - 4x + 5 \\
+                  \mathbf{f'(x)} &= \mathbf{-\frac{12}{x^4} - 4x + 5}
+                \end{aligned}$$
+              </div>
+              <div class="sol">
+                $$\begin{aligned}
+                  f(x) &= 6x^6 - x + \frac{2}{x^5} + 9 \\
+                  f(x) &= 6x^6 - x + 2x^{-5} + 9 \\
+                  f'(x) &= 6(6)x^5 - 1 + 2(-5)x^{-6} \\
+                  f'(x) &= 36x^5 - 1 - 10x^{-6} \\
+                  \mathbf{f'(x)} &= \mathbf{36x^5 - 1 - \frac{10}{x^6}}
+                \end{aligned}$$
+              </div>
+            </div>
+          </div>
+          <div class="mini-card">
+            <div class="mini-card-head">Bloque 4</div>
+            <div class="mini-card-body">
+              <div class="sol">
+                $$\begin{aligned}
+                  f(x) &= -\frac{1}{x^8} + 5x^3 - 4x + 2 \\
+                  f(x) &= -x^{-8} + 5x^3 - 4x + 2 \\
+                  f'(x) &= -(-8)x^{-9} + 5(3)x^2 - 4 \\
+                  f'(x) &= 8x^{-9} + 15x^2 - 4 \\
+                  \mathbf{f'(x)} &= \mathbf{\frac{8}{x^9} + 15x^2 - 4}
+                \end{aligned}$$
+              </div>
+              <div class="sol">
+                $$\begin{aligned}
+                  f(x) &= 2x^7 - \frac{3}{x^5} + x^2 - 10 \\
+                  f(x) &= 2x^7 - 3x^{-5} + x^2 - 10 \\
+                  f'(x) &= 2(7)x^6 - 3(-5)x^{-6} + 2x \\
+                  f'(x) &= 14x^6 + 15x^{-6} + 2x \\
+                  \mathbf{f'(x)} &= \mathbf{14x^6 + \frac{15}{x^6} + 2x}
+                \end{aligned}$$
+              </div>
+              <div class="sol">
+                $$\begin{aligned}
+                  f(x) &= 4x^4 - 6x^2 + \frac{8}{x} - 5 \\
+                  f(x) &= 4x^4 - 6x^2 + 8x^{-1} - 5 \\
+                  f'(x) &= 4(4)x^3 - 6(2)x + 8(-1)x^{-2} \\
+                  f'(x) &= 16x^3 - 12x - 8x^{-2} \\
+                  \mathbf{f'(x)} &= \mathbf{16x^3 - 12x - \frac{8}{x^2}}
+                \end{aligned}$$
+              </div>
+              <div class="sol">
+                $$\begin{aligned}
+                  f(x) &= -\frac{2}{x^6} + 3x^5 - 7x + 1 \\
+                  f(x) &= -2x^{-6} + 3x^5 - 7x + 1 \\
+                  f'(x) &= -2(-6)x^{-7} + 3(5)x^4 - 7 \\
+                  f'(x) &= 12x^{-7} + 15x^4 - 7 \\
+                  \mathbf{f'(x)} &= \mathbf{\frac{12}{x^7} + 15x^4 - 7}
+                \end{aligned}$$
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ EJERCICIOS EXTRA (colapsable) ══════════ -->
+    <section class="section-block">
+      <div class="sec-toggle" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('show');">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+        </div>
+        <h2>Ejercicios extra</h2>
+        <span class="chev">▼</span>
+      </div>
+      <div class="collapsible">
+        <div class="bloques-2">
+          <div class="mini-card">
+            <div class="mini-card-head">Bloque 1</div>
+            <div class="mini-card-body">
+              <div class="ej-line">$f(x) = 8x^5 - 4x^3 + 2x^2 - 9$</div>
+              <div class="ej-line">$f(x) = -3x^4 + 5x^2 - 7x + 10$</div>
+              <div class="ej-line">$f(x) = 10x^3 - 7x^2 + 6x - 12$</div>
+            </div>
+          </div>
+          <div class="mini-card">
+            <div class="mini-card-head">Bloque 2</div>
+            <div class="mini-card-body">
+              <div class="ej-line">$f(x) = \dfrac{7}{x^3} - \dfrac{2}{x^6} + \dfrac{4}{x}$</div>
+              <div class="ej-line">$f(x) = -\dfrac{5}{x^7} + \dfrac{3}{x^2} - \dfrac{1}{x^5}$</div>
+              <div class="ej-line">$f(x) = \dfrac{4}{x^4} - \dfrac{3}{x^5} + \dfrac{9}{x^2}$</div>
+            </div>
+          </div>
+          <div class="mini-card">
+            <div class="mini-card-head">Bloque 3</div>
+            <div class="mini-card-body">
+              <div class="ej-line">$f(x) = -x^9 + 4x^5 - 2x^3 + x - 5$</div>
+              <div class="ej-line">$f(x) = \dfrac{1}{x^{10}} + \dfrac{1}{x^2} - 6x^4$</div>
+              <div class="ej-line">$f(x) = 2x^7 - 3x^4 + \dfrac{5}{x^3} + 12$</div>
+            </div>
+          </div>
+          <div class="mini-card">
+            <div class="mini-card-head">Bloque 4</div>
+            <div class="mini-card-body">
+              <div class="ej-line">$f(x) = -6x^2 + \dfrac{9}{x^2} - \dfrac{2}{x^8} + 3$</div>
+              <div class="ej-line">$f(x) = 5x^4 - 2x^3 + 7x^2 - 4x + 1$</div>
+              <div class="ej-line">$f(x) = -\dfrac{3}{x^6} - 4x^3 + \dfrac{2}{x^4} - 11$</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+  <script src="../../nav.js"></script>
+  <script src="../../footer.js"></script>
+</body>
+</html>

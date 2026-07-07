@@ -1,9 +1,16 @@
 # Bitácora — lety2E
 
 > Registro de lo que vamos haciendo en el sitio. Lo más reciente arriba.
-> (Las cosas pendientes por revisar van en `Notas por revisar.md`, no aquí.)
+> (Los pendientes van en `Pendientes lety2E.md`, no aquí.)
 
 ---
+
+## 2026-07-07
+- **Arrancó la migración de Matemáticas 5** (fuente: transcripción de Lety en `~/Downloads/Latex matematicas 5.md`, revisada completa — 19 temas sanos, sin duplicados).
+- **Publicado el tema 1: Reglas básicas de derivación** (`math/matematicas-5/reglas-basicas.html`) con 2 videos (reglas básicas + con x en el denominador — fusiona los dos temas del sitio viejo, decisión de Lety), apuntes, 4 ejemplos, 4 bloques de ejercicios con respuestas paso a paso y extras.
+- Index de Mat 5 estrenado (adiós `próximamente`; descripción corregida: era "álgebra lineal", es Cálculo) y card del curso activada en el índice de Math.
+- Orden del curso y decisiones registradas en `Pendientes lety2E.md` (incl. Historia del Cálculo → para pensar: cierre con IA / trabajos de historia de las matemáticas).
+- Arreglado `.claude/serve.py` (apuntaba a la carpeta vieja `lety2E 2`).
 
 ## 2026-07-02
 - **Simulador UNAM publicado:** ya tiene su card en el índice de Apuntes (antes solo se llegaba por URL directa).
