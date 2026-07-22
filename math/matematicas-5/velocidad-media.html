@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Velocidad media e instantánea — Matemáticas 5 — LetyMath</title>
+  <meta name="description" content="Velocidad media e instantánea: posición de una partícula, velocidad media en un intervalo y velocidad instantánea con la derivada. Ejercicios resueltos." />
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../../favicon.ico">
+  <link rel="stylesheet" href="../../style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" />
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body, {
+      delimiters: [
+        {left:'$$', right:'$$', display:true},
+        {left:'$', right:'$', display:false}
+      ]
+    });"></script>
+
+  <style>
+    .topic-tag {
+      display: inline-flex; align-items: center; gap: .35rem;
+      padding: .22rem .75rem; border-radius: 99px;
+      background: var(--accent-light); color: var(--accent);
+      font-size: .78rem; font-weight: 700; letter-spacing: .03em;
+      margin-bottom: .55rem;
+    }
+    .topic-tag::before {
+      content: ''; width: 7px; height: 7px; border-radius: 50%;
+      background: var(--accent); display: inline-block;
+    }
+
+    .section-block { margin-bottom: 2.5rem; }
+    .section-block:last-child { margin-bottom: 0; }
+
+    .sec-head {
+      display: flex; align-items: center; gap: .65rem;
+      margin-bottom: 1.1rem;
+    }
+    .sec-head h2 { margin: 0; font-size: 1.2rem; line-height: 1; }
+    .sec-icon {
+      width: 30px; height: 30px; border-radius: 8px;
+      display: grid; place-items: center; flex-shrink: 0;
+      background: var(--accent);
+    }
+    .sec-icon svg { width: 15px; height: 15px; stroke: #fff; fill: none; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+
+    .sec-toggle {
+      display: flex; align-items: center; gap: .65rem;
+      cursor: pointer; user-select: none;
+      padding: .8rem 0; margin: 0 0 .4rem;
+    }
+    .sec-toggle h2 { margin: 0; font-size: 1.2rem; line-height: 1; }
+    .sec-toggle .chev {
+      margin-left: auto; font-size: .75rem; color: var(--text-3);
+      transition: transform .25s;
+    }
+    .sec-toggle.open .chev { transform: rotate(180deg); }
+
+    .collapsible {
+      max-height: 0; overflow: hidden;
+      transition: max-height .4s ease, padding .3s ease;
+      padding: 0;
+    }
+    .collapsible.show { max-height: 12000px; padding: .8rem 0; }
+
+    /* Apuntes */
+    .reglas-grid { display: grid; grid-template-columns: 1fr 1fr; gap: .85rem; margin: 1rem 0; }
+    @media (max-width: 480px) { .reglas-grid { grid-template-columns: 1fr; } }
+    .regla-card {
+      background: var(--bg-card); border: 1.5px solid var(--border);
+      border-radius: var(--r-sm); padding: .85rem;
+    }
+    .regla-card-title { font-weight: 700; font-size: .85rem; margin-bottom: .4rem; color: var(--course-1); }
+    .regla-card-body { font-size: .82rem; color: var(--text-2); line-height: 1.65; }
+
+    /* Ejemplo */
+    .ejemplo-section { margin: 2rem 0 2.5rem; }
+    .ejemplo-head {
+      display: flex; align-items: center; gap: .65rem;
+      margin-bottom: 1rem;
+    }
+    .ejemplo-head h3 {
+      margin: 0; font-family: var(--font-display);
+      font-size: 1.2rem; line-height: 1;
+      color: var(--M); font-style: italic;
+    }
+    .ejemplo-block {
+      padding: 2rem 1.5rem;
+      background: var(--bg-card);
+      border: 1.5px solid var(--border);
+      border-radius: var(--r-md);
+      color: var(--text);
+    }
+    .ejemplo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem 2rem; }
+    @media (max-width: 700px) { .ejemplo-grid { grid-template-columns: 1fr; } }
+    .ejemplo-item { text-align: center; font-size: 1.02rem; }
+    .ejemplo-block strong { color: var(--M); font-weight: 700; }
+    .ejemplo-enunciado {
+      text-align: center; font-size: 1.02rem;
+      margin-bottom: 1.2rem; line-height: 1.8;
+    }
+    .inciso {
+      font-weight: 700; font-size: .8rem; color: var(--course-1);
+      display: block; margin-bottom: .1rem;
+    }
+
+    /* Mini card (bloque) */
+    .mini-card {
+      background: var(--bg-card); border: 1.5px solid var(--border);
+      border-radius: var(--r-md); overflow: hidden;
+    }
+    .mini-card-head {
+      padding: .4rem .8rem; background: var(--course-1);
+      font-family: var(--font-display); font-size: .85rem; color: #fff; font-weight: 700;
+    }
+    .mini-card-body {
+      padding: .8rem 1rem;
+      font-size: .9rem; line-height: 1.6; color: var(--text);
+    }
+    .mini-card-body .ej-line {
+      padding: .6rem 0;
+      border-bottom: 1px solid var(--border-s);
+      line-height: 2.2;
+    }
+    .mini-card-body .ej-line:last-child { border-bottom: none; padding-bottom: .25rem; }
+    .mini-card-body .ej-line:first-child { padding-top: .25rem; }
+    /* Enunciados con texto: sí pueden partir renglón (anula el nowrap global) */
+    .mini-card-body .ej-line.texto { white-space: normal; line-height: 1.9; }
+    .mini-card-body .sol {
+      padding: .4rem 0 .6rem;
+      border-bottom: 1px solid var(--border-s);
+    }
+    .mini-card-body .sol:last-child { border-bottom: none; padding-bottom: .1rem; }
+
+    /* Grid de bloques */
+    .bloques-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2rem; }
+    @media (max-width: 700px) { .bloques-2 { grid-template-columns: 1fr; } }
+
+    /* Navegación */
+    .topic-nav-btns {
+      display: flex; justify-content: space-between; gap: 1rem;
+      margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border);
+    }
+    .btn-anterior, .btn-siguiente {
+      display: inline-flex; align-items: center; gap: .5rem;
+      padding: .65rem 1.4rem; border-radius: 99px;
+      font-weight: 700; font-size: .9rem; transition: background .2s, transform .18s;
+    }
+    .btn-anterior {
+      background: transparent; color: var(--accent);
+      border: 2px solid var(--accent);
+    }
+    .btn-anterior:hover { background: var(--accent-light); transform: translateX(-3px); }
+    .btn-siguiente { background: var(--accent); color: #fff; }
+    .btn-siguiente:hover { background: var(--M); color: #fff; transform: translateX(3px); }
+  </style>
+</head>
+<body data-section="math">
+  <main class="topic-content">
+
+    <header class="topic-header">
+      <p class="breadcrumb">
+        <a href="../index.html">Inicio</a> ›
+        <a href="index.html">Matemáticas 5</a> ›
+        Velocidad media e instantánea
+      </p>
+      <div class="topic-tag">Matemáticas 5 · Tema 2</div>
+      <h1>Velocidad media e instantánea</h1>
+    </header>
+
+    <!-- ══════════ APUNTES ══════════ -->
+    <section class="section-block">
+      <div class="sec-head">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+        </div>
+        <h2>Apuntes</h2>
+      </div>
+      <div class="apunte-box">
+        <div class="reglas-grid">
+          <div class="regla-card">
+            <div class="regla-card-title">Velocidad media</div>
+            <div class="regla-card-body">
+              Representa el cambio de posición en un intervalo de tiempo determinado:
+              $$v_m = \frac{\Delta x}{\Delta t} = \frac{x(t_2) - x(t_1)}{t_2 - t_1}$$
+            </div>
+          </div>
+          <div class="regla-card">
+            <div class="regla-card-title">Velocidad instantánea</div>
+            <div class="regla-card-body">
+              Es el valor de la velocidad en un punto exacto del tiempo: la derivada de la función de posición:
+              $$v(t) = x'(t) = \lim_{\Delta t \to 0} \frac{x(t + \Delta t) - x(t)}{\Delta t}$$
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ EJEMPLO ══════════ -->
+    <section class="section-block ejemplo-section">
+      <div class="ejemplo-head">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        </div>
+        <h3>Ejemplo</h3>
+      </div>
+      <div class="ejemplo-block">
+        <p class="ejemplo-enunciado">Una partícula se mueve según la ecuación $x(t) = 16t - t^2$.</p>
+        <div class="ejemplo-grid">
+          <div class="ejemplo-item">
+            <span class="inciso">a) Posición en $t=0$ y $t=2$</span>
+            $$\begin{aligned}
+              x(0) &= 16(0) - (0)^2 = \mathbf{0} \\
+              x(2) &= 16(2) - (2)^2 = 32 - 4 = \mathbf{28}
+            \end{aligned}$$
+          </div>
+          <div class="ejemplo-item">
+            <span class="inciso">b) Velocidad media en $(0, 2)$</span>
+            $$\begin{aligned}
+              v_m &= \frac{x(2) - x(0)}{2 - 0} \\
+              v_m &= \frac{28 - 0}{2} = \mathbf{14}
+            \end{aligned}$$
+          </div>
+          <div class="ejemplo-item">
+            <span class="inciso">c) Velocidad instantánea en $t=1.2$</span>
+            $$\begin{aligned}
+              x'(t) &= 16 - 2t \\
+              x'(1.2) &= 16 - 2(1.2) \\
+              x'(1.2) &= 16 - 2.4 = \mathbf{13.6}
+            \end{aligned}$$
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ EJERCICIOS (siempre visibles) ══════════ -->
+    <section class="section-block">
+      <div class="sec-head">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+        </div>
+        <h2>Ejercicios</h2>
+      </div>
+      <div class="bloques-2">
+        <div class="mini-card">
+          <div class="mini-card-head">Ejercicio 1</div>
+          <div class="mini-card-body">
+            <div class="ej-line texto">Una partícula se mueve a lo largo de una recta según la ecuación $x(t) = t^2 - 5t$</div>
+            <div class="ej-line texto">a) ¿cuál es la posición del móvil cuando $t=1$, $t=3$?</div>
+            <div class="ej-line texto">b) ¿cuál es la velocidad media en el intervalo $(1, 3)$?</div>
+            <div class="ej-line texto">c) ¿cuál es la velocidad instantánea en $t=1.8$?</div>
+          </div>
+        </div>
+        <div class="mini-card">
+          <div class="mini-card-head">Ejercicio 2</div>
+          <div class="mini-card-body">
+            <div class="ej-line texto">Una partícula se mueve a lo largo de una recta según la ecuación $x(t) = t^2 + 4t$</div>
+            <div class="ej-line texto">a) ¿cuál es la posición del móvil cuando $t=2$, $t=4$?</div>
+            <div class="ej-line texto">b) ¿cuál es la velocidad media en el intervalo $(2, 4)$?</div>
+            <div class="ej-line texto">c) ¿cuál es la velocidad instantánea en $t=2.5$?</div>
+          </div>
+        </div>
+        <div class="mini-card">
+          <div class="mini-card-head">Ejercicio 3</div>
+          <div class="mini-card-body">
+            <div class="ej-line texto">Una partícula se mueve a lo largo de una recta según la ecuación $x(t) = 3 - 2t^2$</div>
+            <div class="ej-line texto">a) ¿cuál es la posición del móvil cuando $t=1$, $t=5$?</div>
+            <div class="ej-line texto">b) ¿cuál es la velocidad media en el intervalo $(1, 5)$?</div>
+            <div class="ej-line texto">c) ¿cuál es la velocidad instantánea en $t=3$?</div>
+          </div>
+        </div>
+        <div class="mini-card">
+          <div class="mini-card-head">Ejercicio 4</div>
+          <div class="mini-card-body">
+            <div class="ej-line texto">Una partícula se mueve a lo largo de una recta según la ecuación $x(t) = 5t - t^2$</div>
+            <div class="ej-line texto">a) ¿cuál es la posición del móvil cuando $t=2$, $t=6$?</div>
+            <div class="ej-line texto">b) ¿cuál es la velocidad media en el intervalo $(2, 6)$?</div>
+            <div class="ej-line texto">c) ¿cuál es la velocidad instantánea en $t=3$?</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ RESPUESTAS (colapsable) ══════════ -->
+    <section class="section-block">
+      <div class="sec-toggle" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('show');">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <h2>Respuestas</h2>
+        <span class="chev">▼</span>
+      </div>
+      <div class="collapsible">
+        <div class="bloques-2">
+          <div class="mini-card">
+            <div class="mini-card-head">Ejercicio 1</div>
+            <div class="mini-card-body">
+              <div class="sol">
+                <span class="inciso">a)</span>
+                $$\begin{aligned}
+                  x(1) &= (1)^2 - 5(1) = 1 - 5 = \mathbf{-4} \\
+                  x(3) &= (3)^2 - 5(3) = 9 - 15 = \mathbf{-6}
+                \end{aligned}$$
+              </div>
+              <div class="sol">
+                <span class="inciso">b)</span>
+                $$\begin{aligned}
+                  v_m &= \frac{x(3) - x(1)}{3 - 1} \\
+                  v_m &= \frac{-6 - (-4)}{2} \\
+                  v_m &= \frac{-2}{2} = \mathbf{-1}
+                \end{aligned}$$
+              </div>
+              <div class="sol">
+                <span class="inciso">c)</span>
+                $$\begin{aligned}
+                  x'(t) &= 2t - 5 \\
+                  x'(1.8) &= 2(1.8) - 5 \\
+                  x'(1.8) &= 3.6 - 5 = \mathbf{-1.4}
+                \end{aligned}$$
+              </div>
+            </div>
+          </div>
+          <div class="mini-card">
+            <div class="mini-card-head">Ejercicio 2</div>
+            <div class="mini-card-body">
+              <div class="sol">
+                <span class="inciso">a)</span>
+                $$\begin{aligned}
+                  x(2) &= (2)^2 + 4(2) = 4 + 8 = \mathbf{12} \\
+                  x(4) &= (4)^2 + 4(4) = 16 + 16 = \mathbf{32}
+                \end{aligned}$$
+              </div>
+              <div class="sol">
+                <span class="inciso">b)</span>
+                $$\begin{aligned}
+                  v_m &= \frac{x(4) - x(2)}{4 - 2} \\
+                  v_m &= \frac{32 - 12}{2} \\
+                  v_m &= \frac{20}{2} = \mathbf{10}
+                \end{aligned}$$
+              </div>
+              <div class="sol">
+                <span class="inciso">c)</span>
+                $$\begin{aligned}
+                  x'(t) &= 2t + 4 \\
+                  x'(2.5) &= 2(2.5) + 4 \\
+                  x'(2.5) &= 5 + 4 = \mathbf{9}
+                \end{aligned}$$
+              </div>
+            </div>
+          </div>
+          <div class="mini-card">
+            <div class="mini-card-head">Ejercicio 3</div>
+            <div class="mini-card-body">
+              <div class="sol">
+                <span class="inciso">a)</span>
+                $$\begin{aligned}
+                  x(1) &= 3 - 2(1)^2 = 3 - 2 = \mathbf{1} \\
+                  x(5) &= 3 - 2(5)^2 = 3 - 50 = \mathbf{-47}
+                \end{aligned}$$
+              </div>
+              <div class="sol">
+                <span class="inciso">b)</span>
+                $$\begin{aligned}
+                  v_m &= \frac{x(5) - x(1)}{5 - 1} \\
+                  v_m &= \frac{-47 - 1}{4} \\
+                  v_m &= \frac{-48}{4} = \mathbf{-12}
+                \end{aligned}$$
+              </div>
+              <div class="sol">
+                <span class="inciso">c)</span>
+                $$\begin{aligned}
+                  x'(t) &= -4t \\
+                  x'(3) &= -4(3) = \mathbf{-12}
+                \end{aligned}$$
+              </div>
+            </div>
+          </div>
+          <div class="mini-card">
+            <div class="mini-card-head">Ejercicio 4</div>
+            <div class="mini-card-body">
+              <div class="sol">
+                <span class="inciso">a)</span>
+                $$\begin{aligned}
+                  x(2) &= 5(2) - (2)^2 = 10 - 4 = \mathbf{6} \\
+                  x(6) &= 5(6) - (6)^2 = 30 - 36 = \mathbf{-6}
+                \end{aligned}$$
+              </div>
+              <div class="sol">
+                <span class="inciso">b)</span>
+                $$\begin{aligned}
+                  v_m &= \frac{x(6) - x(2)}{6 - 2} \\
+                  v_m &= \frac{-6 - 6}{4} \\
+                  v_m &= \frac{-12}{4} = \mathbf{-3}
+                \end{aligned}$$
+              </div>
+              <div class="sol">
+                <span class="inciso">c)</span>
+                $$\begin{aligned}
+                  x'(t) &= 5 - 2t \\
+                  x'(3) &= 5 - 2(3) \\
+                  x'(3) &= 5 - 6 = \mathbf{-1}
+                \end{aligned}$$
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ EJERCICIOS EXTRA (colapsable) ══════════ -->
+    <section class="section-block">
+      <div class="sec-toggle" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('show');">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+        </div>
+        <h2>Ejercicios extra</h2>
+        <span class="chev">▼</span>
+      </div>
+      <div class="collapsible">
+        <div class="bloques-2">
+          <div class="mini-card">
+            <div class="mini-card-head">Bloque 1</div>
+            <div class="mini-card-body">
+              <div class="ej-line texto"><div>Una partícula se mueve según $x(t) = 2t^2 - 8t$</div><div>a) ¿cuál es la posición del móvil cuando $t=0$, $t=4$?</div><div>b) ¿cuál es la velocidad media en el intervalo $(0, 4)$?</div><div>c) ¿cuál es la velocidad instantánea en $t=2$?</div></div>
+              <div class="ej-line texto"><div>Una partícula se mueve según $x(t) = 10 + 4t - t^2$</div><div>a) ¿cuál es la posición del móvil cuando $t=1$, $t=5$?</div><div>b) ¿cuál es la velocidad media en el intervalo $(1, 5)$?</div><div>c) ¿cuál es la velocidad instantánea en $t=2.5$?</div></div>
+              <div class="ej-line texto"><div>Una partícula se mueve según $x(t) = 6 - 3t^2$</div><div>a) ¿cuál es la posición del móvil cuando $t=2$, $t=4$?</div><div>b) ¿cuál es la velocidad media en el intervalo $(2, 4)$?</div><div>c) ¿cuál es la velocidad instantánea en $t=3$?</div></div>
+              <div class="ej-line texto"><div>Una partícula se mueve según $x(t) = t^2 - 10t$</div><div>a) ¿cuál es la posición del móvil cuando $t=3$, $t=7$?</div><div>b) ¿cuál es la velocidad media en el intervalo $(3, 7)$?</div><div>c) ¿cuál es la velocidad instantánea en $t=5$?</div></div>
+            </div>
+          </div>
+          <div class="mini-card">
+            <div class="mini-card-head">Bloque 2</div>
+            <div class="mini-card-body">
+              <div class="ej-line texto"><div>Una partícula se mueve según $x(t) = 20t - 5t^2$</div><div>a) ¿cuál es la posición del móvil cuando $t=0$, $t=2$?</div><div>b) ¿cuál es la velocidad media en el intervalo $(0, 2)$?</div><div>c) ¿cuál es la velocidad instantánea en $t=1$?</div></div>
+              <div class="ej-line texto"><div>Una partícula se mueve según $x(t) = 15 + t - t^2$</div><div>a) ¿cuál es la posición del móvil cuando $t=1$, $t=3$?</div><div>b) ¿cuál es la velocidad media en el intervalo $(1, 3)$?</div><div>c) ¿cuál es la velocidad instantánea en $t=2$?</div></div>
+              <div class="ej-line texto"><div>Una partícula se mueve según $x(t) = 3t^2 - 12t$</div><div>a) ¿cuál es la posición del móvil cuando $t=1$, $t=4$?</div><div>b) ¿cuál es la velocidad media en el intervalo $(1, 4)$?</div><div>c) ¿cuál es la velocidad instantánea en $t=2.5$?</div></div>
+              <div class="ej-line texto"><div>Una partícula se mueve según $x(t) = 5 - t^2$</div><div>a) ¿cuál es la posición del móvil cuando $t=1$, $t=3$?</div><div>b) ¿cuál es la velocidad media en el intervalo $(1, 3)$?</div><div>c) ¿cuál es la velocidad instantánea en $t=2$?</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ NAVEGACIÓN ══════════ -->
+    <div class="topic-nav-btns">
+      <a href="reglas-basicas.html" class="btn-anterior">← Reglas básicas de derivación</a>
+    </div>
+
+  </main>
+  <script src="../../nav.js"></script>
+  <script src="../../footer.js"></script>
+</body>
+</html>

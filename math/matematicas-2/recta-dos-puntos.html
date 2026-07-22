@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ecuación de la recta dados dos puntos — Matemáticas 2 — lety2e</title>
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../../favicon.ico">
+  <meta name="description" content="Obtención de la ecuación general de una recta que pasa por dos puntos dados y su comprobación matemática — Matemáticas 2." />
+  <link rel="stylesheet" href="../../style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" />
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body, {
+      delimiters: [
+        {left:'$$', right:'$$', display:true},
+        {left:'$', right:'$', display:false}
+      ]
+    });" id="katex-script"></script>
+  <script defer src="../../math-fit.js?v=3"></script>
+
+  <style>
+    .topic-tag {
+      display: inline-flex; align-items: center; gap: .35rem;
+      padding: .22rem .75rem; border-radius: 99px;
+      background: var(--accent-light); color: var(--accent);
+      font-size: .78rem; font-weight: 700; letter-spacing: .03em;
+      margin-bottom: .55rem;
+    }
+    .topic-tag::before {
+      content: ''; width: 7px; height: 7px; border-radius: 50%;
+      background: var(--accent); display: inline-block;
+    }
+
+    .section-block { margin-bottom: 2.5rem; }
+    .section-block:last-child { margin-bottom: 0; }
+
+    .sec-head {
+      display: flex; align-items: center; gap: .65rem;
+      margin-bottom: 1.1rem;
+    }
+    .sec-head h2 { margin: 0; font-size: 1.2rem; line-height: 1; }
+    .sec-icon {
+      width: 30px; height: 30px; border-radius: 8px;
+      display: grid; place-items: center; flex-shrink: 0;
+      background: var(--accent);
+    }
+    .sec-icon svg { width: 15px; height: 15px; stroke: #fff; fill: none; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+
+    .sec-toggle {
+      display: flex; align-items: center; gap: .65rem;
+      cursor: pointer; user-select: none;
+      padding: .8rem 0; margin: 0 0 .4rem;
+    }
+    .sec-toggle h2 { margin: 0; font-size: 1.2rem; line-height: 1; }
+    .sec-toggle .chev {
+      margin-left: auto; font-size: .75rem; color: var(--text-3);
+      transition: transform .25s;
+    }
+    .sec-toggle.open .chev { transform: rotate(180deg); }
+
+    .collapsible {
+      max-height: 0; overflow: hidden;
+      transition: max-height .5s ease, padding .3s ease;
+    }
+    .collapsible.show { max-height: 40000px; padding: .8rem 0; }
+
+    /* ── Tabulación / Procedimiento / Gráfica ── */
+    .tabulacion-block {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 1.5rem;
+      background: var(--bg-card);
+      border: 1.5px solid var(--border);
+      border-radius: var(--r-md);
+      padding: 1.2rem 1.4rem;
+      align-items: start;
+    }
+    @media (max-width: 700px) {
+      .tabulacion-block { grid-template-columns: 1fr; gap: 1.2rem; }
+    }
+
+    .tabulacion-info { display: flex; flex-direction: column; gap: 0.8rem; }
+    .tabulacion-eq { font-size: 1.1rem; color: var(--T); margin: 0; }
+    .tabulacion-despeje { font-size: 0.9rem; color: var(--text-2); font-weight: 700; margin: 0; text-transform: uppercase; letter-spacing: 0.05em; }
+    
+    .comprobaciones-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 0.4rem;
+    }
+    .comprobacion-col {
+      background: var(--bg);
+      border: 1px solid var(--border-s);
+      border-radius: var(--r-md);
+      padding: 0.8rem 1rem;
+      font-size: 0.9rem;
+    }
+    .comprobacion-title { font-weight: 700; color: var(--accent); margin-bottom: 0.4rem; font-size: 0.85rem; }
+
+    .procedimiento-list {
+      font-size: 0.85rem;
+      color: var(--text);
+      line-height: 1.8;
+      border-left: 3px solid var(--border);
+      padding-left: 0.8rem;
+    }
+    .procedimiento-list strong { color: var(--M); font-weight: 700; }
+
+    .tabulacion-grafica {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .grafica-svg {
+      width: 100%;
+      max-width: 210px;
+      height: auto;
+      display: block;
+    }
+
+    /* ── Grids y Cards de Ejercicios ── */
+    .bloques-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2rem; }
+    @media (max-width: 700px) { .bloques-2 { grid-template-columns: 1fr; } }
+
+    .mini-card {
+      background: var(--bg-card);
+      border: 1.5px solid var(--border);
+      border-radius: var(--r-md);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .mini-card-head {
+      padding: .5rem .8rem; background: var(--course-1);
+      font-family: var(--font-display); font-size: .85rem; color: #fff; font-weight: 700;
+    }
+    .mini-card-body {
+      padding: .8rem 1.2rem;
+      font-size: .95rem; color: var(--text);
+    }
+    .mini-card-body .sol {
+      margin: 0;
+      padding: .6rem 0;
+      border-bottom: 1px solid var(--border-s);
+      line-height: 2.2; /* radical/fraction-safe */
+      text-align: center;
+    }
+    .mini-card-body .sol:last-child {
+      border-bottom: none;
+      padding-bottom: .25rem;
+    }
+    .mini-card-body .sol:first-child {
+      padding-top: .25rem;
+    }
+    .mini-card-body strong { color: var(--M); font-weight: 700; }
+
+    .resolucion-card {
+      margin-bottom: 1.5rem;
+    }
+    .resolucion-card:last-child {
+      margin-bottom: 0;
+    }
+
+    /* ── Nav ── */
+    .topic-nav-btns {
+      display: flex; justify-content: space-between; gap: 1rem;
+      margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border);
+    }
+    .btn-anterior, .btn-siguiente {
+      display: inline-flex; align-items: center; gap: .5rem;
+      padding: .65rem 1.4rem; border-radius: 99px;
+      font-weight: 700; font-size: .9rem;
+      transition: background .2s, transform .18s;
+      text-decoration: none;
+    }
+    .btn-anterior {
+      background: transparent; color: var(--accent);
+      border: 2px solid var(--accent);
+    }
+    .btn-anterior:hover { background: var(--accent-light); transform: translateX(-3px); }
+    .btn-siguiente { background: var(--accent); color: #fff; }
+    .btn-siguiente:hover { background: var(--M); color: #fff; transform: translateX(3px); }
+  </style>
+</head>
+<body data-section="math">
+
+  <script src="../../nav.js"></script>
+
+  <main class="topic-content">
+
+    <header class="topic-header">
+      <p class="breadcrumb">
+        <a href="../index.html">Inicio</a> ›
+        <a href="index.html">Matemáticas 2</a> ›
+        Ecuación de la recta dados dos puntos
+      </p>
+      <div class="topic-tag">Matemáticas 2 · Tema 7</div>
+      <h1>Ecuación de la recta dados dos puntos</h1>
+    </header>
+
+    <!-- ══════════ MINI APUNTE ══════════ -->
+    <section class="section-block">
+      <div class="sec-head">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        </div>
+        <h2>Mini apunte</h2>
+      </div>
+      <div class="mini-card">
+        <div class="mini-card-body left" style="line-height:1.6;">
+          Para encontrar la ecuación de una recta que pasa por dos puntos dados, $A(x_1, y_1)$ y $B(x_2, y_2)$, igualamos la expresión de la pendiente $m$ evaluada en un punto genérico $(x, y)$ con la pendiente entre los dos puntos originales:
+          $$\dfrac{x - x_1}{x_2 - x_1} = \dfrac{y - y_1}{y_2 - y_1}$$
+          Al multiplicar cruzado y agrupar los términos, obtenemos la **ecuación general de la recta** de la forma:
+          $$Ax + By + C = 0$$
+          Para estar seguros del resultado, realizamos la **comprobación** sustituyendo las coordenadas de los puntos $A$ y $B$ en la ecuación general obtenida. Ambos deben cumplir la igualdad a $0$.
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ EJEMPLO ══════════ -->
+    <section class="section-block ejemplo-section">
+      <div class="sec-head">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+        </div>
+        <h2>Ejemplo</h2>
+      </div>
+
+      <div class="tabulacion-block">
+        <div class="tabulacion-info">
+          <p class="tabulacion-eq"><strong>Puntos:</strong> $A(-3, 2), \quad B(1, 4)$</p>
+          
+          <p class="tabulacion-despeje">Sustitución y desarrollo:</p>
+          <div class="procedimiento-list" style="border-left: 3px solid var(--accent); padding-left: 0.8rem; font-size: 0.9rem;">
+            $$\begin{aligned}
+            \dfrac{x - (-3)}{1 - (-3)} &= \dfrac{y - 2}{4 - 2} \\[8pt]
+            \dfrac{x + 3}{4} &= \dfrac{y - 2}{2} \\[8pt]
+            2(x + 3) &= 4(y - 2) \\[6pt]
+            2x + 6 &= 4y - 8 \\[6pt]
+            2x - 4y + 6 + 8 &= 0 \\[6pt]
+            \mathbf{2x - 4y + 14 = 0}
+            \end{aligned}$$
+          </div>
+          
+          <p class="tabulacion-despeje" style="margin-top: 0.4rem;">Comprobación:</p>
+          <div class="comprobaciones-row">
+            <div class="comprobacion-col">
+              <div class="comprobacion-title">Punto A(−3, 2)</div>
+              $$\begin{aligned}
+              2(-3) - 4(2) + 14 &= 0 \\
+              -6 - 8 + 14 &= 0 \\
+              -14 + 14 &= 0 \\
+              \mathbf{0} &\mathbf{= 0}
+              \end{aligned}$$
+            </div>
+            <div class="comprobacion-col">
+              <div class="comprobacion-title">Punto B(1, 4)</div>
+              $$\begin{aligned}
+              2(1) - 4(4) + 14 &= 0 \\
+              2 - 16 + 14 &= 0 \\
+              16 - 16 &= 0 \\
+              \mathbf{0} &\mathbf{= 0}
+              \end{aligned}$$
+            </div>
+          </div>
+        </div>
+        <div class="tabulacion-grafica">
+          <svg viewBox="0 0 176 154" xmlns="http://www.w3.org/2000/svg" class="grafica-svg" role="img" aria-label="Recta que pasa por A(-3,2) y B(1,4)">
+  <g stroke="#E0C4BC" stroke-width="0.5" opacity="0.6">
+    <line x1="0.0" y1="0" x2="0.0" y2="154.0"/>
+    <line x1="22.0" y1="0" x2="22.0" y2="154.0"/>
+    <line x1="44.0" y1="0" x2="44.0" y2="154.0"/>
+    <line x1="66.0" y1="0" x2="66.0" y2="154.0"/>
+    <line x1="88.0" y1="0" x2="88.0" y2="154.0"/>
+    <line x1="110.0" y1="0" x2="110.0" y2="154.0"/>
+    <line x1="132.0" y1="0" x2="132.0" y2="154.0"/>
+    <line x1="154.0" y1="0" x2="154.0" y2="154.0"/>
+    <line x1="176.0" y1="0" x2="176.0" y2="154.0"/>
+    <line x1="0" y1="154.0" x2="176.0" y2="154.0"/>
+    <line x1="0" y1="132.0" x2="176.0" y2="132.0"/>
+    <line x1="0" y1="110.0" x2="176.0" y2="110.0"/>
+    <line x1="0" y1="88.0" x2="176.0" y2="88.0"/>
+    <line x1="0" y1="66.0" x2="176.0" y2="66.0"/>
+    <line x1="0" y1="44.0" x2="176.0" y2="44.0"/>
+    <line x1="0" y1="22.0" x2="176.0" y2="22.0"/>
+    <line x1="0" y1="0.0" x2="176.0" y2="0.0"/>
+  </g>
+  <line x1="0" y1="132.0" x2="176.0" y2="132.0" stroke="#7B5A50" stroke-width="1.2"/>
+  <line x1="110.0" y1="0" x2="110.0" y2="154.0" stroke="#7B5A50" stroke-width="1.2"/>
+  <line x1="22.0" y1="130.0" x2="22.0" y2="134.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="22.0" y="141.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">-4</text>
+  <line x1="44.0" y1="130.0" x2="44.0" y2="134.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="44.0" y="141.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">-3</text>
+  <line x1="66.0" y1="130.0" x2="66.0" y2="134.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="66.0" y="141.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">-2</text>
+  <line x1="88.0" y1="130.0" x2="88.0" y2="134.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="88.0" y="141.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">-1</text>
+  <line x1="132.0" y1="130.0" x2="132.0" y2="134.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="132.0" y="141.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">1</text>
+  <line x1="154.0" y1="130.0" x2="154.0" y2="134.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="154.0" y="141.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">2</text>
+  <line x1="108.0" y1="110.0" x2="112.0" y2="110.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="105.0" y="113.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">1</text>
+  <line x1="108.0" y1="88.0" x2="112.0" y2="88.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="105.0" y="91.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">2</text>
+  <line x1="108.0" y1="66.0" x2="112.0" y2="66.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="105.0" y="69.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">3</text>
+  <line x1="108.0" y1="44.0" x2="112.0" y2="44.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="105.0" y="47.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">4</text>
+  <line x1="108.0" y1="22.0" x2="112.0" y2="22.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="105.0" y="25.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">5</text>
+  <text x="168" y="128.0" font-family="DM Sans, sans-serif" font-size="9" fill="#7B5A50" font-style="italic">x</text>
+  <text x="115.0" y="10" font-family="DM Sans, sans-serif" font-size="9" fill="#7B5A50" font-style="italic">y</text>
+  <line x1="0.0" y1="110.0" x2="176.0" y2="22.0" stroke="#FF00AA" stroke-width="2.2" stroke-linecap="round"/>
+  <circle cx="44.0" cy="88.0" r="3.5" fill="#1A0828"/>
+  <text x="49.0" y="83.0" font-family="DM Sans, sans-serif" font-weight="bold" font-size="9" fill="#1A0828">A</text>
+  <circle cx="132.0" cy="44.0" r="3.5" fill="#1A0828"/>
+  <text x="137.0" y="39.0" font-family="DM Sans, sans-serif" font-weight="bold" font-size="9" fill="#1A0828">B</text>
+</svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ EJERCICIOS ══════════ -->
+    <section class="section-block">
+      <div class="sec-head">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+        </div>
+        <h2>Ejercicios</h2>
+      </div>
+      <div class="bloques-2">
+
+        <!-- B1 -->
+        <div class="mini-card" style="grid-column: 1 / -1;">
+          <div class="mini-card-head">Bloque 1</div>
+          <div class="mini-card-body">
+            <div class="sol">$A(-4, 7), \quad B(2, 3)$</div>
+            <div class="sol">$A(3, -2), \quad B(-2, -3)$</div>
+            <div class="sol">$A(-3, 2), \quad B(4, -1)$</div>
+            <div class="sol">$A(4, -5), \quad B(-3, 4)$</div>
+            <div class="sol">$A(-2, 6), \quad B(5, 2)$</div>
+            <div class="sol">$A(1, -4), \quad B(-2, 3)$</div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══════════ RESPUESTAS ══════════ -->
+    <section class="section-block">
+      <div class="sec-toggle" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('show');">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <h2>Resoluciones</h2>
+        <span class="chev">▼</span>
+      </div>
+      <div class="collapsible">
+        <div class="bloques-2">
+
+          <!-- E1 -->
+          <div class="tabulacion-block resolucion-card" style="grid-column: 1 / -1;">
+            <div class="tabulacion-info">
+              <p class="tabulacion-eq">Recta que pasa por $A(-4, 7)$ y $B(2, 3)$</p>
+              <p class="tabulacion-despeje">Desarrollo:</p>
+              <div class="procedimiento-list">
+                $$\begin{aligned}
+                \dfrac{x - (-4)}{2 - (-4)} &= \dfrac{y - 7}{3 - 7} \\[6pt]
+                \dfrac{x + 4}{6} &= \dfrac{y - 7}{-4} \\[6pt]
+                -4(x + 4) &= 6(y - 7) \\[6pt]
+                -4x - 16 &= 6y - 42 \\[6pt]
+                -4x - 6y + 26 &= 0 \\[6pt]
+                \mathbf{-2x - 3y + 13 = 0}
+                \end{aligned}$$
+              </div>
+              <p class="tabulacion-despeje">Comprobación:</p>
+              <div class="comprobaciones-row">
+                <div class="comprobacion-col">
+                  <div class="comprobacion-title">Punto A(−4, 7)</div>
+                  $$\begin{aligned}
+                  -2(-4) - 3(7) + 13 &= 0 \\
+                  8 - 21 + 13 &= 0 \\
+                  \mathbf{0} &\mathbf{= 0}
+                  \end{aligned}$$
+                </div>
+                <div class="comprobacion-col">
+                  <div class="comprobacion-title">Punto B(2, 3)</div>
+                  $$\begin{aligned}
+                  -2(2) - 3(3) + 13 &= 0 \\
+                  -4 - 9 + 13 &= 0 \\
+                  \mathbf{0} &\mathbf{= 0}
+                  \end{aligned}$$
+                </div>
+              </div>
+            </div>
+            <div class="tabulacion-grafica">
+              <svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg" class="grafica-svg" role="img" aria-label="Recta que pasa por A(-4,7) y B(2,3)">
+  <g stroke="#E0C4BC" stroke-width="0.5" opacity="0.6">
+    <line x1="0.0" y1="0" x2="0.0" y2="220.0"/>
+    <line x1="22.0" y1="0" x2="22.0" y2="220.0"/>
+    <line x1="44.0" y1="0" x2="44.0" y2="220.0"/>
+    <line x1="66.0" y1="0" x2="66.0" y2="220.0"/>
+    <line x1="88.0" y1="0" x2="88.0" y2="220.0"/>
+    <line x1="110.0" y1="0" x2="110.0" y2="220.0"/>
+    <line x1="132.0" y1="0" x2="132.0" y2="220.0"/>
+    <line x1="154.0" y1="0" x2="154.0" y2="220.0"/>
+    <line x1="176.0" y1="0" x2="176.0" y2="220.0"/>
+    <line x1="198.0" y1="0" x2="198.0" y2="220.0"/>
+    <line x1="220.0" y1="0" x2="220.0" y2="220.0"/>
+    <line x1="0" y1="220.0" x2="220.0" y2="220.0"/>
+    <line x1="0" y1="198.0" x2="220.0" y2="198.0"/>
+    <line x1="0" y1="176.0" x2="220.0" y2="176.0"/>
+    <line x1="0" y1="154.0" x2="220.0" y2="154.0"/>
+    <line x1="0" y1="132.0" x2="220.0" y2="132.0"/>
+    <line x1="0" y1="110.0" x2="220.0" y2="110.0"/>
+    <line x1="0" y1="88.0" x2="220.0" y2="88.0"/>
+    <line x1="0" y1="66.0" x2="220.0" y2="66.0"/>
+    <line x1="0" y1="44.0" x2="220.0" y2="44.0"/>
+    <line x1="0" y1="22.0" x2="220.0" y2="22.0"/>
+    <line x1="0" y1="0.0" x2="220.0" y2="0.0"/>
+  </g>
+  <line x1="0" y1="198.0" x2="220.0" y2="198.0" stroke="#7B5A50" stroke-width="1.2"/>
+  <line x1="132.0" y1="0" x2="132.0" y2="220.0" stroke="#7B5A50" stroke-width="1.2"/>
+  <line x1="22.0" y1="196.0" x2="22.0" y2="200.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="22.0" y="207.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">-5</text>
+  <line x1="44.0" y1="196.0" x2="44.0" y2="200.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="44.0" y="207.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">-4</text>
+  <line x1="66.0" y1="196.0" x2="66.0" y2="200.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="66.0" y="207.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">-3</text>
+  <line x1="88.0" y1="196.0" x2="88.0" y2="200.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="88.0" y="207.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">-2</text>
+  <line x1="110.0" y1="196.0" x2="110.0" y2="200.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="110.0" y="207.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">-1</text>
+  <line x1="154.0" y1="196.0" x2="154.0" y2="200.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="154.0" y="207.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">1</text>
+  <line x1="176.0" y1="196.0" x2="176.0" y2="200.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="176.0" y="207.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">2</text>
+  <line x1="198.0" y1="196.0" x2="198.0" y2="200.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="198.0" y="207.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">3</text>
+  <line x1="130.0" y1="176.0" x2="134.0" y2="176.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="127.0" y="179.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">1</text>
+  <line x1="130.0" y1="154.0" x2="134.0" y2="154.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="127.0" y="157.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">2</text>
+  <line x1="130.0" y1="132.0" x2="134.0" y2="132.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="127.0" y="135.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">3</text>
+  <line x1="130.0" y1="110.0" x2="134.0" y2="110.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="127.0" y="113.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">4</text>
+  <line x1="130.0" y1="88.0" x2="134.0" y2="88.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="127.0" y="91.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">5</text>
+  <line x1="130.0" y1="66.0" x2="134.0" y2="66.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="127.0" y="69.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">6</text>
+  <line x1="130.0" y1="44.0" x2="134.0" y2="44.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="127.0" y="47.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">7</text>
+  <line x1="130.0" y1="22.0" x2="134.0" y2="22.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="127.0" y="25.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">8</text>
+  <text x="212" y="194.0" font-family="DM Sans, sans-serif" font-size="9" fill="#7B5A50" font-style="italic">x</text>
+  <text x="137.0" y="10" font-family="DM Sans, sans-serif" font-size="9" fill="#7B5A50" font-style="italic">y</text>
+  <line x1="0.0" y1="14.7" x2="220.0" y2="161.3" stroke="#00DEC8" stroke-width="2.2" stroke-linecap="round"/>
+  <circle cx="44.0" cy="44.0" r="3.5" fill="#1A0828"/>
+  <text x="49.0" y="39.0" font-family="DM Sans, sans-serif" font-weight="bold" font-size="9" fill="#1A0828">A</text>
+  <circle cx="176.0" cy="132.0" r="3.5" fill="#1A0828"/>
+  <text x="181.0" y="127.0" font-family="DM Sans, sans-serif" font-weight="bold" font-size="9" fill="#1A0828">B</text>
+</svg>
+            </div>
+          </div>
+
+          <!-- E2 -->
+          <div class="tabulacion-block resolucion-card" style="grid-column: 1 / -1;">
+            <div class="tabulacion-info">
+              <p class="tabulacion-eq">Recta que pasa por $A(3, -2)$ y $B(-2, -3)$</p>
+              <p class="tabulacion-despeje">Desarrollo:</p>
+              <div class="procedimiento-list">
+                $$\begin{aligned}
+                \dfrac{x - 3}{-2 - 3} &= \dfrac{y - (-2)}{-3 - (-2)} \\[6pt]
+                \dfrac{x - 3}{-5} &= \dfrac{y + 2}{-1} \\[6pt]
+                -1(x - 3) &= -5(y + 2) \\[6pt]
+                -x + 3 &= -5y - 10 \\[6pt]
+                -x + 5y + 13 &= 0 \\[6pt]
+                \mathbf{x - 5y - 13 = 0}
+                \end{aligned}$$
+              </div>
+              <p class="tabulacion-despeje">Comprobación:</p>
+              <div class="comprobaciones-row">
+                <div class="comprobacion-col">
+                  <div class="comprobacion-title">Punto A(3, −2)</div>
+                  $$\begin{aligned}
+                  (3) - 5(-2) - 13 &= 0 \\
+                  3 + 10 - 13 &= 0 \\
+                  \mathbf{0} &\mathbf{= 0}
+                  \end{aligned}$$
+                </div>
+                <div class="comprobacion-col">
+                  <div class="comprobacion-title">Punto B(−2, −3)</div>
+                  $$\begin{aligned}
+                  (-2) - 5(-3) - 13 &= 0 \\
+                  -2 + 15 - 13 &= 0 \\
+                  \mathbf{0} &\mathbf{= 0}
+                  \end{aligned}$$
+                </div>
+              </div>
+            </div>
+            <div class="tabulacion-grafica">
+              <svg viewBox="0 0 198 132" xmlns="http://www.w3.org/2000/svg" class="grafica-svg" role="img" aria-label="Recta que pasa por A(3,-2) y B(-2,-3)">
+  <g stroke="#E0C4BC" stroke-width="0.5" opacity="0.6">
+    <line x1="0.0" y1="0" x2="0.0" y2="132.0"/>
+    <line x1="22.0" y1="0" x2="22.0" y2="132.0"/>
+    <line x1="44.0" y1="0" x2="44.0" y2="132.0"/>
+    <line x1="66.0" y1="0" x2="66.0" y2="132.0"/>
+    <line x1="88.0" y1="0" x2="88.0" y2="132.0"/>
+    <line x1="110.0" y1="0" x2="110.0" y2="132.0"/>
+    <line x1="132.0" y1="0" x2="132.0" y2="132.0"/>
+    <line x1="154.0" y1="0" x2="154.0" y2="132.0"/>
+    <line x1="176.0" y1="0" x2="176.0" y2="132.0"/>
+    <line x1="198.0" y1="0" x2="198.0" y2="132.0"/>
+    <line x1="0" y1="132.0" x2="198.0" y2="132.0"/>
+    <line x1="0" y1="110.0" x2="198.0" y2="110.0"/>
+    <line x1="0" y1="88.0" x2="198.0" y2="88.0"/>
+    <line x1="0" y1="66.0" x2="198.0" y2="66.0"/>
+    <line x1="0" y1="44.0" x2="198.0" y2="44.0"/>
+    <line x1="0" y1="22.0" x2="198.0" y2="22.0"/>
+    <line x1="0" y1="0.0" x2="198.0" y2="0.0"/>
+  </g>
+  <line x1="0" y1="22.0" x2="198.0" y2="22.0" stroke="#7B5A50" stroke-width="1.2"/>
+  <line x1="88.0" y1="0" x2="88.0" y2="132.0" stroke="#7B5A50" stroke-width="1.2"/>
+  <line x1="22.0" y1="20.0" x2="22.0" y2="24.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="22.0" y="31.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">-3</text>
+  <line x1="44.0" y1="20.0" x2="44.0" y2="24.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="44.0" y="31.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">-2</text>
+  <line x1="66.0" y1="20.0" x2="66.0" y2="24.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="66.0" y="31.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">-1</text>
+  <line x1="110.0" y1="20.0" x2="110.0" y2="24.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="110.0" y="31.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">1</text>
+  <line x1="132.0" y1="20.0" x2="132.0" y2="24.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="132.0" y="31.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">2</text>
+  <line x1="154.0" y1="20.0" x2="154.0" y2="24.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="154.0" y="31.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">3</text>
+  <line x1="176.0" y1="20.0" x2="176.0" y2="24.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="176.0" y="31.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">4</text>
+  <line x1="86.0" y1="110.0" x2="90.0" y2="110.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="83.0" y="113.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">-4</text>
+  <line x1="86.0" y1="88.0" x2="90.0" y2="88.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="83.0" y="91.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">-3</text>
+  <line x1="86.0" y1="66.0" x2="90.0" y2="66.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="83.0" y="69.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">-2</text>
+  <line x1="86.0" y1="44.0" x2="90.0" y2="44.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="83.0" y="47.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">-1</text>
+  <text x="190" y="18.0" font-family="DM Sans, sans-serif" font-size="9" fill="#7B5A50" font-style="italic">x</text>
+  <text x="93.0" y="10" font-family="DM Sans, sans-serif" font-size="9" fill="#7B5A50" font-style="italic">y</text>
+  <line x1="0.0" y1="96.8" x2="198.0" y2="57.2" stroke="#FF00AA" stroke-width="2.2" stroke-linecap="round"/>
+  <circle cx="154.0" cy="66.0" r="3.5" fill="#1A0828"/>
+  <text x="159.0" y="61.0" font-family="DM Sans, sans-serif" font-weight="bold" font-size="9" fill="#1A0828">A</text>
+  <circle cx="44.0" cy="88.0" r="3.5" fill="#1A0828"/>
+  <text x="49.0" y="83.0" font-family="DM Sans, sans-serif" font-weight="bold" font-size="9" fill="#1A0828">B</text>
+</svg>
+            </div>
+          </div>
+
+          <!-- E3 -->
+          <div class="tabulacion-block resolucion-card" style="grid-column: 1 / -1;">
+            <div class="tabulacion-info">
+              <p class="tabulacion-eq">Recta que pasa por $A(-3, 2)$ y $B(4, -1)$</p>
+              <p class="tabulacion-despeje">Desarrollo:</p>
+              <div class="procedimiento-list">
+                $$\begin{aligned}
+                \dfrac{x - (-3)}{4 - (-3)} &= \dfrac{y - 2}{-1 - 2} \\[6pt]
+                \dfrac{x + 3}{7} &= \dfrac{y - 2}{-3} \\[6pt]
+                -3(x + 3) &= 7(y - 2) \\[6pt]
+                -3x - 9 &= 7y - 14 \\[6pt]
+                -3x - 7y + 5 &= 0 \\[6pt]
+                \mathbf{3x + 7y - 5 = 0}
+                \end{aligned}$$
+              </div>
+              <p class="tabulacion-despeje">Comprobación:</p>
+              <div class="comprobaciones-row">
+                <div class="comprobacion-col">
+                  <div class="comprobacion-title">Punto A(−3, 2)</div>
+                  $$\begin{aligned}
+                  3(-3) + 7(2) - 5 &= 0 \\
+                  -9 + 14 - 5 &= 0 \\
+                  \mathbf{0} &\mathbf{= 0}
+                  \end{aligned}$$
+                </div>
+                <div class="comprobacion-col">
+                  <div class="comprobacion-title">Punto B(4, −1)</div>
+                  $$\begin{aligned}
+                  3(4) + 7(-1) - 5 &= 0 \\
+                  12 - 7 - 5 &= 0 \\
+                  \mathbf{0} &\mathbf{= 0}
+                  \end{aligned}$$
+                </div>
+              </div>
+            </div>
+            <div class="tabulacion-grafica">
+              <svg viewBox="0 0 242 154" xmlns="http://www.w3.org/2000/svg" class="grafica-svg" role="img" aria-label="Recta que pasa por A(-3,2) y B(4,-1)">
+  <g stroke="#E0C4BC" stroke-width="0.5" opacity="0.6">
+    <line x1="0.0" y1="0" x2="0.0" y2="154.0"/>
+    <line x1="22.0" y1="0" x2="22.0" y2="154.0"/>
+    <line x1="44.0" y1="0" x2="44.0" y2="154.0"/>
+    <line x1="66.0" y1="0" x2="66.0" y2="154.0"/>
+    <line x1="88.0" y1="0" x2="88.0" y2="154.0"/>
+    <line x1="110.0" y1="0" x2="110.0" y2="154.0"/>
+    <line x1="132.0" y1="0" x2="132.0" y2="154.0"/>
+    <line x1="154.0" y1="0" x2="154.0" y2="154.0"/>
+    <line x1="176.0" y1="0" x2="176.0" y2="154.0"/>
+    <line x1="198.0" y1="0" x2="198.0" y2="154.0"/>
+    <line x1="220.0" y1="0" x2="220.0" y2="154.0"/>
+    <line x1="242.0" y1="0" x2="242.0" y2="154.0"/>
+    <line x1="0" y1="154.0" x2="242.0" y2="154.0"/>
+    <line x1="0" y1="132.0" x2="242.0" y2="132.0"/>
+    <line x1="0" y1="110.0" x2="242.0" y2="110.0"/>
+    <line x1="0" y1="88.0" x2="242.0" y2="88.0"/>
+    <line x1="0" y1="66.0" x2="242.0" y2="66.0"/>
+    <line x1="0" y1="44.0" x2="242.0" y2="44.0"/>
+    <line x1="0" y1="22.0" x2="242.0" y2="22.0"/>
+    <line x1="0" y1="0.0" x2="242.0" y2="0.0"/>
+  </g>
+  <line x1="0" y1="88.0" x2="242.0" y2="88.0" stroke="#7B5A50" stroke-width="1.2"/>
+  <line x1="110.0" y1="0" x2="110.0" y2="154.0" stroke="#7B5A50" stroke-width="1.2"/>
+  <line x1="22.0" y1="86.0" x2="22.0" y2="90.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="22.0" y="97.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">-4</text>
+  <line x1="44.0" y1="86.0" x2="44.0" y2="90.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="44.0" y="97.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">-3</text>
+  <line x1="66.0" y1="86.0" x2="66.0" y2="90.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="66.0" y="97.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">-2</text>
+  <line x1="88.0" y1="86.0" x2="88.0" y2="90.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="88.0" y="97.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">-1</text>
+  <line x1="132.0" y1="86.0" x2="132.0" y2="90.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="132.0" y="97.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">1</text>
+  <line x1="154.0" y1="86.0" x2="154.0" y2="90.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="154.0" y="97.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">2</text>
+  <line x1="176.0" y1="86.0" x2="176.0" y2="90.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="176.0" y="97.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">3</text>
+  <line x1="198.0" y1="86.0" x2="198.0" y2="90.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="198.0" y="97.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">4</text>
+  <line x1="220.0" y1="86.0" x2="220.0" y2="90.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="220.0" y="97.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">5</text>
+  <line x1="108.0" y1="132.0" x2="112.0" y2="132.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="105.0" y="135.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">-2</text>
+  <line x1="108.0" y1="110.0" x2="112.0" y2="110.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="105.0" y="113.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">-1</text>
+  <line x1="108.0" y1="66.0" x2="112.0" y2="66.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="105.0" y="69.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">1</text>
+  <line x1="108.0" y1="44.0" x2="112.0" y2="44.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="105.0" y="47.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">2</text>
+  <line x1="108.0" y1="22.0" x2="112.0" y2="22.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="105.0" y="25.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">3</text>
+  <text x="234" y="84.0" font-family="DM Sans, sans-serif" font-size="9" fill="#7B5A50" font-style="italic">x</text>
+  <text x="115.0" y="10" font-family="DM Sans, sans-serif" font-size="9" fill="#7B5A50" font-style="italic">y</text>
+  <line x1="0.0" y1="25.1" x2="242.0" y2="128.9" stroke="#4A0080" stroke-width="2.2" stroke-linecap="round"/>
+  <circle cx="44.0" cy="44.0" r="3.5" fill="#1A0828"/>
+  <text x="49.0" y="39.0" font-family="DM Sans, sans-serif" font-weight="bold" font-size="9" fill="#1A0828">A</text>
+  <circle cx="198.0" cy="110.0" r="3.5" fill="#1A0828"/>
+  <text x="203.0" y="105.0" font-family="DM Sans, sans-serif" font-weight="bold" font-size="9" fill="#1A0828">B</text>
+</svg>
+            </div>
+          </div>
+
+          <!-- E4 -->
+          <div class="tabulacion-block resolucion-card" style="grid-column: 1 / -1;">
+            <div class="tabulacion-info">
+              <p class="tabulacion-eq">Recta que pasa por $A(4, -5)$ y $B(-3, 4)$</p>
+              <p class="tabulacion-despeje">Desarrollo:</p>
+              <div class="procedimiento-list">
+                $$\begin{aligned}
+                \dfrac{x - 4}{-3 - 4} &= \dfrac{y - (-5)}{4 - (-5)} \\[6pt]
+                \dfrac{x - 4}{-7} &= \dfrac{y + 5}{9} \\[6pt]
+                9(x - 4) &= -7(y + 5) \\[6pt]
+                9x - 36 &= -7y - 35 \\[6pt]
+                \mathbf{9x + 7y - 1 = 0}
+                \end{aligned}$$
+              </div>
+              <p class="tabulacion-despeje">Comprobación:</p>
+              <div class="comprobaciones-row">
+                <div class="comprobacion-col">
+                  <div class="comprobacion-title">Punto A(4, −5)</div>
+                  $$\begin{aligned}
+                  9(4) + 7(-5) - 1 &= 0 \\
+                  36 - 35 - 1 &= 0 \\
+                  \mathbf{0} &\mathbf{= 0}
+                  \end{aligned}$$
+                </div>
+                <div class="comprobacion-col">
+                  <div class="comprobacion-title">Punto B(−3, 4)</div>
+                  $$\begin{aligned}
+                  9(-3) + 7(4) - 1 &= 0 \\
+                  -27 + 28 - 1 &= 0 \\
+                  \mathbf{0} &\mathbf{= 0}
+                  \end{aligned}$$
+                </div>
+              </div>
+            </div>
+            <div class="tabulacion-grafica">
+              <svg viewBox="0 0 242 286" xmlns="http://www.w3.org/2000/svg" class="grafica-svg" role="img" aria-label="Recta que pasa por A(4,-5) y B(-3,4)">
+  <g stroke="#E0C4BC" stroke-width="0.5" opacity="0.6">
+    <line x1="0.0" y1="0" x2="0.0" y2="286.0"/>
+    <line x1="22.0" y1="0" x2="22.0" y2="286.0"/>
+    <line x1="44.0" y1="0" x2="44.0" y2="286.0"/>
+    <line x1="66.0" y1="0" x2="66.0" y2="286.0"/>
+    <line x1="88.0" y1="0" x2="88.0" y2="286.0"/>
+    <line x1="110.0" y1="0" x2="110.0" y2="286.0"/>
+    <line x1="132.0" y1="0" x2="132.0" y2="286.0"/>
+    <line x1="154.0" y1="0" x2="154.0" y2="286.0"/>
+    <line x1="176.0" y1="0" x2="176.0" y2="286.0"/>
+    <line x1="198.0" y1="0" x2="198.0" y2="286.0"/>
+    <line x1="220.0" y1="0" x2="220.0" y2="286.0"/>
+    <line x1="242.0" y1="0" x2="242.0" y2="286.0"/>
+    <line x1="0" y1="286.0" x2="242.0" y2="286.0"/>
+    <line x1="0" y1="264.0" x2="242.0" y2="264.0"/>
+    <line x1="0" y1="242.0" x2="242.0" y2="242.0"/>
+    <line x1="0" y1="220.0" x2="242.0" y2="220.0"/>
+    <line x1="0" y1="198.0" x2="242.0" y2="198.0"/>
+    <line x1="0" y1="176.0" x2="242.0" y2="176.0"/>
+    <line x1="0" y1="154.0" x2="242.0" y2="154.0"/>
+    <line x1="0" y1="132.0" x2="242.0" y2="132.0"/>
+    <line x1="0" y1="110.0" x2="242.0" y2="110.0"/>
+    <line x1="0" y1="88.0" x2="242.0" y2="88.0"/>
+    <line x1="0" y1="66.0" x2="242.0" y2="66.0"/>
+    <line x1="0" y1="44.0" x2="242.0" y2="44.0"/>
+    <line x1="0" y1="22.0" x2="242.0" y2="22.0"/>
+    <line x1="0" y1="0.0" x2="242.0" y2="0.0"/>
+  </g>
+  <line x1="0" y1="132.0" x2="242.0" y2="132.0" stroke="#7B5A50" stroke-width="1.2"/>
+  <line x1="110.0" y1="0" x2="110.0" y2="286.0" stroke="#7B5A50" stroke-width="1.2"/>
+  <line x1="22.0" y1="130.0" x2="22.0" y2="134.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="22.0" y="141.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">-4</text>
+  <line x1="44.0" y1="130.0" x2="44.0" y2="134.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="44.0" y="141.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">-3</text>
+  <line x1="66.0" y1="130.0" x2="66.0" y2="134.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="66.0" y="141.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">-2</text>
+  <line x1="88.0" y1="130.0" x2="88.0" y2="134.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="88.0" y="141.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">-1</text>
+  <line x1="132.0" y1="130.0" x2="132.0" y2="134.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="132.0" y="141.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">1</text>
+  <line x1="154.0" y1="130.0" x2="154.0" y2="134.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="154.0" y="141.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">2</text>
+  <line x1="176.0" y1="130.0" x2="176.0" y2="134.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="176.0" y="141.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">3</text>
+  <line x1="198.0" y1="130.0" x2="198.0" y2="134.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="198.0" y="141.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">4</text>
+  <line x1="220.0" y1="130.0" x2="220.0" y2="134.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="220.0" y="141.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">5</text>
+  <line x1="108.0" y1="264.0" x2="112.0" y2="264.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="105.0" y="267.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">-6</text>
+  <line x1="108.0" y1="242.0" x2="112.0" y2="242.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="105.0" y="245.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">-5</text>
+  <line x1="108.0" y1="220.0" x2="112.0" y2="220.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="105.0" y="223.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">-4</text>
+  <line x1="108.0" y1="198.0" x2="112.0" y2="198.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="105.0" y="201.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">-3</text>
+  <line x1="108.0" y1="176.0" x2="112.0" y2="176.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="105.0" y="179.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">-2</text>
+  <line x1="108.0" y1="154.0" x2="112.0" y2="154.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="105.0" y="157.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">-1</text>
+  <line x1="108.0" y1="110.0" x2="112.0" y2="110.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="105.0" y="113.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">1</text>
+  <line x1="108.0" y1="88.0" x2="112.0" y2="88.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="105.0" y="91.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">2</text>
+  <line x1="108.0" y1="66.0" x2="112.0" y2="66.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="105.0" y="69.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">3</text>
+  <line x1="108.0" y1="44.0" x2="112.0" y2="44.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="105.0" y="47.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">4</text>
+  <line x1="108.0" y1="22.0" x2="112.0" y2="22.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="105.0" y="25.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">5</text>
+  <text x="234" y="128.0" font-family="DM Sans, sans-serif" font-size="9" fill="#7B5A50" font-style="italic">x</text>
+  <text x="115.0" y="10" font-family="DM Sans, sans-serif" font-size="9" fill="#7B5A50" font-style="italic">y</text>
+  <line x1="0.0" y1="-12.6" x2="242.0" y2="298.6" stroke="#00DEC8" stroke-width="2.2" stroke-linecap="round"/>
+  <circle cx="198.0" cy="242.0" r="3.5" fill="#1A0828"/>
+  <text x="203.0" y="237.0" font-family="DM Sans, sans-serif" font-weight="bold" font-size="9" fill="#1A0828">A</text>
+  <circle cx="44.0" cy="44.0" r="3.5" fill="#1A0828"/>
+  <text x="49.0" y="39.0" font-family="DM Sans, sans-serif" font-weight="bold" font-size="9" fill="#1A0828">B</text>
+</svg>
+            </div>
+          </div>
+
+          <!-- E5 -->
+          <div class="tabulacion-block resolucion-card" style="grid-column: 1 / -1;">
+            <div class="tabulacion-info">
+              <p class="tabulacion-eq">Recta que pasa por $A(-2, 6)$ y $B(5, 2)$</p>
+              <p class="tabulacion-despeje">Desarrollo:</p>
+              <div class="procedimiento-list">
+                $$\begin{aligned}
+                \dfrac{x - (-2)}{5 - (-2)} &= \dfrac{y - 6}{2 - 6} \\[6pt]
+                \dfrac{x + 2}{7} &= \dfrac{y - 6}{-4} \\[6pt]
+                -4(x + 2) &= 7(y - 6) \\[6pt]
+                -4x - 8 &= 7y - 42 \\[6pt]
+                -4x - 7y + 34 &= 0 \\[6pt]
+                \mathbf{4x + 7y - 34 = 0}
+                \end{aligned}$$
+              </div>
+              <p class="tabulacion-despeje">Comprobación:</p>
+              <div class="comprobaciones-row">
+                <div class="comprobacion-col">
+                  <div class="comprobacion-title">Punto A(−2, 6)</div>
+                  $$\begin{aligned}
+                  4(-2) + 7(6) - 34 &= 0 \\
+                  -8 + 42 - 34 &= 0 \\
+                  \mathbf{0} &\mathbf{= 0}
+                  \end{aligned}$$
+                </div>
+                <div class="comprobacion-col">
+                  <div class="comprobacion-title">Punto B(5, 2)</div>
+                  $$\begin{aligned}
+                  4(5) + 7(2) - 34 &= 0 \\
+                  20 + 14 - 34 &= 0 \\
+                  \mathbf{0} &\mathbf{= 0}
+                  \end{aligned}$$
+                </div>
+              </div>
+            </div>
+            <div class="tabulacion-grafica">
+              <svg viewBox="0 0 242 198" xmlns="http://www.w3.org/2000/svg" class="grafica-svg" role="img" aria-label="Recta que pasa por A(-2,6) y B(5,2)">
+  <g stroke="#E0C4BC" stroke-width="0.5" opacity="0.6">
+    <line x1="0.0" y1="0" x2="0.0" y2="198.0"/>
+    <line x1="22.0" y1="0" x2="22.0" y2="198.0"/>
+    <line x1="44.0" y1="0" x2="44.0" y2="198.0"/>
+    <line x1="66.0" y1="0" x2="66.0" y2="198.0"/>
+    <line x1="88.0" y1="0" x2="88.0" y2="198.0"/>
+    <line x1="110.0" y1="0" x2="110.0" y2="198.0"/>
+    <line x1="132.0" y1="0" x2="132.0" y2="198.0"/>
+    <line x1="154.0" y1="0" x2="154.0" y2="198.0"/>
+    <line x1="176.0" y1="0" x2="176.0" y2="198.0"/>
+    <line x1="198.0" y1="0" x2="198.0" y2="198.0"/>
+    <line x1="220.0" y1="0" x2="220.0" y2="198.0"/>
+    <line x1="242.0" y1="0" x2="242.0" y2="198.0"/>
+    <line x1="0" y1="198.0" x2="242.0" y2="198.0"/>
+    <line x1="0" y1="176.0" x2="242.0" y2="176.0"/>
+    <line x1="0" y1="154.0" x2="242.0" y2="154.0"/>
+    <line x1="0" y1="132.0" x2="242.0" y2="132.0"/>
+    <line x1="0" y1="110.0" x2="242.0" y2="110.0"/>
+    <line x1="0" y1="88.0" x2="242.0" y2="88.0"/>
+    <line x1="0" y1="66.0" x2="242.0" y2="66.0"/>
+    <line x1="0" y1="44.0" x2="242.0" y2="44.0"/>
+    <line x1="0" y1="22.0" x2="242.0" y2="22.0"/>
+    <line x1="0" y1="0.0" x2="242.0" y2="0.0"/>
+  </g>
+  <line x1="0" y1="176.0" x2="242.0" y2="176.0" stroke="#7B5A50" stroke-width="1.2"/>
+  <line x1="88.0" y1="0" x2="88.0" y2="198.0" stroke="#7B5A50" stroke-width="1.2"/>
+  <line x1="22.0" y1="174.0" x2="22.0" y2="178.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="22.0" y="185.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">-3</text>
+  <line x1="44.0" y1="174.0" x2="44.0" y2="178.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="44.0" y="185.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">-2</text>
+  <line x1="66.0" y1="174.0" x2="66.0" y2="178.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="66.0" y="185.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">-1</text>
+  <line x1="110.0" y1="174.0" x2="110.0" y2="178.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="110.0" y="185.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">1</text>
+  <line x1="132.0" y1="174.0" x2="132.0" y2="178.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="132.0" y="185.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">2</text>
+  <line x1="154.0" y1="174.0" x2="154.0" y2="178.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="154.0" y="185.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">3</text>
+  <line x1="176.0" y1="174.0" x2="176.0" y2="178.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="176.0" y="185.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">4</text>
+  <line x1="198.0" y1="174.0" x2="198.0" y2="178.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="198.0" y="185.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">5</text>
+  <line x1="220.0" y1="174.0" x2="220.0" y2="178.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="220.0" y="185.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">6</text>
+  <line x1="86.0" y1="154.0" x2="90.0" y2="154.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="83.0" y="157.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">1</text>
+  <line x1="86.0" y1="132.0" x2="90.0" y2="132.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="83.0" y="135.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">2</text>
+  <line x1="86.0" y1="110.0" x2="90.0" y2="110.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="83.0" y="113.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">3</text>
+  <line x1="86.0" y1="88.0" x2="90.0" y2="88.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="83.0" y="91.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">4</text>
+  <line x1="86.0" y1="66.0" x2="90.0" y2="66.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="83.0" y="69.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">5</text>
+  <line x1="86.0" y1="44.0" x2="90.0" y2="44.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="83.0" y="47.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">6</text>
+  <line x1="86.0" y1="22.0" x2="90.0" y2="22.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="83.0" y="25.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">7</text>
+  <text x="234" y="172.0" font-family="DM Sans, sans-serif" font-size="9" fill="#7B5A50" font-style="italic">x</text>
+  <text x="93.0" y="10" font-family="DM Sans, sans-serif" font-size="9" fill="#7B5A50" font-style="italic">y</text>
+  <line x1="0.0" y1="18.9" x2="242.0" y2="157.1" stroke="#FF00AA" stroke-width="2.2" stroke-linecap="round"/>
+  <circle cx="44.0" cy="44.0" r="3.5" fill="#1A0828"/>
+  <text x="49.0" y="39.0" font-family="DM Sans, sans-serif" font-weight="bold" font-size="9" fill="#1A0828">A</text>
+  <circle cx="198.0" cy="132.0" r="3.5" fill="#1A0828"/>
+  <text x="203.0" y="127.0" font-family="DM Sans, sans-serif" font-weight="bold" font-size="9" fill="#1A0828">B</text>
+</svg>
+            </div>
+          </div>
+
+          <!-- E6 -->
+          <div class="tabulacion-block resolucion-card" style="grid-column: 1 / -1;">
+            <div class="tabulacion-info">
+              <p class="tabulacion-eq">Recta que pasa por $A(1, -4)$ y $B(-2, 3)$</p>
+              <p class="tabulacion-despeje">Desarrollo:</p>
+              <div class="procedimiento-list">
+                $$\begin{aligned}
+                \dfrac{x - 1}{-2 - 1} &= \dfrac{y - (-4)}{3 - (-4)} \\[6pt]
+                \dfrac{x - 1}{-3} &= \dfrac{y + 4}{7} \\[6pt]
+                7(x - 1) &= -3(y + 4) \\[6pt]
+                7x - 7 &= -3y - 12 \\[6pt]
+                \mathbf{7x + 3y + 5 = 0}
+                \end{aligned}$$
+              </div>
+              <p class="tabulacion-despeje">Comprobación:</p>
+              <div class="comprobaciones-row">
+                <div class="comprobacion-col">
+                  <div class="comprobacion-title">Punto A(1, −4)</div>
+                  $$\begin{aligned}
+                  7(1) + 3(-4) + 5 &= 0 \\
+                  7 - 12 + 5 &= 0 \\
+                  \mathbf{0} &\mathbf{= 0}
+                  \end{aligned}$$
+                </div>
+                <div class="comprobacion-col">
+                  <div class="comprobacion-title">Punto B(−2, 3)</div>
+                  $$\begin{aligned}
+                  7(-2) + 3(3) + 5 &= 0 \\
+                  -14 + 9 + 5 &= 0 \\
+                  \mathbf{0} &\mathbf{= 0}
+                  \end{aligned}$$
+                </div>
+              </div>
+            </div>
+            <div class="tabulacion-grafica">
+              <svg viewBox="0 0 154 242" xmlns="http://www.w3.org/2000/svg" class="grafica-svg" role="img" aria-label="Recta que pasa por A(1,-4) y B(-2,3)">
+  <g stroke="#E0C4BC" stroke-width="0.5" opacity="0.6">
+    <line x1="0.0" y1="0" x2="0.0" y2="242.0"/>
+    <line x1="22.0" y1="0" x2="22.0" y2="242.0"/>
+    <line x1="44.0" y1="0" x2="44.0" y2="242.0"/>
+    <line x1="66.0" y1="0" x2="66.0" y2="242.0"/>
+    <line x1="88.0" y1="0" x2="88.0" y2="242.0"/>
+    <line x1="110.0" y1="0" x2="110.0" y2="242.0"/>
+    <line x1="132.0" y1="0" x2="132.0" y2="242.0"/>
+    <line x1="154.0" y1="0" x2="154.0" y2="242.0"/>
+    <line x1="0" y1="242.0" x2="154.0" y2="242.0"/>
+    <line x1="0" y1="220.0" x2="154.0" y2="220.0"/>
+    <line x1="0" y1="198.0" x2="154.0" y2="198.0"/>
+    <line x1="0" y1="176.0" x2="154.0" y2="176.0"/>
+    <line x1="0" y1="154.0" x2="154.0" y2="154.0"/>
+    <line x1="0" y1="132.0" x2="154.0" y2="132.0"/>
+    <line x1="0" y1="110.0" x2="154.0" y2="110.0"/>
+    <line x1="0" y1="88.0" x2="154.0" y2="88.0"/>
+    <line x1="0" y1="66.0" x2="154.0" y2="66.0"/>
+    <line x1="0" y1="44.0" x2="154.0" y2="44.0"/>
+    <line x1="0" y1="22.0" x2="154.0" y2="22.0"/>
+    <line x1="0" y1="0.0" x2="154.0" y2="0.0"/>
+  </g>
+  <line x1="0" y1="110.0" x2="154.0" y2="110.0" stroke="#7B5A50" stroke-width="1.2"/>
+  <line x1="88.0" y1="0" x2="88.0" y2="242.0" stroke="#7B5A50" stroke-width="1.2"/>
+  <line x1="22.0" y1="108.0" x2="22.0" y2="112.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="22.0" y="119.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">-3</text>
+  <line x1="44.0" y1="108.0" x2="44.0" y2="112.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="44.0" y="119.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">-2</text>
+  <line x1="66.0" y1="108.0" x2="66.0" y2="112.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="66.0" y="119.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">-1</text>
+  <line x1="110.0" y1="108.0" x2="110.0" y2="112.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="110.0" y="119.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">1</text>
+  <line x1="132.0" y1="108.0" x2="132.0" y2="112.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="132.0" y="119.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">2</text>
+  <line x1="86.0" y1="220.0" x2="90.0" y2="220.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="83.0" y="223.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">-5</text>
+  <line x1="86.0" y1="198.0" x2="90.0" y2="198.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="83.0" y="201.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">-4</text>
+  <line x1="86.0" y1="176.0" x2="90.0" y2="176.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="83.0" y="179.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">-3</text>
+  <line x1="86.0" y1="154.0" x2="90.0" y2="154.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="83.0" y="157.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">-2</text>
+  <line x1="86.0" y1="132.0" x2="90.0" y2="132.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="83.0" y="135.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">-1</text>
+  <line x1="86.0" y1="88.0" x2="90.0" y2="88.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="83.0" y="91.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">1</text>
+  <line x1="86.0" y1="66.0" x2="90.0" y2="66.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="83.0" y="69.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">2</text>
+  <line x1="86.0" y1="44.0" x2="90.0" y2="44.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="83.0" y="47.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">3</text>
+  <line x1="86.0" y1="22.0" x2="90.0" y2="22.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="83.0" y="25.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">4</text>
+  <text x="146" y="106.0" font-family="DM Sans, sans-serif" font-size="9" fill="#7B5A50" font-style="italic">x</text>
+  <text x="93.0" y="10" font-family="DM Sans, sans-serif" font-size="9" fill="#7B5A50" font-style="italic">y</text>
+  <line x1="0.0" y1="-58.7" x2="154.0" y2="300.7" stroke="#4A0080" stroke-width="2.2" stroke-linecap="round"/>
+  <circle cx="110.0" cy="198.0" r="3.5" fill="#1A0828"/>
+  <text x="115.0" y="193.0" font-family="DM Sans, sans-serif" font-weight="bold" font-size="9" fill="#1A0828">A</text>
+  <circle cx="44.0" cy="44.0" r="3.5" fill="#1A0828"/>
+  <text x="49.0" y="39.0" font-family="DM Sans, sans-serif" font-weight="bold" font-size="9" fill="#1A0828">B</text>
+</svg>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ EXTRAS ══════════ -->
+    <section class="section-block">
+      <div class="sec-toggle" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('show');">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </div>
+        <h2>Ejercicios extra</h2>
+        <span class="chev">▼</span>
+      </div>
+      <div class="collapsible">
+        <div class="bloques-2">
+
+          <!-- B1 P1 -->
+          <div class="mini-card">
+            <div class="mini-card-head">Bloque 1 · Parte 1</div>
+            <div class="mini-card-body">
+              <div class="sol">$A(1, 1), \quad B(3, 5)$</div>
+              <div class="sol">$A(-2, 4), \quad B(1, -2)$</div>
+              <div class="sol">$A(0, 0), \quad B(-4, 2)$</div>
+            </div>
+          </div>
+
+          <!-- B1 P2 -->
+          <div class="mini-card">
+            <div class="mini-card-head">Bloque 1 · Parte 2</div>
+            <div class="mini-card-body">
+              <div class="sol">$A(-5, -5), \quad B(5, 5)$</div>
+              <div class="sol">$A(2, 6), \quad B(-3, 1)$</div>
+              <div class="sol">$A(4, 0), \quad B(0, -8)$</div>
+            </div>
+          </div>
+
+          <!-- B2 P1 -->
+          <div class="mini-card">
+            <div class="mini-card-head">Bloque 2 · Parte 1</div>
+            <div class="mini-card-body">
+              <div class="sol">$A(3, 3), \quad B(-3, -3)$</div>
+              <div class="sol">$A(-1, 7), \quad B(2, 4)$</div>
+              <div class="sol">$A(6, -2), \quad B(-2, 6)$</div>
+            </div>
+          </div>
+
+          <!-- B2 P2 -->
+          <div class="mini-card">
+            <div class="mini-card-head">Bloque 2 · Parte 2</div>
+            <div class="mini-card-body">
+              <div class="sol">$A(0, 5), \quad B(5, 0)$</div>
+              <div class="sol">$A(-4, -2), \quad B(4, 2)$</div>
+              <div class="sol">$A(3, -1), \quad B(1, 3)$</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ NAV ══════════ -->
+    <div class="topic-nav-btns">
+      <a href="grafica-cuadratica.html" class="btn-anterior">← Funciones cuadráticas</a>
+      <a href="pendiente-ordenada.html" class="btn-siguiente">Pendiente y ordenada →</a>
+    </div>
+
+  </main>
+
+  <script src="../../nav.js"></script>
+  <script src="../../footer.js"></script>
+</body>
+</html>

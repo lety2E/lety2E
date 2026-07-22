@@ -1,0 +1,1596 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Funciones cuadráticas — Matemáticas 2 — lety2e</title>
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../../favicon.ico">
+  <meta name="description" content="Graficación de funciones cuadráticas: construcción de tablas de valores, análisis del coeficiente principal y representación de parábolas — Matemáticas 2." />
+  <link rel="stylesheet" href="../../style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" />
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body, {
+      delimiters: [
+        {left:'$$', right:'$$', display:true},
+        {left:'$', right:'$', display:false}
+      ]
+    });" id="katex-script"></script>
+  <script defer src="../../math-fit.js?v=3"></script>
+
+  <style>
+    .topic-tag {
+      display: inline-flex; align-items: center; gap: .35rem;
+      padding: .22rem .75rem; border-radius: 99px;
+      background: var(--accent-light); color: var(--accent);
+      font-size: .78rem; font-weight: 700; letter-spacing: .03em;
+      margin-bottom: .55rem;
+    }
+    .topic-tag::before {
+      content: ''; width: 7px; height: 7px; border-radius: 50%;
+      background: var(--accent); display: inline-block;
+    }
+
+    .section-block { margin-bottom: 2.5rem; }
+    .section-block:last-child { margin-bottom: 0; }
+
+    .sec-head {
+      display: flex; align-items: center; gap: .65rem;
+      margin-bottom: 1.1rem;
+    }
+    .sec-head h2 { margin: 0; font-size: 1.2rem; line-height: 1; }
+    .sec-icon {
+      width: 30px; height: 30px; border-radius: 8px;
+      display: grid; place-items: center; flex-shrink: 0;
+      background: var(--accent);
+    }
+    .sec-icon svg { width: 15px; height: 15px; stroke: #fff; fill: none; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+
+    .sec-toggle {
+      display: flex; align-items: center; gap: .65rem;
+      cursor: pointer; user-select: none;
+      padding: .8rem 0; margin: 0 0 .4rem;
+    }
+    .sec-toggle h2 { margin: 0; font-size: 1.2rem; line-height: 1; }
+    .sec-toggle .chev {
+      margin-left: auto; font-size: .75rem; color: var(--text-3);
+      transition: transform .25s;
+    }
+    .sec-toggle.open .chev { transform: rotate(180deg); }
+
+    .collapsible {
+      max-height: 0; overflow: hidden;
+      transition: max-height .5s ease, padding .3s ease;
+    }
+    .collapsible.show { max-height: 40000px; padding: .8rem 0; }
+
+    /* ── Tabulación y Gráfica ── */
+    .tabulacion-block {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      background: var(--bg-card);
+      border: 1.5px solid var(--border);
+      border-radius: var(--r-md);
+      padding: 1.2rem 1.4rem;
+      align-items: start;
+    }
+    @media (max-width: 700px) {
+      .tabulacion-block { grid-template-columns: 1fr; gap: 1.2rem; }
+    }
+
+    .tabulacion-info { display: flex; flex-direction: column; gap: 0.8rem; }
+    .tabulacion-eq { font-size: 1.1rem; color: var(--T); margin: 0; }
+    .tabulacion-despeje { font-size: 0.9rem; color: var(--text-2); font-weight: 700; margin: 0; text-transform: uppercase; letter-spacing: 0.05em; }
+    .despeje-steps { display: flex; flex-direction: column; gap: 0.3rem; }
+    .ej-line { line-height: 2; }
+
+    .tabulacion-tabla-row {
+      display: flex;
+      gap: 1.5rem;
+      align-items: start;
+      flex-wrap: wrap;
+    }
+    
+    .tabla-x-y {
+      border-collapse: collapse;
+      background: var(--bg-card);
+      min-width: 120px;
+    }
+    .tabla-x-y th, .tabla-x-y td {
+      border: 1px solid var(--border);
+      padding: 0.4rem 0.8rem;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+    .tabla-x-y th {
+      background: var(--accent-light);
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .procedimiento-list {
+      font-size: 0.85rem;
+      color: var(--text);
+      line-height: 1.8;
+      border-left: 3px solid var(--border);
+      padding-left: 0.8rem;
+    }
+    .procedimiento-list strong { color: var(--M); font-weight: 700; }
+
+    .tabulacion-grafica {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .grafica-svg {
+      width: 100%;
+      max-width: 200px;
+      height: auto;
+      display: block;
+    }
+
+    /* ── Grids y Cards de Ejercicios ── */
+    .bloques-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2rem; }
+    @media (max-width: 700px) { .bloques-2 { grid-template-columns: 1fr; } }
+
+    .mini-card {
+      background: var(--bg-card);
+      border: 1.5px solid var(--border);
+      border-radius: var(--r-md);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .mini-card-head {
+      padding: .5rem .8rem; background: var(--course-1);
+      font-family: var(--font-display); font-size: .85rem; color: #fff; font-weight: 700;
+    }
+    .mini-card-body {
+      padding: .8rem 1.2rem;
+      font-size: .95rem; color: var(--text);
+    }
+    .mini-card-body .sol {
+      margin: 0;
+      padding: .6rem 0;
+      border-bottom: 1px solid var(--border-s);
+      line-height: 2.2; /* radical/fraction-safe */
+      text-align: center;
+    }
+    .mini-card-body .sol:last-child {
+      border-bottom: none;
+      padding-bottom: .25rem;
+    }
+    .mini-card-body .sol:first-child {
+      padding-top: .25rem;
+    }
+    .mini-card-body strong { color: var(--M); font-weight: 700; }
+
+    .resolucion-card {
+      margin-bottom: 1.5rem;
+    }
+    .resolucion-card:last-child {
+      margin-bottom: 0;
+    }
+
+    /* ── Nav ── */
+    .topic-nav-btns {
+      display: flex; justify-content: space-between; gap: 1rem;
+      margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border);
+    }
+    .btn-anterior, .btn-siguiente {
+      display: inline-flex; align-items: center; gap: .5rem;
+      padding: .65rem 1.4rem; border-radius: 99px;
+      font-weight: 700; font-size: .9rem;
+      transition: background .2s, transform .18s;
+      text-decoration: none;
+    }
+    .btn-anterior {
+      background: transparent; color: var(--accent);
+      border: 2px solid var(--accent);
+    }
+    .btn-anterior:hover { background: var(--accent-light); transform: translateX(-3px); }
+    .btn-siguiente { background: var(--accent); color: #fff; }
+    .btn-siguiente:hover { background: var(--M); color: #fff; transform: translateX(3px); }
+  </style>
+</head>
+<body data-section="math">
+
+  <script src="../../nav.js"></script>
+
+  <main class="topic-content">
+
+    <header class="topic-header">
+      <p class="breadcrumb">
+        <a href="../index.html">Inicio</a> ›
+        <a href="index.html">Matemáticas 2</a> ›
+        Funciones cuadráticas
+      </p>
+      <div class="topic-tag">Matemáticas 2 · Tema 6</div>
+      <h1>Funciones cuadráticas</h1>
+    </header>
+
+    <!-- ══════════ MINI APUNTE ══════════ -->
+    <section class="section-block">
+      <div class="sec-head">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        </div>
+        <h2>Mini apunte</h2>
+      </div>
+      <div class="mini-card">
+        <div class="mini-card-body left" style="line-height:1.6;">
+          Una función cuadrática es de la forma $f(x) = ax^2 + bx + c$. Para graficarla en un intervalo dado, construimos una tabla de valores calculando la imagen (el resultado de evaluar) cada número entero en dicho intervalo. La representación gráfica es una curva llamada **parábola**:
+          <ul style="margin-top: 0.5rem; padding-left: 1.2rem;">
+            <li>Si $a > 0$ (coeficiente principal positivo), la parábola abre **hacia arriba** (tiene un punto mínimo).</li>
+            <li>Si $a < 0$ (coeficiente principal negativo), la parábola abre **hacia abajo** (tiene un punto máximo).</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ EJEMPLO ══════════ -->
+    <section class="section-block ejemplo-section">
+      <div class="sec-head">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+        </div>
+        <h2>Ejemplo</h2>
+      </div>
+
+      <div class="tabulacion-block">
+        <div class="tabulacion-info">
+          <p class="tabulacion-eq"><strong>Función:</strong> $f(x) = x^2 - 6x + 5$</p>
+          <p class="tabulacion-despeje">Intervalo: $f: [0, 6] 	o \mathbb{R}$</p>
+          <div class="tabulacion-tabla-row">
+            <table class="tabla-x-y">
+              <tr><th>x</th><th>f(x)</th></tr>
+              <tr><td>0</td><td>5</td></tr>
+              <tr><td>1</td><td>0</td></tr>
+              <tr><td>2</td><td>−3</td></tr>
+              <tr><td>3</td><td>−4</td></tr>
+              <tr><td>4</td><td>−3</td></tr>
+              <tr><td>5</td><td>0</td></tr>
+              <tr><td>6</td><td>5</td></tr>
+            </table>
+            <div class="procedimiento-list">
+              $f(0) = (0)^2 - 6(0) + 5 = $ <strong>$5$</strong><br>
+              $f(1) = (1)^2 - 6(1) + 5 = 1-6+5 = $ <strong>$0$</strong><br>
+              $f(2) = (2)^2 - 6(2) + 5 = 4-12+5 = $ <strong>$-3$</strong><br>
+              $f(3) = (3)^2 - 6(3) + 5 = 9-18+5 = $ <strong>$-4$</strong><br>
+              $f(4) = (4)^2 - 6(4) + 5 = 16-24+5 = $ <strong>$-3$</strong><br>
+              $f(5) = (5)^2 - 6(5) + 5 = 25-30+5 = $ <strong>$0$</strong><br>
+              $f(6) = (6)^2 - 6(6) + 5 = 36-36+5 = $ <strong>$5$</strong>
+            </div>
+          </div>
+        </div>
+        <div class="tabulacion-grafica">
+          <svg viewBox="0 0 220 286" xmlns="http://www.w3.org/2000/svg" class="grafica-svg" role="img" aria-label="Gráfica de y = x² - 6x + 5">
+  <g stroke="#E0C4BC" stroke-width="0.5" opacity="0.6">
+    <line x1="0.0" y1="0" x2="0.0" y2="286.0"/>
+    <line x1="22.0" y1="0" x2="22.0" y2="286.0"/>
+    <line x1="44.0" y1="0" x2="44.0" y2="286.0"/>
+    <line x1="66.0" y1="0" x2="66.0" y2="286.0"/>
+    <line x1="88.0" y1="0" x2="88.0" y2="286.0"/>
+    <line x1="110.0" y1="0" x2="110.0" y2="286.0"/>
+    <line x1="132.0" y1="0" x2="132.0" y2="286.0"/>
+    <line x1="154.0" y1="0" x2="154.0" y2="286.0"/>
+    <line x1="176.0" y1="0" x2="176.0" y2="286.0"/>
+    <line x1="198.0" y1="0" x2="198.0" y2="286.0"/>
+    <line x1="220.0" y1="0" x2="220.0" y2="286.0"/>
+    <line x1="0" y1="286.0" x2="220.0" y2="286.0"/>
+    <line x1="0" y1="264.0" x2="220.0" y2="264.0"/>
+    <line x1="0" y1="242.0" x2="220.0" y2="242.0"/>
+    <line x1="0" y1="220.0" x2="220.0" y2="220.0"/>
+    <line x1="0" y1="198.0" x2="220.0" y2="198.0"/>
+    <line x1="0" y1="176.0" x2="220.0" y2="176.0"/>
+    <line x1="0" y1="154.0" x2="220.0" y2="154.0"/>
+    <line x1="0" y1="132.0" x2="220.0" y2="132.0"/>
+    <line x1="0" y1="110.0" x2="220.0" y2="110.0"/>
+    <line x1="0" y1="88.0" x2="220.0" y2="88.0"/>
+    <line x1="0" y1="66.0" x2="220.0" y2="66.0"/>
+    <line x1="0" y1="44.0" x2="220.0" y2="44.0"/>
+    <line x1="0" y1="22.0" x2="220.0" y2="22.0"/>
+    <line x1="0" y1="0.0" x2="220.0" y2="0.0"/>
+  </g>
+  <line x1="0" y1="154.0" x2="220.0" y2="154.0" stroke="#7B5A50" stroke-width="1.2"/>
+  <line x1="44.0" y1="0" x2="44.0" y2="286.0" stroke="#7B5A50" stroke-width="1.2"/>
+  <!-- Números de los ejes -->
+  <line x1="22.0" y1="152.0" x2="22.0" y2="156.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="22.0" y="163.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">-1</text>
+  <line x1="66.0" y1="152.0" x2="66.0" y2="156.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="66.0" y="163.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">1</text>
+  <line x1="88.0" y1="152.0" x2="88.0" y2="156.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="88.0" y="163.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">2</text>
+  <line x1="110.0" y1="152.0" x2="110.0" y2="156.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="110.0" y="163.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">3</text>
+  <line x1="132.0" y1="152.0" x2="132.0" y2="156.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="132.0" y="163.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">4</text>
+  <line x1="154.0" y1="152.0" x2="154.0" y2="156.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="154.0" y="163.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">5</text>
+  <line x1="176.0" y1="152.0" x2="176.0" y2="156.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="176.0" y="163.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">6</text>
+  <line x1="198.0" y1="152.0" x2="198.0" y2="156.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="198.0" y="163.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">7</text>
+  <line x1="42.0" y1="264.0" x2="46.0" y2="264.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="39.0" y="267.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">-5</text>
+  <line x1="42.0" y1="242.0" x2="46.0" y2="242.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="39.0" y="245.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">-4</text>
+  <line x1="42.0" y1="220.0" x2="46.0" y2="220.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="39.0" y="223.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">-3</text>
+  <line x1="42.0" y1="198.0" x2="46.0" y2="198.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="39.0" y="201.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">-2</text>
+  <line x1="42.0" y1="176.0" x2="46.0" y2="176.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="39.0" y="179.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">-1</text>
+  <line x1="42.0" y1="132.0" x2="46.0" y2="132.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="39.0" y="135.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">1</text>
+  <line x1="42.0" y1="110.0" x2="46.0" y2="110.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="39.0" y="113.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">2</text>
+  <line x1="42.0" y1="88.0" x2="46.0" y2="88.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="39.0" y="91.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">3</text>
+  <line x1="42.0" y1="66.0" x2="46.0" y2="66.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="39.0" y="69.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">4</text>
+  <line x1="42.0" y1="44.0" x2="46.0" y2="44.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="39.0" y="47.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">5</text>
+  <line x1="42.0" y1="22.0" x2="46.0" y2="22.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="39.0" y="25.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">6</text>
+  <text x="212" y="150.0" font-family="DM Sans, sans-serif" font-size="9" fill="#7B5A50" font-style="italic">x</text>
+  <text x="49.0" y="10" font-family="DM Sans, sans-serif" font-size="9" fill="#7B5A50" font-style="italic">y</text>
+  <path d="M 44.0,44.0 L 45.1,50.5 L 46.2,57.0 L 47.3,63.3 L 48.4,69.5 L 49.5,75.6 L 50.6,81.6 L 51.7,87.5 L 52.8,93.3 L 53.9,98.9 L 55.0,104.5 L 56.1,109.9 L 57.2,115.3 L 58.3,120.5 L 59.4,125.6 L 60.5,130.6 L 61.6,135.5 L 62.7,140.3 L 63.8,145.0 L 64.9,149.5 L 66.0,154.0 L 67.1,158.3 L 68.2,162.6 L 69.3,166.7 L 70.4,170.7 L 71.5,174.6 L 72.6,178.4 L 73.7,182.1 L 74.8,185.7 L 75.9,189.1 L 77.0,192.5 L 78.1,195.7 L 79.2,198.9 L 80.3,201.9 L 81.4,204.8 L 82.5,207.6 L 83.6,210.3 L 84.7,212.9 L 85.8,215.4 L 86.9,217.7 L 88.0,220.0 L 89.1,222.1 L 90.2,224.2 L 91.3,226.1 L 92.4,227.9 L 93.5,229.6 L 94.6,231.2 L 95.7,232.7 L 96.8,234.1 L 97.9,235.3 L 99.0,236.5 L 100.1,237.5 L 101.2,238.5 L 102.3,239.3 L 103.4,240.0 L 104.5,240.6 L 105.6,241.1 L 106.7,241.5 L 107.8,241.8 L 108.9,241.9 L 110.0,242.0 L 111.1,241.9 L 112.2,241.8 L 113.3,241.5 L 114.4,241.1 L 115.5,240.6 L 116.6,240.0 L 117.7,239.3 L 118.8,238.5 L 119.9,237.5 L 121.0,236.5 L 122.1,235.3 L 123.2,234.1 L 124.3,232.7 L 125.4,231.2 L 126.5,229.6 L 127.6,227.9 L 128.7,226.1 L 129.8,224.2 L 130.9,222.1 L 132.0,220.0 L 133.1,217.7 L 134.2,215.4 L 135.3,212.9 L 136.4,210.3 L 137.5,207.6 L 138.6,204.8 L 139.7,201.9 L 140.8,198.9 L 141.9,195.7 L 143.0,192.5 L 144.1,189.1 L 145.2,185.7 L 146.3,182.1 L 147.4,178.4 L 148.5,174.6 L 149.6,170.7 L 150.7,166.7 L 151.8,162.6 L 152.9,158.3 L 154.0,154.0 L 155.1,149.5 L 156.2,145.0 L 157.3,140.3 L 158.4,135.5 L 159.5,130.6 L 160.6,125.6 L 161.7,120.5 L 162.8,115.3 L 163.9,109.9 L 165.0,104.5 L 166.1,98.9 L 167.2,93.3 L 168.3,87.5 L 169.4,81.6 L 170.5,75.6 L 171.6,69.5 L 172.7,63.3 L 173.8,57.0 L 174.9,50.5 L 176.0,44.0" stroke="#FF00AA" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Puntos evaluados -->
+  <circle cx="44.0" cy="44.0" r="3" fill="#1A0828"/>
+  <circle cx="66.0" cy="154.0" r="3" fill="#1A0828"/>
+  <circle cx="88.0" cy="220.0" r="3" fill="#1A0828"/>
+  <circle cx="110.0" cy="242.0" r="3" fill="#1A0828"/>
+  <circle cx="132.0" cy="220.0" r="3" fill="#1A0828"/>
+  <circle cx="154.0" cy="154.0" r="3" fill="#1A0828"/>
+  <circle cx="176.0" cy="44.0" r="3" fill="#1A0828"/>
+</svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ EJERCICIOS ══════════ -->
+    <section class="section-block">
+      <div class="sec-head">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+        </div>
+        <h2>Ejercicios</h2>
+      </div>
+      <div class="bloques-2">
+
+        <!-- B1 -->
+        <div class="mini-card">
+          <div class="mini-card-head">Bloque 1</div>
+          <div class="mini-card-body">
+            <div class="sol">$f(x) = x^2 - 2x - 8, \quad [-2, 4]$</div>
+            <div class="sol">$f(x) = x^2 - 6x + 8, \quad [0, 6]$</div>
+            <div class="sol">$f(x) = x^2 + 4x, \quad [-5, 1]$</div>
+            <div class="sol">$f(x) = -x^2 - 4x, \quad [-5, 1]$</div>
+            <div class="sol">$f(x) = -x^2 + 2x + 8, \quad [-2, 4]$</div>
+          </div>
+        </div>
+
+        <!-- B2 -->
+        <div class="mini-card">
+          <div class="mini-card-head">Bloque 2</div>
+          <div class="mini-card-body">
+            <div class="sol">$f(x) = -x^2 - 10x - 24, \quad [-8, -2]$</div>
+            <div class="sol">$f(x) = x^2 - 4x + 4, \quad [-1, 5]$</div>
+            <div class="sol">$f(x) = x^2 + 6x + 9, \quad [-6, 0]$</div>
+            <div class="sol">$f(x) = -x^2 + 4x - 3, \quad [-1, 5]$</div>
+            <div class="sol">$f(x) = x^2 - 7x + 10, \quad [1, 6]$</div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══════════ RESPUESTAS ══════════ -->
+    <section class="section-block">
+      <div class="sec-toggle" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('show');">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <h2>Resoluciones</h2>
+        <span class="chev">▼</span>
+      </div>
+      <div class="collapsible">
+        
+        <h3>Bloque 1</h3>
+        <div class="bloques-2" style="margin-bottom: 2rem;">
+          
+          <!-- B1 E1 -->
+          <div class="tabulacion-block resolucion-card" style="grid-column: 1 / -1;">
+            <div class="tabulacion-info">
+              <p class="tabulacion-eq">$f(x) = x^2 - 2x - 8$ en $[-2, 4]$</p>
+              <div class="tabulacion-tabla-row">
+                <table class="tabla-x-y">
+                  <tr><th>x</th><th>f(x)</th></tr>
+                  <tr><td>−2</td><td>0</td></tr>
+                  <tr><td>−1</td><td>−5</td></tr>
+                  <tr><td>0</td><td>−8</td></tr>
+                  <tr><td>1</td><td>−9</td></tr>
+                  <tr><td>2</td><td>−8</td></tr>
+                  <tr><td>3</td><td>−5</td></tr>
+                  <tr><td>4</td><td>0</td></tr>
+                </table>
+                <div class="procedimiento-list">
+                  $f(-2) = (-2)^2 - 2(-2) - 8 = 4+4-8 = $ <strong>$0$</strong><br>
+                  $f(-1) = (-1)^2 - 2(-1) - 8 = 1+2-8 = $ <strong>$-5$</strong><br>
+                  $f(0) = (0)^2 - 2(0) - 8 = $ <strong>$-8$</strong><br>
+                  $f(1) = (1)^2 - 2(1) - 8 = 1-2-8 = $ <strong>$-9$</strong><br>
+                  $f(2) = (2)^2 - 2(2) - 8 = 4-4-8 = $ <strong>$-8$</strong><br>
+                  $f(3) = (3)^2 - 2(3) - 8 = 9-6-8 = $ <strong>$-5$</strong><br>
+                  $f(4) = (4)^2 - 2(4) - 8 = 16-8-8 = $ <strong>$0$</strong>
+                </div>
+              </div>
+            </div>
+            <div class="tabulacion-grafica">
+              <svg viewBox="0 0 220 308" xmlns="http://www.w3.org/2000/svg" class="grafica-svg" role="img" aria-label="Gráfica de y = x² - 2x - 8">
+  <g stroke="#E0C4BC" stroke-width="0.5" opacity="0.6">
+    <line x1="0.0" y1="0" x2="0.0" y2="308.0"/>
+    <line x1="22.0" y1="0" x2="22.0" y2="308.0"/>
+    <line x1="44.0" y1="0" x2="44.0" y2="308.0"/>
+    <line x1="66.0" y1="0" x2="66.0" y2="308.0"/>
+    <line x1="88.0" y1="0" x2="88.0" y2="308.0"/>
+    <line x1="110.0" y1="0" x2="110.0" y2="308.0"/>
+    <line x1="132.0" y1="0" x2="132.0" y2="308.0"/>
+    <line x1="154.0" y1="0" x2="154.0" y2="308.0"/>
+    <line x1="176.0" y1="0" x2="176.0" y2="308.0"/>
+    <line x1="198.0" y1="0" x2="198.0" y2="308.0"/>
+    <line x1="220.0" y1="0" x2="220.0" y2="308.0"/>
+    <line x1="0" y1="308.0" x2="220.0" y2="308.0"/>
+    <line x1="0" y1="286.0" x2="220.0" y2="286.0"/>
+    <line x1="0" y1="264.0" x2="220.0" y2="264.0"/>
+    <line x1="0" y1="242.0" x2="220.0" y2="242.0"/>
+    <line x1="0" y1="220.0" x2="220.0" y2="220.0"/>
+    <line x1="0" y1="198.0" x2="220.0" y2="198.0"/>
+    <line x1="0" y1="176.0" x2="220.0" y2="176.0"/>
+    <line x1="0" y1="154.0" x2="220.0" y2="154.0"/>
+    <line x1="0" y1="132.0" x2="220.0" y2="132.0"/>
+    <line x1="0" y1="110.0" x2="220.0" y2="110.0"/>
+    <line x1="0" y1="88.0" x2="220.0" y2="88.0"/>
+    <line x1="0" y1="66.0" x2="220.0" y2="66.0"/>
+    <line x1="0" y1="44.0" x2="220.0" y2="44.0"/>
+    <line x1="0" y1="22.0" x2="220.0" y2="22.0"/>
+    <line x1="0" y1="0.0" x2="220.0" y2="0.0"/>
+  </g>
+  <line x1="0" y1="66.0" x2="220.0" y2="66.0" stroke="#7B5A50" stroke-width="1.2"/>
+  <line x1="88.0" y1="0" x2="88.0" y2="308.0" stroke="#7B5A50" stroke-width="1.2"/>
+  <!-- Números de los ejes -->
+  <line x1="22.0" y1="64.0" x2="22.0" y2="68.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="22.0" y="75.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">-3</text>
+  <line x1="44.0" y1="64.0" x2="44.0" y2="68.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="44.0" y="75.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">-2</text>
+  <line x1="66.0" y1="64.0" x2="66.0" y2="68.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="66.0" y="75.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">-1</text>
+  <line x1="110.0" y1="64.0" x2="110.0" y2="68.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="110.0" y="75.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">1</text>
+  <line x1="132.0" y1="64.0" x2="132.0" y2="68.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="132.0" y="75.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">2</text>
+  <line x1="154.0" y1="64.0" x2="154.0" y2="68.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="154.0" y="75.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">3</text>
+  <line x1="176.0" y1="64.0" x2="176.0" y2="68.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="176.0" y="75.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">4</text>
+  <line x1="198.0" y1="64.0" x2="198.0" y2="68.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="198.0" y="75.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">5</text>
+  <line x1="86.0" y1="286.0" x2="90.0" y2="286.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="83.0" y="289.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">-10</text>
+  <line x1="86.0" y1="264.0" x2="90.0" y2="264.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="83.0" y="267.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">-9</text>
+  <line x1="86.0" y1="242.0" x2="90.0" y2="242.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="83.0" y="245.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">-8</text>
+  <line x1="86.0" y1="220.0" x2="90.0" y2="220.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="83.0" y="223.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">-7</text>
+  <line x1="86.0" y1="198.0" x2="90.0" y2="198.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="83.0" y="201.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">-6</text>
+  <line x1="86.0" y1="176.0" x2="90.0" y2="176.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="83.0" y="179.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">-5</text>
+  <line x1="86.0" y1="154.0" x2="90.0" y2="154.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="83.0" y="157.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">-4</text>
+  <line x1="86.0" y1="132.0" x2="90.0" y2="132.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="83.0" y="135.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">-3</text>
+  <line x1="86.0" y1="110.0" x2="90.0" y2="110.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="83.0" y="113.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">-2</text>
+  <line x1="86.0" y1="88.0" x2="90.0" y2="88.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="83.0" y="91.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">-1</text>
+  <line x1="86.0" y1="44.0" x2="90.0" y2="44.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="83.0" y="47.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">1</text>
+  <line x1="86.0" y1="22.0" x2="90.0" y2="22.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="83.0" y="25.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">2</text>
+  <text x="212" y="62.0" font-family="DM Sans, sans-serif" font-size="9" fill="#7B5A50" font-style="italic">x</text>
+  <text x="93.0" y="10" font-family="DM Sans, sans-serif" font-size="9" fill="#7B5A50" font-style="italic">y</text>
+  <path d="M 44.0,66.0 L 45.1,72.5 L 46.2,79.0 L 47.3,85.3 L 48.4,91.5 L 49.5,97.6 L 50.6,103.6 L 51.7,109.5 L 52.8,115.3 L 53.9,120.9 L 55.0,126.5 L 56.1,131.9 L 57.2,137.3 L 58.3,142.5 L 59.4,147.6 L 60.5,152.6 L 61.6,157.5 L 62.7,162.3 L 63.8,167.0 L 64.9,171.5 L 66.0,176.0 L 67.1,180.3 L 68.2,184.6 L 69.3,188.7 L 70.4,192.7 L 71.5,196.6 L 72.6,200.4 L 73.7,204.1 L 74.8,207.7 L 75.9,211.1 L 77.0,214.5 L 78.1,217.7 L 79.2,220.9 L 80.3,223.9 L 81.4,226.8 L 82.5,229.6 L 83.6,232.3 L 84.7,234.9 L 85.8,237.4 L 86.9,239.7 L 88.0,242.0 L 89.1,244.1 L 90.2,246.2 L 91.3,248.1 L 92.4,249.9 L 93.5,251.6 L 94.6,253.2 L 95.7,254.7 L 96.8,256.1 L 97.9,257.3 L 99.0,258.5 L 100.1,259.5 L 101.2,260.5 L 102.3,261.3 L 103.4,262.0 L 104.5,262.6 L 105.6,263.1 L 106.7,263.5 L 107.8,263.8 L 108.9,263.9 L 110.0,264.0 L 111.1,263.9 L 112.2,263.8 L 113.3,263.5 L 114.4,263.1 L 115.5,262.6 L 116.6,262.0 L 117.7,261.3 L 118.8,260.5 L 119.9,259.5 L 121.0,258.5 L 122.1,257.3 L 123.2,256.1 L 124.3,254.7 L 125.4,253.2 L 126.5,251.6 L 127.6,249.9 L 128.7,248.1 L 129.8,246.2 L 130.9,244.1 L 132.0,242.0 L 133.1,239.7 L 134.2,237.4 L 135.3,234.9 L 136.4,232.3 L 137.5,229.6 L 138.6,226.8 L 139.7,223.9 L 140.8,220.9 L 141.9,217.7 L 143.0,214.5 L 144.1,211.1 L 145.2,207.7 L 146.3,204.1 L 147.4,200.4 L 148.5,196.6 L 149.6,192.7 L 150.7,188.7 L 151.8,184.6 L 152.9,180.3 L 154.0,176.0 L 155.1,171.5 L 156.2,167.0 L 157.3,162.3 L 158.4,157.5 L 159.5,152.6 L 160.6,147.6 L 161.7,142.5 L 162.8,137.3 L 163.9,131.9 L 165.0,126.5 L 166.1,120.9 L 167.2,115.3 L 168.3,109.5 L 169.4,103.6 L 170.5,97.6 L 171.6,91.5 L 172.7,85.3 L 173.8,79.0 L 174.9,72.5 L 176.0,66.0" stroke="#00DEC8" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Puntos evaluados -->
+  <circle cx="44.0" cy="66.0" r="3" fill="#1A0828"/>
+  <circle cx="66.0" cy="176.0" r="3" fill="#1A0828"/>
+  <circle cx="88.0" cy="242.0" r="3" fill="#1A0828"/>
+  <circle cx="110.0" cy="264.0" r="3" fill="#1A0828"/>
+  <circle cx="132.0" cy="242.0" r="3" fill="#1A0828"/>
+  <circle cx="154.0" cy="176.0" r="3" fill="#1A0828"/>
+  <circle cx="176.0" cy="66.0" r="3" fill="#1A0828"/>
+</svg>
+            </div>
+          </div>
+
+          <!-- B1 E2 -->
+          <div class="tabulacion-block resolucion-card" style="grid-column: 1 / -1;">
+            <div class="tabulacion-info">
+              <p class="tabulacion-eq">$f(x) = x^2 - 6x + 8$ en $[0, 6]$</p>
+              <div class="tabulacion-tabla-row">
+                <table class="tabla-x-y">
+                  <tr><th>x</th><th>f(x)</th></tr>
+                  <tr><td>0</td><td>8</td></tr>
+                  <tr><td>1</td><td>3</td></tr>
+                  <tr><td>2</td><td>0</td></tr>
+                  <tr><td>3</td><td>−1</td></tr>
+                  <tr><td>4</td><td>0</td></tr>
+                  <tr><td>5</td><td>3</td></tr>
+                  <tr><td>6</td><td>8</td></tr>
+                </table>
+                <div class="procedimiento-list">
+                  $f(0) = (0)^2 - 6(0) + 8 = $ <strong>$8$</strong><br>
+                  $f(1) = (1)^2 - 6(1) + 8 = 1-6+8 = $ <strong>$3$</strong><br>
+                  $f(2) = (2)^2 - 6(2) + 8 = 4-12+8 = $ <strong>$0$</strong><br>
+                  $f(3) = (3)^2 - 6(3) + 8 = 9-18+8 = $ <strong>$-1$</strong><br>
+                  $f(4) = (4)^2 - 6(4) + 8 = 16-24+8 = $ <strong>$0$</strong><br>
+                  $f(5) = (5)^2 - 6(5) + 8 = 25-30+8 = $ <strong>$3$</strong><br>
+                  $f(6) = (6)^2 - 6(6) + 8 = 36-36+8 = $ <strong>$8$</strong>
+                </div>
+              </div>
+            </div>
+            <div class="tabulacion-grafica">
+              <svg viewBox="0 0 220 286" xmlns="http://www.w3.org/2000/svg" class="grafica-svg" role="img" aria-label="Gráfica de y = x² - 6x + 8">
+  <g stroke="#E0C4BC" stroke-width="0.5" opacity="0.6">
+    <line x1="0.0" y1="0" x2="0.0" y2="286.0"/>
+    <line x1="22.0" y1="0" x2="22.0" y2="286.0"/>
+    <line x1="44.0" y1="0" x2="44.0" y2="286.0"/>
+    <line x1="66.0" y1="0" x2="66.0" y2="286.0"/>
+    <line x1="88.0" y1="0" x2="88.0" y2="286.0"/>
+    <line x1="110.0" y1="0" x2="110.0" y2="286.0"/>
+    <line x1="132.0" y1="0" x2="132.0" y2="286.0"/>
+    <line x1="154.0" y1="0" x2="154.0" y2="286.0"/>
+    <line x1="176.0" y1="0" x2="176.0" y2="286.0"/>
+    <line x1="198.0" y1="0" x2="198.0" y2="286.0"/>
+    <line x1="220.0" y1="0" x2="220.0" y2="286.0"/>
+    <line x1="0" y1="286.0" x2="220.0" y2="286.0"/>
+    <line x1="0" y1="264.0" x2="220.0" y2="264.0"/>
+    <line x1="0" y1="242.0" x2="220.0" y2="242.0"/>
+    <line x1="0" y1="220.0" x2="220.0" y2="220.0"/>
+    <line x1="0" y1="198.0" x2="220.0" y2="198.0"/>
+    <line x1="0" y1="176.0" x2="220.0" y2="176.0"/>
+    <line x1="0" y1="154.0" x2="220.0" y2="154.0"/>
+    <line x1="0" y1="132.0" x2="220.0" y2="132.0"/>
+    <line x1="0" y1="110.0" x2="220.0" y2="110.0"/>
+    <line x1="0" y1="88.0" x2="220.0" y2="88.0"/>
+    <line x1="0" y1="66.0" x2="220.0" y2="66.0"/>
+    <line x1="0" y1="44.0" x2="220.0" y2="44.0"/>
+    <line x1="0" y1="22.0" x2="220.0" y2="22.0"/>
+    <line x1="0" y1="0.0" x2="220.0" y2="0.0"/>
+  </g>
+  <line x1="0" y1="220.0" x2="220.0" y2="220.0" stroke="#7B5A50" stroke-width="1.2"/>
+  <line x1="44.0" y1="0" x2="44.0" y2="286.0" stroke="#7B5A50" stroke-width="1.2"/>
+  <!-- Números de los ejes -->
+  <line x1="22.0" y1="218.0" x2="22.0" y2="222.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="22.0" y="229.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">-1</text>
+  <line x1="66.0" y1="218.0" x2="66.0" y2="222.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="66.0" y="229.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">1</text>
+  <line x1="88.0" y1="218.0" x2="88.0" y2="222.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="88.0" y="229.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">2</text>
+  <line x1="110.0" y1="218.0" x2="110.0" y2="222.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="110.0" y="229.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">3</text>
+  <line x1="132.0" y1="218.0" x2="132.0" y2="222.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="132.0" y="229.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">4</text>
+  <line x1="154.0" y1="218.0" x2="154.0" y2="222.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="154.0" y="229.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">5</text>
+  <line x1="176.0" y1="218.0" x2="176.0" y2="222.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="176.0" y="229.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">6</text>
+  <line x1="198.0" y1="218.0" x2="198.0" y2="222.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="198.0" y="229.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">7</text>
+  <line x1="42.0" y1="264.0" x2="46.0" y2="264.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="39.0" y="267.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">-2</text>
+  <line x1="42.0" y1="242.0" x2="46.0" y2="242.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="39.0" y="245.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">-1</text>
+  <line x1="42.0" y1="198.0" x2="46.0" y2="198.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="39.0" y="201.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">1</text>
+  <line x1="42.0" y1="176.0" x2="46.0" y2="176.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="39.0" y="179.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">2</text>
+  <line x1="42.0" y1="154.0" x2="46.0" y2="154.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="39.0" y="157.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">3</text>
+  <line x1="42.0" y1="132.0" x2="46.0" y2="132.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="39.0" y="135.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">4</text>
+  <line x1="42.0" y1="110.0" x2="46.0" y2="110.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="39.0" y="113.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">5</text>
+  <line x1="42.0" y1="88.0" x2="46.0" y2="88.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="39.0" y="91.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">6</text>
+  <line x1="42.0" y1="66.0" x2="46.0" y2="66.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="39.0" y="69.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">7</text>
+  <line x1="42.0" y1="44.0" x2="46.0" y2="44.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="39.0" y="47.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">8</text>
+  <line x1="42.0" y1="22.0" x2="46.0" y2="22.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="39.0" y="25.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">9</text>
+  <text x="212" y="216.0" font-family="DM Sans, sans-serif" font-size="9" fill="#7B5A50" font-style="italic">x</text>
+  <text x="49.0" y="10" font-family="DM Sans, sans-serif" font-size="9" fill="#7B5A50" font-style="italic">y</text>
+  <path d="M 44.0,44.0 L 45.1,50.5 L 46.2,57.0 L 47.3,63.3 L 48.4,69.5 L 49.5,75.6 L 50.6,81.6 L 51.7,87.5 L 52.8,93.3 L 53.9,98.9 L 55.0,104.5 L 56.1,109.9 L 57.2,115.3 L 58.3,120.5 L 59.4,125.6 L 60.5,130.6 L 61.6,135.5 L 62.7,140.3 L 63.8,145.0 L 64.9,149.5 L 66.0,154.0 L 67.1,158.3 L 68.2,162.6 L 69.3,166.7 L 70.4,170.7 L 71.5,174.6 L 72.6,178.4 L 73.7,182.1 L 74.8,185.7 L 75.9,189.1 L 77.0,192.5 L 78.1,195.7 L 79.2,198.9 L 80.3,201.9 L 81.4,204.8 L 82.5,207.6 L 83.6,210.3 L 84.7,212.9 L 85.8,215.4 L 86.9,217.7 L 88.0,220.0 L 89.1,222.1 L 90.2,224.2 L 91.3,226.1 L 92.4,227.9 L 93.5,229.6 L 94.6,231.2 L 95.7,232.7 L 96.8,234.1 L 97.9,235.3 L 99.0,236.5 L 100.1,237.5 L 101.2,238.5 L 102.3,239.3 L 103.4,240.0 L 104.5,240.6 L 105.6,241.1 L 106.7,241.5 L 107.8,241.8 L 108.9,241.9 L 110.0,242.0 L 111.1,241.9 L 112.2,241.8 L 113.3,241.5 L 114.4,241.1 L 115.5,240.6 L 116.6,240.0 L 117.7,239.3 L 118.8,238.5 L 119.9,237.5 L 121.0,236.5 L 122.1,235.3 L 123.2,234.1 L 124.3,232.7 L 125.4,231.2 L 126.5,229.6 L 127.6,227.9 L 128.7,226.1 L 129.8,224.2 L 130.9,222.1 L 132.0,220.0 L 133.1,217.7 L 134.2,215.4 L 135.3,212.9 L 136.4,210.3 L 137.5,207.6 L 138.6,204.8 L 139.7,201.9 L 140.8,198.9 L 141.9,195.7 L 143.0,192.5 L 144.1,189.1 L 145.2,185.7 L 146.3,182.1 L 147.4,178.4 L 148.5,174.6 L 149.6,170.7 L 150.7,166.7 L 151.8,162.6 L 152.9,158.3 L 154.0,154.0 L 155.1,149.5 L 156.2,145.0 L 157.3,140.3 L 158.4,135.5 L 159.5,130.6 L 160.6,125.6 L 161.7,120.5 L 162.8,115.3 L 163.9,109.9 L 165.0,104.5 L 166.1,98.9 L 167.2,93.3 L 168.3,87.5 L 169.4,81.6 L 170.5,75.6 L 171.6,69.5 L 172.7,63.3 L 173.8,57.0 L 174.9,50.5 L 176.0,44.0" stroke="#FF00AA" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Puntos evaluados -->
+  <circle cx="44.0" cy="44.0" r="3" fill="#1A0828"/>
+  <circle cx="66.0" cy="154.0" r="3" fill="#1A0828"/>
+  <circle cx="88.0" cy="220.0" r="3" fill="#1A0828"/>
+  <circle cx="110.0" cy="242.0" r="3" fill="#1A0828"/>
+  <circle cx="132.0" cy="220.0" r="3" fill="#1A0828"/>
+  <circle cx="154.0" cy="154.0" r="3" fill="#1A0828"/>
+  <circle cx="176.0" cy="44.0" r="3" fill="#1A0828"/>
+</svg>
+            </div>
+          </div>
+
+          <!-- B1 E3 -->
+          <div class="tabulacion-block resolucion-card" style="grid-column: 1 / -1;">
+            <div class="tabulacion-info">
+              <p class="tabulacion-eq">$f(x) = x^2 + 4x$ en $[-5, 1]$</p>
+              <div class="tabulacion-tabla-row">
+                <table class="tabla-x-y">
+                  <tr><th>x</th><th>f(x)</th></tr>
+                  <tr><td>−5</td><td>5</td></tr>
+                  <tr><td>−4</td><td>0</td></tr>
+                  <tr><td>−3</td><td>−3</td></tr>
+                  <tr><td>−2</td><td>−4</td></tr>
+                  <tr><td>−1</td><td>−3</td></tr>
+                  <tr><td>0</td><td>0</td></tr>
+                  <tr><td>1</td><td>5</td></tr>
+                </table>
+                <div class="procedimiento-list">
+                  $f(-5) = (-5)^2 + 4(-5) = 25-20 = $ <strong>$5$</strong><br>
+                  $f(-4) = (-4)^2 + 4(-4) = 16-16 = $ <strong>$0$</strong><br>
+                  $f(-3) = (-3)^2 + 4(-3) = 9-12 = $ <strong>$-3$</strong><br>
+                  $f(-2) = (-2)^2 + 4(-2) = 4-8 = $ <strong>$-4$</strong><br>
+                  $f(-1) = (-1)^2 + 4(-1) = 1-4 = $ <strong>$-3$</strong><br>
+                  $f(0) = (0)^2 + 4(0) = $ <strong>$0$</strong><br>
+                  $f(1) = (1)^2 + 4(1) = 1+4 = $ <strong>$5$</strong>
+                </div>
+              </div>
+            </div>
+            <div class="tabulacion-grafica">
+              <svg viewBox="0 0 220 286" xmlns="http://www.w3.org/2000/svg" class="grafica-svg" role="img" aria-label="Gráfica de y = x² + 4x">
+  <g stroke="#E0C4BC" stroke-width="0.5" opacity="0.6">
+    <line x1="0.0" y1="0" x2="0.0" y2="286.0"/>
+    <line x1="22.0" y1="0" x2="22.0" y2="286.0"/>
+    <line x1="44.0" y1="0" x2="44.0" y2="286.0"/>
+    <line x1="66.0" y1="0" x2="66.0" y2="286.0"/>
+    <line x1="88.0" y1="0" x2="88.0" y2="286.0"/>
+    <line x1="110.0" y1="0" x2="110.0" y2="286.0"/>
+    <line x1="132.0" y1="0" x2="132.0" y2="286.0"/>
+    <line x1="154.0" y1="0" x2="154.0" y2="286.0"/>
+    <line x1="176.0" y1="0" x2="176.0" y2="286.0"/>
+    <line x1="198.0" y1="0" x2="198.0" y2="286.0"/>
+    <line x1="220.0" y1="0" x2="220.0" y2="286.0"/>
+    <line x1="0" y1="286.0" x2="220.0" y2="286.0"/>
+    <line x1="0" y1="264.0" x2="220.0" y2="264.0"/>
+    <line x1="0" y1="242.0" x2="220.0" y2="242.0"/>
+    <line x1="0" y1="220.0" x2="220.0" y2="220.0"/>
+    <line x1="0" y1="198.0" x2="220.0" y2="198.0"/>
+    <line x1="0" y1="176.0" x2="220.0" y2="176.0"/>
+    <line x1="0" y1="154.0" x2="220.0" y2="154.0"/>
+    <line x1="0" y1="132.0" x2="220.0" y2="132.0"/>
+    <line x1="0" y1="110.0" x2="220.0" y2="110.0"/>
+    <line x1="0" y1="88.0" x2="220.0" y2="88.0"/>
+    <line x1="0" y1="66.0" x2="220.0" y2="66.0"/>
+    <line x1="0" y1="44.0" x2="220.0" y2="44.0"/>
+    <line x1="0" y1="22.0" x2="220.0" y2="22.0"/>
+    <line x1="0" y1="0.0" x2="220.0" y2="0.0"/>
+  </g>
+  <line x1="0" y1="154.0" x2="220.0" y2="154.0" stroke="#7B5A50" stroke-width="1.2"/>
+  <line x1="154.0" y1="0" x2="154.0" y2="286.0" stroke="#7B5A50" stroke-width="1.2"/>
+  <!-- Números de los ejes -->
+  <line x1="22.0" y1="152.0" x2="22.0" y2="156.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="22.0" y="163.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">-6</text>
+  <line x1="44.0" y1="152.0" x2="44.0" y2="156.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="44.0" y="163.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">-5</text>
+  <line x1="66.0" y1="152.0" x2="66.0" y2="156.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="66.0" y="163.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">-4</text>
+  <line x1="88.0" y1="152.0" x2="88.0" y2="156.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="88.0" y="163.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">-3</text>
+  <line x1="110.0" y1="152.0" x2="110.0" y2="156.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="110.0" y="163.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">-2</text>
+  <line x1="132.0" y1="152.0" x2="132.0" y2="156.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="132.0" y="163.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">-1</text>
+  <line x1="176.0" y1="152.0" x2="176.0" y2="156.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="176.0" y="163.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">1</text>
+  <line x1="198.0" y1="152.0" x2="198.0" y2="156.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="198.0" y="163.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">2</text>
+  <line x1="152.0" y1="264.0" x2="156.0" y2="264.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="149.0" y="267.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">-5</text>
+  <line x1="152.0" y1="242.0" x2="156.0" y2="242.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="149.0" y="245.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">-4</text>
+  <line x1="152.0" y1="220.0" x2="156.0" y2="220.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="149.0" y="223.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">-3</text>
+  <line x1="152.0" y1="198.0" x2="156.0" y2="198.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="149.0" y="201.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">-2</text>
+  <line x1="152.0" y1="176.0" x2="156.0" y2="176.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="149.0" y="179.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">-1</text>
+  <line x1="152.0" y1="132.0" x2="156.0" y2="132.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="149.0" y="135.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">1</text>
+  <line x1="152.0" y1="110.0" x2="156.0" y2="110.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="149.0" y="113.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">2</text>
+  <line x1="152.0" y1="88.0" x2="156.0" y2="88.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="149.0" y="91.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">3</text>
+  <line x1="152.0" y1="66.0" x2="156.0" y2="66.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="149.0" y="69.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">4</text>
+  <line x1="152.0" y1="44.0" x2="156.0" y2="44.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="149.0" y="47.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">5</text>
+  <line x1="152.0" y1="22.0" x2="156.0" y2="22.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="149.0" y="25.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">6</text>
+  <text x="212" y="150.0" font-family="DM Sans, sans-serif" font-size="9" fill="#7B5A50" font-style="italic">x</text>
+  <text x="159.0" y="10" font-family="DM Sans, sans-serif" font-size="9" fill="#7B5A50" font-style="italic">y</text>
+  <path d="M 44.0,44.0 L 45.1,50.5 L 46.2,57.0 L 47.3,63.3 L 48.4,69.5 L 49.5,75.6 L 50.6,81.6 L 51.7,87.5 L 52.8,93.3 L 53.9,98.9 L 55.0,104.5 L 56.1,109.9 L 57.2,115.3 L 58.3,120.5 L 59.4,125.6 L 60.5,130.6 L 61.6,135.5 L 62.7,140.3 L 63.8,145.0 L 64.9,149.5 L 66.0,154.0 L 67.1,158.3 L 68.2,162.6 L 69.3,166.7 L 70.4,170.7 L 71.5,174.6 L 72.6,178.4 L 73.7,182.1 L 74.8,185.7 L 75.9,189.1 L 77.0,192.5 L 78.1,195.7 L 79.2,198.9 L 80.3,201.9 L 81.4,204.8 L 82.5,207.6 L 83.6,210.3 L 84.7,212.9 L 85.8,215.4 L 86.9,217.7 L 88.0,220.0 L 89.1,222.1 L 90.2,224.2 L 91.3,226.1 L 92.4,227.9 L 93.5,229.6 L 94.6,231.2 L 95.7,232.7 L 96.8,234.1 L 97.9,235.3 L 99.0,236.5 L 100.1,237.5 L 101.2,238.5 L 102.3,239.3 L 103.4,240.0 L 104.5,240.6 L 105.6,241.1 L 106.7,241.5 L 107.8,241.8 L 108.9,241.9 L 110.0,242.0 L 111.1,241.9 L 112.2,241.8 L 113.3,241.5 L 114.4,241.1 L 115.5,240.6 L 116.6,240.0 L 117.7,239.3 L 118.8,238.5 L 119.9,237.5 L 121.0,236.5 L 122.1,235.3 L 123.2,234.1 L 124.3,232.7 L 125.4,231.2 L 126.5,229.6 L 127.6,227.9 L 128.7,226.1 L 129.8,224.2 L 130.9,222.1 L 132.0,220.0 L 133.1,217.7 L 134.2,215.4 L 135.3,212.9 L 136.4,210.3 L 137.5,207.6 L 138.6,204.8 L 139.7,201.9 L 140.8,198.9 L 141.9,195.7 L 143.0,192.5 L 144.1,189.1 L 145.2,185.7 L 146.3,182.1 L 147.4,178.4 L 148.5,174.6 L 149.6,170.7 L 150.7,166.7 L 151.8,162.6 L 152.9,158.3 L 154.0,154.0 L 155.1,149.5 L 156.2,145.0 L 157.3,140.3 L 158.4,135.5 L 159.5,130.6 L 160.6,125.6 L 161.7,120.5 L 162.8,115.3 L 163.9,109.9 L 165.0,104.5 L 166.1,98.9 L 167.2,93.3 L 168.3,87.5 L 169.4,81.6 L 170.5,75.6 L 171.6,69.5 L 172.7,63.3 L 173.8,57.0 L 174.9,50.5 L 176.0,44.0" stroke="#4A0080" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Puntos evaluados -->
+  <circle cx="44.0" cy="44.0" r="3" fill="#1A0828"/>
+  <circle cx="66.0" cy="154.0" r="3" fill="#1A0828"/>
+  <circle cx="88.0" cy="220.0" r="3" fill="#1A0828"/>
+  <circle cx="110.0" cy="242.0" r="3" fill="#1A0828"/>
+  <circle cx="132.0" cy="220.0" r="3" fill="#1A0828"/>
+  <circle cx="154.0" cy="154.0" r="3" fill="#1A0828"/>
+  <circle cx="176.0" cy="44.0" r="3" fill="#1A0828"/>
+</svg>
+            </div>
+          </div>
+
+          <!-- B1 E4 -->
+          <div class="tabulacion-block resolucion-card" style="grid-column: 1 / -1;">
+            <div class="tabulacion-info">
+              <p class="tabulacion-eq">$f(x) = -x^2 - 4x$ en $[-5, 1]$</p>
+              <div class="tabulacion-tabla-row">
+                <table class="tabla-x-y">
+                  <tr><th>x</th><th>f(x)</th></tr>
+                  <tr><td>−5</td><td>−5</td></tr>
+                  <tr><td>−4</td><td>0</td></tr>
+                  <tr><td>−3</td><td>3</td></tr>
+                  <tr><td>−2</td><td>4</td></tr>
+                  <tr><td>−1</td><td>3</td></tr>
+                  <tr><td>0</td><td>0</td></tr>
+                  <tr><td>1</td><td>−5</td></tr>
+                </table>
+                <div class="procedimiento-list">
+                  $f(-5) = -(-5)^2 - 4(-5) = -25+20 = $ <strong>$-5$</strong><br>
+                  $f(-4) = -(-4)^2 - 4(-4) = -16+16 = $ <strong>$0$</strong><br>
+                  $f(-3) = -(-3)^2 - 4(-3) = -9+12 = $ <strong>$3$</strong><br>
+                  $f(-2) = -(-2)^2 - 4(-2) = -4+8 = $ <strong>$4$</strong><br>
+                  $f(-1) = -(-1)^2 - 4(-1) = -1+4 = $ <strong>$3$</strong><br>
+                  $f(0) = -(0)^2 - 4(0) = $ <strong>$0$</strong><br>
+                  $f(1) = -(1)^2 - 4(1) = -1-4 = $ <strong>$-5$</strong>
+                </div>
+              </div>
+            </div>
+            <div class="tabulacion-grafica">
+              <svg viewBox="0 0 220 286" xmlns="http://www.w3.org/2000/svg" class="grafica-svg" role="img" aria-label="Gráfica de y = -x² - 4x">
+  <g stroke="#E0C4BC" stroke-width="0.5" opacity="0.6">
+    <line x1="0.0" y1="0" x2="0.0" y2="286.0"/>
+    <line x1="22.0" y1="0" x2="22.0" y2="286.0"/>
+    <line x1="44.0" y1="0" x2="44.0" y2="286.0"/>
+    <line x1="66.0" y1="0" x2="66.0" y2="286.0"/>
+    <line x1="88.0" y1="0" x2="88.0" y2="286.0"/>
+    <line x1="110.0" y1="0" x2="110.0" y2="286.0"/>
+    <line x1="132.0" y1="0" x2="132.0" y2="286.0"/>
+    <line x1="154.0" y1="0" x2="154.0" y2="286.0"/>
+    <line x1="176.0" y1="0" x2="176.0" y2="286.0"/>
+    <line x1="198.0" y1="0" x2="198.0" y2="286.0"/>
+    <line x1="220.0" y1="0" x2="220.0" y2="286.0"/>
+    <line x1="0" y1="286.0" x2="220.0" y2="286.0"/>
+    <line x1="0" y1="264.0" x2="220.0" y2="264.0"/>
+    <line x1="0" y1="242.0" x2="220.0" y2="242.0"/>
+    <line x1="0" y1="220.0" x2="220.0" y2="220.0"/>
+    <line x1="0" y1="198.0" x2="220.0" y2="198.0"/>
+    <line x1="0" y1="176.0" x2="220.0" y2="176.0"/>
+    <line x1="0" y1="154.0" x2="220.0" y2="154.0"/>
+    <line x1="0" y1="132.0" x2="220.0" y2="132.0"/>
+    <line x1="0" y1="110.0" x2="220.0" y2="110.0"/>
+    <line x1="0" y1="88.0" x2="220.0" y2="88.0"/>
+    <line x1="0" y1="66.0" x2="220.0" y2="66.0"/>
+    <line x1="0" y1="44.0" x2="220.0" y2="44.0"/>
+    <line x1="0" y1="22.0" x2="220.0" y2="22.0"/>
+    <line x1="0" y1="0.0" x2="220.0" y2="0.0"/>
+  </g>
+  <line x1="0" y1="132.0" x2="220.0" y2="132.0" stroke="#7B5A50" stroke-width="1.2"/>
+  <line x1="154.0" y1="0" x2="154.0" y2="286.0" stroke="#7B5A50" stroke-width="1.2"/>
+  <!-- Números de los ejes -->
+  <line x1="22.0" y1="130.0" x2="22.0" y2="134.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="22.0" y="141.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">-6</text>
+  <line x1="44.0" y1="130.0" x2="44.0" y2="134.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="44.0" y="141.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">-5</text>
+  <line x1="66.0" y1="130.0" x2="66.0" y2="134.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="66.0" y="141.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">-4</text>
+  <line x1="88.0" y1="130.0" x2="88.0" y2="134.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="88.0" y="141.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">-3</text>
+  <line x1="110.0" y1="130.0" x2="110.0" y2="134.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="110.0" y="141.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">-2</text>
+  <line x1="132.0" y1="130.0" x2="132.0" y2="134.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="132.0" y="141.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">-1</text>
+  <line x1="176.0" y1="130.0" x2="176.0" y2="134.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="176.0" y="141.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">1</text>
+  <line x1="198.0" y1="130.0" x2="198.0" y2="134.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="198.0" y="141.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">2</text>
+  <line x1="152.0" y1="264.0" x2="156.0" y2="264.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="149.0" y="267.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">-6</text>
+  <line x1="152.0" y1="242.0" x2="156.0" y2="242.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="149.0" y="245.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">-5</text>
+  <line x1="152.0" y1="220.0" x2="156.0" y2="220.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="149.0" y="223.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">-4</text>
+  <line x1="152.0" y1="198.0" x2="156.0" y2="198.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="149.0" y="201.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">-3</text>
+  <line x1="152.0" y1="176.0" x2="156.0" y2="176.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="149.0" y="179.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">-2</text>
+  <line x1="152.0" y1="154.0" x2="156.0" y2="154.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="149.0" y="157.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">-1</text>
+  <line x1="152.0" y1="110.0" x2="156.0" y2="110.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="149.0" y="113.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">1</text>
+  <line x1="152.0" y1="88.0" x2="156.0" y2="88.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="149.0" y="91.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">2</text>
+  <line x1="152.0" y1="66.0" x2="156.0" y2="66.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="149.0" y="69.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">3</text>
+  <line x1="152.0" y1="44.0" x2="156.0" y2="44.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="149.0" y="47.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">4</text>
+  <line x1="152.0" y1="22.0" x2="156.0" y2="22.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="149.0" y="25.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">5</text>
+  <text x="212" y="128.0" font-family="DM Sans, sans-serif" font-size="9" fill="#7B5A50" font-style="italic">x</text>
+  <text x="159.0" y="10" font-family="DM Sans, sans-serif" font-size="9" fill="#7B5A50" font-style="italic">y</text>
+  <path d="M 44.0,242.0 L 45.1,235.5 L 46.2,229.0 L 47.3,222.7 L 48.4,216.5 L 49.5,210.4 L 50.6,204.4 L 51.7,198.5 L 52.8,192.7 L 53.9,187.1 L 55.0,181.5 L 56.1,176.1 L 57.2,170.7 L 58.3,165.5 L 59.4,160.4 L 60.5,155.4 L 61.6,150.5 L 62.7,145.7 L 63.8,141.0 L 64.9,136.5 L 66.0,132.0 L 67.1,127.7 L 68.2,123.4 L 69.3,119.3 L 70.4,115.3 L 71.5,111.4 L 72.6,107.6 L 73.7,103.9 L 74.8,100.3 L 75.9,96.9 L 77.0,93.5 L 78.1,90.3 L 79.2,87.1 L 80.3,84.1 L 81.4,81.2 L 82.5,78.4 L 83.6,75.7 L 84.7,73.1 L 85.8,70.6 L 86.9,68.3 L 88.0,66.0 L 89.1,63.9 L 90.2,61.8 L 91.3,59.9 L 92.4,58.1 L 93.5,56.4 L 94.6,54.8 L 95.7,53.3 L 96.8,51.9 L 97.9,50.7 L 99.0,49.5 L 100.1,48.5 L 101.2,47.5 L 102.3,46.7 L 103.4,46.0 L 104.5,45.4 L 105.6,44.9 L 106.7,44.5 L 107.8,44.2 L 108.9,44.1 L 110.0,44.0 L 111.1,44.1 L 112.2,44.2 L 113.3,44.5 L 114.4,44.9 L 115.5,45.4 L 116.6,46.0 L 117.7,46.7 L 118.8,47.5 L 119.9,48.5 L 121.0,49.5 L 122.1,50.7 L 123.2,51.9 L 124.3,53.3 L 125.4,54.8 L 126.5,56.4 L 127.6,58.1 L 128.7,59.9 L 129.8,61.8 L 130.9,63.9 L 132.0,66.0 L 133.1,68.3 L 134.2,70.6 L 135.3,73.1 L 136.4,75.7 L 137.5,78.4 L 138.6,81.2 L 139.7,84.1 L 140.8,87.1 L 141.9,90.3 L 143.0,93.5 L 144.1,96.9 L 145.2,100.3 L 146.3,103.9 L 147.4,107.6 L 148.5,111.4 L 149.6,115.3 L 150.7,119.3 L 151.8,123.4 L 152.9,127.7 L 154.0,132.0 L 155.1,136.5 L 156.2,141.0 L 157.3,145.7 L 158.4,150.5 L 159.5,155.4 L 160.6,160.4 L 161.7,165.5 L 162.8,170.7 L 163.9,176.1 L 165.0,181.5 L 166.1,187.1 L 167.2,192.7 L 168.3,198.5 L 169.4,204.4 L 170.5,210.4 L 171.6,216.5 L 172.7,222.7 L 173.8,229.0 L 174.9,235.5 L 176.0,242.0" stroke="#00DEC8" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Puntos evaluados -->
+  <circle cx="44.0" cy="242.0" r="3" fill="#1A0828"/>
+  <circle cx="66.0" cy="132.0" r="3" fill="#1A0828"/>
+  <circle cx="88.0" cy="66.0" r="3" fill="#1A0828"/>
+  <circle cx="110.0" cy="44.0" r="3" fill="#1A0828"/>
+  <circle cx="132.0" cy="66.0" r="3" fill="#1A0828"/>
+  <circle cx="154.0" cy="132.0" r="3" fill="#1A0828"/>
+  <circle cx="176.0" cy="242.0" r="3" fill="#1A0828"/>
+</svg>
+            </div>
+          </div>
+
+          <!-- B1 E5 -->
+          <div class="tabulacion-block resolucion-card" style="grid-column: 1 / -1;">
+            <div class="tabulacion-info">
+              <p class="tabulacion-eq">$f(x) = -x^2 + 2x + 8$ en $[-2, 4]$</p>
+              <div class="tabulacion-tabla-row">
+                <table class="tabla-x-y">
+                  <tr><th>x</th><th>f(x)</th></tr>
+                  <tr><td>−2</td><td>0</td></tr>
+                  <tr><td>−1</td><td>5</td></tr>
+                  <tr><td>0</td><td>8</td></tr>
+                  <tr><td>1</td><td>9</td></tr>
+                  <tr><td>2</td><td>8</td></tr>
+                  <tr><td>3</td><td>5</td></tr>
+                  <tr><td>4</td><td>0</td></tr>
+                </table>
+                <div class="procedimiento-list">
+                  $f(-2) = -(-2)^2 + 2(-2) + 8 = -4-4+8 = $ <strong>$0$</strong><br>
+                  $f(-1) = -(-1)^2 + 2(-1) + 8 = -1-2+8 = $ <strong>$5$</strong><br>
+                  $f(0) = -(0)^2 + 2(0) + 8 = $ <strong>$8$</strong><br>
+                  $f(1) = -(1)^2 + 2(1) + 8 = -1+2+8 = $ <strong>$9$</strong><br>
+                  $f(2) = -(2)^2 + 2(2) + 8 = -4+4+8 = $ <strong>$8$</strong><br>
+                  $f(3) = -(3)^2 + 2(3) + 8 = -9+6+8 = $ <strong>$5$</strong><br>
+                  $f(4) = -(4)^2 + 2(4) + 8 = -16+8+8 = $ <strong>$0$</strong>
+                </div>
+              </div>
+            </div>
+            <div class="tabulacion-grafica">
+              <svg viewBox="0 0 220 308" xmlns="http://www.w3.org/2000/svg" class="grafica-svg" role="img" aria-label="Gráfica de y = -x² + 2x + 8">
+  <g stroke="#E0C4BC" stroke-width="0.5" opacity="0.6">
+    <line x1="0.0" y1="0" x2="0.0" y2="308.0"/>
+    <line x1="22.0" y1="0" x2="22.0" y2="308.0"/>
+    <line x1="44.0" y1="0" x2="44.0" y2="308.0"/>
+    <line x1="66.0" y1="0" x2="66.0" y2="308.0"/>
+    <line x1="88.0" y1="0" x2="88.0" y2="308.0"/>
+    <line x1="110.0" y1="0" x2="110.0" y2="308.0"/>
+    <line x1="132.0" y1="0" x2="132.0" y2="308.0"/>
+    <line x1="154.0" y1="0" x2="154.0" y2="308.0"/>
+    <line x1="176.0" y1="0" x2="176.0" y2="308.0"/>
+    <line x1="198.0" y1="0" x2="198.0" y2="308.0"/>
+    <line x1="220.0" y1="0" x2="220.0" y2="308.0"/>
+    <line x1="0" y1="308.0" x2="220.0" y2="308.0"/>
+    <line x1="0" y1="286.0" x2="220.0" y2="286.0"/>
+    <line x1="0" y1="264.0" x2="220.0" y2="264.0"/>
+    <line x1="0" y1="242.0" x2="220.0" y2="242.0"/>
+    <line x1="0" y1="220.0" x2="220.0" y2="220.0"/>
+    <line x1="0" y1="198.0" x2="220.0" y2="198.0"/>
+    <line x1="0" y1="176.0" x2="220.0" y2="176.0"/>
+    <line x1="0" y1="154.0" x2="220.0" y2="154.0"/>
+    <line x1="0" y1="132.0" x2="220.0" y2="132.0"/>
+    <line x1="0" y1="110.0" x2="220.0" y2="110.0"/>
+    <line x1="0" y1="88.0" x2="220.0" y2="88.0"/>
+    <line x1="0" y1="66.0" x2="220.0" y2="66.0"/>
+    <line x1="0" y1="44.0" x2="220.0" y2="44.0"/>
+    <line x1="0" y1="22.0" x2="220.0" y2="22.0"/>
+    <line x1="0" y1="0.0" x2="220.0" y2="0.0"/>
+  </g>
+  <line x1="0" y1="242.0" x2="220.0" y2="242.0" stroke="#7B5A50" stroke-width="1.2"/>
+  <line x1="88.0" y1="0" x2="88.0" y2="308.0" stroke="#7B5A50" stroke-width="1.2"/>
+  <!-- Números de los ejes -->
+  <line x1="22.0" y1="240.0" x2="22.0" y2="244.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="22.0" y="251.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">-3</text>
+  <line x1="44.0" y1="240.0" x2="44.0" y2="244.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="44.0" y="251.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">-2</text>
+  <line x1="66.0" y1="240.0" x2="66.0" y2="244.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="66.0" y="251.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">-1</text>
+  <line x1="110.0" y1="240.0" x2="110.0" y2="244.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="110.0" y="251.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">1</text>
+  <line x1="132.0" y1="240.0" x2="132.0" y2="244.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="132.0" y="251.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">2</text>
+  <line x1="154.0" y1="240.0" x2="154.0" y2="244.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="154.0" y="251.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">3</text>
+  <line x1="176.0" y1="240.0" x2="176.0" y2="244.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="176.0" y="251.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">4</text>
+  <line x1="198.0" y1="240.0" x2="198.0" y2="244.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="198.0" y="251.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">5</text>
+  <line x1="86.0" y1="286.0" x2="90.0" y2="286.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="83.0" y="289.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">-2</text>
+  <line x1="86.0" y1="264.0" x2="90.0" y2="264.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="83.0" y="267.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">-1</text>
+  <line x1="86.0" y1="220.0" x2="90.0" y2="220.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="83.0" y="223.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">1</text>
+  <line x1="86.0" y1="198.0" x2="90.0" y2="198.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="83.0" y="201.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">2</text>
+  <line x1="86.0" y1="176.0" x2="90.0" y2="176.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="83.0" y="179.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">3</text>
+  <line x1="86.0" y1="154.0" x2="90.0" y2="154.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="83.0" y="157.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">4</text>
+  <line x1="86.0" y1="132.0" x2="90.0" y2="132.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="83.0" y="135.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">5</text>
+  <line x1="86.0" y1="110.0" x2="90.0" y2="110.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="83.0" y="113.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">6</text>
+  <line x1="86.0" y1="88.0" x2="90.0" y2="88.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="83.0" y="91.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">7</text>
+  <line x1="86.0" y1="66.0" x2="90.0" y2="66.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="83.0" y="69.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">8</text>
+  <line x1="86.0" y1="44.0" x2="90.0" y2="44.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="83.0" y="47.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">9</text>
+  <line x1="86.0" y1="22.0" x2="90.0" y2="22.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="83.0" y="25.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">10</text>
+  <text x="212" y="238.0" font-family="DM Sans, sans-serif" font-size="9" fill="#7B5A50" font-style="italic">x</text>
+  <text x="93.0" y="10" font-family="DM Sans, sans-serif" font-size="9" fill="#7B5A50" font-style="italic">y</text>
+  <path d="M 44.0,242.0 L 45.1,235.5 L 46.2,229.0 L 47.3,222.7 L 48.4,216.5 L 49.5,210.4 L 50.6,204.4 L 51.7,198.5 L 52.8,192.7 L 53.9,187.1 L 55.0,181.5 L 56.1,176.1 L 57.2,170.7 L 58.3,165.5 L 59.4,160.4 L 60.5,155.4 L 61.6,150.5 L 62.7,145.7 L 63.8,141.0 L 64.9,136.5 L 66.0,132.0 L 67.1,127.7 L 68.2,123.4 L 69.3,119.3 L 70.4,115.3 L 71.5,111.4 L 72.6,107.6 L 73.7,103.9 L 74.8,100.3 L 75.9,96.9 L 77.0,93.5 L 78.1,90.3 L 79.2,87.1 L 80.3,84.1 L 81.4,81.2 L 82.5,78.4 L 83.6,75.7 L 84.7,73.1 L 85.8,70.6 L 86.9,68.3 L 88.0,66.0 L 89.1,63.9 L 90.2,61.8 L 91.3,59.9 L 92.4,58.1 L 93.5,56.4 L 94.6,54.8 L 95.7,53.3 L 96.8,51.9 L 97.9,50.7 L 99.0,49.5 L 100.1,48.5 L 101.2,47.5 L 102.3,46.7 L 103.4,46.0 L 104.5,45.4 L 105.6,44.9 L 106.7,44.5 L 107.8,44.2 L 108.9,44.1 L 110.0,44.0 L 111.1,44.1 L 112.2,44.2 L 113.3,44.5 L 114.4,44.9 L 115.5,45.4 L 116.6,46.0 L 117.7,46.7 L 118.8,47.5 L 119.9,48.5 L 121.0,49.5 L 122.1,50.7 L 123.2,51.9 L 124.3,53.3 L 125.4,54.8 L 126.5,56.4 L 127.6,58.1 L 128.7,59.9 L 129.8,61.8 L 130.9,63.9 L 132.0,66.0 L 133.1,68.3 L 134.2,70.6 L 135.3,73.1 L 136.4,75.7 L 137.5,78.4 L 138.6,81.2 L 139.7,84.1 L 140.8,87.1 L 141.9,90.3 L 143.0,93.5 L 144.1,96.9 L 145.2,100.3 L 146.3,103.9 L 147.4,107.6 L 148.5,111.4 L 149.6,115.3 L 150.7,119.3 L 151.8,123.4 L 152.9,127.7 L 154.0,132.0 L 155.1,136.5 L 156.2,141.0 L 157.3,145.7 L 158.4,150.5 L 159.5,155.4 L 160.6,160.4 L 161.7,165.5 L 162.8,170.7 L 163.9,176.1 L 165.0,181.5 L 166.1,187.1 L 167.2,192.7 L 168.3,198.5 L 169.4,204.4 L 170.5,210.4 L 171.6,216.5 L 172.7,222.7 L 173.8,229.0 L 174.9,235.5 L 176.0,242.0" stroke="#FF00AA" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Puntos evaluados -->
+  <circle cx="44.0" cy="242.0" r="3" fill="#1A0828"/>
+  <circle cx="66.0" cy="132.0" r="3" fill="#1A0828"/>
+  <circle cx="88.0" cy="66.0" r="3" fill="#1A0828"/>
+  <circle cx="110.0" cy="44.0" r="3" fill="#1A0828"/>
+  <circle cx="132.0" cy="66.0" r="3" fill="#1A0828"/>
+  <circle cx="154.0" cy="132.0" r="3" fill="#1A0828"/>
+  <circle cx="176.0" cy="242.0" r="3" fill="#1A0828"/>
+</svg>
+            </div>
+          </div>
+
+        </div>
+
+        <h3>Bloque 2</h3>
+        <div class="bloques-2">
+
+          <!-- B2 E1 -->
+          <div class="tabulacion-block resolucion-card" style="grid-column: 1 / -1;">
+            <div class="tabulacion-info">
+              <p class="tabulacion-eq">$f(x) = -x^2 - 10x - 24$ en $[-8, -2]$</p>
+              <div class="tabulacion-tabla-row">
+                <table class="tabla-x-y">
+                  <tr><th>x</th><th>f(x)</th></tr>
+                  <tr><td>−8</td><td>−8</td></tr>
+                  <tr><td>−7</td><td>−3</td></tr>
+                  <tr><td>−6</td><td>0</td></tr>
+                  <tr><td>−5</td><td>1</td></tr>
+                  <tr><td>−4</td><td>0</td></tr>
+                  <tr><td>−3</td><td>−3</td></tr>
+                  <tr><td>−2</td><td>−8</td></tr>
+                </table>
+                <div class="procedimiento-list">
+                  $f(-8) = -(-8)^2 - 10(-8) - 24 = -64+80-24 = $ <strong>$-8$</strong><br>
+                  $f(-7) = -(-7)^2 - 10(-7) - 24 = -49+70-24 = $ <strong>$-3$</strong><br>
+                  $f(-6) = -(-6)^2 - 10(-6) - 24 = -36+60-24 = $ <strong>$0$</strong><br>
+                  $f(-5) = -(-5)^2 - 10(-5) - 24 = -25+50-24 = $ <strong>$1$</strong><br>
+                  $f(-4) = -(-4)^2 - 10(-4) - 24 = -16+40-24 = $ <strong>$0$</strong><br>
+                  $f(-3) = -(-3)^2 - 10(-3) - 24 = -9+30-24 = $ <strong>$-3$</strong><br>
+                  $f(-2) = -(-2)^2 - 10(-2) - 24 = -4+20-24 = $ <strong>$-8$</strong>
+                </div>
+              </div>
+            </div>
+            <div class="tabulacion-grafica">
+              <svg viewBox="0 0 220 286" xmlns="http://www.w3.org/2000/svg" class="grafica-svg" role="img" aria-label="Gráfica de y = -x² - 10x - 24">
+  <g stroke="#E0C4BC" stroke-width="0.5" opacity="0.6">
+    <line x1="0.0" y1="0" x2="0.0" y2="286.0"/>
+    <line x1="22.0" y1="0" x2="22.0" y2="286.0"/>
+    <line x1="44.0" y1="0" x2="44.0" y2="286.0"/>
+    <line x1="66.0" y1="0" x2="66.0" y2="286.0"/>
+    <line x1="88.0" y1="0" x2="88.0" y2="286.0"/>
+    <line x1="110.0" y1="0" x2="110.0" y2="286.0"/>
+    <line x1="132.0" y1="0" x2="132.0" y2="286.0"/>
+    <line x1="154.0" y1="0" x2="154.0" y2="286.0"/>
+    <line x1="176.0" y1="0" x2="176.0" y2="286.0"/>
+    <line x1="198.0" y1="0" x2="198.0" y2="286.0"/>
+    <line x1="220.0" y1="0" x2="220.0" y2="286.0"/>
+    <line x1="0" y1="286.0" x2="220.0" y2="286.0"/>
+    <line x1="0" y1="264.0" x2="220.0" y2="264.0"/>
+    <line x1="0" y1="242.0" x2="220.0" y2="242.0"/>
+    <line x1="0" y1="220.0" x2="220.0" y2="220.0"/>
+    <line x1="0" y1="198.0" x2="220.0" y2="198.0"/>
+    <line x1="0" y1="176.0" x2="220.0" y2="176.0"/>
+    <line x1="0" y1="154.0" x2="220.0" y2="154.0"/>
+    <line x1="0" y1="132.0" x2="220.0" y2="132.0"/>
+    <line x1="0" y1="110.0" x2="220.0" y2="110.0"/>
+    <line x1="0" y1="88.0" x2="220.0" y2="88.0"/>
+    <line x1="0" y1="66.0" x2="220.0" y2="66.0"/>
+    <line x1="0" y1="44.0" x2="220.0" y2="44.0"/>
+    <line x1="0" y1="22.0" x2="220.0" y2="22.0"/>
+    <line x1="0" y1="0.0" x2="220.0" y2="0.0"/>
+  </g>
+  <line x1="0" y1="66.0" x2="220.0" y2="66.0" stroke="#7B5A50" stroke-width="1.2"/>
+  <line x1="220.0" y1="0" x2="220.0" y2="286.0" stroke="#7B5A50" stroke-width="1.2"/>
+  <!-- Números de los ejes -->
+  <line x1="22.0" y1="64.0" x2="22.0" y2="68.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="22.0" y="75.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">-9</text>
+  <line x1="44.0" y1="64.0" x2="44.0" y2="68.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="44.0" y="75.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">-8</text>
+  <line x1="66.0" y1="64.0" x2="66.0" y2="68.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="66.0" y="75.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">-7</text>
+  <line x1="88.0" y1="64.0" x2="88.0" y2="68.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="88.0" y="75.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">-6</text>
+  <line x1="110.0" y1="64.0" x2="110.0" y2="68.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="110.0" y="75.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">-5</text>
+  <line x1="132.0" y1="64.0" x2="132.0" y2="68.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="132.0" y="75.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">-4</text>
+  <line x1="154.0" y1="64.0" x2="154.0" y2="68.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="154.0" y="75.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">-3</text>
+  <line x1="176.0" y1="64.0" x2="176.0" y2="68.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="176.0" y="75.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">-2</text>
+  <line x1="198.0" y1="64.0" x2="198.0" y2="68.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="198.0" y="75.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">-1</text>
+  <line x1="218.0" y1="264.0" x2="222.0" y2="264.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="215.0" y="267.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">-9</text>
+  <line x1="218.0" y1="242.0" x2="222.0" y2="242.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="215.0" y="245.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">-8</text>
+  <line x1="218.0" y1="220.0" x2="222.0" y2="220.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="215.0" y="223.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">-7</text>
+  <line x1="218.0" y1="198.0" x2="222.0" y2="198.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="215.0" y="201.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">-6</text>
+  <line x1="218.0" y1="176.0" x2="222.0" y2="176.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="215.0" y="179.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">-5</text>
+  <line x1="218.0" y1="154.0" x2="222.0" y2="154.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="215.0" y="157.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">-4</text>
+  <line x1="218.0" y1="132.0" x2="222.0" y2="132.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="215.0" y="135.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">-3</text>
+  <line x1="218.0" y1="110.0" x2="222.0" y2="110.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="215.0" y="113.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">-2</text>
+  <line x1="218.0" y1="88.0" x2="222.0" y2="88.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="215.0" y="91.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">-1</text>
+  <line x1="218.0" y1="44.0" x2="222.0" y2="44.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="215.0" y="47.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">1</text>
+  <line x1="218.0" y1="22.0" x2="222.0" y2="22.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="215.0" y="25.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">2</text>
+  <text x="212" y="62.0" font-family="DM Sans, sans-serif" font-size="9" fill="#7B5A50" font-style="italic">x</text>
+  <text x="225.0" y="10" font-family="DM Sans, sans-serif" font-size="9" fill="#7B5A50" font-style="italic">y</text>
+  <path d="M 44.0,242.0 L 45.1,235.5 L 46.2,229.0 L 47.3,222.7 L 48.4,216.5 L 49.5,210.4 L 50.6,204.4 L 51.7,198.5 L 52.8,192.7 L 53.9,187.1 L 55.0,181.5 L 56.1,176.1 L 57.2,170.7 L 58.3,165.5 L 59.4,160.4 L 60.5,155.4 L 61.6,150.5 L 62.7,145.7 L 63.8,141.0 L 64.9,136.5 L 66.0,132.0 L 67.1,127.7 L 68.2,123.4 L 69.3,119.3 L 70.4,115.3 L 71.5,111.4 L 72.6,107.6 L 73.7,103.9 L 74.8,100.3 L 75.9,96.9 L 77.0,93.5 L 78.1,90.3 L 79.2,87.1 L 80.3,84.1 L 81.4,81.2 L 82.5,78.4 L 83.6,75.7 L 84.7,73.1 L 85.8,70.6 L 86.9,68.3 L 88.0,66.0 L 89.1,63.9 L 90.2,61.8 L 91.3,59.9 L 92.4,58.1 L 93.5,56.4 L 94.6,54.8 L 95.7,53.3 L 96.8,51.9 L 97.9,50.7 L 99.0,49.5 L 100.1,48.5 L 101.2,47.5 L 102.3,46.7 L 103.4,46.0 L 104.5,45.4 L 105.6,44.9 L 106.7,44.5 L 107.8,44.2 L 108.9,44.1 L 110.0,44.0 L 111.1,44.1 L 112.2,44.2 L 113.3,44.5 L 114.4,44.9 L 115.5,45.4 L 116.6,46.0 L 117.7,46.7 L 118.8,47.5 L 119.9,48.5 L 121.0,49.5 L 122.1,50.7 L 123.2,51.9 L 124.3,53.3 L 125.4,54.8 L 126.5,56.4 L 127.6,58.1 L 128.7,59.9 L 129.8,61.8 L 130.9,63.9 L 132.0,66.0 L 133.1,68.3 L 134.2,70.6 L 135.3,73.1 L 136.4,75.7 L 137.5,78.4 L 138.6,81.2 L 139.7,84.1 L 140.8,87.1 L 141.9,90.3 L 143.0,93.5 L 144.1,96.9 L 145.2,100.3 L 146.3,103.9 L 147.4,107.6 L 148.5,111.4 L 149.6,115.3 L 150.7,119.3 L 151.8,123.4 L 152.9,127.7 L 154.0,132.0 L 155.1,136.5 L 156.2,141.0 L 157.3,145.7 L 158.4,150.5 L 159.5,155.4 L 160.6,160.4 L 161.7,165.5 L 162.8,170.7 L 163.9,176.1 L 165.0,181.5 L 166.1,187.1 L 167.2,192.7 L 168.3,198.5 L 169.4,204.4 L 170.5,210.4 L 171.6,216.5 L 172.7,222.7 L 173.8,229.0 L 174.9,235.5 L 176.0,242.0" stroke="#4A0080" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Puntos evaluados -->
+  <circle cx="44.0" cy="242.0" r="3" fill="#1A0828"/>
+  <circle cx="66.0" cy="132.0" r="3" fill="#1A0828"/>
+  <circle cx="88.0" cy="66.0" r="3" fill="#1A0828"/>
+  <circle cx="110.0" cy="44.0" r="3" fill="#1A0828"/>
+  <circle cx="132.0" cy="66.0" r="3" fill="#1A0828"/>
+  <circle cx="154.0" cy="132.0" r="3" fill="#1A0828"/>
+  <circle cx="176.0" cy="242.0" r="3" fill="#1A0828"/>
+</svg>
+            </div>
+          </div>
+
+          <!-- B2 E2 -->
+          <div class="tabulacion-block resolucion-card" style="grid-column: 1 / -1;">
+            <div class="tabulacion-info">
+              <p class="tabulacion-eq">$f(x) = x^2 - 4x + 4$ en $[-1, 5]$</p>
+              <div class="tabulacion-tabla-row">
+                <table class="tabla-x-y">
+                  <tr><th>x</th><th>f(x)</th></tr>
+                  <tr><td>−1</td><td>9</td></tr>
+                  <tr><td>0</td><td>4</td></tr>
+                  <tr><td>1</td><td>1</td></tr>
+                  <tr><td>2</td><td>0</td></tr>
+                  <tr><td>3</td><td>1</td></tr>
+                  <tr><td>4</td><td>4</td></tr>
+                  <tr><td>5</td><td>9</td></tr>
+                </table>
+                <div class="procedimiento-list">
+                  $f(-1) = (-1)^2 - 4(-1) + 4 = 1+4+4 = $ <strong>$9$</strong><br>
+                  $f(0) = (0)^2 - 4(0) + 4 = $ <strong>$4$</strong><br>
+                  $f(1) = (1)^2 - 4(1) + 4 = 1-4+4 = $ <strong>$1$</strong><br>
+                  $f(2) = (2)^2 - 4(2) + 4 = 4-8+4 = $ <strong>$0$</strong><br>
+                  $f(3) = (3)^2 - 4(3) + 4 = 9-12+4 = $ <strong>$1$</strong><br>
+                  $f(4) = (4)^2 - 4(4) + 4 = 16-16+4 = $ <strong>$4$</strong><br>
+                  $f(5) = (5)^2 - 4(5) + 4 = 25-20+4 = $ <strong>$9$</strong>
+                </div>
+              </div>
+            </div>
+            <div class="tabulacion-grafica">
+              <svg viewBox="0 0 220 308" xmlns="http://www.w3.org/2000/svg" class="grafica-svg" role="img" aria-label="Gráfica de y = x² - 4x + 4">
+  <g stroke="#E0C4BC" stroke-width="0.5" opacity="0.6">
+    <line x1="0.0" y1="0" x2="0.0" y2="308.0"/>
+    <line x1="22.0" y1="0" x2="22.0" y2="308.0"/>
+    <line x1="44.0" y1="0" x2="44.0" y2="308.0"/>
+    <line x1="66.0" y1="0" x2="66.0" y2="308.0"/>
+    <line x1="88.0" y1="0" x2="88.0" y2="308.0"/>
+    <line x1="110.0" y1="0" x2="110.0" y2="308.0"/>
+    <line x1="132.0" y1="0" x2="132.0" y2="308.0"/>
+    <line x1="154.0" y1="0" x2="154.0" y2="308.0"/>
+    <line x1="176.0" y1="0" x2="176.0" y2="308.0"/>
+    <line x1="198.0" y1="0" x2="198.0" y2="308.0"/>
+    <line x1="220.0" y1="0" x2="220.0" y2="308.0"/>
+    <line x1="0" y1="308.0" x2="220.0" y2="308.0"/>
+    <line x1="0" y1="286.0" x2="220.0" y2="286.0"/>
+    <line x1="0" y1="264.0" x2="220.0" y2="264.0"/>
+    <line x1="0" y1="242.0" x2="220.0" y2="242.0"/>
+    <line x1="0" y1="220.0" x2="220.0" y2="220.0"/>
+    <line x1="0" y1="198.0" x2="220.0" y2="198.0"/>
+    <line x1="0" y1="176.0" x2="220.0" y2="176.0"/>
+    <line x1="0" y1="154.0" x2="220.0" y2="154.0"/>
+    <line x1="0" y1="132.0" x2="220.0" y2="132.0"/>
+    <line x1="0" y1="110.0" x2="220.0" y2="110.0"/>
+    <line x1="0" y1="88.0" x2="220.0" y2="88.0"/>
+    <line x1="0" y1="66.0" x2="220.0" y2="66.0"/>
+    <line x1="0" y1="44.0" x2="220.0" y2="44.0"/>
+    <line x1="0" y1="22.0" x2="220.0" y2="22.0"/>
+    <line x1="0" y1="0.0" x2="220.0" y2="0.0"/>
+  </g>
+  <line x1="0" y1="264.0" x2="220.0" y2="264.0" stroke="#7B5A50" stroke-width="1.2"/>
+  <line x1="66.0" y1="0" x2="66.0" y2="308.0" stroke="#7B5A50" stroke-width="1.2"/>
+  <!-- Números de los ejes -->
+  <line x1="22.0" y1="262.0" x2="22.0" y2="266.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="22.0" y="273.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">-2</text>
+  <line x1="44.0" y1="262.0" x2="44.0" y2="266.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="44.0" y="273.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">-1</text>
+  <line x1="88.0" y1="262.0" x2="88.0" y2="266.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="88.0" y="273.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">1</text>
+  <line x1="110.0" y1="262.0" x2="110.0" y2="266.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="110.0" y="273.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">2</text>
+  <line x1="132.0" y1="262.0" x2="132.0" y2="266.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="132.0" y="273.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">3</text>
+  <line x1="154.0" y1="262.0" x2="154.0" y2="266.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="154.0" y="273.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">4</text>
+  <line x1="176.0" y1="262.0" x2="176.0" y2="266.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="176.0" y="273.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">5</text>
+  <line x1="198.0" y1="262.0" x2="198.0" y2="266.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="198.0" y="273.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">6</text>
+  <line x1="64.0" y1="286.0" x2="68.0" y2="286.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="61.0" y="289.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">-1</text>
+  <line x1="64.0" y1="242.0" x2="68.0" y2="242.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="61.0" y="245.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">1</text>
+  <line x1="64.0" y1="220.0" x2="68.0" y2="220.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="61.0" y="223.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">2</text>
+  <line x1="64.0" y1="198.0" x2="68.0" y2="198.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="61.0" y="201.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">3</text>
+  <line x1="64.0" y1="176.0" x2="68.0" y2="176.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="61.0" y="179.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">4</text>
+  <line x1="64.0" y1="154.0" x2="68.0" y2="154.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="61.0" y="157.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">5</text>
+  <line x1="64.0" y1="132.0" x2="68.0" y2="132.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="61.0" y="135.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">6</text>
+  <line x1="64.0" y1="110.0" x2="68.0" y2="110.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="61.0" y="113.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">7</text>
+  <line x1="64.0" y1="88.0" x2="68.0" y2="88.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="61.0" y="91.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">8</text>
+  <line x1="64.0" y1="66.0" x2="68.0" y2="66.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="61.0" y="69.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">9</text>
+  <line x1="64.0" y1="44.0" x2="68.0" y2="44.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="61.0" y="47.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">10</text>
+  <line x1="64.0" y1="22.0" x2="68.0" y2="22.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="61.0" y="25.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">11</text>
+  <text x="212" y="260.0" font-family="DM Sans, sans-serif" font-size="9" fill="#7B5A50" font-style="italic">x</text>
+  <text x="71.0" y="10" font-family="DM Sans, sans-serif" font-size="9" fill="#7B5A50" font-style="italic">y</text>
+  <path d="M 44.0,66.0 L 45.1,72.5 L 46.2,79.0 L 47.3,85.3 L 48.4,91.5 L 49.5,97.6 L 50.6,103.6 L 51.7,109.5 L 52.8,115.3 L 53.9,120.9 L 55.0,126.5 L 56.1,131.9 L 57.2,137.3 L 58.3,142.5 L 59.4,147.6 L 60.5,152.6 L 61.6,157.5 L 62.7,162.3 L 63.8,167.0 L 64.9,171.5 L 66.0,176.0 L 67.1,180.3 L 68.2,184.6 L 69.3,188.7 L 70.4,192.7 L 71.5,196.6 L 72.6,200.4 L 73.7,204.1 L 74.8,207.7 L 75.9,211.1 L 77.0,214.5 L 78.1,217.7 L 79.2,220.9 L 80.3,223.9 L 81.4,226.8 L 82.5,229.6 L 83.6,232.3 L 84.7,234.9 L 85.8,237.4 L 86.9,239.7 L 88.0,242.0 L 89.1,244.1 L 90.2,246.2 L 91.3,248.1 L 92.4,249.9 L 93.5,251.6 L 94.6,253.2 L 95.7,254.7 L 96.8,256.1 L 97.9,257.3 L 99.0,258.5 L 100.1,259.5 L 101.2,260.5 L 102.3,261.3 L 103.4,262.0 L 104.5,262.6 L 105.6,263.1 L 106.7,263.5 L 107.8,263.8 L 108.9,263.9 L 110.0,264.0 L 111.1,263.9 L 112.2,263.8 L 113.3,263.5 L 114.4,263.1 L 115.5,262.6 L 116.6,262.0 L 117.7,261.3 L 118.8,260.5 L 119.9,259.5 L 121.0,258.5 L 122.1,257.3 L 123.2,256.1 L 124.3,254.7 L 125.4,253.2 L 126.5,251.6 L 127.6,249.9 L 128.7,248.1 L 129.8,246.2 L 130.9,244.1 L 132.0,242.0 L 133.1,239.7 L 134.2,237.4 L 135.3,234.9 L 136.4,232.3 L 137.5,229.6 L 138.6,226.8 L 139.7,223.9 L 140.8,220.9 L 141.9,217.7 L 143.0,214.5 L 144.1,211.1 L 145.2,207.7 L 146.3,204.1 L 147.4,200.4 L 148.5,196.6 L 149.6,192.7 L 150.7,188.7 L 151.8,184.6 L 152.9,180.3 L 154.0,176.0 L 155.1,171.5 L 156.2,167.0 L 157.3,162.3 L 158.4,157.5 L 159.5,152.6 L 160.6,147.6 L 161.7,142.5 L 162.8,137.3 L 163.9,131.9 L 165.0,126.5 L 166.1,120.9 L 167.2,115.3 L 168.3,109.5 L 169.4,103.6 L 170.5,97.6 L 171.6,91.5 L 172.7,85.3 L 173.8,79.0 L 174.9,72.5 L 176.0,66.0" stroke="#00DEC8" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Puntos evaluados -->
+  <circle cx="44.0" cy="66.0" r="3" fill="#1A0828"/>
+  <circle cx="66.0" cy="176.0" r="3" fill="#1A0828"/>
+  <circle cx="88.0" cy="242.0" r="3" fill="#1A0828"/>
+  <circle cx="110.0" cy="264.0" r="3" fill="#1A0828"/>
+  <circle cx="132.0" cy="242.0" r="3" fill="#1A0828"/>
+  <circle cx="154.0" cy="176.0" r="3" fill="#1A0828"/>
+  <circle cx="176.0" cy="66.0" r="3" fill="#1A0828"/>
+</svg>
+            </div>
+          </div>
+
+          <!-- B2 E3 -->
+          <div class="tabulacion-block resolucion-card" style="grid-column: 1 / -1;">
+            <div class="tabulacion-info">
+              <p class="tabulacion-eq">$f(x) = x^2 + 6x + 9$ en $[-6, 0]$</p>
+              <div class="tabulacion-tabla-row">
+                <table class="tabla-x-y">
+                  <tr><th>x</th><th>f(x)</th></tr>
+                  <tr><td>−6</td><td>9</td></tr>
+                  <tr><td>−5</td><td>4</td></tr>
+                  <tr><td>−4</td><td>1</td></tr>
+                  <tr><td>−3</td><td>0</td></tr>
+                  <tr><td>−2</td><td>1</td></tr>
+                  <tr><td>−1</td><td>4</td></tr>
+                  <tr><td>0</td><td>9</td></tr>
+                </table>
+                <div class="procedimiento-list">
+                  $f(-6) = (-6)^2 + 6(-6) + 9 = 36-36+9 = $ <strong>$9$</strong><br>
+                  $f(-5) = (-5)^2 + 6(-5) + 9 = 25-30+9 = $ <strong>$4$</strong><br>
+                  $f(-4) = (-4)^2 + 6(-4) + 9 = 16-24+9 = $ <strong>$1$</strong><br>
+                  $f(-3) = (-3)^2 + 6(-3) + 9 = 9-18+9 = $ <strong>$0$</strong><br>
+                  $f(-2) = (-2)^2 + 6(-2) + 9 = 4-12+9 = $ <strong>$1$</strong><br>
+                  $f(-1) = (-1)^2 + 6(-1) + 9 = 1-6+9 = $ <strong>$4$</strong><br>
+                  $f(0) = (0)^2 + 6(0) + 9 = $ <strong>$9$</strong>
+                </div>
+              </div>
+            </div>
+            <div class="tabulacion-grafica">
+              <svg viewBox="0 0 220 286" xmlns="http://www.w3.org/2000/svg" class="grafica-svg" role="img" aria-label="Gráfica de y = x² + 6x + 9">
+  <g stroke="#E0C4BC" stroke-width="0.5" opacity="0.6">
+    <line x1="0.0" y1="0" x2="0.0" y2="286.0"/>
+    <line x1="22.0" y1="0" x2="22.0" y2="286.0"/>
+    <line x1="44.0" y1="0" x2="44.0" y2="286.0"/>
+    <line x1="66.0" y1="0" x2="66.0" y2="286.0"/>
+    <line x1="88.0" y1="0" x2="88.0" y2="286.0"/>
+    <line x1="110.0" y1="0" x2="110.0" y2="286.0"/>
+    <line x1="132.0" y1="0" x2="132.0" y2="286.0"/>
+    <line x1="154.0" y1="0" x2="154.0" y2="286.0"/>
+    <line x1="176.0" y1="0" x2="176.0" y2="286.0"/>
+    <line x1="198.0" y1="0" x2="198.0" y2="286.0"/>
+    <line x1="220.0" y1="0" x2="220.0" y2="286.0"/>
+    <line x1="0" y1="286.0" x2="220.0" y2="286.0"/>
+    <line x1="0" y1="264.0" x2="220.0" y2="264.0"/>
+    <line x1="0" y1="242.0" x2="220.0" y2="242.0"/>
+    <line x1="0" y1="220.0" x2="220.0" y2="220.0"/>
+    <line x1="0" y1="198.0" x2="220.0" y2="198.0"/>
+    <line x1="0" y1="176.0" x2="220.0" y2="176.0"/>
+    <line x1="0" y1="154.0" x2="220.0" y2="154.0"/>
+    <line x1="0" y1="132.0" x2="220.0" y2="132.0"/>
+    <line x1="0" y1="110.0" x2="220.0" y2="110.0"/>
+    <line x1="0" y1="88.0" x2="220.0" y2="88.0"/>
+    <line x1="0" y1="66.0" x2="220.0" y2="66.0"/>
+    <line x1="0" y1="44.0" x2="220.0" y2="44.0"/>
+    <line x1="0" y1="22.0" x2="220.0" y2="22.0"/>
+    <line x1="0" y1="0.0" x2="220.0" y2="0.0"/>
+  </g>
+  <line x1="0" y1="242.0" x2="220.0" y2="242.0" stroke="#7B5A50" stroke-width="1.2"/>
+  <line x1="176.0" y1="0" x2="176.0" y2="286.0" stroke="#7B5A50" stroke-width="1.2"/>
+  <!-- Números de los ejes -->
+  <line x1="22.0" y1="240.0" x2="22.0" y2="244.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="22.0" y="251.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">-7</text>
+  <line x1="44.0" y1="240.0" x2="44.0" y2="244.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="44.0" y="251.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">-6</text>
+  <line x1="66.0" y1="240.0" x2="66.0" y2="244.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="66.0" y="251.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">-5</text>
+  <line x1="88.0" y1="240.0" x2="88.0" y2="244.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="88.0" y="251.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">-4</text>
+  <line x1="110.0" y1="240.0" x2="110.0" y2="244.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="110.0" y="251.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">-3</text>
+  <line x1="132.0" y1="240.0" x2="132.0" y2="244.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="132.0" y="251.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">-2</text>
+  <line x1="154.0" y1="240.0" x2="154.0" y2="244.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="154.0" y="251.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">-1</text>
+  <line x1="198.0" y1="240.0" x2="198.0" y2="244.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="198.0" y="251.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">1</text>
+  <line x1="174.0" y1="264.0" x2="178.0" y2="264.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="171.0" y="267.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">-1</text>
+  <line x1="174.0" y1="220.0" x2="178.0" y2="220.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="171.0" y="223.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">1</text>
+  <line x1="174.0" y1="198.0" x2="178.0" y2="198.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="171.0" y="201.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">2</text>
+  <line x1="174.0" y1="176.0" x2="178.0" y2="176.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="171.0" y="179.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">3</text>
+  <line x1="174.0" y1="154.0" x2="178.0" y2="154.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="171.0" y="157.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">4</text>
+  <line x1="174.0" y1="132.0" x2="178.0" y2="132.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="171.0" y="135.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">5</text>
+  <line x1="174.0" y1="110.0" x2="178.0" y2="110.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="171.0" y="113.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">6</text>
+  <line x1="174.0" y1="88.0" x2="178.0" y2="88.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="171.0" y="91.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">7</text>
+  <line x1="174.0" y1="66.0" x2="178.0" y2="66.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="171.0" y="69.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">8</text>
+  <line x1="174.0" y1="44.0" x2="178.0" y2="44.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="171.0" y="47.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">9</text>
+  <line x1="174.0" y1="22.0" x2="178.0" y2="22.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="171.0" y="25.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">10</text>
+  <text x="212" y="238.0" font-family="DM Sans, sans-serif" font-size="9" fill="#7B5A50" font-style="italic">x</text>
+  <text x="181.0" y="10" font-family="DM Sans, sans-serif" font-size="9" fill="#7B5A50" font-style="italic">y</text>
+  <path d="M 44.0,44.0 L 45.1,50.5 L 46.2,57.0 L 47.3,63.3 L 48.4,69.5 L 49.5,75.6 L 50.6,81.6 L 51.7,87.5 L 52.8,93.3 L 53.9,98.9 L 55.0,104.5 L 56.1,109.9 L 57.2,115.3 L 58.3,120.5 L 59.4,125.6 L 60.5,130.6 L 61.6,135.5 L 62.7,140.3 L 63.8,145.0 L 64.9,149.5 L 66.0,154.0 L 67.1,158.3 L 68.2,162.6 L 69.3,166.7 L 70.4,170.7 L 71.5,174.6 L 72.6,178.4 L 73.7,182.1 L 74.8,185.7 L 75.9,189.1 L 77.0,192.5 L 78.1,195.7 L 79.2,198.9 L 80.3,201.9 L 81.4,204.8 L 82.5,207.6 L 83.6,210.3 L 84.7,212.9 L 85.8,215.4 L 86.9,217.7 L 88.0,220.0 L 89.1,222.1 L 90.2,224.2 L 91.3,226.1 L 92.4,227.9 L 93.5,229.6 L 94.6,231.2 L 95.7,232.7 L 96.8,234.1 L 97.9,235.3 L 99.0,236.5 L 100.1,237.5 L 101.2,238.5 L 102.3,239.3 L 103.4,240.0 L 104.5,240.6 L 105.6,241.1 L 106.7,241.5 L 107.8,241.8 L 108.9,241.9 L 110.0,242.0 L 111.1,241.9 L 112.2,241.8 L 113.3,241.5 L 114.4,241.1 L 115.5,240.6 L 116.6,240.0 L 117.7,239.3 L 118.8,238.5 L 119.9,237.5 L 121.0,236.5 L 122.1,235.3 L 123.2,234.1 L 124.3,232.7 L 125.4,231.2 L 126.5,229.6 L 127.6,227.9 L 128.7,226.1 L 129.8,224.2 L 130.9,222.1 L 132.0,220.0 L 133.1,217.7 L 134.2,215.4 L 135.3,212.9 L 136.4,210.3 L 137.5,207.6 L 138.6,204.8 L 139.7,201.9 L 140.8,198.9 L 141.9,195.7 L 143.0,192.5 L 144.1,189.1 L 145.2,185.7 L 146.3,182.1 L 147.4,178.4 L 148.5,174.6 L 149.6,170.7 L 150.7,166.7 L 151.8,162.6 L 152.9,158.3 L 154.0,154.0 L 155.1,149.5 L 156.2,145.0 L 157.3,140.3 L 158.4,135.5 L 159.5,130.6 L 160.6,125.6 L 161.7,120.5 L 162.8,115.3 L 163.9,109.9 L 165.0,104.5 L 166.1,98.9 L 167.2,93.3 L 168.3,87.5 L 169.4,81.6 L 170.5,75.6 L 171.6,69.5 L 172.7,63.3 L 173.8,57.0 L 174.9,50.5 L 176.0,44.0" stroke="#FF00AA" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Puntos evaluados -->
+  <circle cx="44.0" cy="44.0" r="3" fill="#1A0828"/>
+  <circle cx="66.0" cy="154.0" r="3" fill="#1A0828"/>
+  <circle cx="88.0" cy="220.0" r="3" fill="#1A0828"/>
+  <circle cx="110.0" cy="242.0" r="3" fill="#1A0828"/>
+  <circle cx="132.0" cy="220.0" r="3" fill="#1A0828"/>
+  <circle cx="154.0" cy="154.0" r="3" fill="#1A0828"/>
+  <circle cx="176.0" cy="44.0" r="3" fill="#1A0828"/>
+</svg>
+            </div>
+          </div>
+
+          <!-- B2 E4 -->
+          <div class="tabulacion-block resolucion-card" style="grid-column: 1 / -1;">
+            <div class="tabulacion-info">
+              <p class="tabulacion-eq">$f(x) = -x^2 + 4x - 3$ en $[-1, 5]$</p>
+              <div class="tabulacion-tabla-row">
+                <table class="tabla-x-y">
+                  <tr><th>x</th><th>f(x)</th></tr>
+                  <tr><td>−1</td><td>−8</td></tr>
+                  <tr><td>0</td><td>−3</td></tr>
+                  <tr><td>1</td><td>0</td></tr>
+                  <tr><td>2</td><td>1</td></tr>
+                  <tr><td>3</td><td>0</td></tr>
+                  <tr><td>4</td><td>−3</td></tr>
+                  <tr><td>5</td><td>−8</td></tr>
+                </table>
+                <div class="procedimiento-list">
+                  $f(-1) = -(-1)^2 + 4(-1) - 3 = -1-4-3 = $ <strong>$-8$</strong><br>
+                  $f(0) = -(0)^2 + 4(0) - 3 = $ <strong>$-3$</strong><br>
+                  $f(1) = -(1)^2 + 4(1) - 3 = -1+4-3 = $ <strong>$0$</strong><br>
+                  $f(2) = -(2)^2 + 4(2) - 3 = -4+8-3 = $ <strong>$1$</strong><br>
+                  $f(3) = -(3)^2 + 4(3) - 3 = -9+12-3 = $ <strong>$0$</strong><br>
+                  $f(4) = -(4)^2 + 4(4) - 3 = -16+16-3 = $ <strong>$-3$</strong><br>
+                  $f(5) = -(5)^2 + 4(5) - 3 = -25+20-3 = $ <strong>$-8$</strong>
+                </div>
+              </div>
+            </div>
+            <div class="tabulacion-grafica">
+              <svg viewBox="0 0 220 308" xmlns="http://www.w3.org/2000/svg" class="grafica-svg" role="img" aria-label="Gráfica de y = -x² + 4x - 3">
+  <g stroke="#E0C4BC" stroke-width="0.5" opacity="0.6">
+    <line x1="0.0" y1="0" x2="0.0" y2="308.0"/>
+    <line x1="22.0" y1="0" x2="22.0" y2="308.0"/>
+    <line x1="44.0" y1="0" x2="44.0" y2="308.0"/>
+    <line x1="66.0" y1="0" x2="66.0" y2="308.0"/>
+    <line x1="88.0" y1="0" x2="88.0" y2="308.0"/>
+    <line x1="110.0" y1="0" x2="110.0" y2="308.0"/>
+    <line x1="132.0" y1="0" x2="132.0" y2="308.0"/>
+    <line x1="154.0" y1="0" x2="154.0" y2="308.0"/>
+    <line x1="176.0" y1="0" x2="176.0" y2="308.0"/>
+    <line x1="198.0" y1="0" x2="198.0" y2="308.0"/>
+    <line x1="220.0" y1="0" x2="220.0" y2="308.0"/>
+    <line x1="0" y1="308.0" x2="220.0" y2="308.0"/>
+    <line x1="0" y1="286.0" x2="220.0" y2="286.0"/>
+    <line x1="0" y1="264.0" x2="220.0" y2="264.0"/>
+    <line x1="0" y1="242.0" x2="220.0" y2="242.0"/>
+    <line x1="0" y1="220.0" x2="220.0" y2="220.0"/>
+    <line x1="0" y1="198.0" x2="220.0" y2="198.0"/>
+    <line x1="0" y1="176.0" x2="220.0" y2="176.0"/>
+    <line x1="0" y1="154.0" x2="220.0" y2="154.0"/>
+    <line x1="0" y1="132.0" x2="220.0" y2="132.0"/>
+    <line x1="0" y1="110.0" x2="220.0" y2="110.0"/>
+    <line x1="0" y1="88.0" x2="220.0" y2="88.0"/>
+    <line x1="0" y1="66.0" x2="220.0" y2="66.0"/>
+    <line x1="0" y1="44.0" x2="220.0" y2="44.0"/>
+    <line x1="0" y1="22.0" x2="220.0" y2="22.0"/>
+    <line x1="0" y1="0.0" x2="220.0" y2="0.0"/>
+  </g>
+  <line x1="0" y1="66.0" x2="220.0" y2="66.0" stroke="#7B5A50" stroke-width="1.2"/>
+  <line x1="66.0" y1="0" x2="66.0" y2="308.0" stroke="#7B5A50" stroke-width="1.2"/>
+  <!-- Números de los ejes -->
+  <line x1="22.0" y1="64.0" x2="22.0" y2="68.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="22.0" y="75.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">-2</text>
+  <line x1="44.0" y1="64.0" x2="44.0" y2="68.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="44.0" y="75.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">-1</text>
+  <line x1="88.0" y1="64.0" x2="88.0" y2="68.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="88.0" y="75.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">1</text>
+  <line x1="110.0" y1="64.0" x2="110.0" y2="68.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="110.0" y="75.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">2</text>
+  <line x1="132.0" y1="64.0" x2="132.0" y2="68.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="132.0" y="75.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">3</text>
+  <line x1="154.0" y1="64.0" x2="154.0" y2="68.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="154.0" y="75.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">4</text>
+  <line x1="176.0" y1="64.0" x2="176.0" y2="68.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="176.0" y="75.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">5</text>
+  <line x1="198.0" y1="64.0" x2="198.0" y2="68.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="198.0" y="75.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">6</text>
+  <line x1="64.0" y1="286.0" x2="68.0" y2="286.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="61.0" y="289.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">-10</text>
+  <line x1="64.0" y1="264.0" x2="68.0" y2="264.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="61.0" y="267.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">-9</text>
+  <line x1="64.0" y1="242.0" x2="68.0" y2="242.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="61.0" y="245.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">-8</text>
+  <line x1="64.0" y1="220.0" x2="68.0" y2="220.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="61.0" y="223.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">-7</text>
+  <line x1="64.0" y1="198.0" x2="68.0" y2="198.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="61.0" y="201.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">-6</text>
+  <line x1="64.0" y1="176.0" x2="68.0" y2="176.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="61.0" y="179.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">-5</text>
+  <line x1="64.0" y1="154.0" x2="68.0" y2="154.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="61.0" y="157.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">-4</text>
+  <line x1="64.0" y1="132.0" x2="68.0" y2="132.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="61.0" y="135.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">-3</text>
+  <line x1="64.0" y1="110.0" x2="68.0" y2="110.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="61.0" y="113.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">-2</text>
+  <line x1="64.0" y1="88.0" x2="68.0" y2="88.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="61.0" y="91.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">-1</text>
+  <line x1="64.0" y1="44.0" x2="68.0" y2="44.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="61.0" y="47.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">1</text>
+  <line x1="64.0" y1="22.0" x2="68.0" y2="22.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="61.0" y="25.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">2</text>
+  <text x="212" y="62.0" font-family="DM Sans, sans-serif" font-size="9" fill="#7B5A50" font-style="italic">x</text>
+  <text x="71.0" y="10" font-family="DM Sans, sans-serif" font-size="9" fill="#7B5A50" font-style="italic">y</text>
+  <path d="M 44.0,242.0 L 45.1,235.5 L 46.2,229.0 L 47.3,222.7 L 48.4,216.5 L 49.5,210.4 L 50.6,204.4 L 51.7,198.5 L 52.8,192.7 L 53.9,187.1 L 55.0,181.5 L 56.1,176.1 L 57.2,170.7 L 58.3,165.5 L 59.4,160.4 L 60.5,155.4 L 61.6,150.5 L 62.7,145.7 L 63.8,141.0 L 64.9,136.5 L 66.0,132.0 L 67.1,127.7 L 68.2,123.4 L 69.3,119.3 L 70.4,115.3 L 71.5,111.4 L 72.6,107.6 L 73.7,103.9 L 74.8,100.3 L 75.9,96.9 L 77.0,93.5 L 78.1,90.3 L 79.2,87.1 L 80.3,84.1 L 81.4,81.2 L 82.5,78.4 L 83.6,75.7 L 84.7,73.1 L 85.8,70.6 L 86.9,68.3 L 88.0,66.0 L 89.1,63.9 L 90.2,61.8 L 91.3,59.9 L 92.4,58.1 L 93.5,56.4 L 94.6,54.8 L 95.7,53.3 L 96.8,51.9 L 97.9,50.7 L 99.0,49.5 L 100.1,48.5 L 101.2,47.5 L 102.3,46.7 L 103.4,46.0 L 104.5,45.4 L 105.6,44.9 L 106.7,44.5 L 107.8,44.2 L 108.9,44.1 L 110.0,44.0 L 111.1,44.1 L 112.2,44.2 L 113.3,44.5 L 114.4,44.9 L 115.5,45.4 L 116.6,46.0 L 117.7,46.7 L 118.8,47.5 L 119.9,48.5 L 121.0,49.5 L 122.1,50.7 L 123.2,51.9 L 124.3,53.3 L 125.4,54.8 L 126.5,56.4 L 127.6,58.1 L 128.7,59.9 L 129.8,61.8 L 130.9,63.9 L 132.0,66.0 L 133.1,68.3 L 134.2,70.6 L 135.3,73.1 L 136.4,75.7 L 137.5,78.4 L 138.6,81.2 L 139.7,84.1 L 140.8,87.1 L 141.9,90.3 L 143.0,93.5 L 144.1,96.9 L 145.2,100.3 L 146.3,103.9 L 147.4,107.6 L 148.5,111.4 L 149.6,115.3 L 150.7,119.3 L 151.8,123.4 L 152.9,127.7 L 154.0,132.0 L 155.1,136.5 L 156.2,141.0 L 157.3,145.7 L 158.4,150.5 L 159.5,155.4 L 160.6,160.4 L 161.7,165.5 L 162.8,170.7 L 163.9,176.1 L 165.0,181.5 L 166.1,187.1 L 167.2,192.7 L 168.3,198.5 L 169.4,204.4 L 170.5,210.4 L 171.6,216.5 L 172.7,222.7 L 173.8,229.0 L 174.9,235.5 L 176.0,242.0" stroke="#4A0080" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Puntos evaluados -->
+  <circle cx="44.0" cy="242.0" r="3" fill="#1A0828"/>
+  <circle cx="66.0" cy="132.0" r="3" fill="#1A0828"/>
+  <circle cx="88.0" cy="66.0" r="3" fill="#1A0828"/>
+  <circle cx="110.0" cy="44.0" r="3" fill="#1A0828"/>
+  <circle cx="132.0" cy="66.0" r="3" fill="#1A0828"/>
+  <circle cx="154.0" cy="132.0" r="3" fill="#1A0828"/>
+  <circle cx="176.0" cy="242.0" r="3" fill="#1A0828"/>
+</svg>
+            </div>
+          </div>
+
+          <!-- B2 E5 -->
+          <div class="tabulacion-block resolucion-card" style="grid-column: 1 / -1;">
+            <div class="tabulacion-info">
+              <p class="tabulacion-eq">$f(x) = x^2 - 7x + 10$ en $[1, 6]$</p>
+              <div class="tabulacion-tabla-row">
+                <table class="tabla-x-y">
+                  <tr><th>x</th><th>f(x)</th></tr>
+                  <tr><td>1</td><td>4</td></tr>
+                  <tr><td>2</td><td>0</td></tr>
+                  <tr><td>3</td><td>−2</td></tr>
+                  <tr><td>4</td><td>−2</td></tr>
+                  <tr><td>5</td><td>0</td></tr>
+                  <tr><td>6</td><td>4</td></tr>
+                </table>
+                <div class="procedimiento-list">
+                  $f(1) = (1)^2 - 7(1) + 10 = 1-7+10 = $ <strong>$4$</strong><br>
+                  $f(2) = (2)^2 - 7(2) + 10 = 4-14+10 = $ <strong>$0$</strong><br>
+                  $f(3) = (3)^2 - 7(3) + 10 = 9-21+10 = $ <strong>$-2$</strong><br>
+                  $f(4) = (4)^2 - 7(4) + 10 = 16-28+10 = $ <strong>$-2$</strong><br>
+                  $f(5) = (5)^2 - 7(5) + 10 = 25-35+10 = $ <strong>$0$</strong><br>
+                  $f(6) = (6)^2 - 7(6) + 10 = 36-42+10 = $ <strong>$4$</strong>
+                </div>
+              </div>
+            </div>
+            <div class="tabulacion-grafica">
+              <svg viewBox="0 0 198 264" xmlns="http://www.w3.org/2000/svg" class="grafica-svg" role="img" aria-label="Gráfica de y = x² - 7x + 10">
+  <g stroke="#E0C4BC" stroke-width="0.5" opacity="0.6">
+    <line x1="0.0" y1="0" x2="0.0" y2="264.0"/>
+    <line x1="22.0" y1="0" x2="22.0" y2="264.0"/>
+    <line x1="44.0" y1="0" x2="44.0" y2="264.0"/>
+    <line x1="66.0" y1="0" x2="66.0" y2="264.0"/>
+    <line x1="88.0" y1="0" x2="88.0" y2="264.0"/>
+    <line x1="110.0" y1="0" x2="110.0" y2="264.0"/>
+    <line x1="132.0" y1="0" x2="132.0" y2="264.0"/>
+    <line x1="154.0" y1="0" x2="154.0" y2="264.0"/>
+    <line x1="176.0" y1="0" x2="176.0" y2="264.0"/>
+    <line x1="198.0" y1="0" x2="198.0" y2="264.0"/>
+    <line x1="0" y1="264.0" x2="198.0" y2="264.0"/>
+    <line x1="0" y1="242.0" x2="198.0" y2="242.0"/>
+    <line x1="0" y1="220.0" x2="198.0" y2="220.0"/>
+    <line x1="0" y1="198.0" x2="198.0" y2="198.0"/>
+    <line x1="0" y1="176.0" x2="198.0" y2="176.0"/>
+    <line x1="0" y1="154.0" x2="198.0" y2="154.0"/>
+    <line x1="0" y1="132.0" x2="198.0" y2="132.0"/>
+    <line x1="0" y1="110.0" x2="198.0" y2="110.0"/>
+    <line x1="0" y1="88.0" x2="198.0" y2="88.0"/>
+    <line x1="0" y1="66.0" x2="198.0" y2="66.0"/>
+    <line x1="0" y1="44.0" x2="198.0" y2="44.0"/>
+    <line x1="0" y1="22.0" x2="198.0" y2="22.0"/>
+    <line x1="0" y1="0.0" x2="198.0" y2="0.0"/>
+  </g>
+  <line x1="0" y1="154.0" x2="198.0" y2="154.0" stroke="#7B5A50" stroke-width="1.2"/>
+  <line x1="22.0" y1="0" x2="22.0" y2="264.0" stroke="#7B5A50" stroke-width="1.2"/>
+  <!-- Números de los ejes -->
+  <line x1="44.0" y1="152.0" x2="44.0" y2="156.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="44.0" y="163.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">1</text>
+  <line x1="66.0" y1="152.0" x2="66.0" y2="156.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="66.0" y="163.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">2</text>
+  <line x1="88.0" y1="152.0" x2="88.0" y2="156.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="88.0" y="163.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">3</text>
+  <line x1="110.0" y1="152.0" x2="110.0" y2="156.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="110.0" y="163.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">4</text>
+  <line x1="132.0" y1="152.0" x2="132.0" y2="156.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="132.0" y="163.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">5</text>
+  <line x1="154.0" y1="152.0" x2="154.0" y2="156.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="154.0" y="163.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">6</text>
+  <line x1="176.0" y1="152.0" x2="176.0" y2="156.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="176.0" y="163.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="middle">7</text>
+  <line x1="20.0" y1="242.0" x2="24.0" y2="242.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="17.0" y="245.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">-4</text>
+  <line x1="20.0" y1="220.0" x2="24.0" y2="220.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="17.0" y="223.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">-3</text>
+  <line x1="20.0" y1="198.0" x2="24.0" y2="198.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="17.0" y="201.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">-2</text>
+  <line x1="20.0" y1="176.0" x2="24.0" y2="176.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="17.0" y="179.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">-1</text>
+  <line x1="20.0" y1="132.0" x2="24.0" y2="132.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="17.0" y="135.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">1</text>
+  <line x1="20.0" y1="110.0" x2="24.0" y2="110.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="17.0" y="113.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">2</text>
+  <line x1="20.0" y1="88.0" x2="24.0" y2="88.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="17.0" y="91.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">3</text>
+  <line x1="20.0" y1="66.0" x2="24.0" y2="66.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="17.0" y="69.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">4</text>
+  <line x1="20.0" y1="44.0" x2="24.0" y2="44.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="17.0" y="47.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">5</text>
+  <line x1="20.0" y1="22.0" x2="24.0" y2="22.0" stroke="#7B5A50" stroke-width="1"/>
+  <text x="17.0" y="25.0" font-family="DM Sans, sans-serif" font-size="8" fill="#7B5A50" text-anchor="end">6</text>
+  <text x="190" y="150.0" font-family="DM Sans, sans-serif" font-size="9" fill="#7B5A50" font-style="italic">x</text>
+  <text x="27.0" y="10" font-family="DM Sans, sans-serif" font-size="9" fill="#7B5A50" font-style="italic">y</text>
+  <path d="M 44.0,66.0 L 45.1,71.4 L 46.2,76.8 L 47.3,82.0 L 48.4,87.1 L 49.5,92.1 L 50.6,97.0 L 51.7,101.8 L 52.8,106.5 L 53.9,111.0 L 55.0,115.5 L 56.1,119.8 L 57.2,124.1 L 58.3,128.2 L 59.4,132.2 L 60.5,136.1 L 61.6,139.9 L 62.7,143.6 L 63.8,147.2 L 64.9,150.6 L 66.0,154.0 L 67.1,157.2 L 68.2,160.4 L 69.3,163.4 L 70.4,166.3 L 71.5,169.1 L 72.6,171.8 L 73.7,174.4 L 74.8,176.9 L 75.9,179.2 L 77.0,181.5 L 78.1,183.6 L 79.2,185.7 L 80.3,187.6 L 81.4,189.4 L 82.5,191.1 L 83.6,192.7 L 84.7,194.2 L 85.8,195.6 L 86.9,196.8 L 88.0,198.0 L 89.1,199.0 L 90.2,200.0 L 91.3,200.8 L 92.4,201.5 L 93.5,202.1 L 94.6,202.6 L 95.7,203.0 L 96.8,203.3 L 97.9,203.4 L 99.0,203.5 L 100.1,203.4 L 101.2,203.3 L 102.3,203.0 L 103.4,202.6 L 104.5,202.1 L 105.6,201.5 L 106.7,200.8 L 107.8,200.0 L 108.9,199.0 L 110.0,198.0 L 111.1,196.8 L 112.2,195.6 L 113.3,194.2 L 114.4,192.7 L 115.5,191.1 L 116.6,189.4 L 117.7,187.6 L 118.8,185.7 L 119.9,183.6 L 121.0,181.5 L 122.1,179.2 L 123.2,176.9 L 124.3,174.4 L 125.4,171.8 L 126.5,169.1 L 127.6,166.3 L 128.7,163.4 L 129.8,160.4 L 130.9,157.2 L 132.0,154.0 L 133.1,150.6 L 134.2,147.2 L 135.3,143.6 L 136.4,139.9 L 137.5,136.1 L 138.6,132.2 L 139.7,128.2 L 140.8,124.1 L 141.9,119.8 L 143.0,115.5 L 144.1,111.0 L 145.2,106.5 L 146.3,101.8 L 147.4,97.0 L 148.5,92.1 L 149.6,87.1 L 150.7,82.0 L 151.8,76.8 L 152.9,71.4 L 154.0,66.0" stroke="#00DEC8" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Puntos evaluados -->
+  <circle cx="44.0" cy="66.0" r="3" fill="#1A0828"/>
+  <circle cx="66.0" cy="154.0" r="3" fill="#1A0828"/>
+  <circle cx="88.0" cy="198.0" r="3" fill="#1A0828"/>
+  <circle cx="110.0" cy="198.0" r="3" fill="#1A0828"/>
+  <circle cx="132.0" cy="154.0" r="3" fill="#1A0828"/>
+  <circle cx="154.0" cy="66.0" r="3" fill="#1A0828"/>
+</svg>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ EXTRAS ══════════ -->
+    <section class="section-block">
+      <div class="sec-toggle" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('show');">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </div>
+        <h2>Ejercicios extra</h2>
+        <span class="chev">▼</span>
+      </div>
+      <div class="collapsible">
+        <div class="bloques-2">
+
+          <!-- B1 -->
+          <div class="mini-card">
+            <div class="mini-card-head">Bloque 1</div>
+            <div class="mini-card-body">
+              <div class="sol">$f(x) = x^2 - x - 2, \quad [-2, 3]$</div>
+              <div class="sol">$f(x) = -x^2 + 9, \quad [-4, 4]$</div>
+              <div class="sol">$f(x) = x^2 - 4x + 3, \quad [0, 4]$</div>
+            </div>
+          </div>
+
+          <!-- B2 -->
+          <div class="mini-card">
+            <div class="mini-card-head">Bloque 2</div>
+            <div class="mini-card-body">
+              <div class="sol">$f(x) = 2x^2 - 4x, \quad [-1, 3]$</div>
+              <div class="sol">$f(x) = -x^2 - 2x + 3, \quad [-4, 2]$</div>
+              <div class="sol">$f(x) = x^2 + 2x + 1, \quad [-3, 1]$</div>
+            </div>
+          </div>
+
+          <!-- B3 -->
+          <div class="mini-card">
+            <div class="mini-card-head">Bloque 3</div>
+            <div class="mini-card-body">
+              <div class="sol">$f(x) = -2x^2 + 8, \quad [-3, 3]$</div>
+              <div class="sol">$f(x) = x^2 - 9, \quad [-4, 4]$</div>
+              <div class="sol">$f(x) = -x^2 + 6x - 8, \quad [1, 5]$</div>
+            </div>
+          </div>
+
+          <!-- B4 -->
+          <div class="mini-card">
+            <div class="mini-card-head">Bloque 4</div>
+            <div class="mini-card-body">
+              <div class="sol">$f(x) = x^2 + 5x + 6, \quad [-5, 0]$</div>
+              <div class="sol">$f(x) = -x^2 + x + 6, \quad [-3, 4]$</div>
+              <div class="sol">$f(x) = x^2 - 2x + 1, \quad [-1, 3]$</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ NAV ══════════ -->
+    <div class="topic-nav-btns">
+      <a href="ecuaciones-fracciones.html" class="btn-anterior">← Ecuaciones con fracciones</a>
+      <a href="recta-dos-puntos.html" class="btn-siguiente">Ecuación de la recta →</a>
+    </div>
+
+  </main>
+
+  <script src="../../nav.js"></script>
+  <script src="../../footer.js"></script>
+</body>
+</html>

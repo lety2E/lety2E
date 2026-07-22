@@ -6,6 +6,15 @@
 ---
 
 ## 2026-07-07
+- **Publicado el tema 8: Pendiente y ordenada al origen** (`math/matematicas-2/pendiente-ordenada.html`), duplicando y adaptando la página correspondiente de Matemáticas 1 por indicación del temario LaTeX.
+- Se enlazaron las páginas agregando el botón Siguiente en `recta-dos-puntos.html` que apunta a `pendiente-ordenada.html`, y se añadió la card de Pendiente y ordenada al origen al index de Matemáticas 2.
+- **Publicado el tema 7: Ecuación de la recta dados dos puntos** (`math/matematicas-2/recta-dos-puntos.html`) con apuntes teóricos de la fórmula punto-punto, un ejemplo detallado con su comprobación y gráfica SVG, un bloque de 6 ejercicios de práctica con resoluciones completas (que incluyen el procedimiento, comprobaciones y su gráfica en SVG inline) y 4 tarjetas de ejercicios extra.
+- Se enlazaron las páginas agregando el botón Siguiente en `grafica-cuadratica.html` que apunta a `recta-dos-puntos.html`, y se añadió la card de Ecuación de la recta al index de Matemáticas 2.
+- **Publicado el tema 6: Funciones cuadráticas** (`math/matematicas-2/grafica-cuadratica.html`) con apuntes teóricos de parábolas, ejemplo con tabla y gráfica SVG inline, 2 bloques de ejercicios de práctica, resoluciones completas paso a paso para todos los ejercicios (incluyendo sus respectivas tablas y gráficas en SVG) y 4 bloques de ejercicios extra estructurados en tarjetas.
+- **Pausada migración de Matemáticas 5** para trabajar en **Matemáticas 2** por petición de Lety (fuente: `Recursos lety2E/Latex Matematicas 2.md`).
+- **Publicado el tema 5: Ecuaciones con fracciones** (`math/matematicas-2/ecuaciones-fracciones.html`) con video de YouTube (`hRxUBd1SxZo`), apuntes teóricos de ejemplos, 4 bloques de ejercicios prácticos, respuestas KaTeX paso a paso y extras.
+- Actualizada la navegación de `algebra-fracciones.html` para incluir el botón Siguiente y añadida la card de Ecuaciones con fracciones al índice de Matemáticas 2.
+- Se enlazaron las páginas agregando el botón Siguiente a `ecuaciones-fracciones.html` que apunta a `grafica-cuadratica.html`, y se añadió la card de Funciones cuadráticas al index de Matemáticas 2.
 - **Arrancó la migración de Matemáticas 5** (fuente: transcripción de Lety en `~/Downloads/Latex matematicas 5.md`, revisada completa — 19 temas sanos, sin duplicados).
 - **Publicado el tema 1: Reglas básicas de derivación** (`math/matematicas-5/reglas-basicas.html`) con 2 videos (reglas básicas + con x en el denominador — fusiona los dos temas del sitio viejo, decisión de Lety), apuntes, 4 ejemplos, 4 bloques de ejercicios con respuestas paso a paso y extras.
 - Index de Mat 5 estrenado (adiós `próximamente`; descripción corregida: era "álgebra lineal", es Cálculo) y card del curso activada en el índice de Math.

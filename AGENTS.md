@@ -14,7 +14,7 @@ es **`Manual lety2E.md`**.
 
 ## Archivos del sistema de Lety (junto al código)
 Además del sitio (HTML/CSS/JS), en la raíz conviven las piezas estándar del sistema:
-- **`Pendientes lety2E.md`** — la bandeja de pendientes (tres secciones ▸/◇/✅). No la borres.
+- **`Pendientes lety2E.md`** — la bandeja de pendientes del sitio; se organiza a su manera (plan de trabajo, prioridades). El trabajo de crear —diseñar o escribir contenido del sitio— vive aquí. Si surge un accionable concreto que amerite la app Recordatorios, pregunta *"¿lo subo a Recordatorios?"* y con el ok de Lety agrégalo a su lista **agente** (vía `osascript`; única escritura de la IA allá). Este archivo queda fuera del resumen del hub (desde 11-jul-2026): Lety lo consulta aquí, en su carpeta. No la borres.
 - **`bitacora lety2E.md`** — el diario del proyecto. No la borres.
 - **`Manual lety2E.md`** — el manual para Lety (espejo humano).
 - **`Recursos lety2E/`** — material reutilizable (plantillas, snippets, prompts; nombres libres, sin índice).

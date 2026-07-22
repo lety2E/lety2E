@@ -5,6 +5,8 @@
 **Local:** `~/Desktop/lety2E/`
 
 > Esta guía documenta **decisiones, preferencias y fuentes externas** que no se pueden inferir leyendo el código. La estructura, paleta y rutas se ven directamente en el repo (`ls`, `style.css`, `nav.js`).
+>
+> **Antes de trabajar, lee también `AGENTS.md`** (en esta misma carpeta): ahí están las reglas del sistema de Lety para este proyecto (pendientes, bitácora, manual).
 
 ---
 
@@ -167,7 +169,7 @@ Para rectas y triángulos: SVG inline (no TikZ, no libs externas — file:// com
 **Cómo llega el contenido (división de trabajo con Lety):**
 - **Migración (lo común):** Lety genera el borrador (código LaTeX/HTML) **con Gemini + sus capturas** (lo hace en Gemini para ahorrar tokens; el borrador no se queda ahí) y lo sube al **doc de Drive, un tema por pestaña**. Luego avisa: *"checa el tema X de tal curso"* + enlaces de YouTube. Claude revisa, arma el HTML y sube.
 - **Desde cero:** algunos temas no vienen de capturas; se arman entre los dos con el mismo formato.
-- Referencia para Lety: `Sistema (cómo funciona).md` en la raíz.
+- Referencia para Lety: `Manual lety2E.md` en la raíz.
 
 Detalle procedimental completo en `.claude/skills/letymath-html/SKILL.md` (skill on-demand). Aquí el resumen:
 
