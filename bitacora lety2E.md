@@ -87,7 +87,8 @@
 - **Lo que esto cambia hacia adelante:** el certificado ahora lo emite y **renueva GitHub
   automáticamente**, así que el problema de SSL vencido no se repite. Y como no hay plan de
   hosting activo, **nadie va a reponer el `ALIAS`**: la configuración de hoy es estable.
-  En Hostinger solo queda el **registro del dominio**, que sí se debe seguir renovando.
+  En Hostinger solo queda el **registro del dominio**, que sí se debe seguir renovando: vence
+  el **2-feb-2027** y Lety dejó activada la **renovación automática** ese mismo día.
 - Nota: el cambio **no tuvo relación** con el renombre de la carpeta local (`lety2E 2` →
   `lety2E`); el repo estaba limpio y sincronizado todo el tiempo.
 
