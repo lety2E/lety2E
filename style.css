@@ -3,7 +3,10 @@
    Un solo archivo de estilos para todo el sitio
    ================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,900&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap');
+/* Tipografías self-hosted (antes venían de fonts.googleapis.com). El sitio no
+   depende de internet para verse bien; ver assets/fonts/fonts.css para
+   actualizarlas. */
+@import url('assets/fonts/fonts.css');
 
 /* ── Variables globales ─────────────────────────── */
 :root {
@@ -1130,6 +1133,43 @@ body[data-section="relatos"] .entrada-item h3 {
 @media (max-width: 600px) {
   .apuntes-grid { grid-template-columns: 1fr; gap: 1.25rem; }
   .apunte-card { min-height: auto; }
+}
+
+/* ================================================
+   APUNTES — grupos
+   Encabezado para partir el índice en bloques
+   (nivel escolar, tipo de material…). Para agregar
+   un grupo nuevo basta con repetir el patrón:
+   <h2 class="apuntes-grupo">…</h2> + su .apuntes-grid
+   ================================================ */
+.apuntes-grupo {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 900;
+  font-size: 1.5rem;
+  color: var(--P);
+  margin: 3.2rem 0 0;
+  padding-bottom: .5rem;
+  border-bottom: 2px solid var(--border-s);
+  display: flex;
+  align-items: baseline;
+  gap: .6rem;
+  flex-wrap: wrap;
+}
+.apuntes-grupo:first-of-type { margin-top: 1.5rem; }
+.apuntes-grupo .apuntes-grupo-nota {
+  font-family: var(--font-body);
+  font-style: normal;
+  font-weight: 400;
+  font-size: .85rem;
+  color: var(--text-2);
+  opacity: .75;
+}
+/* El grid que sigue a un grupo se pega un poco más al título */
+.apuntes-grupo + .apuntes-grid { margin-top: 1.4rem; }
+
+@media (max-width: 600px) {
+  .apuntes-grupo { font-size: 1.28rem; margin-top: 2.6rem; }
 }
 
 /* ================================================

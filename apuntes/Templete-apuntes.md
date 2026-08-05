@@ -1,6 +1,18 @@
 # TEMPLATE — Apunte de Historia (lety2E Apuntes)
 
-Referencia canónica: `apuntes/segunda-guerra-mundial.html`
+> ℹ️ **El prototipo salió del sitio y se guardó como recurso.** El 5-ago-2026 se retiró
+> `apuntes/segunda-guerra-mundial.html` (a Lety dejó de convencerle el formato), junto con
+> `mcp.html` y `compresion.html`. El archivo **no se perdió**: vive en
+>
+> ```
+> Recursos lety2E/formato-apunte-zoom-N1-N5 (segunda-guerra-mundial).html
+> ```
+>
+> Ahí está para copiar componentes o retomar el formato cuando haga falta. **Ya no se
+> publica** — no tiene card en ningún índice.
+>
+> Las guías nuevas de `ingreso-licenciatura/` usan **otro formato** (sin niveles N1–N5 ni
+> flashcards), así que hoy ninguna página viva implementa el patrón de abajo.
 
 > Artefacto self-contained: **no depende** de `style.css`, `nav.js` ni `footer.js`.
 > Todo el CSS y JS va inline dentro del mismo `.html`.
@@ -9,7 +21,7 @@ Referencia canónica: `apuntes/segunda-guerra-mundial.html`
 
 ## Lógica pedagógica — el zoom progresivo
 
-> Prototipo de referencia: `apuntes/segunda-guerra-mundial.html`
+> Prototipo de referencia: `Recursos lety2E/formato-apunte-zoom-N1-N5 (segunda-guerra-mundial).html`
 > Fue construido con la skill `letymath-html` a partir de un documento real de Lety.
 
 La idea central es un **zoom progresivo**: el apunte se lee como si acercaras una lupa al tema. Cada pestaña es un nivel más cercano. El estudiante puede quedarse en N1 si quiere lo esencial, o ir hasta N4 si quiere profundidad real. N5 siempre es práctica.
@@ -50,7 +62,7 @@ Lo que va **dentro** de cada nivel depende de la naturaleza del contenido. No se
 
 ## Checklist para replicar en un tema nuevo
 
-1. Duplicar `apuntes/segunda-guerra-mundial.html` → `apuntes/nombre-del-tema.html`
+1. Duplicar el prototipo de `Recursos lety2E/` → `apuntes/nombre-del-tema.html`
 2. Cambiar `<title>` y `<h1>`
 3. Cambiar el subtítulo en `<p>` del header (materia · niveles)
 4. Ajustar el color de `.tabs-nav` al tema (ver sección Tabs)

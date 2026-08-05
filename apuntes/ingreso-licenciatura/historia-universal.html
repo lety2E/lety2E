@@ -1,0 +1,1336 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Historia Universal · Área 2 · UNAM</title>
+<style>
+  :root{
+    --M:#FF00AA; --T:#00B8B8; --P:#6A2A8C;
+    --bg:#FFF7FB; --card:#FFFFFF; --ink:#1A0828;
+    --muted:#7B5A50; --border:#F0D7E6; --hover:#FFE3F1; --soft:#FDF1F8;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,system-ui,sans-serif;
+    background:var(--bg);color:var(--ink);line-height:1.5;-webkit-font-smoothing:antialiased;
+  }
+
+  header{text-align:center;padding:2.2rem 1rem .8rem}
+  header .eyebrow{font-size:.76rem;letter-spacing:.18em;text-transform:uppercase;color:var(--T);font-weight:700}
+  header h1{margin:.35rem 0 .25rem;font-size:clamp(1.5rem,3.8vw,2.1rem);color:var(--P)}
+  header p{margin:0 auto;max-width:48ch;color:var(--muted);font-size:.93rem}
+
+  .controls{display:flex;justify-content:center;align-items:center;gap:.6rem;flex-wrap:wrap;padding:1rem 1rem 0}
+  .switch{
+    display:inline-flex;align-items:center;gap:.55rem;
+    background:var(--card);border:1.5px solid var(--border);
+    border-radius:999px;padding:.42rem .9rem;cursor:pointer;
+    font-size:.86rem;font-weight:600;color:var(--ink);transition:all .15s ease;font-family:inherit;
+  }
+  .switch:hover{border-color:var(--T);background:#F0FBFB}
+  .switch .dot{width:34px;height:19px;border-radius:999px;background:var(--border);position:relative;transition:background .18s ease;flex:none}
+  .switch .dot::after{
+    content:"";position:absolute;top:2.5px;left:2.5px;width:14px;height:14px;border-radius:50%;
+    background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.25);transition:transform .18s ease;
+  }
+  body.memo .switch#memoBtn .dot{background:var(--T)}
+  body.memo .switch#memoBtn .dot::after{transform:translateX(15px)}
+  body.flip .switch#flipBtn .dot{background:var(--M)}
+  body.flip .switch#flipBtn .dot::after{transform:translateX(15px)}
+  #flipBtn{display:none}
+  body.memo #flipBtn{display:inline-flex}
+  .hint{text-align:center;color:var(--muted);font-size:.8rem;padding:.55rem 1rem 0;min-height:1.4rem;max-width:64ch;margin:0 auto}
+
+  .tabs{max-width:1180px;margin:.9rem auto 0;padding:0 1rem;display:flex;flex-wrap:wrap;gap:.45rem;justify-content:center}
+  .tab{
+    background:var(--card);border:1.5px solid var(--border);color:var(--ink);
+    border-radius:999px;padding:.45rem .9rem;font-size:.87rem;font-weight:600;
+    cursor:pointer;transition:all .15s ease;font-family:inherit;white-space:nowrap;
+  }
+  .tab b{color:var(--T);margin-right:.35rem;font-weight:800}
+  .tab:hover{background:var(--hover);border-color:var(--M)}
+  .tab.active{background:var(--M);color:#fff;border-color:var(--M);box-shadow:0 4px 12px rgba(255,0,170,.25)}
+  .tab.active b{color:#fff}
+
+  main{max-width:1000px;margin:1.5rem auto 4rem;padding:0 1rem}
+  .panel{display:none}
+  .panel.active{display:block;animation:fade .25s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+
+  .panel-head{margin-bottom:1.3rem;padding-bottom:.8rem;border-bottom:2px solid var(--border)}
+  .panel-head .u{font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--T);font-weight:800}
+  .panel-head h2{margin:.2rem 0 .3rem;color:var(--P);font-size:clamp(1.25rem,3vw,1.65rem)}
+  .panel-head .lead{color:var(--muted);font-size:.9rem;margin:0}
+
+  h3.sec{
+    display:flex;align-items:center;gap:.6rem;margin:2rem 0 .9rem;
+    font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--P);
+  }
+  h3.sec::after{content:"";flex:1;height:1.5px;background:var(--border)}
+
+  .cgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:.7rem}
+  .concept{background:var(--card);border:1.5px solid var(--border);border-left:4px solid var(--T);border-radius:12px;padding:.75rem .9rem}
+  .concept h4{margin:0 0 .25rem;font-size:.93rem;color:var(--P)}
+  .concept p{margin:0;font-size:.87rem;color:var(--ink)}
+  .concept em{color:var(--muted);font-style:normal}
+
+  .fgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:.7rem}
+  .card{
+    background:var(--card);border:1.5px solid var(--border);border-radius:14px;
+    padding:.8rem .9rem .7rem;position:relative;transition:border-color .15s ease,box-shadow .15s ease;
+  }
+  .card:hover{border-color:var(--M);box-shadow:0 6px 18px rgba(255,0,170,.10)}
+  .card .name{font-size:.95rem;font-weight:700;color:var(--M);margin-bottom:.45rem;padding-right:5.2rem;transition:filter .18s ease}
+  .fbody .dato,.fbody .io-v{transition:filter .18s ease}
+
+  .io{display:grid;grid-template-columns:6.4rem 1fr;gap:.5rem;align-items:baseline;padding:.28rem 0}
+  .io + .io{border-top:1px dashed var(--border)}
+  .io-k{
+    font-size:.66rem;letter-spacing:.09em;text-transform:uppercase;color:var(--T);font-weight:800;
+    min-width:0;overflow-wrap:anywhere;line-height:1.25;
+  }
+  .io-v{font-size:.88rem;color:var(--ink)}
+  .io-v b{color:var(--P);font-weight:700}
+
+  .dato{font-size:.89rem;color:var(--ink);padding:.1rem 0 .2rem}
+  .dato ul{margin:.2rem 0;padding-left:1.1rem}
+  .dato li{margin-bottom:.25rem}
+  .dato li:last-child{margin-bottom:0}
+  .dato b{color:var(--P);font-weight:700}
+
+  .leg{font-size:.78rem;color:var(--muted);border-top:1.5px solid var(--soft);padding-top:.45rem;margin-top:.35rem}
+  .leg b{color:var(--P);font-weight:700}
+
+  details.why{margin-top:.55rem;border-top:1.5px solid var(--soft);padding-top:.45rem}
+  details.why > summary{
+    list-style:none;cursor:pointer;display:flex;align-items:center;gap:.35rem;
+    font-size:.76rem;font-weight:700;color:var(--T);letter-spacing:.02em;
+  }
+  details.why > summary::-webkit-details-marker{display:none}
+  details.why > summary::after{content:"▾";font-size:.8rem;transition:transform .15s ease}
+  details.why[open] > summary::after{transform:rotate(180deg)}
+  details.why > summary:hover{color:var(--M)}
+  details.why .why-body{font-size:.83rem;line-height:1.45;color:var(--ink);background:var(--soft);border-radius:10px;padding:.55rem .7rem;margin-top:.45rem}
+
+  /* ---------- Tira de cronología ---------- */
+  /* El orden es el andamio: las filas siempre están en secuencia y eso no se tapa.
+     Se tapa el hecho (de ida) o el año (volteado). */
+  .tl{background:var(--card);border:1.5px solid var(--border);border-radius:14px;padding:.15rem .95rem .35rem}
+  .tl-row{display:grid;grid-template-columns:5.6rem 1fr;gap:.65rem;align-items:baseline;padding:.44rem 0;position:relative}
+  .tl-row + .tl-row{border-top:1px dashed var(--border)}
+  .tl-y{
+    font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+    font-size:1rem;font-weight:700;color:var(--T);letter-spacing:.01em;
+    min-width:0;overflow-wrap:anywhere;line-height:1.3;transition:filter .18s ease;
+  }
+  .tl-e{font-size:.88rem;color:var(--ink);transition:filter .18s ease}
+  .tl-e b{color:var(--P);font-weight:700}
+  .tl-e em{font-style:normal;color:var(--muted);font-size:.94em}
+  .tl-cap{font-size:.78rem;color:var(--muted);margin:.15rem 0 .6rem}
+
+  .trap{background:#FFF9E8;border:1.5px solid #F5E2A8;border-left:4px solid #E8B93B;border-radius:12px;padding:.8rem 1rem;margin-top:.7rem}
+  .trap h4{margin:0 0 .4rem;font-size:.86rem;color:#8A6410}
+  .trap ul{margin:0;padding-left:1.1rem;font-size:.86rem;color:#5C4712}
+  .trap li{margin-bottom:.25rem}
+  .trap li:last-child{margin-bottom:0}
+
+  /* ---------- Modo memoria ---------- */
+  /* se tapa el valor, nunca la etiqueta: el andamio queda para poder recitar */
+  body.memo:not(.flip) .fbody .io-v,
+  body.memo:not(.flip) .fbody .dato{filter:blur(6.5px)}
+  body.memo:not(.flip) .card.open .fbody .io-v,
+  body.memo:not(.flip) .card.open .fbody .dato{filter:none}
+
+  body.memo.flip .card .name{filter:blur(6.5px)}
+  body.memo.flip .card.open .name{filter:none}
+
+  body.memo:not(.flip) .tl-e{filter:blur(6.5px)}
+  body.memo:not(.flip) .tl-row.open .tl-e{filter:none}
+  body.memo.flip .tl-y{filter:blur(6.5px)}
+  body.memo.flip .tl-row.open .tl-y{filter:none}
+
+  body.memo .card,body.memo .tl-row{cursor:pointer}
+  body.memo .card::after{
+    content:"toca para ver";position:absolute;right:.7rem;top:.72rem;
+    font-size:.66rem;color:var(--T);font-weight:700;letter-spacing:.04em;
+  }
+  body.memo .card.open::after{content:""}
+  body.memo details.why{filter:none}
+
+  footer{text-align:center;color:var(--muted);font-size:.8rem;padding:0 1rem 3rem;max-width:60ch;margin:0 auto}
+
+  @media (max-width:420px){
+    .io{grid-template-columns:5.4rem 1fr}
+    .tl-row{grid-template-columns:4.8rem 1fr}
+  }
+
+  @media print{
+    .tabs,.controls,.hint,footer{display:none}
+    .panel{display:block!important;page-break-after:always}
+    body.memo .fbody .dato,body.memo .fbody .io-v,body.memo .card .name,
+    body.memo .tl-e,body.memo .tl-y{filter:none}
+    body{background:#fff}
+  }
+</style>
+
+<style>
+/* ---- barra de regreso lety2E (prefijo l2e- para no chocar) ---- */
+.l2e-volver{
+  font-family:'DM Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
+  font-size:.85rem;font-weight:500;
+  padding:.7rem 1.1rem;
+  background:#1A0828;color:#F5E9F2;
+  display:flex;flex-wrap:wrap;align-items:center;gap:.45rem;
+  line-height:1.5;
+}
+.l2e-volver a{color:#00DEC8;text-decoration:none;}
+.l2e-volver a:hover{color:#FF00AA;text-decoration:underline;}
+.l2e-volver .l2e-sep{opacity:.45;}
+.l2e-volver .l2e-actual{opacity:.75;}
+.l2e-volver .l2e-marca{
+  margin-left:auto;font-family:Georgia,'Times New Roman',serif;
+  font-style:italic;font-weight:700;color:#FF00AA;text-decoration:none;
+}
+.l2e-volver .l2e-marca:hover{color:#00DEC8;}
+@media (max-width:520px){
+  .l2e-volver{font-size:.78rem;padding:.6rem .8rem;}
+  .l2e-volver .l2e-marca{margin-left:auto;}
+}
+</style>
+</head>
+<body data-section="apuntes">
+<nav class="l2e-volver">
+  <a href="../../index.html">Inicio</a>
+  <span class="l2e-sep">&rsaquo;</span>
+  <a href="../index.html">Apuntes</a>
+  <span class="l2e-sep">&rsaquo;</span>
+  <a href="index.html">Ingreso UNAM</a>
+  <span class="l2e-sep">&rsaquo;</span>
+  <span class="l2e-actual">Historia Universal</span>
+  <a class="l2e-marca" href="../../index.html">lety2E</a>
+</nav>
+
+
+<header>
+  <div class="eyebrow">Guía UNAM · Área 2 · Ciencias Biológicas, Químicas y de la Salud</div>
+  <h1>Historia Universal</h1>
+  <p>Las 9 unidades del temario oficial, de la Ilustración al mundo de hoy. Se memoriza en dos ejes: <b>los nombres</b> (tratado ↔ qué acordó, doctrina ↔ quién la formuló) y <b>el orden</b> en que pasaron las cosas.</p>
+</header>
+
+<div class="controls">
+  <button class="switch" id="memoBtn"><span class="dot"></span> Modo memoria</button>
+  <button class="switch" id="flipBtn"><span class="dot"></span> Voltear</button>
+</div>
+<div class="hint" id="hint">Enciende el <b>modo memoria</b> para taparte. El <b>En palabras</b> de cada tarjeta se abre siempre, en cualquier modo.</div>
+
+<nav class="tabs" id="tabs"></nav>
+
+<main id="main">
+<!-- ============ U1 LA HISTORIA ============ -->
+<section class="panel" data-num="1" data-short="La Historia">
+  <div class="panel-head">
+    <div class="u">Unidad 1</div>
+    <h2>La Historia</h2>
+    <p class="lead">La unidad más corta y la que más se subestima: qué es la Historia, para qué sirve y cómo se corta el tiempo en edades. De aquí salen preguntas fáciles que se pierden por no repasarlas.</p>
+  </div>
+
+  <h3 class="sec">Conceptos clave</h3>
+  <div class="cgrid">
+    <div class="concept"><h4>Qué es la Historia</h4><p>La ciencia social que estudia el <b>pasado de las sociedades humanas</b> a partir de sus huellas, para explicar el presente. No es una lista de fechas: es explicación de <b>procesos</b>.</p></div>
+    <div class="concept"><h4>Para qué sirve</h4><p>Para <b>entender el presente</b>, reconocer que lo que hay pudo ser de otro modo y formar identidad y criterio. Su utilidad no es predecir: es <b>explicar por qué llegamos aquí</b>.</p></div>
+    <div class="concept"><h4>Fuentes</h4><p><b>Primarias</b>: producidas en la época estudiada (documentos, objetos, testimonios). <b>Secundarias</b>: elaboradas después sobre las primeras (libros, ensayos, estudios).</p></div>
+    <div class="concept"><h4>Periodización</h4><p>Dividir el tiempo en <b>etapas</b> con un criterio. Es una herramienta del historiador, no algo que exista en la realidad: los cortes son convenciones y se discuten.</p></div>
+    <div class="concept"><h4>Prehistoria e Historia</h4><p>La frontera es la <b>escritura</b>: antes hay Prehistoria (Paleolítico, Neolítico, Edad de los Metales), después Historia. Es un corte eurocéntrico y por eso hoy se matiza.</p></div>
+    <div class="concept"><h4>Ciencias auxiliares</h4><p>La <b>arqueología</b>, la <b>paleografía</b> (escrituras antiguas), la <b>numismática</b> (monedas), la <b>epigrafía</b> (inscripciones) y la <b>cronología</b>. La historia no trabaja sola.</p></div>
+  </div>
+
+  <h3 class="sec">Las edades históricas</h3>
+  <div class="fgrid">
+
+    <div class="card"><div class="name">Edad Antigua</div><div class="fbody">
+      <div class="io"><span class="io-k">Empieza</span><span class="io-v">con la invención de la <b>escritura</b>, hacia el <b>3500-3000 a. C.</b> en Mesopotamia</span></div>
+      <div class="io"><span class="io-k">Termina</span><span class="io-v">en <b>476 d. C.</b>, con la caída del <b>Imperio romano de Occidente</b></span></div>
+      <div class="io"><span class="io-k">Qué abarca</span><span class="io-v">Mesopotamia, Egipto, Grecia y Roma</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">El corte es la escritura porque a partir de ahí las sociedades dejan constancia de sí mismas: se puede saber qué pensaban, no solo qué comían.</div></details></div>
+
+    <div class="card"><div class="name">Edad Media</div><div class="fbody">
+      <div class="io"><span class="io-k">Empieza</span><span class="io-v"><b>476</b>, caída de Roma de Occidente</span></div>
+      <div class="io"><span class="io-k">Termina</span><span class="io-v"><b>1453</b> (caída de Constantinopla) o <b>1492</b> (llegada a América), según el autor</span></div>
+      <div class="io"><span class="io-k">Qué la define</span><span class="io-v">el <b>feudalismo</b>, el poder de la Iglesia y la economía rural</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Es la única edad con dos fechas de cierre aceptadas, y el examen puede usar cualquiera de las dos. Vale la pena saberse las dos y por qué.</div></details></div>
+
+    <div class="card"><div class="name">Edad Moderna</div><div class="fbody">
+      <div class="io"><span class="io-k">Empieza</span><span class="io-v"><b>1453</b> o <b>1492</b></span></div>
+      <div class="io"><span class="io-k">Termina</span><span class="io-v"><b>1789</b>, con la <b>Revolución Francesa</b></span></div>
+      <div class="io"><span class="io-k">Qué la define</span><span class="io-v">Renacimiento, Reforma protestante, <b>monarquías absolutas</b>, expansión europea y revolución científica</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Es donde nace casi todo lo que hoy llamamos moderno: el Estado, la ciencia experimental y la economía mundial.</div></details></div>
+
+    <div class="card"><div class="name">Edad Contemporánea</div><div class="fbody">
+      <div class="io"><span class="io-k">Empieza</span><span class="io-v"><b>1789</b></span></div>
+      <div class="io"><span class="io-k">Hasta</span><span class="io-v">el <b>presente</b></span></div>
+      <div class="io"><span class="io-k">Qué la define</span><span class="io-v">revoluciones burguesas, <b>industrialización</b>, imperialismo, guerras mundiales y globalización</span></div>
+      <div class="io"><span class="io-k">Ojo</span><span class="io-v">es la que cubre <b>todo el resto del temario</b>: las unidades 2 a 9</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">El temario oficial de Historia Universal es, en realidad, esta sola edad vista con lupa. Las otras tres caben en esta pestaña.</div></details></div>
+  </div>
+
+  <h3 class="sec">La tira · las edades</h3>
+  <p class="tl-cap">Los cortes, en orden. De ida ves el año y dices qué empieza o qué termina; volteado ves el hecho y dices el año.</p>
+  <div class="tl">
+    <div class="tl-row"><span class="tl-y">3500 a.C.</span><span class="tl-e">Invención de la <b>escritura</b>: empieza la <b>Edad Antigua</b></span></div>
+    <div class="tl-row"><span class="tl-y">476</span><span class="tl-e">Caída del <b>Imperio romano de Occidente</b>: empieza la <b>Edad Media</b></span></div>
+    <div class="tl-row"><span class="tl-y">1453</span><span class="tl-e">Caída de <b>Constantinopla</b>: primer cierre posible de la Edad Media</span></div>
+    <div class="tl-row"><span class="tl-y">1492</span><span class="tl-e">Llegada a <b>América</b>: segundo cierre posible · empieza la <b>Edad Moderna</b></span></div>
+    <div class="tl-row"><span class="tl-y">1789</span><span class="tl-e"><b>Revolución Francesa</b>: empieza la <b>Edad Contemporánea</b></span></div>
+  </div>
+
+  <div class="trap"><h4>Ojo en el examen</h4><ul>
+    <li><b>476, 1453/1492, 1789.</b> Tres cortes y ya tienes las cuatro edades. Es la pregunta más barata de toda la materia.</li>
+    <li>La Edad Media tiene <b>dos posibles fechas de cierre</b>: Constantinopla (1453) y América (1492). Si el examen da una, es esa.</li>
+    <li><b>Fuente primaria = de la época · secundaria = escrita después.</b> Un libro de historia sobre Roma es secundaria aunque sea muy antiguo, si no es romano.</li>
+    <li>La <b>periodización es una convención</b>, no un hecho natural. Ese matiz se pregunta con palabras como «criterio» o «convencional».</li>
+  </ul></div>
+</section>
+
+<!-- ============ U2 REVOLUCIONES BURGUESAS ============ -->
+<section class="panel" data-num="2" data-short="Revoluciones burguesas">
+  <div class="panel-head">
+    <div class="u">Unidad 2 · siglos XVIII y XIX</div>
+    <h2>Las revoluciones burguesas</h2>
+    <p class="lead">Cómo una clase con dinero pero sin poder político lo consiguió: primero con ideas, luego con independencias y revoluciones, y en paralelo con máquinas.</p>
+  </div>
+
+  <h3 class="sec">Conceptos clave</h3>
+  <div class="cgrid">
+    <div class="concept"><h4>Antiguo Régimen</h4><p>Lo que se venía abajo: <b>monarquía absoluta</b>, sociedad de tres estamentos (clero, nobleza y estado llano) con privilegios de nacimiento, y economía agraria y señorial.</p></div>
+    <div class="concept"><h4>Burguesía</h4><p>La clase de los comerciantes, banqueros e industriales: tenían <b>dinero pero no privilegios</b>. Toda la unidad es la historia de cómo convirtieron lo uno en lo otro.</p></div>
+    <div class="concept"><h4>Ilustración</h4><p>El movimiento del siglo XVIII que puso la <b>razón</b> por encima de la tradición y la fe como criterio para organizar la sociedad. Su símbolo es <b>la luz</b>, y su obra, la <em>Enciclopedia</em>.</p></div>
+    <div class="concept"><h4>Soberanía nacional</h4><p>El poder no viene de Dios al rey, sino de la <b>nación</b>, que lo delega por medio de representantes. Es la idea que legitima todas las revoluciones del periodo.</p></div>
+    <div class="concept"><h4>Liberalismo</h4><p><b>Político</b>: constitución, división de poderes, derechos individuales, gobierno representativo. <b>Económico</b>: libertad de mercado y mínima intervención del Estado.</p></div>
+    <div class="concept"><h4>Capitalismo industrial</h4><p>La producción se hace en <b>fábricas</b>, con máquinas que pertenecen a un dueño y trabajadores que solo tienen su <b>fuerza de trabajo</b>. Nace aquí y define los dos siglos siguientes.</p></div>
+  </div>
+
+  <h3 class="sec">Las ideas</h3>
+  <div class="fgrid">
+
+    <div class="card"><div class="name">Montesquieu</div><div class="fbody">
+      <div class="io"><span class="io-k">Su idea</span><span class="io-v">la <b>división de poderes</b>: ejecutivo, legislativo y judicial, separados para que se limiten entre sí</span></div>
+      <div class="io"><span class="io-k">Su obra</span><span class="io-v"><em>El espíritu de las leyes</em></span></div>
+      <div class="io"><span class="io-k">Dónde se ve</span><span class="io-v">en <b>toda constitución</b> moderna, empezando por la de Estados Unidos</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">La idea de que el poder solo se detiene con otro poder. Es la respuesta técnica al absolutismo: no basta con un buen rey, hacen falta contrapesos.</div></details></div>
+
+    <div class="card"><div class="name">Rousseau</div><div class="fbody">
+      <div class="io"><span class="io-k">Su idea</span><span class="io-v">el <b>contrato social</b> y la <b>soberanía popular</b>: el poder reside en el pueblo</span></div>
+      <div class="io"><span class="io-k">Su obra</span><span class="io-v"><em>El contrato social</em>; también <em>Emilio</em>, sobre educación</span></div>
+      <div class="io"><span class="io-k">Su frase</span><span class="io-v">«el hombre nace libre y en todas partes está <b>encadenado</b>»</span></div>
+      <div class="io"><span class="io-k">A quién inspiró</span><span class="io-v">al ala <b>radical</b> de la Revolución Francesa (jacobinos) y a Morelos</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">El más radical de los tres: no quería limitar al rey, quería que el poder fuera del pueblo entero. Por eso su nombre aparece cada vez que se habla de soberanía.</div></details></div>
+
+    <div class="card"><div class="name">Voltaire</div><div class="fbody">
+      <div class="io"><span class="io-k">Su idea</span><span class="io-v"><b>tolerancia religiosa</b> y <b>libertad de expresión</b>; crítica feroz al fanatismo y al clero</span></div>
+      <div class="io"><span class="io-k">Qué defendía</span><span class="io-v">una monarquía <b>ilustrada</b>, no necesariamente la república</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">El polemista del grupo. No pedía tumbar al rey sino que dejara de mandar la Iglesia sobre las conciencias.</div></details></div>
+
+    <div class="card"><div class="name">Adam Smith</div><div class="fbody">
+      <div class="io"><span class="io-k">Su idea</span><span class="io-v">el <b>liberalismo económico</b>: la <b>mano invisible</b> del mercado ordena la economía sola</span></div>
+      <div class="io"><span class="io-k">Su obra</span><span class="io-v"><em>La riqueza de las naciones</em>, <b>1776</b></span></div>
+      <div class="io"><span class="io-k">Su lema</span><span class="io-v"><em>laissez faire, laissez passer</em> — dejar hacer, dejar pasar</span></div>
+      <div class="io"><span class="io-k">Contra qué va</span><span class="io-v">contra el <b>mercantilismo</b> y el proteccionismo del Antiguo Régimen</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Es la mitad económica del liberalismo, y la que da fundamento a la industrialización sin freno del siglo XIX. También es a quien Marx va a responder.</div></details></div>
+
+    <div class="card"><div class="name">La Enciclopedia</div><div class="fbody">
+      <div class="io"><span class="io-k">Quiénes</span><span class="io-v"><b>Diderot</b> y <b>D'Alembert</b></span></div>
+      <div class="io"><span class="io-k">Qué fue</span><span class="io-v">reunir <b>todo el saber</b> de la época en una obra ordenada y accesible</span></div>
+      <div class="io"><span class="io-k">Por qué importa</span><span class="io-v">difundió las ideas nuevas fuera de las élites: es el <b>vehículo</b> de la Ilustración</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Poner el conocimiento por escrito y al alcance de quien pudiera leerlo era, en ese momento, un acto político. La Iglesia la censuró por eso.</div></details></div>
+  </div>
+
+  <h3 class="sec">Las revoluciones</h3>
+  <div class="fgrid">
+
+    <div class="card"><div class="name">Independencia de las Trece Colonias</div><div class="fbody">
+      <div class="io"><span class="io-k">Declaración</span><span class="io-v"><b>4 de julio de 1776</b>, redactada por <b>Thomas Jefferson</b></span></div>
+      <div class="io"><span class="io-k">Causa</span><span class="io-v">impuestos sin representación en el Parlamento — «<b>no taxation without representation</b>»</span></div>
+      <div class="io"><span class="io-k">Quién ayudó</span><span class="io-v"><b>Francia</b> y España, contra Inglaterra</span></div>
+      <div class="io"><span class="io-k">Se reconoce en</span><span class="io-v">el <b>Tratado de Versalles/París de 1783</b></span></div>
+      <div class="io"><span class="io-k">Qué estrenó</span><span class="io-v">la primera <b>constitución escrita</b> (1787), con república federal y división de poderes</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Es la primera vez que las ideas ilustradas se convierten en un país real. Por eso funciona como modelo para Hispanoamérica treinta años después.</div></details></div>
+
+    <div class="card"><div class="name">Revolución Francesa</div><div class="fbody">
+      <div class="io"><span class="io-k">Años</span><span class="io-v"><b>1789 – 1799</b></span></div>
+      <div class="io"><span class="io-k">Cómo empieza</span><span class="io-v">crisis financiera → Estados Generales → <b>toma de la Bastilla</b>, 14 de julio de 1789</span></div>
+      <div class="io"><span class="io-k">Su documento</span><span class="io-v"><b>Declaración de los Derechos del Hombre y del Ciudadano</b> (1789)</span></div>
+      <div class="io"><span class="io-k">Sus etapas</span><span class="io-v">Asamblea/monarquía constitucional → <b>Convención</b> (república y Terror, con <b>Robespierre</b>) → <b>Directorio</b></span></div>
+      <div class="io"><span class="io-k">Su lema</span><span class="io-v"><b>Libertad, Igualdad, Fraternidad</b></span></div>
+      <div class="io"><span class="io-k">Cómo termina</span><span class="io-v">golpe del <b>18 Brumario</b> (1799): llega Napoleón</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Es el corte que abre la Edad Contemporánea. No solo cambió de gobierno: abolió los privilegios de nacimiento, y eso ya no tuvo vuelta atrás en ninguna parte.</div></details></div>
+
+    <div class="card"><div class="name">Imperio napoleónico</div><div class="fbody">
+      <div class="io"><span class="io-k">Años</span><span class="io-v">cónsul desde 1799, emperador <b>1804 – 1815</b></span></div>
+      <div class="io"><span class="io-k">Qué exportó</span><span class="io-v">el <b>Código Civil</b> (Código Napoleón): igualdad ante la ley, propiedad privada, matrimonio civil</span></div>
+      <div class="io"><span class="io-k">Su freno económico</span><span class="io-v">el <b>bloqueo continental</b> contra Inglaterra, que fracasó</span></div>
+      <div class="io"><span class="io-k">Sus derrotas</span><span class="io-v"><b>Rusia</b> (1812) y <b>Waterloo</b> (1815)</span></div>
+      <div class="io"><span class="io-k">Efecto en América</span><span class="io-v">al invadir <b>España en 1808</b> abrió la crisis que detona las independencias</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Traicionó la república y al mismo tiempo repartió sus leyes por media Europa a punta de ejército. Esa contradicción es lo que se pregunta: fue tirano y difusor de la revolución a la vez.</div></details></div>
+
+    <div class="card"><div class="name">Congreso de Viena</div><div class="fbody">
+      <div class="io"><span class="io-k">Años</span><span class="io-v"><b>1814 – 1815</b>, tras la derrota napoleónica</span></div>
+      <div class="io"><span class="io-k">Quién lo dirige</span><span class="io-v"><b>Metternich</b>, canciller austriaco</span></div>
+      <div class="io"><span class="io-k">Sus principios</span><span class="io-v"><b>legitimidad</b> (devolver los tronos), <b>equilibrio</b> entre potencias y <b>restauración</b> del orden anterior</span></div>
+      <div class="io"><span class="io-k">Qué crea</span><span class="io-v">la <b>Santa Alianza</b>, para sofocar cualquier revolución liberal</span></div>
+      <div class="io"><span class="io-k">Qué ignoró</span><span class="io-v">las <b>nacionalidades</b>: repartió pueblos como territorios, y eso alimenta el nacionalismo del siglo XIX</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Intentaron poner el reloj en 1789 y no se pudo. De su fracaso salen las oleadas revolucionarias de 1820, 1830 y 1848.</div></details></div>
+
+    <div class="card"><div class="name">Independencia de Hispanoamérica</div><div class="fbody">
+      <div class="io"><span class="io-k">Cuándo</span><span class="io-v">sobre todo <b>1810 – 1824</b></span></div>
+      <div class="io"><span class="io-k">Detonante</span><span class="io-v">la <b>invasión napoleónica a España</b> (1808): sin rey legítimo, ¿quién manda?</span></div>
+      <div class="io"><span class="io-k">Quiénes la hacen</span><span class="io-v">los <b>criollos</b>, desplazados de los altos cargos</span></div>
+      <div class="io"><span class="io-k">Sus libertadores</span><span class="io-v"><b>Simón Bolívar</b> (norte) y <b>José de San Martín</b> (sur)</span></div>
+      <div class="io"><span class="io-k">Batalla final</span><span class="io-v"><b>Ayacucho</b>, 1824, en Perú</span></div>
+      <div class="io"><span class="io-k">El sueño roto</span><span class="io-v">la <b>Gran Colombia</b> de Bolívar, que se deshizo en 1830</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Es la misma unidad vista desde América. Conviene estudiarla junto con la Independencia de México: comparten causa externa y comparten protagonista social, el criollo.</div></details></div>
+
+    <div class="card"><div class="name">Revolución Industrial</div><div class="fbody">
+      <div class="io"><span class="io-k">Dónde y cuándo</span><span class="io-v"><b>Inglaterra</b>, desde mediados del <b>siglo XVIII</b></span></div>
+      <div class="io"><span class="io-k">Por qué ahí</span><span class="io-v"><b>carbón y hierro</b>, capital acumulado del comercio, mano de obra libre por los cercamientos y estabilidad política</span></div>
+      <div class="io"><span class="io-k">Su máquina</span><span class="io-v">la <b>máquina de vapor</b> de <b>James Watt</b></span></div>
+      <div class="io"><span class="io-k">Su industria</span><span class="io-v">la <b>textil</b> primero, luego siderurgia y ferrocarril</span></div>
+      <div class="io"><span class="io-k">Qué crea</span><span class="io-v">dos clases nuevas: la <b>burguesía industrial</b> y el <b>proletariado</b>; y la ciudad industrial</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">La otra mitad de la unidad: mientras unos cambiaban las leyes, otros cambiaban cómo se produce. Del segundo cambio salen los problemas sociales de la unidad siguiente.</div></details></div>
+
+    <div class="card"><div class="name">Segunda Revolución Industrial</div><div class="fbody">
+      <div class="io"><span class="io-k">Cuándo</span><span class="io-v">desde <b>1870</b> aproximadamente</span></div>
+      <div class="io"><span class="io-k">Sus energías</span><span class="io-v"><b>electricidad</b> y <b>petróleo</b>, en lugar del carbón</span></div>
+      <div class="io"><span class="io-k">Sus industrias</span><span class="io-v"><b>química</b>, <b>acero</b>, automóvil, comunicaciones</span></div>
+      <div class="io"><span class="io-k">Quiénes lideran</span><span class="io-v"><b>Alemania</b> y <b>Estados Unidos</b>, ya no solo Inglaterra</span></div>
+      <div class="io"><span class="io-k">A qué lleva</span><span class="io-v">a las <b>grandes concentraciones</b> (monopolio, oligopolio, trust) y al <b>imperialismo</b></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Es la bisagra con la unidad 4: la nueva industria necesita materias primas y mercados que Europa ya no tiene dentro, y entonces sale a buscarlos al mundo.</div></details></div>
+  </div>
+
+  <h3 class="sec">La tira · Revoluciones burguesas</h3>
+  <p class="tl-cap">De la primera independencia americana al orden restaurado. Nota el par 1776 / 1789: ideas iguales, trece años de diferencia.</p>
+  <div class="tl">
+    <div class="tl-row"><span class="tl-y">1776</span><span class="tl-e">Declaración de <b>Independencia de las Trece Colonias</b> · <em>La riqueza de las naciones</em></span></div>
+    <div class="tl-row"><span class="tl-y">1783</span><span class="tl-e">Inglaterra <b>reconoce</b> la independencia estadounidense</span></div>
+    <div class="tl-row"><span class="tl-y">1787</span><span class="tl-e">Primera <b>constitución escrita</b> de la historia</span></div>
+    <div class="tl-row"><span class="tl-y">1789</span><span class="tl-e"><b>Revolución Francesa</b>: toma de la Bastilla · <b>Declaración de Derechos del Hombre</b></span></div>
+    <div class="tl-row"><span class="tl-y">1793</span><span class="tl-e">Ejecución de <b>Luis XVI</b> · el <b>Terror</b> de Robespierre</span></div>
+    <div class="tl-row"><span class="tl-y">1799</span><span class="tl-e"><b>18 Brumario</b>: golpe de Napoleón</span></div>
+    <div class="tl-row"><span class="tl-y">1804</span><span class="tl-e"><b>Código Napoleón</b> · Napoleón se corona emperador</span></div>
+    <div class="tl-row"><span class="tl-y">1808</span><span class="tl-e"><b>Invasión de España</b>: se abre la crisis que detona las independencias americanas</span></div>
+    <div class="tl-row"><span class="tl-y">1812</span><span class="tl-e">Fracaso de la <b>campaña de Rusia</b></span></div>
+    <div class="tl-row"><span class="tl-y">1814-15</span><span class="tl-e"><b>Congreso de Viena</b> · <b>Waterloo</b> · Santa Alianza</span></div>
+    <div class="tl-row"><span class="tl-y">1824</span><span class="tl-e"><b>Batalla de Ayacucho</b>: fin del dominio español continental</span></div>
+  </div>
+
+  <div class="trap"><h4>Ojo en el examen</h4><ul>
+    <li><b>Montesquieu = división de poderes · Rousseau = soberanía popular · Voltaire = tolerancia · Smith = mercado libre.</b> Cuatro nombres, cuatro ideas: es puro amarrar y se pregunta siempre.</li>
+    <li><b>1776 es la independencia; 1783 el reconocimiento; 1787 la constitución.</b> Tres fechas distintas del mismo proceso.</li>
+    <li>La Revolución Francesa <b>no fue de un bloque</b>: monarquía constitucional → república y Terror → Directorio. Preguntan por las etapas.</li>
+    <li><b>El Congreso de Viena restaura, no revoluciona.</b> Sus principios son legitimidad, equilibrio y restauración. Metternich es el nombre a recordar.</li>
+    <li><b>Primera Revolución Industrial = carbón, vapor, textil, Inglaterra. Segunda = electricidad, petróleo, acero, Alemania y EE. UU.</b> Es la comparación que más cae.</li>
+    <li>La causa externa de la independencia hispanoamericana es la <b>invasión napoleónica de 1808</b>, la misma que la de México.</li>
+  </ul></div>
+</section>
+
+<!-- ============ U3 PENSAMIENTO Y MOVIMIENTOS DEL XIX ============ -->
+<section class="panel" data-num="3" data-short="Siglo XIX">
+  <div class="panel-head">
+    <div class="u">Unidad 3 · siglo XIX</div>
+    <h2>Pensamiento y movimientos sociales y políticos</h2>
+    <p class="lead">Tres pleitos a la vez: liberales contra conservadores, obreros contra patrones, y naciones que quieren un Estado propio. Los tres siguen abiertos al llegar 1914.</p>
+  </div>
+
+  <h3 class="sec">Conceptos clave</h3>
+  <div class="cgrid">
+    <div class="concept"><h4>Conservadurismo</h4><p>Defiende el <b>orden tradicional</b>: monarquía, religión, jerarquía social y cambios lentos. Nace como reacción contra 1789 y triunfa en el Congreso de Viena.</p></div>
+    <div class="concept"><h4>Nacionalismo</h4><p>La idea de que cada <b>nación</b> —lengua, cultura, historia comunes— debe tener su propio <b>Estado</b>. Puede ser <b>unificador</b> (Italia, Alemania) o <b>disgregador</b> (los pueblos del Imperio austrohúngaro).</p></div>
+    <div class="concept"><h4>Proletariado</h4><p>La clase que <b>solo tiene su fuerza de trabajo</b> y la vende por un salario. Jornadas de 14 horas, trabajo infantil, sin seguridad ni derechos: ese es el punto de partida de todo el movimiento obrero.</p></div>
+    <div class="concept"><h4>Socialismo utópico</h4><p>Los primeros críticos —<b>Saint-Simon, Fourier, Owen</b>— que imaginaron comunidades justas y quisieron convencer a los patrones. <b>Sin lucha de clases</b>: por eso «utópico».</p></div>
+    <div class="concept"><h4>Socialismo científico</h4><p>El de <b>Marx y Engels</b>: no basta con imaginar, hay que <b>analizar</b> el capitalismo y organizar al proletariado para transformarlo. La historia avanza por <b>lucha de clases</b>.</p></div>
+    <div class="concept"><h4>Anarquismo</h4><p>De <b>Bakunin</b> y Proudhon: hay que abolir <b>el Estado mismo</b>, no conquistarlo. Este desacuerdo con Marx rompió la Primera Internacional.</p></div>
+  </div>
+
+  <h3 class="sec">Las ideas y los movimientos obreros</h3>
+  <div class="fgrid">
+
+    <div class="card"><div class="name">Ludismo</div><div class="fbody">
+      <div class="io"><span class="io-k">Cuándo</span><span class="io-v">principios del <b>siglo XIX</b>, en Inglaterra</span></div>
+      <div class="io"><span class="io-k">Qué hacían</span><span class="io-v"><b>destruían las máquinas</b>, a las que culpaban del desempleo</span></div>
+      <div class="io"><span class="io-k">Su límite</span><span class="io-v">era una reacción <b>espontánea y sin organización</b> ni programa</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">La primera respuesta obrera fue romper lo que les quitaba el trabajo. Todavía no había idea de sindicato ni de partido: eso viene después.</div></details></div>
+
+    <div class="card"><div class="name">Cartismo</div><div class="fbody">
+      <div class="io"><span class="io-k">Dónde y cuándo</span><span class="io-v"><b>Inglaterra</b>, 1838 en adelante</span></div>
+      <div class="io"><span class="io-k">Su documento</span><span class="io-v">la <b>Carta del Pueblo</b> — de ahí el nombre</span></div>
+      <div class="io"><span class="io-k">Qué pedía</span><span class="io-v"><b>sufragio universal masculino</b>, voto secreto, sueldo para los diputados, elecciones anuales</span></div>
+      <div class="io"><span class="io-k">Qué lo distingue</span><span class="io-v">es la primera exigencia obrera <b>política</b>, no solo salarial</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Descubrieron que sin voto no había manera de cambiar las leyes de fábrica. Pedir el voto fue, en ese momento, la petición obrera más radical posible.</div></details></div>
+
+    <div class="card"><div class="name">Marx y Engels</div><div class="fbody">
+      <div class="io"><span class="io-k">Su obra de 1848</span><span class="io-v">el <b>Manifiesto Comunista</b></span></div>
+      <div class="io"><span class="io-k">La obra mayor</span><span class="io-v"><em>El Capital</em>, de Marx</span></div>
+      <div class="io"><span class="io-k">Su tesis</span><span class="io-v">la historia es <b>lucha de clases</b>; el obrero produce <b>plusvalía</b> que se queda el patrón</span></div>
+      <div class="io"><span class="io-k">Su propuesta</span><span class="io-v"><b>revolución</b> proletaria, socializar los medios de producción, sociedad sin clases</span></div>
+      <div class="io"><span class="io-k">Su frase</span><span class="io-v">«¡<b>Proletarios del mundo, uníos</b>!»</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Es la teoría que va a mover medio siglo XX: la Revolución Rusa, la Guerra Fría y las luchas de liberación cuelgan de aquí. Por eso conviene tenerla clara desde esta unidad.</div></details></div>
+
+    <div class="card"><div class="name">Las Internacionales</div><div class="fbody">
+      <div class="io"><span class="io-k">Primera</span><span class="io-v"><b>1864</b>, con Marx; se rompe por el pleito con <b>Bakunin</b> y los anarquistas</span></div>
+      <div class="io"><span class="io-k">Segunda</span><span class="io-v"><b>1889</b>; de ella sale el <b>1º de mayo</b> como día del trabajo</span></div>
+      <div class="io"><span class="io-k">Qué eran</span><span class="io-v">organizaciones para <b>coordinar</b> a los obreros por encima de las fronteras</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">La idea de fondo era que los trabajadores tenían más en común entre países que con sus patrones. En 1914 esa idea se rompió: casi todos apoyaron a su propia nación en la guerra.</div></details></div>
+
+    <div class="card"><div class="name">Doctrina social de la Iglesia</div><div class="fbody">
+      <div class="io"><span class="io-k">Su documento</span><span class="io-v">la encíclica <b>Rerum Novarum</b>, <b>1891</b></span></div>
+      <div class="io"><span class="io-k">Quién</span><span class="io-v">el papa <b>León XIII</b></span></div>
+      <div class="io"><span class="io-k">Qué dice</span><span class="io-v">reconoce el <b>salario justo</b> y el derecho a asociarse, pero <b>defiende la propiedad privada</b> y rechaza la lucha de clases</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Es la tercera respuesta a la cuestión obrera, entre el liberalismo y el socialismo. Se pregunta porque suele olvidarse que también la hubo.</div></details></div>
+
+    <div class="card"><div class="name">Oleadas revolucionarias</div><div class="fbody">
+      <div class="io"><span class="io-k">1820 y 1830</span><span class="io-v">de carácter <b>liberal</b>: contra la restauración del Congreso de Viena</span></div>
+      <div class="io"><span class="io-k">1848</span><span class="io-v">la «<b>primavera de los pueblos</b>»: ya no solo liberal, también <b>social y nacionalista</b></span></div>
+      <div class="io"><span class="io-k">Qué coincide</span><span class="io-v">ese mismo año se publica el <b>Manifiesto Comunista</b></span></div>
+      <div class="io"><span class="io-k">Resultado</span><span class="io-v">fracasaron casi todas, pero el <b>Antiguo Régimen ya no volvió</b></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Tres oleadas en treinta años, cada una más amplia que la anterior. La de 1848 es la que suma a los obreros y a las naciones sin Estado, y por eso es la que más se pregunta.</div></details></div>
+  </div>
+
+  <h3 class="sec">Las unificaciones</h3>
+  <div class="fgrid">
+
+    <div class="card"><div class="name">Unificación de Italia</div><div class="fbody">
+      <div class="io"><span class="io-k">Años</span><span class="io-v"><b>1859 – 1870</b></span></div>
+      <div class="io"><span class="io-k">Quién dirige</span><span class="io-v">el reino de <b>Piamonte-Cerdeña</b>, con el rey <b>Víctor Manuel II</b></span></div>
+      <div class="io"><span class="io-k">Su político</span><span class="io-v"><b>Camilo Benso, conde de Cavour</b> — la diplomacia</span></div>
+      <div class="io"><span class="io-k">Su militar</span><span class="io-v"><b>Giuseppe Garibaldi</b> y los <b>camisas rojas</b> — el sur</span></div>
+      <div class="io"><span class="io-k">Contra quién</span><span class="io-v">contra <b>Austria</b> y contra los Estados Pontificios</span></div>
+      <div class="io"><span class="io-k">Se cierra</span><span class="io-v">en <b>1870</b> con la toma de <b>Roma</b>, que pasa a ser la capital</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Dos personajes y dos métodos: uno negociaba en las cortes europeas y el otro desembarcaba con voluntarios. La combinación es lo que se pregunta.</div></details></div>
+
+    <div class="card"><div class="name">Unificación de Alemania</div><div class="fbody">
+      <div class="io"><span class="io-k">Años</span><span class="io-v"><b>1864 – 1871</b></span></div>
+      <div class="io"><span class="io-k">Quién dirige</span><span class="io-v"><b>Prusia</b>, con el rey <b>Guillermo I</b></span></div>
+      <div class="io"><span class="io-k">Su canciller</span><span class="io-v"><b>Otto von Bismarck</b>, el «Canciller de Hierro»</span></div>
+      <div class="io"><span class="io-k">Su método</span><span class="io-v">«<b>sangre y hierro</b>»: tres guerras — contra <b>Dinamarca</b>, <b>Austria</b> y <b>Francia</b></span></div>
+      <div class="io"><span class="io-k">Se proclama</span><span class="io-v">en <b>1871</b>, el <b>II Reich</b>, en el <b>Salón de los Espejos de Versalles</b></span></div>
+      <div class="io"><span class="io-k">Qué deja pendiente</span><span class="io-v">Francia pierde <b>Alsacia y Lorena</b>: el rencor que llega hasta 1914</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Proclamar el nuevo imperio dentro del palacio del enemigo derrotado fue una humillación calculada. Ese agravio explica buena parte de la Primera Guerra Mundial.</div></details></div>
+
+    <div class="card"><div class="name">Nacionalismo disgregador</div><div class="fbody">
+      <div class="io"><span class="io-k">Dónde</span><span class="io-v">en los imperios <b>austrohúngaro</b>, <b>otomano</b> y <b>ruso</b></span></div>
+      <div class="io"><span class="io-k">Qué buscaba</span><span class="io-v"><b>separarse</b> del imperio, no unir Estados pequeños</span></div>
+      <div class="io"><span class="io-k">Su zona caliente</span><span class="io-v">los <b>Balcanes</b>, llamados «el polvorín de Europa»</span></div>
+      <div class="io"><span class="io-k">A qué lleva</span><span class="io-v">al <b>atentado de Sarajevo</b> y a la Primera Guerra Mundial</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">El mismo principio —cada nación, un Estado— unió a unos países y rompió a otros. Es la cara que se olvida al estudiar solo Italia y Alemania, y la que más consecuencias tuvo.</div></details></div>
+  </div>
+
+  <h3 class="sec">La tira · Siglo XIX</h3>
+  <p class="tl-cap">De la primera oleada liberal a las dos unificaciones. Fíjate en 1848: ahí coinciden la revolución y el libro.</p>
+  <div class="tl">
+    <div class="tl-row"><span class="tl-y">1820</span><span class="tl-e">Primera oleada <b>revolucionaria liberal</b></span></div>
+    <div class="tl-row"><span class="tl-y">1830</span><span class="tl-e">Segunda oleada · revolución de julio en <b>Francia</b></span></div>
+    <div class="tl-row"><span class="tl-y">1838</span><span class="tl-e"><b>Carta del Pueblo</b>: nace el cartismo</span></div>
+    <div class="tl-row"><span class="tl-y">1848</span><span class="tl-e"><b>Primavera de los pueblos</b> · <b>Manifiesto Comunista</b></span></div>
+    <div class="tl-row"><span class="tl-y">1859</span><span class="tl-e">Arranca la <b>unificación italiana</b></span></div>
+    <div class="tl-row"><span class="tl-y">1864</span><span class="tl-e"><b>Primera Internacional</b> · Prusia empieza sus guerras</span></div>
+    <div class="tl-row"><span class="tl-y">1870</span><span class="tl-e">Toma de <b>Roma</b>: se completa Italia · guerra franco-prusiana</span></div>
+    <div class="tl-row"><span class="tl-y">1871</span><span class="tl-e">Proclamación del <b>Imperio alemán</b> en Versalles · <b>Comuna de París</b></span></div>
+    <div class="tl-row"><span class="tl-y">1889</span><span class="tl-e"><b>Segunda Internacional</b></span></div>
+    <div class="tl-row"><span class="tl-y">1891</span><span class="tl-e"><b>Rerum Novarum</b></span></div>
+  </div>
+
+  <div class="trap"><h4>Ojo en el examen</h4><ul>
+    <li><b>Utópico ≠ científico.</b> Saint-Simon, Fourier y Owen imaginan y persuaden; Marx y Engels analizan y organizan. El corte es la <b>lucha de clases</b>.</li>
+    <li><b>Marx quiere tomar el Estado, Bakunin quiere abolirlo.</b> Ese desacuerdo rompió la Primera Internacional y se pregunta como tal.</li>
+    <li><b>Italia: Cavour y Garibaldi, desde Piamonte. Alemania: Bismarck, desde Prusia.</b> No los cruces: es la confusión más común de la unidad.</li>
+    <li><b>1848 es doble</b>: la primavera de los pueblos y el Manifiesto Comunista. Esa coincidencia es pregunta segura.</li>
+    <li><b>Ludismo = romper máquinas · cartismo = pedir el voto.</b> Uno es reacción, el otro es programa político.</li>
+    <li>El nacionalismo <b>unificó</b> en Europa occidental y <b>rompió</b> en la oriental. Las dos caras se preguntan.</li>
+  </ul></div>
+</section>
+
+<!-- ============ U4 EL IMPERIALISMO ============ -->
+<section class="panel" data-num="4" data-short="Imperialismo">
+  <div class="panel-head">
+    <div class="u">Unidad 4 · 1870 – 1914</div>
+    <h2>El imperialismo</h2>
+    <p class="lead">Cuarenta años en que unas cuantas potencias se reparten África y Asia. Es la antesala directa de la Primera Guerra Mundial: el reparto no alcanzó para todos.</p>
+  </div>
+
+  <h3 class="sec">Conceptos clave</h3>
+  <div class="cgrid">
+    <div class="concept"><h4>Imperialismo</h4><p>El dominio <b>político, económico y cultural</b> de las potencias industriales sobre territorios de África, Asia y Oceanía. No es solo conquista: es control de materias primas y mercados.</p></div>
+    <div class="concept"><h4>Causas económicas</h4><p>La industria necesitaba <b>materias primas baratas</b>, <b>mercados</b> donde vender el excedente y lugares donde <b>invertir</b> el capital acumulado. Es la causa de fondo.</p></div>
+    <div class="concept"><h4>Causas ideológicas</h4><p>El <b>darwinismo social</b> (unas razas «superiores» a otras), la «<b>misión civilizadora</b>» y la <b>carga del hombre blanco</b>. Coartadas morales para lo que era un negocio.</p></div>
+    <div class="concept"><h4>Colonia vs. protectorado</h4><p><b>Colonia</b>: administrada directamente por la metrópoli. <b>Protectorado</b>: conserva su gobierno local pero la metrópoli maneja el ejército y las relaciones exteriores.</p></div>
+    <div class="concept"><h4>Metrópoli</h4><p>El país dominante. La relación es siempre desigual: la colonia aporta <b>materias primas</b> y compra <b>manufacturas</b>, y no se le permite industrializarse.</p></div>
+    <div class="concept"><h4>Monopolio, oligopolio y trust</h4><p><b>Monopolio</b>: un solo vendedor. <b>Oligopolio</b>: unos pocos que dominan el mercado. <b>Trust</b>: varias empresas que se fusionan para controlar un sector entero.</p></div>
+  </div>
+
+  <h3 class="sec">El reparto del mundo</h3>
+  <div class="fgrid">
+
+    <div class="card"><div class="name">Conferencia de Berlín</div><div class="fbody">
+      <div class="io"><span class="io-k">Años</span><span class="io-v"><b>1884 – 1885</b></span></div>
+      <div class="io"><span class="io-k">Quién la convoca</span><span class="io-v"><b>Bismarck</b></span></div>
+      <div class="io"><span class="io-k">Para qué</span><span class="io-v">para repartirse <b>África</b> entre las potencias europeas <b>sin guerra entre ellas</b></span></div>
+      <div class="io"><span class="io-k">Su regla</span><span class="io-v">quien <b>ocupara efectivamente</b> un territorio se lo quedaba</span></div>
+      <div class="io"><span class="io-k">Quiénes no fueron</span><span class="io-v">ningún <b>africano</b>: las fronteras se trazaron con regla, ignorando pueblos y culturas</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Un continente entero repartido en una sala de juntas en Europa. Las fronteras rectas del mapa africano actual salieron de ahí, y con ellas buena parte de sus conflictos posteriores.</div></details></div>
+
+    <div class="card"><div class="name">Los grandes imperios</div><div class="fbody">
+      <div class="io"><span class="io-k">El mayor</span><span class="io-v">el <b>británico</b>: «el imperio donde nunca se pone el sol» — India, Egipto, Sudáfrica, Australia</span></div>
+      <div class="io"><span class="io-k">El segundo</span><span class="io-v">el <b>francés</b>: sobre todo África occidental y del norte, e Indochina</span></div>
+      <div class="io"><span class="io-k">Los tardíos</span><span class="io-v"><b>Alemania</b> e <b>Italia</b>, que llegaron cuando ya casi no quedaba: de ahí su descontento</span></div>
+      <div class="io"><span class="io-k">Los de fuera de Europa</span><span class="io-v"><b>Estados Unidos</b> (Cuba, Filipinas, Puerto Rico, 1898) y <b>Japón</b> (Corea, Manchuria)</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Los que llegaron tarde a repartirse el mundo son justamente los que van a querer rehacer el reparto por la fuerza. Ahí está el motivo de las dos guerras mundiales.</div></details></div>
+
+    <div class="card"><div class="name">La India británica</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué era</span><span class="io-v">«la <b>joya de la corona</b>» del imperio británico</span></div>
+      <div class="io"><span class="io-k">Qué daba</span><span class="io-v"><b>algodón</b>, té, especias y un mercado enorme</span></div>
+      <div class="io"><span class="io-k">Qué se le impidió</span><span class="io-v">tener <b>industria textil propia</b>: compraba las telas hechas en Inglaterra con su propio algodón</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">El ejemplo perfecto de cómo funcionaba el sistema: la colonia entrega la materia prima barata y recompra el producto caro. Gandhi va a atacar exactamente ese circuito.</div></details></div>
+
+    <div class="card"><div class="name">Guerra Hispano-Estadounidense</div><div class="fbody">
+      <div class="io"><span class="io-k">Año</span><span class="io-v"><b>1898</b></span></div>
+      <div class="io"><span class="io-k">Qué pierde España</span><span class="io-v"><b>Cuba</b>, <b>Puerto Rico</b> y <b>Filipinas</b> — sus últimas colonias</span></div>
+      <div class="io"><span class="io-k">Qué significó</span><span class="io-v">Estados Unidos entra al reparto como <b>potencia imperialista</b></span></div>
+      <div class="io"><span class="io-k">Su doctrina</span><span class="io-v">«<b>América para los americanos</b>» (Doctrina Monroe, 1823) y la política del <b>gran garrote</b></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">El año en que un imperio viejo se acaba y otro nuevo empieza. Para América Latina significó cambiar de vecino dominante, y eso se nota todo el siglo XX.</div></details></div>
+
+    <div class="card"><div class="name">Revolución científico-tecnológica</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué la hace posible</span><span class="io-v">la <b>electricidad</b>, el <b>motor de combustión</b> y la industria <b>química</b></span></div>
+      <div class="io"><span class="io-k">En transporte</span><span class="io-v"><b>barco de vapor de acero</b>, ferrocarril, automóvil y avión (1903)</span></div>
+      <div class="io"><span class="io-k">En comunicación</span><span class="io-v"><b>telégrafo</b>, teléfono, radio; el <b>Canal de Suez</b> (1869) y el de <b>Panamá</b> (1914)</span></div>
+      <div class="io"><span class="io-k">En medicina</span><span class="io-v"><b>Pasteur</b> y la vacuna, la <b>antisepsia</b>, los rayos X — cae la mortalidad y crece la población</span></div>
+      <div class="io"><span class="io-k">Para qué sirvió</span><span class="io-v">hizo <b>posible</b> el dominio: sin barcos rápidos, telégrafo y quinina no hay imperio</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">La tecnología no fue un adorno del imperialismo: fue su herramienta. Se pudo ocupar el interior de África cuando la medicina permitió sobrevivir a la malaria.</div></details></div>
+
+    <div class="card"><div class="name">Consecuencias del imperialismo</div><div class="fbody">
+      <div class="io"><span class="io-k">Para las colonias</span><span class="io-v"><b>economías dependientes</b> de un solo producto, fronteras artificiales, destrucción cultural</span></div>
+      <div class="io"><span class="io-k">Para Europa</span><span class="io-v"><b>rivalidades</b> crecientes, carrera armamentista y sistema de <b>alianzas</b></span></div>
+      <div class="io"><span class="io-k">A largo plazo</span><span class="io-v">el <b>subdesarrollo</b> del sur y los conflictos que estallan al descolonizar</span></div>
+      <div class="io"><span class="io-k">A corto plazo</span><span class="io-v">la <b>Primera Guerra Mundial</b></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Las fronteras trazadas con regla y las economías de un solo producto no se arreglaron con la independencia. Es la explicación histórica que el examen busca cuando pregunta por el subdesarrollo.</div></details></div>
+  </div>
+
+  <h3 class="sec">La tira · Imperialismo</h3>
+  <p class="tl-cap">Cuarenta años de reparto. Nota que las fechas de infraestructura y las de conquista van entrelazadas: no es casualidad.</p>
+  <div class="tl">
+    <div class="tl-row"><span class="tl-y">1869</span><span class="tl-e">Se abre el <b>Canal de Suez</b></span></div>
+    <div class="tl-row"><span class="tl-y">1870</span><span class="tl-e">Arranca la <b>Segunda Revolución Industrial</b> y la expansión colonial</span></div>
+    <div class="tl-row"><span class="tl-y">1876</span><span class="tl-e">Victoria es proclamada <b>emperatriz de la India</b></span></div>
+    <div class="tl-row"><span class="tl-y">1884-85</span><span class="tl-e"><b>Conferencia de Berlín</b>: se reparte África</span></div>
+    <div class="tl-row"><span class="tl-y">1898</span><span class="tl-e"><b>Guerra Hispano-Estadounidense</b>: España pierde sus últimas colonias</span></div>
+    <div class="tl-row"><span class="tl-y">1899-1902</span><span class="tl-e"><b>Guerra de los Bóeres</b> en Sudáfrica</span></div>
+    <div class="tl-row"><span class="tl-y">1903</span><span class="tl-e">Primer vuelo de los <b>hermanos Wright</b></span></div>
+    <div class="tl-row"><span class="tl-y">1904-05</span><span class="tl-e"><b>Guerra ruso-japonesa</b>: gana Japón, una potencia no europea</span></div>
+    <div class="tl-row"><span class="tl-y">1914</span><span class="tl-e">Se abre el <b>Canal de Panamá</b> · estalla la <b>Primera Guerra Mundial</b></span></div>
+  </div>
+
+  <div class="trap"><h4>Ojo en el examen</h4><ul>
+    <li><b>Colonia = administración directa · protectorado = gobierno local con la metrópoli controlando ejército y exterior.</b> Distinción clásica.</li>
+    <li>La <b>Conferencia de Berlín (1884-85)</b> reparte África y <b>no invitó a ningún africano</b>. Los dos datos se preguntan.</li>
+    <li><b>Monopolio (uno) · oligopolio (pocos) · trust (fusión).</b> Se preguntan también en Geografía económica, así que sirven doble.</li>
+    <li><b>Alemania e Italia llegaron tarde al reparto.</b> Ese descontento es la causa que enlaza esta unidad con la siguiente.</li>
+    <li>El <b>darwinismo social</b> no es la teoría de Darwin: es su uso deformado para justificar el dominio de unos pueblos sobre otros.</li>
+    <li><b>1898 es el año bisagra</b>: se acaba el imperio español y empieza el estadounidense.</li>
+  </ul></div>
+</section>
+
+<!-- ============ U5 PRIMERA GUERRA MUNDIAL ============ -->
+<section class="panel" data-num="5" data-short="Primera Guerra">
+  <div class="panel-head">
+    <div class="u">Unidad 5 · 1914 – 1918</div>
+    <h2>La Primera Guerra Mundial</h2>
+    <p class="lead">Cuatro años que acabaron con cuatro imperios y con la Europa del siglo XIX. Aquí entra además la Revolución Rusa, que cambia el mapa político del mundo.</p>
+  </div>
+
+  <h3 class="sec">Conceptos clave</h3>
+  <div class="cgrid">
+    <div class="concept"><h4>Paz Armada</h4><p>Los años previos (1871–1914): no había guerra pero todos se armaban y firmaban alianzas. La palabra dice el problema — era paz solo de nombre.</p></div>
+    <div class="concept"><h4>Las causas profundas</h4><p><b>Rivalidades imperialistas</b> por colonias, <b>nacionalismos</b> (revanchismo francés por Alsacia y Lorena, paneslavismo, pangermanismo), <b>carrera armamentista</b> y el <b>sistema de alianzas</b>.</p></div>
+    <div class="concept"><h4>Guerra total</h4><p>No pelea solo el ejército: se moviliza <b>toda la sociedad y toda la economía</b>. Las fábricas producen armas, las mujeres entran al trabajo y la población civil es objetivo.</p></div>
+    <div class="concept"><h4>Guerra de trincheras</h4><p>Frentes inmóviles durante años, con ametralladora, alambre de púas, artillería y <b>gas</b>. Muchísimos muertos para avanzar metros: es lo que define el frente occidental.</p></div>
+    <div class="concept"><h4>Soviet</h4><p><b>«Consejo»</b> en ruso: asambleas de obreros, campesinos y soldados. Son la base del poder revolucionario y de ahí sale el nombre del país que nace en 1922.</p></div>
+    <div class="concept"><h4>Bolcheviques</h4><p>«<b>Mayoritarios</b>»: el ala radical del partido socialdemócrata ruso, dirigida por <b>Lenin</b>. Querían la revolución ya; los <b>mencheviques</b> («minoritarios»), gradual.</p></div>
+  </div>
+
+  <h3 class="sec">La guerra</h3>
+  <div class="fgrid">
+
+    <div class="card"><div class="name">Los dos bandos</div><div class="fbody">
+      <div class="io"><span class="io-k">Triple Alianza</span><span class="io-v"><b>Alemania</b>, <b>Austria-Hungría</b> e <b>Italia</b> (1882)</span></div>
+      <div class="io"><span class="io-k">Triple Entente</span><span class="io-v"><b>Francia</b>, <b>Reino Unido</b> y <b>Rusia</b> (1907)</span></div>
+      <div class="io"><span class="io-k">El cambio</span><span class="io-v"><b>Italia cambia de bando</b> en 1915 y pelea con la Entente</span></div>
+      <div class="io"><span class="io-k">Quién se suma</span><span class="io-v">el <b>Imperio otomano</b> con los alemanes; <b>Estados Unidos</b> con la Entente en 1917</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">El bando que cambió de lado es la pregunta trampa: firmó con unos y peleó con los otros, porque le prometieron territorios. La lealtad ahí fue un cálculo, no un principio.</div></details></div>
+
+    <div class="card"><div class="name">Atentado de Sarajevo</div><div class="fbody">
+      <div class="io"><span class="io-k">Fecha</span><span class="io-v"><b>28 de junio de 1914</b></span></div>
+      <div class="io"><span class="io-k">A quién</span><span class="io-v">al archiduque <b>Francisco Fernando</b>, heredero de Austria-Hungría</span></div>
+      <div class="io"><span class="io-k">Quién</span><span class="io-v"><b>Gavrilo Princip</b>, nacionalista serbio de la Mano Negra</span></div>
+      <div class="io"><span class="io-k">Qué desató</span><span class="io-v">Austria le declara la guerra a <b>Serbia</b> y las alianzas arrastran a todos en semanas</span></div>
+      <div class="io"><span class="io-k">Qué fue</span><span class="io-v">la <b>causa inmediata</b>, no la causa profunda</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Distinguir la chispa de la pólvora es justo lo que el examen quiere: sin las rivalidades acumuladas, un atentado no habría incendiado el continente.</div></details></div>
+
+    <div class="card"><div class="name">Las fases de la guerra</div><div class="fbody">
+      <div class="io"><span class="io-k">1914</span><span class="io-v">guerra de <b>movimientos</b>: el plan alemán falla y el frente se congela</span></div>
+      <div class="io"><span class="io-k">1915-16</span><span class="io-v">guerra de <b>posiciones o trincheras</b>: Verdún y el Somme, con cientos de miles de muertos</span></div>
+      <div class="io"><span class="io-k">1917</span><span class="io-v">año de <b>giro</b>: entra <b>Estados Unidos</b> y <b>sale Rusia</b> por la revolución</span></div>
+      <div class="io"><span class="io-k">1918</span><span class="io-v">contraofensiva final y <b>armisticio del 11 de noviembre</b></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Cuatro fases y un año bisagra. Si te acuerdas de que en 1917 uno entra y otro se va, tienes ordenado todo el conflicto.</div></details></div>
+
+    <div class="card"><div class="name">Tratado de Versalles</div><div class="fbody">
+      <div class="io"><span class="io-k">Año</span><span class="io-v"><b>1919</b></span></div>
+      <div class="io"><span class="io-k">A quién castiga</span><span class="io-v">a <b>Alemania</b>, declarada <b>única culpable</b> de la guerra</span></div>
+      <div class="io"><span class="io-k">Qué le impone</span><span class="io-v"><b>reparaciones</b> enormes, pérdida de territorios y de todas sus <b>colonias</b>, y ejército reducido</span></div>
+      <div class="io"><span class="io-k">Qué devuelve</span><span class="io-v"><b>Alsacia y Lorena</b> a Francia</span></div>
+      <div class="io"><span class="io-k">Su consecuencia</span><span class="io-v">humillación y crisis: es el <b>caldo de cultivo del nazismo</b></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Se diseñó para que Alemania no volviera a levantarse y consiguió lo contrario. Hitler llegó al poder prometiendo romperlo, y lo rompió.</div></details></div>
+
+    <div class="card"><div class="name">Sociedad de Naciones</div><div class="fbody">
+      <div class="io"><span class="io-k">Año</span><span class="io-v"><b>1919</b>, creada en Versalles</span></div>
+      <div class="io"><span class="io-k">Quién la propuso</span><span class="io-v"><b>Woodrow Wilson</b>, en sus <b>Catorce Puntos</b></span></div>
+      <div class="io"><span class="io-k">Para qué</span><span class="io-v">para <b>resolver conflictos sin guerra</b>, por la vía del diálogo</span></div>
+      <div class="io"><span class="io-k">Por qué fracasó</span><span class="io-v">porque <b>Estados Unidos nunca entró</b>, no tenía ejército y no pudo frenar a nadie en los años treinta</span></div>
+      <div class="io"><span class="io-k">Su sucesora</span><span class="io-v">la <b>ONU</b>, en 1945</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">La ironía que siempre se pregunta: el país que la propuso fue el que no se sumó, porque su Senado no ratificó el tratado. Nació sin su principal impulsor.</div></details></div>
+
+    <div class="card"><div class="name">Consecuencias de la guerra</div><div class="fbody">
+      <div class="io"><span class="io-k">Humanas</span><span class="io-v">unos <b>10 millones</b> de muertos, más la <b>gripe española</b> de 1918</span></div>
+      <div class="io"><span class="io-k">Políticas</span><span class="io-v">caen <b>cuatro imperios</b>: alemán, austrohúngaro, ruso y otomano; aparecen nuevos países</span></div>
+      <div class="io"><span class="io-k">Económicas</span><span class="io-v">Europa endeudada; <b>Estados Unidos</b> pasa de deudor a <b>primera potencia</b> y acreedor</span></div>
+      <div class="io"><span class="io-k">Sociales</span><span class="io-v">la mujer entra masivamente al <b>trabajo</b> y avanza el <b>sufragio femenino</b></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">La guerra la ganaron Francia e Inglaterra en el papel, pero quien salió ganando de verdad fue quien llegó al final y vendió a todos. Ese desplazamiento del centro del mundo es lo importante.</div></details></div>
+  </div>
+
+  <h3 class="sec">La Revolución Rusa</h3>
+  <div class="fgrid">
+
+    <div class="card"><div class="name">Causas de la revolución</div><div class="fbody">
+      <div class="io"><span class="io-k">El régimen</span><span class="io-v"><b>autocracia zarista</b> de <b>Nicolás II</b>, sin parlamento real</span></div>
+      <div class="io"><span class="io-k">El campo</span><span class="io-v">campesinos sin tierra en un país apenas industrializado</span></div>
+      <div class="io"><span class="io-k">El detonante</span><span class="io-v">la <b>guerra</b>: derrotas, hambre y millones de muertos</span></div>
+      <div class="io"><span class="io-k">El antecedente</span><span class="io-v">la revolución fallida de <b>1905</b> y el <b>Domingo Sangriento</b></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Marx pensaba que la revolución llegaría en el país más industrializado y llegó en uno de los más atrasados. La guerra fue lo que hizo la diferencia.</div></details></div>
+
+    <div class="card"><div class="name">Revolución de Febrero</div><div class="fbody">
+      <div class="io"><span class="io-k">Año</span><span class="io-v"><b>1917</b></span></div>
+      <div class="io"><span class="io-k">Qué logra</span><span class="io-v">la <b>abdicación del zar</b> y el fin de la monarquía</span></div>
+      <div class="io"><span class="io-k">Qué instala</span><span class="io-v">un <b>gobierno provisional</b> burgués y liberal (después, <b>Kérenski</b>)</span></div>
+      <div class="io"><span class="io-k">Su error</span><span class="io-v"><b>seguir en la guerra</b>, que era justo lo que la gente quería terminar</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">La primera de las dos revoluciones del mismo año. Quitó al zar pero no dio ni pan ni paz, y por eso duró ocho meses.</div></details></div>
+
+    <div class="card"><div class="name">Revolución de Octubre</div><div class="fbody">
+      <div class="io"><span class="io-k">Año</span><span class="io-v"><b>1917</b></span></div>
+      <div class="io"><span class="io-k">Quiénes</span><span class="io-v">los <b>bolcheviques</b>, con <b>Lenin</b> y <b>Trotsky</b></span></div>
+      <div class="io"><span class="io-k">Su consigna</span><span class="io-v">«<b>paz, pan y tierra</b>» y «todo el poder a los soviets»</span></div>
+      <div class="io"><span class="io-k">Qué hace</span><span class="io-v">derriba al gobierno provisional e instala el <b>primer Estado socialista</b> del mundo</span></div>
+      <div class="io"><span class="io-k">Sale de la guerra</span><span class="io-v">con el <b>Tratado de Brest-Litovsk</b>, 1918</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Tres palabras ganaron la revolución: paz para los soldados, pan para las ciudades y tierra para los campesinos. El gobierno anterior no ofrecía ninguna de las tres.</div></details></div>
+
+    <div class="card"><div class="name">Nace la URSS</div><div class="fbody">
+      <div class="io"><span class="io-k">Año</span><span class="io-v"><b>1922</b>, tras la <b>guerra civil</b> entre rojos y blancos</span></div>
+      <div class="io"><span class="io-k">Su nombre</span><span class="io-v">Unión de <b>Repúblicas Socialistas Soviéticas</b></span></div>
+      <div class="io"><span class="io-k">Su primera economía</span><span class="io-v">el <b>comunismo de guerra</b> y luego la <b>NEP</b>, que permitió algo de mercado</span></div>
+      <div class="io"><span class="io-k">Después de Lenin</span><span class="io-v"><b>Stalin</b> gana la sucesión frente a Trotsky: planes quinquenales, colectivización y <b>purgas</b></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Con este país nace el otro polo del siglo XX. Todo lo que va a pasar en la unidad 8 —los bloques, la Guerra Fría— arranca aquí.</div></details></div>
+  </div>
+
+  <h3 class="sec">La tira · Primera Guerra y Revolución Rusa</h3>
+  <p class="tl-cap">Cuatro años de guerra y dos revoluciones en el mismo año. 1917 es la fecha que hay que tener clavada.</p>
+  <div class="tl">
+    <div class="tl-row"><span class="tl-y">1882</span><span class="tl-e">Se firma la <b>Triple Alianza</b></span></div>
+    <div class="tl-row"><span class="tl-y">1905</span><span class="tl-e">Revolución fallida en Rusia · <b>Domingo Sangriento</b></span></div>
+    <div class="tl-row"><span class="tl-y">1907</span><span class="tl-e">Se completa la <b>Triple Entente</b></span></div>
+    <div class="tl-row"><span class="tl-y">1914</span><span class="tl-e"><b>Atentado de Sarajevo</b>, 28 de junio · estalla la guerra</span></div>
+    <div class="tl-row"><span class="tl-y">1915</span><span class="tl-e"><b>Italia cambia de bando</b> y entra con la Entente</span></div>
+    <div class="tl-row"><span class="tl-y">1916</span><span class="tl-e">Batallas de <b>Verdún</b> y del <b>Somme</b></span></div>
+    <div class="tl-row"><span class="tl-y">1917</span><span class="tl-e">Entra <b>Estados Unidos</b> · revoluciones de <b>febrero</b> y de <b>octubre</b> en Rusia</span></div>
+    <div class="tl-row"><span class="tl-y">1918</span><span class="tl-e"><b>Brest-Litovsk</b> · <b>armisticio</b> del 11 de noviembre · gripe española</span></div>
+    <div class="tl-row"><span class="tl-y">1919</span><span class="tl-e"><b>Tratado de Versalles</b> · <b>Sociedad de Naciones</b></span></div>
+    <div class="tl-row"><span class="tl-y">1922</span><span class="tl-e">Nace la <b>URSS</b></span></div>
+  </div>
+
+  <div class="trap"><h4>Ojo en el examen</h4><ul>
+    <li><b>Causa inmediata (Sarajevo) ≠ causas profundas (imperialismo, nacionalismo, alianzas, armamentismo).</b> Es literalmente la pregunta más frecuente de la unidad.</li>
+    <li><b>Italia firma con la Triple Alianza pero pelea con la Entente.</b> Trampa clásica.</li>
+    <li><b>1917: entra Estados Unidos y sale Rusia.</b> Dos movimientos opuestos el mismo año.</li>
+    <li><b>Febrero tumba al zar; Octubre instala a los bolcheviques.</b> Dos revoluciones, un año, y no son la misma.</li>
+    <li><b>Bolchevique = mayoritario y radical (Lenin) · menchevique = minoritario y gradual.</b> Puro amarrar nombres.</li>
+    <li>La <b>Sociedad de Naciones la propuso Wilson y EE. UU. no entró</b>. Ese dato se pregunta tal cual.</li>
+    <li>Caen <b>cuatro imperios</b>: alemán, austrohúngaro, ruso y otomano. Vale la pena recitarlos.</li>
+  </ul></div>
+</section>
+
+<!-- ============ U6 ENTREGUERRAS ============ -->
+<section class="panel" data-num="6" data-short="Entreguerras">
+  <div class="panel-head">
+    <div class="u">Unidad 6 · 1919 – 1939</div>
+    <h2>El mundo entre guerras</h2>
+    <p class="lead">Veinte años entre dos guerras: una crisis económica mundial y el ascenso de los regímenes que van a provocar la siguiente. Es la unidad de los <b>totalitarismos</b>.</p>
+  </div>
+
+  <h3 class="sec">Conceptos clave</h3>
+  <div class="cgrid">
+    <div class="concept"><h4>Totalitarismo</h4><p><b>Partido único</b>, líder carismático, <b>ideología oficial obligatoria</b>, control total de la vida (prensa, escuela, ocio), <b>policía política</b> y eliminación de la oposición. No es solo una dictadura: quiere formar al ciudadano entero.</p></div>
+    <div class="concept"><h4>Especulación bursátil</h4><p>Comprar acciones para revenderlas más caras, muchas veces <b>con dinero prestado</b>. Infla el precio por encima del valor real y produce la <b>burbuja</b> que revienta en 1929.</p></div>
+    <div class="concept"><h4>Sobreproducción</h4><p>Se produce más de lo que la gente puede comprar. Con los almacenes llenos y las ventas caídas, las empresas quiebran y despiden — y así el problema se agranda solo.</p></div>
+    <div class="concept"><h4>Intervencionismo</h4><p>Que el <b>Estado intervenga</b> en la economía para reactivarla: obra pública, empleo, regulación. Es la respuesta a la crisis y el reverso del liberalismo clásico.</p></div>
+    <div class="concept"><h4>Keynesianismo</h4><p>La teoría de <b>John Maynard Keynes</b>: en la crisis el Estado debe <b>gastar</b> para crear demanda, aunque se endeude. Es la base teórica del New Deal y del capitalismo de posguerra.</p></div>
+    <div class="concept"><h4>Antisemitismo y racismo de Estado</h4><p>El odio convertido en <b>política oficial</b>: leyes que excluyen a un grupo de la ciudadanía. En el régimen nazi lleva de las <b>Leyes de Núremberg</b> al <b>Holocausto</b>.</p></div>
+  </div>
+
+  <h3 class="sec">La crisis</h3>
+  <div class="fgrid">
+
+    <div class="card"><div class="name">Los felices años veinte</div><div class="fbody">
+      <div class="io"><span class="io-k">Dónde</span><span class="io-v">sobre todo en <b>Estados Unidos</b></span></div>
+      <div class="io"><span class="io-k">Qué pasaba</span><span class="io-v">consumo masivo, <b>compras a crédito</b>, automóvil, radio, cine</span></div>
+      <div class="io"><span class="io-k">Qué escondía</span><span class="io-v"><b>sobreproducción</b>, crisis agrícola y una <b>burbuja</b> en la bolsa</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">La prosperidad era real para muchos y estaba construida sobre deuda. El nombre alegre de la década es parte de la pregunta: era una fiesta pagada a plazos.</div></details></div>
+
+    <div class="card"><div class="name">Crac del 29</div><div class="fbody">
+      <div class="io"><span class="io-k">Fecha</span><span class="io-v"><b>24 de octubre de 1929</b>, el «<b>jueves negro</b>»</span></div>
+      <div class="io"><span class="io-k">Dónde</span><span class="io-v">la bolsa de <b>Wall Street</b>, Nueva York</span></div>
+      <div class="io"><span class="io-k">Qué pasó</span><span class="io-v">venta masiva de acciones y <b>derrumbe</b> de los precios</span></div>
+      <div class="io"><span class="io-k">Qué siguió</span><span class="io-v">quiebra de <b>bancos</b> y empresas, <b>desempleo</b> masivo y contracción del comercio mundial</span></div>
+      <div class="io"><span class="io-k">Cómo se llama el periodo</span><span class="io-v">la <b>Gran Depresión</b></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Fue mundial porque la economía ya estaba conectada: al caer el país acreedor, retiró sus préstamos de Europa y arrastró a todos. Ese contagio es lo que se pregunta.</div></details></div>
+
+    <div class="card"><div class="name">New Deal</div><div class="fbody">
+      <div class="io"><span class="io-k">Quién</span><span class="io-v"><b>Franklin D. Roosevelt</b>, desde <b>1933</b></span></div>
+      <div class="io"><span class="io-k">Qué hizo</span><span class="io-v"><b>obra pública</b> masiva para dar empleo, regulación de bancos y bolsa, ayudas sociales y <b>seguridad social</b></span></div>
+      <div class="io"><span class="io-k">En qué se apoya</span><span class="io-v">en las ideas de <b>Keynes</b>: el Estado gasta para reactivar</span></div>
+      <div class="io"><span class="io-k">Qué rompe</span><span class="io-v">con el <b>liberalismo</b> de no intervención que había regido hasta entonces</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">La otra salida posible a la crisis. Es la comparación que el examen busca: unos países respondieron con reforma y otros con dictadura.</div></details></div>
+  </div>
+
+  <h3 class="sec">Los totalitarismos</h3>
+  <div class="fgrid">
+
+    <div class="card"><div class="name">Fascismo italiano</div><div class="fbody">
+      <div class="io"><span class="io-k">Quién</span><span class="io-v"><b>Benito Mussolini</b>, <em>Il Duce</em></span></div>
+      <div class="io"><span class="io-k">Cómo llega</span><span class="io-v">con la <b>Marcha sobre Roma</b>, <b>1922</b></span></div>
+      <div class="io"><span class="io-k">Su fuerza de choque</span><span class="io-v">los <b>camisas negras</b></span></div>
+      <div class="io"><span class="io-k">Qué defendía</span><span class="io-v"><b>Estado corporativo</b>, nacionalismo imperial (revivir Roma), anticomunismo y culto al líder</span></div>
+      <div class="io"><span class="io-k">Su expansión</span><span class="io-v">invasión de <b>Etiopía (Abisinia)</b> en 1935</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Fue el primero de los tres y el modelo de los otros. Llegó al poder por la puerta legal, con el rey nombrándolo, no por un golpe: ese matiz se pregunta.</div></details></div>
+
+    <div class="card"><div class="name">Nazismo alemán</div><div class="fbody">
+      <div class="io"><span class="io-k">Quién</span><span class="io-v"><b>Adolf Hitler</b>, <em>Führer</em>; su partido, el <b>NSDAP</b></span></div>
+      <div class="io"><span class="io-k">Cómo llega</span><span class="io-v">nombrado <b>canciller en 1933</b>, por vía electoral y legal</span></div>
+      <div class="io"><span class="io-k">Su libro</span><span class="io-v"><em>Mi lucha</em> (<em>Mein Kampf</em>)</span></div>
+      <div class="io"><span class="io-k">Sus ideas</span><span class="io-v"><b>raza superior</b> aria, <b>antisemitismo</b>, <b>espacio vital</b> (<em>Lebensraum</em>), revancha contra Versalles</span></div>
+      <div class="io"><span class="io-k">Sus leyes</span><span class="io-v">las <b>Leyes de Núremberg</b>, 1935: quitan la ciudadanía a los judíos</span></div>
+      <div class="io"><span class="io-k">De qué se alimentó</span><span class="io-v">de la <b>crisis de 1929</b> y de la humillación de <b>Versalles</b></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Es la línea que el examen quiere que veas: Versalles humilla, la crisis empobrece, y sobre esas dos cosas se construye el discurso que llega al poder votado.</div></details></div>
+
+    <div class="card"><div class="name">Estalinismo</div><div class="fbody">
+      <div class="io"><span class="io-k">Quién</span><span class="io-v"><b>Iósif Stalin</b>, en la URSS desde 1927</span></div>
+      <div class="io"><span class="io-k">Su economía</span><span class="io-v"><b>planes quinquenales</b>, industrialización acelerada y <b>colectivización</b> forzosa del campo</span></div>
+      <div class="io"><span class="io-k">Su represión</span><span class="io-v">las <b>purgas</b>, los procesos de Moscú y los campos de trabajo (<b>gulags</b>)</span></div>
+      <div class="io"><span class="io-k">En qué se distingue</span><span class="io-v">es totalitarismo de <b>izquierda</b>: los otros dos son de derecha y anticomunistas</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Suele preguntarse para comprobar que entendiste qué es un totalitarismo: no lo define ser de izquierda o de derecha, sino el control total del Estado sobre la vida.</div></details></div>
+
+    <div class="card"><div class="name">Guerra Civil Española</div><div class="fbody">
+      <div class="io"><span class="io-k">Años</span><span class="io-v"><b>1936 – 1939</b></span></div>
+      <div class="io"><span class="io-k">Quiénes</span><span class="io-v">la <b>República</b> contra los <b>sublevados</b> de <b>Francisco Franco</b></span></div>
+      <div class="io"><span class="io-k">Quién apoyó a cada uno</span><span class="io-v">a Franco, <b>Alemania e Italia</b>; a la República, la <b>URSS</b>, las Brigadas Internacionales y <b>México</b></span></div>
+      <div class="io"><span class="io-k">Qué fue</span><span class="io-v">el <b>ensayo general</b> de la Segunda Guerra Mundial — ahí se probó el bombardeo de civiles (<b>Guernica</b>)</span></div>
+      <div class="io"><span class="io-k">Cómo termina</span><span class="io-v">con la <b>dictadura de Franco</b>, hasta 1975</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Interesa doble: es el laboratorio de la guerra que viene y es el motivo por el que México recibió a miles de refugiados españoles con Cárdenas.</div></details></div>
+
+    <div class="card"><div class="name">Política de apaciguamiento</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué fue</span><span class="io-v">Francia e Inglaterra <b>cediendo</b> ante las exigencias alemanas para evitar otra guerra</span></div>
+      <div class="io"><span class="io-k">Su momento</span><span class="io-v">la <b>Conferencia de Múnich</b>, 1938: le entregan los <b>Sudetes</b> checoslovacos</span></div>
+      <div class="io"><span class="io-k">Qué logró</span><span class="io-v"><b>nada</b>: al año siguiente ocupó Checoslovaquia entera y luego Polonia</span></div>
+      <div class="io"><span class="io-k">El otro pacto</span><span class="io-v">el <b>germano-soviético</b> de 1939 (Ribbentrop-Mólotov), que repartía Polonia</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Es el ejemplo histórico de que ceder ante quien no piensa parar solo compra tiempo. Se creyó que entregando una región se evitaba la guerra, y lo que se consiguió fue llegar a ella en peores condiciones.</div></details></div>
+  </div>
+
+  <h3 class="sec">La tira · Entreguerras</h3>
+  <p class="tl-cap">Veinte años. Fíjate en la cadena 1929 → 1933: la crisis económica y la llegada al poder van pegadas.</p>
+  <div class="tl">
+    <div class="tl-row"><span class="tl-y">1922</span><span class="tl-e"><b>Marcha sobre Roma</b>: Mussolini llega al poder</span></div>
+    <div class="tl-row"><span class="tl-y">1929</span><span class="tl-e"><b>Crac de Wall Street</b>, 24 de octubre: empieza la Gran Depresión</span></div>
+    <div class="tl-row"><span class="tl-y">1933</span><span class="tl-e"><b>Hitler</b>, canciller de Alemania · <b>New Deal</b> de Roosevelt</span></div>
+    <div class="tl-row"><span class="tl-y">1935</span><span class="tl-e"><b>Leyes de Núremberg</b> · Italia invade <b>Etiopía</b></span></div>
+    <div class="tl-row"><span class="tl-y">1936</span><span class="tl-e">Empieza la <b>Guerra Civil Española</b> · remilitarización de Renania</span></div>
+    <div class="tl-row"><span class="tl-y">1938</span><span class="tl-e"><b>Anexión de Austria</b> · <b>Conferencia de Múnich</b> · Noche de los Cristales Rotos</span></div>
+    <div class="tl-row"><span class="tl-y">1939</span><span class="tl-e"><b>Pacto germano-soviético</b> · invasión de <b>Polonia</b>, 1 de septiembre</span></div>
+  </div>
+
+  <div class="trap"><h4>Ojo en el examen</h4><ul>
+    <li><b>Mussolini llega en 1922 · Hitler en 1933.</b> Once años de diferencia, y los dos por vías legales, no por golpe.</li>
+    <li><b>La crisis de 1929 es la causa económica del nazismo</b>, junto con Versalles. Esa cadena se pregunta como cadena.</li>
+    <li><b>New Deal y totalitarismo son las dos respuestas a la misma crisis.</b> Uno interviene manteniendo la democracia; el otro la elimina.</li>
+    <li><b>Los tres totalitarismos:</b> fascismo (Italia), nazismo (Alemania), estalinismo (URSS). Los dos primeros son de derecha y anticomunistas; el tercero, de izquierda.</li>
+    <li>El <b>racismo</b> es lo que distingue al nazismo del fascismo italiano: el <em>Lebensraum</em> y las Leyes de Núremberg no tienen equivalente en Italia.</li>
+    <li><b>Múnich 1938 = apaciguamiento.</b> Palabra clave.</li>
+  </ul></div>
+</section>
+
+<!-- ============ U7 SEGUNDA GUERRA MUNDIAL ============ -->
+<section class="panel" data-num="7" data-short="Segunda Guerra">
+  <div class="panel-head">
+    <div class="u">Unidad 7 · 1939 – 1945</div>
+    <h2>La Segunda Guerra Mundial</h2>
+    <p class="lead">Seis años, unos 55 millones de muertos y un mundo nuevo al final: dos superpotencias, la ONU y la bomba atómica.</p>
+  </div>
+
+  <h3 class="sec">Conceptos clave</h3>
+  <div class="cgrid">
+    <div class="concept"><h4>Los dos bandos</h4><p><b>Eje</b>: Alemania, Italia y Japón. <b>Aliados</b>: Reino Unido, Francia, <b>URSS</b> (desde 1941) y <b>Estados Unidos</b> (desde 1941). México estuvo con los Aliados desde 1942.</p></div>
+    <div class="concept"><h4>Guerra relámpago</h4><p><em>Blitzkrieg</em>: ataque <b>rápido y combinado</b> de aviación, tanques e infantería para romper el frente antes de que reaccione. Explica la velocidad de las victorias alemanas de 1939-41.</p></div>
+    <div class="concept"><h4>Holocausto</h4><p>El exterminio sistemático de unos <b>6 millones de judíos</b>, además de gitanos, eslavos, homosexuales, discapacitados y opositores. Se planificó como «<b>solución final</b>» y se ejecutó en campos de exterminio.</p></div>
+    <div class="concept"><h4>Genocidio</h4><p>El concepto jurídico que nace de aquí: la destrucción deliberada de un <b>grupo nacional, étnico, racial o religioso</b>. Se tipificó por primera vez tras esta guerra.</p></div>
+    <div class="concept"><h4>Crímenes de guerra y de lesa humanidad</h4><p>Se juzgaron en los <b>Juicios de Núremberg</b> (1945-46). Ahí se estableció que <b>obedecer órdenes no exime</b> de responsabilidad individual.</p></div>
+    <div class="concept"><h4>Descolonización</h4><p>La consecuencia menos obvia: Europa sale destrozada y sin fuerza para sostener sus imperios, y las colonias que pelearon en la guerra reclaman su independencia. Es el puente a la unidad 8.</p></div>
+  </div>
+
+  <h3 class="sec">La guerra y su desenlace</h3>
+  <div class="fgrid">
+
+    <div class="card"><div class="name">Causas de la guerra</div><div class="fbody">
+      <div class="io"><span class="io-k">El tratado</span><span class="io-v">el resentimiento por <b>Versalles</b> y su revisión por la fuerza</span></div>
+      <div class="io"><span class="io-k">La economía</span><span class="io-v">las secuelas de la <b>crisis de 1929</b></span></div>
+      <div class="io"><span class="io-k">La política</span><span class="io-v">el <b>expansionismo</b> de los regímenes totalitarios y el <b>fracaso</b> de la Sociedad de Naciones</span></div>
+      <div class="io"><span class="io-k">La causa inmediata</span><span class="io-v">la <b>invasión de Polonia</b>, 1 de septiembre de <b>1939</b></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Se suele decir que las dos guerras son en realidad una sola con veinte años de tregua. Toda la lista de causas apunta hacia atrás, a la unidad anterior.</div></details></div>
+
+    <div class="card"><div class="name">Fase del avance del Eje</div><div class="fbody">
+      <div class="io"><span class="io-k">Años</span><span class="io-v"><b>1939 – 1941</b></span></div>
+      <div class="io"><span class="io-k">Qué pasa</span><span class="io-v">Alemania ocupa <b>Polonia, Dinamarca, Noruega, Países Bajos y Francia</b> en meses</span></div>
+      <div class="io"><span class="io-k">Dónde se frena</span><span class="io-v">en la <b>Batalla de Inglaterra</b>: no logra la superioridad aérea</span></div>
+      <div class="io"><span class="io-k">Su error</span><span class="io-v">invadir la <b>URSS</b> en 1941 (Operación Barbarroja) y abrir un segundo frente</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Dos años ganando todo y luego el mismo error que Napoleón: entrar a Rusia y no poder con el invierno ni con las distancias.</div></details></div>
+
+    <div class="card"><div class="name">El giro de la guerra</div><div class="fbody">
+      <div class="io"><span class="io-k">Años</span><span class="io-v"><b>1942 – 1943</b></span></div>
+      <div class="io"><span class="io-k">En el este</span><span class="io-v"><b>Stalingrado</b>: la derrota alemana que cambia el rumbo</span></div>
+      <div class="io"><span class="io-k">En el Pacífico</span><span class="io-v"><b>Midway</b>, tras el ataque japonés a <b>Pearl Harbor</b> (diciembre de 1941)</span></div>
+      <div class="io"><span class="io-k">En África</span><span class="io-v"><b>El Alamein</b></span></div>
+      <div class="io"><span class="io-k">Qué cambia</span><span class="io-v">a partir de aquí el Eje solo <b>retrocede</b></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Tres batallas en tres continentes, todas entre 1942 y 1943. Si te acuerdas de las tres, tienes el punto de inflexión de la guerra entera.</div></details></div>
+
+    <div class="card"><div class="name">Desembarco de Normandía</div><div class="fbody">
+      <div class="io"><span class="io-k">Fecha</span><span class="io-v"><b>6 de junio de 1944</b>, el «<b>Día D</b>»</span></div>
+      <div class="io"><span class="io-k">Qué fue</span><span class="io-v">el desembarco aliado en la costa de <b>Francia</b></span></div>
+      <div class="io"><span class="io-k">Para qué</span><span class="io-v">para abrir el <b>frente occidental</b> y liberar Europa desde el oeste</span></div>
+      <div class="io"><span class="io-k">Qué siguió</span><span class="io-v">liberación de <b>París</b> y avance hacia Alemania, mientras la URSS avanzaba desde el este</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Alemania quedó apretada entre dos frentes que se acercaban. Dónde se encontraron esos dos ejércitos es, literalmente, por dónde se dividió Europa después.</div></details></div>
+
+    <div class="card"><div class="name">El final de la guerra</div><div class="fbody">
+      <div class="io"><span class="io-k">En Europa</span><span class="io-v"><b>mayo de 1945</b>: caída de Berlín y rendición alemana</span></div>
+      <div class="io"><span class="io-k">En el Pacífico</span><span class="io-v"><b>agosto de 1945</b>: bombas atómicas sobre <b>Hiroshima</b> (6) y <b>Nagasaki</b> (9); Japón se rinde</span></div>
+      <div class="io"><span class="io-k">Quién decidió la bomba</span><span class="io-v"><b>Harry Truman</b></span></div>
+      <div class="io"><span class="io-k">Qué inaugura</span><span class="io-v">la <b>era nuclear</b> y el arma que va a sostener el equilibrio de la Guerra Fría</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Terminó una guerra y empezó otra lógica: a partir de ahí, dos potencias pueden destruirse mutuamente y por eso evitan enfrentarse directamente.</div></details></div>
+
+    <div class="card"><div class="name">Las conferencias</div><div class="fbody">
+      <div class="io"><span class="io-k">Yalta</span><span class="io-v"><b>febrero de 1945</b>: Roosevelt, Churchill y Stalin acuerdan las <b>zonas de influencia</b> y el reparto de Alemania</span></div>
+      <div class="io"><span class="io-k">Potsdam</span><span class="io-v"><b>julio de 1945</b>: ya con Truman; se confirma la división y afloran las <b>diferencias</b> entre aliados</span></div>
+      <div class="io"><span class="io-k">Qué producen</span><span class="io-v">la <b>división de Europa</b> en dos bloques, y por tanto la Guerra Fría</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">La guerra siguiente se decidió en las mesas de negociación de esta. Los vencedores se repartieron el mapa y esa raya duró hasta 1989.</div></details></div>
+
+    <div class="card"><div class="name">Consecuencias</div><div class="fbody">
+      <div class="io"><span class="io-k">Humanas</span><span class="io-v">unos <b>55 millones</b> de muertos, la mayoría <b>civiles</b>; el Holocausto</span></div>
+      <div class="io"><span class="io-k">Políticas</span><span class="io-v">Europa deja de ser el centro; surgen <b>dos superpotencias</b>: EE. UU. y la URSS</span></div>
+      <div class="io"><span class="io-k">Institucionales</span><span class="io-v">se crea la <b>ONU</b> (1945) y se firma la <b>Declaración Universal de los Derechos Humanos</b> (1948)</span></div>
+      <div class="io"><span class="io-k">Económicas</span><span class="io-v"><b>Bretton Woods</b> (1944): nacen el <b>FMI</b> y el <b>Banco Mundial</b>; el dólar queda como moneda de referencia</span></div>
+      <div class="io"><span class="io-k">Coloniales</span><span class="io-v">empieza la <b>descolonización</b> de Asia y África</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Casi todas las instituciones internacionales que hoy existen salieron de aquí. Es el momento en que el mundo intentó darse reglas para no repetirlo.</div></details></div>
+  </div>
+
+  <h3 class="sec">La tira · Segunda Guerra</h3>
+  <p class="tl-cap">Seis años. Los tres puntos de giro (1942-43) están seguidos: es lo que hay que ubicar.</p>
+  <div class="tl">
+    <div class="tl-row"><span class="tl-y">1939</span><span class="tl-e">Invasión de <b>Polonia</b>, 1 de septiembre: estalla la guerra</span></div>
+    <div class="tl-row"><span class="tl-y">1940</span><span class="tl-e">Cae <b>Francia</b> · <b>Batalla de Inglaterra</b></span></div>
+    <div class="tl-row"><span class="tl-y">1941</span><span class="tl-e"><b>Operación Barbarroja</b> contra la URSS · <b>Pearl Harbor</b>, 7 de diciembre</span></div>
+    <div class="tl-row"><span class="tl-y">1942</span><span class="tl-e"><b>Midway</b> · <b>El Alamein</b> · <b>México entra</b> con los Aliados</span></div>
+    <div class="tl-row"><span class="tl-y">1943</span><span class="tl-e"><b>Stalingrado</b>: el Eje empieza a retroceder</span></div>
+    <div class="tl-row"><span class="tl-y">1944</span><span class="tl-e"><b>Día D</b> en Normandía, 6 de junio · <b>Bretton Woods</b></span></div>
+    <div class="tl-row"><span class="tl-y">1945</span><span class="tl-e"><b>Yalta</b> · rendición alemana en mayo · <b>Hiroshima y Nagasaki</b> · <b>Potsdam</b> · nace la <b>ONU</b></span></div>
+    <div class="tl-row"><span class="tl-y">1945-46</span><span class="tl-e"><b>Juicios de Núremberg</b></span></div>
+    <div class="tl-row"><span class="tl-y">1948</span><span class="tl-e"><b>Declaración Universal de los Derechos Humanos</b></span></div>
+  </div>
+
+  <div class="trap"><h4>Ojo en el examen</h4><ul>
+    <li><b>Eje: Alemania, Italia, Japón.</b> La URSS empieza con un pacto con Alemania (1939) y termina en los Aliados (1941): ese cambio se pregunta.</li>
+    <li><b>Stalingrado, Midway y El Alamein</b> son los tres puntos de giro, en tres frentes distintos.</li>
+    <li><b>Pearl Harbor (dic. 1941) es lo que mete a Estados Unidos</b>; antes solo abastecía.</li>
+    <li><b>Yalta y Potsdam son las dos conferencias de 1945</b>, y de ahí sale la división en bloques. Es la bisagra con la unidad siguiente.</li>
+    <li><b>Hiroshima el 6, Nagasaki el 9 de agosto de 1945.</b> Dos ciudades, dos fechas.</li>
+    <li><b>Holocausto: unos 6 millones de judíos.</b> El total de la guerra son ~55 millones. No confundas las dos cifras.</li>
+    <li><b>Bretton Woods (1944) = FMI y Banco Mundial.</b> Se pregunta también en Geografía económica.</li>
+  </ul></div>
+</section>
+
+<!-- ============ U8 CAPITALISMO VS SOCIALISMO ============ -->
+<section class="panel" data-num="8" data-short="Guerra Fría">
+  <div class="panel-head">
+    <div class="u">Unidad 8 · 1945 – 1991</div>
+    <h2>El conflicto entre capitalismo y socialismo</h2>
+    <p class="lead">Casi medio siglo de mundo partido en dos, sin que las dos potencias llegaran nunca a dispararse. Mientras tanto, Asia y África se independizan.</p>
+  </div>
+
+  <h3 class="sec">Conceptos clave</h3>
+  <div class="cgrid">
+    <div class="concept"><h4>Guerra Fría</h4><p>Enfrentamiento <b>total pero sin choque armado directo</b> entre las dos superpotencias: se pelea con economía, propaganda, espionaje, carrera armamentista y <b>guerras por terceros</b>.</p></div>
+    <div class="concept"><h4>Bipolaridad</h4><p>El mundo organizado en <b>dos bloques</b> con sus alianzas militares y sus modelos económicos. Todo país tenía que ubicarse respecto a esos dos polos.</p></div>
+    <div class="concept"><h4>Telón de acero</h4><p>La expresión de <b>Churchill</b> (1946) para la frontera que separaba a la Europa occidental de la que quedó bajo influencia soviética. Su símbolo físico fue el <b>Muro de Berlín</b>.</p></div>
+    <div class="concept"><h4>Coexistencia pacífica</h4><p>La fase de <b>distensión</b>: aceptar que los dos sistemas van a convivir y negociar límites a las armas. No es amistad, es administrar el peligro.</p></div>
+    <div class="concept"><h4>Descolonización</h4><p>El proceso por el que las colonias de <b>Asia y África</b> se independizan tras 1945. Puede ser <b>negociada</b> (India) o por <b>guerra</b> (Argelia, Vietnam).</p></div>
+    <div class="concept"><h4>Tercer Mundo y No Alineados</h4><p>Los países que no querían pertenecer a ninguno de los dos bloques. Se organizaron en la <b>Conferencia de Bandung</b> (1955), con Nehru, Nasser, Tito y Sukarno.</p></div>
+  </div>
+
+  <h3 class="sec">Los bloques</h3>
+  <div class="fgrid">
+
+    <div class="card"><div class="name">Bloque capitalista</div><div class="fbody">
+      <div class="io"><span class="io-k">Quién lo encabeza</span><span class="io-v"><b>Estados Unidos</b></span></div>
+      <div class="io"><span class="io-k">Su alianza militar</span><span class="io-v">la <b>OTAN</b>, 1949</span></div>
+      <div class="io"><span class="io-k">Su plan económico</span><span class="io-v">el <b>Plan Marshall</b>, 1947: ayuda para reconstruir Europa occidental</span></div>
+      <div class="io"><span class="io-k">Su doctrina</span><span class="io-v">la <b>Doctrina Truman</b> y la política de <b>contención</b> del comunismo</span></div>
+      <div class="io"><span class="io-k">Su sistema</span><span class="io-v">economía de <b>mercado</b> y democracia liberal (con excepciones que apoyó)</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">La ayuda económica no fue solo generosidad: una Europa próspera era una Europa que no votaría comunista. La estrategia y la caridad iban juntas.</div></details></div>
+
+    <div class="card"><div class="name">Bloque socialista</div><div class="fbody">
+      <div class="io"><span class="io-k">Quién lo encabeza</span><span class="io-v">la <b>URSS</b></span></div>
+      <div class="io"><span class="io-k">Su alianza militar</span><span class="io-v">el <b>Pacto de Varsovia</b>, 1955</span></div>
+      <div class="io"><span class="io-k">Su organismo económico</span><span class="io-v">el <b>COMECON</b> (CAME), 1949</span></div>
+      <div class="io"><span class="io-k">Su sistema</span><span class="io-v"><b>economía planificada</b> por el Estado y <b>partido único</b></span></div>
+      <div class="io"><span class="io-k">Su zona</span><span class="io-v">Europa del este: Polonia, Hungría, Checoslovaquia, Rumania, Bulgaria, <b>Alemania Oriental</b></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Cada institución de un bloque tiene su espejo en el otro: alianza militar contra alianza militar, organismo económico contra organismo económico. Estudiarlas en pares es lo que funciona.</div></details></div>
+
+    <div class="card"><div class="name">División de Alemania</div><div class="fbody">
+      <div class="io"><span class="io-k">Cuándo</span><span class="io-v"><b>1949</b>: nacen la <b>RFA</b> (Occidental) y la <b>RDA</b> (Oriental)</span></div>
+      <div class="io"><span class="io-k">Antes</span><span class="io-v">el <b>bloqueo de Berlín</b> (1948-49) y el <b>puente aéreo</b> aliado</span></div>
+      <div class="io"><span class="io-k">El muro</span><span class="io-v">el <b>Muro de Berlín</b>, levantado en <b>1961</b> y derribado en <b>1989</b></span></div>
+      <div class="io"><span class="io-k">La reunificación</span><span class="io-v"><b>1990</b></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Un solo país partido en dos sistemas fue el experimento más visible de la Guerra Fría. Por eso su muro se volvió el símbolo, y su caída, el final.</div></details></div>
+
+    <div class="card"><div class="name">Crisis de los misiles</div><div class="fbody">
+      <div class="io"><span class="io-k">Año y lugar</span><span class="io-v"><b>1962</b>, en <b>Cuba</b></span></div>
+      <div class="io"><span class="io-k">Qué pasó</span><span class="io-v">la URSS instaló <b>misiles nucleares</b> a 150 km de Estados Unidos</span></div>
+      <div class="io"><span class="io-k">Quiénes</span><span class="io-v"><b>Kennedy</b> y <b>Jruschov</b>, con <b>Fidel Castro</b> de por medio</span></div>
+      <div class="io"><span class="io-k">Cómo terminó</span><span class="io-v">se retiraron los misiles; EE. UU. se comprometió a no invadir y retiró los suyos de Turquía</span></div>
+      <div class="io"><span class="io-k">Qué significó</span><span class="io-v">el momento <b>más cerca de una guerra nuclear</b>; después vino la <b>distensión</b> y el teléfono rojo</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Trece días en que el mundo estuvo al borde. El susto fue tan grande que produjo lo contrario: a partir de ahí las dos potencias empezaron a hablarse.</div></details></div>
+
+    <div class="card"><div class="name">Guerra de Corea</div><div class="fbody">
+      <div class="io"><span class="io-k">Años</span><span class="io-v"><b>1950 – 1953</b></span></div>
+      <div class="io"><span class="io-k">Qué fue</span><span class="io-v">el <b>norte comunista</b> (con China y la URSS) contra el <b>sur capitalista</b> (con EE. UU. y la ONU)</span></div>
+      <div class="io"><span class="io-k">Cómo terminó</span><span class="io-v">en <b>empate</b>, con el país partido en el <b>paralelo 38</b> — sigue dividido</span></div>
+      <div class="io"><span class="io-k">Qué ejemplifica</span><span class="io-v">la <b>guerra por terceros</b>: las superpotencias pelean sin enfrentarse ellas</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Es el modelo de todos los conflictos del periodo: un país pequeño partido en dos, cada mitad armada por una superpotencia. Aquella frontera del paralelo 38 sigue en pie hasta hoy.</div></details></div>
+
+    <div class="card"><div class="name">Guerra de Vietnam</div><div class="fbody">
+      <div class="io"><span class="io-k">Años</span><span class="io-v">intervención estadounidense sobre todo <b>1964 – 1975</b></span></div>
+      <div class="io"><span class="io-k">Antes</span><span class="io-v">la derrota <b>francesa</b> en Dien Bien Phu (1954) y la división del país</span></div>
+      <div class="io"><span class="io-k">Cómo terminó</span><span class="io-v"><b>derrota de Estados Unidos</b> y <b>reunificación comunista</b> en 1975</span></div>
+      <div class="io"><span class="io-k">Su efecto interno</span><span class="io-v">enorme <b>movimiento pacifista</b> y crisis de confianza en EE. UU.</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">La primera guerra televisada y la primera que una superpotencia perdió ante un país pequeño. Cambió lo que la gente estaba dispuesta a aceptar de su propio gobierno.</div></details></div>
+
+    <div class="card"><div class="name">Revolución Cubana</div><div class="fbody">
+      <div class="io"><span class="io-k">Año</span><span class="io-v"><b>1959</b></span></div>
+      <div class="io"><span class="io-k">Quiénes</span><span class="io-v"><b>Fidel Castro</b> y <b>Ernesto «Che» Guevara</b>, contra <b>Fulgencio Batista</b></span></div>
+      <div class="io"><span class="io-k">Qué hizo</span><span class="io-v">reforma agraria, nacionalizaciones, alfabetización; se alinea con la <b>URSS</b></span></div>
+      <div class="io"><span class="io-k">La respuesta</span><span class="io-v">el <b>embargo</b> estadounidense y la invasión fallida de <b>Bahía de Cochinos</b> (1961)</span></div>
+      <div class="io"><span class="io-k">Por qué importa aquí</span><span class="io-v">metió la Guerra Fría <b>dentro de América Latina</b></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">A partir de aquí, cualquier movimiento social latinoamericano fue leído como amenaza comunista. De esa lógica salen las dictaduras militares del Cono Sur.</div></details></div>
+
+    <div class="card"><div class="name">Independencia de la India</div><div class="fbody">
+      <div class="io"><span class="io-k">Año</span><span class="io-v"><b>1947</b></span></div>
+      <div class="io"><span class="io-k">Quién</span><span class="io-v"><b>Mahatma Gandhi</b>, y luego <b>Nehru</b> como primer ministro</span></div>
+      <div class="io"><span class="io-k">Su método</span><span class="io-v">la <b>resistencia pacífica</b> o no violencia: boicot a los productos británicos, desobediencia civil (<b>Marcha de la Sal</b>)</span></div>
+      <div class="io"><span class="io-k">Al lograrla</span><span class="io-v">la <b>partición</b> en India (hinduista) y <b>Pakistán</b> (musulmán), con millones de desplazados</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">El caso de descolonización negociada por excelencia, y el ejemplo de que la independencia no resuelve sola los conflictos: la partición dejó una frontera que sigue en disputa.</div></details></div>
+
+    <div class="card"><div class="name">Descolonización de África</div><div class="fbody">
+      <div class="io"><span class="io-k">Cuándo</span><span class="io-v">sobre todo en los <b>años sesenta</b>; <b>1960</b> se llamó «el año de África»</span></div>
+      <div class="io"><span class="io-k">El caso violento</span><span class="io-v"><b>Argelia</b>, contra Francia (1954-1962)</span></div>
+      <div class="io"><span class="io-k">Su lastre</span><span class="io-v">las <b>fronteras artificiales</b> de la Conferencia de Berlín, que partieron etnias y juntaron enemigos</span></div>
+      <div class="io"><span class="io-k">Qué siguió</span><span class="io-v"><b>neocolonialismo</b>: independencia política con dependencia económica, guerras civiles y dictaduras</span></div>
+      <div class="io"><span class="io-k">Caso aparte</span><span class="io-v">el <b>apartheid</b> en Sudáfrica, hasta 1994 con <b>Nelson Mandela</b></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Aquí se cierra el círculo con la unidad 4: las fronteras que se trazaron con regla en 1885 son las que estallan al independizarse. Es la pregunta de causa y consecuencia a largo plazo.</div></details></div>
+  </div>
+
+  <h3 class="sec">La tira · Guerra Fría</h3>
+  <p class="tl-cap">Casi medio siglo. Fíjate en 1949 y 1955: cada bloque responde al otro con una institución espejo.</p>
+  <div class="tl">
+    <div class="tl-row"><span class="tl-y">1946</span><span class="tl-e">Churchill habla del <b>telón de acero</b></span></div>
+    <div class="tl-row"><span class="tl-y">1947</span><span class="tl-e"><b>Doctrina Truman</b> y <b>Plan Marshall</b> · independencia de la <b>India</b></span></div>
+    <div class="tl-row"><span class="tl-y">1948-49</span><span class="tl-e"><b>Bloqueo de Berlín</b> y puente aéreo</span></div>
+    <div class="tl-row"><span class="tl-y">1949</span><span class="tl-e">Nace la <b>OTAN</b> y el <b>COMECON</b> · se dividen la <b>RFA</b> y la <b>RDA</b> · revolución en <b>China</b> (Mao)</span></div>
+    <div class="tl-row"><span class="tl-y">1950-53</span><span class="tl-e"><b>Guerra de Corea</b></span></div>
+    <div class="tl-row"><span class="tl-y">1955</span><span class="tl-e"><b>Pacto de Varsovia</b> · <b>Conferencia de Bandung</b> (No Alineados)</span></div>
+    <div class="tl-row"><span class="tl-y">1959</span><span class="tl-e"><b>Revolución Cubana</b></span></div>
+    <div class="tl-row"><span class="tl-y">1961</span><span class="tl-e">Se levanta el <b>Muro de Berlín</b> · Bahía de Cochinos · <b>Gagarin</b> en el espacio</span></div>
+    <div class="tl-row"><span class="tl-y">1962</span><span class="tl-e"><b>Crisis de los misiles</b> en Cuba</span></div>
+    <div class="tl-row"><span class="tl-y">1960s</span><span class="tl-e"><b>Descolonización de África</b>: 1960, «el año de África»</span></div>
+    <div class="tl-row"><span class="tl-y">1969</span><span class="tl-e">El hombre llega a la <b>Luna</b>: EE. UU. gana la carrera espacial</span></div>
+    <div class="tl-row"><span class="tl-y">1975</span><span class="tl-e">Fin de la <b>Guerra de Vietnam</b>: derrota estadounidense</span></div>
+  </div>
+
+  <div class="trap"><h4>Ojo en el examen</h4><ul>
+    <li><b>OTAN (1949) ↔ Pacto de Varsovia (1955) · Plan Marshall (1947) ↔ COMECON (1949).</b> Institución contra institución: es la pregunta de la unidad.</li>
+    <li><b>RFA es la occidental y capitalista · RDA la oriental y socialista.</b> Se confunden las siglas constantemente.</li>
+    <li>La Guerra Fría es <b>sin enfrentamiento directo</b> entre las dos potencias. Corea y Vietnam son guerras <b>por terceros</b>.</li>
+    <li><b>1962 es el punto más peligroso</b> y, justo por eso, el que abre la distensión.</li>
+    <li><b>Bandung 1955 = No Alineados.</b> Nehru, Nasser, Tito y Sukarno.</li>
+    <li><b>India se independiza negociando (Gandhi, 1947) · Argelia con guerra (1962).</b> Los dos modelos de descolonización.</li>
+    <li>El <b>Muro de Berlín se levanta en 1961 y cae en 1989</b>. Dos fechas, no una.</li>
+  </ul></div>
+</section>
+
+<!-- ============ U9 EL MUNDO ACTUAL ============ -->
+<section class="panel" data-num="9" data-short="Mundo actual">
+  <div class="panel-head">
+    <div class="u">Unidad 9 · de 1989 a hoy</div>
+    <h2>El mundo actual</h2>
+    <p class="lead">Se cae un bloque, el mundo se vuelve uno solo de mercado y aparecen los conflictos que la Guerra Fría tenía congelados. Esta unidad se cruza con Geografía.</p>
+  </div>
+
+  <h3 class="sec">Conceptos clave</h3>
+  <div class="cgrid">
+    <div class="concept"><h4>Globalización</h4><p>La <b>integración mundial</b> de economía, comunicaciones y cultura: el capital, la información y las mercancías circulan sin fronteras. Las personas, mucho menos.</p></div>
+    <div class="concept"><h4>Perestroika y glásnost</h4><p>Las dos reformas de <b>Gorbachov</b>: <em>perestroika</em> es <b>reestructuración económica</b>; <em>glásnost</em> es <b>transparencia</b> y apertura informativa. Buscaban salvar el sistema y lo aceleraron hacia el final.</p></div>
+    <div class="concept"><h4>Unipolaridad</h4><p>Tras 1991 queda <b>una sola superpotencia</b>, Estados Unidos. Hoy se discute si vuelve la multipolaridad con China y la Unión Europea.</p></div>
+    <div class="concept"><h4>Bloques económicos</h4><p>Agrupaciones regionales para comerciar sin aranceles: <b>Unión Europea</b>, <b>TLCAN/T-MEC</b>, <b>Mercosur</b>, <b>APEC</b>, <b>ASEAN</b>. Son la forma política de la globalización.</p></div>
+    <div class="concept"><h4>Limpieza étnica</h4><p>Expulsar o exterminar a un grupo para dejar un territorio étnicamente homogéneo. Reapareció en Europa en las <b>guerras de Yugoslavia</b> y en África en el <b>genocidio de Ruanda</b>.</p></div>
+    <div class="concept"><h4>Sociedad de la información</h4><p>La riqueza depende del <b>conocimiento y los datos</b> más que de la industria. Internet, la computadora personal y el celular la hacen posible; la <b>brecha digital</b> es su desigualdad.</p></div>
+  </div>
+
+  <h3 class="sec">El fin del bloque soviético</h3>
+  <div class="fgrid">
+
+    <div class="card"><div class="name">Mijaíl Gorbachov</div><div class="fbody">
+      <div class="io"><span class="io-k">Cuándo</span><span class="io-v">llega al poder en <b>1985</b></span></div>
+      <div class="io"><span class="io-k">Sus reformas</span><span class="io-v"><b>perestroika</b> (reestructuración económica) y <b>glásnost</b> (transparencia)</span></div>
+      <div class="io"><span class="io-k">Qué buscaba</span><span class="io-v"><b>salvar</b> el sistema reformándolo, no terminarlo</span></div>
+      <div class="io"><span class="io-k">Qué provocó</span><span class="io-v">al aflojar el control, los países satélites y las repúblicas <b>se soltaron</b></span></div>
+      <div class="io"><span class="io-k">Por qué era urgente</span><span class="io-v">economía estancada, gasto militar insostenible y la guerra de <b>Afganistán</b></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Quiso abrir una ventana y se le cayó la casa. Es el ejemplo clásico de reforma que desborda a quien la emprende — el mismo patrón que las Reformas Borbónicas.</div></details></div>
+
+    <div class="card"><div class="name">Caída del Muro de Berlín</div><div class="fbody">
+      <div class="io"><span class="io-k">Fecha</span><span class="io-v"><b>9 de noviembre de 1989</b></span></div>
+      <div class="io"><span class="io-k">Qué simboliza</span><span class="io-v">el <b>fin de la Guerra Fría</b> y del mundo dividido en dos</span></div>
+      <div class="io"><span class="io-k">Qué siguió</span><span class="io-v">la <b>reunificación alemana</b> en 1990 y el desplome de los regímenes de Europa del este</span></div>
+      <div class="io"><span class="io-k">El otro 1989</span><span class="io-v">la represión de <b>Tiananmén</b> en China: ahí el régimen sí resistió</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">El mismo año, dos regímenes comunistas enfrentaron protestas y respondieron distinto. Uno se abrió y desapareció; el otro reprimió y sigue en pie, ya con economía de mercado.</div></details></div>
+
+    <div class="card"><div class="name">Disolución de la URSS</div><div class="fbody">
+      <div class="io"><span class="io-k">Año</span><span class="io-v"><b>1991</b></span></div>
+      <div class="io"><span class="io-k">Qué pasó</span><span class="io-v">las repúblicas se independizan y el país <b>deja de existir</b></span></div>
+      <div class="io"><span class="io-k">Cuántas salieron</span><span class="io-v"><b>15 repúblicas</b>, entre ellas Rusia, Ucrania y las bálticas</span></div>
+      <div class="io"><span class="io-k">Quién queda</span><span class="io-v"><b>Boris Yeltsin</b> en Rusia; se crea la <b>CEI</b></span></div>
+      <div class="io"><span class="io-k">Consecuencia global</span><span class="io-v">queda <b>una sola superpotencia</b>: fin de la bipolaridad</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Un imperio que se deshizo sin una guerra que lo derrotara. Eso es históricamente raro y es parte de por qué se pregunta tanto.</div></details></div>
+
+    <div class="card"><div class="name">Guerras de Yugoslavia</div><div class="fbody">
+      <div class="io"><span class="io-k">Años</span><span class="io-v"><b>1991 – 2001</b>, en los <b>Balcanes</b></span></div>
+      <div class="io"><span class="io-k">Qué pasó</span><span class="io-v">el país se <b>fragmentó</b> en varios Estados, con guerras entre ellos</span></div>
+      <div class="io"><span class="io-k">Por qué</span><span class="io-v">porque juntaba pueblos, lenguas y religiones distintas, y al morir <b>Tito</b> y caer el bloque, los nacionalismos se soltaron</span></div>
+      <div class="io"><span class="io-k">Lo más grave</span><span class="io-v"><b>limpieza étnica</b> y la matanza de <b>Srebrenica</b> (1995) en Bosnia</span></div>
+      <div class="io"><span class="io-k">Qué países salieron</span><span class="io-v">Eslovenia, Croacia, Bosnia-Herzegovina, Macedonia del Norte, Serbia, Montenegro y <b>Kosovo</b></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Es el ejemplo europeo de nacionalismo <em>disgregador</em>, el mismo concepto de la unidad 3. Ojo con la confusión clásica: esto es una división en los Balcanes, no un caso del Cáucaso ni una unificación.</div></details></div>
+
+    <div class="card"><div class="name">La Unión Europea</div><div class="fbody">
+      <div class="io"><span class="io-k">Su origen</span><span class="io-v">la <b>CECA</b> (1951) y el <b>Tratado de Roma</b> (1957), que crea la Comunidad Económica Europea</span></div>
+      <div class="io"><span class="io-k">Cuándo toma su nombre</span><span class="io-v">con el <b>Tratado de Maastricht</b>, <b>1992</b></span></div>
+      <div class="io"><span class="io-k">Su moneda</span><span class="io-v">el <b>euro</b>, en circulación desde <b>2002</b></span></div>
+      <div class="io"><span class="io-k">Qué permite</span><span class="io-v">libre circulación de <b>personas, bienes, servicios y capitales</b></span></div>
+      <div class="io"><span class="io-k">Su primera salida</span><span class="io-v">el <b>Brexit</b>: el Reino Unido sale en 2020</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Nació de una idea muy concreta: si Francia y Alemania comparten el carbón y el acero, no pueden armarse en secreto una contra otra. La integración empezó como política de paz.</div></details></div>
+
+    <div class="card"><div class="name">Globalización económica</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué la impulsa</span><span class="io-v">las <b>empresas transnacionales</b>, la tecnología y los acuerdos de libre comercio</span></div>
+      <div class="io"><span class="io-k">Sus organismos</span><span class="io-v"><b>FMI</b>, <b>Banco Mundial</b> y la <b>OMC</b> (1995, sucesora del GATT)</span></div>
+      <div class="io"><span class="io-k">Qué produjo</span><span class="io-v"><b>deslocalización</b>: la producción se muda a donde la mano de obra es más barata</span></div>
+      <div class="io"><span class="io-k">Sus críticas</span><span class="io-v">aumento de la <b>desigualdad</b>, daño ambiental y pérdida de soberanía de los Estados</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Este bloque de conceptos es exactamente el mismo que pide Geografía económica. Estudiarlo una vez te sirve en las dos materias.</div></details></div>
+
+    <div class="card"><div class="name">Los conflictos del nuevo siglo</div><div class="fbody">
+      <div class="io"><span class="io-k">1990-91</span><span class="io-v"><b>Guerra del Golfo</b>: Irak invade Kuwait</span></div>
+      <div class="io"><span class="io-k">1994</span><span class="io-v">genocidio de <b>Ruanda</b></span></div>
+      <div class="io"><span class="io-k">2001</span><span class="io-v">atentados del <b>11 de septiembre</b> y «guerra contra el terrorismo»: Afganistán</span></div>
+      <div class="io"><span class="io-k">2003</span><span class="io-v">invasión de <b>Irak</b></span></div>
+      <div class="io"><span class="io-k">El de fondo</span><span class="io-v">el conflicto <b>árabe-israelí</b>, desde la creación de Israel en <b>1948</b></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Al desaparecer la tensión entre dos bloques, los conflictos dejaron de ser ideológicos y pasaron a ser religiosos, étnicos y por recursos. Ese cambio de naturaleza es lo que se pregunta.</div></details></div>
+
+    <div class="card"><div class="name">Desarrollo científico y tecnológico</div><div class="fbody">
+      <div class="io"><span class="io-k">En cómputo</span><span class="io-v"><b>computadora personal</b>, <b>internet</b> (uso masivo desde los noventa), teléfono móvil</span></div>
+      <div class="io"><span class="io-k">En biología</span><span class="io-v"><b>ADN recombinante</b>, <b>clonación</b> (la oveja Dolly, 1996) y el <b>Proyecto Genoma Humano</b> (2003)</span></div>
+      <div class="io"><span class="io-k">En el espacio</span><span class="io-v">estaciones espaciales, sondas y satélites de comunicación</span></div>
+      <div class="io"><span class="io-k">Sus dilemas</span><span class="io-v"><b>bioética</b>, privacidad de los datos, <b>brecha digital</b> y crisis <b>ambiental</b></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Es el punto donde esta materia toca a Biología: la clonación y el genoma se preguntan en las dos. Vale la pena repasarlo pensando en las dos pestañas.</div></details></div>
+  </div>
+
+  <h3 class="sec">La tira · Mundo actual</h3>
+  <p class="tl-cap">De la caída del muro a hoy. Las fechas están cerca entre sí: aquí el orden se pierde fácil.</p>
+  <div class="tl">
+    <div class="tl-row"><span class="tl-y">1985</span><span class="tl-e">Llega <b>Gorbachov</b>: perestroika y glásnost</span></div>
+    <div class="tl-row"><span class="tl-y">1989</span><span class="tl-e">Cae el <b>Muro de Berlín</b>, 9 de noviembre · <b>Tiananmén</b> en China</span></div>
+    <div class="tl-row"><span class="tl-y">1990</span><span class="tl-e"><b>Reunificación alemana</b> · Guerra del Golfo</span></div>
+    <div class="tl-row"><span class="tl-y">1991</span><span class="tl-e"><b>Disolución de la URSS</b> · empiezan las <b>guerras de Yugoslavia</b></span></div>
+    <div class="tl-row"><span class="tl-y">1992</span><span class="tl-e"><b>Tratado de Maastricht</b>: nace la Unión Europea</span></div>
+    <div class="tl-row"><span class="tl-y">1994</span><span class="tl-e">Entra en vigor el <b>TLCAN</b> · genocidio de <b>Ruanda</b></span></div>
+    <div class="tl-row"><span class="tl-y">1995</span><span class="tl-e">Nace la <b>OMC</b> · matanza de <b>Srebrenica</b></span></div>
+    <div class="tl-row"><span class="tl-y">2001</span><span class="tl-e">Atentados del <b>11 de septiembre</b></span></div>
+    <div class="tl-row"><span class="tl-y">2002</span><span class="tl-e">Entra en circulación el <b>euro</b></span></div>
+    <div class="tl-row"><span class="tl-y">2003</span><span class="tl-e">Invasión de <b>Irak</b> · se completa el <b>Genoma Humano</b></span></div>
+  </div>
+
+  <div class="trap"><h4>Ojo en el examen</h4><ul>
+    <li><b>Perestroika = economía · glásnost = transparencia.</b> Dos palabras rusas, dos significados; se preguntan juntas y se cambian fácil.</li>
+    <li><b>Muro cae en 1989, URSS se disuelve en 1991.</b> Dos años distintos y dos hechos distintos.</li>
+    <li><b>Yugoslavia es división en los Balcanes.</b> No la confundas con Chechenia (Cáucaso, dentro de Rusia) ni con la unificación alemana, que es lo contrario: unión, no ruptura.</li>
+    <li><b>Maastricht 1992 = Unión Europea · euro 2002.</b> Diez años de diferencia entre el nombre y la moneda.</li>
+    <li><b>GATT → OMC en 1995.</b> Y FMI y Banco Mundial vienen de Bretton Woods, 1944.</li>
+    <li>Este bloque comparte contenido con <b>Geografía</b> (bloques económicos, organismos, zonas de tensión). Repasar uno es repasar el otro.</li>
+  </ul></div>
+</section>
+
+<!-- ============ LÍNEA COMPLETA ============ -->
+<section class="panel" data-short="Línea completa">
+  <div class="panel-head">
+    <div class="u">Repaso · todos los periodos</div>
+    <h2>La línea completa</h2>
+    <p class="lead">Los hitos de las nueve unidades en una sola tira. Es donde se entrena el orden entre periodos, no solo dentro de cada uno.</p>
+  </div>
+
+  <h3 class="sec">De 1776 a 2003</h3>
+  <p class="tl-cap">Treinta y cinco hitos, en orden. De ida ves el año; volteado ves el hecho y dices el año.</p>
+  <div class="tl">
+    <div class="tl-row"><span class="tl-y">1776</span><span class="tl-e"><b>Independencia de las Trece Colonias</b></span></div>
+    <div class="tl-row"><span class="tl-y">1789</span><span class="tl-e"><b>Revolución Francesa</b>: empieza la Edad Contemporánea</span></div>
+    <div class="tl-row"><span class="tl-y">1799</span><span class="tl-e"><b>18 Brumario</b>: llega Napoleón</span></div>
+    <div class="tl-row"><span class="tl-y">1808</span><span class="tl-e"><b>Invasión napoleónica a España</b></span></div>
+    <div class="tl-row"><span class="tl-y">1814-15</span><span class="tl-e"><b>Congreso de Viena</b>: la restauración</span></div>
+    <div class="tl-row"><span class="tl-y">1824</span><span class="tl-e"><b>Ayacucho</b>: fin del dominio español en América</span></div>
+    <div class="tl-row"><span class="tl-y">1848</span><span class="tl-e"><b>Primavera de los pueblos</b> · <b>Manifiesto Comunista</b></span></div>
+    <div class="tl-row"><span class="tl-y">1870</span><span class="tl-e">Se completa la <b>unificación de Italia</b> · Segunda Revolución Industrial</span></div>
+    <div class="tl-row"><span class="tl-y">1871</span><span class="tl-e"><b>Unificación de Alemania</b> en Versalles</span></div>
+    <div class="tl-row"><span class="tl-y">1884-85</span><span class="tl-e"><b>Conferencia de Berlín</b>: reparto de África</span></div>
+    <div class="tl-row"><span class="tl-y">1898</span><span class="tl-e">España pierde sus últimas colonias ante <b>Estados Unidos</b></span></div>
+    <div class="tl-row"><span class="tl-y">1914</span><span class="tl-e"><b>Sarajevo</b> y estalla la <b>Primera Guerra Mundial</b></span></div>
+    <div class="tl-row"><span class="tl-y">1917</span><span class="tl-e"><b>Revolución Rusa</b> · entra Estados Unidos a la guerra</span></div>
+    <div class="tl-row"><span class="tl-y">1919</span><span class="tl-e"><b>Tratado de Versalles</b> · Sociedad de Naciones</span></div>
+    <div class="tl-row"><span class="tl-y">1922</span><span class="tl-e">Nace la <b>URSS</b> · <b>Mussolini</b> llega al poder</span></div>
+    <div class="tl-row"><span class="tl-y">1929</span><span class="tl-e"><b>Crac de Wall Street</b>: la Gran Depresión</span></div>
+    <div class="tl-row"><span class="tl-y">1933</span><span class="tl-e"><b>Hitler</b>, canciller · <b>New Deal</b></span></div>
+    <div class="tl-row"><span class="tl-y">1936-39</span><span class="tl-e"><b>Guerra Civil Española</b></span></div>
+    <div class="tl-row"><span class="tl-y">1939</span><span class="tl-e">Invasión de <b>Polonia</b>: <b>Segunda Guerra Mundial</b></span></div>
+    <div class="tl-row"><span class="tl-y">1941</span><span class="tl-e"><b>Pearl Harbor</b> · Alemania invade la URSS</span></div>
+    <div class="tl-row"><span class="tl-y">1944</span><span class="tl-e"><b>Día D</b> en Normandía · <b>Bretton Woods</b></span></div>
+    <div class="tl-row"><span class="tl-y">1945</span><span class="tl-e">Fin de la guerra · <b>Hiroshima y Nagasaki</b> · nace la <b>ONU</b></span></div>
+    <div class="tl-row"><span class="tl-y">1947</span><span class="tl-e"><b>Plan Marshall</b> · independencia de la <b>India</b></span></div>
+    <div class="tl-row"><span class="tl-y">1948</span><span class="tl-e"><b>Declaración Universal de los Derechos Humanos</b> · creación de Israel</span></div>
+    <div class="tl-row"><span class="tl-y">1949</span><span class="tl-e"><b>OTAN</b> · división de Alemania · revolución en <b>China</b></span></div>
+    <div class="tl-row"><span class="tl-y">1955</span><span class="tl-e"><b>Pacto de Varsovia</b> · <b>Bandung</b>: los No Alineados</span></div>
+    <div class="tl-row"><span class="tl-y">1959</span><span class="tl-e"><b>Revolución Cubana</b></span></div>
+    <div class="tl-row"><span class="tl-y">1961</span><span class="tl-e">Se levanta el <b>Muro de Berlín</b></span></div>
+    <div class="tl-row"><span class="tl-y">1962</span><span class="tl-e"><b>Crisis de los misiles</b></span></div>
+    <div class="tl-row"><span class="tl-y">1969</span><span class="tl-e">Llegada a la <b>Luna</b></span></div>
+    <div class="tl-row"><span class="tl-y">1975</span><span class="tl-e">Fin de la <b>Guerra de Vietnam</b></span></div>
+    <div class="tl-row"><span class="tl-y">1989</span><span class="tl-e">Cae el <b>Muro de Berlín</b></span></div>
+    <div class="tl-row"><span class="tl-y">1991</span><span class="tl-e"><b>Disolución de la URSS</b> · guerras de <b>Yugoslavia</b></span></div>
+    <div class="tl-row"><span class="tl-y">1992</span><span class="tl-e"><b>Maastricht</b>: nace la Unión Europea</span></div>
+    <div class="tl-row"><span class="tl-y">2001</span><span class="tl-e">Atentados del <b>11 de septiembre</b></span></div>
+  </div>
+
+  <div class="trap"><h4>Cómo usar esta pestaña</h4><ul>
+    <li>Recórrela <b>en modo memoria y de ida</b>: ves los años y vas diciendo qué pasó. Es lo más parecido a la pregunta de «ordena estos sucesos».</li>
+    <li>Después <b>voltéala</b>: ves los hechos y dices el año. Esa dirección es la que de verdad cuesta.</li>
+    <li>Si un año se te resiste, ve a su unidad: ahí está la tarjeta completa con el quién y el por qué.</li>
+    <li>Al llegar a 1810, 1910 y 1917, cruza con <b>Historia de México</b>: son los mismos años vistos desde el otro lado.</li>
+  </ul></div>
+</section>
+</main>
+
+<footer>Las 9 unidades del temario oficial de la Guía UNAM · Área 2 · uso personal de estudio</footer>
+
+<script>
+  const panels = [...document.querySelectorAll('.panel')];
+  const tabs = document.getElementById('tabs');
+  panels.forEach((p,i)=>{
+    const b = document.createElement('button');
+    b.className = 'tab';
+    b.innerHTML = (p.dataset.num ? '<b>'+p.dataset.num+'</b>' : '') + p.dataset.short;
+    b.onclick = ()=> show(i);
+    tabs.appendChild(b);
+  });
+  function show(i){
+    panels.forEach((p,j)=>p.classList.toggle('active', i===j));
+    [...tabs.children].forEach((t,j)=>t.classList.toggle('active', i===j));
+    localStorage.setItem('hun-unidad', i);
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+  show(Math.min(+localStorage.getItem('hun-unidad')||0, panels.length-1));
+
+  document.addEventListener('keydown', e=>{
+    if(e.target.tagName==='INPUT') return;
+    const cur = panels.findIndex(p=>p.classList.contains('active'));
+    if(e.key==='ArrowRight' && cur<panels.length-1) show(cur+1);
+    if(e.key==='ArrowLeft'  && cur>0) show(cur-1);
+  });
+
+  const hint = document.getElementById('hint');
+  function pista(){
+    if(!document.body.classList.contains('memo')){
+      hint.innerHTML = 'Enciende el <b>modo memoria</b> para taparte. El <b>En palabras</b> de cada tarjeta se abre siempre, en cualquier modo.';
+    } else if(document.body.classList.contains('flip')){
+      hint.innerHTML = 'Volteado: ves el <b>contenido</b> y dices <b>cómo se llama</b>; en la tira ves el <b>hecho</b> y dices el <b>año</b>. Toca para comprobar.';
+    } else {
+      hint.innerHTML = 'Ves el <b>nombre</b> y recitas el contenido; en la tira ves el <b>año</b> y dices qué pasó. Toca para comprobar.';
+    }
+  }
+
+  function cerrarTodas(){
+    document.querySelectorAll('.card.open, .tl-row.open').forEach(c=>c.classList.remove('open'));
+  }
+
+  const memoBtn = document.getElementById('memoBtn');
+  memoBtn.onclick = ()=>{
+    document.body.classList.toggle('memo');
+    cerrarTodas();
+    localStorage.setItem('hun-memo', document.body.classList.contains('memo')?'1':'0');
+    pista();
+  };
+  const flipBtn = document.getElementById('flipBtn');
+  flipBtn.onclick = ()=>{
+    document.body.classList.toggle('flip');
+    cerrarTodas();
+    localStorage.setItem('hun-flip', document.body.classList.contains('flip')?'1':'0');
+    pista();
+  };
+  if(localStorage.getItem('hun-memo')==='1') document.body.classList.add('memo');
+  if(localStorage.getItem('hun-flip')==='1') document.body.classList.add('flip');
+  pista();
+
+  let abiertas = [];
+  window.addEventListener('beforeprint', ()=>{
+    abiertas = [...document.querySelectorAll('details.why')].filter(d=>d.open);
+    document.querySelectorAll('details.why').forEach(d=>d.open=true);
+  });
+  window.addEventListener('afterprint', ()=>{
+    document.querySelectorAll('details.why').forEach(d=>d.open = abiertas.includes(d));
+  });
+
+  document.addEventListener('click', e=>{
+    if(e.target.closest('details.why')) return;
+    if(e.target.closest('.switch')) return;
+    if(!document.body.classList.contains('memo')) return;
+    const r = e.target.closest('.tl-row');
+    if(r){ r.classList.toggle('open'); return; }
+    const c = e.target.closest('.card');
+    if(c) c.classList.toggle('open');
+  });
+</script>
+</body>
+</html>

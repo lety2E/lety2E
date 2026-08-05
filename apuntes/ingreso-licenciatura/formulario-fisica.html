@@ -1,0 +1,975 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Formulario de Física · Área 2 · UNAM</title>
+<style>
+  :root{
+    --M:#FF00AA;          /* magenta */
+    --T:#00B8B8;          /* turquesa */
+    --P:#6A2A8C;          /* morado */
+    --bg:#FFF7FB;
+    --card:#FFFFFF;
+    --ink:#1A0828;
+    --muted:#7B5A50;
+    --border:#F0D7E6;
+    --hover:#FFE3F1;
+    --soft:#FDF1F8;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,system-ui,sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* ---------- Encabezado ---------- */
+  header{text-align:center;padding:2.2rem 1rem .8rem}
+  header .eyebrow{
+    font-size:.76rem;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--T);font-weight:700;
+  }
+  header h1{margin:.35rem 0 .25rem;font-size:clamp(1.5rem,3.8vw,2.1rem);color:var(--P)}
+  header p{margin:0 auto;max-width:46ch;color:var(--muted);font-size:.93rem}
+
+  /* ---------- Barra de control ---------- */
+  .controls{
+    display:flex;justify-content:center;align-items:center;gap:.6rem;
+    flex-wrap:wrap;padding:1rem 1rem 0;
+  }
+  .switch{
+    display:inline-flex;align-items:center;gap:.55rem;
+    background:var(--card);border:1.5px solid var(--border);
+    border-radius:999px;padding:.42rem .9rem;cursor:pointer;
+    font-size:.86rem;font-weight:600;color:var(--ink);
+    transition:all .15s ease;font-family:inherit;
+  }
+  .switch:hover{border-color:var(--T);background:#F0FBFB}
+  .switch .dot{
+    width:34px;height:19px;border-radius:999px;background:var(--border);
+    position:relative;transition:background .18s ease;flex:none;
+  }
+  .switch .dot::after{
+    content:"";position:absolute;top:2.5px;left:2.5px;
+    width:14px;height:14px;border-radius:50%;background:#fff;
+    box-shadow:0 1px 3px rgba(0,0,0,.25);transition:transform .18s ease;
+  }
+  body.memo .switch .dot{background:var(--T)}
+  body.memo .switch .dot::after{transform:translateX(15px)}
+  .hint{
+    text-align:center;color:var(--muted);font-size:.8rem;
+    padding:.55rem 1rem 0;min-height:1.4rem;
+  }
+
+  /* ---------- Pestañas ---------- */
+  .tabs{
+    max-width:1180px;margin:.9rem auto 0;padding:0 1rem;
+    display:flex;flex-wrap:wrap;gap:.45rem;justify-content:center;
+  }
+  .tab{
+    background:var(--card);border:1.5px solid var(--border);color:var(--ink);
+    border-radius:999px;padding:.45rem .9rem;font-size:.87rem;font-weight:600;
+    cursor:pointer;transition:all .15s ease;font-family:inherit;white-space:nowrap;
+  }
+  .tab b{color:var(--T);margin-right:.35rem;font-weight:800}
+  .tab:hover{background:var(--hover);border-color:var(--M)}
+  .tab.active{background:var(--M);color:#fff;border-color:var(--M);box-shadow:0 4px 12px rgba(255,0,170,.25)}
+  .tab.active b{color:#fff}
+
+  /* ---------- Paneles ---------- */
+  main{max-width:1000px;margin:1.5rem auto 4rem;padding:0 1rem}
+  .panel{display:none}
+  .panel.active{display:block;animation:fade .25s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+
+  .panel-head{margin-bottom:1.3rem;padding-bottom:.8rem;border-bottom:2px solid var(--border)}
+  .panel-head .u{
+    font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--T);font-weight:800;
+  }
+  .panel-head h2{margin:.2rem 0 .3rem;color:var(--P);font-size:clamp(1.25rem,3vw,1.65rem)}
+  .panel-head .lead{color:var(--muted);font-size:.9rem;margin:0}
+
+  h3.sec{
+    display:flex;align-items:center;gap:.6rem;
+    margin:2rem 0 .9rem;font-size:.8rem;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--P);
+  }
+  h3.sec::after{content:"";flex:1;height:1.5px;background:var(--border)}
+
+  /* ---------- Conceptos ---------- */
+  .cgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:.7rem}
+  .concept{
+    background:var(--card);border:1.5px solid var(--border);
+    border-left:4px solid var(--T);border-radius:12px;padding:.75rem .9rem;
+  }
+  .concept h4{margin:0 0 .25rem;font-size:.93rem;color:var(--P)}
+  .concept p{margin:0;font-size:.87rem;color:var(--ink)}
+  .concept em{color:var(--muted);font-style:normal}
+
+  /* ---------- Fórmulas ---------- */
+  .fgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(285px,1fr));gap:.7rem}
+  .card{
+    background:var(--card);border:1.5px solid var(--border);border-radius:14px;
+    padding:.8rem .9rem .7rem;position:relative;
+    transition:border-color .15s ease,box-shadow .15s ease;
+  }
+  .card:hover{border-color:var(--M);box-shadow:0 6px 18px rgba(255,0,170,.10)}
+  .card .name{font-size:.82rem;font-weight:700;color:var(--M);margin-bottom:.45rem}
+  .fbody .eq{transition:filter .18s ease}
+  .eq{
+    font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+    font-size:1.16rem;text-align:center;padding:.45rem .2rem .5rem;
+    color:var(--ink);overflow-x:auto;
+  }
+  .eq + .eq{border-top:1px dashed var(--border)}
+  .eq i{font-style:italic}
+  .leg{
+    font-size:.78rem;color:var(--muted);border-top:1.5px solid var(--soft);
+    padding-top:.45rem;margin-top:.15rem;
+  }
+  .leg b{color:var(--P);font-weight:700;font-style:italic}
+
+  /* fracciones */
+  .frac{display:inline-flex;flex-direction:column;vertical-align:middle;
+        text-align:center;margin:0 .16em;line-height:1.12;font-size:.92em}
+  .frac span:first-child{border-bottom:1.4px solid currentColor;padding:0 .3em}
+  .frac span:last-child{padding:0 .3em}
+  .rt{border-top:1.4px solid currentColor;padding:0 .18em;margin-left:-.1em}
+
+  /* ---------- Explicación en palabras ---------- */
+  details.why{margin-top:.55rem;border-top:1.5px solid var(--soft);padding-top:.45rem}
+  details.why > summary{
+    list-style:none;cursor:pointer;display:flex;align-items:center;gap:.35rem;
+    font-size:.76rem;font-weight:700;color:var(--T);letter-spacing:.02em;
+  }
+  details.why > summary::-webkit-details-marker{display:none}
+  details.why > summary::after{content:"▾";font-size:.8rem;transition:transform .15s ease}
+  details.why[open] > summary::after{transform:rotate(180deg)}
+  details.why > summary:hover{color:var(--M)}
+  details.why .why-body{
+    font-size:.83rem;line-height:1.45;color:var(--ink);
+    background:var(--soft);border-radius:10px;padding:.55rem .7rem;margin-top:.45rem;
+  }
+
+  /* ---------- Trampas ---------- */
+  .trap{
+    background:#FFF9E8;border:1.5px solid #F5E2A8;border-left:4px solid #E8B93B;
+    border-radius:12px;padding:.8rem 1rem;margin-top:.7rem;
+  }
+  .trap h4{margin:0 0 .4rem;font-size:.86rem;color:#8A6410}
+  .trap ul{margin:0;padding-left:1.1rem;font-size:.86rem;color:#5C4712}
+  .trap li{margin-bottom:.25rem}
+  .trap li:last-child{margin-bottom:0}
+
+  /* ---------- Modo memoria ---------- */
+  /* se tapa solo la fórmula: la leyenda de variables queda visible para poder recitarla */
+  body.memo .fbody .eq{filter:blur(6.5px)}
+  body.memo .card{cursor:pointer}
+  body.memo .card.open .fbody .eq{filter:none}
+  body.memo .card::after{
+    content:"toca para ver";position:absolute;right:.7rem;top:.72rem;
+    font-size:.66rem;color:var(--T);font-weight:700;letter-spacing:.04em;
+  }
+  body.memo .card.open::after{content:""}
+  /* la explicación nunca se tapa, aunque el modo memoria esté encendido */
+  body.memo details.why{filter:none}
+
+  /* ---------- Tablas (constantes) ---------- */
+  table.t{
+    width:100%;border-collapse:collapse;background:var(--card);
+    border:1.5px solid var(--border);border-radius:12px;overflow:hidden;font-size:.87rem;
+  }
+  table.t th{
+    background:var(--soft);color:var(--P);text-align:left;
+    padding:.55rem .7rem;font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;
+  }
+  table.t td{padding:.5rem .7rem;border-top:1px solid var(--border)}
+  table.t td:first-child{font-weight:600}
+  .wrap{overflow-x:auto}
+
+  footer{text-align:center;color:var(--muted);font-size:.8rem;padding:0 1rem 3rem}
+
+  @media print{
+    .tabs,.controls,.hint,footer{display:none}
+    .panel{display:block!important;page-break-after:always}
+    body.memo .fbody .eq{filter:none}
+    body{background:#fff}
+  }
+</style>
+
+<style>
+/* ---- barra de regreso lety2E (prefijo l2e- para no chocar) ---- */
+.l2e-volver{
+  font-family:'DM Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
+  font-size:.85rem;font-weight:500;
+  padding:.7rem 1.1rem;
+  background:#1A0828;color:#F5E9F2;
+  display:flex;flex-wrap:wrap;align-items:center;gap:.45rem;
+  line-height:1.5;
+}
+.l2e-volver a{color:#00DEC8;text-decoration:none;}
+.l2e-volver a:hover{color:#FF00AA;text-decoration:underline;}
+.l2e-volver .l2e-sep{opacity:.45;}
+.l2e-volver .l2e-actual{opacity:.75;}
+.l2e-volver .l2e-marca{
+  margin-left:auto;font-family:Georgia,'Times New Roman',serif;
+  font-style:italic;font-weight:700;color:#FF00AA;text-decoration:none;
+}
+.l2e-volver .l2e-marca:hover{color:#00DEC8;}
+@media (max-width:520px){
+  .l2e-volver{font-size:.78rem;padding:.6rem .8rem;}
+  .l2e-volver .l2e-marca{margin-left:auto;}
+}
+</style>
+</head>
+<body data-section="apuntes">
+<nav class="l2e-volver">
+  <a href="../../index.html">Inicio</a>
+  <span class="l2e-sep">&rsaquo;</span>
+  <a href="../index.html">Apuntes</a>
+  <span class="l2e-sep">&rsaquo;</span>
+  <a href="index.html">Ingreso UNAM</a>
+  <span class="l2e-sep">&rsaquo;</span>
+  <span class="l2e-actual">Formulario de Física</span>
+  <a class="l2e-marca" href="../../index.html">lety2E</a>
+</nav>
+
+
+<header>
+  <div class="eyebrow">Guía UNAM · Área 2 · Ciencias Biológicas, Químicas y de la Salud</div>
+  <h1>Formulario de Física</h1>
+  <p>Las 9 unidades del temario oficial: conceptos clave, fórmulas con su leyenda y las trampas que más se preguntan.</p>
+</header>
+
+<div class="controls">
+  <button class="switch" id="memoBtn"><span class="dot"></span> Modo memoria</button>
+</div>
+<div class="hint" id="hint">Tapa las fórmulas, recítalas de memoria y toca la tarjeta para comprobar. El <b>En palabras</b> de cada tarjeta se abre siempre, en cualquier modo.</div>
+
+<nav class="tabs" id="tabs"></nav>
+
+<main id="main">
+
+<!-- ============ U1 CINEMÁTICA ============ -->
+<section class="panel" data-num="1" data-short="Cinemática">
+  <div class="panel-head">
+    <div class="u">Unidad 1</div>
+    <h2>Cinemática</h2>
+    <p class="lead">Describe el movimiento sin preguntar por sus causas: posición, velocidad y aceleración.</p>
+  </div>
+
+  <h3 class="sec">Conceptos clave</h3>
+  <div class="cgrid">
+    <div class="concept"><h4>Distancia vs. desplazamiento</h4><p>Distancia = todo el camino recorrido (escalar, nunca negativa). Desplazamiento = del punto inicial al final en línea recta (vector, puede ser 0).</p></div>
+    <div class="concept"><h4>Rapidez vs. velocidad</h4><p>Rapidez es escalar (solo magnitud); velocidad es vector (magnitud + dirección). <em>Cambiar de dirección ya es cambiar de velocidad.</em></p></div>
+    <div class="concept"><h4>Gráfica posición–tiempo</h4><p>La <b>pendiente</b> es la velocidad. Recta = velocidad constante (MRU); curva = velocidad variable; horizontal = reposo.</p></div>
+    <div class="concept"><h4>Gráfica velocidad–tiempo</h4><p>La <b>pendiente</b> es la aceleración; el <b>área bajo la curva</b> es el desplazamiento.</p></div>
+    <div class="concept"><h4>MRU</h4><p>Velocidad constante, aceleración cero, trayectoria recta.</p></div>
+    <div class="concept"><h4>MUA</h4><p>Aceleración constante ≠ 0: la velocidad cambia lo mismo cada segundo. La caída libre es el caso más común.</p></div>
+  </div>
+
+  <h3 class="sec">Fórmulas</h3>
+  <div class="fgrid">
+    <div class="card"><div class="name">Velocidad media</div><div class="fbody">
+      <div class="eq"><i>v</i> = <span class="frac"><span>Δ<i>x</i></span><span>Δ<i>t</i></span></span> = <span class="frac"><span><i>x</i><sub>f</sub> − <i>x</i><sub>0</sub></span><span><i>t</i><sub>f</sub> − <i>t</i><sub>0</sub></span></span></div>
+      <div class="leg"><b>v</b> velocidad (m/s) · <b>Δx</b> desplazamiento (m) · <b>Δt</b> tiempo (s)</div></div><details class="why"><summary>En palabras</summary><div class="why-body">Es cuánto avanzaste entre lo que tardaste. Si hiciste 120 km en 2 horas, tu velocidad media fue 60 km/h, aunque en el camino hayas ido a 100 y te hayas parado a comer.</div></details></div>
+
+    <div class="card"><div class="name">Aceleración media</div><div class="fbody">
+      <div class="eq"><i>a</i> = <span class="frac"><span>Δ<i>v</i></span><span>Δ<i>t</i></span></span> = <span class="frac"><span><i>v</i> − <i>v</i><sub>0</sub></span><span><i>t</i></span></span></div>
+      <div class="leg"><b>a</b> aceleración (m/s²) · <b>v₀</b> velocidad inicial (m/s)</div></div><details class="why"><summary>En palabras</summary><div class="why-body">Mide qué tan rápido cambia la velocidad. Si un coche pasa de 0 a 20 m/s en 4 s, su aceleración es 5 m/s²: cada segundo gana 5 m/s de rapidez.</div></details></div>
+
+    <div class="card"><div class="name">MRU (velocidad constante)</div><div class="fbody">
+      <div class="eq"><i>x</i> = <i>x</i><sub>0</sub> + <i>v t</i></div>
+      <div class="leg"><b>x</b> posición final (m) · <b>x₀</b> posición inicial (m) · aquí <b>a</b> = 0</div></div><details class="why"><summary>En palabras</summary><div class="why-body">Sin aceleración, la posición crece parejo: donde estabas más lo que avanzas cada segundo. En la gráfica sale una línea recta.</div></details></div>
+
+    <div class="card"><div class="name">MUA · las tres de oro</div><div class="fbody">
+      <div class="eq"><i>v</i> = <i>v</i><sub>0</sub> + <i>a t</i></div>
+      <div class="eq"><i>x</i> = <i>x</i><sub>0</sub> + <i>v</i><sub>0</sub><i>t</i> + ½<i>a t</i>²</div>
+      <div class="eq"><i>v</i>² = <i>v</i><sub>0</sub>² + 2<i>a</i>Δ<i>x</i></div>
+      <div class="leg">La tercera es la que se usa <em>cuando no te dan el tiempo</em>.</div></div><details class="why"><summary>En palabras</summary><div class="why-body">Las tres dicen lo mismo desde ángulos distintos: la primera liga velocidad con tiempo, la segunda posición con tiempo, y la tercera velocidad con distancia (sin tiempo). Escoge según el dato que <em>no</em> te dieron.</div></details></div>
+
+    <div class="card"><div class="name">Desplazamiento con velocidad promedio</div><div class="fbody">
+      <div class="eq">Δ<i>x</i> = <span class="frac"><span><i>v</i><sub>0</sub> + <i>v</i></span><span>2</span></span> · <i>t</i></div>
+      <div class="leg">Solo válida si la aceleración es constante.</div></div><details class="why"><summary>En palabras</summary><div class="why-body">Si la aceleración es constante, la velocidad promedio es literalmente el promedio entre la inicial y la final. Multiplícala por el tiempo y tienes la distancia.</div></details></div>
+
+    <div class="card"><div class="name">Caída libre</div><div class="fbody">
+      <div class="eq"><i>v</i> = <i>g t</i> &nbsp;·&nbsp; <i>h</i> = ½<i>g t</i>²</div>
+      <div class="eq"><i>v</i> = √<span class="rt">2<i>g h</i></span></div>
+      <div class="leg"><b>g</b> = 9.8 m/s² (≈10) · se suelta desde el reposo (<b>v₀</b> = 0) · la masa <em>no</em> influye</div></div><details class="why"><summary>En palabras</summary><div class="why-body">Todo cae con la misma aceleración, pese lo que pese: una pluma y un martillo llegan al mismo tiempo si no hay aire (lo comprobaron en la Luna).</div></details></div>
+
+    <div class="card"><div class="name">Tiro vertical</div><div class="fbody">
+      <div class="eq"><i>h</i><sub>máx</sub> = <span class="frac"><span><i>v</i><sub>0</sub>²</span><span>2<i>g</i></span></span> &nbsp;·&nbsp; <i>t</i><sub>subida</sub> = <span class="frac"><span><i>v</i><sub>0</sub></span><span><i>g</i></span></span></div>
+      <div class="leg">En el punto más alto <b>v</b> = 0 pero <b>a</b> sigue valiendo <em>g</em>. Sube y baja en el mismo tiempo.</div></div><details class="why"><summary>En palabras</summary><div class="why-body">Al lanzar hacia arriba, la gravedad va frenando el objeto hasta detenerlo un instante; de ahí regresa por el mismo camino y tarda lo mismo en bajar que en subir.</div></details></div>
+
+    <div class="card"><div class="name">Tiro parabólico</div><div class="fbody">
+      <div class="eq"><i>x</i> = <i>v</i><sub>0</sub>cos θ · <i>t</i></div>
+      <div class="eq"><i>y</i> = <i>v</i><sub>0</sub>sen θ · <i>t</i> − ½<i>g t</i>²</div>
+      <div class="eq"><i>R</i> = <span class="frac"><span><i>v</i><sub>0</sub>² sen 2θ</span><span><i>g</i></span></span></div>
+      <div class="leg">Horizontal = MRU · vertical = caída libre · alcance máximo con <b>θ</b> = 45°</div></div><details class="why"><summary>En palabras</summary><div class="why-body">El movimiento se parte en dos que no se estorban: el horizontal es parejo y el vertical es caída libre. Lo único que comparten es el tiempo.</div></details></div>
+
+    <div class="card"><div class="name">Movimiento circular uniforme</div><div class="fbody">
+      <div class="eq"><i>v</i> = <span class="frac"><span>2π<i>r</i></span><span><i>T</i></span></span> = ω<i>r</i> &nbsp;·&nbsp; ω = 2π<i>f</i></div>
+      <div class="eq"><i>a</i><sub>c</sub> = <span class="frac"><span><i>v</i>²</span><span><i>r</i></span></span></div>
+      <div class="leg"><b>T</b> periodo (s) · <b>f</b> frecuencia (Hz) · <b>a<sub>c</sub></b> apunta al centro</div></div><details class="why"><summary>En palabras</summary><div class="why-body">Aunque la rapidez no cambie, la dirección sí, y eso ya es aceleración: siempre apunta al centro. Por eso en una curva sientes que te vas hacia afuera — en realidad es el coche el que te jala hacia adentro.</div></details></div>
+  </div>
+
+  <div class="trap"><h4>Ojo en el examen</h4><ul>
+    <li>Si la gráfica <i>x–t</i> es una recta inclinada, el movimiento es de <b>velocidad constante</b> (no de aceleración constante).</li>
+    <li>Aceleración negativa no significa "frenar": significa que apunta en sentido contrario al eje positivo.</li>
+    <li>En caída libre todos los cuerpos caen igual (sin aire): la masa no aparece en la fórmula.</li>
+  </ul></div>
+</section>
+
+<!-- ============ U2 FUERZAS Y NEWTON ============ -->
+<section class="panel" data-num="2" data-short="Fuerzas y Newton">
+  <div class="panel-head">
+    <div class="u">Unidad 2</div>
+    <h2>Fuerzas, leyes de Newton y Gravitación Universal</h2>
+    <p class="lead">Por qué cambian el movimiento y la forma de los cuerpos. Fuerza = vector.</p>
+  </div>
+
+  <h3 class="sec">Conceptos clave</h3>
+  <div class="cgrid">
+    <div class="concept"><h4>1ª ley · Inercia</h4><p>Sin fuerza neta, un cuerpo sigue en reposo o con velocidad constante. La inercia se mide con la <b>masa</b>.</p></div>
+    <div class="concept"><h4>2ª ley</h4><p>La fuerza neta produce aceleración en la misma dirección: <em>ΣF = ma</em>. Es la que resuelve casi todos los problemas.</p></div>
+    <div class="concept"><h4>3ª ley · Acción y reacción</h4><p>Fuerzas iguales y opuestas, pero <b>sobre cuerpos distintos</b>: por eso nunca se cancelan entre sí.</p></div>
+    <div class="concept"><h4>Masa vs. peso</h4><p>Masa (kg) es la cantidad de materia, igual en todos lados. Peso (N) es la fuerza con que la gravedad jala: cambia con <em>g</em>.</p></div>
+    <div class="concept"><h4>Equilibrio</h4><p>Traslacional: ΣF = 0. Rotacional: Στ = 0. Un cuerpo en equilibrio puede estar quieto <em>o</em> moverse con velocidad constante.</p></div>
+    <div class="concept"><h4>Superposición</h4><p>Varias fuerzas se suman como vectores: se descomponen en <em>x</em> y <em>y</em>, se suman por separado y se recompone la resultante.</p></div>
+  </div>
+
+  <h3 class="sec">Fórmulas</h3>
+  <div class="fgrid">
+    <div class="card"><div class="name">Segunda ley de Newton</div><div class="fbody">
+      <div class="eq">Σ<i>F</i> = <i>m a</i></div>
+      <div class="leg"><b>F</b> fuerza neta (N) · <b>m</b> masa (kg) · <b>a</b> (m/s²) · 1 N = 1 kg·m/s²</div></div><details class="why"><summary>En palabras</summary><div class="why-body">La misma fuerza acelera más a lo ligero que a lo pesado: empujar un carrito vacío contra uno lleno. Y si la fuerza neta es cero, no hay aceleración.</div></details></div>
+
+    <div class="card"><div class="name">Peso</div><div class="fbody">
+      <div class="eq"><i>w</i> = <i>m g</i></div>
+      <div class="leg"><b>w</b> peso (N) · <b>g</b> = 9.8 m/s² en la Tierra</div></div><details class="why"><summary>En palabras</summary><div class="why-body">El peso es la fuerza con que el planeta te jala, no lo que “mides” en materia. En la Luna tu masa sería idéntica, pero pesarías seis veces menos.</div></details></div>
+
+    <div class="card"><div class="name">Componentes y resultante</div><div class="fbody">
+      <div class="eq"><i>F</i><sub>x</sub> = <i>F</i> cos θ &nbsp;·&nbsp; <i>F</i><sub>y</sub> = <i>F</i> sen θ</div>
+      <div class="eq"><i>R</i> = √<span class="rt">(Σ<i>F</i><sub>x</sub>)² + (Σ<i>F</i><sub>y</sub>)²</span></div>
+      <div class="eq">tan θ = <span class="frac"><span>Σ<i>F</i><sub>y</sub></span><span>Σ<i>F</i><sub>x</sub></span></span></div>
+      <div class="leg">El ángulo θ siempre se mide desde el eje <em>x</em> positivo.</div></div><details class="why"><summary>En palabras</summary><div class="why-body">Una fuerza inclinada se parte en cuánto jala en horizontal y cuánto en vertical. Sumas cada dirección por separado y vuelves a juntarlas con Pitágoras.</div></details></div>
+
+    <div class="card"><div class="name">Fricción</div><div class="fbody">
+      <div class="eq"><i>f</i><sub>s</sub> ≤ μ<sub>s</sub><i>N</i> &nbsp;·&nbsp; <i>f</i><sub>k</sub> = μ<sub>k</sub><i>N</i></div>
+      <div class="leg"><b>N</b> normal (N) · <b>μ</b> coeficiente (sin unidades) · μ<sub>s</sub> &gt; μ<sub>k</sub> · no depende del área de contacto</div></div><details class="why"><summary>En palabras</summary><div class="why-body">La fricción se opone al deslizamiento y depende de qué tan apretadas están las superficies, no de qué tan grandes son. Cuesta más arrancar un mueble que mantenerlo moviéndose: por eso el coeficiente estático es mayor.</div></details></div>
+
+    <div class="card"><div class="name">Torca (momento de fuerza)</div><div class="fbody">
+      <div class="eq">τ = <i>F d</i> sen θ</div>
+      <div class="leg"><b>τ</b> torca (N·m) · <b>d</b> brazo de palanca (m) · máxima cuando la fuerza es perpendicular (θ = 90°)</div></div><details class="why"><summary>En palabras</summary><div class="why-body">Para girar algo no basta la fuerza: importa qué tan lejos del eje la aplicas. Por eso la manija de la puerta está en el extremo opuesto a las bisagras y con una llave larga aflojas mejor un tornillo.</div></details></div>
+
+    <div class="card"><div class="name">Ley de Hooke</div><div class="fbody">
+      <div class="eq"><i>F</i> = −<i>k x</i></div>
+      <div class="leg"><b>k</b> constante del resorte (N/m) · <b>x</b> deformación (m) · el signo − indica que se opone al estiramiento</div></div><details class="why"><summary>En palabras</summary><div class="why-body">Mientras no lo estires de más, el resorte devuelve una fuerza proporcional a lo que lo deformaste: al doble de estiramiento, el doble de fuerza, y siempre en sentido contrario.</div></details></div>
+
+    <div class="card"><div class="name">Gravitación Universal</div><div class="fbody">
+      <div class="eq"><i>F</i> = <i>G</i> <span class="frac"><span><i>m</i><sub>1</sub><i>m</i><sub>2</sub></span><span><i>r</i>²</span></span></div>
+      <div class="leg"><b>G</b> = 6.67×10⁻¹¹ N·m²/kg² · <b>r</b> distancia entre centros (m) · si <em>r</em> se duplica, <em>F</em> baja a la cuarta parte</div></div><details class="why"><summary>En palabras</summary><div class="why-body">Todas las masas se atraen, tú incluida; solo que con masas chicas la fuerza es imperceptible. Y cae muy rápido con la distancia: al doble de lejos, la cuarta parte de fuerza.</div></details></div>
+
+    <div class="card"><div class="name">Fuerza centrípeta</div><div class="fbody">
+      <div class="eq"><i>F</i><sub>c</sub> = <span class="frac"><span><i>m v</i>²</span><span><i>r</i></span></span></div>
+      <div class="leg">No es una fuerza nueva: es el papel que hace la tensión, la gravedad o la fricción.</div></div><details class="why"><summary>En palabras</summary><div class="why-body">Para que algo dé vuelta, <em>algo</em> tiene que jalarlo hacia el centro: la cuerda, la gravedad o la fricción de las llantas. Si eso falla, el cuerpo sale disparado en línea recta.</div></details></div>
+
+    <div class="card"><div class="name">Tercera ley de Kepler</div><div class="fbody">
+      <div class="eq"><span class="frac"><span><i>T</i>²</span><span><i>r</i>³</span></span> = constante</div>
+      <div class="leg">Mientras más lejos el planeta, más tarda en dar la vuelta. 1ª ley: órbitas elípticas. 2ª: áreas iguales en tiempos iguales.</div></div><details class="why"><summary>En palabras</summary><div class="why-body">Mientras más lejos está un planeta del Sol, más tarda en darle la vuelta — y no en proporción directa: Neptuno está 30 veces más lejos que la Tierra y tarda 165 años.</div></details></div>
+  </div>
+
+  <div class="trap"><h4>Ojo en el examen</h4><ul>
+    <li>Dos fuerzas opuestas sobre el <b>mismo</b> cuerpo sí se restan (fuerza neta); acción y reacción actúan sobre cuerpos <b>diferentes</b>.</li>
+    <li>La normal <b>no</b> siempre vale <em>mg</em>: cambia en planos inclinados o si hay fuerzas verticales extra.</li>
+    <li>En equilibrio no siempre hay reposo: velocidad constante también cumple ΣF = 0.</li>
+  </ul></div>
+</section>
+
+<!-- ============ U3 TRABAJO Y CONSERVACIÓN ============ -->
+<section class="panel" data-num="3" data-short="Trabajo y energía">
+  <div class="panel-head">
+    <div class="u">Unidad 3</div>
+    <h2>Trabajo y leyes de la conservación</h2>
+    <p class="lead">Energía e ímpetu: lo que no se crea ni se destruye, solo se transforma o se transfiere.</p>
+  </div>
+
+  <h3 class="sec">Conceptos clave</h3>
+  <div class="cgrid">
+    <div class="concept"><h4>Trabajo mecánico</h4><p>Solo hay trabajo si la fuerza tiene componente <b>en la dirección del movimiento</b>. Cargar una caja caminando en horizontal: trabajo cero de la fuerza que la sostiene.</p></div>
+    <div class="concept"><h4>Potencia</h4><p>Qué tan rápido se hace el trabajo. Dos personas suben la misma caja: hacen el mismo trabajo, pero la más rápida desarrolla más potencia.</p></div>
+    <div class="concept"><h4>Conservación de la energía</h4><p>Sin fricción, la mecánica total (cinética + potencial) es la misma en todo el recorrido: lo que pierde de altura lo gana en rapidez.</p></div>
+    <div class="concept"><h4>Ímpetu (momento lineal)</h4><p>Es <em>masa × velocidad</em>. En un choque el ímpetu total <b>siempre</b> se conserva (si no hay fuerzas externas), sea el choque como sea.</p></div>
+    <div class="concept"><h4>Choque elástico vs. inelástico</h4><p>Elástico: se conservan ímpetu <b>y</b> energía cinética. Inelástico: solo el ímpetu. Totalmente inelástico: quedan pegados y se mueven juntos.</p></div>
+    <div class="concept"><h4>Procesos disipativos</h4><p>La fricción convierte energía mecánica en calor: por eso ahí la energía mecánica ya no se conserva (pero la total sí).</p></div>
+  </div>
+
+  <h3 class="sec">Fórmulas</h3>
+  <div class="fgrid">
+    <div class="card"><div class="name">Trabajo</div><div class="fbody">
+      <div class="eq"><i>W</i> = <i>F d</i> cos θ</div>
+      <div class="leg"><b>W</b> trabajo (J) · <b>θ</b> ángulo entre fuerza y desplazamiento · θ = 90° → <em>W</em> = 0</div></div><details class="why"><summary>En palabras</summary><div class="why-body">En física solo hay trabajo si mueves algo en la dirección en que empujas. Sostener una maleta parada no es trabajo, por cansado que resulte; cargarla mientras caminas en horizontal, tampoco.</div></details></div>
+
+    <div class="card"><div class="name">Potencia</div><div class="fbody">
+      <div class="eq"><i>P</i> = <span class="frac"><span><i>W</i></span><span><i>t</i></span></span> = <i>F v</i></div>
+      <div class="leg"><b>P</b> potencia (W) · 1 W = 1 J/s · 1 hp ≈ 746 W</div></div><details class="why"><summary>En palabras</summary><div class="why-body">Es el trabajo por segundo. Subir cinco pisos corriendo o caminando cuesta la misma energía, pero corriendo desarrollas mucha más potencia.</div></details></div>
+
+    <div class="card"><div class="name">Energía cinética</div><div class="fbody">
+      <div class="eq"><i>E</i><sub>c</sub> = ½<i>m v</i>²</div>
+      <div class="leg">Si la rapidez se duplica, la energía cinética se <b>cuadruplica</b>.</div></div><details class="why"><summary>En palabras</summary><div class="why-body">La energía que tiene un cuerpo por moverse. Crece con el <em>cuadrado</em> de la rapidez: por eso al doble de velocidad un coche necesita cuatro veces más distancia para frenar.</div></details></div>
+
+    <div class="card"><div class="name">Energía potencial</div><div class="fbody">
+      <div class="eq"><i>E</i><sub>p</sub> = <i>m g h</i></div>
+      <div class="eq"><i>E</i><sub>pe</sub> = ½<i>k x</i>²</div>
+      <div class="leg">Gravitatoria y elástica (resorte). <b>h</b> se mide desde el nivel que elijas como cero.</div></div><details class="why"><summary>En palabras</summary><div class="why-body">Energía guardada por la posición: la altura (lista para caer) o la deformación de un resorte (lista para saltar). Está “ahorrada”, esperando convertirse en movimiento.</div></details></div>
+
+    <div class="card"><div class="name">Conservación de la energía mecánica</div><div class="fbody">
+      <div class="eq"><i>E</i><sub>c1</sub> + <i>E</i><sub>p1</sub> = <i>E</i><sub>c2</sub> + <i>E</i><sub>p2</sub></div>
+      <div class="eq">½<i>m v</i>² = <i>m g h</i> → <i>v</i> = √<span class="rt">2<i>g h</i></span></div>
+      <div class="leg">Válida sin fricción. Nota que la masa se cancela.</div></div><details class="why"><summary>En palabras</summary><div class="why-body">Lo que el cuerpo pierde de altura lo gana en rapidez, y al revés. Como una montaña rusa sin fricción: la suma es la misma en todo el recorrido.</div></details></div>
+
+    <div class="card"><div class="name">Teorema trabajo–energía</div><div class="fbody">
+      <div class="eq"><i>W</i><sub>neto</sub> = Δ<i>E</i><sub>c</sub> = ½<i>m v</i>² − ½<i>m v</i><sub>0</sub>²</div>
+      <div class="leg">El trabajo neto sobre un cuerpo es igual al cambio de su energía cinética.</div></div><details class="why"><summary>En palabras</summary><div class="why-body">Todo el trabajo neto que le haces a un cuerpo se le va en cambiarle la rapidez. Es otra forma de resolver problemas sin usar las fórmulas de cinemática.</div></details></div>
+
+    <div class="card"><div class="name">Ímpetu e impulso</div><div class="fbody">
+      <div class="eq"><i>p</i> = <i>m v</i> &nbsp;·&nbsp; <i>J</i> = <i>F</i>Δ<i>t</i> = Δ<i>p</i></div>
+      <div class="leg"><b>p</b> ímpetu (kg·m/s) · alargar Δ<em>t</em> reduce la fuerza (bolsas de aire, flexionar rodillas)</div></div><details class="why"><summary>En palabras</summary><div class="why-body">El ímpetu mide qué tan difícil es detener algo: un tráiler lento puede tener más que un coche veloz. El impulso dice que la misma fuerza aplicada más tiempo cambia más el movimiento; por eso alargar el choque (bolsa de aire, flexionar rodillas) reduce la fuerza del golpe.</div></details></div>
+
+    <div class="card"><div class="name">Conservación del ímpetu</div><div class="fbody">
+      <div class="eq"><i>m</i><sub>1</sub><i>u</i><sub>1</sub> + <i>m</i><sub>2</sub><i>u</i><sub>2</sub> = <i>m</i><sub>1</sub><i>v</i><sub>1</sub> + <i>m</i><sub>2</sub><i>v</i><sub>2</sub></div>
+      <div class="leg"><b>u</b> antes · <b>v</b> después · cuida los <b>signos</b>: sentido contrario = negativo</div></div><details class="why"><summary>En palabras</summary><div class="why-body">En un choque, lo que uno pierde el otro lo gana: la suma antes es igual a la suma después. Es la ley que resuelve <em>todos</em> los choques, elásticos o no.</div></details></div>
+
+    <div class="card"><div class="name">Choque totalmente inelástico</div><div class="fbody">
+      <div class="eq"><i>v</i><sub>f</sub> = <span class="frac"><span><i>m</i><sub>1</sub><i>u</i><sub>1</sub> + <i>m</i><sub>2</sub><i>u</i><sub>2</sub></span><span><i>m</i><sub>1</sub> + <i>m</i><sub>2</sub></span></span></div>
+      <div class="leg">Quedan unidos con una sola velocidad final.</div></div><details class="why"><summary>En palabras</summary><div class="why-body">Cuando los cuerpos quedan pegados (plastilina, vagones que se enganchan) se mueven juntos con una sola velocidad, un promedio pesado por sus masas.</div></details></div>
+
+    <div class="card"><div class="name">Choque elástico en 1D</div><div class="fbody">
+      <div class="eq"><i>v</i><sub>1</sub> = <span class="frac"><span><i>m</i><sub>1</sub> − <i>m</i><sub>2</sub></span><span><i>m</i><sub>1</sub> + <i>m</i><sub>2</sub></span></span><i>u</i><sub>1</sub></div>
+      <div class="eq"><i>v</i><sub>2</sub> = <span class="frac"><span>2<i>m</i><sub>1</sub></span><span><i>m</i><sub>1</sub> + <i>m</i><sub>2</sub></span></span><i>u</i><sub>1</sub></div>
+      <div class="leg">Con el blanco en reposo (<em>u</em><sub>2</sub> = 0). Si choca contra una masa mayor, <b>rebota</b> (<em>v</em><sub>1</sub> negativa).</div></div><details class="why"><summary>En palabras</summary><div class="why-body">Como bolas de billar. Si la bola pega contra una más pesada, rebota hacia atrás; si es contra una más ligera, sigue de frente más despacio; si son iguales, se queda quieta y la otra sale con toda la rapidez.</div></details></div>
+
+    <div class="card"><div class="name">Trabajo de la fricción</div><div class="fbody">
+      <div class="eq"><i>W</i><sub>f</sub> = −<i>f</i><sub>k</sub><i>d</i> = −μ<sub>k</sub><i>N d</i></div>
+      <div class="leg">Siempre negativo: resta energía mecánica y la vuelve calor.</div></div><details class="why"><summary>En palabras</summary><div class="why-body">La fricción va restando energía mecánica y la convierte en calor: por eso frotarte las manos calienta y por eso todo lo que desliza acaba deteniéndose.</div></details></div>
+  </div>
+
+  <div class="trap"><h4>Ojo en el examen</h4><ul>
+    <li>El ímpetu es <b>vector</b>: en un choque frontal una velocidad entra con signo negativo.</li>
+    <li>La energía cinética depende de <em>v</em>², el ímpetu de <em>v</em>: no confundas cuál se duplica y cuál se cuadruplica.</li>
+    <li>"Se conserva la energía" en un choque solo aplica si te dicen que es <b>elástico</b>.</li>
+  </ul></div>
+</section>
+
+<!-- ============ U4 TERMODINÁMICA ============ -->
+<section class="panel" data-num="4" data-short="Termodinámica">
+  <div class="panel-head">
+    <div class="u">Unidad 4</div>
+    <h2>Termodinámica</h2>
+    <p class="lead">Calor, temperatura, gases ideales y las leyes que rigen el intercambio de energía térmica.</p>
+  </div>
+
+  <h3 class="sec">Conceptos clave</h3>
+  <div class="cgrid">
+    <div class="concept"><h4>Calor vs. temperatura</h4><p>Calor es <b>energía en tránsito</b> por diferencia de temperatura (J). Temperatura mide la <b>energía cinética promedio</b> de las moléculas (K). Una tina tibia tiene más calor que una taza hirviendo.</p></div>
+    <div class="concept"><h4>Equilibrio térmico (ley cero)</h4><p>Dos cuerpos en contacto llegan a la <b>misma temperatura</b> y deja de fluir calor. El calor siempre va del caliente al frío.</p></div>
+    <div class="concept"><h4>Teoría cinética de los gases</h4><p>Moléculas puntuales en movimiento constante y desordenado, sin fuerzas entre ellas, con choques <b>perfectamente elásticos</b>. La temperatura es su energía cinética promedio.</p></div>
+    <div class="concept"><h4>1ª ley</h4><p>Conservación de la energía aplicada al calor: ΔU = Q − W. La energía interna sube si entra calor o si se hace trabajo sobre el sistema.</p></div>
+    <div class="concept"><h4>2ª ley</h4><p>El calor no pasa solo del frío al caliente y ninguna máquina térmica es 100% eficiente: la <b>entropía</b> (desorden) del universo aumenta.</p></div>
+    <div class="concept"><h4>Capacidad térmica específica</h4><p>Cuánto calor necesita 1 kg para subir 1 °C. El agua la tiene muy alta (4186 J/kg·°C): por eso tarda en calentarse y en enfriarse.</p></div>
+  </div>
+
+  <h3 class="sec">Fórmulas</h3>
+  <div class="fgrid">
+    <div class="card"><div class="name">Escalas de temperatura</div><div class="fbody">
+      <div class="eq"><i>K</i> = °C + 273.15</div>
+      <div class="eq">°F = <span class="frac"><span>9</span><span>5</span></span>°C + 32</div>
+      <div class="leg">El cero absoluto (0 K = −273.15 °C) es la mínima temperatura posible. En gases <b>siempre</b> usa kelvin.</div></div><details class="why"><summary>En palabras</summary><div class="why-body">Kelvin es la escala “sin negativos”: empieza en el punto donde las moléculas ya no tienen energía que ceder. Un cambio de 1 K es igual de grande que uno de 1 °C.</div></details></div>
+
+    <div class="card"><div class="name">Calor sensible</div><div class="fbody">
+      <div class="eq"><i>Q</i> = <i>m c</i> Δ<i>T</i></div>
+      <div class="leg"><b>Q</b> calor (J o cal) · <b>c</b> capacidad térmica específica (J/kg·°C) · cambia la <em>temperatura</em></div></div><details class="why"><summary>En palabras</summary><div class="why-body">Cuánto calor necesitas para subirle la temperatura a algo: depende de cuánto hay, de qué está hecho y de cuántos grados quieres subirle. “Sensible” porque sí se siente en el termómetro.</div></details></div>
+
+    <div class="card"><div class="name">Calor latente</div><div class="fbody">
+      <div class="eq"><i>Q</i> = <i>m L</i></div>
+      <div class="leg">Cambio de <em>fase</em> (fusión o vaporización): la temperatura <b>no</b> cambia mientras dura.</div></div><details class="why"><summary>En palabras</summary><div class="why-body">Para derretir hielo o hervir agua metes calor y el termómetro no se mueve: esa energía se gasta en separar las moléculas, no en calentarlas. Por eso el hielo enfría tan bien la bebida.</div></details></div>
+
+    <div class="card"><div class="name">Dilatación térmica</div><div class="fbody">
+      <div class="eq">Δ<i>L</i> = α<i>L</i><sub>0</sub>Δ<i>T</i> &nbsp;·&nbsp; Δ<i>V</i> = β<i>V</i><sub>0</sub>Δ<i>T</i></div>
+      <div class="leg"><b>α</b> coeficiente lineal (1/°C) · β ≈ 3α</div></div><details class="why"><summary>En palabras</summary><div class="why-body">Casi todo se agranda al calentarse porque las moléculas se agitan más y ocupan más espacio. Por eso las vías del tren y los puentes llevan juntas de separación.</div></details></div>
+
+    <div class="card"><div class="name">Conducción de calor</div><div class="fbody">
+      <div class="eq"><span class="frac"><span><i>Q</i></span><span><i>t</i></span></span> = <i>k A</i> <span class="frac"><span>Δ<i>T</i></span><span><i>L</i></span></span></div>
+      <div class="leg"><b>k</b> conductividad térmica · metales alta (conductores), aire y plásticos baja (aislantes)</div></div><details class="why"><summary>En palabras</summary><div class="why-body">El calor pasa más rápido si el material es buen conductor, si el área de contacto es grande y si la diferencia de temperatura es mucha; y más lento mientras más grueso sea. Por eso el metal se siente frío y la madera no, aunque estén a la misma temperatura.</div></details></div>
+
+    <div class="card"><div class="name">Primera ley de la termodinámica</div><div class="fbody">
+      <div class="eq">Δ<i>U</i> = <i>Q</i> − <i>W</i></div>
+      <div class="leg"><b>Q</b> &gt; 0 si el sistema <em>recibe</em> calor · <b>W</b> &gt; 0 si el sistema <em>hace</em> trabajo (se expande)</div></div><details class="why"><summary>En palabras</summary><div class="why-body">Es la contabilidad de la energía: lo que entra como calor, menos lo que el sistema gasta haciendo trabajo, se queda guardado adentro como energía interna. Nada se pierde.</div></details></div>
+
+    <div class="card"><div class="name">Eficiencia térmica</div><div class="fbody">
+      <div class="eq"><i>e</i> = <span class="frac"><span><i>W</i></span><span><i>Q</i><sub>H</sub></span></span> = 1 − <span class="frac"><span><i>Q</i><sub>C</sub></span><span><i>Q</i><sub>H</sub></span></span></div>
+      <div class="eq"><i>e</i><sub>Carnot</sub> = 1 − <span class="frac"><span><i>T</i><sub>C</sub></span><span><i>T</i><sub>H</sub></span></span></div>
+      <div class="leg">Carnot es el máximo teórico y va con temperaturas en <b>kelvin</b>.</div></div><details class="why"><summary>En palabras</summary><div class="why-body">Ninguna máquina convierte todo el calor en trabajo: siempre tiene que tirar una parte al ambiente. Carnot marca el máximo teórico, y solo daría 100% con un foco frío en el cero absoluto — imposible.</div></details></div>
+
+    <div class="card"><div class="name">Gas ideal</div><div class="fbody">
+      <div class="eq"><i>P V</i> = <i>n R T</i></div>
+      <div class="leg"><b>P</b> (Pa) · <b>V</b> (m³) · <b>n</b> moles · <b>R</b> = 8.31 J/mol·K · <b>T</b> (K)</div></div><details class="why"><summary>En palabras</summary><div class="why-body">Amarra las cuatro cosas de un gas: si lo aprietas, lo calientas o metes más cantidad, algo tiene que ceder. Es la que explica por qué un globo se infla con el calor.</div></details></div>
+
+    <div class="card"><div class="name">Ley general de los gases</div><div class="fbody">
+      <div class="eq"><span class="frac"><span><i>P</i><sub>1</sub><i>V</i><sub>1</sub></span><span><i>T</i><sub>1</sub></span></span> = <span class="frac"><span><i>P</i><sub>2</sub><i>V</i><sub>2</sub></span><span><i>T</i><sub>2</sub></span></span></div>
+      <div class="leg">Boyle: <em>PV</em> = cte (T fija) · Charles: <em>V/T</em> = cte (P fija) · Gay-Lussac: <em>P/T</em> = cte (V fijo)</div></div><details class="why"><summary>En palabras</summary><div class="why-body">Si no entra ni sale gas, esa combinación se mantiene: te deja comparar el “antes” con el “después” sin necesitar los moles ni la constante R.</div></details></div>
+
+    <div class="card"><div class="name">Energía cinética molecular</div><div class="fbody">
+      <div class="eq"><i>E</i><sub>c</sub> = <span class="frac"><span>3</span><span>2</span></span><i>k T</i></div>
+      <div class="leg"><b>k</b> = 1.38×10⁻²³ J/K (constante de Boltzmann) · la temperatura absoluta <em>es</em> la medida de esta energía</div></div><details class="why"><summary>En palabras</summary><div class="why-body">La temperatura no es otra cosa que qué tan rápido se agitan las moléculas en promedio. Calentar es literalmente agitar más.</div></details></div>
+  </div>
+
+  <div class="trap"><h4>Ojo en el examen</h4><ul>
+    <li>Durante un cambio de fase entra calor pero la temperatura <b>se queda igual</b>.</li>
+    <li>Equilibrio térmico = misma temperatura que el otro cuerpo, no "que su temperatura no varía".</li>
+    <li>En la teoría cinética las moléculas se consideran <b>rígidas y elásticas</b>, no deformables.</li>
+  </ul></div>
+</section>
+
+<!-- ============ U5 ONDAS ============ -->
+<section class="panel" data-num="5" data-short="Ondas">
+  <div class="panel-head">
+    <div class="u">Unidad 5</div>
+    <h2>Ondas</h2>
+    <p class="lead">Transporte de energía sin transporte de materia: lo que viaja es la perturbación.</p>
+  </div>
+
+  <h3 class="sec">Conceptos clave</h3>
+  <div class="cgrid">
+    <div class="concept"><h4>Qué es una onda</h4><p>Una perturbación que se propaga llevando <b>energía</b>, no materia. El corcho en el agua sube y baja, no avanza con la ola.</p></div>
+    <div class="concept"><h4>Transversal vs. longitudinal</h4><p>Transversal: vibración <b>perpendicular</b> al avance (cuerda, luz). Longitudinal: vibración <b>paralela</b>, con compresiones y rarefacciones (sonido).</p></div>
+    <div class="concept"><h4>Elementos</h4><p>Amplitud (altura), longitud de onda λ (largo de un ciclo), periodo T (lo que tarda un ciclo), frecuencia f (ciclos por segundo).</p></div>
+    <div class="concept"><h4>Reflexión y refracción</h4><p>Al reflejarse regresa al mismo medio. Al refractarse pasa a otro medio: cambian <b>rapidez y longitud de onda</b>, pero la <b>frecuencia nunca cambia</b>.</p></div>
+    <div class="concept"><h4>Difracción e interferencia</h4><p>Difracción: la onda rodea obstáculos o se abre al pasar por una rendija. Interferencia: dos ondas se superponen y se suman (constructiva) o se cancelan (destructiva).</p></div>
+    <div class="concept"><h4>Ondas estacionarias</h4><p>Nacen de la interferencia de la onda incidente con la reflejada. Tienen <b>nodos</b> (no vibran) y <b>antinodos</b> (máxima vibración).</p></div>
+    <div class="concept"><h4>Energía de la onda</h4><p>Es proporcional al <b>cuadrado de la amplitud</b>. La energía incidente se reparte entre la transmitida y la reflejada.</p></div>
+  </div>
+
+  <h3 class="sec">Fórmulas</h3>
+  <div class="fgrid">
+    <div class="card"><div class="name">Ecuación fundamental de la onda</div><div class="fbody">
+      <div class="eq"><i>v</i> = λ <i>f</i></div>
+      <div class="leg"><b>v</b> rapidez (m/s) · <b>λ</b> longitud de onda (m) · <b>f</b> frecuencia (Hz)</div></div><details class="why"><summary>En palabras</summary><div class="why-body">La onda avanza una longitud de onda completa en cada ciclo; así que su rapidez es el largo del ciclo por cuántos ciclos pasan por segundo. Es la fórmula que más se usa de toda la unidad.</div></details></div>
+
+    <div class="card"><div class="name">Periodo y frecuencia</div><div class="fbody">
+      <div class="eq"><i>T</i> = <span class="frac"><span>1</span><span><i>f</i></span></span> &nbsp;·&nbsp; <i>f</i> = <span class="frac"><span>1</span><span><i>T</i></span></span></div>
+      <div class="leg"><b>T</b> en segundos · <b>f</b> en hertz (1 Hz = 1 ciclo/s)</div></div><details class="why"><summary>En palabras</summary><div class="why-body">Son la misma información al revés: si algo vibra 4 veces por segundo, cada vibración dura un cuarto de segundo.</div></details></div>
+
+    <div class="card"><div class="name">Onda estacionaria en cuerda</div><div class="fbody">
+      <div class="eq"><i>L</i> = <i>n</i> <span class="frac"><span>λ</span><span>2</span></span> → λ = <span class="frac"><span>2<i>L</i></span><span><i>n</i></span></span></div>
+      <div class="eq"><i>f</i><sub>n</sub> = <span class="frac"><span><i>n v</i></span><span>2<i>L</i></span></span></div>
+      <div class="leg"><b>n</b> = número de vientres (armónico) · en cada segmento cabe <b>media</b> longitud de onda</div></div><details class="why"><summary>En palabras</summary><div class="why-body">En una cuerda amarrada, la onda rebota y choca consigo misma: solo “caben” ciertos largos, aquellos donde entra un número exacto de medias ondas. Es lo que hace que una guitarra dé notas y no ruido.</div></details></div>
+
+    <div class="card"><div class="name">Ley de reflexión</div><div class="fbody">
+      <div class="eq">θ<sub>incidencia</sub> = θ<sub>reflexión</sub></div>
+      <div class="leg">Los ángulos se miden desde la <b>normal</b> (perpendicular a la superficie).</div></div><details class="why"><summary>En palabras</summary><div class="why-body">La onda rebota con el mismo ángulo con el que llegó, como una bola en la banda del billar.</div></details></div>
+
+    <div class="card"><div class="name">Refracción</div><div class="fbody">
+      <div class="eq"><span class="frac"><span>sen θ<sub>1</sub></span><span>sen θ<sub>2</sub></span></span> = <span class="frac"><span><i>v</i><sub>1</sub></span><span><i>v</i><sub>2</sub></span></span> = <span class="frac"><span>λ<sub>1</sub></span><span>λ<sub>2</sub></span></span></div>
+      <div class="leg">Al cambiar de medio cambia <em>v</em> y λ; <b>f</b> se mantiene.</div></div><details class="why"><summary>En palabras</summary><div class="why-body">Al pasar a un medio donde viaja más lento, la onda se dobla. Es lo que hace que un popote dentro del vaso se vea quebrado y que la alberca se vea menos honda de lo que es.</div></details></div>
+
+    <div class="card"><div class="name">Sonido</div><div class="fbody">
+      <div class="eq"><i>v</i><sub>aire</sub> ≈ 340 m/s</div>
+      <div class="leg">Onda longitudinal y mecánica: <b>no</b> se propaga en el vacío. Audible entre 20 Hz y 20 000 Hz. Viaja más rápido en sólidos que en gases.</div></div><details class="why"><summary>En palabras</summary><div class="why-body">El sonido es aire empujándose a sí mismo en compresiones sucesivas: por eso necesita un medio y en el vacío del espacio no se oiría nada. Y viaja más rápido donde las moléculas están más juntas (sólidos).</div></details></div>
+
+    <div class="card"><div class="name">Efecto Doppler</div><div class="fbody">
+      <div class="eq"><i>f</i>′ = <i>f</i> <span class="frac"><span><i>v</i> ± <i>v</i><sub>o</sub></span><span><i>v</i> ∓ <i>v</i><sub>s</sub></span></span></div>
+      <div class="leg">Se acercan → frecuencia más aguda; se alejan → más grave (la ambulancia).</div></div><details class="why"><summary>En palabras</summary><div class="why-body">Cuando la fuente se acerca, las ondas llegan más apretadas y el tono suena más agudo; al alejarse se estiran y suena más grave. Es la sirena de la ambulancia al pasar junto a ti.</div></details></div>
+  </div>
+
+  <div class="trap"><h4>Ojo en el examen</h4><ul>
+    <li>Al cambiar de medio la <b>frecuencia se conserva</b>; lo que cambia son la rapidez y la longitud de onda.</li>
+    <li>En una cuerda de largo <em>L</em> con varios nodos, λ = 2<em>L</em>/<em>n</em> — no es igual al largo de la cuerda.</li>
+    <li>Las ondas mecánicas necesitan medio; las electromagnéticas (luz) no.</li>
+  </ul></div>
+</section>
+
+<!-- ============ U6 ELECTROMAGNETISMO ============ -->
+<section class="panel" data-num="6" data-short="Electromagnetismo">
+  <div class="panel-head">
+    <div class="u">Unidad 6</div>
+    <h2>Electromagnetismo</h2>
+    <p class="lead">Cargas, circuitos, campos y la luz como onda electromagnética. La unidad más larga del temario.</p>
+  </div>
+
+  <h3 class="sec">Conceptos clave</h3>
+  <div class="cgrid">
+    <div class="concept"><h4>Carga eléctrica</h4><p>Cargas iguales se repelen, distintas se atraen. La carga se <b>conserva</b> y está cuantizada (múltiplos de <em>e</em> = 1.6×10⁻¹⁹ C).</p></div>
+    <div class="concept"><h4>Conductor vs. aislante</h4><p>Conductor: los electrones se mueven con libertad (metales). Aislante: <b>dificulta</b> el flujo de corriente (no es que no tenga cargas).</p></div>
+    <div class="concept"><h4>Campo eléctrico</h4><p>Región donde una carga siente fuerza. Sus líneas <b>salen</b> de las positivas y <b>entran</b> a las negativas.</p></div>
+    <div class="concept"><h4>Corriente y resistencia</h4><p>Corriente = carga que pasa por segundo. Resistencia = oposición al paso; crece con la longitud y baja con el área del conductor.</p></div>
+    <div class="concept"><h4>Serie vs. paralelo</h4><p>Serie: misma <b>corriente</b>, las resistencias se suman. Paralelo: mismo <b>voltaje</b>, la resistencia equivalente es menor que la más pequeña.</p></div>
+    <div class="concept"><h4>Inducción electromagnética</h4><p>Un campo magnético <b>variable</b> genera corriente (Faraday–Henry). Si no hay cambio de flujo, no hay corriente inducida.</p></div>
+    <div class="concept"><h4>Ley de Lenz</h4><p>La corriente inducida se <b>opone</b> al cambio que la produjo: es conservación de la energía disfrazada.</p></div>
+    <div class="concept"><h4>La luz como onda EM</h4><p>Campo eléctrico y magnético perpendiculares entre sí que se autoinducen y viajan en el vacío a <em>c</em> = 3×10⁸ m/s.</p></div>
+  </div>
+
+  <h3 class="sec">Fórmulas</h3>
+  <div class="fgrid">
+    <div class="card"><div class="name">Ley de Coulomb</div><div class="fbody">
+      <div class="eq"><i>F</i> = <i>k</i> <span class="frac"><span><i>q</i><sub>1</sub><i>q</i><sub>2</sub></span><span><i>r</i>²</span></span></div>
+      <div class="leg"><b>k</b> = 9×10⁹ N·m²/C² · <b>q</b> carga (C) · misma forma que la gravitación, pero puede ser atractiva o repulsiva</div></div><details class="why"><summary>En palabras</summary><div class="why-body">Idéntica en forma a la gravedad, pero con cargas — y muchísimo más intensa. La diferencia es que esta puede jalar o empujar, según los signos.</div></details></div>
+
+    <div class="card"><div class="name">Campo eléctrico</div><div class="fbody">
+      <div class="eq"><i>E</i> = <span class="frac"><span><i>F</i></span><span><i>q</i></span></span> = <i>k</i> <span class="frac"><span><i>Q</i></span><span><i>r</i>²</span></span></div>
+      <div class="leg"><b>E</b> en N/C (o V/m) · es vector</div></div><details class="why"><summary>En palabras</summary><div class="why-body">El campo es la huella que una carga deja en el espacio a su alrededor: lo que sentiría ahí una carga de prueba. Existe aunque no haya nadie para sentirlo.</div></details></div>
+
+    <div class="card"><div class="name">Potencial eléctrico</div><div class="fbody">
+      <div class="eq"><i>V</i> = <span class="frac"><span><i>W</i></span><span><i>q</i></span></span> = <i>k</i><span class="frac"><span><i>Q</i></span><span><i>r</i></span></span></div>
+      <div class="leg"><b>V</b> en volts (1 V = 1 J/C) · es escalar (no tiene dirección)</div></div><details class="why"><summary>En palabras</summary><div class="why-body">El voltaje es energía por cada unidad de carga: la “presión” que empuja a los electrones, como la altura del tinaco empuja el agua. Ojo: es escalar, no tiene dirección.</div></details></div>
+
+    <div class="card"><div class="name">Corriente eléctrica</div><div class="fbody">
+      <div class="eq"><i>I</i> = <span class="frac"><span><i>q</i></span><span><i>t</i></span></span></div>
+      <div class="leg"><b>I</b> en amperes (1 A = 1 C/s)</div></div><details class="why"><summary>En palabras</summary><div class="why-body">Cuánta carga pasa por segundo por el cable, igual que el caudal de agua en un tubo.</div></details></div>
+
+    <div class="card"><div class="name">Ley de Ohm</div><div class="fbody">
+      <div class="eq"><i>V</i> = <i>I R</i></div>
+      <div class="leg"><b>V</b> (V) · <b>I</b> (A) · <b>R</b> resistencia (Ω)</div></div><details class="why"><summary>En palabras</summary><div class="why-body">A más voltaje, más corriente; a más resistencia, menos. Con esta y la de potencia se resuelve casi cualquier circuito del examen.</div></details></div>
+
+    <div class="card"><div class="name">Resistividad</div><div class="fbody">
+      <div class="eq"><i>R</i> = ρ <span class="frac"><span><i>L</i></span><span><i>A</i></span></span></div>
+      <div class="leg"><b>ρ</b> resistividad del material · <b>A</b> área transversal (π<i>r</i>²): al reducir el diámetro a la mitad, <em>A</em> baja a la <b>cuarta parte</b></div></div><details class="why"><summary>En palabras</summary><div class="why-body">Un cable largo y delgado resiste más; corto y grueso, menos — igual que cuesta más trabajo tomar agua con un popote angosto y largo. Cuidado: el área va con el <em>radio al cuadrado</em>.</div></details></div>
+
+    <div class="card"><div class="name">Potencia eléctrica</div><div class="fbody">
+      <div class="eq"><i>P</i> = <i>V I</i> = <i>I</i>²<i>R</i> = <span class="frac"><span><i>V</i>²</span><span><i>R</i></span></span></div>
+      <div class="leg"><b>P</b> en watts · energía consumida: <em>E</em> = <em>P t</em> (kWh en el recibo)</div></div><details class="why"><summary>En palabras</summary><div class="why-body">Es lo que realmente consume un aparato. Por eso un foco de 100 W gasta el doble que uno de 50 en el mismo tiempo, y el recibo de luz cobra kilowatts-hora (potencia × tiempo).</div></details></div>
+
+    <div class="card"><div class="name">Resistencias en serie y paralelo</div><div class="fbody">
+      <div class="eq"><i>R</i><sub>eq</sub> = <i>R</i><sub>1</sub> + <i>R</i><sub>2</sub> + …</div>
+      <div class="eq"><span class="frac"><span>1</span><span><i>R</i><sub>eq</sub></span></span> = <span class="frac"><span>1</span><span><i>R</i><sub>1</sub></span></span> + <span class="frac"><span>1</span><span><i>R</i><sub>2</sub></span></span> + …</div>
+      <div class="leg">Arriba serie, abajo paralelo. Dos iguales en paralelo: <em>R</em>/2.</div></div><details class="why"><summary>En palabras</summary><div class="why-body">En serie la corriente está obligada a pasar por todas: se estorba más y la resistencia total sube. En paralelo le abres varios caminos: pasa más fácil y la total baja.</div></details></div>
+
+    <div class="card"><div class="name">Capacitores</div><div class="fbody">
+      <div class="eq"><i>C</i> = <span class="frac"><span><i>Q</i></span><span><i>V</i></span></span> &nbsp;·&nbsp; <i>E</i> = ½<i>C V</i>²</div>
+      <div class="leg"><b>C</b> en farads · <b>paralelo</b>: <em>C</em><sub>eq</sub> = ΣC · <b>serie</b>: 1/<em>C</em><sub>eq</sub> = Σ1/C <em>(al revés que las resistencias)</em></div></div><details class="why"><summary>En palabras</summary><div class="why-body">Un capacitor almacena carga como un tanque almacena agua. Conectarlos en paralelo es como tener un tanque más grande (se suman); en serie, lo contrario. Justo al revés que las resistencias.</div></details></div>
+
+    <div class="card"><div class="name">Fuerza magnética</div><div class="fbody">
+      <div class="eq"><i>F</i> = <i>q v B</i> sen θ</div>
+      <div class="eq"><i>F</i> = <i>B I L</i> sen θ</div>
+      <div class="leg"><b>B</b> campo magnético (T) · sobre carga en movimiento y sobre alambre con corriente · si <em>v</em> es paralela a <em>B</em>, la fuerza es cero</div></div><details class="why"><summary>En palabras</summary><div class="why-body">Un campo magnético solo empuja a las cargas que se <em>mueven</em>, y lo hace de lado (perpendicular). Si la carga viaja paralela al campo, no siente nada.</div></details></div>
+
+    <div class="card"><div class="name">Campo de un alambre y un solenoide</div><div class="fbody">
+      <div class="eq"><i>B</i> = <span class="frac"><span>μ<sub>0</sub><i>I</i></span><span>2π<i>r</i></span></span> &nbsp;·&nbsp; <i>B</i> = μ<sub>0</sub><i>n I</i></div>
+      <div class="leg"><b>μ₀</b> = 4π×10⁻⁷ T·m/A · <b>n</b> espiras por metro (Ampère–Maxwell)</div></div><details class="why"><summary>En palabras</summary><div class="why-body">Toda corriente crea un campo magnético a su alrededor. Si enrollas el cable, los campos de cada vuelta se suman: eso es un electroimán.</div></details></div>
+
+    <div class="card"><div class="name">Ley de Faraday</div><div class="fbody">
+      <div class="eq">ε = −<i>N</i> <span class="frac"><span>ΔΦ</span><span>Δ<i>t</i></span></span></div>
+      <div class="eq">Φ = <i>B A</i> cos θ</div>
+      <div class="leg"><b>ε</b> fem inducida (V) · <b>Φ</b> flujo magnético (Wb) · el signo − es la ley de Lenz</div></div><details class="why"><summary>En palabras</summary><div class="why-body">Mover un imán cerca de una bobina genera electricidad. Así funcionan las plantas eléctricas, el alternador del coche y la tarjeta que pasas por el torniquete. Lo esencial es el <em>cambio</em>: un imán quieto no genera nada.</div></details></div>
+
+    <div class="card"><div class="name">Ondas electromagnéticas</div><div class="fbody">
+      <div class="eq"><i>c</i> = λ <i>f</i> = 3×10⁸ m/s</div>
+      <div class="leg">Espectro de <b>mayor λ a menor</b>: radio → microondas → infrarrojo → <b>visible</b> → ultravioleta → rayos X → gamma</div></div><details class="why"><summary>En palabras</summary><div class="why-body">Las ondas de radio, el calor que sientes del sol, la luz visible y los rayos X son todos lo mismo viajando a 300 000 km/s: solo cambian su longitud y su frecuencia. El ojo humano solo alcanza a ver una rebanadita.</div></details></div>
+  </div>
+
+  <div class="trap"><h4>Ojo en el examen</h4><ul>
+    <li>Un aislante <b>dificulta</b> el flujo de corriente; no es que "no tenga corriente".</li>
+    <li>En <em>R</em> = ρ<em>L</em>/<em>A</em>, si acortas a la mitad y adelgazas el diámetro a la mitad: <em>R</em> × ½ × 4 = <b>2R</b>.</li>
+    <li>Capacitores en serie/paralelo se combinan al revés que las resistencias.</li>
+    <li>Sin <b>cambio</b> de flujo magnético no hay corriente inducida, aunque el campo sea intenso.</li>
+  </ul></div>
+</section>
+
+<!-- ============ U7 FLUIDOS ============ -->
+<section class="panel" data-num="7" data-short="Fluidos">
+  <div class="panel-head">
+    <div class="u">Unidad 7</div>
+    <h2>Fluidos</h2>
+    <p class="lead">Líquidos y gases en reposo y en movimiento. Muy conectada con fisiología: presión arterial, respiración, flotación.</p>
+  </div>
+
+  <h3 class="sec">Conceptos clave</h3>
+  <div class="cgrid">
+    <div class="concept"><h4>Presión hidrostática</h4><p>Depende solo de la <b>profundidad</b> y la densidad del fluido, <em>no</em> de la forma ni del volumen del recipiente.</p></div>
+    <div class="concept"><h4>Principio de Pascal</h4><p>La presión aplicada a un fluido encerrado se transmite <b>íntegra</b> a todos los puntos. Es la base del gato hidráulico y de los frenos.</p></div>
+    <div class="concept"><h4>Principio de Arquímedes</h4><p>Todo cuerpo sumergido recibe un empuje hacia arriba igual al <b>peso del fluido desplazado</b>. Flota si su densidad es menor que la del fluido.</p></div>
+    <div class="concept"><h4>Ecuación de continuidad</h4><p>El gasto es constante: donde el tubo se <b>angosta</b>, el fluido va más <b>rápido</b> (la manguera con el dedo).</p></div>
+    <div class="concept"><h4>Principio de Bernoulli</h4><p>Donde la rapidez aumenta, la <b>presión disminuye</b>. Explica el ala del avión y el atomizador.</p></div>
+    <div class="concept"><h4>Viscosidad, tensión superficial y capilaridad</h4><p>Viscosidad: resistencia del fluido a fluir (la miel). Tensión superficial: la "piel" del líquido por cohesión. Capilaridad: el líquido sube por tubos delgados por adhesión.</p></div>
+  </div>
+
+  <h3 class="sec">Fórmulas</h3>
+  <div class="fgrid">
+    <div class="card"><div class="name">Densidad</div><div class="fbody">
+      <div class="eq">ρ = <span class="frac"><span><i>m</i></span><span><i>V</i></span></span></div>
+      <div class="leg"><b>ρ</b> en kg/m³ · agua: 1000 kg/m³ = 1 g/cm³</div></div><details class="why"><summary>En palabras</summary><div class="why-body">Cuánta materia cabe en cierto espacio. Por eso un kilo de plomo ocupa muchísimo menos lugar que un kilo de plumas — pesan igual, pero no ocupan igual.</div></details></div>
+
+    <div class="card"><div class="name">Presión</div><div class="fbody">
+      <div class="eq"><i>P</i> = <span class="frac"><span><i>F</i></span><span><i>A</i></span></span></div>
+      <div class="leg"><b>P</b> en pascales (1 Pa = 1 N/m²) · a menor área, mayor presión</div></div><details class="why"><summary>En palabras</summary><div class="why-body">La misma fuerza repartida en poca área aprieta muchísimo más: un tacón de aguja marca el piso y una raqueta para nieve, con la misma persona encima, ni te hunde.</div></details></div>
+
+    <div class="card"><div class="name">Presión hidrostática</div><div class="fbody">
+      <div class="eq"><i>P</i> = ρ <i>g h</i></div>
+      <div class="eq"><i>P</i><sub>abs</sub> = <i>P</i><sub>atm</sub> + ρ<i>g h</i></div>
+      <div class="leg"><b>h</b> profundidad (m) · <b>P<sub>atm</sub></b> = 1.013×10⁵ Pa = 1 atm = 760 mmHg</div></div><details class="why"><summary>En palabras</summary><div class="why-body">En el fondo te aprieta el peso de toda la columna de líquido que tienes encima. Solo importa qué tan hondo estás, no si es una alberca o un tubito delgado.</div></details></div>
+
+    <div class="card"><div class="name">Principio de Pascal</div><div class="fbody">
+      <div class="eq"><span class="frac"><span><i>F</i><sub>1</sub></span><span><i>A</i><sub>1</sub></span></span> = <span class="frac"><span><i>F</i><sub>2</sub></span><span><i>A</i><sub>2</sub></span></span></div>
+      <div class="leg">Con un pistón grande obtienes más fuerza, pero recorre menos distancia.</div></div><details class="why"><summary>En palabras</summary><div class="why-body">Un empujón chico en un pistón chico se convierte en un empujón grande en el pistón grande. Así un gato hidráulico levanta un coche y así funcionan los frenos.</div></details></div>
+
+    <div class="card"><div class="name">Empuje (Arquímedes)</div><div class="fbody">
+      <div class="eq"><i>E</i> = ρ<sub>fluido</sub> · <i>g</i> · <i>V</i><sub>desplazado</sub></div>
+      <div class="leg">Flota si ρ<sub>cuerpo</sub> &lt; ρ<sub>fluido</sub> · el peso aparente es <em>w</em> − <em>E</em></div></div><details class="why"><summary>En palabras</summary><div class="why-body">El líquido empuja hacia arriba con una fuerza igual al peso del líquido que el cuerpo hizo a un lado. Por eso te sientes ligera en la alberca y por eso un barco de acero flota: hace a un lado muchísima agua.</div></details></div>
+
+    <div class="card"><div class="name">Gasto y continuidad</div><div class="fbody">
+      <div class="eq"><i>Q</i> = <i>A v</i></div>
+      <div class="eq"><i>A</i><sub>1</sub><i>v</i><sub>1</sub> = <i>A</i><sub>2</sub><i>v</i><sub>2</sub></div>
+      <div class="leg"><b>Q</b> gasto (m³/s) · si el área se reduce a la mitad, la rapidez se duplica</div></div><details class="why"><summary>En palabras</summary><div class="why-body">Por donde el tubo se angosta, el agua tiene que ir más rápido para que pase la misma cantidad: es el dedo tapando la manguera.</div></details></div>
+
+    <div class="card"><div class="name">Ecuación de Bernoulli</div><div class="fbody">
+      <div class="eq"><i>P</i> + ½ρ<i>v</i>² + ρ<i>g h</i> = constante</div>
+      <div class="leg">Es conservación de la energía por unidad de volumen en un fluido ideal.</div></div><details class="why"><summary>En palabras</summary><div class="why-body">Donde el fluido corre más rápido, aprieta menos. Suena al revés, pero es lo que sostiene el ala de un avión (el aire va más veloz por arriba) y lo que hace que la cortina del baño se pegue a ti.</div></details></div>
+  </div>
+
+  <div class="trap"><h4>Ojo en el examen</h4><ul>
+    <li>La presión en el fondo depende de la <b>altura de la columna</b>, no de cuánta agua haya.</li>
+    <li>El empuje depende del volumen <b>sumergido</b> y de la densidad del <b>fluido</b>, no del peso del cuerpo.</li>
+    <li>Bernoulli es contraintuitivo: <b>más rapidez = menos presión</b>.</li>
+  </ul></div>
+</section>
+
+<!-- ============ U8 ÓPTICA ============ -->
+<section class="panel" data-num="8" data-short="Óptica">
+  <div class="panel-head">
+    <div class="u">Unidad 8</div>
+    <h2>Óptica</h2>
+    <p class="lead">Comportamiento de la luz: reflexión, refracción, espejos, lentes y su naturaleza dual.</p>
+  </div>
+
+  <h3 class="sec">Conceptos clave</h3>
+  <div class="cgrid">
+    <div class="concept"><h4>Reflexión</h4><p>La luz rebota: el ángulo de incidencia es igual al de reflexión, medidos desde la <b>normal</b>.</p></div>
+    <div class="concept"><h4>Refracción</h4><p>La luz cambia de dirección al cambiar de medio porque cambia su rapidez. Del aire al agua se acerca a la normal.</p></div>
+    <div class="concept"><h4>Reflexión total interna</h4><p>Si pasa de un medio más denso a uno menos denso con un ángulo mayor al <b>crítico</b>, la luz no sale: se refleja toda. Es el principio de la fibra óptica.</p></div>
+    <div class="concept"><h4>Imagen real vs. virtual</h4><p>Real: los rayos <b>sí</b> se cruzan, se proyecta en pantalla, sale invertida. Virtual: parece venir de atrás del espejo/lente, derecha, no se proyecta.</p></div>
+    <div class="concept"><h4>Espejos</h4><p>Plano: imagen virtual, derecha y del mismo tamaño. Cóncavo: converge (puede dar imagen real). Convexo: diverge, siempre virtual y más pequeña (retrovisores).</p></div>
+    <div class="concept"><h4>Lentes</h4><p>Convergente (biconvexa, <em>f</em> &gt; 0): corrige hipermetropía. Divergente (bicóncava, <em>f</em> &lt; 0): imagen siempre virtual y menor, corrige miopía.</p></div>
+    <div class="concept"><h4>Naturaleza de la luz</h4><p><b>Newton</b>: corpuscular, chorro de partículas. <b>Huygens y Young</b>: ondulatoria (la interferencia y la difracción lo prueban). <b>Hoy</b>: dualidad onda–partícula.</p></div>
+  </div>
+
+  <h3 class="sec">Fórmulas</h3>
+  <div class="fgrid">
+    <div class="card"><div class="name">Índice de refracción</div><div class="fbody">
+      <div class="eq"><i>n</i> = <span class="frac"><span><i>c</i></span><span><i>v</i></span></span></div>
+      <div class="leg">Sin unidades y siempre ≥ 1 · aire ≈ 1.00 · agua = 1.33 · vidrio ≈ 1.5</div></div><details class="why"><summary>En palabras</summary><div class="why-body">Dice cuántas veces más lento va la luz dentro de ese material que en el vacío. En el agua va a tres cuartas partes de su velocidad.</div></details></div>
+
+    <div class="card"><div class="name">Ley de Snell</div><div class="fbody">
+      <div class="eq"><i>n</i><sub>1</sub> sen θ<sub>1</sub> = <i>n</i><sub>2</sub> sen θ<sub>2</sub></div>
+      <div class="leg">Ángulos medidos desde la normal · a mayor <em>n</em>, más se acerca el rayo a la normal</div></div><details class="why"><summary>En palabras</summary><div class="why-body">Al entrar a un material donde va más lento, el rayo se dobla acercándose a la normal; al salir a uno donde va más rápido, se aleja. Ese doblez es todo lo que hacen los lentes.</div></details></div>
+
+    <div class="card"><div class="name">Ángulo crítico</div><div class="fbody">
+      <div class="eq">sen θ<sub>c</sub> = <span class="frac"><span><i>n</i><sub>2</sub></span><span><i>n</i><sub>1</sub></span></span></div>
+      <div class="leg">Solo existe si <em>n</em><sub>1</sub> &gt; <em>n</em><sub>2</sub> (del medio denso al menos denso).</div></div><details class="why"><summary>En palabras</summary><div class="why-body">Si la luz intenta salir demasiado inclinada, ya no sale: rebota completa hacia adentro. Así viaja la señal de internet por la fibra óptica, atrapada dentro del vidrio.</div></details></div>
+
+    <div class="card"><div class="name">Ecuación de espejos y lentes</div><div class="fbody">
+      <div class="eq"><span class="frac"><span>1</span><span><i>f</i></span></span> = <span class="frac"><span>1</span><span><i>d</i><sub>o</sub></span></span> + <span class="frac"><span>1</span><span><i>d</i><sub>i</sub></span></span></div>
+      <div class="leg"><b>f</b> distancia focal · <b>d<sub>o</sub></b> objeto · <b>d<sub>i</sub></b> imagen · <em>d<sub>i</sub></em> negativa = imagen virtual</div></div><details class="why"><summary>En palabras</summary><div class="why-body">Relaciona tres cosas: dónde pusiste el objeto, dónde se forma la imagen y qué tan curvo es el espejo o la lente. Con los signos correctos sirve para las cuatro variantes.</div></details></div>
+
+    <div class="card"><div class="name">Amplificación</div><div class="fbody">
+      <div class="eq"><i>m</i> = − <span class="frac"><span><i>d</i><sub>i</sub></span><span><i>d</i><sub>o</sub></span></span> = <span class="frac"><span><i>h</i><sub>i</sub></span><span><i>h</i><sub>o</sub></span></span></div>
+      <div class="leg"><b>m</b> negativa = imagen invertida · |<em>m</em>| &gt; 1 = más grande</div></div><details class="why"><summary>En palabras</summary><div class="why-body">Te dice de qué tamaño y en qué posición sale la imagen: si es negativa la imagen está de cabeza, y si su valor absoluto pasa de 1, salió más grande que el objeto.</div></details></div>
+
+    <div class="card"><div class="name">Foco de un espejo esférico</div><div class="fbody">
+      <div class="eq"><i>f</i> = <span class="frac"><span><i>R</i></span><span>2</span></span></div>
+      <div class="leg"><b>R</b> radio de curvatura · cóncavo <em>f</em> &gt; 0, convexo <em>f</em> &lt; 0</div></div><details class="why"><summary>En palabras</summary><div class="why-body">En un espejo esférico el foco queda justo a la mitad del radio: si es una tapa de esfera de 20 cm de radio, el foco está a 10 cm.</div></details></div>
+
+    <div class="card"><div class="name">Potencia de una lente</div><div class="fbody">
+      <div class="eq"><i>P</i> = <span class="frac"><span>1</span><span><i>f</i></span></span></div>
+      <div class="leg">En dioptrías (1/m), con <b>f en metros</b> · convergente positiva, divergente negativa</div></div><details class="why"><summary>En palabras</summary><div class="why-body">Es el número de tu receta de lentes. +2 dioptrías es una lente convergente con el foco a medio metro; entre más alta la graduación, más corto el foco y más gruesa la lente.</div></details></div>
+  </div>
+
+  <div class="trap"><h4>Ojo en el examen</h4><ul>
+    <li>Newton defendió el modelo <b>corpuscular</b>; la difracción y la interferencia son argumentos <b>ondulatorios</b>.</li>
+    <li>Los ángulos siempre se miden desde la <b>normal</b>, no desde la superficie.</li>
+    <li>El espejo plano no invierte arriba–abajo: invierte adelante–atrás (por eso parece cambiar izquierda y derecha).</li>
+  </ul></div>
+</section>
+
+<!-- ============ U9 FÍSICA CONTEMPORÁNEA ============ -->
+<section class="panel" data-num="9" data-short="Física contemporánea">
+  <div class="panel-head">
+    <div class="u">Unidad 9</div>
+    <h2>Física contemporánea</h2>
+    <p class="lead">Estructura atómica y física nuclear. Aquí se pregunta más <em>historia y concepto</em> que cálculo.</p>
+  </div>
+
+  <h3 class="sec">Conceptos clave</h3>
+  <div class="cgrid">
+    <div class="concept"><h4>Modelos atómicos</h4><p><b>Dalton</b>: esfera indivisible. <b>Thomson</b>: budín con pasas (cargas + y − repartidas). <b>Rutherford</b>: núcleo pequeño, positivo y denso con electrones alrededor. <b>Bohr</b>: órbitas de energía fija. <b>Cuántico</b>: nubes de probabilidad.</p></div>
+    <div class="concept"><h4>Experimento de Rutherford</h4><p>Bombardeó una <b>laminilla de oro</b> con partículas alfa: casi todas pasaron de largo y unas pocas rebotaron. Conclusión: el átomo es sobre todo <b>vacío</b> con un núcleo diminuto y positivo.</p></div>
+    <div class="concept"><h4>Modelo de Bohr y espectros</h4><p>El electrón solo ocupa niveles permitidos. Al saltar de nivel emite o absorbe un fotón de energía exacta: por eso los espectros son de <b>líneas</b>, no continuos.</p></div>
+    <div class="concept"><h4>Radiactividad</h4><p>Descubierta por <b>Becquerel</b> (1896) con sales de uranio; los <b>Curie</b> aislaron polonio y radio. Marie Curie ganó el Nobel de <b>Física (1903) y de Química (1911)</b>.</p></div>
+    <div class="concept"><h4>Tipos de radiación</h4><p><b>α</b>: núcleo de helio, poco penetrante (la detiene una hoja). <b>β</b>: electrón, penetra más (lámina de aluminio). <b>γ</b>: onda electromagnética, la más penetrante (plomo o concreto).</p></div>
+    <div class="concept"><h4>Detectores</h4><p>Contador <b>Geiger-Müller</b>, cámara de niebla, cámara de burbujas, placas fotográficas y dosímetros.</p></div>
+    <div class="concept"><h4>Fisión vs. fusión</h4><p><b>Fisión</b>: un núcleo pesado se parte (reactores, bomba atómica). <b>Fusión</b>: núcleos ligeros se unen (el Sol). Ambas liberan energía por la pérdida de masa.</p></div>
+    <div class="concept"><h4>Aplicaciones</h4><p>Radioterapia y medicina nuclear, radiofármacos, esterilización, datación con carbono-14, generación eléctrica.</p></div>
+  </div>
+
+  <h3 class="sec">Fórmulas</h3>
+  <div class="fgrid">
+    <div class="card"><div class="name">Energía del fotón (Planck)</div><div class="fbody">
+      <div class="eq"><i>E</i> = <i>h f</i> = <span class="frac"><span><i>h c</i></span><span>λ</span></span></div>
+      <div class="leg"><b>h</b> = 6.63×10⁻³⁴ J·s · a mayor frecuencia, mayor energía</div></div><details class="why"><summary>En palabras</summary><div class="why-body">La luz no entrega energía en cualquier cantidad, sino en paquetitos indivisibles llamados fotones. Mientras más hacia el violeta, más energía trae cada paquete: por eso el sol quema con el ultravioleta y no con el rojo.</div></details></div>
+
+    <div class="card"><div class="name">Efecto fotoeléctrico</div><div class="fbody">
+      <div class="eq"><i>h f</i> = <i>W</i><sub>0</sub> + <i>E</i><sub>c máx</sub></div>
+      <div class="leg"><b>W₀</b> función trabajo · si la frecuencia no llega al umbral, <b>no</b> salen electrones por más intensa que sea la luz</div></div><details class="why"><summary>En palabras</summary><div class="why-body">Para arrancar un electrón hace falta un fotón suficientemente energético: mil fotones rojos débiles no logran lo que uno solo de ultravioleta. Esto demostró que la luz también se comporta como partícula (y le dio el Nobel a Einstein).</div></details></div>
+
+    <div class="card"><div class="name">Niveles de energía (Bohr)</div><div class="fbody">
+      <div class="eq"><i>E</i><sub>n</sub> = − <span class="frac"><span>13.6</span><span><i>n</i>²</span></span> eV</div>
+      <div class="eq">Δ<i>E</i> = <i>E</i><sub>f</sub> − <i>E</i><sub>i</sub> · <i>h f</i> = |Δ<i>E</i>|</div>
+      <div class="leg">Para el hidrógeno · <b>n</b> = 1, 2, 3… (número cuántico principal) · el fotón se lleva el <em>tamaño</em> del salto: al <em>bajar</em> de nivel ΔE es negativo y se <em>emite</em>; al <em>subir</em> es positivo y se <em>absorbe</em></div></div><details class="why"><summary>En palabras</summary><div class="why-body">Los electrones solo pueden estar en ciertos escalones de energía, nunca entre ellos. Al bajar de escalón sueltan un fotón de energía exacta: por eso cada elemento emite sus propios colores y se le puede reconocer a distancia.</div></details></div>
+
+    <div class="card"><div class="name">Longitud de onda de De Broglie</div><div class="fbody">
+      <div class="eq">λ = <span class="frac"><span><i>h</i></span><span><i>m v</i></span></span></div>
+      <div class="leg">Toda partícula tiene onda asociada: la dualidad onda–partícula.</div></div><details class="why"><summary>En palabras</summary><div class="why-body">Si la luz puede portarse como partícula, la materia puede portarse como onda. En ti no se nota (la onda es absurdamente pequeña), pero en un electrón sí: en eso se basa el microscopio electrónico.</div></details></div>
+
+    <div class="card"><div class="name">Equivalencia masa–energía</div><div class="fbody">
+      <div class="eq"><i>E</i> = <i>m c</i>²</div>
+      <div class="leg">El "defecto de masa" en fisión y fusión se convierte en energía.</div></div><details class="why"><summary>En palabras</summary><div class="why-body">Masa y energía son la misma cosa en dos presentaciones. En la fisión y la fusión, los pedazos resultantes pesan un poquito menos que el original: esa masa faltante es la energía que se liberó.</div></details></div>
+
+    <div class="card"><div class="name">Decaimiento y vida media</div><div class="fbody">
+      <div class="eq"><i>N</i> = <i>N</i><sub>0</sub> (½)<sup><i>t</i>/<i>t</i>½</sup></div>
+      <div class="leg">Cada vida media queda la <b>mitad</b> de la muestra: 1 → ½ → ¼ → ⅛…</div></div><details class="why"><summary>En palabras</summary><div class="why-body">La vida media es lo que tarda en desintegrarse la mitad de la muestra. Después de otra vida media queda un cuarto, luego un octavo: nunca llega a cero de golpe. Así se fecha un fósil con carbono-14.</div></details></div>
+
+    <div class="card"><div class="name">Cambios en el núcleo</div><div class="fbody">
+      <div class="eq">α: <i>A</i> − 4, <i>Z</i> − 2</div>
+      <div class="eq">β⁻: <i>A</i> igual, <i>Z</i> + 1</div>
+      <div class="eq">γ: <i>A</i> y <i>Z</i> sin cambio</div>
+      <div class="leg"><b>A</b> número de masa · <b>Z</b> número atómico</div></div><details class="why"><summary>En palabras</summary><div class="why-body">Emitir alfa o beta cambia el número de protones, o sea que el átomo se <em>convierte en otro elemento</em>. La gamma no: ahí solo suelta energía sobrante y sigue siendo el mismo.</div></details></div>
+  </div>
+
+  <div class="trap"><h4>Ojo en el examen</h4><ul>
+    <li>Rutherford descubrió el <b>núcleo</b>; Bohr introdujo las <b>órbitas cuantizadas</b>; Thomson fue el del budín.</li>
+    <li>Marie Curie: Nobel de <b>Física y Química</b> (no de Medicina ni Biología).</li>
+    <li>La emisión gamma no cambia el elemento; la alfa y la beta sí.</li>
+  </ul></div>
+</section>
+
+<!-- ============ CONSTANTES ============ -->
+<section class="panel" data-short="Constantes y unidades">
+  <div class="panel-head">
+    <div class="u">Anexo</div>
+    <h2>Constantes, unidades y datos útiles</h2>
+    <p class="lead">Lo que conviene traer de memoria el día del examen.</p>
+  </div>
+
+  <h3 class="sec">Constantes</h3>
+  <div class="wrap"><table class="t">
+    <tr><th>Constante</th><th>Símbolo</th><th>Valor</th></tr>
+    <tr><td>Aceleración de la gravedad</td><td>g</td><td>9.8 m/s² (≈ 10)</td></tr>
+    <tr><td>Gravitación universal</td><td>G</td><td>6.67×10⁻¹¹ N·m²/kg²</td></tr>
+    <tr><td>Constante de Coulomb</td><td>k</td><td>9×10⁹ N·m²/C²</td></tr>
+    <tr><td>Carga del electrón</td><td>e</td><td>1.6×10⁻¹⁹ C</td></tr>
+    <tr><td>Rapidez de la luz</td><td>c</td><td>3×10⁸ m/s</td></tr>
+    <tr><td>Rapidez del sonido (aire)</td><td>v</td><td>≈ 340 m/s</td></tr>
+    <tr><td>Constante de los gases</td><td>R</td><td>8.31 J/mol·K</td></tr>
+    <tr><td>Constante de Boltzmann</td><td>k<sub>B</sub></td><td>1.38×10⁻²³ J/K</td></tr>
+    <tr><td>Constante de Planck</td><td>h</td><td>6.63×10⁻³⁴ J·s</td></tr>
+    <tr><td>Permeabilidad del vacío</td><td>μ₀</td><td>4π×10⁻⁷ T·m/A</td></tr>
+    <tr><td>Número de Avogadro</td><td>N<sub>A</sub></td><td>6.022×10²³ /mol</td></tr>
+    <tr><td>Densidad del agua</td><td>ρ</td><td>1000 kg/m³ = 1 g/cm³</td></tr>
+    <tr><td>Calor específico del agua</td><td>c</td><td>4186 J/kg·°C = 1 cal/g·°C</td></tr>
+    <tr><td>Presión atmosférica</td><td>P<sub>atm</sub></td><td>1.013×10⁵ Pa = 1 atm = 760 mmHg</td></tr>
+  </table></div>
+
+  <h3 class="sec">Unidades del SI</h3>
+  <div class="wrap"><table class="t">
+    <tr><th>Magnitud</th><th>Unidad</th><th>Equivale a</th></tr>
+    <tr><td>Fuerza</td><td>newton (N)</td><td>kg·m/s²</td></tr>
+    <tr><td>Trabajo y energía</td><td>joule (J)</td><td>N·m</td></tr>
+    <tr><td>Potencia</td><td>watt (W)</td><td>J/s</td></tr>
+    <tr><td>Presión</td><td>pascal (Pa)</td><td>N/m²</td></tr>
+    <tr><td>Frecuencia</td><td>hertz (Hz)</td><td>1/s</td></tr>
+    <tr><td>Carga</td><td>coulomb (C)</td><td>A·s</td></tr>
+    <tr><td>Potencial</td><td>volt (V)</td><td>J/C</td></tr>
+    <tr><td>Resistencia</td><td>ohm (Ω)</td><td>V/A</td></tr>
+    <tr><td>Capacitancia</td><td>farad (F)</td><td>C/V</td></tr>
+    <tr><td>Campo magnético</td><td>tesla (T)</td><td>N/(A·m)</td></tr>
+    <tr><td>Flujo magnético</td><td>weber (Wb)</td><td>T·m²</td></tr>
+  </table></div>
+
+  <h3 class="sec">Conversiones y prefijos</h3>
+  <div class="cgrid">
+    <div class="concept"><h4>Prefijos</h4><p>nano 10⁻⁹ · micro 10⁻⁶ · mili 10⁻³ · centi 10⁻² · kilo 10³ · mega 10⁶ · giga 10⁹</p></div>
+    <div class="concept"><h4>Rapidez</h4><p>1 m/s = 3.6 km/h · para pasar de km/h a m/s, divide entre 3.6</p></div>
+    <div class="concept"><h4>Energía</h4><p>1 cal = 4.186 J · 1 eV = 1.6×10⁻¹⁹ J · 1 kWh = 3.6×10⁶ J</p></div>
+    <div class="concept"><h4>Volumen</h4><p>1 m³ = 1000 L · 1 L = 1000 cm³ · 1 cm³ = 1 mL</p></div>
+    <div class="concept"><h4>Potencia</h4><p>1 hp ≈ 746 W</p></div>
+    <div class="concept"><h4>Ángulos frecuentes</h4><p>sen 30° = cos 60° = 0.5 · sen 45° = cos 45° ≈ 0.7 · sen 60° = cos 30° ≈ 0.87 · sen 90° = 1</p></div>
+  </div>
+
+  <div class="trap"><h4>Antes de contestar</h4><ul>
+    <li>Revisa que todo esté en el <b>mismo sistema</b> de unidades (metros, kilogramos, segundos).</li>
+    <li>En gases y en Carnot, la temperatura va en <b>kelvin</b>.</li>
+    <li>Si el resultado se ve absurdo (un coche a 5000 m/s), casi siempre es una conversión olvidada.</li>
+  </ul></div>
+</section>
+
+</main>
+
+<footer>Temario oficial de la Guía UNAM 2026 · Área 2 · uso personal de estudio</footer>
+
+<script>
+  const panels = [...document.querySelectorAll('.panel')];
+  const tabs = document.getElementById('tabs');
+  panels.forEach((p,i)=>{
+    const b = document.createElement('button');
+    b.className = 'tab';
+    b.innerHTML = (p.dataset.num ? '<b>'+p.dataset.num+'</b>' : '') + p.dataset.short;
+    b.onclick = ()=> show(i);
+    tabs.appendChild(b);
+  });
+  function show(i){
+    panels.forEach((p,j)=>p.classList.toggle('active', i===j));
+    [...tabs.children].forEach((t,j)=>t.classList.toggle('active', i===j));
+    localStorage.setItem('fis-unidad', i);
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+  show(Math.min(+localStorage.getItem('fis-unidad')||0, panels.length-1));
+
+  document.addEventListener('keydown', e=>{
+    if(e.target.tagName==='INPUT') return;
+    const cur = panels.findIndex(p=>p.classList.contains('active'));
+    if(e.key==='ArrowRight' && cur<panels.length-1) show(cur+1);
+    if(e.key==='ArrowLeft'  && cur>0) show(cur-1);
+  });
+
+  const memoBtn = document.getElementById('memoBtn');
+  memoBtn.onclick = ()=>{
+    document.body.classList.toggle('memo');
+    document.querySelectorAll('.card.open').forEach(c=>c.classList.remove('open'));
+    localStorage.setItem('fis-memo', document.body.classList.contains('memo')?'1':'0');
+  };
+  if(localStorage.getItem('fis-memo')==='1') document.body.classList.add('memo');
+
+  // al imprimir, se abren todas las explicaciones
+  let abiertas = [];
+  window.addEventListener('beforeprint', ()=>{
+    abiertas = [...document.querySelectorAll('details.why')].filter(d=>d.open);
+    document.querySelectorAll('details.why').forEach(d=>d.open=true);
+  });
+  window.addEventListener('afterprint', ()=>{
+    document.querySelectorAll('details.why').forEach(d=>d.open = abiertas.includes(d));
+  });
+
+  document.addEventListener('click', e=>{
+    // la explicación se abre y cierra sola, sin destapar la fórmula
+    if(e.target.closest('details.why')) return;
+    if(!document.body.classList.contains('memo')) return;
+    const c = e.target.closest('.card');
+    if(c) c.classList.toggle('open');
+  });
+</script>
+</body>
+</html>

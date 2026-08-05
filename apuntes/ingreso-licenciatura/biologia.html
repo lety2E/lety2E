@@ -1,0 +1,1035 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Biología · Área 2 · UNAM</title>
+<style>
+  :root{
+    --M:#FF00AA;          /* magenta */
+    --T:#00B8B8;          /* turquesa */
+    --P:#6A2A8C;          /* morado */
+    --bg:#FFF7FB;
+    --card:#FFFFFF;
+    --ink:#1A0828;
+    --muted:#7B5A50;
+    --border:#F0D7E6;
+    --hover:#FFE3F1;
+    --soft:#FDF1F8;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,system-ui,sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* ---------- Encabezado ---------- */
+  header{text-align:center;padding:2.2rem 1rem .8rem}
+  header .eyebrow{
+    font-size:.76rem;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--T);font-weight:700;
+  }
+  header h1{margin:.35rem 0 .25rem;font-size:clamp(1.5rem,3.8vw,2.1rem);color:var(--P)}
+  header p{margin:0 auto;max-width:48ch;color:var(--muted);font-size:.93rem}
+
+  /* ---------- Barra de control ---------- */
+  .controls{
+    display:flex;justify-content:center;align-items:center;gap:.6rem;
+    flex-wrap:wrap;padding:1rem 1rem 0;
+  }
+  .switch{
+    display:inline-flex;align-items:center;gap:.55rem;
+    background:var(--card);border:1.5px solid var(--border);
+    border-radius:999px;padding:.42rem .9rem;cursor:pointer;
+    font-size:.86rem;font-weight:600;color:var(--ink);
+    transition:all .15s ease;font-family:inherit;
+  }
+  .switch:hover{border-color:var(--T);background:#F0FBFB}
+  .switch .dot{
+    width:34px;height:19px;border-radius:999px;background:var(--border);
+    position:relative;transition:background .18s ease;flex:none;
+  }
+  .switch .dot::after{
+    content:"";position:absolute;top:2.5px;left:2.5px;
+    width:14px;height:14px;border-radius:50%;background:#fff;
+    box-shadow:0 1px 3px rgba(0,0,0,.25);transition:transform .18s ease;
+  }
+  body.memo .switch#memoBtn .dot{background:var(--T)}
+  body.memo .switch#memoBtn .dot::after{transform:translateX(15px)}
+  body.flip .switch#flipBtn .dot{background:var(--M)}
+  body.flip .switch#flipBtn .dot::after{transform:translateX(15px)}
+  /* voltear solo tiene sentido con el modo memoria encendido */
+  #flipBtn{display:none}
+  body.memo #flipBtn{display:inline-flex}
+  .hint{
+    text-align:center;color:var(--muted);font-size:.8rem;
+    padding:.55rem 1rem 0;min-height:1.4rem;max-width:60ch;margin:0 auto;
+  }
+
+  /* ---------- Pestañas ---------- */
+  .tabs{
+    max-width:1180px;margin:.9rem auto 0;padding:0 1rem;
+    display:flex;flex-wrap:wrap;gap:.45rem;justify-content:center;
+  }
+  .tab{
+    background:var(--card);border:1.5px solid var(--border);color:var(--ink);
+    border-radius:999px;padding:.45rem .9rem;font-size:.87rem;font-weight:600;
+    cursor:pointer;transition:all .15s ease;font-family:inherit;white-space:nowrap;
+  }
+  .tab b{color:var(--T);margin-right:.35rem;font-weight:800}
+  .tab:hover{background:var(--hover);border-color:var(--M)}
+  .tab.active{background:var(--M);color:#fff;border-color:var(--M);box-shadow:0 4px 12px rgba(255,0,170,.25)}
+  .tab.active b{color:#fff}
+
+  /* ---------- Paneles ---------- */
+  main{max-width:1000px;margin:1.5rem auto 4rem;padding:0 1rem}
+  .panel{display:none}
+  .panel.active{display:block;animation:fade .25s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+
+  .panel-head{margin-bottom:1.3rem;padding-bottom:.8rem;border-bottom:2px solid var(--border)}
+  .panel-head .u{
+    font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--T);font-weight:800;
+  }
+  .panel-head h2{margin:.2rem 0 .3rem;color:var(--P);font-size:clamp(1.25rem,3vw,1.65rem)}
+  .panel-head .lead{color:var(--muted);font-size:.9rem;margin:0}
+
+  h3.sec{
+    display:flex;align-items:center;gap:.6rem;
+    margin:2rem 0 .9rem;font-size:.8rem;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--P);
+  }
+  h3.sec::after{content:"";flex:1;height:1.5px;background:var(--border)}
+
+  /* ---------- Conceptos (contexto, nunca se tapan) ---------- */
+  .cgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:.7rem}
+  .concept{
+    background:var(--card);border:1.5px solid var(--border);
+    border-left:4px solid var(--T);border-radius:12px;padding:.75rem .9rem;
+  }
+  .concept h4{margin:0 0 .25rem;font-size:.93rem;color:var(--P)}
+  .concept p{margin:0;font-size:.87rem;color:var(--ink)}
+  .concept em{color:var(--muted);font-style:normal}
+
+  /* ---------- Tarjetas ---------- */
+  .fgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:.7rem}
+  .card{
+    background:var(--card);border:1.5px solid var(--border);border-radius:14px;
+    padding:.8rem .9rem .7rem;position:relative;
+    transition:border-color .15s ease,box-shadow .15s ease;
+  }
+  .card:hover{border-color:var(--M);box-shadow:0 6px 18px rgba(255,0,170,.10)}
+  .card .name{
+    font-size:.95rem;font-weight:700;color:var(--M);margin-bottom:.45rem;
+    padding-right:5.2rem;transition:filter .18s ease;
+  }
+  .fbody .dato,.fbody .ec,.fbody .io-v{transition:filter .18s ease}
+
+  /* el par entra/sale/dónde: la carne de Biología */
+  .io{display:grid;grid-template-columns:6.1rem 1fr;gap:.5rem;align-items:baseline;padding:.28rem 0}
+  .io + .io{border-top:1px dashed var(--border)}
+  .io-k{
+    font-size:.66rem;letter-spacing:.09em;text-transform:uppercase;
+    color:var(--T);font-weight:800;
+    /* que una etiqueta larga se parta en vez de encimarse en el valor */
+    min-width:0;overflow-wrap:anywhere;line-height:1.25;
+  }
+  .io-v{font-size:.88rem;color:var(--ink)}
+  .io-v b{color:var(--P);font-weight:700}
+
+  .dato{font-size:.89rem;color:var(--ink);padding:.1rem 0 .2rem}
+  .dato ul{margin:.2rem 0;padding-left:1.1rem}
+  .dato li{margin-bottom:.25rem}
+  .dato li:last-child{margin-bottom:0}
+  .dato b{color:var(--P);font-weight:700}
+
+  /* ecuación global, en serif como el formulario de Física */
+  .ec{
+    font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+    font-size:1rem;text-align:center;padding:.5rem .2rem .3rem;
+    color:var(--ink);overflow-x:auto;border-top:1px dashed var(--border);margin-top:.3rem;
+  }
+  .ec sub{font-size:.72em}
+
+  .leg{
+    font-size:.78rem;color:var(--muted);border-top:1.5px solid var(--soft);
+    padding-top:.45rem;margin-top:.35rem;
+  }
+  .leg b{color:var(--P);font-weight:700}
+
+  /* ---------- Explicación en palabras ---------- */
+  details.why{margin-top:.55rem;border-top:1.5px solid var(--soft);padding-top:.45rem}
+  details.why > summary{
+    list-style:none;cursor:pointer;display:flex;align-items:center;gap:.35rem;
+    font-size:.76rem;font-weight:700;color:var(--T);letter-spacing:.02em;
+  }
+  details.why > summary::-webkit-details-marker{display:none}
+  details.why > summary::after{content:"▾";font-size:.8rem;transition:transform .15s ease}
+  details.why[open] > summary::after{transform:rotate(180deg)}
+  details.why > summary:hover{color:var(--M)}
+  details.why .why-body{
+    font-size:.83rem;line-height:1.45;color:var(--ink);
+    background:var(--soft);border-radius:10px;padding:.55rem .7rem;margin-top:.45rem;
+  }
+
+  /* ---------- Trampas ---------- */
+  .trap{
+    background:#FFF9E8;border:1.5px solid #F5E2A8;border-left:4px solid #E8B93B;
+    border-radius:12px;padding:.8rem 1rem;margin-top:.7rem;
+  }
+  .trap h4{margin:0 0 .4rem;font-size:.86rem;color:#8A6410}
+  .trap ul{margin:0;padding-left:1.1rem;font-size:.86rem;color:#5C4712}
+  .trap li{margin-bottom:.25rem}
+  .trap li:last-child{margin-bottom:0}
+
+  /* ---------- Modo memoria ---------- */
+  /* De ida: se tapa el contenido y el nombre queda de pista.
+     Volteado: se tapa el nombre y el contenido queda de pista.
+     En los dos casos queda visible el andamio que te deja recitar. */
+  /* se tapa el valor, nunca la etiqueta: ENTRA · SALE · DÓNDE quedan de andamio */
+  body.memo:not(.flip) .fbody .io-v,
+  body.memo:not(.flip) .fbody .dato,
+  body.memo:not(.flip) .fbody .ec{filter:blur(6.5px)}
+  body.memo:not(.flip) .card.open .fbody .io-v,
+  body.memo:not(.flip) .card.open .fbody .dato,
+  body.memo:not(.flip) .card.open .fbody .ec{filter:none}
+
+  body.memo.flip .card .name{filter:blur(6.5px)}
+  body.memo.flip .card.open .name{filter:none}
+
+  body.memo .card{cursor:pointer}
+  body.memo .card::after{
+    content:"toca para ver";position:absolute;right:.7rem;top:.72rem;
+    font-size:.66rem;color:var(--T);font-weight:700;letter-spacing:.04em;
+  }
+  body.memo .card.open::after{content:""}
+  /* la explicación nunca se tapa, aunque el modo memoria esté encendido */
+  body.memo details.why{filter:none}
+
+  footer{text-align:center;color:var(--muted);font-size:.8rem;padding:0 1rem 3rem;max-width:60ch;margin:0 auto}
+
+  @media print{
+    .tabs,.controls,.hint,footer{display:none}
+    .panel{display:block!important;page-break-after:always}
+    body.memo .fbody .dato,body.memo .fbody .ec,body.memo .fbody .io-v,body.memo .card .name{filter:none}
+    body{background:#fff}
+  }
+</style>
+
+<style>
+/* ---- barra de regreso lety2E (prefijo l2e- para no chocar) ---- */
+.l2e-volver{
+  font-family:'DM Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
+  font-size:.85rem;font-weight:500;
+  padding:.7rem 1.1rem;
+  background:#1A0828;color:#F5E9F2;
+  display:flex;flex-wrap:wrap;align-items:center;gap:.45rem;
+  line-height:1.5;
+}
+.l2e-volver a{color:#00DEC8;text-decoration:none;}
+.l2e-volver a:hover{color:#FF00AA;text-decoration:underline;}
+.l2e-volver .l2e-sep{opacity:.45;}
+.l2e-volver .l2e-actual{opacity:.75;}
+.l2e-volver .l2e-marca{
+  margin-left:auto;font-family:Georgia,'Times New Roman',serif;
+  font-style:italic;font-weight:700;color:#FF00AA;text-decoration:none;
+}
+.l2e-volver .l2e-marca:hover{color:#00DEC8;}
+@media (max-width:520px){
+  .l2e-volver{font-size:.78rem;padding:.6rem .8rem;}
+  .l2e-volver .l2e-marca{margin-left:auto;}
+}
+</style>
+</head>
+<body data-section="apuntes">
+<nav class="l2e-volver">
+  <a href="../../index.html">Inicio</a>
+  <span class="l2e-sep">&rsaquo;</span>
+  <a href="../index.html">Apuntes</a>
+  <span class="l2e-sep">&rsaquo;</span>
+  <a href="index.html">Ingreso UNAM</a>
+  <span class="l2e-sep">&rsaquo;</span>
+  <span class="l2e-actual">Biología</span>
+  <a class="l2e-marca" href="../../index.html">lety2E</a>
+</nav>
+
+
+<header>
+  <div class="eyebrow">Guía UNAM · Área 2 · Ciencias Biológicas, Químicas y de la Salud</div>
+  <h1>Biología</h1>
+  <p>Aquí no hay fórmulas: hay <b>nombres amarrados a nombres</b>. Cada tarjeta liga un proceso con las sustancias que entran, las que salen y dónde ocurre.</p>
+</header>
+
+<div class="controls">
+  <button class="switch" id="memoBtn"><span class="dot"></span> Modo memoria</button>
+  <button class="switch" id="flipBtn"><span class="dot"></span> Voltear</button>
+</div>
+<div class="hint" id="hint">Enciende el <b>modo memoria</b> para taparte. El <b>En palabras</b> de cada tarjeta se abre siempre, en cualquier modo.</div>
+
+<nav class="tabs" id="tabs"></nav>
+
+<main id="main">
+
+<!-- ============ U1 CÉLULA ============ -->
+<section class="panel" data-num="1" data-short="Célula">
+  <div class="panel-head">
+    <div class="u">Unidad 1</div>
+    <h2>Célula</h2>
+    <p class="lead">La unidad de lo vivo: quién la descubrió, de qué está hecha y qué hace cada pieza por dentro.</p>
+  </div>
+
+  <h3 class="sec">Conceptos clave</h3>
+  <div class="cgrid">
+    <div class="concept"><h4>Quién vio qué</h4><p><b>Hooke</b> (1665) miró corcho al microscopio y nombró «celdas» — <em>estaban muertas, eran solo las paredes.</em> <b>Leeuwenhoek</b> fue el primero en ver células <em>vivas</em> («animálculos»).</p></div>
+    <div class="concept"><h4>Postulados de la Teoría Celular</h4><p><b>Schleiden</b>: las plantas están hechas de células. <b>Schwann</b>: los animales también. <b>Virchow</b>: <em>toda célula proviene de otra célula.</em> Ese tercero es el que más preguntan.</p></div>
+    <div class="concept"><h4>Procariota vs. eucariota</h4><p><b>Procariota</b>: sin núcleo (el ADN anda suelto en el nucleoide), sin organelos con membrana, ribosomas 70S. Son las bacterias. <b>Eucariota</b>: núcleo con envoltura, organelos, ribosomas 80S.</p></div>
+    <div class="concept"><h4>Vegetal vs. animal</h4><p>Solo la <b>vegetal</b>: pared celular, cloroplastos y una vacuola enorme. Solo la <b>animal</b>: centriolos y lisosomas abundantes. <em>Las dos tienen mitocondrias.</em></p></div>
+    <div class="concept"><h4>Membrana celular</h4><p>Modelo de <b>mosaico fluido</b> (Singer y Nicolson): bicapa de fosfolípidos con proteínas embebidas que flotan. Es <b>semipermeable</b>: decide qué pasa.</p></div>
+    <div class="concept"><h4>Transporte</h4><p><b>Pasivo</b>, sin gastar ATP y a favor del gradiente: difusión, ósmosis (agua) y difusión facilitada. <b>Activo</b>, gastando ATP y contra el gradiente: la bomba de sodio–potasio.</p></div>
+  </div>
+
+  <h3 class="sec">Organelos y su función</h3>
+  <div class="fgrid">
+
+    <div class="card"><div class="name">Núcleo</div><div class="fbody">
+      <div class="dato">Guarda el <b>ADN</b> organizado en cromosomas y dirige a la célula. Lo rodea la <b>envoltura nuclear</b>, con poros para dejar salir el ARN. Adentro está el <b>nucleolo</b>, que fabrica los ribosomas.</div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Es la oficina de dirección: ahí están los planos y de ahí salen las órdenes, pero los planos nunca salen — se manda una copia (el ARN) por los poros.</div></details></div>
+
+    <div class="card"><div class="name">Mitocondria</div><div class="fbody">
+      <div class="dato">Hace la <b>respiración aerobia</b>: convierte glucosa y <b>O₂</b> en <b>ATP</b>. Tiene <b>doble membrana</b>; la interna se pliega en <b>crestas</b> y el interior es la <b>matriz</b>. Tiene <b>ADN propio</b> y sus propios ribosomas.</div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Es la planta de energía. Que tenga ADN propio no es un detalle: es la prueba de que alguna vez fue una bacteria libre que se quedó a vivir adentro (teoría endosimbiótica de Margulis).</div></details></div>
+
+    <div class="card"><div class="name">Cloroplasto</div><div class="fbody">
+      <div class="dato">Hace la <b>fotosíntesis</b>. Contiene <b>clorofila</b> en los <b>tilacoides</b> (apilados en <b>granas</b>); el líquido de alrededor es el <b>estroma</b>. También tiene <b>ADN propio</b>. Solo en células vegetales.</div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Es la cocina de la planta: con luz, agua y aire fabrica su propia comida. El verde que ves es la clorofila, que refleja el verde y se queda con el resto de la luz.</div></details></div>
+
+    <div class="card"><div class="name">Ribosoma</div><div class="fbody">
+      <div class="dato">Arma las <b>proteínas</b> leyendo el <b>ARN mensajero</b> (traducción). <b>No tiene membrana.</b> Está en <em>todas</em> las células: <b>70S</b> en procariotas, <b>80S</b> en eucariotas.</div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Es el taller de armado. Le llega la instrucción escrita y va enganchando aminoácidos en el orden que dice la receta.</div></details></div>
+
+    <div class="card"><div class="name">Retículo endoplásmico rugoso</div><div class="fbody">
+      <div class="dato">Se ve rugoso porque tiene <b>ribosomas pegados</b>. <b>Sintetiza y transporta proteínas</b>, sobre todo las que van a salir de la célula.</div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Es la banda transportadora que sale del taller: las proteínas recién hechas caen adentro y viajan hacia el Golgi.</div></details></div>
+
+    <div class="card"><div class="name">Retículo endoplásmico liso</div><div class="fbody">
+      <div class="dato">Sin ribosomas. <b>Sintetiza lípidos</b> y esteroides, y <b>desintoxica</b> — por eso abunda en las células del <b>hígado</b>.</div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Mismo tubo, otro oficio: aquí no se hacen proteínas sino grasas, y se neutraliza lo que hace daño.</div></details></div>
+
+    <div class="card"><div class="name">Aparato de Golgi</div><div class="fbody">
+      <div class="dato"><b>Modifica, empaqueta y distribuye</b> lo que le llega del retículo. Forma <b>vesículas</b> y de ahí salen los <b>lisosomas</b>.</div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Es la oficina de correos: recibe el producto, le pone la etiqueta y decide a qué parte de la célula —o fuera de ella— se manda.</div></details></div>
+
+    <div class="card"><div class="name">Lisosoma</div><div class="fbody">
+      <div class="dato"><b>Digestión celular</b>: trae <b>enzimas hidrolíticas</b> que degradan lo viejo, lo dañado o lo que se tragó la célula. Sobre todo en células <b>animales</b>.</div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Es el estómago y el basurero al mismo tiempo. Si se rompe, se digiere a sí misma la célula.</div></details></div>
+
+    <div class="card"><div class="name">Vacuola</div><div class="fbody">
+      <div class="dato">Almacena <b>agua</b>, sales, azúcares y desechos. En la célula <b>vegetal</b> es una sola y enorme: da la <b>turgencia</b> que mantiene erguida a la planta.</div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Es el tinaco. Cuando se vacía, la planta se marchita — literalmente se le baja la presión.</div></details></div>
+
+    <div class="card"><div class="name">Pared celular</div><div class="fbody">
+      <div class="dato">Rígida, por fuera de la membrana; da <b>forma y protección</b>. En vegetales es de <b>celulosa</b>; en hongos, de <b>quitina</b>; en bacterias, de <b>peptidoglicano</b>.</div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Es la armadura. Por eso una hoja truena y un músculo no: uno la trae, el otro solo membrana.</div></details></div>
+
+    <div class="card"><div class="name">Centriolos</div><div class="fbody">
+      <div class="dato">Organizan el <b>huso acromático</b> que jala los cromosomas durante la división celular. Solo en células <b>animales</b>.</div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Son los postes que tensan los hilos para repartir los cromosomas cuando la célula se parte en dos.</div></details></div>
+
+    <div class="card"><div class="name">Membrana celular</div><div class="fbody">
+      <div class="dato">Bicapa de <b>fosfolípidos</b> con proteínas embebidas (<b>mosaico fluido</b>). Es <b>semipermeable</b>: controla qué entra y qué sale. La tienen <em>todas</em> las células.</div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Es la aduana. No es un muro: es una frontera con vigilantes que dejan pasar unas cosas y cobran energía por otras.</div></details></div>
+  </div>
+
+  <h3 class="sec">Las moléculas de la vida</h3>
+  <div class="fgrid">
+
+    <div class="card"><div class="name">Carbohidratos</div><div class="fbody">
+      <div class="io"><span class="io-k">Función</span><span class="io-v">energía de <b>disponibilidad inmediata</b></span></div>
+      <div class="io"><span class="io-k">Ejemplos</span><span class="io-v"><b>glucosa</b> (monosacárido) · <b>sacarosa</b> (disacárido) · <b>almidón</b>, <b>glucógeno</b> y <b>celulosa</b> (polisacáridos)</span></div>
+      <div class="io"><span class="io-k">Ojo</span><span class="io-v">almidón = reserva <em>vegetal</em> · glucógeno = reserva <em>animal</em> · celulosa = estructura</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Es el dinero en efectivo del cuerpo: se gasta rápido y se consigue rápido. Los tres polisacáridos están hechos de lo mismo (glucosa), solo cambia cómo van pegadas.</div></details></div>
+
+    <div class="card"><div class="name">Lípidos</div><div class="fbody">
+      <div class="io"><span class="io-k">Función</span><span class="io-v"><b>almacén</b> de energía a largo plazo y material de las <b>membranas</b></span></div>
+      <div class="io"><span class="io-k">Ejemplos</span><span class="io-v"><b>fosfolípidos</b> (membrana) · grasas y aceites · <b>colesterol</b> y hormonas esteroides</span></div>
+      <div class="io"><span class="io-k">Ojo</span><span class="io-v">no se disuelven en agua — son <b>apolares</b></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Es el dinero en el banco: guarda más energía por gramo que el azúcar, pero cuesta más sacarlo. Y además es el material con el que están hechas todas las membranas.</div></details></div>
+
+    <div class="card"><div class="name">Proteínas</div><div class="fbody">
+      <div class="io"><span class="io-k">Función</span><span class="io-v">estructura, transporte, defensa y <b>enzimas</b></span></div>
+      <div class="io"><span class="io-k">Hechas de</span><span class="io-v"><b>aminoácidos</b> unidos por <b>enlace peptídico</b></span></div>
+      <div class="io"><span class="io-k">Ojo</span><span class="io-v">el calor y el pH extremo las <b>desnaturalizan</b>: pierden su forma y dejan de servir</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Son las obreras: casi todo lo que <em>hace</em> algo en la célula es una proteína. Y su forma es su función — por eso un huevo frito ya no se puede «desfreír».</div></details></div>
+
+    <div class="card"><div class="name">Ácidos nucleicos</div><div class="fbody">
+      <div class="io"><span class="io-k">Función</span><span class="io-v">guardar y transmitir la <b>información</b></span></div>
+      <div class="io"><span class="io-k">ADN</span><span class="io-v">doble hélice · guarda la receta · bases <b>A-T</b> y <b>G-C</b></span></div>
+      <div class="io"><span class="io-k">ARN</span><span class="io-v">una sola hebra · ejecuta la receta · lleva <b>uracilo</b> en vez de timina</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">El ADN es el libro de recetas guardado bajo llave en el núcleo; el ARN es la hojita que copias para llevártela a la cocina.</div></details></div>
+  </div>
+
+  <div class="trap"><h4>Ojo en el examen</h4><ul>
+    <li><b>Virchow</b> es el del «toda célula proviene de otra célula». Hooke solo vio celdas <em>muertas</em> de corcho — no descubrió la célula viva.</li>
+    <li><b>Mitocondria y cloroplasto</b> son los únicos organelos con <b>ADN propio</b>: de ahí la teoría endosimbiótica de Margulis.</li>
+    <li>Los <b>ribosomas no tienen membrana</b> y <em>sí</em> están en bacterias. Es la trampa clásica de «¿qué organelo tienen las procariotas?».</li>
+    <li>La planta tiene <b>mitocondrias además de cloroplastos</b>: también respira, y lo hace todo el tiempo, de día y de noche.</li>
+    <li>Pared celular: vegetal = <b>celulosa</b> · hongo = <b>quitina</b> · bacteria = <b>peptidoglicano</b>.</li>
+  </ul></div>
+</section>
+
+<!-- ============ U2 METABOLISMO CELULAR ============ -->
+<section class="panel" data-num="2" data-short="Metabolismo celular">
+  <div class="panel-head">
+    <div class="u">Unidad 2</div>
+    <h2>Metabolismo celular</h2>
+    <p class="lead">Los procesos con sus sustancias: qué entra, qué sale y dónde ocurre. Es lo que más se pregunta y lo más fácil de confundir.</p>
+  </div>
+
+  <h3 class="sec">Conceptos clave</h3>
+  <div class="cgrid">
+    <div class="concept"><h4>Anabolismo vs. catabolismo</h4><p><b>Anabolismo</b>: construye moléculas grandes y <em>gasta</em> energía (fotosíntesis). <b>Catabolismo</b>: rompe moléculas y <em>libera</em> energía (respiración). Los dos juntos son el metabolismo.</p></div>
+    <div class="concept"><h4>ATP</h4><p>La <b>moneda de energía</b> de la célula: adenina + ribosa + <b>3 fosfatos</b>. La energía está en el último enlace: al soltarlo (<em>ATP → ADP + P</em>) se libera para lo que haga falta.</p></div>
+    <div class="concept"><h4>Enzimas</h4><p><b>Catalizadores biológicos</b> (son proteínas). Bajan la <b>energía de activación</b> para que la reacción sea más rápida. Son específicas (llave–cerradura) y <em>no se consumen</em>.</p></div>
+    <div class="concept"><h4>Qué desactiva una enzima</h4><p>El <b>calor</b> y el <b>pH extremo</b> la desnaturalizan: pierde su forma y ya no encaja con su sustrato. Cada una tiene su temperatura y su pH óptimos.</p></div>
+    <div class="concept"><h4>El aire y el agua no son adorno</h4><p>Fotosíntesis y respiración son <b>inversas</b>: lo que una produce, la otra consume. Por eso el oxígeno y el CO₂ dan vueltas entre plantas y animales.</p></div>
+    <div class="concept"><h4>Aerobio vs. anaerobio</h4><p><b>Aerobio</b> = con oxígeno, rinde mucho (36–38 ATP). <b>Anaerobio</b> = sin oxígeno, rinde poquito (2 ATP) pero es rápido y no depende de nadie.</p></div>
+  </div>
+
+  <h3 class="sec">Fotosíntesis</h3>
+  <div class="fgrid">
+
+    <div class="card"><div class="name">Fotosíntesis (global)</div><div class="fbody">
+      <div class="io"><span class="io-k">Entra</span><span class="io-v"><b>CO₂</b> + <b>H₂O</b> + <b>luz</b></span></div>
+      <div class="io"><span class="io-k">Sale</span><span class="io-v"><b>glucosa</b> + <b>O₂</b></span></div>
+      <div class="io"><span class="io-k">Dónde</span><span class="io-v">cloroplasto</span></div>
+      <div class="io"><span class="io-k">Con qué</span><span class="io-v"><b>clorofila</b> (capta la luz)</span></div>
+      <div class="ec">6 CO<sub>2</sub> + 6 H<sub>2</sub>O + luz → C<sub>6</sub>H<sub>12</sub>O<sub>6</sub> + 6 O<sub>2</sub></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">La planta se hace su propia comida con aire, agua y sol. Y de pilón suelta el oxígeno que respiramos — para ella es un desecho.</div></details></div>
+
+    <div class="card"><div class="name">Fase luminosa (fotoquímica)</div><div class="fbody">
+      <div class="io"><span class="io-k">Entra</span><span class="io-v"><b>luz</b> + <b>H₂O</b></span></div>
+      <div class="io"><span class="io-k">Sale</span><span class="io-v"><b>ATP</b> + <b>NADPH</b> + <b>O₂</b></span></div>
+      <div class="io"><span class="io-k">Dónde</span><span class="io-v">membrana de los <b>tilacoides</b> (en las granas)</span></div>
+      <div class="io"><span class="io-k">Con qué</span><span class="io-v">clorofila y fotosistemas · el O₂ sale de romper el agua (<b>fotólisis</b>)</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Es la parte que necesita sol: la luz rompe el agua y con eso se cargan las dos pilas (ATP y NADPH) que la siguiente fase va a gastar. El oxígeno que sale es el pedazo sobrante del agua.</div></details></div>
+
+    <div class="card"><div class="name">Fase oscura (Ciclo de Calvin)</div><div class="fbody">
+      <div class="io"><span class="io-k">Entra</span><span class="io-v"><b>CO₂</b> + <b>ATP</b> + <b>NADPH</b></span></div>
+      <div class="io"><span class="io-k">Sale</span><span class="io-v"><b>glucosa</b></span></div>
+      <div class="io"><span class="io-k">Dónde</span><span class="io-v"><b>estroma</b> del cloroplasto</span></div>
+      <div class="io"><span class="io-k">Con qué</span><span class="io-v">la enzima <b>RuBisCO</b>, que fija el CO₂</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Aquí se arma la comida de verdad: se agarra el carbono del aire y se pega hasta formar azúcar, gastando las pilas que cargó la fase luminosa.</div></details></div>
+  </div>
+
+  <h3 class="sec">Respiración: de la glucosa al ATP</h3>
+  <div class="fgrid">
+
+    <div class="card"><div class="name">Glucólisis</div><div class="fbody">
+      <div class="io"><span class="io-k">Entra</span><span class="io-v">1 <b>glucosa</b> (6 carbonos)</span></div>
+      <div class="io"><span class="io-k">Sale</span><span class="io-v">2 <b>piruvato</b> (3C) + <b>2 ATP</b> netos + <b>2 NADH</b></span></div>
+      <div class="io"><span class="io-k">Dónde</span><span class="io-v"><b>citoplasma</b> (citosol)</span></div>
+      <div class="io"><span class="io-k">Con qué</span><span class="io-v">enzimas del citosol · <b>no necesita O₂</b></span></div>
+      <div class="leg">Es el <b>paso común</b>: pase lo que pase después, toda glucosa empieza por aquí.</div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Partir la glucosa en dos. Es el primer paso de todo y el único que no ocupa mitocondria ni oxígeno — por eso lo pueden hacer hasta las bacterias.</div></details></div>
+
+    <div class="card"><div class="name">Oxidación del piruvato</div><div class="fbody">
+      <div class="io"><span class="io-k">Entra</span><span class="io-v"><b>piruvato</b></span></div>
+      <div class="io"><span class="io-k">Sale</span><span class="io-v"><b>acetil-CoA</b> + <b>CO₂</b> + <b>NADH</b></span></div>
+      <div class="io"><span class="io-k">Dónde</span><span class="io-v"><b>matriz</b> mitocondrial</span></div>
+      <div class="io"><span class="io-k">Con qué</span><span class="io-v"><b>coenzima A</b></span></div>
+      <div class="leg">El puente entre la glucólisis y el Ciclo de Krebs.</div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Lo que sale de la glucólisis no entra al ciclo así nomás: primero se le quita un carbono (que sale como CO₂) y se le engancha la coenzima A. Ese pasito es el que casi nadie recuerda.</div></details></div>
+
+    <div class="card"><div class="name">Ciclo de Krebs (del ácido cítrico)</div><div class="fbody">
+      <div class="io"><span class="io-k">Entra</span><span class="io-v"><b>acetil-CoA</b> (2C)</span></div>
+      <div class="io"><span class="io-k">Sale</span><span class="io-v"><b>CO₂</b> + <b>NADH</b> + <b>FADH₂</b> + <b>ATP</b></span></div>
+      <div class="io"><span class="io-k">Dónde</span><span class="io-v"><b>matriz</b> mitocondrial</span></div>
+      <div class="io"><span class="io-k">Con qué</span><span class="io-v">el <b>oxaloacetato</b> lo recibe y forma <b>citrato</b> (ácido cítrico)</span></div>
+      <div class="io"><span class="io-k">Por vuelta</span><span class="io-v">2 CO₂ · 3 NADH · 1 FADH₂ · 1 ATP — y son <b>2 vueltas</b> por glucosa</span></div>
+      <div class="leg">Es un <b>ciclo</b>: lo que se gasta al principio se regenera al final para volver a empezar.</div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Aquí se termina de desarmar el carbono: todo el CO₂ que exhalas sale de este ciclo. Pero casi no produce ATP directo — lo que produce son las pilas cargadas (NADH y FADH₂) para el paso siguiente.</div></details></div>
+
+    <div class="card"><div class="name">Cadena respiratoria (transportadora de electrones)</div><div class="fbody">
+      <div class="io"><span class="io-k">Entra</span><span class="io-v"><b>NADH</b> + <b>FADH₂</b> + <b>O₂</b></span></div>
+      <div class="io"><span class="io-k">Sale</span><span class="io-v"><b>H₂O</b> + la mayor parte del <b>ATP</b> (≈34)</span></div>
+      <div class="io"><span class="io-k">Dónde</span><span class="io-v"><b>crestas</b> de la membrana interna mitocondrial</span></div>
+      <div class="io"><span class="io-k">Con qué</span><span class="io-v">el <b>O₂ es el aceptor final</b> de electrones — por eso se forma agua</span></div>
+      <div class="leg">También se le llama <b>fosforilación oxidativa</b>.</div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Las pilas cargadas sueltan sus electrones, que van bajando escalones y sueltan energía en cada uno. Al final del tobogán está el oxígeno esperando: los recoge, se junta con hidrógeno y queda agua.</div></details></div>
+
+    <div class="card"><div class="name">Respiración aerobia (global)</div><div class="fbody">
+      <div class="io"><span class="io-k">Entra</span><span class="io-v"><b>glucosa</b> + <b>O₂</b></span></div>
+      <div class="io"><span class="io-k">Sale</span><span class="io-v"><b>CO₂</b> + <b>H₂O</b> + <b>36–38 ATP</b></span></div>
+      <div class="io"><span class="io-k">Dónde</span><span class="io-v">citoplasma (glucólisis) + <b>mitocondria</b> (todo lo demás)</span></div>
+      <div class="ec">C<sub>6</sub>H<sub>12</sub>O<sub>6</sub> + 6 O<sub>2</sub> → 6 CO<sub>2</sub> + 6 H<sub>2</sub>O + energía</div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Es la fotosíntesis al revés, y salta a la vista si comparas las dos ecuaciones: entra lo que allá salía y sale lo que allá entraba.</div></details></div>
+  </div>
+
+  <h3 class="sec">Sin oxígeno: las fermentaciones</h3>
+  <div class="fgrid">
+
+    <div class="card"><div class="name">Fermentación láctica</div><div class="fbody">
+      <div class="io"><span class="io-k">Entra</span><span class="io-v"><b>piruvato</b> + <b>NADH</b></span></div>
+      <div class="io"><span class="io-k">Sale</span><span class="io-v"><b>ácido láctico</b> + NAD⁺</span></div>
+      <div class="io"><span class="io-k">Dónde</span><span class="io-v"><b>citoplasma</b></span></div>
+      <div class="io"><span class="io-k">Quién</span><span class="io-v">músculo sin oxígeno · bacterias del <b>yogur</b> y el queso</span></div>
+      <div class="leg">Balance: solo los <b>2 ATP</b> de la glucólisis.</div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Cuando corres y te falta aire, el músculo sigue trabajando por esta ruta. El ácido láctico que se acumula es el ardor del día siguiente.</div></details></div>
+
+    <div class="card"><div class="name">Fermentación alcohólica</div><div class="fbody">
+      <div class="io"><span class="io-k">Entra</span><span class="io-v"><b>piruvato</b> + <b>NADH</b></span></div>
+      <div class="io"><span class="io-k">Sale</span><span class="io-v"><b>etanol</b> + <b>CO₂</b> + NAD⁺</span></div>
+      <div class="io"><span class="io-k">Dónde</span><span class="io-v"><b>citoplasma</b></span></div>
+      <div class="io"><span class="io-k">Quién</span><span class="io-v"><b>levaduras</b> · el pan, la cerveza y el vino</span></div>
+      <div class="leg">Balance: solo los <b>2 ATP</b> de la glucólisis.</div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">La levadura hace lo mismo que tu músculo, pero suelta alcohol y gas en vez de ácido. El CO₂ es el que infla el pan; el etanol, el que se queda en la cerveza.</div></details></div>
+
+    <div class="card"><div class="name">Balance energético</div><div class="fbody">
+      <div class="io"><span class="io-k">Glucólisis</span><span class="io-v"><b>2 ATP</b> netos</span></div>
+      <div class="io"><span class="io-k">Krebs</span><span class="io-v"><b>2 ATP</b> (1 por vuelta, 2 vueltas)</span></div>
+      <div class="io"><span class="io-k">Cadena</span><span class="io-v">≈ <b>34 ATP</b> — casi todo</span></div>
+      <div class="io"><span class="io-k">Total</span><span class="io-v">aerobia <b>36–38 ATP</b> · fermentación <b>2 ATP</b></span></div>
+      <div class="leg">Respirar con oxígeno rinde alrededor de <b>18 veces más</b> que fermentar.</div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Ese número es la razón de que respiremos. Con oxígeno le sacas a la misma glucosa casi veinte veces más energía; sin él, apenas para salir del apuro.</div></details></div>
+  </div>
+
+  <div class="trap"><h4>Ojo en el examen</h4><ul>
+    <li>El <b>O₂ de la fotosíntesis sale del AGUA</b>, no del CO₂. Se rompe el agua (fotólisis) en la fase luminosa. Es la trampa que más se pregunta.</li>
+    <li>La <b>fase oscura no necesita oscuridad</b>: se llama así porque no usa la luz <em>directamente</em>. Ocurre de día, con lo que le dejó la fase luminosa.</li>
+    <li>La <b>glucólisis siempre es en el citoplasma</b>, con o sin oxígeno, y le pasa a todas las rutas. Nunca en la mitocondria.</li>
+    <li>El <b>oxígeno no «quema» la glucosa</b>: es el <b>aceptor final de electrones</b> al final de la cadena. Por eso el producto es agua.</li>
+    <li><b>Láctica → ácido láctico</b> (músculo, yogur). <b>Alcohólica → etanol + CO₂</b> (levadura, pan, cerveza). Confundirlas es lo más común.</li>
+    <li>El <b>CO₂ que exhalas sale del Ciclo de Krebs</b> y de la oxidación del piruvato, no de la cadena respiratoria.</li>
+  </ul></div>
+</section>
+
+<!-- ============ U3 REPRODUCCIÓN ============ -->
+<section class="panel" data-num="3" data-short="Reproducción">
+  <div class="panel-head">
+    <div class="u">Unidad 3</div>
+    <h2>Reproducción</h2>
+    <p class="lead">Cómo se copia la célula y cómo se copia la información: ciclo celular, mitosis, meiosis y el camino del ADN a la proteína.</p>
+  </div>
+
+  <h3 class="sec">Conceptos clave</h3>
+  <div class="cgrid">
+    <div class="concept"><h4>Ciclo celular</h4><p><b>Interfase</b> (G1 crece · S duplica el ADN · G2 se prepara) + <b>división</b> (mitosis + citocinesis). La interfase es como el <b>90%</b> del tiempo — <em>la célula no está descansando, está trabajando.</em></p></div>
+    <div class="concept"><h4>Mitosis vs. meiosis en una línea</h4><p><b>Mitosis</b>: 1 célula → <b>2 idénticas</b> y <b>diploides</b> (2n), para crecer y reparar. <b>Meiosis</b>: 1 célula → <b>4 distintas</b> y <b>haploides</b> (n), solo para hacer gametos.</p></div>
+    <div class="concept"><h4>ADN vs. ARN</h4><p><b>ADN</b>: doble hélice · desoxirribosa · <b>timina</b> · vive en el núcleo · guarda. <b>ARN</b>: una hebra · ribosa · <b>uracilo</b> · sale al citoplasma · ejecuta.</p></div>
+    <div class="concept"><h4>Del ADN a la proteína</h4><p><b>Replicación</b> (ADN→ADN) · <b>transcripción</b> (ADN→ARN, en el núcleo) · <b>traducción</b> (ARN→proteína, en el ribosoma). Es el «dogma central».</p></div>
+    <div class="concept"><h4>Asexual vs. sexual</h4><p><b>Asexual</b>: un progenitor, hijos idénticos (clones), rápida, <em>sin variabilidad</em>. <b>Sexual</b>: dos progenitores y gametos, más lenta, pero <b>con variabilidad</b> — que es la materia prima de la evolución.</p></div>
+    <div class="concept"><h4>¿De dónde sale la variabilidad?</h4><p>De tres lugares: el <b>entrecruzamiento</b> en profase I, el reparto <b>al azar</b> de los cromosomas en la meiosis, y la <b>fecundación al azar</b> de un gameto con otro.</p></div>
+  </div>
+
+  <h3 class="sec">Las fases de la mitosis</h3>
+  <div class="fgrid">
+
+    <div class="card"><div class="name">Profase</div><div class="fbody">
+      <div class="dato">La cromatina se <b>condensa</b> en cromosomas visibles. <b>Desaparecen</b> la envoltura nuclear y el nucleolo. Se forma el <b>huso acromático</b>.</div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Es la preparación: se enrollan los hilos para poder manejarlos y se quita el techo del núcleo para que quepan las cuerdas que van a jalar.</div></details></div>
+
+    <div class="card"><div class="name">Metafase</div><div class="fbody">
+      <div class="dato">Los cromosomas se <b>alinean en el ecuador</b> de la célula (placa ecuatorial). Es la fase en la que mejor se ven y se cuentan.</div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Todos formados en la línea de en medio, como en la escolta, esperando el jalón.</div></details></div>
+
+    <div class="card"><div class="name">Anafase</div><div class="fbody">
+      <div class="dato">Las <b>cromátidas hermanas se separan</b> y viajan a los <b>polos opuestos</b>, jaladas por el huso.</div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">El jalón. Cada mitad se va para su lado, y por eso cada célula nueva acaba con un juego completo.</div></details></div>
+
+    <div class="card"><div class="name">Telofase</div><div class="fbody">
+      <div class="dato">Se <b>reconstruye la envoltura nuclear</b> en cada polo y los cromosomas se <b>descondensan</b>. Después viene la <b>citocinesis</b>: se parte el citoplasma y quedan dos células.</div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Es la profase al revés: se vuelve a poner el techo y se desenrollan los hilos. Ya son dos núcleos; falta cortar el cuerpo.</div></details></div>
+  </div>
+
+  <h3 class="sec">Meiosis</h3>
+  <div class="fgrid">
+
+    <div class="card"><div class="name">Meiosis I (reduccional)</div><div class="fbody">
+      <div class="io"><span class="io-k">Separa</span><span class="io-v">los <b>cromosomas homólogos</b></span></div>
+      <div class="io"><span class="io-k">Resultado</span><span class="io-v">de <b>2n pasa a n</b>: aquí es donde se reduce a la mitad</span></div>
+      <div class="io"><span class="io-k">Ojo</span><span class="io-v">en su <b>profase I</b> ocurre el entrecruzamiento</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Es la división que de verdad importa: aparta un cromosoma de cada par, y con eso el gameto queda con la mitad del juego.</div></details></div>
+
+    <div class="card"><div class="name">Meiosis II (ecuacional)</div><div class="fbody">
+      <div class="io"><span class="io-k">Separa</span><span class="io-v">las <b>cromátidas hermanas</b> — igualito que una mitosis</span></div>
+      <div class="io"><span class="io-k">Resultado</span><span class="io-v"><b>4 células haploides</b> y todas <b>distintas</b> entre sí</span></div>
+      <div class="io"><span class="io-k">Ojo</span><span class="io-v">aquí <b>no</b> se vuelve a duplicar el ADN</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">La segunda pasada es una mitosis normal sobre células que ya venían a la mitad. Por eso al final son cuatro y no dos.</div></details></div>
+
+    <div class="card"><div class="name">Entrecruzamiento (crossing-over)</div><div class="fbody">
+      <div class="io"><span class="io-k">Cuándo</span><span class="io-v"><b>profase I</b> de la meiosis</span></div>
+      <div class="io"><span class="io-k">Qué pasa</span><span class="io-v">los homólogos se aparean (<b>sinapsis</b>) e <b>intercambian fragmentos</b></span></div>
+      <div class="io"><span class="io-k">Para qué</span><span class="io-v">es la <b>fuente principal de variabilidad</b> genética</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Los cromosomas que venían de tu papá y de tu mamá se abrazan y se intercambian pedazos. Por eso tus hijos no reciben el cromosoma de tu papá tal cual, sino una mezcla.</div></details></div>
+  </div>
+
+  <h3 class="sec">Del ADN a la proteína</h3>
+  <div class="fgrid">
+
+    <div class="card"><div class="name">ADN</div><div class="fbody">
+      <div class="dato"><b>Doble hélice</b> (Watson y Crick). Azúcar: <b>desoxirribosa</b>. Bases apareadas: <b>A–T</b> y <b>G–C</b>. Vive en el <b>núcleo</b>. Guarda la información.</div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Es la escalera de caracol. Los peldaños siempre son las mismas parejas: A con T, G con C. Por eso basta una hebra para reconstruir la otra.</div></details></div>
+
+    <div class="card"><div class="name">ARN mensajero (ARNm)</div><div class="fbody">
+      <div class="dato"><b>Copia la receta</b> del ADN y la lleva del núcleo al <b>ribosoma</b>. Una sola hebra, con <b>uracilo</b> en lugar de timina.</div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Es la hojita que copias del libro que no puedes sacar de la biblioteca.</div></details></div>
+
+    <div class="card"><div class="name">ARN de transferencia (ARNt)</div><div class="fbody">
+      <div class="dato"><b>Trae los aminoácidos</b> al ribosoma, uno por uno, leyendo cada <b>codón</b> de tres bases.</div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Es el mesero: lee lo que pide el codón y trae exactamente ese aminoácido.</div></details></div>
+
+    <div class="card"><div class="name">Replicación</div><div class="fbody">
+      <div class="io"><span class="io-k">De qué a qué</span><span class="io-v"><b>ADN → ADN</b></span></div>
+      <div class="io"><span class="io-k">Dónde</span><span class="io-v">núcleo, en la <b>fase S</b> de la interfase</span></div>
+      <div class="io"><span class="io-k">Cómo</span><span class="io-v">es <b>semiconservativa</b>: cada molécula nueva guarda una hebra vieja</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Sacar copia antes de partirse en dos, para que a cada célula le toque un juego completo.</div></details></div>
+
+    <div class="card"><div class="name">Transcripción</div><div class="fbody">
+      <div class="io"><span class="io-k">De qué a qué</span><span class="io-v"><b>ADN → ARNm</b></span></div>
+      <div class="io"><span class="io-k">Dónde</span><span class="io-v"><b>núcleo</b></span></div>
+      <div class="io"><span class="io-k">Con qué</span><span class="io-v">la enzima <b>ARN polimerasa</b></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Pasar la receta del libro grande a una hojita portátil.</div></details></div>
+
+    <div class="card"><div class="name">Traducción</div><div class="fbody">
+      <div class="io"><span class="io-k">De qué a qué</span><span class="io-v"><b>ARNm → proteína</b></span></div>
+      <div class="io"><span class="io-k">Dónde</span><span class="io-v"><b>ribosoma</b></span></div>
+      <div class="io"><span class="io-k">Con qué</span><span class="io-v">el <b>ARNt</b> trae los aminoácidos · se lee en <b>codones</b> de 3 bases</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Cocinar de verdad: se lee la hojita de tres en tres letras y se va armando la proteína aminoácido por aminoácido.</div></details></div>
+  </div>
+
+  <h3 class="sec">Reproducción del organismo</h3>
+  <div class="fgrid">
+
+    <div class="card"><div class="name">Reproducción asexual</div><div class="fbody">
+      <div class="io"><span class="io-k">Progenitor</span><span class="io-v"><b>uno solo</b></span></div>
+      <div class="io"><span class="io-k">Descendencia</span><span class="io-v"><b>idéntica</b> (clones) · sin variabilidad</span></div>
+      <div class="io"><span class="io-k">Tipos</span><span class="io-v"><b>bipartición</b> · <b>gemación</b> · <b>esporulación</b> · <b>fragmentación</b> · regeneración</span></div>
+      <div class="leg">Rápida y barata, pero toda la descendencia es igual de vulnerable.</div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Es sacar fotocopias. Muy eficiente mientras el ambiente no cambie — si llega una plaga que le pega a uno, le pega a todos.</div></details></div>
+
+    <div class="card"><div class="name">Reproducción sexual</div><div class="fbody">
+      <div class="io"><span class="io-k">Progenitor</span><span class="io-v"><b>dos</b></span></div>
+      <div class="io"><span class="io-k">Cómo</span><span class="io-v">dos <b>gametos</b> (n) se fusionan en la <b>fecundación</b> → <b>cigoto</b> (2n)</span></div>
+      <div class="io"><span class="io-k">Ventaja</span><span class="io-v"><b>variabilidad</b>: cada hijo es distinto</span></div>
+      <div class="leg">Más lenta y más cara, pero es la que le da material a la evolución.</div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Barajar el mazo cada generación. Cuesta más, pero siempre habrá alguien en la familia a quien la nueva enfermedad no le pegue.</div></details></div>
+  </div>
+
+  <div class="trap"><h4>Ojo en el examen</h4><ul>
+    <li><b>Mitosis = 2 células idénticas y diploides. Meiosis = 4 células distintas y haploides.</b> Es la confusión número uno de toda la unidad.</li>
+    <li>La <b>interfase no es parte de la mitosis</b>, aunque sea donde se duplica el ADN.</li>
+    <li>El <b>entrecruzamiento es de la meiosis</b> (profase I), nunca de la mitosis.</li>
+    <li><b>PMAT</b>: Profase, Metafase, Anafase, Telofase. En <b>metafase se alinean</b>; en <b>anafase se separan</b>.</li>
+    <li>En la meiosis el ADN se duplica <b>una sola vez</b> aunque haya dos divisiones. Por eso el resultado es haploide.</li>
+    <li>El ADN lleva <b>timina</b>; el ARN lleva <b>uracilo</b>. Y el ADN es doble, el ARN es sencillo.</li>
+  </ul></div>
+</section>
+
+<!-- ============ U4 MECANISMOS DE LA HERENCIA ============ -->
+<section class="panel" data-num="4" data-short="Herencia">
+  <div class="panel-head">
+    <div class="u">Unidad 4</div>
+    <h2>Mecanismos de la herencia</h2>
+    <p class="lead">Mendel, los cromosomas, lo que se hereda con el sexo, las mutaciones y cómo se mete un gen de un organismo en otro.</p>
+  </div>
+
+  <h3 class="sec">Conceptos clave</h3>
+  <div class="cgrid">
+    <div class="concept"><h4>El vocabulario</h4><p><b>Gen</b>: el fragmento de ADN con la instrucción. <b>Alelo</b>: cada versión del gen (A o a). <b>Genotipo</b>: los alelos que traes (AA, Aa, aa). <b>Fenotipo</b>: lo que se ve.</p></div>
+    <div class="concept"><h4>Homocigoto y heterocigoto</h4><p><b>Homocigoto</b>: los dos alelos iguales (AA o aa). <b>Heterocigoto</b>: uno de cada uno (Aa) — <em>también se le dice «híbrido».</em></p></div>
+    <div class="concept"><h4>Dominante y recesivo</h4><p>El <b>dominante</b> (A) se expresa aunque venga uno solo. El <b>recesivo</b> (a) solo se ve cuando <em>los dos</em> lo son (aa).</p></div>
+    <div class="concept"><h4>Cuadro de Punnett</h4><p>La tablita para cruzar: se ponen los gametos de cada padre en los bordes y se llenan las casillas. <b>Aa × Aa</b> da 1 AA : 2 Aa : 1 aa.</p></div>
+    <div class="concept"><h4>Con qué trabajó cada quien</h4><p><b>Mendel</b>: chícharos (<em>Pisum sativum</em>) — eligió 7 caracteres de dos versiones claras. <b>Morgan</b>: la mosca de la fruta (<em>Drosophila</em>).</p></div>
+    <div class="concept"><h4>Mutación</h4><p>Cambio en la secuencia del ADN. Puede ser mala, neutra o buena — y aunque suene mal, es la <b>materia prima de la evolución</b>: sin mutaciones no habría variación nueva.</p></div>
+  </div>
+
+  <h3 class="sec">Las leyes de Mendel</h3>
+  <div class="fgrid">
+
+    <div class="card"><div class="name">1ª Ley · de la uniformidad</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué dice</span><span class="io-v">al cruzar dos <b>homocigotos distintos</b>, toda la primera generación sale <b>igual</b></span></div>
+      <div class="io"><span class="io-k">Cruce</span><span class="io-v">AA × aa</span></div>
+      <div class="io"><span class="io-k">Resultado</span><span class="io-v"><b>100% Aa</b> — todos heterocigotos y con el carácter <b>dominante</b></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Si cruzas una planta de flor roja pura con una de flor blanca pura, salen <em>todas</em> rojas. El blanco no se perdió: está escondido.</div></details></div>
+
+    <div class="card"><div class="name">2ª Ley · de la segregación</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué dice</span><span class="io-v">los dos alelos se <b>separan</b> al formar los gametos: cada gameto lleva <b>uno solo</b></span></div>
+      <div class="io"><span class="io-k">Cruce</span><span class="io-v">Aa × Aa</span></div>
+      <div class="io"><span class="io-k">Fenotipo</span><span class="io-v"><b>3 : 1</b></span></div>
+      <div class="io"><span class="io-k">Genotipo</span><span class="io-v"><b>1 AA : 2 Aa : 1 aa</b></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Al cruzar los hijos de la primera ley, el blanco reaparece en uno de cada cuatro. Ahí se ve que nunca se había ido.</div></details></div>
+
+    <div class="card"><div class="name">3ª Ley · de la distribución independiente</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué dice</span><span class="io-v">dos caracteres distintos se heredan <b>independientes</b> uno del otro</span></div>
+      <div class="io"><span class="io-k">Cruce</span><span class="io-v">AaBb × AaBb</span></div>
+      <div class="io"><span class="io-k">Fenotipo</span><span class="io-v"><b>9 : 3 : 3 : 1</b></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">El color de la flor no viene amarrado al tamaño de la semilla: cada característica se reparte por su cuenta.</div></details></div>
+  </div>
+
+  <h3 class="sec">Cromosomas, sexo y mutaciones</h3>
+  <div class="fgrid">
+
+    <div class="card"><div class="name">Teoría cromosómica de la herencia</div><div class="fbody">
+      <div class="io"><span class="io-k">Quién</span><span class="io-v"><b>Sutton</b> y <b>Boveri</b> · la comprobó <b>Morgan</b> con la mosca</span></div>
+      <div class="io"><span class="io-k">Qué dice</span><span class="io-v">los <b>genes están en los cromosomas</b>, en lugares fijos (<b>loci</b>)</span></div>
+      <div class="io"><span class="io-k">Por qué encaja</span><span class="io-v">los cromosomas van <b>en pares</b>, igual que los alelos de Mendel</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Mendel dedujo que había «factores» que se heredaban, pero no sabía dónde estaban. Estos le pusieron dirección: están en los cromosomas.</div></details></div>
+
+    <div class="card"><div class="name">Herencia ligada al sexo</div><div class="fbody">
+      <div class="io"><span class="io-k">Dónde</span><span class="io-v">en el <b>cromosoma X</b></span></div>
+      <div class="io"><span class="io-k">A quién pega</span><span class="io-v">más a los <b>hombres</b>: XY trae una sola X, no hay segunda copia que tape al recesivo</span></div>
+      <div class="io"><span class="io-k">Ejemplos</span><span class="io-v"><b>daltonismo</b> y <b>hemofilia</b></span></div>
+      <div class="leg">La mujer (XX) puede ser <b>portadora</b> sin que se le note.</div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">La mujer trae dos X: si una viene fallada, la otra la cubre. El hombre trae una sola, así que lo que venga en ella se ve, sí o sí.</div></details></div>
+
+    <div class="card"><div class="name">Mutación génica</div><div class="fbody">
+      <div class="dato">Cambio en <b>una o pocas bases</b> del ADN. Ejemplo clásico: la <b>anemia falciforme</b>, donde una sola base cambiada deforma la hemoglobina.</div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Una letra mal escrita en la receta. A veces no pasa nada, y a veces cambia toda la proteína.</div></details></div>
+
+    <div class="card"><div class="name">Mutación cromosómica</div><div class="fbody">
+      <div class="dato">Cambio en la <b>estructura</b> del cromosoma: <b>deleción</b> (se pierde un pedazo), <b>duplicación</b>, <b>inversión</b> (se voltea) y <b>translocación</b> (se cambia de cromosoma).</div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Aquí no se cambió una letra: se arrancó, se repitió o se pegó al revés un párrafo entero.</div></details></div>
+
+    <div class="card"><div class="name">Mutación genómica</div><div class="fbody">
+      <div class="dato">Cambio en el <b>número de cromosomas</b>. El ejemplo que siempre preguntan: el <b>síndrome de Down</b>, que es una <b>trisomía del par 21</b>.</div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">No falló una letra ni un párrafo: sobra o falta un capítulo completo.</div></details></div>
+
+    <div class="card"><div class="name">ADN recombinante</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué es</span><span class="io-v">juntar <b>ADN de dos organismos distintos</b></span></div>
+      <div class="io"><span class="io-k">Herramientas</span><span class="io-v"><b>enzimas de restricción</b> (tijeras) · <b>ADN ligasa</b> (pegamento) · <b>plásmido</b> (el vehículo)</span></div>
+      <div class="io"><span class="io-k">Sale</span><span class="io-v">un organismo <b>transgénico</b></span></div>
+      <div class="io"><span class="io-k">Ejemplo</span><span class="io-v"><b>insulina humana</b> producida por la bacteria <b>E. coli</b></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Se recorta el gen humano de la insulina, se mete en un anillito de ADN bacteriano y se le da a la bacteria. La bacteria lo lee como si fuera suyo y se pone a fabricar insulina.</div></details></div>
+  </div>
+
+  <div class="trap"><h4>Ojo en el examen</h4><ul>
+    <li><b>Genotipo</b> es lo que traes; <b>fenotipo</b> es lo que se ve. <em>AA</em> y <em>Aa</em> se ven igual pero no son lo mismo.</li>
+    <li><b>3:1 es la proporción fenotípica</b> de Aa × Aa. La genotípica es <b>1:2:1</b>. Preguntan cuál es cuál.</li>
+    <li><b>9:3:3:1</b> es de <b>dos</b> caracteres a la vez (AaBb × AaBb), no de uno.</li>
+    <li>El papá le pasa la <b>Y</b> a los hijos varones y la <b>X</b> a las hijas. Por eso el <b>daltonismo lo hereda el hijo de la madre</b>, nunca del padre.</li>
+    <li>Mendel trabajó con <b>chícharos</b>; Morgan con la <b>mosca de la fruta</b>. Y Mendel no sabía que existían los genes.</li>
+  </ul></div>
+</section>
+
+<!-- ============ U5 EVOLUCIÓN ============ -->
+<section class="panel" data-num="5" data-short="Evolución">
+  <div class="panel-head">
+    <div class="u">Unidad 5</div>
+    <h2>Evolución</h2>
+    <p class="lead">Cómo empezó la vida y cómo cambia: las teorías con su autor, las evidencias y los cinco reinos.</p>
+  </div>
+
+  <h3 class="sec">Conceptos clave</h3>
+  <div class="cgrid">
+    <div class="concept"><h4>Dos preguntas distintas</h4><p><b>Cómo empezó</b> la vida (Oparin) y <b>cómo cambia</b> la vida (Darwin) son cosas separadas. Confundirlas es error de examen.</p></div>
+    <div class="concept"><h4>Qué es una especie</h4><p>Grupo de organismos que <b>se cruzan entre sí</b> y dejan <b>descendencia fértil</b>. Por eso la mula no es especie: es híbrida y estéril.</p></div>
+    <div class="concept"><h4>Nomenclatura binomial</h4><p>De <b>Linneo</b>: <b>género</b> con mayúscula + <b>especie</b> con minúscula, en latín y en cursiva. <em>Homo sapiens</em>.</p></div>
+    <div class="concept"><h4>Categorías taxonómicas</h4><p>De lo grande a lo chico: <b>reino · filo · clase · orden · familia · género · especie</b>.</p></div>
+    <div class="concept"><h4>Adaptación</h4><p>Característica que le sirve al organismo <b>en ese ambiente</b>. No es que la desarrolle porque la necesita: es que quien ya la tenía dejó más hijos.</p></div>
+    <div class="concept"><h4>Selección natural, bien dicho</h4><p>No es «el más fuerte». Es el <b>mejor adaptado</b> a ese ambiente y en ese momento. Si el ambiente cambia, cambia quién lleva ventaja.</p></div>
+  </div>
+
+  <h3 class="sec">Teorías, con su autor</h3>
+  <div class="fgrid">
+
+    <div class="card"><div class="name">Teoría quimiosintética (Oparin–Haldane)</div><div class="fbody">
+      <div class="io"><span class="io-k">Explica</span><span class="io-v">el <b>origen de la vida</b></span></div>
+      <div class="io"><span class="io-k">Cómo</span><span class="io-v">en la Tierra primitiva <b>sin oxígeno</b>, la energía (rayos, radiación) formó moléculas orgánicas en el mar → <b>caldo primitivo</b> → <b>coacervados</b> → primeras células</span></div>
+      <div class="io"><span class="io-k">Prueba</span><span class="io-v">el experimento de <b>Miller y Urey</b>, que obtuvo aminoácidos en el laboratorio</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">La idea es que la vida no llegó de golpe: primero se acumularon las piezas sueltas en el mar, y con el tiempo unas gotitas empezaron a comportarse como células.</div></details></div>
+
+    <div class="card"><div class="name">Teoría endosimbiótica (Margulis)</div><div class="fbody">
+      <div class="io"><span class="io-k">Explica</span><span class="io-v">el origen de la célula <b>eucariota</b></span></div>
+      <div class="io"><span class="io-k">Cómo</span><span class="io-v">una célula grande se <b>tragó bacterias</b> que, en vez de digerirse, se quedaron a vivir adentro</span></div>
+      <div class="io"><span class="io-k">Evidencia</span><span class="io-v"><b>mitocondria</b> y <b>cloroplasto</b> tienen <b>ADN propio</b>, doble membrana y ribosomas 70S</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Los organelos que producen energía alguna vez fueron bacterias libres. Se metieron a vivir de arrimadas y acabaron siendo indispensables.</div></details></div>
+
+    <div class="card"><div class="name">Lamarck</div><div class="fbody">
+      <div class="io"><span class="io-k">Mecanismo</span><span class="io-v">la <b>función crea al órgano</b>: lo que se usa se desarrolla, lo que no se atrofia</span></div>
+      <div class="io"><span class="io-k">Y además</span><span class="io-v"><b>herencia de los caracteres adquiridos</b></span></div>
+      <div class="io"><span class="io-k">La jirafa</span><span class="io-v">estiró el cuello para alcanzar las hojas y <em>ese</em> cuello largo se lo pasó a sus hijos</span></div>
+      <div class="io"><span class="io-k">Por qué no</span><span class="io-v">lo que ganas en vida <b>no se hereda</b>: no pasa a los gametos</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Es la explicación intuitiva y por eso se te queda. Pero si fuera cierta, un fisicoculturista tendría hijos musculosos de nacimiento.</div></details></div>
+
+    <div class="card"><div class="name">Darwin–Wallace</div><div class="fbody">
+      <div class="io"><span class="io-k">Mecanismo</span><span class="io-v"><b>selección natural</b>: hay variación en la población y sobreviven y se reproducen los <b>mejor adaptados</b></span></div>
+      <div class="io"><span class="io-k">La jirafa</span><span class="io-v">las que <b>ya nacían</b> con el cuello más largo comieron mejor y dejaron más hijos</span></div>
+      <div class="io"><span class="io-k">Obra</span><span class="io-v"><em>El origen de las especies</em> (1859)</span></div>
+      <div class="io"><span class="io-k">Dónde</span><span class="io-v">viaje del <b>Beagle</b> · los <b>pinzones</b> de las Galápagos</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">La diferencia con Lamarck cabe en una frase: el ambiente no <em>causa</em> el cambio, solo <em>escoge</em> entre lo que ya venía.</div></details></div>
+
+    <div class="card"><div class="name">Teoría sintética (neodarwinismo)</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué es</span><span class="io-v"><b>Darwin + genética</b></span></div>
+      <div class="io"><span class="io-k">De dónde sale la variación</span><span class="io-v">de las <b>mutaciones</b> y la <b>recombinación</b> — lo que Darwin no sabía explicar</span></div>
+      <div class="io"><span class="io-k">Junta</span><span class="io-v">selección natural + genética de Mendel + genética de poblaciones</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">A Darwin le faltaba una pieza: de dónde salía la variación. La genética se la puso, y con eso la teoría quedó completa.</div></details></div>
+  </div>
+
+  <h3 class="sec">Evidencias de la evolución</h3>
+  <div class="fgrid">
+
+    <div class="card"><div class="name">Paleontológicas</div><div class="fbody">
+      <div class="dato">Los <b>fósiles</b>: muestran formas <b>intermedias</b> y el orden en el tiempo. Ejemplo estrella: el <b>Archaeopteryx</b>, entre reptil y ave.</div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Es la evidencia más directa: son las fotos viejas del álbum familiar de la vida.</div></details></div>
+
+    <div class="card"><div class="name">Anatómicas</div><div class="fbody">
+      <div class="io"><span class="io-k">Homólogos</span><span class="io-v"><b>mismo origen, distinta función</b> → ancestro común. Brazo humano, ala de murciélago, aleta de ballena</span></div>
+      <div class="io"><span class="io-k">Análogos</span><span class="io-v"><b>distinto origen, misma función</b> → convergencia. Ala de ave y ala de insecto</span></div>
+      <div class="io"><span class="io-k">Vestigiales</span><span class="io-v">quedaron sin uso: <b>apéndice</b>, <b>cóccix</b>, muelas del juicio</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Los mismos huesos, en el mismo orden, sirviendo para cosas distintas. Solo se explica si venimos del mismo lugar.</div></details></div>
+
+    <div class="card"><div class="name">Embriológicas</div><div class="fbody">
+      <div class="dato">Los <b>embriones</b> de los vertebrados se parecen muchísimo en las primeras etapas: <em>todos</em> pasan por <b>arcos branquiales</b> y <b>cola</b>, incluso el humano.</div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">De adultos no se parecen en nada, pero de embriones cuesta distinguir un pollo de un humano. Eso delata el parentesco.</div></details></div>
+
+    <div class="card"><div class="name">Genéticas</div><div class="fbody">
+      <div class="dato">Todos los seres vivos usan el <b>mismo código genético</b>: el mismo ADN y las mismas cuatro bases. Entre más <b>parecido el ADN</b>, más cercano el parentesco.</div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Que una bacteria y tú usen el mismo idioma para escribir sus genes no puede ser casualidad.</div></details></div>
+
+    <div class="card"><div class="name">Biogeográficas</div><div class="fbody">
+      <div class="dato">La <b>distribución geográfica</b>: especies parecidas en lugares vecinos y especies únicas en <b>islas aisladas</b>. Ejemplo: los <b>pinzones de Galápagos</b>, uno distinto por isla.</div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">En cada isla, un pinzón con un pico distinto según lo que ahí se puede comer. Es la evolución sucediendo en cámara lenta y a la vista.</div></details></div>
+  </div>
+
+  <h3 class="sec">Los cinco reinos (Whittaker)</h3>
+  <div class="fgrid">
+
+    <div class="card"><div class="name">Monera</div><div class="fbody">
+      <div class="dato"><b>Procariotas</b> (sin núcleo), unicelulares. Con <b>pared de peptidoglicano</b>. Son las <b>bacterias</b> y las cianobacterias.</div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Es el único reino sin núcleo. Si la pregunta dice «procariota», ya sabes cuál es.</div></details></div>
+
+    <div class="card"><div class="name">Protista</div><div class="fbody">
+      <div class="dato"><b>Eucariotas</b>, casi todos <b>unicelulares</b>. Es el reino del cajón de sastre: <b>amiba</b>, <b>paramecio</b>, euglena y las <b>algas</b>.</div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Aquí se metió todo lo eucariota que no era ni planta, ni animal, ni hongo.</div></details></div>
+
+    <div class="card"><div class="name">Fungi</div><div class="fbody">
+      <div class="dato">Los <b>hongos</b>. <b>Heterótrofos por absorción</b> (digieren afuera y absorben). Pared de <b>quitina</b>. Setas, levaduras y mohos.</div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">No son plantas aunque no se muevan: no hacen fotosíntesis. Comen lo que descomponen, y su pared es de quitina, como el caparazón de un insecto.</div></details></div>
+
+    <div class="card"><div class="name">Plantae</div><div class="fbody">
+      <div class="dato"><b>Autótrofos</b> por fotosíntesis. Pluricelulares, con <b>pared de celulosa</b> y <b>cloroplastos</b>.</div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Las únicas que se fabrican su propia comida a gran escala. Todo lo demás, directa o indirectamente, come de ellas.</div></details></div>
+
+    <div class="card"><div class="name">Animalia</div><div class="fbody">
+      <div class="dato"><b>Heterótrofos</b> por ingestión (se lo comen entero). Pluricelulares, <b>sin pared celular</b> y casi todos con <b>movimiento</b>.</div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Sin pared celular es la clave: por eso un animal es blandito y una planta truena.</div></details></div>
+  </div>
+
+  <div class="trap"><h4>Ojo en el examen</h4><ul>
+    <li><b>Lamarck vs. Darwin</b>: en Lamarck el ambiente <em>causa</em> el cambio; en Darwin el cambio ya estaba y el ambiente solo <em>selecciona</em>. Lo preguntan con la jirafa, casi siempre.</li>
+    <li><b>Homólogos</b> = mismo origen, distinta función. <b>Análogos</b> = distinto origen, misma función. No confundirlos.</li>
+    <li><b>Oparin</b> explica el origen de la vida · <b>Margulis</b> el de la célula eucariota · <b>Darwin</b> el cambio de las especies. Tres preguntas distintas.</li>
+    <li>La selección natural <b>no es «el más fuerte»</b>: es el mejor adaptado a <em>ese</em> ambiente.</li>
+    <li>Los hongos <b>no son plantas</b>: no hacen fotosíntesis y su pared es de quitina, no de celulosa.</li>
+  </ul></div>
+</section>
+
+<!-- ============ U6 LOS SERES VIVOS Y SU AMBIENTE ============ -->
+<section class="panel" data-num="6" data-short="Ambiente">
+  <div class="panel-head">
+    <div class="u">Unidad 6</div>
+    <h2>Los seres vivos y su ambiente</h2>
+    <p class="lead">Ecología: cómo se organiza un ecosistema, por dónde pasa la energía, cómo circula la materia y cómo se relacionan los que ahí viven.</p>
+  </div>
+
+  <h3 class="sec">Conceptos clave</h3>
+  <div class="cgrid">
+    <div class="concept"><h4>La escalera ecológica</h4><p>Individuo → <b>población</b> (misma especie, mismo lugar) → <b>comunidad</b> (todas las poblaciones juntas) → <b>ecosistema</b> (comunidad + lo físico) → bioma → biosfera.</p></div>
+    <div class="concept"><h4>Bióticos y abióticos</h4><p><b>Bióticos</b>: todo lo vivo. <b>Abióticos</b>: luz, agua, temperatura, suelo, pH, humedad. Los dos juntos hacen el ecosistema.</p></div>
+    <div class="concept"><h4>Cadena vs. trama</h4><p><b>Cadena</b> alimenticia: una sola vía en línea recta. <b>Trama</b> (o red): todas las cadenas entrecruzadas. La trama es lo realista, porque casi nadie come una sola cosa.</p></div>
+    <div class="concept"><h4>Hábitat y nicho</h4><p><b>Hábitat</b> es <em>dónde vive</em> (la dirección). <b>Nicho</b> es <em>a qué se dedica</em> (el oficio): qué come, cuándo, con quién se relaciona.</p></div>
+    <div class="concept"><h4>Energía y materia no son lo mismo</h4><p>La <b>energía fluye</b> en un solo sentido y se acaba (sale como calor). La <b>materia circula</b> en ciclos y se reusa para siempre.</p></div>
+    <div class="concept"><h4>Deterioro ambiental</h4><p>Contaminación, deforestación, pérdida de biodiversidad, <b>efecto invernadero</b>, <b>lluvia ácida</b> y adelgazamiento de la <b>capa de ozono</b>.</p></div>
+  </div>
+
+  <h3 class="sec">Quién es quién en la cadena</h3>
+  <div class="fgrid">
+
+    <div class="card"><div class="name">Productores (autótrofos)</div><div class="fbody">
+      <div class="io"><span class="io-k">Quiénes</span><span class="io-v"><b>plantas</b>, algas y cianobacterias</span></div>
+      <div class="io"><span class="io-k">Qué hacen</span><span class="io-v">fabrican su alimento por <b>fotosíntesis</b></span></div>
+      <div class="io"><span class="io-k">Nivel</span><span class="io-v">el <b>primero</b>: sostienen todo lo demás</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Son la puerta por la que entra la energía del sol al mundo vivo. Sin ellos no hay cadena que empiece.</div></details></div>
+
+    <div class="card"><div class="name">Consumidores (heterótrofos)</div><div class="fbody">
+      <div class="io"><span class="io-k">Primarios</span><span class="io-v"><b>herbívoros</b>: se comen a los productores</span></div>
+      <div class="io"><span class="io-k">Secundarios</span><span class="io-v"><b>carnívoros</b> que se comen a los herbívoros</span></div>
+      <div class="io"><span class="io-k">Terciarios</span><span class="io-v">carnívoros que se comen a otros carnívoros</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">El número no dice qué tan feroz es, sino a qué distancia está de la planta.</div></details></div>
+
+    <div class="card"><div class="name">Descomponedores</div><div class="fbody">
+      <div class="io"><span class="io-k">Quiénes</span><span class="io-v"><b>hongos</b> y <b>bacterias</b></span></div>
+      <div class="io"><span class="io-k">Qué hacen</span><span class="io-v">degradan la <b>materia muerta</b> y devuelven los <b>nutrientes al suelo</b></span></div>
+      <div class="io"><span class="io-k">Por qué importan</span><span class="io-v">sin ellos los <b>ciclos se detienen</b> y todo queda amontonado</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Son los que cierran el círculo. Gracias a ellos el carbono de un árbol caído vuelve a estar disponible para el siguiente.</div></details></div>
+
+    <div class="card"><div class="name">Flujo de energía · regla del 10%</div><div class="fbody">
+      <div class="io"><span class="io-k">Dirección</span><span class="io-v">en <b>un solo sentido</b>: sol → productores → consumidores → se pierde como <b>calor</b></span></div>
+      <div class="io"><span class="io-k">Cuánto pasa</span><span class="io-v">solo el <b>10%</b> de un nivel al siguiente</span></div>
+      <div class="io"><span class="io-k">Por eso</span><span class="io-v">las cadenas son <b>cortas</b> (4 o 5 niveles) y las pirámides van de más a menos</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Por eso siempre hay más pasto que gacelas y más gacelas que leones. En cada escalón se pierde el 90% de la energía, y llega un punto en que ya no alcanza para otro nivel.</div></details></div>
+  </div>
+
+  <h3 class="sec">Ciclos biogeoquímicos</h3>
+  <div class="fgrid">
+
+    <div class="card"><div class="name">Ciclo del carbono</div><div class="fbody">
+      <div class="io"><span class="io-k">Entra</span><span class="io-v">a lo vivo por la <b>fotosíntesis</b> (las plantas toman <b>CO₂</b>)</span></div>
+      <div class="io"><span class="io-k">Regresa</span><span class="io-v">por <b>respiración</b>, <b>descomposición</b> y <b>combustión</b></span></div>
+      <div class="io"><span class="io-k">Reservas</span><span class="io-v">atmósfera (CO₂), océanos y <b>combustibles fósiles</b></span></div>
+      <div class="leg">Quemar combustibles fósiles suelta de golpe lo que llevaba millones de años guardado.</div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">El carbono de tu cuerpo estuvo en el aire, luego en una planta, luego en tu comida. Y volverá al aire. Es el mismo carbono dando vueltas.</div></details></div>
+
+    <div class="card"><div class="name">Ciclo del nitrógeno</div><div class="fbody">
+      <div class="io"><span class="io-k">Reserva</span><span class="io-v">la <b>atmósfera</b> (78% N₂) — pero así <b>nadie lo puede usar</b></span></div>
+      <div class="io"><span class="io-k">Fijación</span><span class="io-v"><b>bacterias fijadoras</b> (<b>Rhizobium</b>, en las raíces de las leguminosas) lo pasan a <b>amonio</b> y <b>nitratos</b></span></div>
+      <div class="io"><span class="io-k">Regresa</span><span class="io-v">las <b>bacterias desnitrificantes</b> lo devuelven al aire como N₂</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Estamos rodeados de nitrógeno y aun así hace falta: el del aire está tan bien amarrado que solo unas bacterias saben abrirlo. Por eso se siembra frijol para descansar la tierra.</div></details></div>
+
+    <div class="card"><div class="name">Ciclo del oxígeno</div><div class="fbody">
+      <div class="io"><span class="io-k">Se libera</span><span class="io-v">por la <b>fotosíntesis</b></span></div>
+      <div class="io"><span class="io-k">Se consume</span><span class="io-v">por la <b>respiración</b> y la <b>combustión</b></span></div>
+      <div class="io"><span class="io-k">Ojo</span><span class="io-v">va <b>amarrado al del carbono</b>: son el mismo intercambio visto al revés</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Todo el oxígeno que respiras lo soltó una planta o un alga. Y el CO₂ que exhalas es justo lo que ellas necesitan.</div></details></div>
+
+    <div class="card"><div class="name">Ciclo del agua</div><div class="fbody">
+      <div class="io"><span class="io-k">Pasos</span><span class="io-v"><b>evaporación</b> → <b>condensación</b> → <b>precipitación</b> → infiltración y escurrimiento</span></div>
+      <div class="io"><span class="io-k">Motor</span><span class="io-v">el <b>sol</b></span></div>
+      <div class="io"><span class="io-k">De lo vivo</span><span class="io-v">las plantas la devuelven por <b>transpiración</b></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">El agua no se crea ni se gasta: es siempre la misma, cambiando de estado y de lugar desde hace millones de años.</div></details></div>
+  </div>
+
+  <h3 class="sec">Relaciones entre organismos</h3>
+  <div class="fgrid">
+
+    <div class="card"><div class="name">Mutualismo</div><div class="fbody">
+      <div class="io"><span class="io-k">Signos</span><span class="io-v"><b>+ / +</b> — los dos ganan</span></div>
+      <div class="io"><span class="io-k">Ejemplos</span><span class="io-v">el <b>liquen</b> (hongo + alga) · las <b>micorrizas</b> · la abeja y la flor</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Un trato en el que a los dos les conviene. El liquen es tan buen ejemplo que ya ni se sabe dónde acaba uno y empieza el otro.</div></details></div>
+
+    <div class="card"><div class="name">Comensalismo</div><div class="fbody">
+      <div class="io"><span class="io-k">Signos</span><span class="io-v"><b>+ / 0</b> — uno gana y al otro ni le va ni le viene</span></div>
+      <div class="io"><span class="io-k">Ejemplo</span><span class="io-v">la <b>rémora</b> pegada al tiburón</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Ir de aventón: aprovechas el viaje y al que maneja no le cuesta nada.</div></details></div>
+
+    <div class="card"><div class="name">Parasitismo</div><div class="fbody">
+      <div class="io"><span class="io-k">Signos</span><span class="io-v"><b>+ / −</b> — uno gana a costa del otro, que se perjudica</span></div>
+      <div class="io"><span class="io-k">Ejemplos</span><span class="io-v">la <b>garrapata</b> · la <b>tenia</b> · el muérdago</span></div>
+      <div class="leg">Al que gana no le conviene matar al otro: se queda sin casa.</div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Vivir del otro sin acabárselo. Es la diferencia con el depredador, que sí se lo come de una vez.</div></details></div>
+
+    <div class="card"><div class="name">Depredación</div><div class="fbody">
+      <div class="io"><span class="io-k">Signos</span><span class="io-v"><b>+ / −</b> — uno se come al otro</span></div>
+      <div class="io"><span class="io-k">Ejemplo</span><span class="io-v">el <b>lobo</b> y el venado</span></div>
+      <div class="leg">Regula el tamaño de las poblaciones en los dos sentidos.</div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Si hay muchos venados, los lobos comen bien y se multiplican; luego escasean los venados y los lobos bajan. Se van meciendo uno al otro.</div></details></div>
+
+    <div class="card"><div class="name">Competencia</div><div class="fbody">
+      <div class="io"><span class="io-k">Signos</span><span class="io-v"><b>− / −</b> — los dos pierden</span></div>
+      <div class="io"><span class="io-k">Por qué</span><span class="io-v">pelean por el <b>mismo recurso</b>: comida, agua, territorio, pareja</span></div>
+      <div class="io"><span class="io-k">Puede ser</span><span class="io-v"><b>intraespecífica</b> (misma especie) o <b>interespecífica</b> (especies distintas)</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">La única relación en la que a nadie le va bien: los dos gastan energía en pelear por algo que no alcanza para ambos.</div></details></div>
+
+    <div class="card"><div class="name">Relaciones intraespecíficas</div><div class="fbody">
+      <div class="dato">Entre individuos de la <b>misma especie</b>: <b>competencia</b>, <b>cooperación</b>, <b>gregarismo</b> (manadas y parvadas), <b>colonias</b> y <b>sociedades</b> (abejas, hormigas).</div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">«Intra» es adentro de la especie; «inter» es entre especies distintas. Con eso no se te vuelven a confundir.</div></details></div>
+  </div>
+
+  <div class="trap"><h4>Ojo en el examen</h4><ul>
+    <li><b>Población</b> = una sola especie · <b>comunidad</b> = todas las especies · <b>ecosistema</b> = comunidad + lo abiótico. Es una escalera y la preguntan seguido.</li>
+    <li>La <b>energía fluye</b> en un solo sentido y se pierde; la <b>materia circula</b> en ciclos. No es lo mismo y es pregunta segura.</li>
+    <li><b>Regla del 10%</b>: por eso hay muchísimo más pasto que gacelas y muchas más gacelas que leones.</li>
+    <li>El <b>nitrógeno del aire no lo usan las plantas</b> directamente: hacen falta las bacterias fijadoras.</li>
+    <li>Los signos son el atajo: <b>mutualismo +/+ · comensalismo +/0 · parasitismo y depredación +/− · competencia −/−</b>.</li>
+    <li><b>Hábitat</b> es dónde vive; <b>nicho</b> es a qué se dedica. Muy preguntado.</li>
+  </ul></div>
+</section>
+
+</main>
+
+<footer>Las 6 unidades del temario oficial de la Guía UNAM 2026 · Área 2 · uso personal de estudio</footer>
+
+<script>
+  const panels = [...document.querySelectorAll('.panel')];
+  const tabs = document.getElementById('tabs');
+  panels.forEach((p,i)=>{
+    const b = document.createElement('button');
+    b.className = 'tab';
+    b.innerHTML = (p.dataset.num ? '<b>'+p.dataset.num+'</b>' : '') + p.dataset.short;
+    b.onclick = ()=> show(i);
+    tabs.appendChild(b);
+  });
+  function show(i){
+    panels.forEach((p,j)=>p.classList.toggle('active', i===j));
+    [...tabs.children].forEach((t,j)=>t.classList.toggle('active', i===j));
+    localStorage.setItem('bio-unidad', i);
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+  show(Math.min(+localStorage.getItem('bio-unidad')||0, panels.length-1));
+
+  document.addEventListener('keydown', e=>{
+    if(e.target.tagName==='INPUT') return;
+    const cur = panels.findIndex(p=>p.classList.contains('active'));
+    if(e.key==='ArrowRight' && cur<panels.length-1) show(cur+1);
+    if(e.key==='ArrowLeft'  && cur>0) show(cur-1);
+  });
+
+  const hint = document.getElementById('hint');
+  function pista(){
+    if(!document.body.classList.contains('memo')){
+      hint.innerHTML = 'Enciende el <b>modo memoria</b> para taparte. El <b>En palabras</b> de cada tarjeta se abre siempre, en cualquier modo.';
+    } else if(document.body.classList.contains('flip')){
+      hint.innerHTML = 'Volteado: ves las <b>sustancias</b> y tienes que decir <b>cómo se llama el proceso</b>. Toca la tarjeta para comprobar.';
+    } else {
+      hint.innerHTML = 'Ves el <b>nombre del proceso</b> y tienes que decir qué entra, qué sale y dónde. Toca la tarjeta para comprobar.';
+    }
+  }
+
+  function cerrarTodas(){
+    document.querySelectorAll('.card.open').forEach(c=>c.classList.remove('open'));
+  }
+
+  const memoBtn = document.getElementById('memoBtn');
+  memoBtn.onclick = ()=>{
+    document.body.classList.toggle('memo');
+    cerrarTodas();
+    localStorage.setItem('bio-memo', document.body.classList.contains('memo')?'1':'0');
+    pista();
+  };
+  const flipBtn = document.getElementById('flipBtn');
+  flipBtn.onclick = ()=>{
+    document.body.classList.toggle('flip');
+    cerrarTodas();
+    localStorage.setItem('bio-flip', document.body.classList.contains('flip')?'1':'0');
+    pista();
+  };
+  if(localStorage.getItem('bio-memo')==='1') document.body.classList.add('memo');
+  if(localStorage.getItem('bio-flip')==='1') document.body.classList.add('flip');
+  pista();
+
+  // al imprimir, se abren todas las explicaciones
+  let abiertas = [];
+  window.addEventListener('beforeprint', ()=>{
+    abiertas = [...document.querySelectorAll('details.why')].filter(d=>d.open);
+    document.querySelectorAll('details.why').forEach(d=>d.open=true);
+  });
+  window.addEventListener('afterprint', ()=>{
+    document.querySelectorAll('details.why').forEach(d=>d.open = abiertas.includes(d));
+  });
+
+  document.addEventListener('click', e=>{
+    // la explicación se abre y cierra sola, sin destapar la tarjeta
+    if(e.target.closest('details.why')) return;
+    if(e.target.closest('.switch')) return;
+    if(!document.body.classList.contains('memo')) return;
+    const c = e.target.closest('.card');
+    if(c) c.classList.toggle('open');
+  });
+</script>
+</body>
+</html>

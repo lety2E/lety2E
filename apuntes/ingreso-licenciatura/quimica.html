@@ -1,0 +1,960 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Química · Área 2 · UNAM</title>
+<style>
+  :root{
+    --M:#FF00AA; --T:#00B8B8; --P:#6A2A8C;
+    --bg:#FFF7FB; --card:#FFFFFF; --ink:#1A0828;
+    --muted:#7B5A50; --border:#F0D7E6; --hover:#FFE3F1; --soft:#FDF1F8;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,system-ui,sans-serif;
+    background:var(--bg);color:var(--ink);line-height:1.5;-webkit-font-smoothing:antialiased;
+  }
+
+  header{text-align:center;padding:2.2rem 1rem .8rem}
+  header .eyebrow{font-size:.76rem;letter-spacing:.18em;text-transform:uppercase;color:var(--T);font-weight:700}
+  header h1{margin:.35rem 0 .25rem;font-size:clamp(1.5rem,3.8vw,2.1rem);color:var(--P)}
+  header p{margin:0 auto;max-width:48ch;color:var(--muted);font-size:.93rem}
+
+  .controls{display:flex;justify-content:center;align-items:center;gap:.6rem;flex-wrap:wrap;padding:1rem 1rem 0}
+  .switch{
+    display:inline-flex;align-items:center;gap:.55rem;
+    background:var(--card);border:1.5px solid var(--border);
+    border-radius:999px;padding:.42rem .9rem;cursor:pointer;
+    font-size:.86rem;font-weight:600;color:var(--ink);transition:all .15s ease;font-family:inherit;
+  }
+  .switch:hover{border-color:var(--T);background:#F0FBFB}
+  .switch .dot{width:34px;height:19px;border-radius:999px;background:var(--border);position:relative;transition:background .18s ease;flex:none}
+  .switch .dot::after{
+    content:"";position:absolute;top:2.5px;left:2.5px;width:14px;height:14px;border-radius:50%;
+    background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.25);transition:transform .18s ease;
+  }
+  body.memo .switch#memoBtn .dot{background:var(--T)}
+  body.memo .switch#memoBtn .dot::after{transform:translateX(15px)}
+  body.flip .switch#flipBtn .dot{background:var(--M)}
+  body.flip .switch#flipBtn .dot::after{transform:translateX(15px)}
+  #flipBtn{display:none}
+  body.memo #flipBtn{display:inline-flex}
+  .hint{text-align:center;color:var(--muted);font-size:.8rem;padding:.55rem 1rem 0;min-height:1.4rem;max-width:62ch;margin:0 auto}
+
+  .tabs{max-width:1180px;margin:.9rem auto 0;padding:0 1rem;display:flex;flex-wrap:wrap;gap:.45rem;justify-content:center}
+  .tab{
+    background:var(--card);border:1.5px solid var(--border);color:var(--ink);
+    border-radius:999px;padding:.45rem .9rem;font-size:.87rem;font-weight:600;
+    cursor:pointer;transition:all .15s ease;font-family:inherit;white-space:nowrap;
+  }
+  .tab b{color:var(--T);margin-right:.35rem;font-weight:800}
+  .tab:hover{background:var(--hover);border-color:var(--M)}
+  .tab.active{background:var(--M);color:#fff;border-color:var(--M);box-shadow:0 4px 12px rgba(255,0,170,.25)}
+  .tab.active b{color:#fff}
+
+  main{max-width:1000px;margin:1.5rem auto 4rem;padding:0 1rem}
+  .panel{display:none}
+  .panel.active{display:block;animation:fade .25s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+
+  .panel-head{margin-bottom:1.3rem;padding-bottom:.8rem;border-bottom:2px solid var(--border)}
+  .panel-head .u{font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--T);font-weight:800}
+  .panel-head h2{margin:.2rem 0 .3rem;color:var(--P);font-size:clamp(1.25rem,3vw,1.65rem)}
+  .panel-head .lead{color:var(--muted);font-size:.9rem;margin:0}
+
+  h3.sec{
+    display:flex;align-items:center;gap:.6rem;margin:2rem 0 .9rem;
+    font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--P);
+  }
+  h3.sec::after{content:"";flex:1;height:1.5px;background:var(--border)}
+
+  .cgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:.7rem}
+  .concept{background:var(--card);border:1.5px solid var(--border);border-left:4px solid var(--T);border-radius:12px;padding:.75rem .9rem}
+  .concept h4{margin:0 0 .25rem;font-size:.93rem;color:var(--P)}
+  .concept p{margin:0;font-size:.87rem;color:var(--ink)}
+  .concept em{color:var(--muted);font-style:normal}
+
+  .fgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:.7rem}
+  .card{
+    background:var(--card);border:1.5px solid var(--border);border-radius:14px;
+    padding:.8rem .9rem .7rem;position:relative;transition:border-color .15s ease,box-shadow .15s ease;
+  }
+  .card:hover{border-color:var(--M);box-shadow:0 6px 18px rgba(255,0,170,.10)}
+  .card .name{font-size:.95rem;font-weight:700;color:var(--M);margin-bottom:.45rem;padding-right:5.2rem;transition:filter .18s ease}
+  .fbody .dato,.fbody .eq,.fbody .io-v{transition:filter .18s ease}
+
+  /* fórmula, en serif como el formulario de Física */
+  .eq{
+    font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+    font-size:1.14rem;text-align:center;padding:.45rem .2rem .5rem;color:var(--ink);overflow-x:auto;
+  }
+  .eq + .eq{border-top:1px dashed var(--border)}
+  .eq i{font-style:italic}
+  .eq sub{font-size:.72em}
+  .frac{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;margin:0 .16em;line-height:1.12;font-size:.92em}
+  .frac span:first-child{border-bottom:1.4px solid currentColor;padding:0 .3em}
+  .frac span:last-child{padding:0 .3em}
+
+  .io{display:grid;grid-template-columns:6.1rem 1fr;gap:.5rem;align-items:baseline;padding:.28rem 0}
+  .io + .io{border-top:1px dashed var(--border)}
+  .io-k{
+    font-size:.66rem;letter-spacing:.09em;text-transform:uppercase;color:var(--T);font-weight:800;
+    min-width:0;overflow-wrap:anywhere;line-height:1.25;
+  }
+  .io-v{font-size:.88rem;color:var(--ink)}
+  .io-v b{color:var(--P);font-weight:700}
+
+  .dato{font-size:.89rem;color:var(--ink);padding:.1rem 0 .2rem}
+  .dato ul{margin:.2rem 0;padding-left:1.1rem}
+  .dato li{margin-bottom:.25rem}
+  .dato li:last-child{margin-bottom:0}
+  .dato b{color:var(--P);font-weight:700}
+  .dato .f{font-family:"Iowan Old Style",Palatino,Georgia,serif;font-size:1.02em}
+
+  .leg{font-size:.78rem;color:var(--muted);border-top:1.5px solid var(--soft);padding-top:.45rem;margin-top:.35rem}
+  .leg b{color:var(--P);font-weight:700}
+
+  details.why{margin-top:.55rem;border-top:1.5px solid var(--soft);padding-top:.45rem}
+  details.why > summary{
+    list-style:none;cursor:pointer;display:flex;align-items:center;gap:.35rem;
+    font-size:.76rem;font-weight:700;color:var(--T);letter-spacing:.02em;
+  }
+  details.why > summary::-webkit-details-marker{display:none}
+  details.why > summary::after{content:"▾";font-size:.8rem;transition:transform .15s ease}
+  details.why[open] > summary::after{transform:rotate(180deg)}
+  details.why > summary:hover{color:var(--M)}
+  details.why .why-body{font-size:.83rem;line-height:1.45;color:var(--ink);background:var(--soft);border-radius:10px;padding:.55rem .7rem;margin-top:.45rem}
+
+  .trap{background:#FFF9E8;border:1.5px solid #F5E2A8;border-left:4px solid #E8B93B;border-radius:12px;padding:.8rem 1rem;margin-top:.7rem}
+  .trap h4{margin:0 0 .4rem;font-size:.86rem;color:#8A6410}
+  .trap ul{margin:0;padding-left:1.1rem;font-size:.86rem;color:#5C4712}
+  .trap li{margin-bottom:.25rem}
+  .trap li:last-child{margin-bottom:0}
+
+  /* ---------- Modo memoria ---------- */
+  /* se tapa el valor, nunca la etiqueta: el andamio queda para poder recitar */
+  body.memo:not(.flip) .fbody .io-v,
+  body.memo:not(.flip) .fbody .dato,
+  body.memo:not(.flip) .fbody .eq{filter:blur(6.5px)}
+  body.memo:not(.flip) .card.open .fbody .io-v,
+  body.memo:not(.flip) .card.open .fbody .dato,
+  body.memo:not(.flip) .card.open .fbody .eq{filter:none}
+
+  body.memo.flip .card .name{filter:blur(6.5px)}
+  body.memo.flip .card.open .name{filter:none}
+
+  body.memo .card{cursor:pointer}
+  body.memo .card::after{
+    content:"toca para ver";position:absolute;right:.7rem;top:.72rem;
+    font-size:.66rem;color:var(--T);font-weight:700;letter-spacing:.04em;
+  }
+  body.memo .card.open::after{content:""}
+  body.memo details.why{filter:none}
+
+  footer{text-align:center;color:var(--muted);font-size:.8rem;padding:0 1rem 3rem;max-width:60ch;margin:0 auto}
+
+  @media print{
+    .tabs,.controls,.hint,footer{display:none}
+    .panel{display:block!important;page-break-after:always}
+    body.memo .fbody .dato,body.memo .fbody .eq,body.memo .fbody .io-v,body.memo .card .name{filter:none}
+    body{background:#fff}
+  }
+</style>
+
+<style>
+/* ---- barra de regreso lety2E (prefijo l2e- para no chocar) ---- */
+.l2e-volver{
+  font-family:'DM Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
+  font-size:.85rem;font-weight:500;
+  padding:.7rem 1.1rem;
+  background:#1A0828;color:#F5E9F2;
+  display:flex;flex-wrap:wrap;align-items:center;gap:.45rem;
+  line-height:1.5;
+}
+.l2e-volver a{color:#00DEC8;text-decoration:none;}
+.l2e-volver a:hover{color:#FF00AA;text-decoration:underline;}
+.l2e-volver .l2e-sep{opacity:.45;}
+.l2e-volver .l2e-actual{opacity:.75;}
+.l2e-volver .l2e-marca{
+  margin-left:auto;font-family:Georgia,'Times New Roman',serif;
+  font-style:italic;font-weight:700;color:#FF00AA;text-decoration:none;
+}
+.l2e-volver .l2e-marca:hover{color:#00DEC8;}
+@media (max-width:520px){
+  .l2e-volver{font-size:.78rem;padding:.6rem .8rem;}
+  .l2e-volver .l2e-marca{margin-left:auto;}
+}
+</style>
+</head>
+<body data-section="apuntes">
+<nav class="l2e-volver">
+  <a href="../../index.html">Inicio</a>
+  <span class="l2e-sep">&rsaquo;</span>
+  <a href="../index.html">Apuntes</a>
+  <span class="l2e-sep">&rsaquo;</span>
+  <a href="index.html">Ingreso UNAM</a>
+  <span class="l2e-sep">&rsaquo;</span>
+  <span class="l2e-actual">Química</span>
+  <a class="l2e-marca" href="../../index.html">lety2E</a>
+</nav>
+
+
+<header>
+  <div class="eyebrow">Guía UNAM · Área 2 · Ciencias Biológicas, Químicas y de la Salud</div>
+  <h1>Química</h1>
+  <p>Materia mixta: unas cuantas fórmulas de verdad y <b>mucho que se memoriza sin ser fórmula</b> — enlaces, nomenclatura, tendencias, grupos funcionales.</p>
+</header>
+
+<div class="controls">
+  <button class="switch" id="memoBtn"><span class="dot"></span> Modo memoria</button>
+  <button class="switch" id="flipBtn"><span class="dot"></span> Voltear</button>
+</div>
+<div class="hint" id="hint">Enciende el <b>modo memoria</b> para taparte. El <b>En palabras</b> de cada tarjeta se abre siempre, en cualquier modo.</div>
+
+<nav class="tabs" id="tabs"></nav>
+
+<main id="main">
+
+<!-- ============ U1 TEMAS BÁSICOS ============ -->
+<section class="panel" data-num="1" data-short="Temas básicos">
+  <div class="panel-head">
+    <div class="u">Unidad 1</div>
+    <h2>Temas básicos</h2>
+    <p class="lead">De qué está hecha la materia, cómo se acomoda en la tabla periódica y cómo se pegan los átomos entre sí.</p>
+  </div>
+
+  <h3 class="sec">Conceptos clave</h3>
+  <div class="cgrid">
+    <div class="concept"><h4>Sustancia pura vs. mezcla</h4><p><b>Pura</b>: composición fija — puede ser <b>elemento</b> (un solo tipo de átomo) o <b>compuesto</b>. <b>Mezcla</b>: dos o más sustancias juntas sin combinarse, en proporción variable, y se separan por medios <em>físicos</em>.</p></div>
+    <div class="concept"><h4>Homogénea vs. heterogénea</h4><p><b>Homogénea</b> (o disolución): una sola fase, no distingues los componentes — agua con sal, aire, acero. <b>Heterogénea</b>: se distinguen las fases — agua con aceite, granito.</p></div>
+    <div class="concept"><h4>Elemento vs. compuesto</h4><p><b>Elemento</b>: un solo tipo de átomo (Fe, O₂). <b>Compuesto</b>: dos o más elementos unidos <em>químicamente</em> y en proporción fija (H₂O, NaCl). El compuesto solo se separa por medios <b>químicos</b>.</p></div>
+    <div class="concept"><h4>Las partículas del átomo</h4><p><b>Protón</b> (+) y <b>neutrón</b> (sin carga) viven en el núcleo y ahí está casi toda la masa. El <b>electrón</b> (−) está afuera y casi no pesa.</p></div>
+    <div class="concept"><h4>Regla del octeto</h4><p>Los átomos ganan, pierden o comparten electrones hasta quedar con <b>8</b> en su última capa, que es como andan los <b>gases nobles</b> — los únicos que ya nacen conformes y por eso casi no reaccionan.</p></div>
+    <div class="concept"><h4>Métodos de separación</h4><p>De mezclas, todos <em>físicos</em>: filtración, decantación, destilación, evaporación, cromatografía, imantación y centrifugación.</p></div>
+  </div>
+
+  <h3 class="sec">El átomo y el mol</h3>
+  <div class="fgrid">
+
+    <div class="card"><div class="name">Número atómico (Z)</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué es</span><span class="io-v">el número de <b>protones</b></span></div>
+      <div class="io"><span class="io-k">Para qué</span><span class="io-v">es lo que <b>define al elemento</b>: si cambia Z, ya es otro elemento</span></div>
+      <div class="io"><span class="io-k">Ojo</span><span class="io-v">en un átomo <b>neutro</b> también es el número de electrones</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Es la credencial del elemento. Todo átomo con 6 protones es carbono, pase lo que pase con lo demás.</div></details></div>
+
+    <div class="card"><div class="name">Número de masa (A)</div><div class="fbody">
+      <div class="eq"><i>A</i> = <i>Z</i> + n<sup>0</sup></div>
+      <div class="io"><span class="io-k">Qué suma</span><span class="io-v"><b>protones + neutrones</b>, o sea todo lo que está en el núcleo</span></div>
+      <div class="io"><span class="io-k">No incluye</span><span class="io-v">los <b>electrones</b>: pesan tan poco que no cuentan</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">La masa del átomo está casi toda en el núcleo. Los electrones son como el polvo alrededor de una piedra.</div></details></div>
+
+    <div class="card"><div class="name">Isótopos</div><div class="fbody">
+      <div class="dato">Átomos del <b>mismo elemento</b> (mismo Z) con <b>distinto número de neutrones</b>, o sea distinta A. Ejemplo: el <b>carbono-12</b> y el <b>carbono-14</b>.</div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Es el mismo elemento en versiones más pesadas o más ligeras. El carbono-14 es el que se usa para fechar fósiles.</div></details></div>
+
+    <div class="card"><div class="name">Mol</div><div class="fbody">
+      <div class="eq"><i>n</i> = <span class="frac"><span><i>m</i></span><span><i>M</i></span></span></div>
+      <div class="io"><span class="io-k">Qué es</span><span class="io-v">la cantidad que contiene <b>6.022×10²³</b> partículas (número de <b>Avogadro</b>)</span></div>
+      <div class="io"><span class="io-k">Variables</span><span class="io-v"><b>n</b> moles · <b>m</b> masa en g · <b>M</b> masa molar en g/mol</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Es la «docena» de los químicos, pero gigante. Sirve para poder contar átomos pesándolos, que es lo único que se puede hacer en un laboratorio.</div></details></div>
+
+    <div class="card"><div class="name">Masa molar (M)</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué es</span><span class="io-v">la <b>suma de las masas atómicas</b> de la fórmula, en <b>g/mol</b></span></div>
+      <div class="io"><span class="io-k">Ejemplo</span><span class="io-v">H₂O = (2×1) + 16 = <b>18 g/mol</b></span></div>
+      <div class="io"><span class="io-k">Dónde ver</span><span class="io-v">en la <b>tabla periódica</b>, es el número con decimales</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Cuánto pesa un mol de esa sustancia. Se saca sumando lo que dice la tabla para cada átomo de la fórmula.</div></details></div>
+
+    <div class="card"><div class="name">Configuración electrónica</div><div class="fbody">
+      <div class="io"><span class="io-k">Orden</span><span class="io-v"><span class="dato f">1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰…</span></span></div>
+      <div class="io"><span class="io-k">Capacidad</span><span class="io-v">s = <b>2</b> · p = <b>6</b> · d = <b>10</b> · f = <b>14</b></span></div>
+      <div class="io"><span class="io-k">Ojo</span><span class="io-v">el <b>4s se llena antes que el 3d</b>: por eso el orden no es el numérico</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Es el mapa de dónde se van sentando los electrones. Los de la última capa son los que reaccionan; los de adentro casi nunca se enteran de nada.</div></details></div>
+  </div>
+
+  <h3 class="sec">Los enlaces</h3>
+  <div class="fgrid">
+
+    <div class="card"><div class="name">Enlace iónico</div><div class="fbody">
+      <div class="io"><span class="io-k">Entre</span><span class="io-v"><b>metal + no metal</b></span></div>
+      <div class="io"><span class="io-k">Qué pasa</span><span class="io-v">se <b>transfieren</b> electrones: uno los cede y el otro los toma</span></div>
+      <div class="io"><span class="io-k">Cuándo</span><span class="io-v">diferencia de electronegatividad <b>grande</b> (mayor a 1.7)</span></div>
+      <div class="io"><span class="io-k">Propiedades</span><span class="io-v">forma <b>cristales</b> · punto de fusión <b>alto</b> · conduce <b>disuelto o fundido</b>, no en sólido</span></div>
+      <div class="io"><span class="io-k">Ejemplo</span><span class="io-v"><b>NaCl</b> (la sal de mesa)</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Uno le regala el electrón al otro y se quedan pegados porque ahora tienen cargas opuestas. Es un enlace de atracción eléctrica, no de compartir.</div></details></div>
+
+    <div class="card"><div class="name">Enlace covalente</div><div class="fbody">
+      <div class="io"><span class="io-k">Entre</span><span class="io-v"><b>no metal + no metal</b></span></div>
+      <div class="io"><span class="io-k">Qué pasa</span><span class="io-v">se <b>comparten</b> electrones</span></div>
+      <div class="io"><span class="io-k">Polar</span><span class="io-v">se comparten <b>desigual</b> (distinta electronegatividad) → <b>H₂O</b></span></div>
+      <div class="io"><span class="io-k">No polar</span><span class="io-v">se comparten <b>parejo</b> (igual electronegatividad) → <b>O₂</b></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Aquí nadie regala nada: los dos ponen electrones sobre la mesa y los usan juntos. Si uno jala más fuerte, el enlace queda «chueco» y la molécula sale polar.</div></details></div>
+
+    <div class="card"><div class="name">Enlace metálico</div><div class="fbody">
+      <div class="io"><span class="io-k">Entre</span><span class="io-v"><b>metal + metal</b></span></div>
+      <div class="io"><span class="io-k">Qué pasa</span><span class="io-v">los electrones quedan <b>libres</b>, en un «mar de electrones» compartido por todos</span></div>
+      <div class="io"><span class="io-k">Por eso</span><span class="io-v">conducen <b>electricidad</b> y <b>calor</b>, y son <b>maleables</b> y dúctiles</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Los electrones no le pertenecen a ningún átomo: andan sueltos por toda la pieza. Por eso el metal conduce, y por eso lo puedes doblar sin que se rompa.</div></details></div>
+  </div>
+
+  <h3 class="sec">Propiedades periódicas</h3>
+  <div class="fgrid">
+
+    <div class="card"><div class="name">Electronegatividad</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué mide</span><span class="io-v">con qué fuerza un átomo <b>jala los electrones</b> del enlace</span></div>
+      <div class="io"><span class="io-k">Cómo varía</span><span class="io-v">aumenta hacia la <b>derecha</b> y hacia <b>arriba</b></span></div>
+      <div class="io"><span class="io-k">El campeón</span><span class="io-v">el <b>flúor</b> (4.0), el más electronegativo de todos</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Es qué tan «codicioso» es un átomo con los electrones. Arriba a la derecha están los más codiciosos; abajo a la izquierda, los más desprendidos.</div></details></div>
+
+    <div class="card"><div class="name">Energía de ionización</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué mide</span><span class="io-v">la energía que cuesta <b>arrancarle</b> un electrón</span></div>
+      <div class="io"><span class="io-k">Cómo varía</span><span class="io-v">aumenta hacia la <b>derecha</b> y hacia <b>arriba</b></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Si un átomo es codicioso con los electrones, también le cuesta soltarlos. Por eso va en la misma dirección que la electronegatividad.</div></details></div>
+
+    <div class="card"><div class="name">Afinidad electrónica</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué mide</span><span class="io-v">la energía que se <b>libera</b> cuando el átomo <b>gana</b> un electrón</span></div>
+      <div class="io"><span class="io-k">Cómo varía</span><span class="io-v">aumenta hacia la <b>derecha</b> y hacia <b>arriba</b></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Qué tan a gusto se siente el átomo al recibir un electrón de más. Las tres propiedades «codiciosas» van para el mismo lado.</div></details></div>
+
+    <div class="card"><div class="name">Radio atómico</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué mide</span><span class="io-v">el <b>tamaño</b> del átomo</span></div>
+      <div class="io"><span class="io-k">Cómo varía</span><span class="io-v">aumenta hacia la <b>izquierda</b> y hacia <b>abajo</b></span></div>
+      <div class="leg">Es la única de las cuatro que va <b>al revés</b> que las demás.</div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Hacia abajo crece porque se van agregando capas. Hacia la derecha se encoge porque el núcleo tiene más protones y jala más fuerte la misma capa.</div></details></div>
+  </div>
+
+  <h3 class="sec">Las cinco familias de compuestos</h3>
+  <div class="fgrid">
+
+    <div class="card"><div class="name">Óxido básico</div><div class="fbody">
+      <div class="io"><span class="io-k">De qué</span><span class="io-v"><b>metal + oxígeno</b></span></div>
+      <div class="io"><span class="io-k">Con agua da</span><span class="io-v">una <b>base</b> (hidróxido)</span></div>
+      <div class="io"><span class="io-k">Ejemplos</span><span class="io-v"><b>Na₂O</b> · <b>CaO</b> (la cal)</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Metal más oxígeno. El adjetivo del nombre viene de lo que pasa después: si le echas agua, da una base.</div></details></div>
+
+    <div class="card"><div class="name">Óxido ácido (anhídrido)</div><div class="fbody">
+      <div class="io"><span class="io-k">De qué</span><span class="io-v"><b>no metal + oxígeno</b></span></div>
+      <div class="io"><span class="io-k">Con agua da</span><span class="io-v">un <b>ácido</b></span></div>
+      <div class="io"><span class="io-k">Ejemplos</span><span class="io-v"><b>SO₃</b> · <b>CO₂</b> · <b>NO₂</b></span></div>
+      <div class="leg">Son justo los que causan la <b>lluvia ácida</b>.</div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">No metal más oxígeno. Su otro nombre quiere decir «sin agua»: si le pones agua, se convierte en el que suelta H⁺.</div></details></div>
+
+    <div class="card"><div class="name">Ácido</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué libera</span><span class="io-v"><b>H⁺</b> en agua</span></div>
+      <div class="io"><span class="io-k">Cómo se ve</span><span class="io-v">la fórmula <b>empieza con H</b></span></div>
+      <div class="io"><span class="io-k">Ejemplos</span><span class="io-v"><b>HCl</b> · <b>H₂SO₄</b> · <b>HNO₃</b></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Si la fórmula empieza con H, ya sabes de cuál de los dos se trata. Ese hidrógeno es el que se suelta y hace todo el desastre.</div></details></div>
+
+    <div class="card"><div class="name">Base (hidróxido)</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué libera</span><span class="io-v"><b>OH⁻</b> en agua</span></div>
+      <div class="io"><span class="io-k">Cómo se ve</span><span class="io-v">la fórmula <b>termina en OH</b></span></div>
+      <div class="io"><span class="io-k">Ejemplos</span><span class="io-v"><b>NaOH</b> (sosa) · <b>Ca(OH)₂</b> (cal apagada)</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Si la fórmula termina en OH, ya está. Se sienten jabonosas al tacto — de hecho el jabón es exactamente eso.</div></details></div>
+
+    <div class="card"><div class="name">Sal</div><div class="fbody">
+      <div class="eq">ácido + base → <b>sal</b> + agua</div>
+      <div class="io"><span class="io-k">De dónde</span><span class="io-v">de la <b>neutralización</b> de un ácido con una base</span></div>
+      <div class="io"><span class="io-k">Ejemplo</span><span class="io-v">HCl + NaOH → <b>NaCl</b> + H₂O</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Cuando un ácido y una base se encuentran, se anulan y dejan dos cosas inofensivas: sal y agua.</div></details></div>
+  </div>
+
+  <div class="trap"><h4>Ojo en el examen</h4><ul>
+    <li>El <b>radio atómico va al revés</b> que la electronegatividad, la ionización y la afinidad. Las otras tres suben a la derecha y arriba; el radio, a la izquierda y abajo.</li>
+    <li><b>Mezcla homogénea ≠ compuesto.</b> El agua con sal es mezcla (proporción variable, se separa evaporando); el agua es compuesto (proporción fija, solo se separa químicamente).</li>
+    <li><b>Iónico = metal + no metal</b> (se transfieren) · <b>covalente = no metal + no metal</b> (se comparten). Con eso sale la mayoría de las preguntas.</li>
+    <li>Los <b>gases nobles</b> ya tienen el octeto completo: por eso casi no reaccionan y no forman enlaces.</li>
+    <li>Un <b>ion</b> es un átomo con carga: <b>catión</b> si perdió electrones (+) y <b>anión</b> si los ganó (−).</li>
+  </ul></div>
+</section>
+
+<!-- ============ U2 AGUA ============ -->
+<section class="panel" data-num="2" data-short="Agua">
+  <div class="panel-head">
+    <div class="u">Unidad 2</div>
+    <h2>Agua</h2>
+    <p class="lead">Por qué el agua es tan rara, y todo lo de ácidos, bases, pH y disoluciones. Aquí están casi todas las fórmulas de la materia.</p>
+  </div>
+
+  <h3 class="sec">Conceptos clave</h3>
+  <div class="cgrid">
+    <div class="concept"><h4>La molécula de agua</h4><p>Es <b>angular</b> (unos 104.5°), no recta. El oxígeno es muy electronegativo y jala los electrones: por eso queda con carga parcial negativa y los hidrógenos positiva. O sea, es <b>polar</b>.</p></div>
+    <div class="concept"><h4>Puente de hidrógeno</h4><p>La atracción entre el <b>H</b> de una molécula y el <b>O</b> de la de al lado. <em>No es un enlace covalente</em> — es mucho más débil — pero explica casi todo lo raro del agua.</p></div>
+    <div class="concept"><h4>Por qué el agua es rara</h4><p>Puntos de <b>fusión y ebullición altísimos</b> para lo chiquita que es, <b>capacidad calorífica</b> enorme, y el <b>hielo flota</b>. Todo eso lo causan los puentes de hidrógeno.</p></div>
+    <div class="concept"><h4>Disolvente universal</h4><p>Disuelve lo <b>polar</b> y lo <b>iónico</b>: «lo semejante disuelve a lo semejante». No disuelve las <b>grasas</b>, que son apolares — por eso el aceite se separa.</p></div>
+    <div class="concept"><h4>Fuerte no es lo mismo que concentrado</h4><p><b>Fuerte/débil</b> es qué tanto se <em>ioniza</em> (y por eso qué tanto conduce). <b>Concentrado/diluido</b> es cuánto soluto hay. Un ácido fuerte muy diluido puede tener pH más alto que uno débil concentrado.</p></div>
+    <div class="concept"><h4>Contaminación del agua</h4><p><b>Físicos</b> (sedimentos, calor), <b>químicos</b> (metales pesados, detergentes, pesticidas) y <b>biológicos</b> (bacterias, virus). Fuentes: <b>industrial, urbana y agrícola</b>.</p></div>
+  </div>
+
+  <h3 class="sec">pH y acidez</h3>
+  <div class="fgrid">
+
+    <div class="card"><div class="name">pH</div><div class="fbody">
+      <div class="eq">pH = −log [H<sup>+</sup>]</div>
+      <div class="io"><span class="io-k">Escala</span><span class="io-v"><b>&lt; 7</b> ácido · <b>= 7</b> neutro · <b>&gt; 7</b> básico</span></div>
+      <div class="io"><span class="io-k">Ojo</span><span class="io-v">es <b>logarítmica</b>: cada unidad son <b>10 veces</b> más o menos H⁺</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Entre más H⁺ suelto haya, más ácido y <em>más bajo</em> el número. Suena al revés, pero es porque el logaritmo lleva signo negativo.</div></details></div>
+
+    <div class="card"><div class="name">pOH</div><div class="fbody">
+      <div class="eq">pOH = −log [OH<sup>−</sup>]</div>
+      <div class="eq">pH + pOH = 14</div>
+      <div class="io"><span class="io-k">Para qué</span><span class="io-v">si te dan uno, el otro sale <b>restando de 14</b></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Los dos números siempre suman 14, así que basta saber uno. Si el pH es 3, el pOH es 11.</div></details></div>
+
+    <div class="card"><div class="name">Producto iónico del agua (Kw)</div><div class="fbody">
+      <div class="eq"><i>K</i><sub>w</sub> = [H<sup>+</sup>][OH<sup>−</sup>] = 1×10<sup>−14</sup></div>
+      <div class="io"><span class="io-k">Qué dice</span><span class="io-v">en agua pura hay <b>10⁻⁷</b> de cada uno — por eso el neutro es <b>pH 7</b></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Hasta el agua más pura tiene un poquito de H⁺ y de OH⁻, en cantidades iguales. De ahí sale que el neutro sea exactamente 7.</div></details></div>
+
+    <div class="card"><div class="name">Indicadores</div><div class="fbody">
+      <div class="io"><span class="io-k">Fenolftaleína</span><span class="io-v"><b>incolora</b> en ácido · <b>rosa/fucsia</b> en base</span></div>
+      <div class="io"><span class="io-k">Tornasol</span><span class="io-v"><b>rojo</b> en ácido · <b>azul</b> en base</span></div>
+      <div class="io"><span class="io-k">Naranja de metilo</span><span class="io-v"><b>rojo</b> en ácido · <b>amarillo</b> en base</span></div>
+      <div class="leg">La <b>primera</b> es la que más preguntan.</div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Son sustancias que cambian de color según el pH. Sirven para ver a ojo si algo es ácido o base, sin aparatos.</div></details></div>
+
+    <div class="card"><div class="name">Neutralización</div><div class="fbody">
+      <div class="eq">ácido + base → sal + agua</div>
+      <div class="io"><span class="io-k">Ejemplo</span><span class="io-v">HCl + NaOH → <b>NaCl</b> + <b>H₂O</b></span></div>
+      <div class="io"><span class="io-k">Resultado</span><span class="io-v">el pH se acerca a <b>7</b></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Es lo que hace un antiácido en el estómago: le echa base al ácido de más y los deja en paz a los dos.</div></details></div>
+
+    <div class="card"><div class="name">Valores de pH que se preguntan</div><div class="fbody">
+      <div class="io"><span class="io-k">Muy ácido</span><span class="io-v">jugo gástrico <b>≈ 2</b> · limón ≈ 2.5 · vinagre ≈ 3</span></div>
+      <div class="io"><span class="io-k">Neutro</span><span class="io-v">agua pura <b>7</b></span></div>
+      <div class="io"><span class="io-k">Básico</span><span class="io-v">sangre <b>7.4</b> · bicarbonato ≈ 9 · sosa ≈ 14</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">La sangre es ligeramente básica y se mantiene ahí casi sin moverse: si se sale de ese rangito, hay problemas serios.</div></details></div>
+  </div>
+
+  <h3 class="sec">Las tres teorías ácido–base</h3>
+  <div class="fgrid">
+
+    <div class="card"><div class="name">Arrhenius</div><div class="fbody">
+      <div class="io"><span class="io-k">Ácido</span><span class="io-v">el que <b>libera H⁺</b></span></div>
+      <div class="io"><span class="io-k">Base</span><span class="io-v">la que <b>libera OH⁻</b></span></div>
+      <div class="io"><span class="io-k">Límite</span><span class="io-v">solo sirve <b>en agua</b> — es la más estrecha de las tres</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">La definición más vieja y más sencilla. Funciona bien mientras todo pase en agua, que es casi siempre en el examen.</div></details></div>
+
+    <div class="card"><div class="name">Brönsted–Lowry</div><div class="fbody">
+      <div class="io"><span class="io-k">Ácido</span><span class="io-v">el que <b>dona</b> un protón (H⁺)</span></div>
+      <div class="io"><span class="io-k">Base</span><span class="io-v">la que <b>acepta</b> un protón</span></div>
+      <div class="io"><span class="io-k">Ventaja</span><span class="io-v">ya no hace falta que haya agua</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Es la misma idea pero contada como un intercambio: alguien da el protón y alguien lo recibe. La palabra clave es <em>protón</em>.</div></details></div>
+
+    <div class="card"><div class="name">Lewis</div><div class="fbody">
+      <div class="io"><span class="io-k">Ácido</span><span class="io-v">el que <b>acepta</b> un par de electrones</span></div>
+      <div class="io"><span class="io-k">Base</span><span class="io-v">la que <b>dona</b> un par de electrones</span></div>
+      <div class="io"><span class="io-k">Ventaja</span><span class="io-v">es la <b>más amplia</b>: abarca a las otras dos</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Cuidado, que aquí se invierte: en esta pareja el ácido <em>recibe</em>. Es al revés de Brönsted, donde el ácido daba. Esa es la trampa.</div></details></div>
+  </div>
+
+  <h3 class="sec">Disoluciones</h3>
+  <div class="fgrid">
+
+    <div class="card"><div class="name">Molaridad (M)</div><div class="fbody">
+      <div class="eq"><i>M</i> = <span class="frac"><span>mol de soluto</span><span>litros de disolución</span></span></div>
+      <div class="io"><span class="io-k">Unidad</span><span class="io-v"><b>mol/L</b> (molar)</span></div>
+      <div class="io"><span class="io-k">Ojo</span><span class="io-v">van los litros de <b>disolución</b>, no los de disolvente</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Cuánto soluto hay por cada litro de la mezcla ya hecha. El detalle de «disolución y no disolvente» es justo lo que preguntan.</div></details></div>
+
+    <div class="card"><div class="name">Porcentaje en masa</div><div class="fbody">
+      <div class="eq">% = <span class="frac"><span>masa de soluto</span><span>masa de disolución</span></span> × 100</div>
+      <div class="io"><span class="io-k">Ojo</span><span class="io-v">la masa de disolución es <b>soluto + disolvente</b>, no solo el disolvente</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Es el «10%» que ves en las etiquetas: de cada 100 g de producto, 10 son de la sustancia.</div></details></div>
+
+    <div class="card"><div class="name">Soluto y disolvente</div><div class="fbody">
+      <div class="io"><span class="io-k">El que cede</span><span class="io-v">el que <b>se disuelve</b> · está en <b>menor</b> cantidad</span></div>
+      <div class="io"><span class="io-k">El que manda</span><span class="io-v">el que <b>disuelve</b> · está en <b>mayor</b> cantidad</span></div>
+      <div class="io"><span class="io-k">Ejemplo</span><span class="io-v">agua de limón: el <b>azúcar</b> es el primero, el <b>agua</b> es el segundo</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">El que manda es el que está en mayor cantidad. Si echas una cucharada de sal a un vaso de agua, el agua es la que disuelve.</div></details></div>
+
+    <div class="card"><div class="name">Datos del agua</div><div class="fbody">
+      <div class="io"><span class="io-k">Fórmula</span><span class="io-v"><b>H₂O</b> · molécula angular (≈104.5°) · <b>polar</b></span></div>
+      <div class="io"><span class="io-k">Fusión</span><span class="io-v"><b>0 °C</b></span></div>
+      <div class="io"><span class="io-k">Ebullición</span><span class="io-v"><b>100 °C</b> a 1 atm</span></div>
+      <div class="io"><span class="io-k">Densidad</span><span class="io-v"><b>1 g/mL</b> = 1000 kg/m³</span></div>
+      <div class="io"><span class="io-k">Calor esp.</span><span class="io-v"><b>4184 J/kg·°C</b> — altísimo</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Que su calor específico sea tan alto explica por qué el mar tarda tanto en calentarse y en enfriarse, y por qué el clima costero es tan parejo.</div></details></div>
+  </div>
+
+  <div class="trap"><h4>Ojo en el examen</h4><ul>
+    <li><b>pH bajo = más ácido y más H⁺.</b> Y la escala es logarítmica: de pH 3 a pH 5 hay <b>100 veces</b> menos H⁺, no 2 veces.</li>
+    <li><b>Fuerte no es concentrado.</b> Fuerte = se ioniza por completo. Concentrado = hay mucho. Son cosas distintas.</li>
+    <li>La <b>fenolftaleína</b> es incolora en ácido y rosa en base. Es la pregunta de indicadores más frecuente.</li>
+    <li>El <b>hielo flota</b> porque los puentes de hidrógeno lo dejan más espaciado: el agua sólida es <em>menos</em> densa que la líquida. Es una rareza, casi ninguna sustancia hace eso.</li>
+    <li>En <b>Lewis se invierte</b>: el ácido <em>acepta</em> electrones. En Brönsted el ácido <em>dona</em> protones. Es la confusión clásica de las tres teorías.</li>
+    <li>La <b>molaridad</b> usa litros de <b>disolución</b>, no de disolvente.</li>
+  </ul></div>
+</section>
+
+<!-- ============ U3 AIRE ============ -->
+<section class="panel" data-num="3" data-short="Aire">
+  <div class="panel-head">
+    <div class="u">Unidad 3</div>
+    <h2>Aire</h2>
+    <p class="lead">De qué está hecho, qué le pasa cuando algo se quema, y los cuatro problemas ambientales que siempre preguntan.</p>
+  </div>
+
+  <h3 class="sec">Conceptos clave</h3>
+  <div class="cgrid">
+    <div class="concept"><h4>Composición del aire</h4><p><b>78% nitrógeno</b> · <b>21% oxígeno</b> · 0.9% argón · 0.04% CO₂, más vapor de agua. <em>El nitrógeno es la mayoría, aunque el que usamos sea el oxígeno.</em></p></div>
+    <div class="concept"><h4>Óxido–reducción</h4><p>Van siempre juntas: si alguien <b>pierde</b> electrones (se oxida), alguien más los <b>gana</b> (se reduce). No puede pasar una sin la otra.</p></div>
+    <div class="concept"><h4>Cómo no confundirse</h4><p>El <b>agente oxidante</b> es el que <em>se reduce</em>, y el <b>agente reductor</b> es el que <em>se oxida</em>. Suena al revés, pero es porque se nombran por lo que le hacen <em>al otro</em>.</p></div>
+    <div class="concept"><h4>Combustión</h4><p>Reacción de algo con <b>oxígeno</b> que libera energía. Es exotérmica siempre. Si sobra oxígeno es <b>completa</b>; si falta, <b>incompleta</b> — y ahí aparece el peligro.</p></div>
+    <div class="concept"><h4>Contaminantes primarios</h4><p>Los que se emiten <em>directamente</em>: <b>óxidos de nitrógeno, carbono y azufre</b>, <b>partículas suspendidas</b> e <b>hidrocarburos</b>. Fuentes: industrial, urbana y agrícola.</p></div>
+    <div class="concept"><h4>Primario vs. secundario</h4><p><b>Primario</b>: sale así de la chimenea o del escape. <b>Secundario</b>: se forma después, ya en la atmósfera, por reacción — como el <b>ozono troposférico</b> y la lluvia ácida.</p></div>
+  </div>
+
+  <h3 class="sec">Reacciones del oxígeno</h3>
+  <div class="fgrid">
+
+    <div class="card"><div class="name">Combustión completa</div><div class="fbody">
+      <div class="eq">hidrocarburo + O<sub>2</sub> → CO<sub>2</sub> + H<sub>2</sub>O</div>
+      <div class="io"><span class="io-k">Cuándo</span><span class="io-v">cuando hay <b>oxígeno de sobra</b></span></div>
+      <div class="io"><span class="io-k">Se ve</span><span class="io-v">flama <b>azul</b>, limpia</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Es la que quieres en la estufa: quema todo y solo deja gas y vapor de agua. Por eso la flama sale azul.</div></details></div>
+
+    <div class="card"><div class="name">Combustión incompleta</div><div class="fbody">
+      <div class="io"><span class="io-k">Cuándo</span><span class="io-v">cuando <b>falta oxígeno</b></span></div>
+      <div class="io"><span class="io-k">Produce</span><span class="io-v"><b>CO</b> (monóxido de carbono, tóxico) y <b>hollín</b> (carbono)</span></div>
+      <div class="io"><span class="io-k">Se ve</span><span class="io-v">flama <b>amarilla o anaranjada</b> y humo negro</span></div>
+      <div class="leg">El monóxido es <b>incoloro e inodoro</b>: por eso mata sin avisar.</div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Es la del calentador mal ventilado. Como no alcanza el oxígeno, en vez de CO₂ sale CO, que se pega a la hemoglobina y no deja pasar el oxígeno.</div></details></div>
+
+    <div class="card"><div class="name">Oxidación</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué pasa</span><span class="io-v"><b>pierde</b> electrones</span></div>
+      <div class="io"><span class="io-k">Su número</span><span class="io-v">el estado de oxidación <b>sube</b></span></div>
+      <div class="io"><span class="io-k">Quién es</span><span class="io-v">el que se oxida es el <b>agente reductor</b></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Oxidarse no es solo enmohecerse: es soltar electrones. El fierro que se oxida está literalmente regalándoselos al oxígeno.</div></details></div>
+
+    <div class="card"><div class="name">Reducción</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué pasa</span><span class="io-v"><b>gana</b> electrones</span></div>
+      <div class="io"><span class="io-k">Su número</span><span class="io-v">el estado de oxidación <b>baja</b></span></div>
+      <div class="io"><span class="io-k">Quién es</span><span class="io-v">el que se reduce es el <b>agente oxidante</b></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">El nombre lo dice: la carga se hace <em>menor</em> al recibir cargas negativas. Ese es el truco para acordarse de para qué lado va.</div></details></div>
+  </div>
+
+  <h3 class="sec">Los problemas ambientales</h3>
+  <div class="fgrid">
+
+    <div class="card"><div class="name">Lluvia ácida</div><div class="fbody">
+      <div class="io"><span class="io-k">La causan</span><span class="io-v">los <b>óxidos de azufre (SO₂)</b> y de <b>nitrógeno (NOₓ)</b></span></div>
+      <div class="io"><span class="io-k">De dónde</span><span class="io-v">industria, termoeléctricas y <b>transporte</b></span></div>
+      <div class="io"><span class="io-k">Cómo</span><span class="io-v">se juntan con el <b>agua</b> de la atmósfera y forman <b>ácido sulfúrico y nítrico</b></span></div>
+      <div class="io"><span class="io-k">Daña</span><span class="io-v">acidifica lagos y suelos · corroe <b>monumentos</b> y edificios</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Los óxidos ácidos que suelta la chimenea se encuentran con el agua de las nubes y bajan convertidos en ácido. Por eso las catedrales viejas se están comiendo solas.</div></details></div>
+
+    <div class="card"><div class="name">Inversión térmica</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué es</span><span class="io-v">una capa de aire <b>caliente</b> queda <b>arriba</b> del aire frío</span></div>
+      <div class="io"><span class="io-k">Por qué es malo</span><span class="io-v">el aire frío de abajo <b>no puede subir</b> y los contaminantes se quedan atrapados a ras de suelo</span></div>
+      <div class="io"><span class="io-k">Cuándo</span><span class="io-v">mañanas frías de <b>invierno</b>, sobre todo en valles como el de México</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Normalmente el aire caliente sube y se lleva la contaminación. Cuando el orden se invierte, queda una tapa encima de la ciudad y todo se acumula abajo.</div></details></div>
+
+    <div class="card"><div class="name">Efecto invernadero</div><div class="fbody">
+      <div class="io"><span class="io-k">Los gases</span><span class="io-v"><b>CO₂</b> · <b>metano</b> (CH₄) · vapor de agua · CFC · óxido nitroso</span></div>
+      <div class="io"><span class="io-k">Qué hacen</span><span class="io-v">dejan <b>entrar</b> la radiación solar pero no dejan <b>salir</b> el calor</span></div>
+      <div class="io"><span class="io-k">Ojo</span><span class="io-v">es un fenómeno <b>natural y necesario</b>; el problema es que se intensificó</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Sin él, la Tierra estaría congelada. El problema no es que exista, sino que le estamos subiendo el volumen.</div></details></div>
+
+    <div class="card"><div class="name">Capa de ozono</div><div class="fbody">
+      <div class="io"><span class="io-k">Dónde</span><span class="io-v">en la <b>estratósfera</b></span></div>
+      <div class="io"><span class="io-k">Qué hace</span><span class="io-v">filtra la radiación <b>ultravioleta</b></span></div>
+      <div class="io"><span class="io-k">Quién la daña</span><span class="io-v">los <b>CFC</b> (clorofluorocarbonos) de aerosoles y refrigerantes</span></div>
+      <div class="io"><span class="io-k">Acuerdo</span><span class="io-v">Protocolo de <b>Montreal</b></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Es el filtro solar del planeta. No confundir con el efecto invernadero: son dos problemas distintos, con gases distintos y acuerdos distintos.</div></details></div>
+  </div>
+
+  <div class="trap"><h4>Ojo en el examen</h4><ul>
+    <li>El <b>agente oxidante se reduce</b> y el <b>agente reductor se oxida</b>. Se nombran por lo que le hacen al otro, no por lo que les pasa a ellos.</li>
+    <li><b>Capa de ozono ≠ efecto invernadero.</b> El ozono lo dañan los <b>CFC</b> (Montreal); el invernadero lo intensifica el <b>CO₂</b> (Kioto/París).</li>
+    <li>La <b>combustión incompleta</b> es la que produce <b>CO</b>, el monóxido que mata. La completa produce CO₂.</li>
+    <li>El aire es <b>78% nitrógeno</b>, no oxígeno. El oxígeno es apenas el 21%.</li>
+    <li>En la <b>inversión térmica</b> el aire caliente queda <em>arriba</em>. Es al revés de lo normal, y por eso el nombre.</li>
+  </ul></div>
+</section>
+
+<!-- ============ U4 ALIMENTOS ============ -->
+<section class="panel" data-num="4" data-short="Alimentos">
+  <div class="panel-head">
+    <div class="u">Unidad 4</div>
+    <h2>Alimentos</h2>
+    <p class="lead">Las biomoléculas vistas por el lado químico: de qué están hechas, qué grupos funcionales traen y para qué sirven.</p>
+  </div>
+
+  <h3 class="sec">Conceptos clave</h3>
+  <div class="cgrid">
+    <div class="concept"><h4>Las cuatro biomoléculas</h4><p><b>Carbohidratos</b> (energía inmediata), <b>lípidos</b> (reserva y membranas), <b>proteínas</b> (estructura y enzimas) y <b>ácidos nucleicos</b> (información). Todas están construidas sobre <b>carbono</b>.</p></div>
+    <div class="concept"><h4>Monómero y polímero</h4><p>El <b>monómero</b> es la pieza suelta; el <b>polímero</b>, la cadena. Glucosa→almidón, aminoácido→proteína, nucleótido→ADN.</p></div>
+    <div class="concept"><h4>Los grupos del aminoácido</h4><p>Todo aminoácido trae <b>dos</b>: el grupo <b>amino</b> (−NH₂) y el <b>carboxilo</b> (−COOH). Lo que cambia entre uno y otro es el «radical» R.</p></div>
+    <div class="concept"><h4>Enzimas</h4><p>Son <b>proteínas</b> que funcionan como <b>catalizadores biológicos</b>: bajan la energía de activación. Son <b>específicas</b> (llave–cerradura) y <em>no se consumen</em>.</p></div>
+    <div class="concept"><h4>Qué mata a una enzima</h4><p>El <b>calor</b> y el <b>pH extremo</b> la <b>desnaturalizan</b>: pierde su forma y con ella su función. Cada una tiene su temperatura y su pH óptimos.</p></div>
+    <div class="concept"><h4>Saturado vs. insaturado</h4><p><b>Saturado</b>: solo enlaces simples, sólido a temperatura ambiente (manteca). <b>Insaturado</b>: tiene dobles enlaces, líquido (aceites). Los dobles enlaces «doblan» la cadena y no la dejan apretarse.</p></div>
+  </div>
+
+  <h3 class="sec">Las biomoléculas</h3>
+  <div class="fgrid">
+
+    <div class="card"><div class="name">Carbohidratos</div><div class="fbody">
+      <div class="io"><span class="io-k">De qué</span><span class="io-v"><b>C, H y O</b> en proporción aproximada <b>1:2:1</b></span></div>
+      <div class="io"><span class="io-k">Función</span><span class="io-v">energía de <b>disponibilidad inmediata</b></span></div>
+      <div class="io"><span class="io-k">Monosacárido</span><span class="io-v"><b>glucosa</b>, fructosa, galactosa</span></div>
+      <div class="io"><span class="io-k">Disacárido</span><span class="io-v"><b>sacarosa</b> (azúcar de mesa), lactosa, maltosa</span></div>
+      <div class="io"><span class="io-k">Polisacárido</span><span class="io-v"><b>almidón</b> (reserva vegetal) · <b>glucógeno</b> (reserva animal) · <b>celulosa</b> (estructura)</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Los tres polisacáridos están hechos de la misma pieza (glucosa); lo único que cambia es cómo van pegadas. Por eso podemos digerir el almidón pero no la celulosa.</div></details></div>
+
+    <div class="card"><div class="name">Lípidos</div><div class="fbody">
+      <div class="io"><span class="io-k">De qué</span><span class="io-v"><b>ácidos grasos</b> + <b>glicerol</b></span></div>
+      <div class="io"><span class="io-k">Función</span><span class="io-v"><b>almacén</b> de energía a largo plazo y material de las <b>membranas</b></span></div>
+      <div class="io"><span class="io-k">Propiedad</span><span class="io-v"><b>apolares</b>: no se disuelven en agua</span></div>
+      <div class="io"><span class="io-k">Tipos</span><span class="io-v"><b>fosfolípidos</b> (membrana) · grasas y aceites · <b>colesterol</b> y hormonas esteroides</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Guardan más del doble de energía por gramo que un azúcar. Por eso el cuerpo los usa de bodega y no de cartera.</div></details></div>
+
+    <div class="card"><div class="name">Proteínas</div><div class="fbody">
+      <div class="io"><span class="io-k">Monómero</span><span class="io-v"><b>aminoácidos</b></span></div>
+      <div class="io"><span class="io-k">Unidos por</span><span class="io-v"><b>enlace peptídico</b></span></div>
+      <div class="io"><span class="io-k">Funciones</span><span class="io-v">estructura · transporte · defensa · <b>enzimas</b></span></div>
+      <div class="io"><span class="io-k">Ojo</span><span class="io-v">su <b>forma es su función</b>: si se desnaturaliza, deja de servir</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Casi todo lo que <em>hace</em> algo en el cuerpo es una proteína. Y como su forma es lo que importa, un huevo frito ya no se puede «desfreír».</div></details></div>
+
+    <div class="card"><div class="name">Enlace peptídico</div><div class="fbody">
+      <div class="io"><span class="io-k">Entre qué</span><span class="io-v">el <b>carboxilo (−COOH)</b> de un aminoácido y el <b>amino (−NH₂)</b> del siguiente</span></div>
+      <div class="io"><span class="io-k">Qué se libera</span><span class="io-v">una molécula de <b>agua</b> — es una reacción de <b>condensación</b></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Al unir dos aminoácidos sobra un agua. Por eso a este tipo de reacción se le llama también «síntesis por deshidratación».</div></details></div>
+
+    <div class="card"><div class="name">Vitaminas</div><div class="fbody">
+      <div class="io"><span class="io-k">Hidrosolubles</span><span class="io-v"><b>C</b> y complejo <b>B</b> · se disuelven en agua · <b>no se acumulan</b>, lo que sobra se orina</span></div>
+      <div class="io"><span class="io-k">Liposolubles</span><span class="io-v"><b>A, D, E, K</b> · se disuelven en grasa · <b>sí se acumulan</b>, y en exceso son tóxicas</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Las cuatro liposolubles se acuerdan como «ADEK». Son las peligrosas de sobredosificar, porque el cuerpo no tiene cómo sacarlas.</div></details></div>
+
+    <div class="card"><div class="name">Minerales</div><div class="fbody">
+      <div class="io"><span class="io-k">Calcio</span><span class="io-v"><b>huesos</b> y dientes · contracción muscular</span></div>
+      <div class="io"><span class="io-k">Hierro</span><span class="io-v">parte de la <b>hemoglobina</b> · transporta el oxígeno</span></div>
+      <div class="io"><span class="io-k">Yodo</span><span class="io-v">hormonas de la <b>tiroides</b></span></div>
+      <div class="io"><span class="io-k">Sodio y potasio</span><span class="io-v"><b>impulso nervioso</b> y equilibrio de líquidos</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Son cuatro parejas fijas que se preguntan tal cual: hierro–sangre, yodo–tiroides, calcio–huesos, sodio/potasio–nervios.</div></details></div>
+  </div>
+
+  <div class="trap"><h4>Ojo en el examen</h4><ul>
+    <li><b>Almidón = reserva vegetal · glucógeno = reserva animal · celulosa = estructura.</b> Los tres son de glucosa; cambia cómo están unidas.</li>
+    <li>Los <b>aminoácidos</b> traen siempre <b>dos</b> grupos funcionales: amino (−NH₂) y carboxilo (−COOH).</li>
+    <li>Las <b>enzimas son proteínas</b> y <b>no se consumen</b> en la reacción: se pueden usar una y otra vez.</li>
+    <li>Las vitaminas <b>ADEK</b> son las liposolubles y sí se acumulan. La <b>C y las B</b> no.</li>
+    <li>El <b>enlace peptídico libera agua</b>. Cuando algo «se une y sobra agua», es condensación.</li>
+  </ul></div>
+</section>
+
+<!-- ============ U5 ENERGÍA Y REACCIONES ============ -->
+<section class="panel" data-num="5" data-short="Energía y reacciones">
+  <div class="panel-head">
+    <div class="u">Unidad 5</div>
+    <h2>La energía y las reacciones químicas</h2>
+    <p class="lead">Si una reacción suelta o absorbe calor, si va a ocurrir sola, y qué la hace ir más rápido o cambiar de rumbo.</p>
+  </div>
+
+  <h3 class="sec">Conceptos clave</h3>
+  <div class="cgrid">
+    <div class="concept"><h4>El signo lo dice todo</h4><p>Con <b>ΔH</b>: negativo = suelta calor (<b>exotérmica</b>), positivo = lo absorbe (<b>endotérmica</b>). Con <b>ΔG</b>: negativo = ocurre sola (<b>espontánea</b>).</p></div>
+    <div class="concept"><h4>Entropía (ΔS)</h4><p>Es el <b>desorden</b>. La segunda ley dice que la entropía del universo siempre <b>aumenta</b>. Un gas tiene más entropía que un líquido, y un líquido más que un sólido.</p></div>
+    <div class="concept"><h4>Energía de activación</h4><p>La <b>barrera mínima</b> que hay que pagar para que la reacción arranque, aunque después libere energía. Por eso la gasolina no se enciende sola: le falta la chispa.</p></div>
+    <div class="concept"><h4>Equilibrio químico</h4><p>Cuando la reacción va <b>hacia los dos lados a la misma velocidad</b>. No es que se haya detenido: es que lo que se forma y lo que se deshace van parejo.</p></div>
+    <div class="concept"><h4>Catalizador</h4><p>Baja la <b>energía de activación</b>, así que la reacción va más rápido. Pero <b>no se consume</b> y <b>no cambia el equilibrio</b>: solo hace que se llegue antes.</p></div>
+    <div class="concept"><h4>Espontáneo no es rápido</h4><p>Que ΔG sea negativo dice que la reacción <em>puede</em> ocurrir sola, <b>no</b> que sea rápida. El diamante convirtiéndose en grafito es espontáneo… y tarda millones de años.</p></div>
+  </div>
+
+  <h3 class="sec">Calor y espontaneidad</h3>
+  <div class="fgrid">
+
+    <div class="card"><div class="name">Reacción exotérmica</div><div class="fbody">
+      <div class="io"><span class="io-k">El calor</span><span class="io-v">se <b>libera</b> — el recipiente se <b>calienta</b></span></div>
+      <div class="io"><span class="io-k">Signo</span><span class="io-v"><b>ΔH &lt; 0</b> (negativo)</span></div>
+      <div class="io"><span class="io-k">Energía</span><span class="io-v">los <b>productos</b> tienen <b>menos</b> energía que los reactivos</span></div>
+      <div class="io"><span class="io-k">Ejemplos</span><span class="io-v"><b>combustión</b> · respiración · neutralización</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">El prefijo lo dice todo: la energía sale hacia afuera. Si tocas el vaso y está caliente, es de estas.</div></details></div>
+
+    <div class="card"><div class="name">Reacción endotérmica</div><div class="fbody">
+      <div class="io"><span class="io-k">El calor</span><span class="io-v">se <b>absorbe</b> — el recipiente se <b>enfría</b></span></div>
+      <div class="io"><span class="io-k">Signo</span><span class="io-v"><b>ΔH &gt; 0</b> (positivo)</span></div>
+      <div class="io"><span class="io-k">Energía</span><span class="io-v">los <b>productos</b> tienen <b>más</b> energía que los reactivos</span></div>
+      <div class="io"><span class="io-k">Ejemplos</span><span class="io-v"><b>fotosíntesis</b> · cocinar · derretir hielo</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">El prefijo lo dice: la energía entra hacia adentro. Por eso hay que ponerle fuego a la comida para que avance.</div></details></div>
+
+    <div class="card"><div class="name">Entalpía (ΔH)</div><div class="fbody">
+      <div class="eq">Δ<i>H</i> = <i>H</i><sub>productos</sub> − <i>H</i><sub>reactivos</sub></div>
+      <div class="io"><span class="io-k">Qué es</span><span class="io-v">el <b>calor</b> intercambiado a <b>presión constante</b></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Es la forma técnica de decir «cuánto calor entró o salió». Como casi todo pasa al aire libre, la presión es constante y por eso se usa ΔH y no la energía interna.</div></details></div>
+
+    <div class="card"><div class="name">Energía libre de Gibbs (ΔG)</div><div class="fbody">
+      <div class="eq">Δ<i>G</i> = Δ<i>H</i> − <i>T</i>Δ<i>S</i></div>
+      <div class="io"><span class="io-k">ΔG &lt; 0</span><span class="io-v"><b>espontánea</b>: ocurre sola</span></div>
+      <div class="io"><span class="io-k">ΔG &gt; 0</span><span class="io-v"><b>no espontánea</b>: hay que empujarla</span></div>
+      <div class="io"><span class="io-k">ΔG = 0</span><span class="io-v">está en <b>equilibrio</b></span></div>
+      <div class="io"><span class="io-k">Ojo</span><span class="io-v">la <b>T va en kelvin</b></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Es el juez que decide si una reacción va a ocurrir sola. Pelea entre dos cosas: soltar energía (ΔH) y aumentar el desorden (ΔS).</div></details></div>
+  </div>
+
+  <h3 class="sec">Equilibrio y velocidad</h3>
+  <div class="fgrid">
+
+    <div class="card"><div class="name">Principio de Le Chatelier</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué dice</span><span class="io-v">si a un sistema en equilibrio se le hace un cambio, el sistema se <b>desplaza para contrarrestarlo</b></span></div>
+      <div class="io"><span class="io-k">Más reactivo</span><span class="io-v">se desplaza hacia los <b>productos</b> (a la derecha)</span></div>
+      <div class="io"><span class="io-k">Más presión</span><span class="io-v">hacia donde hay <b>menos moles de gas</b></span></div>
+      <div class="io"><span class="io-k">Más temperatura</span><span class="io-v">hacia el lado que <b>absorbe</b> calor (el endotérmico)</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">El sistema es terco: si lo empujas de un lado, se recorre para el otro y deshace lo que le hiciste. Si le agregas reactivo, lo consume; si lo aprietas, se encoge.</div></details></div>
+
+    <div class="card"><div class="name">Velocidad de reacción</div><div class="fbody">
+      <div class="io"><span class="io-k">Temperatura</span><span class="io-v">↑ temperatura, <b>↑ velocidad</b> (las partículas chocan más y más fuerte)</span></div>
+      <div class="io"><span class="io-k">Concentración</span><span class="io-v">↑ concentración, <b>↑ velocidad</b> (hay más con quién chocar)</span></div>
+      <div class="io"><span class="io-k">Superficie</span><span class="io-v">↑ superficie de contacto, <b>↑ velocidad</b> (molido reacciona más rápido que entero)</span></div>
+      <div class="io"><span class="io-k">Catalizador</span><span class="io-v"><b>↑ velocidad</b> bajando la energía de activación</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Todo se reduce a que las partículas choquen más seguido y con más ganas. Por eso la comida se echa a perder más rápido fuera del refrigerador.</div></details></div>
+
+    <div class="card"><div class="name">Catalizador</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué hace</span><span class="io-v">baja la <b>energía de activación</b></span></div>
+      <div class="io"><span class="io-k">Qué NO hace</span><span class="io-v"><b>no se consume</b> y <b>no cambia el equilibrio</b> — solo se llega antes</span></div>
+      <div class="io"><span class="io-k">En lo vivo</span><span class="io-v">son las <b>enzimas</b></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Es un atajo, no un empujón. Te lleva al mismo destino más rápido, pero no cambia cuál es el destino.</div></details></div>
+  </div>
+
+  <div class="trap"><h4>Ojo en el examen</h4><ul>
+    <li><b>Exotérmica: ΔH negativo</b> y el vaso se calienta. <b>Endotérmica: ΔH positivo</b> y se enfría. El signo es lo que preguntan.</li>
+    <li>El <b>catalizador no cambia el equilibrio</b>, solo la velocidad con que se llega a él. Es un error muy común.</li>
+    <li><b>Espontáneo no significa rápido.</b> ΔG dice <em>si</em> ocurre, no <em>qué tan pronto</em>.</li>
+    <li>En <b>ΔG = ΔH − TΔS</b> la temperatura va en <b>kelvin</b>, siempre.</li>
+    <li>En Le Chatelier, subir la <b>presión</b> desplaza hacia donde hay <b>menos moles de gas</b> — el sistema busca ocupar menos espacio.</li>
+  </ul></div>
+</section>
+
+<!-- ============ U6 QUÍMICA DEL CARBONO ============ -->
+<section class="panel" data-num="6" data-short="Química del carbono">
+  <div class="panel-head">
+    <div class="u">Unidad 6</div>
+    <h2>Química del carbono</h2>
+    <p class="lead">Hidrocarburos, los nueve grupos funcionales con su terminación, y los tipos de reacción orgánica.</p>
+  </div>
+
+  <h3 class="sec">Conceptos clave</h3>
+  <div class="cgrid">
+    <div class="concept"><h4>Por qué el carbono</h4><p>Tiene <b>4 electrones de valencia</b>, así que forma <b>4 enlaces</b> y queda <b>tetraédrico</b>. Y puede unirse <em>consigo mismo</em> en cadenas larguísimas — por eso existen millones de compuestos orgánicos.</p></div>
+    <div class="concept"><h4>Saturado e insaturado</h4><p><b>Saturado</b>: solo enlaces <b>simples</b> (alcanos). <b>Insaturado</b>: tiene dobles o triples (alquenos y alquinos). «Saturado» quiere decir que ya no le cabe más hidrógeno.</p></div>
+    <div class="concept"><h4>Los prefijos, de 1 a 10</h4><p><b>met</b>(1) · <b>et</b>(2) · <b>prop</b>(3) · <b>but</b>(4) · <b>pent</b>(5) · <b>hex</b>(6) · <b>hept</b>(7) · <b>oct</b>(8) · <b>non</b>(9) · <b>dec</b>(10). Dicen cuántos <b>carbonos</b> hay.</p></div>
+    <div class="concept"><h4>Cómo se lee un nombre</h4><p><b>Prefijo</b> (cuántos carbonos) + <b>terminación</b> (qué tipo es). <em>Prop-ano</em> = 3 carbonos, todos simples. <em>Prop-anol</em> = 3 carbonos con un −OH.</p></div>
+    <div class="concept"><h4>Isomería estructural</h4><p>Misma <b>fórmula molecular</b>, distinta <b>estructura</b> — y por eso distintas propiedades. El <b>butano</b> y el <b>metilpropano</b> son los dos C₄H₁₀ y no son la misma sustancia.</p></div>
+    <div class="concept"><h4>Cíclicos</h4><p>Cuando la cadena se cierra en anillo. Llevan el prefijo <b>ciclo−</b>: ciclohexano, ciclopropano. El <b>benceno</b> (C₆H₆) es el anillo aromático más famoso.</p></div>
+  </div>
+
+  <h3 class="sec">Los hidrocarburos</h3>
+  <div class="fgrid">
+
+    <div class="card"><div class="name">Alcano</div><div class="fbody">
+      <div class="io"><span class="io-k">Enlace</span><span class="io-v">solo <b>simples</b> C−C · es <b>saturado</b></span></div>
+      <div class="io"><span class="io-k">Terminación</span><span class="io-v"><b>-ano</b></span></div>
+      <div class="io"><span class="io-k">Fórmula</span><span class="io-v"><span class="dato f">C<sub>n</sub>H<sub>2n+2</sub></span></span></div>
+      <div class="io"><span class="io-k">Ejemplos</span><span class="io-v"><b>metano</b> CH₄ · <b>etano</b> C₂H₆ · <b>propano</b> C₃H₈</span></div>
+      <div class="io"><span class="io-k">Reacciona por</span><span class="io-v"><b>sustitución</b></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Son los más tranquilos: como ya están «llenos» de hidrógeno, no aceptan más y solo pueden intercambiar. El gas de la estufa es de esta familia.</div></details></div>
+
+    <div class="card"><div class="name">Alqueno</div><div class="fbody">
+      <div class="io"><span class="io-k">Enlace</span><span class="io-v">al menos un <b>doble</b> C=C · es <b>insaturado</b></span></div>
+      <div class="io"><span class="io-k">Terminación</span><span class="io-v"><b>-eno</b></span></div>
+      <div class="io"><span class="io-k">Fórmula</span><span class="io-v"><span class="dato f">C<sub>n</sub>H<sub>2n</sub></span></span></div>
+      <div class="io"><span class="io-k">Ejemplo</span><span class="io-v"><b>eteno</b> (etileno) C₂H₄</span></div>
+      <div class="io"><span class="io-k">Reacciona por</span><span class="io-v"><b>adición</b></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">El doble enlace es el punto débil por donde entran otras moléculas. Del etileno sale el polietileno de las bolsas.</div></details></div>
+
+    <div class="card"><div class="name">Alquino</div><div class="fbody">
+      <div class="io"><span class="io-k">Enlace</span><span class="io-v">al menos un <b>triple</b> C≡C · es <b>insaturado</b></span></div>
+      <div class="io"><span class="io-k">Terminación</span><span class="io-v"><b>-ino</b></span></div>
+      <div class="io"><span class="io-k">Fórmula</span><span class="io-v"><span class="dato f">C<sub>n</sub>H<sub>2n−2</sub></span></span></div>
+      <div class="io"><span class="io-k">Ejemplo</span><span class="io-v"><b>etino</b> (acetileno) C₂H₂</span></div>
+      <div class="io"><span class="io-k">Reacciona por</span><span class="io-v"><b>adición</b></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">El acetileno es el del soplete: quema tan caliente que corta metal. Entre más enlaces apretados, más energía guardada.</div></details></div>
+  </div>
+
+  <h3 class="sec">Los nueve grupos funcionales</h3>
+  <div class="fgrid">
+
+    <div class="card"><div class="name">Alcohol</div><div class="fbody">
+      <div class="io"><span class="io-k">Grupo</span><span class="io-v"><span class="dato f">−OH</span> (hidroxilo)</span></div>
+      <div class="io"><span class="io-k">Terminación</span><span class="io-v"><b>-ol</b></span></div>
+      <div class="io"><span class="io-k">Ejemplos</span><span class="io-v"><b>metanol</b> · <b>etanol</b> (el de las bebidas)</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Ojo, que ese −OH no lo vuelve base: no se suelta como OH⁻. Va pegado al carbono, no al metal.</div></details></div>
+
+    <div class="card"><div class="name">Éter</div><div class="fbody">
+      <div class="io"><span class="io-k">Grupo</span><span class="io-v"><span class="dato f">R−O−R</span> — un oxígeno <b>entre dos carbonos</b></span></div>
+      <div class="io"><span class="io-k">Se nombra</span><span class="io-v">los dos radicales + la palabra <b>éter</b></span></div>
+      <div class="io"><span class="io-k">Ejemplo</span><span class="io-v"><b>dimetil éter</b> · el éter etílico, usado como anestésico</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Un oxígeno haciendo de puente entre dos pedazos de cadena. Es como un alcohol al que le taparon el hidrógeno con más carbono.</div></details></div>
+
+    <div class="card"><div class="name">Aldehído</div><div class="fbody">
+      <div class="io"><span class="io-k">Grupo</span><span class="io-v"><span class="dato f">−CHO</span> (carbonilo <b>al final</b> de la cadena)</span></div>
+      <div class="io"><span class="io-k">Terminación</span><span class="io-v"><b>-al</b></span></div>
+      <div class="io"><span class="io-k">Ejemplo</span><span class="io-v"><b>metanal</b> (formaldehído) · etanal</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">La diferencia con la cetona es solo la <em>posición</em>: aquí el carbonilo está en la punta. El formaldehído es el de conservar muestras.</div></details></div>
+
+    <div class="card"><div class="name">Cetona</div><div class="fbody">
+      <div class="io"><span class="io-k">Grupo</span><span class="io-v"><span class="dato f">−CO−</span> (carbonilo <b>en medio</b> de la cadena)</span></div>
+      <div class="io"><span class="io-k">Terminación</span><span class="io-v"><b>-ona</b></span></div>
+      <div class="io"><span class="io-k">Ejemplo</span><span class="io-v"><b>propanona</b> (acetona, la del quitaesmalte)</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Mismo grupo que el aldehído pero a media cadena, con carbonos de los dos lados. El aldehído va en la orilla; este, en medio.</div></details></div>
+
+    <div class="card"><div class="name">Ácido carboxílico</div><div class="fbody">
+      <div class="io"><span class="io-k">Grupo</span><span class="io-v"><span class="dato f">−COOH</span> (carboxilo)</span></div>
+      <div class="io"><span class="io-k">Se nombra</span><span class="io-v"><b>ácido</b> …<b>-oico</b></span></div>
+      <div class="io"><span class="io-k">Ejemplos</span><span class="io-v"><b>ácido etanoico</b> (acético, el del vinagre) · ácido metanoico (fórmico)</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Es el grupo que sí se comporta como tal de verdad: suelta su H. También es uno de los dos que trae todo aminoácido.</div></details></div>
+
+    <div class="card"><div class="name">Éster</div><div class="fbody">
+      <div class="io"><span class="io-k">Grupo</span><span class="io-v"><span class="dato f">−COO−</span></span></div>
+      <div class="io"><span class="io-k">Se nombra</span><span class="io-v">…<b>-ato de</b> …<b>-ilo</b></span></div>
+      <div class="io"><span class="io-k">De dónde sale</span><span class="io-v"><b>ácido + alcohol</b> (y se libera agua)</span></div>
+      <div class="io"><span class="io-k">Ejemplo</span><span class="io-v"><b>acetato de etilo</b></span></div>
+      <div class="leg">Son los responsables del <b>olor de las frutas</b> y de muchos perfumes.</div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Si juntas un ácido y un alcohol, sale este y sobra agua. Casi todo lo que huele rico a fruta es de esta familia.</div></details></div>
+
+    <div class="card"><div class="name">Amina</div><div class="fbody">
+      <div class="io"><span class="io-k">Grupo</span><span class="io-v"><span class="dato f">−NH₂</span> (amino)</span></div>
+      <div class="io"><span class="io-k">Terminación</span><span class="io-v"><b>-amina</b></span></div>
+      <div class="io"><span class="io-k">Ejemplo</span><span class="io-v"><b>metilamina</b> · es el otro grupo que trae todo <b>aminoácido</b></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Donde veas nitrógeno con hidrógenos colgando, ya sabes cuál es. Se comportan como bases débiles.</div></details></div>
+
+    <div class="card"><div class="name">Amida</div><div class="fbody">
+      <div class="io"><span class="io-k">Grupo</span><span class="io-v"><span class="dato f">−CONH₂</span></span></div>
+      <div class="io"><span class="io-k">Terminación</span><span class="io-v"><b>-amida</b></span></div>
+      <div class="io"><span class="io-k">Dónde importa</span><span class="io-v">es el <b>enlace peptídico</b> de las proteínas</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Amina más carbonilo. Y no es un dato menor: el enlace que une los aminoácidos de todas tus proteínas es exactamente este.</div></details></div>
+
+    <div class="card"><div class="name">Compuesto halogenado</div><div class="fbody">
+      <div class="io"><span class="io-k">Grupo</span><span class="io-v">un <b>halógeno</b>: F, Cl, Br o I</span></div>
+      <div class="io"><span class="io-k">Se nombra</span><span class="io-v">con el prefijo <b>fluoro-, cloro-, bromo-, yodo-</b></span></div>
+      <div class="io"><span class="io-k">Ejemplos</span><span class="io-v"><b>cloroformo</b> · los <b>CFC</b>, los que dañan la capa de ozono</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Es cambiarle un hidrógeno a la cadena por un halógeno. Aquí se conecta con la unidad de Aire: los CFC son halogenados.</div></details></div>
+  </div>
+
+  <h3 class="sec">Reacciones orgánicas</h3>
+  <div class="fgrid">
+
+    <div class="card"><div class="name">Sustitución</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué pasa</span><span class="io-v">un átomo o grupo <b>reemplaza</b> a otro</span></div>
+      <div class="io"><span class="io-k">Quién la hace</span><span class="io-v">los <b>alcanos</b> (los saturados, que no aceptan más)</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Como el alcano ya está lleno, la única forma de meterle algo nuevo es sacando algo viejo. Un intercambio.</div></details></div>
+
+    <div class="card"><div class="name">Adición</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué pasa</span><span class="io-v">se <b>agrega</b> algo rompiendo un enlace doble o triple</span></div>
+      <div class="io"><span class="io-k">Quién la hace</span><span class="io-v">los <b>alquenos</b> y <b>alquinos</b> (los insaturados)</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">El doble enlace se abre y deja lugar para dos invitados nuevos. Así se hidrogenan los aceites para volverlos margarina.</div></details></div>
+
+    <div class="card"><div class="name">Eliminación</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué pasa</span><span class="io-v">se <b>quitan</b> átomos y se <b>forma</b> un enlace doble o triple</span></div>
+      <div class="io"><span class="io-k">Es</span><span class="io-v">lo <b>contrario</b> de la adición</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Se van dos invitados y los que quedan se agarran más fuerte: donde había un enlace simple, ahora hay uno doble.</div></details></div>
+
+    <div class="card"><div class="name">Condensación</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué pasa</span><span class="io-v">dos moléculas se <b>unen</b> y se <b>libera agua</b></span></div>
+      <div class="io"><span class="io-k">Ejemplos</span><span class="io-v">el <b>enlace peptídico</b> · la formación de un <b>éster</b></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">La regla para reconocerla: si se pegan y sobra agua, es esta. También se le dice «síntesis por deshidratación».</div></details></div>
+
+    <div class="card"><div class="name">Hidrólisis</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué pasa</span><span class="io-v">una molécula se <b>rompe</b> usando <b>agua</b></span></div>
+      <div class="io"><span class="io-k">Es</span><span class="io-v">lo <b>contrario</b> de la condensación</span></div>
+      <div class="io"><span class="io-k">Ejemplo</span><span class="io-v">la <b>digestión</b>: así se parten los alimentos</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">«Hidro» agua, «lisis» romper. Es lo que hace tu cuerpo con la comida: mete agua y parte las cadenas largas en piezas.</div></details></div>
+
+    <div class="card"><div class="name">Polimerización</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué pasa</span><span class="io-v">muchos <b>monómeros</b> se unen en una cadena larga (<b>polímero</b>)</span></div>
+      <div class="io"><span class="io-k">Por adición</span><span class="io-v">se abren dobles enlaces y <b>no sobra nada</b> → <b>polietileno</b>, PVC</span></div>
+      <div class="io"><span class="io-k">Por condensación</span><span class="io-v">se unen y <b>sobra agua</b> → <b>nylon</b>, poliéster, <b>proteínas</b></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Casi todos los plásticos salen de aquí. Y también tus proteínas: son un polímero por condensación de aminoácidos.</div></details></div>
+  </div>
+
+  <div class="trap"><h4>Ojo en el examen</h4><ul>
+    <li><b>Aldehído en la punta, cetona en medio.</b> Es el mismo grupo carbonilo; lo único que cambia es dónde está.</li>
+    <li>Las terminaciones son la pregunta segura: <b>-ano / -eno / -ino</b> para hidrocarburos, <b>-ol</b> alcohol, <b>-al</b> aldehído, <b>-ona</b> cetona, <b>ácido -oico</b>, <b>-amina</b>, <b>-amida</b>.</li>
+    <li><b>Alcanos por sustitución · alquenos y alquinos por adición.</b> Los saturados no pueden añadir porque ya están llenos.</li>
+    <li><b>Condensación libera agua · hidrólisis consume agua.</b> Son una el reverso de la otra.</li>
+    <li>El <b>−OH del alcohol no lo hace base</b>: no se suelta como OH⁻. La base necesita al metal.</li>
+    <li>Los <b>isómeros</b> tienen la misma fórmula molecular pero distintas propiedades, porque están armados distinto.</li>
+  </ul></div>
+</section>
+
+</main>
+
+<footer>Las 6 unidades del temario oficial de la Guía UNAM 2026 · Área 2 · uso personal de estudio</footer>
+
+<script>
+  const panels = [...document.querySelectorAll('.panel')];
+  const tabs = document.getElementById('tabs');
+  panels.forEach((p,i)=>{
+    const b = document.createElement('button');
+    b.className = 'tab';
+    b.innerHTML = (p.dataset.num ? '<b>'+p.dataset.num+'</b>' : '') + p.dataset.short;
+    b.onclick = ()=> show(i);
+    tabs.appendChild(b);
+  });
+  function show(i){
+    panels.forEach((p,j)=>p.classList.toggle('active', i===j));
+    [...tabs.children].forEach((t,j)=>t.classList.toggle('active', i===j));
+    localStorage.setItem('qui-unidad', i);
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+  show(Math.min(+localStorage.getItem('qui-unidad')||0, panels.length-1));
+
+  document.addEventListener('keydown', e=>{
+    if(e.target.tagName==='INPUT') return;
+    const cur = panels.findIndex(p=>p.classList.contains('active'));
+    if(e.key==='ArrowRight' && cur<panels.length-1) show(cur+1);
+    if(e.key==='ArrowLeft'  && cur>0) show(cur-1);
+  });
+
+  const hint = document.getElementById('hint');
+  function pista(){
+    if(!document.body.classList.contains('memo')){
+      hint.innerHTML = 'Enciende el <b>modo memoria</b> para taparte. El <b>En palabras</b> de cada tarjeta se abre siempre, en cualquier modo.';
+    } else if(document.body.classList.contains('flip')){
+      hint.innerHTML = 'Volteado: ves el <b>contenido</b> y tienes que decir <b>cómo se llama</b>. Toca la tarjeta para comprobar.';
+    } else {
+      hint.innerHTML = 'Ves el <b>nombre</b> y tienes que recitar la fórmula o el dato. Toca la tarjeta para comprobar.';
+    }
+  }
+
+  function cerrarTodas(){
+    document.querySelectorAll('.card.open').forEach(c=>c.classList.remove('open'));
+  }
+
+  const memoBtn = document.getElementById('memoBtn');
+  memoBtn.onclick = ()=>{
+    document.body.classList.toggle('memo');
+    cerrarTodas();
+    localStorage.setItem('qui-memo', document.body.classList.contains('memo')?'1':'0');
+    pista();
+  };
+  const flipBtn = document.getElementById('flipBtn');
+  flipBtn.onclick = ()=>{
+    document.body.classList.toggle('flip');
+    cerrarTodas();
+    localStorage.setItem('qui-flip', document.body.classList.contains('flip')?'1':'0');
+    pista();
+  };
+  if(localStorage.getItem('qui-memo')==='1') document.body.classList.add('memo');
+  if(localStorage.getItem('qui-flip')==='1') document.body.classList.add('flip');
+  pista();
+
+  let abiertas = [];
+  window.addEventListener('beforeprint', ()=>{
+    abiertas = [...document.querySelectorAll('details.why')].filter(d=>d.open);
+    document.querySelectorAll('details.why').forEach(d=>d.open=true);
+  });
+  window.addEventListener('afterprint', ()=>{
+    document.querySelectorAll('details.why').forEach(d=>d.open = abiertas.includes(d));
+  });
+
+  document.addEventListener('click', e=>{
+    if(e.target.closest('details.why')) return;
+    if(e.target.closest('.switch')) return;
+    if(!document.body.classList.contains('memo')) return;
+    const c = e.target.closest('.card');
+    if(c) c.classList.toggle('open');
+  });
+</script>
+</body>
+</html>

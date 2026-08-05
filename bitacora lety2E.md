@@ -5,6 +5,92 @@
 
 ---
 
+## 2026-08-05
+- **KaTeX ahora vive en el repo: el sitio dejó de depender del CDN.** Se descargó KaTeX 0.16.9
+  (css + js + auto-render + 40 archivos de fuente en `woff2`/`woff`, ~940 KB) a
+  **`assets/katex/`**, y se reapuntaron los **28 archivos** que lo cargaban desde
+  `cdn.jsdelivr.net`: los 24 temas de Math, los 2 simuladores (3 archivos) y la plantilla de
+  la skill `letymath-html` — así los temas nuevos ya nacen apuntando a la copia local.
+  Salió de una duda de Lety sobre qué necesita internet; el detonante fue que
+  `simulador-unam-offline.html` **se llamaba "offline" pero jalaba KaTeX del CDN**.
+- No se tocó el CSS de KaTeX (queda idéntico al de upstream, más fácil de actualizar).
+  Se omitieron los `.ttf` a propósito: los navegadores toman el primer formato que soportan
+  y ninguno pide `.ttf` teniendo `woff2`/`woff` (solo lo usaría un Android anterior a 2013).
+- Verificado: **cero referencias al CDN** en todo el repo, 131 fórmulas dibujadas en
+  `operaciones-fracciones.html`, ninguna sin renderizar, sin errores de consola y sin
+  peticiones fallidas. El **simulador COMIPEMS quedó 100% sin recursos externos**.
+- **Las tipografías también se trajeron al repo.** Playfair Display y DM Sans se
+  self-hostean desde **`assets/fonts/`** (6 archivos `woff2`, 184 KB) con sus reglas
+  `@font-face` en `assets/fonts/fonts.css`; `style.css:6` dejó de importar de
+  `fonts.googleapis.com`. Sólo se guardaron los subsets **latin y latin-ext** (el sitio es en
+  español; cyrillic y vietnamese nunca se usarían). DM Sans es fuente variable, así que un
+  solo archivo cubre los pesos 300–700.
+- **Hallazgo:** el simulador COMIPEMS traía su propio `@import` de Google Fonts, pero estaba
+  **colocado después del bloque `:root`** — el navegador ignora un `@import` que no va al
+  inicio, así que llevaba tiempo cayendo a fuentes del sistema sin que se notara. Se cambió
+  por un `<link>` a `assets/fonts/fonts.css`: ahora **sí** se ve con Playfair Display.
+  Se revisó todo el repo en busca de otros `@import` mal colocados — no hay más.
+- **Estado final:** la portada, los índices y los dos simuladores cargan **cero recursos
+  externos**. Lo único que sigue saliendo a internet son los **iframes de YouTube** en los
+  temas de Math que traen video — eso no tiene arreglo, un video embebido necesita conexión.
+- **Apuntes reorganizado por nivel escolar y estrenada la subsección de ingreso a la UNAM.**
+  El índice de Apuntes ahora se parte en bloques (`<h2 class="apuntes-grupo">` + su
+  `.apuntes-grid`): **Ingreso a licenciatura (UNAM · Área 2)** e **Ingreso a bachillerato
+  (COMIPEMS)**. Separarlos fue petición de Lety — son niveles distintos y estaban revueltos.
+  El patrón es extensible: un grupo nuevo se crea copiando ese par de líneas.
+- **Publicadas 9 guías en `apuntes/ingreso-licenciatura/`** (fuente: proyecto Artefactos,
+  carpeta `Ingreso licenciatura`), agrupadas en Empieza aquí · Ciencias · Humanidades ·
+  Formularios · Practicar: temario, biología, química, español, literatura, historia de
+  México, historia universal y formularios de física y geografía.
+- Venían como **artefactos sueltos**: sin `data-section` y sin un solo link interno — quien
+  llegaba se quedaba atorado sin salida. Se les inyectó una barra `.l2e-volver`
+  (breadcrumb `Inicio › Apuntes › Ingreso UNAM › <materia>`, prefijo propio para no chocar
+  con el CSS de cada página). **No se tocó su contenido.** Helper del script en el
+  scratchpad de la sesión.
+- **Los dos simuladores NO se movieron** — sus URLs siguen vivas; la separación por nivel se
+  resolvió en la agrupación del índice, no moviendo carpetas.
+- **Retirados** `mcp.html`, `compresion.html` y `segunda-guerra-mundial.html` (a Lety dejó de
+  convencerle el formato). Ojo: el tercero era la **referencia canónica** del patrón zoom
+  N1–N5, así que —idea de Lety— en vez de dejarlo solo en el historial de git se guardó en
+  `Recursos lety2E/formato-apunte-zoom-N1-N5 (segunda-guerra-mundial).html`, disponible para
+  copiar componentes pero sin card en ningún índice. `CLAUDE.md` y `apuntes/Templete-apuntes.md`
+  apuntan ahí. Las guías nuevas usan otro formato, así que no se ascendió ninguna a "referencia"
+  del template viejo.
+- **Dejados fuera a propósito:** `Guias-unam.html` (636 KB, duplica el contenido de las
+  individuales) y `hist mex.html` / `hist mex 2.html` (borradores viejos; el segundo además
+  está roto, muestra `{sel?.title}` sin procesar). `simulador-unam-area2.html` ya estaba
+  publicado — md5 idéntico al del sitio.
+- **Hueco conocido:** de las 9 materias de Área 2 faltan páginas completas de **Física** y
+  **Geografía** (solo hay formulario); el contenido de Física sí existe dentro de `Guias-unam.html`.
+- Verificado en local: los 13 links de ambos índices dan 200, cero referencias colgando a los
+  borrados, sin errores de consola y **sin overflow horizontal en 390 y 360** de ancho.
+
+- **Sitio caído y recuperado — el dominio ya no apuntaba a GitHub Pages.** `lety2e.com`
+  resolvía al CDN de Hostinger (`92.112.198.67` / `147.79.120.81`) por un registro
+  **ALIAS `@` → `lety2e.com.cdn.hstgr.net`**, y ese servidor tenía el certificado SSL
+  **vencido desde el 27-jun-2026**: el navegador bloqueaba la entrada. Encima Hostinger
+  servía una versión **vieja** del sitio (botones `/escritos/`, `/musica/`, `/la-turquesa/`).
+- **Arreglo (lo hizo Lety en el panel de Hostinger, guiada paso a paso):** borrados el
+  `ALIAS @` y el `CNAME www → www.lety2e.com.cdn.hstgr.net`; agregados los 4 registros A de
+  GitHub Pages (`185.199.108/109/110/111.153`, TTL 3600) y `CNAME www → lety2E.github.io`.
+  Se conservó el `A ftp` (inofensivo). Hostinger advierte al añadir varios A con el mismo
+  nombre: es round-robin normal, GitHub lo requiere — se confirma sin problema.
+- **Verificado:** DNS propagado, `https://lety2e.com` → 200, `http` → 301 a https,
+  `www` → 301 al dominio raíz, y las tres secciones (`math/`, `lupian/`, `apuntes/`) cargan.
+  Certificado nuevo de Let's Encrypt emitido por GitHub, vigente al 8-sep-2026.
+- **Enforce HTTPS** ya estaba activo en Settings → Pages; el aviso "DNS Check in Progress"
+  es la re-verificación normal tras el cambio y se resuelve solo.
+- **Causa raíz (confirmada por Lety):** ya **no renovó el hosting** de Hostinger, solo paga
+  el dominio. Al caducar el plan, Hostinger dejó de renovar el certificado de su CDN — venció
+  el 27-jun-2026 — pero el `ALIAS` seguía apuntando ahí. O sea: **el sitio llevaba caído
+  desde finales de junio**, no fue algo reciente.
+- **Lo que esto cambia hacia adelante:** el certificado ahora lo emite y **renueva GitHub
+  automáticamente**, así que el problema de SSL vencido no se repite. Y como no hay plan de
+  hosting activo, **nadie va a reponer el `ALIAS`**: la configuración de hoy es estable.
+  En Hostinger solo queda el **registro del dominio**, que sí se debe seguir renovando.
+- Nota: el cambio **no tuvo relación** con el renombre de la carpeta local (`lety2E 2` →
+  `lety2E`); el repo estaba limpio y sincronizado todo el tiempo.
+
 ## 2026-07-07
 - **Publicado el tema 8: Pendiente y ordenada al origen** (`math/matematicas-2/pendiente-ordenada.html`), duplicando y adaptando la página correspondiente de Matemáticas 1 por indicación del temario LaTeX.
 - Se enlazaron las páginas agregando el botón Siguiente en `recta-dos-puntos.html` que apunta a `pendiente-ordenada.html`, y se añadió la card de Pendiente y ordenada al origen al index de Matemáticas 2.

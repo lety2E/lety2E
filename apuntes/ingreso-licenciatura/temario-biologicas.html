@@ -1,0 +1,1523 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Temario · Área 2 · Ciencias Biológicas, Químicas y de la Salud · UNAM</title>
+<style>
+  :root{
+    --M:#FF00AA;          /* magenta */
+    --T:#00B8B8;          /* turquesa */
+    --P:#6A2A8C;          /* morado */
+    --bg:#FFF7FB;
+    --card:#FFFFFF;
+    --ink:#1A0828;
+    --muted:#7B5A50;
+    --border:#F0D7E6;
+    --hover:#FFE3F1;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,system-ui,sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  header{
+    text-align:center;
+    padding:2.4rem 1rem 1.2rem;
+  }
+  header .eyebrow{
+    font-size:.78rem;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    color:var(--T);
+    font-weight:700;
+  }
+  header h1{
+    margin:.4rem 0 .2rem;
+    font-size:clamp(1.4rem,3.6vw,2rem);
+    color:var(--P);
+  }
+  header p{
+    margin:0;
+    color:var(--muted);
+    font-size:.95rem;
+  }
+
+  /* Tabs */
+  .tabs{
+    max-width:1100px;
+    margin:1.6rem auto 0;
+    padding:0 1rem;
+    display:flex;
+    flex-wrap:wrap;
+    gap:.5rem;
+    justify-content:center;
+  }
+  .tab{
+    background:var(--card);
+    border:1.5px solid var(--border);
+    color:var(--ink);
+    border-radius:999px;
+    padding:.5rem 1rem;
+    font-size:.92rem;
+    font-weight:600;
+    cursor:pointer;
+    transition:all .15s ease;
+    font-family:inherit;
+  }
+  .tab:hover{background:var(--hover);border-color:var(--M)}
+  .tab.active{
+    background:var(--M);
+    color:#fff;
+    border-color:var(--M);
+    box-shadow:0 4px 12px rgba(255,0,170,.25);
+  }
+
+  /* Panels */
+  main{
+    max-width:900px;
+    margin:1.6rem auto 4rem;
+    padding:0 1rem;
+  }
+  .panel{display:none}
+  .panel.active{display:block;animation:fade .25s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+
+  .panel-head{
+    margin-bottom:1.2rem;
+    padding-bottom:.8rem;
+    border-bottom:2px solid var(--border);
+  }
+  .panel-head h2{
+    margin:0;
+    color:var(--P);
+    font-size:1.5rem;
+  }
+  .panel-head .count{
+    color:var(--muted);
+    font-size:.88rem;
+    margin-top:.2rem;
+  }
+
+  /* Unit (accordion) */
+  details.unit{
+    background:var(--card);
+    border:1.5px solid var(--border);
+    border-radius:14px;
+    margin-bottom:.6rem;
+    overflow:hidden;
+    transition:border-color .15s ease, box-shadow .15s ease;
+  }
+  details.unit[open]{
+    border-color:var(--M);
+    box-shadow:0 6px 18px rgba(255,0,170,.10);
+  }
+  details.unit > summary{
+    list-style:none;
+    cursor:pointer;
+    padding:.85rem 1rem;
+    display:flex;
+    align-items:center;
+    gap:.7rem;
+    font-weight:600;
+    font-size:1rem;
+    color:var(--ink);
+    user-select:none;
+  }
+  details.unit > summary::-webkit-details-marker{display:none}
+  details.unit > summary:hover{background:var(--hover)}
+  .unit-num{
+    flex:0 0 auto;
+    width:30px;
+    height:30px;
+    border-radius:50%;
+    background:var(--T);
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:.85rem;
+    font-weight:700;
+  }
+  details.unit[open] .unit-num{background:var(--M)}
+  .unit-title{flex:1}
+  .chev{
+    flex:0 0 auto;
+    color:var(--muted);
+    transition:transform .2s ease;
+    font-size:.85rem;
+  }
+  details.unit[open] .chev{transform:rotate(180deg);color:var(--M)}
+
+  .unit-body{
+    padding:.3rem 1rem 1rem 3.7rem;
+    border-top:1px solid var(--border);
+  }
+  .unit-body ol{
+    margin:.6rem 0 0;
+    padding-left:1.2rem;
+  }
+  .unit-body > ol > li{
+    margin:.45rem 0;
+    color:var(--ink);
+  }
+  .unit-body ol ol{
+    margin:.3rem 0 .6rem;
+    padding-left:1.1rem;
+  }
+  .unit-body ol ol li{
+    color:var(--muted);
+    font-size:.92rem;
+    margin:.2rem 0;
+    list-style-type:lower-alpha;
+  }
+  .unit-body ol ol ol li{
+    list-style-type:lower-roman;
+  }
+
+  /* Preguntas del examen muestra */
+  .qbtn{
+    margin-top:.8rem;
+    display:inline-flex;
+    align-items:center;
+    gap:.5rem;
+    background:linear-gradient(135deg,var(--M),#FF4FBF);
+    color:#fff;
+    border:none;
+    border-radius:999px;
+    padding:.45rem .9rem;
+    font-size:.82rem;
+    font-weight:600;
+    cursor:pointer;
+    font-family:inherit;
+    box-shadow:0 3px 10px rgba(255,0,170,.20);
+    transition:transform .12s ease, box-shadow .12s ease;
+  }
+  .qbtn:hover{transform:translateY(-1px);box-shadow:0 6px 14px rgba(255,0,170,.30)}
+  .qbtn .qcount{
+    background:rgba(255,255,255,.28);
+    padding:.05rem .45rem;
+    border-radius:999px;
+    font-size:.75rem;
+  }
+  .qbox{
+    margin-top:.9rem;
+    display:none;
+    border-top:1.5px dashed var(--border);
+    padding-top:.8rem;
+  }
+  .qbox.open{display:block}
+  .q{
+    background:#FFFBFD;
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:.7rem .85rem;
+    margin-bottom:.6rem;
+  }
+  .q-head{
+    display:flex;
+    gap:.55rem;
+    align-items:flex-start;
+    margin-bottom:.45rem;
+  }
+  .q-num{
+    flex:0 0 auto;
+    background:var(--T);
+    color:#fff;
+    border-radius:6px;
+    padding:.1rem .42rem;
+    font-size:.76rem;
+    font-weight:700;
+    line-height:1.4;
+  }
+  .q-text{
+    flex:1;
+    font-size:.92rem;
+    color:var(--ink);
+    line-height:1.45;
+  }
+  .q-ctx{
+    background:#FFF1A8;
+    border:1px solid #F5DC6A;
+    border-radius:8px;
+    padding:.45rem .65rem;
+    margin-bottom:.45rem;
+    font-size:.82rem;
+    color:#5A4A1A;
+    font-style:italic;
+  }
+  .q-opts{
+    list-style:none;
+    margin:0;
+    padding:0;
+  }
+  .q-opts li{
+    display:flex;
+    gap:.5rem;
+    align-items:flex-start;
+    padding:.35rem .55rem;
+    border-radius:7px;
+    cursor:pointer;
+    transition:background .12s ease;
+    font-size:.88rem;
+    margin:.15rem 0;
+  }
+  .q-opts li:hover{background:var(--hover)}
+  .q-opts .letter{
+    flex:0 0 auto;
+    width:22px;
+    height:22px;
+    border:1.5px solid var(--border);
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:.74rem;
+    font-weight:700;
+    color:var(--muted);
+    background:#fff;
+  }
+  .q-opts li.correct{background:#D8F5DA;color:#1E5A2A}
+  .q-opts li.correct .letter{background:#3FAF50;color:#fff;border-color:#3FAF50}
+  .q-opts li.wrong{background:#FFE0E0;color:#7A1F1F}
+  .q-opts li.wrong .letter{background:#D94545;color:#fff;border-color:#D94545}
+  .q-tip{
+    font-size:.75rem;
+    color:var(--muted);
+    margin:.2rem 0 .4rem;
+    font-style:italic;
+  }
+
+  footer{
+    text-align:center;
+    color:var(--muted);
+    font-size:.82rem;
+    padding:1.4rem 1rem 2rem;
+  }
+
+  @media (max-width:520px){
+    .tabs{gap:.35rem}
+    .tab{padding:.42rem .8rem;font-size:.85rem}
+    .unit-body{padding-left:1rem}
+    details.unit > summary{font-size:.95rem}
+  }
+</style>
+
+<style>
+/* ---- barra de regreso lety2E (prefijo l2e- para no chocar) ---- */
+.l2e-volver{
+  font-family:'DM Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
+  font-size:.85rem;font-weight:500;
+  padding:.7rem 1.1rem;
+  background:#1A0828;color:#F5E9F2;
+  display:flex;flex-wrap:wrap;align-items:center;gap:.45rem;
+  line-height:1.5;
+}
+.l2e-volver a{color:#00DEC8;text-decoration:none;}
+.l2e-volver a:hover{color:#FF00AA;text-decoration:underline;}
+.l2e-volver .l2e-sep{opacity:.45;}
+.l2e-volver .l2e-actual{opacity:.75;}
+.l2e-volver .l2e-marca{
+  margin-left:auto;font-family:Georgia,'Times New Roman',serif;
+  font-style:italic;font-weight:700;color:#FF00AA;text-decoration:none;
+}
+.l2e-volver .l2e-marca:hover{color:#00DEC8;}
+@media (max-width:520px){
+  .l2e-volver{font-size:.78rem;padding:.6rem .8rem;}
+  .l2e-volver .l2e-marca{margin-left:auto;}
+}
+</style>
+</head>
+<body data-section="apuntes">
+<nav class="l2e-volver">
+  <a href="../../index.html">Inicio</a>
+  <span class="l2e-sep">&rsaquo;</span>
+  <a href="../index.html">Apuntes</a>
+  <span class="l2e-sep">&rsaquo;</span>
+  <a href="index.html">Ingreso UNAM</a>
+  <span class="l2e-sep">&rsaquo;</span>
+  <span class="l2e-actual">Temario</span>
+  <a class="l2e-marca" href="../../index.html">lety2E</a>
+</nav>
+
+
+<header>
+  <div class="eyebrow">Examen UNAM · Área 2</div>
+  <h1>Temario · Ciencias Biológicas, Químicas y de la Salud</h1>
+  <p>Toca una materia para ver sus unidades. Cada unidad se despliega para mostrar los subtemas.</p>
+</header>
+
+<nav class="tabs" role="tablist" id="tabs">
+  <button class="tab active" data-target="espanol">Español</button>
+  <button class="tab" data-target="matematicas">Matemáticas</button>
+  <button class="tab" data-target="fisica">Física</button>
+  <button class="tab" data-target="quimica">Química</button>
+  <button class="tab" data-target="biologia">Biología</button>
+  <button class="tab" data-target="historia-universal">Hist. Universal</button>
+  <button class="tab" data-target="historia-mexico">Hist. México</button>
+  <button class="tab" data-target="literatura">Literatura</button>
+  <button class="tab" data-target="geografia">Geografía</button>
+</nav>
+
+<main>
+
+<!-- ESPAÑOL -->
+<section class="panel active" id="espanol">
+  <div class="panel-head"><h2>Español</h2><div class="count">7 unidades</div></div>
+
+  <details class="unit"><summary><span class="unit-num">1</span><span class="unit-title">Funciones de la lengua</span><span class="chev">▾</span></summary>
+    <div class="unit-body"><ol><li>Referencial</li><li>Apelativa</li><li>Poética</li></ol></div>
+  </details>
+  <details class="unit"><summary><span class="unit-num">2</span><span class="unit-title">Formas del discurso</span><span class="chev">▾</span></summary>
+    <div class="unit-body"><ol><li>Descriptivo</li><li>Narrativo</li><li>Argumentativo</li></ol></div>
+  </details>
+  <details class="unit"><summary><span class="unit-num">3</span><span class="unit-title">Comprensión de lectura</span><span class="chev">▾</span></summary>
+    <div class="unit-body"><ol>
+      <li>Estructura del texto</li>
+      <li>Ideas principales y secundarias</li>
+      <li>Frases clave</li>
+      <li>Inferencia de datos</li>
+      <li>Inferencia de rasgos, sentimientos y motivos de los personajes</li>
+      <li>Punto de vista del autor</li>
+    </ol></div>
+  </details>
+  <details class="unit"><summary><span class="unit-num">4</span><span class="unit-title">Gramática</span><span class="chev">▾</span></summary>
+    <div class="unit-body"><ol><li>Oración</li><li>Uso del sujeto</li><li>Uso del predicado</li></ol></div>
+  </details>
+  <details class="unit"><summary><span class="unit-num">5</span><span class="unit-title">Redacción</span><span class="chev">▾</span></summary>
+    <div class="unit-body"><ol><li>—</li></ol></div>
+  </details>
+  <details class="unit"><summary><span class="unit-num">6</span><span class="unit-title">Vocabulario</span><span class="chev">▾</span></summary>
+    <div class="unit-body"><ol><li>Analogías</li><li>Sinónimos</li><li>Antónimos</li><li>Homófonos</li></ol></div>
+  </details>
+  <details class="unit"><summary><span class="unit-num">7</span><span class="unit-title">Ortografía</span><span class="chev">▾</span></summary>
+    <div class="unit-body"><ol>
+      <li>Uso de s, c, z</li>
+      <li>Uso de v, b</li>
+      <li>Uso de g, j</li>
+      <li>Uso de <em>ll, y</em></li>
+      <li>Uso de h</li>
+      <li>Uso de r, rr</li>
+      <li>Acentos</li>
+      <li>Puntuación</li>
+      <li>Mayúsculas</li>
+    </ol></div>
+  </details>
+</section>
+
+<!-- MATEMÁTICAS -->
+<section class="panel" id="matematicas">
+  <div class="panel-head"><h2>Matemáticas</h2><div class="count">17 unidades</div></div>
+
+  <details class="unit"><summary><span class="unit-num">1</span><span class="unit-title">Operaciones con números reales, complejos y expresiones algebraicas</span><span class="chev">▾</span></summary>
+    <div class="unit-body"><ol>
+      <li>Números reales
+        <ol><li>Suma y resta</li><li>Multiplicación y división</li><li>Raíces y potencias con exponente racional</li></ol>
+      </li>
+      <li>Números complejos
+        <ol><li>Suma y resta</li><li>Multiplicación</li></ol>
+      </li>
+      <li>Expresiones algebraicas
+        <ol><li>Suma y resta</li><li>Multiplicación y división</li><li>Raíces y potencias con exponente racional</li><li>Operaciones con radicales</li></ol>
+      </li>
+    </ol></div>
+  </details>
+
+  <details class="unit"><summary><span class="unit-num">2</span><span class="unit-title">Productos notables y factorización</span><span class="chev">▾</span></summary>
+    <div class="unit-body"><ol>
+      <li>Binomio de Newton (a+b)<sup>n</sup>, n ∈ ℕ</li>
+      <li>Teorema del residuo y del factor</li>
+      <li>Simplificación de fracciones algebraicas</li>
+      <li>Operaciones con fracciones algebraicas</li>
+    </ol></div>
+  </details>
+
+  <details class="unit"><summary><span class="unit-num">3</span><span class="unit-title">Ecuaciones</span><span class="chev">▾</span></summary>
+    <div class="unit-body"><ol>
+      <li>Ecuación, identidad y propiedades de la igualdad</li>
+      <li>Ecuaciones de primer grado</li>
+      <li>Ecuaciones de segundo grado</li>
+    </ol></div>
+  </details>
+
+  <details class="unit"><summary><span class="unit-num">4</span><span class="unit-title">Desigualdades</span><span class="chev">▾</span></summary>
+    <div class="unit-body"><ol>
+      <li>Desigualdad de primer grado en una variable y sus propiedades</li>
+    </ol></div>
+  </details>
+
+  <details class="unit"><summary><span class="unit-num">5</span><span class="unit-title">Sistemas de ecuaciones</span><span class="chev">▾</span></summary>
+    <div class="unit-body"><ol>
+      <li>Sistemas de dos ecuaciones lineales con dos incógnitas
+        <ol><li>Métodos de solución</li></ol>
+      </li>
+      <li>Sistemas de tres ecuaciones lineales con tres incógnitas
+        <ol><li>Métodos de solución (Regla de Cramer)</li></ol>
+      </li>
+    </ol></div>
+  </details>
+
+  <details class="unit"><summary><span class="unit-num">6</span><span class="unit-title">Funciones algebraicas</span><span class="chev">▾</span></summary>
+    <div class="unit-body"><ol>
+      <li>Dominio, contradominio y regla de correspondencia</li>
+      <li>Rango o imagen</li>
+      <li>Gráfica</li>
+      <li>Implícitas y explícitas</li>
+      <li>Crecientes y decrecientes</li>
+      <li>Continuas y discontinuas</li>
+      <li>Álgebra de funciones</li>
+    </ol></div>
+  </details>
+
+  <details class="unit"><summary><span class="unit-num">7</span><span class="unit-title">Trigonometría</span><span class="chev">▾</span></summary>
+    <div class="unit-body"><ol>
+      <li>Trigonometría básica
+        <ol>
+          <li>Medida de un ángulo (conversión de grados a radianes y de radianes a grados)</li>
+          <li>Razones trigonométricas</li>
+          <li>Resolución de triángulos rectángulos</li>
+          <li>Ley de los Senos y Ley de los Cosenos</li>
+          <li>Resolución de triángulos oblicuángulos</li>
+          <li>Razones trigonométricas para un ángulo en cualquier cuadrante. Fórmulas de reducción</li>
+        </ol>
+      </li>
+      <li>Funciones trigonométricas
+        <ol>
+          <li>El círculo trigonométrico</li>
+          <li>Funciones trigonométricas directas
+            <ol><li>Dominio y rango</li><li>Periodo y amplitud</li><li>Desfasamiento</li><li>Asíntotas de la gráfica</li></ol>
+          </li>
+        </ol>
+      </li>
+    </ol></div>
+  </details>
+
+  <details class="unit"><summary><span class="unit-num">8</span><span class="unit-title">Funciones exponenciales y logarítmicas</span><span class="chev">▾</span></summary>
+    <div class="unit-body"><ol>
+      <li>Dominio y rango</li>
+      <li>Gráficas y asíntotas</li>
+    </ol></div>
+  </details>
+
+  <details class="unit"><summary><span class="unit-num">9</span><span class="unit-title">Recta</span><span class="chev">▾</span></summary>
+    <div class="unit-body"><ol>
+      <li>Distancia entre dos puntos</li>
+      <li>Coordenadas de un punto que divide a un segmento de acuerdo con una razón dada</li>
+      <li>Pendiente de una recta</li>
+      <li>Formas de la ecuación de la recta y su gráfica</li>
+      <li>Condiciones de paralelismo y perpendicularidad</li>
+      <li>Distancia de un punto a una recta</li>
+      <li>Ecuaciones de las medianas, mediatrices y alturas de un triángulo. Puntos de intersección (ortocentro, circuncentro y baricentro)</li>
+    </ol></div>
+  </details>
+
+  <details class="unit"><summary><span class="unit-num">10</span><span class="unit-title">Circunferencia</span><span class="chev">▾</span></summary>
+    <div class="unit-body"><ol>
+      <li>Circunferencia como lugar geométrico</li>
+      <li>Formas ordinaria (canónica) y general de la ecuación de la circunferencia con centro en el origen</li>
+      <li>Ecuación de la circunferencia con centro en (h, k) en las formas ordinaria y general</li>
+      <li>Elementos de una circunferencia</li>
+    </ol></div>
+  </details>
+
+  <details class="unit"><summary><span class="unit-num">11</span><span class="unit-title">Parábola</span><span class="chev">▾</span></summary>
+    <div class="unit-body"><ol>
+      <li>Parábola como lugar geométrico</li>
+      <li>Formas ordinaria y general de la ecuación de la parábola cuando el vértice está en el origen y el eje focal coincide con alguno de los ejes coordenados</li>
+      <li>Formas ordinaria y general de la ecuación de la parábola cuando el vértice está en un punto cualquiera del plano y eje focal paralelo a alguno de los ejes coordenados</li>
+      <li>Elementos de una parábola</li>
+    </ol></div>
+  </details>
+
+  <details class="unit"><summary><span class="unit-num">12</span><span class="unit-title">Elipse</span><span class="chev">▾</span></summary>
+    <div class="unit-body"><ol>
+      <li>Elipse como lugar geométrico</li>
+      <li>Relación entre los parámetros <em>a, b</em> y <em>c</em></li>
+      <li>Formas ordinaria y general de la ecuación de la elipse con centro en el origen y eje focal sobre alguno de los ejes coordenados</li>
+      <li>Formas ordinaria y general de la ecuación de la elipse con centro fuera del origen y eje focal paralelo a alguno de los ejes coordenados</li>
+      <li>Elementos de una elipse</li>
+    </ol></div>
+  </details>
+
+  <details class="unit"><summary><span class="unit-num">13</span><span class="unit-title">Hipérbola</span><span class="chev">▾</span></summary>
+    <div class="unit-body"><ol>
+      <li>Hipérbola como lugar geométrico</li>
+      <li>Relación entre los parámetros de la hipérbola <em>a, b</em> y <em>c</em></li>
+      <li>Formas ordinaria y general de la ecuación de la hipérbola con centro en el origen y eje focal sobre alguno de los ejes coordenados</li>
+      <li>Formas ordinaria y general de la ecuación de la hipérbola con centro fuera del origen y eje focal paralelo a alguno de los ejes coordenados</li>
+      <li>Elementos de una hipérbola</li>
+    </ol></div>
+  </details>
+
+  <details class="unit"><summary><span class="unit-num">14</span><span class="unit-title">Ecuación general de segundo grado</span><span class="chev">▾</span></summary>
+    <div class="unit-body"><ol>
+      <li>Las cónicas</li>
+      <li>Ecuación general de segundo grado</li>
+      <li>Criterios para identificar la cónica que representa una ecuación de segundo grado</li>
+      <li>Traslación de ejes</li>
+    </ol></div>
+  </details>
+
+  <details class="unit"><summary><span class="unit-num">15</span><span class="unit-title">Límites</span><span class="chev">▾</span></summary>
+    <div class="unit-body"><ol>
+      <li>Concepto intuitivo</li>
+      <li>Definición formal</li>
+      <li>Teoremas sobre límites</li>
+      <li>Obtención de límites</li>
+      <li>Formas indeterminadas</li>
+      <li>Continuidad en un punto y en un intervalo</li>
+    </ol></div>
+  </details>
+
+  <details class="unit"><summary><span class="unit-num">16</span><span class="unit-title">La derivada</span><span class="chev">▾</span></summary>
+    <div class="unit-body"><ol>
+      <li>Definición de derivada y sus notaciones</li>
+      <li>Obtención de derivadas</li>
+      <li>Regla de la cadena</li>
+      <li>Derivada de funciones implícitas</li>
+      <li>Derivadas sucesivas de una función</li>
+      <li>Interpretación geométrica y física</li>
+      <li>Ecuaciones de la tangente y de la normal a una curva</li>
+      <li>Cálculo de velocidad y aceleración de un móvil</li>
+      <li>Máximos y mínimos relativos de una función</li>
+      <li>Máximos y mínimos absolutos en un intervalo cerrado</li>
+      <li>Puntos de inflexión y de concavidad en una curva</li>
+      <li>Problemas de la vida cotidiana</li>
+    </ol></div>
+  </details>
+
+  <details class="unit"><summary><span class="unit-num">17</span><span class="unit-title">La integral</span><span class="chev">▾</span></summary>
+    <div class="unit-body"><ol>
+      <li>Función integrable en un intervalo cerrado</li>
+      <li>Teoremas que justifican las propiedades de la integral de una función</li>
+      <li>Integral inmediata</li>
+      <li>Tabla de fórmulas de integración</li>
+      <li>Métodos de integración</li>
+      <li>Integral definida y su notación</li>
+    </ol></div>
+  </details>
+</section>
+
+<!-- FÍSICA -->
+<section class="panel" id="fisica">
+  <div class="panel-head"><h2>Física</h2><div class="count">9 unidades</div></div>
+
+  <details class="unit"><summary><span class="unit-num">1</span><span class="unit-title">Cinemática</span><span class="chev">▾</span></summary>
+    <div class="unit-body"><ol>
+      <li>Características de los fenómenos mecánicos</li>
+      <li>Movimiento rectilíneo uniforme</li>
+      <li>Movimiento uniformemente acelerado</li>
+    </ol></div>
+  </details>
+
+  <details class="unit"><summary><span class="unit-num">2</span><span class="unit-title">Fuerzas, leyes de Newton y Ley de la Gravitación Universal</span><span class="chev">▾</span></summary>
+    <div class="unit-body"><ol>
+      <li>Factores que cambian la estructura o el estado de movimiento de objetos</li>
+      <li>El concepto de fuerza</li>
+      <li>El carácter vectorial de la fuerza</li>
+      <li>Superposición de fuerzas</li>
+      <li>Primera Ley de Newton</li>
+      <li>Segunda Ley de Newton
+        <ol><li>Concepto de peso</li><li>Concepto de masa</li></ol>
+      </li>
+      <li>Tercera Ley de Newton</li>
+      <li>Equilibrio rotacional y traslacional. Fuerza y torca</li>
+      <li>Ley de la Fuerza en un resorte (Ley de Hooke)</li>
+      <li>Ley de la Gravitación Universal. Movimiento de planetas</li>
+    </ol></div>
+  </details>
+
+  <details class="unit"><summary><span class="unit-num">3</span><span class="unit-title">Trabajo y leyes de la conservación</span><span class="chev">▾</span></summary>
+    <div class="unit-body"><ol>
+      <li>Concepto de trabajo mecánico</li>
+      <li>Concepto de potencia</li>
+      <li>Energía cinética</li>
+      <li>Energía potencial</li>
+      <li>Conservación de la energía mecánica</li>
+      <li>Conservación del ímpetu (momento)</li>
+      <li>Colisiones entre partículas en una dimensión</li>
+      <li>Procesos disipativos (fricción y rozamiento)</li>
+    </ol></div>
+  </details>
+
+  <details class="unit"><summary><span class="unit-num">4</span><span class="unit-title">Termodinámica</span><span class="chev">▾</span></summary>
+    <div class="unit-body"><ol>
+      <li>Calor y temperatura
+        <ol>
+          <li>Diferencia entre calor y temperatura</li>
+          <li>Equilibrio térmico</li>
+          <li>Escalas termométricas absolutas</li>
+          <li>Conductividad calorífica y capacidad térmica específica</li>
+          <li>Leyes de la Termodinámica</li>
+        </ol>
+      </li>
+      <li>Teoría Cinética de los Gases
+        <ol>
+          <li>Estructura de la materia (enfoque clásico)</li>
+          <li>Temperatura según la Teoría Cinética de los Gases</li>
+          <li>Ecuación de estado de los gases ideales</li>
+        </ol>
+      </li>
+    </ol></div>
+  </details>
+
+  <details class="unit"><summary><span class="unit-num">5</span><span class="unit-title">Ondas</span><span class="chev">▾</span></summary>
+    <div class="unit-body"><ol>
+      <li>Caracterización de ondas mecánicas</li>
+      <li>Reflexión y refracción de ondas</li>
+      <li>Difracción e interferencia de ondas</li>
+      <li>Energía de una onda incidente y de las ondas transmitida y reflejada</li>
+    </ol></div>
+  </details>
+
+  <details class="unit"><summary><span class="unit-num">6</span><span class="unit-title">Electromagnetismo</span><span class="chev">▾</span></summary>
+    <div class="unit-body"><ol>
+      <li>Efectos cualitativos entre cuerpos cargados eléctricamente</li>
+      <li>Ley de Coulomb. Campo eléctrico</li>
+      <li>Ley de Ohm y potencia eléctrica</li>
+      <li>Circuitos
+        <ol><li>Circuitos de resistencias</li><li>Circuitos de condensadores</li></ol>
+      </li>
+      <li>Campo magnético</li>
+      <li>Inducción electromagnética</li>
+      <li>Relación entre campo magnético y eléctrico</li>
+      <li>Inducción de campos</li>
+      <li>La luz como onda electromagnética</li>
+      <li>Espectro electromagnético</li>
+      <li>Leyes de Ampere–Maxwell</li>
+      <li>Leyes de Faraday y Henry</li>
+    </ol></div>
+  </details>
+
+  <details class="unit"><summary><span class="unit-num">7</span><span class="unit-title">Fluidos</span><span class="chev">▾</span></summary>
+    <div class="unit-body"><ol>
+      <li>Fluidos en reposo
+        <ol>
+          <li>Presión atmosférica</li>
+          <li>Principio de Pascal</li>
+          <li>Principio de Arquímedes</li>
+          <li>Presión hidrostática</li>
+          <li>Tensión superficial y capilaridad</li>
+        </ol>
+      </li>
+      <li>Fluidos en movimiento
+        <ol>
+          <li>Ecuación de continuidad</li>
+          <li>Ecuación de Bernoulli</li>
+          <li>Viscosidad</li>
+        </ol>
+      </li>
+    </ol></div>
+  </details>
+
+  <details class="unit"><summary><span class="unit-num">8</span><span class="unit-title">Óptica</span><span class="chev">▾</span></summary>
+    <div class="unit-body"><ol>
+      <li>Reflexión y refracción de la luz</li>
+      <li>Espejos planos y esféricos</li>
+      <li>Lentes convergentes y divergentes</li>
+      <li>Punto de vista contemporáneo (dualidad)
+        <ol><li>Modelo corpuscular</li><li>Modelo ondulatorio</li></ol>
+      </li>
+    </ol></div>
+  </details>
+
+  <details class="unit"><summary><span class="unit-num">9</span><span class="unit-title">Física contemporánea</span><span class="chev">▾</span></summary>
+    <div class="unit-body"><ol>
+      <li>Estructura atómica de la materia
+        <ol>
+          <li>Modelos atómicos</li>
+          <li>El experimento de Rutherford</li>
+          <li>Espectroscopía y modelo atómico de Bohr</li>
+        </ol>
+      </li>
+      <li>Física nuclear
+        <ol>
+          <li>El descubrimiento de la radiactividad</li>
+          <li>Decaimiento radiactivo</li>
+          <li>Detectores de radiactividad</li>
+          <li>Fisión y fusión nucleares</li>
+          <li>Aplicaciones de la radiactividad y la energía nuclear</li>
+        </ol>
+      </li>
+      <li>Otras formas de energía</li>
+    </ol></div>
+  </details>
+</section>
+
+<!-- QUÍMICA -->
+<section class="panel" id="quimica">
+  <div class="panel-head"><h2>Química</h2><div class="count">6 unidades</div></div>
+
+  <details class="unit"><summary><span class="unit-num">1</span><span class="unit-title">Temas básicos</span><span class="chev">▾</span></summary>
+    <div class="unit-body"><ol>
+      <li>Sustancias químicas
+        <ol><li>Sustancias puras: elemento y compuesto</li><li>Mezclas: homogéneas y heterogéneas</li></ol>
+      </li>
+      <li>Estructura atómica
+        <ol>
+          <li>Conceptos de átomo, protón, electrón, neutrón, número atómico y masa atómica</li>
+          <li>Orbitales atómicos</li>
+          <li>Configuraciones electrónicas</li>
+        </ol>
+      </li>
+      <li>Tabla periódica
+        <ol>
+          <li>Clasificación de elementos: metales, no metales y metaloides</li>
+          <li>Regla del octeto de Lewis</li>
+          <li>Propiedades periódicas
+            <ol>
+              <li>Electronegatividad y tipos de enlace: iónico y covalente</li>
+              <li>Energía de ionización</li>
+              <li>Afinidad electrónica</li>
+            </ol>
+          </li>
+        </ol>
+      </li>
+      <li>Clasificación de los compuestos en óxidos básicos, óxidos ácidos (anhídridos), ácidos, bases y sales</li>
+      <li>Mol
+        <ol><li>Concepto</li><li>Cálculo de masa molar</li></ol>
+      </li>
+    </ol></div>
+  </details>
+
+  <details class="unit"><summary><span class="unit-num">2</span><span class="unit-title">Agua</span><span class="chev">▾</span></summary>
+    <div class="unit-body"><ol>
+      <li>Composición del agua y estructura molecular
+        <ol><li>Polaridad y puentes de hidrógeno</li></ol>
+      </li>
+      <li>Propiedades físicas: puntos de ebullición y de fusión, capacidad calorífica específica</li>
+      <li>Propiedades químicas: tipo de enlace, capacidad (poder) disolvente del agua</li>
+      <li>Ácidos y bases
+        <ol>
+          <li>Teorías ácido–base: Arrhenius, Brönsted–Lowry y Lewis</li>
+          <li>Clasificación por su conductividad: fuertes y débiles</li>
+          <li>Diferenciación de las sustancias de acuerdo con su pH</li>
+          <li>Indicadores y pH</li>
+          <li>Concentración de iones [H+] y [OH−]</li>
+        </ol>
+      </li>
+      <li>Soluciones o disoluciones
+        <ol><li>Concepto de soluto y disolvente</li><li>Concentración: molaridad y porcentual</li></ol>
+      </li>
+      <li>Contaminación del agua
+        <ol>
+          <li>Principales contaminantes: físicos, químicos y biológicos</li>
+          <li>Fuentes generadoras: industrial, urbana y agrícola</li>
+        </ol>
+      </li>
+      <li>Importancia y aplicaciones del agua para la humanidad</li>
+      <li>Uso responsable y preservación del agua</li>
+    </ol></div>
+  </details>
+
+  <details class="unit"><summary><span class="unit-num">3</span><span class="unit-title">Aire</span><span class="chev">▾</span></summary>
+    <div class="unit-body"><ol>
+      <li>¿Qué es el aire?</li>
+      <li>Composición porcentual del aire</li>
+      <li>Reacciones del oxígeno
+        <ol>
+          <li>Reacciones de combustión</li>
+          <li>Formación de óxidos básicos</li>
+          <li>Formación de óxidos ácidos (nitrógeno, azufre y carbono)</li>
+        </ol>
+      </li>
+      <li>Reacciones de óxido–reducción</li>
+      <li>Ciclos del oxígeno, nitrógeno y carbono</li>
+      <li>Contaminantes del aire
+        <ol>
+          <li>Contaminantes primarios del aire (óxidos de nitrógeno, carbono y azufre, partículas suspendidas e hidrocarburos)</li>
+          <li>Principales fuentes generadoras (industriales, urbanas y agrícolas)</li>
+          <li>Impacto ambiental: inversión térmica y lluvia ácida</li>
+        </ol>
+      </li>
+    </ol></div>
+  </details>
+
+  <details class="unit"><summary><span class="unit-num">4</span><span class="unit-title">Alimentos</span><span class="chev">▾</span></summary>
+    <div class="unit-body"><ol>
+      <li>Carbohidratos
+        <ol><li>Estructura</li><li>Fuente de energía de disponibilidad inmediata</li></ol>
+      </li>
+      <li>Lípidos
+        <ol><li>Estructura</li><li>Almacén de energía</li></ol>
+      </li>
+      <li>Proteínas
+        <ol>
+          <li>Grupos funcionales presentes en aminoácidos</li>
+          <li>Enlace peptídico</li>
+          <li>Enzimas: catalizadores biológicos</li>
+        </ol>
+      </li>
+      <li>Vitaminas y minerales: fuentes e importancia</li>
+    </ol></div>
+  </details>
+
+  <details class="unit"><summary><span class="unit-num">5</span><span class="unit-title">La energía y las reacciones químicas</span><span class="chev">▾</span></summary>
+    <div class="unit-body"><ol>
+      <li>Reacciones químicas endotérmicas y exotérmicas</li>
+      <li>Energía interna</li>
+      <li>Entalpía</li>
+      <li>Energía libre y espontaneidad</li>
+      <li>Equilibrio químico: Ley de Le Chatelier</li>
+      <li>Velocidad de reacción y factores que influyen en ella</li>
+    </ol></div>
+  </details>
+
+  <details class="unit"><summary><span class="unit-num">6</span><span class="unit-title">Química del carbono</span><span class="chev">▾</span></summary>
+    <div class="unit-body"><ol>
+      <li>Carbono
+        <ol>
+          <li>Estructura tetraédrica</li>
+          <li>Tipos de enlace carbono–carbono: estructura y modelos</li>
+        </ol>
+      </li>
+      <li>Alcanos, alquenos, alquinos y cíclicos
+        <ol><li>Nomenclatura</li><li>Isomería estructural</li></ol>
+      </li>
+      <li>Grupos funcionales
+        <ol>
+          <li>Alcohol, éter, aldehído, cetona, ácidos carboxílicos, éster, aminas, amidas y compuestos halogenados</li>
+          <li>Nomenclatura</li>
+        </ol>
+      </li>
+      <li>Reacciones orgánicas
+        <ol>
+          <li>Reacciones de sustitución, adición y eliminación</li>
+          <li>Reacciones de condensación e hidrólisis</li>
+          <li>Reacciones de polimerización por adición y condensación</li>
+        </ol>
+      </li>
+    </ol></div>
+  </details>
+</section>
+
+<!-- BIOLOGÍA -->
+<section class="panel" id="biologia">
+  <div class="panel-head"><h2>Biología</h2><div class="count">6 unidades</div></div>
+
+  <details class="unit"><summary><span class="unit-num">1</span><span class="unit-title">Célula</span><span class="chev">▾</span></summary>
+    <div class="unit-body"><ol>
+      <li>Teoría Celular
+        <ol><li>Descubrimiento de las células</li><li>Formulación y postulados de la Teoría Celular</li></ol>
+      </li>
+      <li>Estructura celular
+        <ol>
+          <li>Moléculas orgánicas presentes en las células y su función</li>
+          <li>Estructura y función de los organelos celulares</li>
+          <li>Diferencias entre células procarióticas y eucarióticas</li>
+        </ol>
+      </li>
+    </ol></div>
+  </details>
+
+  <details class="unit"><summary><span class="unit-num">2</span><span class="unit-title">Metabolismo celular</span><span class="chev">▾</span></summary>
+    <div class="unit-body"><ol>
+      <li>Anabolismo y catabolismo
+        <ol><li>Concepto de anabolismo y catabolismo</li><li>Papel de las enzimas y del ATP en el metabolismo</li></ol>
+      </li>
+      <li>Fotosíntesis
+        <ol><li>Aspectos generales de la fase luminosa</li><li>Aspectos generales de la fase oscura</li><li>Importancia</li></ol>
+      </li>
+      <li>Respiración anaerobia
+        <ol><li>Aspectos generales de la glucólisis</li><li>Fermentación láctica y fermentación alcohólica</li><li>Balance energético</li></ol>
+      </li>
+      <li>Respiración aerobia
+        <ol><li>Aspectos generales del Ciclo de Krebs</li><li>Aspectos generales de la cadena respiratoria</li><li>Balance energético</li></ol>
+      </li>
+    </ol></div>
+  </details>
+
+  <details class="unit"><summary><span class="unit-num">3</span><span class="unit-title">Reproducción</span><span class="chev">▾</span></summary>
+    <div class="unit-body"><ol>
+      <li>Ciclo celular
+        <ol><li>Fases del ciclo celular</li><li>Estructura y funciones del ADN</li><li>Estructura y funciones del ARN</li></ol>
+      </li>
+      <li>Reproducción celular
+        <ol><li>Fases e importancia de la mitosis</li><li>Fases e importancia de la meiosis</li></ol>
+      </li>
+      <li>Reproducción a nivel de organismo
+        <ol><li>Aspectos generales de la reproducción asexual</li><li>Aspectos generales de la reproducción sexual</li></ol>
+      </li>
+    </ol></div>
+  </details>
+
+  <details class="unit"><summary><span class="unit-num">4</span><span class="unit-title">Mecanismos de la herencia</span><span class="chev">▾</span></summary>
+    <div class="unit-body"><ol>
+      <li>Trabajos de Mendel y sus principios de la herencia</li>
+      <li>Teoría cromosómica de la herencia
+        <ol><li>Formulación de la teoría cromosómica de la herencia</li><li>Herencia ligada al sexo</li><li>Concepto e importancia de las mutaciones</li></ol>
+      </li>
+      <li>Ingeniería genética
+        <ol><li>Aspectos generales de la tecnología del ADN recombinante y sus aplicaciones</li></ol>
+      </li>
+    </ol></div>
+  </details>
+
+  <details class="unit"><summary><span class="unit-num">5</span><span class="unit-title">Evolución</span><span class="chev">▾</span></summary>
+    <div class="unit-body"><ol>
+      <li>Teorías para explicar el origen de la vida
+        <ol><li>Teoría quimiosintética de Oparin–Haldane</li><li>Teoría endosimbiótica de Margulis</li></ol>
+      </li>
+      <li>Teorías para explicar el proceso evolutivo
+        <ol><li>Teoría de Lamarck</li><li>Teoría de Darwin–Wallace</li><li>Teoría sintética</li></ol>
+      </li>
+      <li>Evidencias de la evolución: paleontológicas, anatómicas, embriológicas, genéticas y biogeográficas</li>
+      <li>Consecuencias de la evolución: adaptación y biodiversidad
+        <ol><li>Criterios para la clasificación de los organismos</li><li>Características generales de los cinco reinos</li></ol>
+      </li>
+    </ol></div>
+  </details>
+
+  <details class="unit"><summary><span class="unit-num">6</span><span class="unit-title">Los seres vivos y su ambiente</span><span class="chev">▾</span></summary>
+    <div class="unit-body"><ol>
+      <li>Estructura del ecosistema
+        <ol><li>Niveles de organización ecológicos: población, comunidad y ecosistema</li><li>Tipos de organización de los componentes abióticos y bióticos</li></ol>
+      </li>
+      <li>Dinámica del ecosistema
+        <ol><li>Flujo de energía en las cadenas y tramas alimenticias</li><li>Ciclos biogeoquímicos</li><li>Relaciones inter e intraespecíficas</li></ol>
+      </li>
+      <li>Deterioro ambiental</li>
+    </ol></div>
+  </details>
+</section>
+
+<!-- HISTORIA UNIVERSAL -->
+<section class="panel" id="historia-universal">
+  <div class="panel-head"><h2>Historia Universal</h2><div class="count">9 unidades</div></div>
+
+  <details class="unit"><summary><span class="unit-num">1</span><span class="unit-title">La Historia</span><span class="chev">▾</span></summary>
+    <div class="unit-body"><ol><li>Definición y utilidad de la Historia</li><li>Periodización de la Historia</li></ol></div>
+  </details>
+
+  <details class="unit"><summary><span class="unit-num">2</span><span class="unit-title">Las revoluciones burguesas</span><span class="chev">▾</span></summary>
+    <div class="unit-body"><ol>
+      <li>Las ideas de la Ilustración</li>
+      <li>El fortalecimiento de la burguesía
+        <ol>
+          <li>La independencia de las Trece Colonias</li>
+          <li>La Revolución Francesa y el Imperio napoleónico</li>
+          <li>La Independencia de Hispanoamérica</li>
+          <li>La Revolución Industrial</li>
+        </ol>
+      </li>
+      <li>El liberalismo económico y político del siglo XIX</li>
+    </ol></div>
+  </details>
+
+  <details class="unit"><summary><span class="unit-num">3</span><span class="unit-title">Pensamiento y movimientos sociales y políticos del siglo XIX</span><span class="chev">▾</span></summary>
+    <div class="unit-body"><ol>
+      <li>La lucha entre el liberalismo y el conservadurismo</li>
+      <li>Los movimientos obreros y el pensamiento socialista</li>
+      <li>El nacionalismo y los procesos de unificación nacional de Italia y Alemania</li>
+    </ol></div>
+  </details>
+
+  <details class="unit"><summary><span class="unit-num">4</span><span class="unit-title">El imperialismo</span><span class="chev">▾</span></summary>
+    <div class="unit-body"><ol>
+      <li>La revolución científico–tecnológica</li>
+      <li>La expansión colonial y las rivalidades imperialistas (1870 – 1914)</li>
+    </ol></div>
+  </details>
+
+  <details class="unit"><summary><span class="unit-num">5</span><span class="unit-title">La Primera Guerra Mundial</span><span class="chev">▾</span></summary>
+    <div class="unit-body"><ol>
+      <li>Los antecedentes inmediatos y el desarrollo</li>
+      <li>La Revolución Socialista Rusa y las consecuencias de la Primera Guerra Mundial</li>
+    </ol></div>
+  </details>
+
+  <details class="unit"><summary><span class="unit-num">6</span><span class="unit-title">El mundo entre guerras</span><span class="chev">▾</span></summary>
+    <div class="unit-body"><ol>
+      <li>La Crisis de 1929</li>
+      <li>Los regímenes totalitarios</li>
+    </ol></div>
+  </details>
+
+  <details class="unit"><summary><span class="unit-num">7</span><span class="unit-title">La Segunda Guerra Mundial</span><span class="chev">▾</span></summary>
+    <div class="unit-body"><ol>
+      <li>El origen y el desarrollo</li>
+      <li>Las consecuencias</li>
+    </ol></div>
+  </details>
+
+  <details class="unit"><summary><span class="unit-num">8</span><span class="unit-title">El conflicto entre el capitalismo y el socialismo</span><span class="chev">▾</span></summary>
+    <div class="unit-body"><ol>
+      <li>Los bloques de poder</li>
+      <li>La Guerra Fría</li>
+      <li>Luchas de liberación nacional en Asia y África</li>
+    </ol></div>
+  </details>
+
+  <details class="unit"><summary><span class="unit-num">9</span><span class="unit-title">El mundo actual</span><span class="chev">▾</span></summary>
+    <div class="unit-body"><ol>
+      <li>La caída del bloque soviético</li>
+      <li>La globalización económica y política</li>
+      <li>El desarrollo científico y tecnológico</li>
+    </ol></div>
+  </details>
+</section>
+
+<!-- HISTORIA DE MÉXICO -->
+<section class="panel" id="historia-mexico">
+  <div class="panel-head"><h2>Historia de México</h2><div class="count">8 unidades</div></div>
+
+  <details class="unit"><summary><span class="unit-num">1</span><span class="unit-title">La Nueva España (siglos XVI a XIX)</span><span class="chev">▾</span></summary>
+    <div class="unit-body"><ol>
+      <li>Los antecedentes: Mesoamérica, áreas culturales</li>
+      <li>Descubrimiento y conquista militar y espiritual de México</li>
+      <li>La organización política</li>
+      <li>La estructura económica y social</li>
+      <li>Las Reformas Borbónicas</li>
+      <li>Las ciencias y las artes</li>
+    </ol></div>
+  </details>
+
+  <details class="unit"><summary><span class="unit-num">2</span><span class="unit-title">El movimiento de Independencia de la Nueva España (1810 – 1821)</span><span class="chev">▾</span></summary>
+    <div class="unit-body"><ol>
+      <li>Causas y antecedentes</li>
+      <li>Etapas del movimiento: iniciación, organización, resistencia y consumación</li>
+    </ol></div>
+  </details>
+
+  <details class="unit"><summary><span class="unit-num">3</span><span class="unit-title">México independiente (1821 – 1854)</span><span class="chev">▾</span></summary>
+    <div class="unit-body"><ol>
+      <li>Los primeros proyectos de organización política</li>
+      <li>Los conflictos internacionales</li>
+      <li>La situación económica</li>
+      <li>La lucha entre federalismo y centralismo</li>
+    </ol></div>
+  </details>
+
+  <details class="unit"><summary><span class="unit-num">4</span><span class="unit-title">La Reforma liberal y la resistencia de la República (1854 – 1876)</span><span class="chev">▾</span></summary>
+    <div class="unit-body"><ol>
+      <li>La Revolución de Ayutla</li>
+      <li>El Congreso Constituyente y la Constitución de 1857</li>
+      <li>El gobierno de Benito Juárez y Leyes de Reforma</li>
+      <li>La intervención francesa en México y el Imperio de Maximiliano</li>
+      <li>El restablecimiento de la República: los gobiernos de Benito Juárez y Sebastián Lerdo de Tejada</li>
+    </ol></div>
+  </details>
+
+  <details class="unit"><summary><span class="unit-num">5</span><span class="unit-title">El Porfiriato (1876 – 1911)</span><span class="chev">▾</span></summary>
+    <div class="unit-body"><ol>
+      <li>Los gobiernos de Porfirio Díaz: el estado liberal oligárquico y la dictadura</li>
+      <li>Los aspectos económicos, sociales y culturales del régimen porfirista</li>
+      <li>Los movimientos de oposición al régimen porfirista</li>
+    </ol></div>
+  </details>
+
+  <details class="unit"><summary><span class="unit-num">6</span><span class="unit-title">La Revolución Mexicana (1910 – 1920)</span><span class="chev">▾</span></summary>
+    <div class="unit-body"><ol>
+      <li>Los antecedentes de la Revolución Mexicana</li>
+      <li>Las etapas de la lucha armada: maderismo, constitucionalismo y lucha de facciones</li>
+      <li>El Congreso Constituyente y la Constitución de 1917</li>
+      <li>El gobierno de Venustiano Carranza</li>
+    </ol></div>
+  </details>
+
+  <details class="unit"><summary><span class="unit-num">7</span><span class="unit-title">La reconstrucción nacional (1920 – 1940)</span><span class="chev">▾</span></summary>
+    <div class="unit-body"><ol>
+      <li>Del caudillismo al presidencialismo</li>
+      <li>El Maximato</li>
+      <li>El Plan Sexenal y el Cardenismo</li>
+    </ol></div>
+  </details>
+
+  <details class="unit"><summary><span class="unit-num">8</span><span class="unit-title">México contemporáneo (1940 – 2000)</span><span class="chev">▾</span></summary>
+    <div class="unit-body"><ol>
+      <li>Las políticas de Unidad Nacional (1940 – 1952)</li>
+      <li>El desarrollo estabilizador y el "milagro mexicano" (1952 – 1970)</li>
+      <li>La política del desarrollo compartido (1970 – 1982)</li>
+      <li>La política neoliberal en México y la globalización (1982 – 2000)</li>
+    </ol></div>
+  </details>
+</section>
+
+<!-- LITERATURA -->
+<section class="panel" id="literatura">
+  <div class="panel-head"><h2>Literatura</h2><div class="count">3 unidades</div></div>
+
+  <details class="unit"><summary><span class="unit-num">1</span><span class="unit-title">El texto</span><span class="chev">▾</span></summary>
+    <div class="unit-body"><ol>
+      <li>Propiedades del texto: propósito, adecuación, cabalidad, coherencia, organización textual y disposición espacial</li>
+      <li>Relación entre la función lingüística y su organización textual</li>
+      <li>El texto periodístico
+        <ol>
+          <li>Propósito</li>
+          <li>Función referencial</li>
+          <li>Elementos de la nota informativa</li>
+          <li>La selección, jerarquización, omisión y reiteración de la información</li>
+        </ol>
+      </li>
+      <li>El texto dramático
+        <ol>
+          <li>Organización dialógica</li>
+          <li>Acción: desarrollo, nudo y desenlace</li>
+          <li>Los personajes</li>
+          <li>Tragedia. Características</li>
+          <li>Comedia. Características</li>
+        </ol>
+      </li>
+      <li>El texto poético
+        <ol>
+          <li>El poema</li>
+          <li>Análisis intratextual del poema
+            <ol><li>Metro</li><li>Rima</li><li>Ritmo</li><li>Metáfora y otras figuras retóricas</li></ol>
+          </li>
+          <li>Análisis contextual</li>
+        </ol>
+      </li>
+    </ol></div>
+  </details>
+
+  <details class="unit"><summary><span class="unit-num">2</span><span class="unit-title">Géneros y corrientes literarias</span><span class="chev">▾</span></summary>
+    <div class="unit-body"><ol>
+      <li>Géneros literarios: épico, lírico o dramático</li>
+      <li>Corrientes literarias
+        <ol>
+          <li>Realismo. Características y autores representativos</li>
+          <li>Contemporánea. Características y autores representativos</li>
+        </ol>
+      </li>
+      <li>Texto narrativo
+        <ol><li>El cuento. Características y corrientes</li><li>La novela. Características y corrientes</li></ol>
+      </li>
+    </ol></div>
+  </details>
+
+  <details class="unit"><summary><span class="unit-num">3</span><span class="unit-title">Redacción y técnicas de investigación documental</span><span class="chev">▾</span></summary>
+    <div class="unit-body"><ol>
+      <li>El resumen, la paráfrasis, la cita textual y el comentario</li>
+      <li>Registro de las fuentes
+        <ol><li>Fichas bibliográficas y hemerográficas</li><li>Fichas de trabajo</li></ol>
+      </li>
+    </ol></div>
+  </details>
+</section>
+
+<!-- GEOGRAFÍA -->
+<section class="panel" id="geografia">
+  <div class="panel-head"><h2>Geografía</h2><div class="count">2 unidades</div></div>
+
+  <details class="unit"><summary><span class="unit-num">1</span><span class="unit-title">La Tierra, base del desarrollo del hombre</span><span class="chev">▾</span></summary>
+    <div class="unit-body"><ol>
+      <li>La Geografía, una ciencia natural y social: relación del hombre con la naturaleza</li>
+      <li>La ubicación espacial y temporal
+        <ol>
+          <li>Coordenadas geográficas: latitud y longitud, ejercicios de localización</li>
+          <li>Los husos horarios y el cambio de fecha: ejercicios de aplicación</li>
+        </ol>
+      </li>
+      <li>Geografía física: el paisaje natural
+        <ol>
+          <li>La tectónica global
+            <ol>
+              <li>Zonas de riesgo volcánico y sísmico en el mundo y en México, en relación con las placas tectónicas</li>
+              <li>Distribución de las llanuras, mesetas y montañas más representativas del mundo y de México</li>
+              <li>Relación de las formas del relieve con la distribución de la población y de las actividades económicas</li>
+              <li>Zonas de riesgo por fenómenos meteorológicos en México: los ciclones</li>
+            </ol>
+          </li>
+          <li>El agua como recurso fundamental
+            <ol>
+              <li>El ciclo hidrológico como conjunto de procesos que relaciona la hidrósfera, la atmósfera, la litósfera y la biósfera</li>
+              <li>Distribución de los principales ríos y lagos del mundo y de México</li>
+              <li>Distribución de los ríos, los lagos y las aguas subterráneas con la distribución de la población y las actividades económicas</li>
+              <li>Importancia del mar: aprovechamiento de las mareas y las corrientes marinas; efectos climáticos de las corrientes y su relación con las actividades económicas</li>
+              <li>Los recursos pesqueros y minerales del mar y su aprovechamiento: banco de especies, de aguas frías y cálidas; petróleo, gas y concentrados polimetálicos</li>
+            </ol>
+          </li>
+        </ol>
+      </li>
+    </ol></div>
+  </details>
+
+  <details class="unit"><summary><span class="unit-num">2</span><span class="unit-title">Geografía humana: el paisaje cultural (espacio geográfico)</span><span class="chev">▾</span></summary>
+    <div class="unit-body"><ol>
+      <li>Las regiones naturales
+        <ol>
+          <li>Su distribución en el mundo y en México</li>
+          <li>Sus recursos naturales renovables y no renovables y su relación con las actividades económicas</li>
+          <li>La utilización de las regiones naturales como resultado de la actividad humana y las concentraciones de población</li>
+          <li>Zonas de riesgo por fenómenos meteorológicos en México: los ciclones</li>
+        </ol>
+      </li>
+      <li>Problemas de deterioro ambiental: causas y consecuencias
+        <ol>
+          <li>El cambio climático global: el "efecto invernadero"</li>
+          <li>Adelgazamiento de la capa de ozono</li>
+          <li>Contaminación, sobreexplotación y desperdicio de las aguas por la actividad agropecuaria e industrial, así como el uso doméstico</li>
+          <li>Zonas de riesgo por la explotación y transporte de petróleo: la marea negra</li>
+        </ol>
+      </li>
+      <li>La población mundial y de México
+        <ol>
+          <li>Áreas de concentración y vacíos de la población en el mundo y en México</li>
+          <li>El crecimiento acelerado de la población: causas y consecuencias</li>
+          <li>Movimientos migratorios actuales: causas y consecuencias
+            <ol><li>Migraciones internacionales: sur–norte</li><li>Migraciones nacionales: campo–ciudad</li></ol>
+          </li>
+        </ol>
+      </li>
+      <li>La economía mundial
+        <ol>
+          <li>Contrastes entre países desarrollados y subdesarrollados
+            <ol><li>Indicadores socioeconómicos: natalidad, alfabetismo, ingreso per cápita, esperanza de vida, etcétera</li></ol>
+          </li>
+          <li>La globalización de la economía
+            <ol><li>Papel de las transnacionales y del Fondo Monetario Internacional</li><li>Los bloques económicos regionales: liderazgo de los Estados Unidos de América, Alemania y Japón</li></ol>
+          </li>
+        </ol>
+      </li>
+      <li>Organización política actual del mundo y de México
+        <ol>
+          <li>La desintegración y unificación de los Estados
+            <ol><li>Los nuevos países de Europa</li><li>Principales zonas de tensión política en el mundo</li></ol>
+          </li>
+          <li>División política de México, límites y fronteras</li>
+        </ol>
+      </li>
+      <li>México, aspectos económicos
+        <ol>
+          <li>Principales áreas de producción agropecuaria y pesquera</li>
+          <li>Distribución de los principales productos mineros y energéticos</li>
+          <li>Principales áreas industriales del país</li>
+          <li>Comercio exterior: productos de importación y exportación</li>
+          <li>Importancia de las vías de comunicación y de los transportes</li>
+        </ol>
+      </li>
+    </ol></div>
+  </details>
+</section>
+
+</main>
+
+<footer>
+  Fuente: <em>Guía para preparar el examen de selección · Área de las Ciencias Biológicas, Químicas y de la Salud</em> · UNAM, 2025.
+</footer>
+
+<script>
+  /* ===== Tabs ===== */
+  const tabs = document.querySelectorAll('.tab');
+  const panels = document.querySelectorAll('.panel');
+  tabs.forEach(t => {
+    t.addEventListener('click', () => {
+      const id = t.dataset.target;
+      tabs.forEach(x => x.classList.toggle('active', x === t));
+      panels.forEach(p => p.classList.toggle('active', p.id === id));
+      window.scrollTo({top: 0, behavior:'smooth'});
+    });
+  });
+
+  /* ===== Preguntas examen muestra UNAM (clasificación oficial) =====
+     m=materia · u=unidad · c=índice de respuesta correcta (0=A 1=B 2=C 3=D)
+     ctx=texto de contexto opcional · e=enunciado · o=opciones [A,B,C,D] */
+  const QUESTIONS = [
+    // FÍSICA
+    {n:1,m:'fisica',u:1,c:2,e:"El desplazamiento de un ferrocarril se describe en una gráfica posición x – tiempo t. A partir de los datos mostrados se puede deducir que el movimiento es rectilíneo con:",o:["aceleración constante","aceleración variable","velocidad constante","velocidad variable"]},
+    {n:2,m:'fisica',u:2,c:3,e:"Con base en un sistema de vectores con fuerzas de 8N (a 30°), 10N (a 75°) y 9N, indica la magnitud del vector resultante en N. Usa sen 30°=0.5, cos 30°=0.8; sen 45°=cos 45°=0.7; sen 75°=0.9, cos 75°=0.3.",o:["√75.8","√23.8","√650","√101.1"]},
+    {n:3,m:'fisica',u:2,c:0,e:"Sobre un objeto de 100 kg se aplican dos fuerzas (una de 20 N y otra de 30 N) con la misma dirección pero de sentido contrario, ¿cuál es la magnitud de la aceleración del objeto?",o:["0.1 m/s²","0.2 m/s²","0.3 m/s²","0.5 m/s²"]},
+    {n:4,m:'fisica',u:3,c:0,e:"Un objeto se suelta desde el reposo a una altura H sobre el suelo. Determina la relación matemática que permita obtener la rapidez que tendrá el objeto al momento que ha caído una cierta distancia h.",o:["v = (2gh)^(1/2)","v = [2g(H−h)]^(1/2)","v = (2gH)^(1/2)","v = [2g(H+h)]^(1/2)"]},
+    {n:5,m:'fisica',u:3,c:0,e:"La bola A impacta con rapidez 6 m/s a la bola B en reposo. Si B tiene el doble de masa que A, ¿cuál es la rapidez de cada bola después del impacto? Choque totalmente elástico.",o:["U_A = −2 m/s; U_B = 4 m/s","U_B = 4 m/s; U_A = 2 m/s","U_A = 2 m/s; U_B = −2 m/s","U_A = 2 m/s; U_B = 4 m/s"]},
+    {n:6,m:'fisica',u:4,c:1,e:"Un sistema está en equilibrio térmico cuando:",o:["en un proceso su temperatura no varía","su temperatura es igual a la de otro sistema con el que está en contacto térmico","se calienta por medio de trabajo","su presión y su masa permanecen constantes"]},
+    {n:7,m:'fisica',u:4,c:2,e:"Una de las suposiciones de la teoría cinética de los gases es que las moléculas de un gas:",o:["carecen de movimiento","se mueven lentamente","son rígidas","son deformables"]},
+    {n:8,m:'fisica',u:5,c:3,e:"Una cuerda atada en un extremo a un vibrador produce un tren de ondas estacionarias de 90 cm de largo (con varios nodos). ¿Cuál es la longitud de onda?",o:["4.5 cm/ciclo","90 cm/ciclo","9 cm/ciclo","18 cm/ciclo"]},
+    {n:9,m:'fisica',u:6,c:1,e:"Un aislante eléctrico es un material que:",o:["no contiene ninguna corriente eléctrica","hace difícil el flujo de corriente eléctrica","no puede ser un elemento químicamente puro","tiene más electrones que protones en su superficie"]},
+    {n:10,m:'fisica',u:6,c:3,e:"Cierto alambre tiene una resistencia R₁. ¿Cuál es la resistencia de otro alambre del mismo material pero con la mitad de la longitud y la mitad del diámetro del primero?",o:["R₁/4","R₁/2","R₁","2R₁"]},
+    {n:11,m:'fisica',u:8,c:0,e:"Isaac Newton consideró a la luz como:",o:["corriente de partículas materiales emitidas por una fuente luminosa","onda transversal que al pasar por una rejilla se deforma explicando la refracción","marea de rayos que al incidir un obstáculo explican la difracción","superposición de ondas que explican la interferencia"]},
+    {n:12,m:'fisica',u:9,c:2,e:"¿En qué áreas recibió Madame Curie el premio Nobel?",o:["Física y Biología","Medicina y Química","Química y Física","Física y Química"]},
+
+    // LITERATURA
+    {n:13,m:'literatura',u:1,c:3,e:"La cabalidad es una propiedad del texto, consiste en que éste sea completo y tenga:",o:["unidad de sentido","datos comprobables","elementos de análisis","opinión del autor"]},
+    {n:14,m:'literatura',u:1,c:0,e:"Dar información, emitir opinión y persuadir al lector son características del texto:",o:["periodístico","científico","poético","literario"]},
+    {n:15,m:'literatura',u:1,c:2,e:"El autor del texto _____ lo escribe con intención de ser representado.",o:["épico","poético","dramático","narrativo"]},
+    {n:16,m:'literatura',u:2,c:0,ctx:"Arturo, el noble rey de Bretaña, cuyas proezas son para nosotros ejemplo de valor y cortesía, al llegar la fiesta que llamamos Pentecostés, la celebró con todo el fasto propio de la realeza, reuniendo a su corte en Caraduel, en el país de Gales.",e:"¿A qué género corresponde el fragmento?",o:["Épico","Lírico","Tragedia","Dramático"]},
+    {n:17,m:'literatura',u:2,c:0,e:"Los autores que conforman una corriente literaria:",o:["comparten características en su forma de escribir y el interés por desarrollar temas similares; además, viven en una misma época","heredan el estilo de quienes los precedieron, comparten forma de escribir y abordan un género determinado","heredan el estilo de quienes los precedieron y muestran interés por desarrollar temas similares","abordan un género determinado para desarrollar temas similares y viven en una misma época"]},
+    {n:18,m:'literatura',u:2,c:2,e:"Corriente literaria que surge en la segunda mitad del siglo XIX, en la cual predomina la objetividad del narrador y la descripción.",o:["Romanticismo","Clasicismo","Realismo","Expresionismo"]},
+    {n:19,m:'literatura',u:2,c:0,e:"Son representantes de la Literatura contemporánea.",o:["Mariana Enríquez y José Saramago","Frank Kafka y Charlotte Brontë","Nicolás Gógol y Jane Austen","Mary Shelley y Luigi Pirandello"]},
+    {n:20,m:'literatura',u:2,c:2,e:"Identifica la respuesta que presenta las características esenciales del cuento.",o:["Subgénero con amplio número de personajes, trama simple y de gran extensión","Subgénero en prosa que plantea un solo problema y contiene un final sorpresivo","Texto literario cuyos personajes poseen hondura psicológica y de trama compleja","Texto expositivo en el que se narra una breve historia dialogada de carácter ficticio"]},
+    {n:21,m:'literatura',u:3,c:1,e:"Identifica la ficha hemerográfica.",o:["Dosal Gómez, M. R., et al. (2001). Lengua española. Español IV. Patria Cultural.","García Márquez, G. (2023). '¿Cómo eran mis compañeros muertos en el mar' en Relato de un náufrago. De Bolsillo.","Peguero, R. (2005, 31 septiembre). 'La filosofía de lucro, el gran mito de la edad contemporánea: Roa Bastos'. El país.","Ocampo de Gómez, A. M. y Prado Velázquez, E. (1976). Diccionario de escritores mexicanos. UNAM."]},
+    {n:22,m:'literatura',u:3,c:3,ctx:"Trejo Rivas, A. y Rosa Pirres, A. (2007). Rimas, rondas y canciones. Editores Mexicanos Unidos. — 'Conformado por apenas 92 páginas este texto de divulgación tiene como mérito principal presentar versiones tradicionales y antiguas de canciones infantiles. Ejemplo: la 'Chuchugua', que se encuentra en las páginas 63–64.'",e:"¿De qué tipo es la ficha anterior?",o:["Comentario","Textual","Paráfrasis","Resumen"]},
+
+    // QUÍMICA
+    {n:23,m:'quimica',u:1,c:3,e:"El elemento con número atómico 17 y configuración electrónica 1s² 2s² 2p⁶ 3s² 3p⁵ se ubica en la familia:",o:["III A","III B","II A","VII A"]},
+    {n:24,m:'quimica',u:1,c:0,e:"Una botella contiene X átomos de carbono que pesan 6.0 g. Si se desea otra botella con igual número de átomos de níquel, ¿qué masa de níquel se debe tomar?",o:["52.7 g","9.7 g","12.3 g","29.4 g"]},
+    {n:25,m:'quimica',u:2,c:0,e:"De las representaciones, identifica en cuál la molécula de agua forma un puente de hidrógeno.",o:["H–O–H···H–O–H (con el H apuntando al O)","Estructura sin alineación O–H","Estructura con I","Estructura con doble enlace"]},
+    {n:26,m:'quimica',u:2,c:2,e:"En la reacción entre NH₃ y BF₃ el N dona un par de electrones al B. Según la teoría ácido–base de Lewis: NH₃ es ___ y BF₃ es ___.",o:["anfótero — una base","una base — anfótero","una base — un ácido","un ácido — una base"]},
+    {n:27,m:'quimica',u:2,c:1,e:"¿Cuál es la concentración mol/L de una disolución que contiene 20 g de NaOH en 2 L de disolución?",o:["0.25","0.50","0.75","1.00"]},
+    {n:28,m:'quimica',u:3,c:3,e:"¿Qué tipo de compuesto se forma al reaccionar el calcio y el oxígeno?",o:["Un ácido","Un carbonato","Un óxido ácido","Un óxido básico"]},
+    {n:29,m:'quimica',u:3,c:0,e:"El efecto invernadero se produce por:",o:["disminución de clorofluorocarbonos en la atmósfera","disminución de la temperatura del suelo","aumento de partículas suspendidas totales","aumento en la cantidad de CO₂ atmosférico"]},
+    {n:30,m:'quimica',u:4,c:3,e:"El siguiente carbohidrato se clasifica como (estructura: HC=O en C1 con cuatro grupos OH en cadena de 4C, pero con carbonilo en C2 → cetosa con 4 carbonos)",o:["aldotriosa","cetotriosa","aldotetrosa","cetotetrosa"]},
+    {n:31,m:'quimica',u:4,c:2,e:"Son los dos grupos funcionales presentes en todos los aminoácidos.",o:["–COO– y –CONH₂","–CHO y –CONH₂","–COO– y –NH₂","–COOH y –NH₂"]},
+    {n:32,m:'quimica',u:5,c:1,e:"Calcula ΔH de: H₂O + C → CO + H₂. Datos: 2C + O₂ → 2CO ΔH°=−221 kJ; 2H₂ + O₂ → 2H₂O ΔH°=−483.6 kJ.",o:["−131.3 kJ","+131.3 kJ","−352.3 kJ","+352.3 kJ"]},
+    {n:33,m:'quimica',u:5,c:0,e:"En una reacción espontánea a cualquier temperatura ΔH es (−), por lo que:",o:["ΔS(+) y ΔG (−)","ΔS(+) y ΔG (+)","ΔS(+) y ΔG (+)","ΔS(−) y ΔG (−)"]},
+    {n:34,m:'quimica',u:6,c:1,e:"Son compuestos orgánicos donde todos sus carbonos presentan estructura tetraédrica.",o:["Etino y butino","Etileno y benceno","Metano y propano","Metanal y propanal"]},
+    {n:35,m:'quimica',u:6,c:0,e:"¿Qué tipo de reacción representa la polimerización del etileno? CH₂=CH₂ → [CH₂–CH₂]ₙ",o:["Adición","Condensación","Descomposición","Sustitución"]},
+
+    // GEOGRAFÍA
+    {n:36,m:'geografia',u:1,c:2,e:"Si en el huso horario 0° son las 20:00 h, ¿qué hora será en la Ciudad de Tijuana, México (huso 120° W)?",o:["8:00 h","11:00 h","12:00 h","13:00 h"]},
+    {n:37,m:'geografia',u:1,c:1,e:"El choque entre la Placa de Cocos y la Norteamericana produce sismos que afectan principalmente a los estados de:",o:["Puebla, Morelos y Querétaro","Michoacán, Guerrero y Oaxaca","Sonora, Sinaloa y Chihuahua","Veracruz, Tabasco y Campeche"]},
+    {n:38,m:'geografia',u:1,c:1,e:"Principal entidad federativa en México productora de cobre.",o:["Coahuila","Sonora","San Luis Potosí","Guanajuato"]},
+    {n:39,m:'geografia',u:1,c:1,e:"El río que comunica a Moscú con el mar Caspio es el:",o:["Ural","Volga","Lena","Duina"]},
+    {n:40,m:'geografia',u:2,c:1,e:"El _____ sirve para la industria pesada.",o:["manganeso","carbón","zinc","cobalto"]},
+    {n:41,m:'geografia',u:2,c:1,e:"El aumento en la retención de bióxido de carbono en la parte inferior de la atmósfera está generando:",o:["el intercambio del agua","el cambio climático global","la alteración del viento","la modificación de la lluvia"]},
+    {n:42,m:'geografia',u:2,c:3,e:"Los países desarrollados reciben un alto número de inmigrantes porque:",o:["cuentan con políticas públicas de seguro de desempleo","presentan rasgos culturales similares","cuentan con mejores ofertas educativas","requieren mano de obra no especializada"]},
+    {n:43,m:'geografia',u:2,c:0,e:"Conjunto de empresas a nivel mundial que controlan en el mercado la producción y venta de uno o varios productos.",o:["Oligopolio","Monopolio","Duopolio","Trípolio"]},
+    {n:44,m:'geografia',u:2,c:3,e:"En la región de los Balcanes tuvo grandes cambios territoriales debido a:",o:["la separación de Chechenia","la unificación alemana","el expansionismo de Rumania","la desintegración de Yugoslavia"]},
+    {n:45,m:'geografia',u:2,c:0,e:"La primera zona pesquera de México se ubica en la península de Baja California y exporta productos como el:",o:["camarón y la jaiba","huachinango y la jaiba","ostión y el robalo","atún y la sardina"]},
+
+    // MATEMÁTICAS
+    {n:46,m:'matematicas',u:1,c:3,e:"Un virus informático atacó el disco duro: el primer día destruyó dos terceras partes, el segundo destruyó un cuarto de lo que quedó, el tercero destruyó la quinta parte de lo restante. ¿Qué fracción quedó sin dañar?",o:["13/60","3/60","1/2","1/5"]},
+    {n:47,m:'matematicas',u:2,c:0,e:"Al desarrollar (x² − 3y)³ se obtiene:",o:["x⁶ − 9x⁴y + 27x²y² − 27y³","x⁶ + 9x⁴y − 27x²y² + 27y³","x⁶ − 9x⁴y + 27x²y² − 27y³","x⁶ + 9x⁴y − 27x²y² − 27y³"]},
+    {n:48,m:'matematicas',u:3,c:3,e:"Eduardo tiene 'a' gramos; Juan tiene la tercera parte de a; Enrique la cuarta parte del duplo de a. La suma es menor que 1000 g. ¿Cuánto falta para 1000 g?",o:["1000 − (a + 3a + 2a) g","1000 − (a + 3a + 2a)·1000 g","1000 − (a + 3a + 2a) − 1000 g","1000 − (a + a/3 + a/2) g"]},
+    {n:49,m:'matematicas',u:3,c:2,e:"Obtén los valores de x al resolver x² + 3x + 2 = 0.",o:["x₁=1, x₂=2","x₁=−1, x₂=2","x₁=−1, x₂=−2","x₁=1, x₂=−2"]},
+    {n:50,m:'matematicas',u:4,c:2,e:"Selecciona la desigualdad que tiene por solución al conjunto [−4/6, ∞).",o:["−4x − 6 ≤ 0","6x + 4 ≤ 0","−3x − 4 ≤ 0","3x + 2 ≤ 0"]},
+    {n:51,m:'matematicas',u:5,c:1,e:"Resuelve el sistema: 3x + 5y = 7; 2x − y = −4.",o:["x = −2, y = 1","x = −2, y = −1","x = −1, y = 2","x = 1, y = −1"]},
+    {n:52,m:'matematicas',u:6,c:0,e:"Determina el rango de la función f(x) = 5 − 3(x − 2)².",o:["y ≤ 5","y ≤ 5","y < 5","y > 5"]},
+    {n:53,m:'matematicas',u:7,c:3,e:"Determina el dominio y el rango de la función f(x) = 5 − 3 cos 2x.",o:["x ∈ (−∞,∞); y ∈ [−5,1]","x ∈ (−∞,∞); y ∈ [−3,3]","x ∈ (−∞,∞); y ∈ [5,11]","x ∈ (−∞,∞); y ∈ [2,8]"]},
+    {n:54,m:'matematicas',u:7,c:2,e:"Selecciona la función que tiene un desplazamiento de fase de π unidades a la derecha.",o:["f(x) = sen(x)","f(x) = sen(x + π)","f(x) = sen(x − π)","f(x) = π sen(x)"]},
+    {n:55,m:'matematicas',u:8,c:1,e:"Calcula el rango de la función y = e^((4x−1)/4) + 4.",o:["[−1/4, ∞)","(4, ∞)","(−4, ∞)","(1/4, ∞)"]},
+    {n:56,m:'matematicas',u:9,c:2,e:"El punto medio del segmento que une los puntos A (2m, m+1) y B (2m, m−1) es:",o:["(0, 2)","(m, 2m)","(2m, m)","(4m, 2m)"]},
+    {n:57,m:'matematicas',u:9,c:2,e:"¿Cuál de las siguientes rectas tiene el mismo valor de abscisa al origen que la recta y − 4x + 1 = 0?",o:["y − 4x + 1 = 0","y + 4x + 1 = 0","y + 4x − 1 = 0","y − 4x = 0"]},
+    {n:58,m:'matematicas',u:9,c:0,e:"La distancia del punto (−1, 1) a la recta −3x + 4y − 8 = 0 es:",o:["2.0 unidades","0.6 unidades","0.2 unidades","1.4 unidades"]},
+    {n:59,m:'matematicas',u:10,c:3,e:"Considerando a la circunferencia como lugar geométrico, ¿qué expresión cumplen los puntos P(x,y) cuya distancia al origen es 10?",o:["x² + y² − 100 = 0","x² − y² − 100 = 0","x² + y² − 100 ≠ 0","x² + y² − 10 = 0"]},
+    {n:60,m:'matematicas',u:11,c:0,e:"La ecuación de la parábola con vértice V(3, 4), parámetro p = 5 y eje focal paralelo al eje Y es:",o:["x² − 6x − 20y + 89 = 0","y² − 6y + 20y + 89 = 0","x² − 6x − 20y + 89 = 0","y² − 6y − 20y + 89 = 0"]},
+    {n:61,m:'matematicas',u:12,c:0,e:"Lugar geométrico de un punto cualquiera del plano cuya suma de distancias a dos puntos fijos (focos) es constante.",o:["Elipse","Circunferencia","Hipérbola","Parábola"]},
+    {n:62,m:'matematicas',u:12,c:1,e:"Determina las coordenadas de los focos de la elipse (x−4)²/16 + (y−1)²/9 = 1.",o:["F(4, 2); F(8, −4)","F(0, 1); F(8, 1)","F(−1, 1); F(9, 1)","F(−1, 1); F(9, −1)"]},
+    {n:63,m:'matematicas',u:13,c:3,e:"Si en Ax² + Cy² + Dx + Ey + F = 0 el discriminante B² − 4AC es positivo, la ecuación representa una:",o:["circunferencia","parábola","elipse","hipérbola"]},
+    {n:64,m:'matematicas',u:14,c:0,e:"Determina lim(x→a) [f(x) · g(x)], si lim(x→a) f(x) = k y lim(x→a) g(x) = −k.",o:["−k²","k²","2k","0"]},
+    {n:65,m:'matematicas',u:15,c:3,e:"La derivada de y = 2x^(1/2) + 6x^(1/3) es:",o:["y' = 2x^(−1/2) + 6x^(−1/3)","y' = x^(1/2) + 2x^(1/3)","y' = −1/x^(1/2) − 2/x^(1/3)","y' = 1/x^(1/2) + 2/x^(1/3)"]},
+    {n:66,m:'matematicas',u:16,c:3,e:"La derivada de y = ln(x² + 5) es:",o:["1/(x²+5)","x/(x²+5)","2x²/(x²+5)","2x/(x²+5)"]},
+    {n:67,m:'matematicas',u:16,c:3,e:"La pendiente de la tangente a la curva f(x) = e^(2x) en el punto P(0, 1) es:",o:["0","1","1","2"]},
+    {n:68,m:'matematicas',u:17,c:3,e:"∫ cos 8x dx es igual a:",o:["−sen 8x + c","−8 sen x + c","sen x / 8 + c","sen 8x / 8 + c"]},
+    {n:69,m:'matematicas',u:17,c:3,e:"La solución de la integral indefinida ∫ (x + 2) e^(x²+4x+3) dx es:",o:["e^(x²+4x+3) + c","e^((x²+4x+3)/2) + c","(1/2) e^(x²+4x+3) + c","(1/2) e^((x²+4x+3)/2) + c"]},
+
+    // ESPAÑOL
+    {n:70,m:'espanol',u:1,c:0,e:"Selecciona el párrafo en el que predomina la función referencial de la lengua.",o:["Si las aves desaparecieran, nuestro planeta se vería privado del espectáculo de su vuelo. Sin embargo, de ellas depende la polinización de las plantas, la dispersión de semillas, el control de insectos y la eliminación de cadáveres.","Si las prodigiosas aves lamentablemente desaparecieran, nos veríamos privados del maravilloso espectáculo de su armónico y encantador vuelo…","Es claro que si las aves desaparecieran nuestro planeta se vería privado del espectáculo de su vuelo. Pero debemos salvarlas, urgentemente, ya que de ellas depende la polinización…","Si las aves desaparecieran ello implicaría que nosotros mismos estaríamos destinados a perecer…"]},
+    {n:71,m:'espanol',u:1,c:2,e:"¿En cuál de los siguientes textos predomina la función apelativa de la lengua?",o:["Regularmente eres un buen conversador, pues no agobias a tus amigos con información…","Resulta una grata experiencia dialogar con personas sencillas que no alardean…","Los buenos conversadores no agobian al otro con datos para demostrar que dominan muchos conocimientos; al contrario, saben transmitir con serenidad lo que han leído, escuchado o leído. Toma en cuenta esto siempre que dialogues.","Los clásicos disponen de la buena educación durante una conversación se hable poco de uno mismo…"]},
+    {n:72,m:'espanol',u:2,c:0,ctx:"Después de la Conquista de Tenochtitlan, hacia 1529, Hernán Cortés ordenó traer frailes dominicos para que evangelizaran a los indios en las tierras con que el rey Carlos V le recompensaba por los servicios prestados a la Corona, y que incluían áreas de Coyoacán, Tacubaya y Cuajimalpa. Estos primeros dominicos fundaron conventos como el de San Juan Bautista (Coyoacán) y compartieron con los franciscanos el trabajo de adoctrinar a los naturales en la fe cristiana.",e:"Señala la forma del discurso que predomina en el fragmento.",o:["Narrativa","Descriptiva","Expositiva","Argumentativa"]},
+    {n:73,m:'espanol',u:2,c:3,e:"Identifica el texto en el que predomina la forma del discurso argumentativa.",o:["Un hombre extraño me grita desde la puerta…","En Español, lo contrario de IN suele ser la misma palabra, pero sin esa sílaba…","Aprende, viaja, estudia, habla, escribe, trabaja, sube y baja, Miguel.","Quien no quiere pensar es un fanático porque deja que otros piensen por él; quien no puede pensar es un idiota porque deja sus decisiones en manos de otros; quien no osa pensar es un cobarde porque deja su vida en manos de alguien más."]},
+    {n:74,m:'espanol',u:3,c:3,ctx:"Lectura 'El ser humano ha generado 8.300 millones de toneladas de plástico' — investigación de Roland Geyer (UCSB) publicada en Science Advances: la producción mundial pasó de 2 millones de toneladas en 1950 a 400 millones en 2015. Sólo el 9% se ha reciclado, 12% incinerado y la mayoría termina en vertederos o en el medio ambiente. Jenna Jambeck advierte que sin cambios, para 2050 habría 12.000 millones de toneladas de residuos plásticos en vertederos o el medio ambiente. (Preguntas 74–78)",e:"¿Cuál opción corresponde a la idea principal del texto?",o:["La vida útil del plástico es muy corta y su mayor mercado está en el sector del empaquetado","Es alarmante el crecimiento exponencial en la producción de plásticos de corta vida útil desde hace más de 13 años","El plástico producido en las últimas décadas se puede comparar con 80 millones de ballenas azules","Es urgente implementar medidas para gestionar la creciente cantidad de desechos plásticos, con base en datos generados a través de la investigación"]},
+    {n:75,m:'espanol',u:3,c:3,e:"De acuerdo al texto, 'las prácticas de gestión de residuos' se refieren a la:",o:["reducción de los costos y el uso variado de materiales producidos por el ser humano","utilización razonable de los materiales producidos por el ser humano","utilización desmedida de plásticos de un solo uso en la vida cotidiana","disposición, manejo y reaprovechamiento sostenible de los residuos plásticos"]},
+    {n:76,m:'espanol',u:3,c:2,e:"A partir de la lectura se infiere que:",o:["las investigaciones sobre los daños del plástico están encabezadas por especialistas estadounidenses","se deben tomar acciones para disminuir la producción mundial de plástico cosmético y comercial","el plástico ha aumentado considerablemente su producción a partir de los años 50 derivado de una sociedad más consumista","se debe investigar más sobre los posibles usos del plástico para estabilizar los índices de contaminación"]},
+    {n:77,m:'espanol',u:3,c:2,e:"La investigadora Jenna Jambeck se muestra:",o:["alarmada por las estadísticas de la acumulación de plásticos","desconcertada porque hay muchos productos elaborados a base de plástico","interesada en dar a conocer los datos estadísticos globales sobre la acumulación de plásticos en los vertederos","preocupada por la baja gestión de plásticos no biodegradables"]},
+    {n:78,m:'espanol',u:3,c:2,e:"La intención de la autora al escribir este texto es:",o:["comparar los diferentes tipos de contaminantes ambientales y sus consecuencias","divulgar los datos estadísticos de los residuos plásticos para que cuánto han crecido","concientizar sobre el uso excesivo del plástico y la importancia de una gestión adecuada de los residuos","difundir los orígenes de la contaminación por desechos plásticos no biodegradables"]},
+    {n:79,m:'espanol',u:4,c:1,ctx:"'Todas las tardes el arquitecto tomaba el café QUE LE PREPARABAN EN LA HOSTERÍA y luego repasaba el diario de palmo a palmo.'",e:"En el párrafo, lo que está en letra mayúscula es una oración:",o:["coordinada","secundaria","principal","yuxtapuesta"]},
+    {n:80,m:'espanol',u:4,c:1,ctx:"'Chuang Tzu presencia A LAS AFUERAS DEL PALACIO la lucha entre dos serpientes.'",e:"En el enunciado, las palabras en mayúsculas constituyen el:",o:["complemento indirecto","complemento circunstancial","complemento directo","predicado nominal"]},
+    {n:81,m:'espanol',u:5,c:0,e:"Selecciona la oración correctamente redactada.",o:["Una mujer está sentada sola en una casa. Sabe que no hay nadie más en el mundo. Todos los otros seres han muerto. Golpean a la puerta…","Una mujer ésta sentada sola en una casa; sabe que no hay nadie más en el mundo, todos los otros seres han muerto…","Una mujer está sentada sola en una casa; sabe que no hay nadie más en el mundo; todos los otros seres han muerto; golpean a la puerta.","Una mujer está sentada sola en una casa. Sabe que no hay nadie más en el mundo, todos los otros seres han muerto. Golpean a la puerta."]},
+    {n:82,m:'espanol',u:5,c:0,e:"Elige la opción con la redacción apropiada.",o:["Los checoslovacos combatían en las calles y se oponían a la dictadura.","Un sinnúmero de feligreses acudieron a la Villa.","La creación de muchas cosas no se tenían contempladas.","Los constantes flujo y reflujo de divisas provocó alarma."]},
+    {n:83,m:'espanol',u:5,c:1,e:"Identifica el párrafo redactado correctamente.",o:["Durante décadas se ha repetido, casi como un mantra 'las mujeres viven más que los hombres.' Pero a simple vista podría parecer una cuestión de estilo de vida…","Durante décadas, se ha repetido casi como un mantra 'las mujeres viven más que los hombres'. Aunque a simple vista podría parecer una cuestión de estilo de vida o de decisiones personales, lo cierto es que esta diferencia de esperanza de vida está profundamente enraizada en nuestra historia evolutiva.","Durante décadas se ha repetido, casi como un mantra, 'las mujeres viven más que los hombres'. Ya que a simple vista podría parecer una cuestión…","Durante décadas se ha repetido, casi como 'un mantra' las mujeres viven más que los hombres…"]},
+    {n:84,m:'espanol',u:6,c:2,ctx:"'El viejo Manuel pide al ángel que lo haga niño: —¡Son tan dulces sus remembranzas de la niñez! El ángel lo aniña. Ahora Manuelito no tiene remembranzas.'",e:"¿Cuál es el sinónimo para la palabra 'remembranzas' en el texto?",o:["Conmemoraciones","Recuerdos","Rememoraciones","Añoranzas"]},
+    {n:85,m:'espanol',u:6,c:2,e:"Selecciona la opción con las palabras correctas para cada caso: 'Un técnico unió el ___ a la pieza principal; otro soldó los cables ___ que quedaron firmemente unidos. Aproximadamente se produce un ___ de piezas al día en esta fábrica de ___.'",o:["tuvo — hasta — ciento — vienes","tubo — asta — siento — vienes","tubo — hasta — ciento — bienes","tuvo — asta — siento — bienes"]},
+    {n:86,m:'espanol',u:7,c:0,e:"Selecciona la opción con las grafías que complementan correctamente: 'Los niños que no ha__an hecho la tarea a__er porque no o__eron la indicación, tendrán que ha__ar el a__er al pasar las palabras en un diccionario de términos Caste__anos.'",o:["y — y — y — ll — ll","y — y — ll — y — ll","y — ll — y — y — ll","y — ll — y — y — ll"]},
+    {n:87,m:'espanol',u:7,c:1,e:"¿En cuál enunciado se aplican correctamente las mayúsculas?",o:["…compra México desconocido; luego, adquiere Antes del fin, libro de Ernesto Sábato, donde el autor afirma: 'Los excluidos no tienen justicia que los defienda'.","…compra México Desconocido; luego, adquiere Antes del fin, libro de Ernesto Sábato, donde el autor afirma: 'Los excluidos no tienen justicia que los defienda'.","…compra México desconocido; luego, adquiere Antes del fin, donde el autor afirma: 'los excluidos no tienen justicia que los defienda'.","…compra México Desconocido; luego, adquiere Antes del fin, donde el autor afirma: 'los excluidos no tienen justicia que los defienda'."]},
+
+    // BIOLOGÍA
+    {n:88,m:'biologia',u:1,c:3,e:"Las células son unidades:",o:["centrales y anatómicas","originales y microscópicas","funcionales y lógicas","estructurales y fisiológicas"]},
+    {n:89,m:'biologia',u:2,c:3,e:"Se denomina reacción _____ a aquella que libera energía.",o:["endergónica","exergónica","reductora","oxidativa"]},
+    {n:90,m:'biologia',u:2,c:3,e:"Las dos moléculas de ácido pirúvico que se producen a partir de la glucólisis deben ser transformadas a _____ para ingresar al ciclo de Krebs.",o:["NADH","FADH₂","ácido oxalacético","acetil CoA"]},
+    {n:91,m:'biologia',u:2,c:1,e:"Los citocromos de la cadena respiratoria se caracterizan por la capacidad de:",o:["sintetizar ATP","catalizar reacciones REDOX","producir moléculas de O₂","reducir el oxígeno"]},
+    {n:92,m:'biologia',u:3,c:2,e:"Una célula presenta número cromosómico 46 XX. Al dividirse durante la mitosis, formará células con:",o:["23 X","23 XX","46 XX","46 X"]},
+    {n:93,m:'biologia',u:3,c:2,e:"Saccharomyces cerevisiae es una levadura cuya reproducción asexual se efectúa por medio de:",o:["gemación","conjugación","bipartición","esporulación"]},
+    {n:94,m:'biologia',u:4,c:0,e:"Resultado de la cruza de una planta heterocigota de flores púrpura y una homocigota de flores blancas, siendo púrpura el carácter dominante.",o:["50% púrpuras y 50% blancas","100% blancas","100% púrpuras","75% púrpuras y 25% blancas"]},
+    {n:95,m:'biologia',u:4,c:1,e:"A cualquier cambio que ocurre en la secuencia del DNA de un organismo se le denomina:",o:["variación","mutación","recombinación","adaptación"]},
+    {n:96,m:'biologia',u:4,c:1,e:"La insulina sintética obtenida mediante la inserción de un plásmido en E. coli es un caso exitoso de la aplicación de la:",o:["Biorremediación","Ingeniería genética","Bioinformática","Bioquímica celular"]},
+    {n:97,m:'biologia',u:5,c:2,e:"Los organismos pertenecientes a los reinos fungi, vegetal y animal presentan células de tipo:",o:["procarióticas","heterótrofas","eucarióticas","autótrofas"]},
+    {n:98,m:'biologia',u:6,c:3,e:"Se conoce como _____ a los organismos de una misma área geográfica y los factores abióticos con los que actúan.",o:["biósfera","biocenosis","población","ecosistema"]},
+    {n:99,m:'biologia',u:6,c:2,e:"Conjunto de organismos de la misma especie que comparten una misma área geográfica y se reproducen entre sí.",o:["Población","Ecosistema","Bioma","Comunidad"]},
+    {n:100,m:'biologia',u:6,c:1,e:"Organismos que se alimentan únicamente de plantas.",o:["Productores","Consumidores primarios","Consumidores secundarios","Desintegradores"]},
+
+    // HISTORIA UNIVERSAL
+    {n:101,m:'historia-universal',u:1,c:0,e:"Recurso que utiliza el historiador para ordenar cronológicamente el estudio del pasado.",o:["Periodización","Investigación","Selección","Observación"]},
+    {n:102,m:'historia-universal',u:2,c:2,e:"El Enciclopedismo del siglo XVIII tuvo como finalidad:",o:["concentrar el pensamiento religioso","incluir el pensamiento filosófico","concentrar todo el conocimiento de su tiempo","referirse a los dogmas de la Iglesia"]},
+    {n:103,m:'historia-universal',u:3,c:2,e:"Países que durante la segunda mitad del siglo XIX surgieron como estados independientes a partir del nacionalismo y de la unión comercial.",o:["Inglaterra e Italia","Rusia y Turquía","Alemania e Italia","Alemania y Rusia"]},
+    {n:104,m:'historia-universal',u:4,c:1,e:"Circunstancias económicas y políticas que impulsaron a Alemania, Japón y EUA como potencias internacionales al finalizar el siglo XIX.",o:["Surgir de imperios y colonias de Inglaterra, Francia y Rusia; tener un gobierno y una economía dependientes","Ser países independientes con un gobierno y una economía sólida y conservar su expansionismo militar","Ser países independientes con un gobierno autónomo con una economía basada en sus colonias","Ser colonias de potencias y haber obtenido su independencia, herederas de los países neocolonialistas"]},
+    {n:105,m:'historia-universal',u:5,c:2,e:"Los Catorce Puntos de Wilson, la creación de la Sociedad de Naciones y la búsqueda de la autodeterminación fueron acuerdos de paz de la:",o:["Guerra Fría","Segunda Guerra Mundial","Primera Guerra Mundial","Guerra de los Balcanes"]},
+    {n:106,m:'historia-universal',u:6,c:0,e:"Partido de un país del centro de Europa que pregonaba ideas anticomunistas y pretendía formar una aparente unidad nacionalista.",o:["Nacional Socialista","Bolchevique","Fascio italiana","Nacional Falangista"]},
+    {n:107,m:'historia-universal',u:7,c:3,e:"Son los representantes de los siguientes regímenes totalitarios: ___ del militarismo, ___ del fascismo y ___ del nazismo.",o:["Mussolini — Hitler — Hiroíto","Mussolini — Hiroíto — Hitler","Hitler — Mussolini — Hiroíto","Hiroíto — Mussolini — Hitler"]},
+    {n:108,m:'historia-universal',u:8,c:3,e:"La OTAN, el Plan Marshall y el apoyo a regímenes democráticos liberales caracterizan al bloque ___; en tanto el bloque ___ se distingue por el Pacto de Varsovia, la Kominform y la Comecon.",o:["socialista — occidental","socialista — capitalista","capitalista — occidental","capitalista — socialista"]},
+    {n:109,m:'historia-universal',u:8,c:1,e:"La Guerra de Corea, la Crisis de los Misiles en Cuba y la Primavera de Praga son conflictos que se presentaron durante la:",o:["Gran Depresión","Guerra Fría","expansión totalitarista","descolonización mundial"]},
+    {n:110,m:'historia-universal',u:9,c:1,e:"Los enormes presupuestos militares por la Guerra Fría y el predominio de Estados Unidos con gasto excesivo fueron causas de la:",o:["invasión armada a Medio Oriente","caída del Bloque Soviético","formación de la OTAN","formación del Pacto de Varsovia"]},
+
+    // HISTORIA DE MÉXICO
+    {n:111,m:'historia-mexico',u:1,c:3,e:"Las creencias politeístas, la existencia de técnicas agrícolas, de pueblos tributarios y los rituales de sacrificios fueron características de:",o:["Centroamérica","Aridoamérica","Oasisamérica","Mesoamérica"]},
+    {n:112,m:'historia-mexico',u:2,c:0,e:"El movimiento independentista de la Nueva España tuvo como causas externas la:",o:["Independencia de los Estados Unidos y la Revolución Francesa","Unificación italiana y las Reformas Borbónicas","Unificación alemana y la venta de la Florida","Independencia de Haití y la anexión de Texas"]},
+    {n:113,m:'historia-mexico',u:3,c:0,e:"La restricción de participación política, el control del poder a manos del presidente y la promoción de fueros religiosos y militares fueron rasgos del grupo político:",o:["centralista","federalista","monopolista","libertador"]},
+    {n:114,m:'historia-mexico',u:4,c:3,e:"La Constitución de 1857 consagró los derechos:",o:["indígenas","eclesiásticos","sociales","individuales"]},
+    {n:115,m:'historia-mexico',u:5,c:0,e:"Movimiento que se opuso al régimen porfirista manifestando su descontento a través del periódico Regeneración.",o:["Magonismo","Carrancismo","Zapatismo","Reyismo"]},
+    {n:116,m:'historia-mexico',u:6,c:0,e:"Plan político con el que se inició la lucha en contra del gobierno de Porfirio Díaz.",o:["San Luis Potosí","Agua Prieta","Empacadora","Ayala"]},
+    {n:117,m:'historia-mexico',u:7,c:2,e:"Se conoce como Maximato al período en el cual _____ mantuvo el control político del país.",o:["Álvaro Obregón","Lázaro Cárdenas","Plutarco Elías Calles","Pascual Ortiz Rubio"]},
+    {n:118,m:'historia-mexico',u:7,c:0,e:"Fundó el Partido de la Revolución Mexicana, el Instituto Politécnico Nacional y la Confederación de Trabajadores de México.",o:["Lázaro Cárdenas","Manuel Ávila Camacho","Miguel Alemán Valdés","Plutarco Elías Calles"]},
+    {n:119,m:'historia-mexico',u:8,c:0,e:"La creación de instituciones como el INFONAVIT, la UAM, el Colegio de Bachilleres y el CCH se llevó a cabo durante el sexenio de:",o:["Luis Echeverría Álvarez","José López Portillo","Miguel de la Madrid","Gustavo Díaz Ordaz"]},
+    {n:120,m:'historia-mexico',u:8,c:1,e:"La economía de mercado y las privatizaciones entre 1982 y 2000 son parte del:",o:["Plan de Once Años","Neoliberalismo","Estado Benefactor","Desarrollo Estabilizador"]},
+  ];
+
+  /* ===== Render: insertar bloque de preguntas en cada unidad ===== */
+  const escapeHtml = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const letters = ['A','B','C','D'];
+
+  document.querySelectorAll('.panel').forEach(panel => {
+    const materia = panel.id;
+    panel.querySelectorAll('details.unit').forEach((unit, idx) => {
+      const unidad = idx + 1;
+      const preguntas = QUESTIONS.filter(q => q.m === materia && q.u === unidad);
+      if (!preguntas.length) return;
+
+      const body = unit.querySelector('.unit-body');
+      if (!body) return;
+
+      const btn = document.createElement('button');
+      btn.className = 'qbtn';
+      btn.innerHTML = `Examen muestra <span class="qcount">${preguntas.length} ${preguntas.length===1?'pregunta':'preguntas'}</span>`;
+
+      const box = document.createElement('div');
+      box.className = 'qbox';
+      box.innerHTML = preguntas.map(q => `
+        <div class="q">
+          <div class="q-head">
+            <span class="q-num">#${q.n}</span>
+            <div class="q-text">${escapeHtml(q.e)}</div>
+          </div>
+          ${q.ctx ? `<div class="q-ctx">${escapeHtml(q.ctx)}</div>` : ''}
+          <div class="q-tip">Toca una opción para verificar.</div>
+          <ul class="q-opts" data-correct="${q.c}">
+            ${q.o.map((opt, i) => `
+              <li data-i="${i}"><span class="letter">${letters[i]}</span><span>${escapeHtml(opt)}</span></li>
+            `).join('')}
+          </ul>
+        </div>
+      `).join('');
+
+      btn.addEventListener('click', e => {
+        e.preventDefault();
+        e.stopPropagation();
+        box.classList.toggle('open');
+      });
+
+      box.addEventListener('click', e => {
+        const li = e.target.closest('li[data-i]');
+        if (!li) return;
+        const ul = li.parentElement;
+        const correct = +ul.dataset.correct;
+        const chosen = +li.dataset.i;
+        ul.querySelectorAll('li').forEach(x => x.classList.remove('correct','wrong'));
+        if (chosen === correct) {
+          li.classList.add('correct');
+        } else {
+          li.classList.add('wrong');
+          ul.querySelector(`li[data-i="${correct}"]`).classList.add('correct');
+        }
+      });
+
+      body.appendChild(btn);
+      body.appendChild(box);
+    });
+  });
+</script>
+
+</body>
+</html>

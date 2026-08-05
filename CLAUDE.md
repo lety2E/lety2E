@@ -187,7 +187,8 @@ KaTeX: ver template en cualquier tema existente — patrón estándar `katex@0.1
 
 ## ➕ Agregar contenido no-Math (resumen)
 
-- **Apunte nuevo:** archivo self-contained en `apuntes/` (guía: `apuntes/Templete-apuntes.md`; referencia canónica: `segunda-guerra-mundial.html`) + card `<a class="apunte-card">` en `apuntes/index.html`.
+- **Apunte nuevo:** archivo self-contained en `apuntes/`. El índice está **agrupado** por bloques (`<h2 class="apuntes-grupo">` + su `.apuntes-grid`); la card nueva va en el grupo que le toque, y un grupo nuevo se crea copiando ese par. Referencia viva: `apuntes/ingreso-licenciatura/` (subsección con índice propio y barra de regreso `.l2e-volver` en cada página). El patrón viejo de zoom N1–N5 está documentado en `apuntes/Templete-apuntes.md`; su prototipo se retiró del sitio el 5-ago-2026 y se guardó como recurso en `Recursos lety2E/formato-apunte-zoom-N1-N5 (segunda-guerra-mundial).html` (ya no se publica, pero sirve para copiar componentes).
+- **Subsección de Apuntes:** carpeta con su `index.html` (usa `style.css` + `nav.js` globales, `data-section="apuntes"`) y adentro los `.html` self-contained. Si las páginas vienen de fuera (artefactos sueltos), hay que inyectarles la barra `.l2e-volver` para que no queden como callejón sin salida — el helper está en el scratchpad de la sesión del 5-ago-2026, o se copia a mano de cualquier página de `ingreso-licenciatura/`.
 - **Relato nuevo:** archivo en `lupian/relatos/` (.html, .mp3, .mp4 o imagen) + `<a class="entrada-item">` en `.lista-organica` del index de relatos.
 - **Cover de cantos:** `<article class="video-cover">` con iframe de YouTube en `lupian/cantos/index.html` (canal: `@Lety2eLupian`).
 - **Sección nueva:** carpeta + `index.html` con su `data-section` + alta en `SECTIONS`/`ROOT_LINKS` de `nav.js` + card en el `index.html` raíz.

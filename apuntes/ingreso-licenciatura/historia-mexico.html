@@ -1,0 +1,1418 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Historia de México · Área 2 · UNAM</title>
+<style>
+  :root{
+    --M:#FF00AA; --T:#00B8B8; --P:#6A2A8C;
+    --bg:#FFF7FB; --card:#FFFFFF; --ink:#1A0828;
+    --muted:#7B5A50; --border:#F0D7E6; --hover:#FFE3F1; --soft:#FDF1F8;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,system-ui,sans-serif;
+    background:var(--bg);color:var(--ink);line-height:1.5;-webkit-font-smoothing:antialiased;
+  }
+
+  header{text-align:center;padding:2.2rem 1rem .8rem}
+  header .eyebrow{font-size:.76rem;letter-spacing:.18em;text-transform:uppercase;color:var(--T);font-weight:700}
+  header h1{margin:.35rem 0 .25rem;font-size:clamp(1.5rem,3.8vw,2.1rem);color:var(--P)}
+  header p{margin:0 auto;max-width:48ch;color:var(--muted);font-size:.93rem}
+
+  .controls{display:flex;justify-content:center;align-items:center;gap:.6rem;flex-wrap:wrap;padding:1rem 1rem 0}
+  .switch{
+    display:inline-flex;align-items:center;gap:.55rem;
+    background:var(--card);border:1.5px solid var(--border);
+    border-radius:999px;padding:.42rem .9rem;cursor:pointer;
+    font-size:.86rem;font-weight:600;color:var(--ink);transition:all .15s ease;font-family:inherit;
+  }
+  .switch:hover{border-color:var(--T);background:#F0FBFB}
+  .switch .dot{width:34px;height:19px;border-radius:999px;background:var(--border);position:relative;transition:background .18s ease;flex:none}
+  .switch .dot::after{
+    content:"";position:absolute;top:2.5px;left:2.5px;width:14px;height:14px;border-radius:50%;
+    background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.25);transition:transform .18s ease;
+  }
+  body.memo .switch#memoBtn .dot{background:var(--T)}
+  body.memo .switch#memoBtn .dot::after{transform:translateX(15px)}
+  body.flip .switch#flipBtn .dot{background:var(--M)}
+  body.flip .switch#flipBtn .dot::after{transform:translateX(15px)}
+  #flipBtn{display:none}
+  body.memo #flipBtn{display:inline-flex}
+  .hint{text-align:center;color:var(--muted);font-size:.8rem;padding:.55rem 1rem 0;min-height:1.4rem;max-width:64ch;margin:0 auto}
+
+  .tabs{max-width:1180px;margin:.9rem auto 0;padding:0 1rem;display:flex;flex-wrap:wrap;gap:.45rem;justify-content:center}
+  .tab{
+    background:var(--card);border:1.5px solid var(--border);color:var(--ink);
+    border-radius:999px;padding:.45rem .9rem;font-size:.87rem;font-weight:600;
+    cursor:pointer;transition:all .15s ease;font-family:inherit;white-space:nowrap;
+  }
+  .tab b{color:var(--T);margin-right:.35rem;font-weight:800}
+  .tab:hover{background:var(--hover);border-color:var(--M)}
+  .tab.active{background:var(--M);color:#fff;border-color:var(--M);box-shadow:0 4px 12px rgba(255,0,170,.25)}
+  .tab.active b{color:#fff}
+
+  main{max-width:1000px;margin:1.5rem auto 4rem;padding:0 1rem}
+  .panel{display:none}
+  .panel.active{display:block;animation:fade .25s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+
+  .panel-head{margin-bottom:1.3rem;padding-bottom:.8rem;border-bottom:2px solid var(--border)}
+  .panel-head .u{font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--T);font-weight:800}
+  .panel-head h2{margin:.2rem 0 .3rem;color:var(--P);font-size:clamp(1.25rem,3vw,1.65rem)}
+  .panel-head .lead{color:var(--muted);font-size:.9rem;margin:0}
+
+  h3.sec{
+    display:flex;align-items:center;gap:.6rem;margin:2rem 0 .9rem;
+    font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--P);
+  }
+  h3.sec::after{content:"";flex:1;height:1.5px;background:var(--border)}
+
+  .cgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:.7rem}
+  .concept{background:var(--card);border:1.5px solid var(--border);border-left:4px solid var(--T);border-radius:12px;padding:.75rem .9rem}
+  .concept h4{margin:0 0 .25rem;font-size:.93rem;color:var(--P)}
+  .concept p{margin:0;font-size:.87rem;color:var(--ink)}
+  .concept em{color:var(--muted);font-style:normal}
+
+  .fgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:.7rem}
+  .card{
+    background:var(--card);border:1.5px solid var(--border);border-radius:14px;
+    padding:.8rem .9rem .7rem;position:relative;transition:border-color .15s ease,box-shadow .15s ease;
+  }
+  .card:hover{border-color:var(--M);box-shadow:0 6px 18px rgba(255,0,170,.10)}
+  .card .name{font-size:.95rem;font-weight:700;color:var(--M);margin-bottom:.45rem;padding-right:5.2rem;transition:filter .18s ease}
+  .fbody .dato,.fbody .io-v{transition:filter .18s ease}
+
+  .io{display:grid;grid-template-columns:6.4rem 1fr;gap:.5rem;align-items:baseline;padding:.28rem 0}
+  .io + .io{border-top:1px dashed var(--border)}
+  .io-k{
+    font-size:.66rem;letter-spacing:.09em;text-transform:uppercase;color:var(--T);font-weight:800;
+    min-width:0;overflow-wrap:anywhere;line-height:1.25;
+  }
+  .io-v{font-size:.88rem;color:var(--ink)}
+  .io-v b{color:var(--P);font-weight:700}
+
+  .dato{font-size:.89rem;color:var(--ink);padding:.1rem 0 .2rem}
+  .dato ul{margin:.2rem 0;padding-left:1.1rem}
+  .dato li{margin-bottom:.25rem}
+  .dato li:last-child{margin-bottom:0}
+  .dato b{color:var(--P);font-weight:700}
+
+  .leg{font-size:.78rem;color:var(--muted);border-top:1.5px solid var(--soft);padding-top:.45rem;margin-top:.35rem}
+  .leg b{color:var(--P);font-weight:700}
+
+  details.why{margin-top:.55rem;border-top:1.5px solid var(--soft);padding-top:.45rem}
+  details.why > summary{
+    list-style:none;cursor:pointer;display:flex;align-items:center;gap:.35rem;
+    font-size:.76rem;font-weight:700;color:var(--T);letter-spacing:.02em;
+  }
+  details.why > summary::-webkit-details-marker{display:none}
+  details.why > summary::after{content:"▾";font-size:.8rem;transition:transform .15s ease}
+  details.why[open] > summary::after{transform:rotate(180deg)}
+  details.why > summary:hover{color:var(--M)}
+  details.why .why-body{font-size:.83rem;line-height:1.45;color:var(--ink);background:var(--soft);border-radius:10px;padding:.55rem .7rem;margin-top:.45rem}
+
+  /* ---------- Tira de cronología ---------- */
+  /* El orden es el andamio: las filas siempre están en secuencia y eso no se tapa.
+     Se tapa el hecho (de ida) o el año (volteado). */
+  .tl{background:var(--card);border:1.5px solid var(--border);border-radius:14px;padding:.15rem .95rem .35rem}
+  .tl-row{display:grid;grid-template-columns:5.6rem 1fr;gap:.65rem;align-items:baseline;padding:.44rem 0;position:relative}
+  .tl-row + .tl-row{border-top:1px dashed var(--border)}
+  .tl-y{
+    font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+    font-size:1rem;font-weight:700;color:var(--T);letter-spacing:.01em;
+    min-width:0;overflow-wrap:anywhere;line-height:1.3;transition:filter .18s ease;
+  }
+  .tl-e{font-size:.88rem;color:var(--ink);transition:filter .18s ease}
+  .tl-e b{color:var(--P);font-weight:700}
+  .tl-e em{font-style:normal;color:var(--muted);font-size:.94em}
+  .tl-cap{font-size:.78rem;color:var(--muted);margin:.15rem 0 .6rem}
+
+  .trap{background:#FFF9E8;border:1.5px solid #F5E2A8;border-left:4px solid #E8B93B;border-radius:12px;padding:.8rem 1rem;margin-top:.7rem}
+  .trap h4{margin:0 0 .4rem;font-size:.86rem;color:#8A6410}
+  .trap ul{margin:0;padding-left:1.1rem;font-size:.86rem;color:#5C4712}
+  .trap li{margin-bottom:.25rem}
+  .trap li:last-child{margin-bottom:0}
+
+  /* ---------- Modo memoria ---------- */
+  /* se tapa el valor, nunca la etiqueta: el andamio queda para poder recitar */
+  body.memo:not(.flip) .fbody .io-v,
+  body.memo:not(.flip) .fbody .dato{filter:blur(6.5px)}
+  body.memo:not(.flip) .card.open .fbody .io-v,
+  body.memo:not(.flip) .card.open .fbody .dato{filter:none}
+
+  body.memo.flip .card .name{filter:blur(6.5px)}
+  body.memo.flip .card.open .name{filter:none}
+
+  body.memo:not(.flip) .tl-e{filter:blur(6.5px)}
+  body.memo:not(.flip) .tl-row.open .tl-e{filter:none}
+  body.memo.flip .tl-y{filter:blur(6.5px)}
+  body.memo.flip .tl-row.open .tl-y{filter:none}
+
+  body.memo .card,body.memo .tl-row{cursor:pointer}
+  body.memo .card::after{
+    content:"toca para ver";position:absolute;right:.7rem;top:.72rem;
+    font-size:.66rem;color:var(--T);font-weight:700;letter-spacing:.04em;
+  }
+  body.memo .card.open::after{content:""}
+  body.memo details.why{filter:none}
+
+  footer{text-align:center;color:var(--muted);font-size:.8rem;padding:0 1rem 3rem;max-width:60ch;margin:0 auto}
+
+  @media (max-width:420px){
+    .io{grid-template-columns:5.4rem 1fr}
+    .tl-row{grid-template-columns:4.8rem 1fr}
+  }
+
+  @media print{
+    .tabs,.controls,.hint,footer{display:none}
+    .panel{display:block!important;page-break-after:always}
+    body.memo .fbody .dato,body.memo .fbody .io-v,body.memo .card .name,
+    body.memo .tl-e,body.memo .tl-y{filter:none}
+    body{background:#fff}
+  }
+</style>
+
+<style>
+/* ---- barra de regreso lety2E (prefijo l2e- para no chocar) ---- */
+.l2e-volver{
+  font-family:'DM Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
+  font-size:.85rem;font-weight:500;
+  padding:.7rem 1.1rem;
+  background:#1A0828;color:#F5E9F2;
+  display:flex;flex-wrap:wrap;align-items:center;gap:.45rem;
+  line-height:1.5;
+}
+.l2e-volver a{color:#00DEC8;text-decoration:none;}
+.l2e-volver a:hover{color:#FF00AA;text-decoration:underline;}
+.l2e-volver .l2e-sep{opacity:.45;}
+.l2e-volver .l2e-actual{opacity:.75;}
+.l2e-volver .l2e-marca{
+  margin-left:auto;font-family:Georgia,'Times New Roman',serif;
+  font-style:italic;font-weight:700;color:#FF00AA;text-decoration:none;
+}
+.l2e-volver .l2e-marca:hover{color:#00DEC8;}
+@media (max-width:520px){
+  .l2e-volver{font-size:.78rem;padding:.6rem .8rem;}
+  .l2e-volver .l2e-marca{margin-left:auto;}
+}
+</style>
+</head>
+<body data-section="apuntes">
+<nav class="l2e-volver">
+  <a href="../../index.html">Inicio</a>
+  <span class="l2e-sep">&rsaquo;</span>
+  <a href="../index.html">Apuntes</a>
+  <span class="l2e-sep">&rsaquo;</span>
+  <a href="index.html">Ingreso UNAM</a>
+  <span class="l2e-sep">&rsaquo;</span>
+  <span class="l2e-actual">Historia de México</span>
+  <a class="l2e-marca" href="../../index.html">lety2E</a>
+</nav>
+
+
+<header>
+  <div class="eyebrow">Guía UNAM · Área 2 · Ciencias Biológicas, Químicas y de la Salud</div>
+  <h1>Historia de México</h1>
+  <p>Las 8 unidades del temario oficial. Aquí se memoriza en dos ejes: <b>los nombres</b> (plan ↔ quién lo firmó, ley ↔ qué hacía) y <b>el orden</b> en que pasaron las cosas.</p>
+</header>
+
+<div class="controls">
+  <button class="switch" id="memoBtn"><span class="dot"></span> Modo memoria</button>
+  <button class="switch" id="flipBtn"><span class="dot"></span> Voltear</button>
+</div>
+<div class="hint" id="hint">Enciende el <b>modo memoria</b> para taparte. El <b>En palabras</b> de cada tarjeta se abre siempre, en cualquier modo.</div>
+
+<nav class="tabs" id="tabs"></nav>
+
+<main id="main">
+
+<!-- ============ U1 LA NUEVA ESPAÑA ============ -->
+<section class="panel" data-num="1" data-short="Nueva España">
+  <div class="panel-head">
+    <div class="u">Unidad 1 · siglos XVI a XIX</div>
+    <h2>La Nueva España</h2>
+    <p class="lead">Tres siglos de virreinato: cómo se organizó el poder, cómo se organizó la sociedad y qué fue lo que terminó agrietándolo.</p>
+  </div>
+
+  <h3 class="sec">Conceptos clave</h3>
+  <div class="cgrid">
+    <div class="concept"><h4>Las tres superáreas</h4><p><b>Mesoamérica</b>: agricultura, sedentarismo, ciudades y pirámides. <b>Aridoamérica</b>: nómadas del desierto del norte (chichimecas). <b>Oasisamérica</b>: sedentarismo limitado por el agua, entre las dos (Paquimé).</p></div>
+    <div class="concept"><h4>Conquista militar y espiritual</h4><p>La <b>militar</b> la hicieron las armas y sobre todo las <b>alianzas</b> con pueblos enemigos de los mexicas (tlaxcaltecas) y las <b>epidemias</b>. La <b>espiritual</b> la hicieron las órdenes mendicantes evangelizando.</p></div>
+    <div class="concept"><h4>Sociedad de castas</h4><p>El lugar social se heredaba por el origen. <b>Peninsular</b> arriba, luego <b>criollo</b> (español nacido aquí), y debajo las mezclas. No era solo prestigio: definía a qué cargos y qué impuestos tenías derecho.</p></div>
+    <div class="concept"><h4>Monopolio comercial</h4><p>La Nueva España solo podía comerciar con España, por puertos fijos (Veracruz–Sevilla/Cádiz) y con la flota vigilada. De ahí el <b>contrabando</b> y el enojo de los comerciantes locales.</p></div>
+    <div class="concept"><h4>Patronato Regio</h4><p>El rey de España, no el Papa, nombraba a los obispos y cobraba el diezmo en América. Por eso el virrey también mandaba en asuntos de Iglesia: <em>Iglesia y Corona eran la misma maquinaria</em>.</p></div>
+    <div class="concept"><h4>Criollismo</h4><p>El orgullo de los criollos por lo propio —la tierra, la Virgen de Guadalupe, el pasado indígena como historia antigua «suya»—. Es el antecedente cultural de la Independencia.</p></div>
+  </div>
+
+  <h3 class="sec">El poder: quién mandaba y desde dónde</h3>
+  <div class="fgrid">
+
+    <div class="card"><div class="name">El Virrey</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué era</span><span class="io-v">el <b>representante personal del rey</b> en la Nueva España</span></div>
+      <div class="io"><span class="io-k">Cuántos cargos</span><span class="io-v"><b>cinco al mismo tiempo</b></span></div>
+      <div class="io"><span class="io-k">Cuáles</span><span class="io-v">Gobernador (político) · Capitán General (militar) · Presidente de la Audiencia (justicia) · Superintendente de la Real Hacienda (dinero) · Vicepatrono de la Iglesia</span></div>
+      <div class="io"><span class="io-k">El primero</span><span class="io-v"><b>Antonio de Mendoza</b>, en <b>1535</b></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Un solo hombre concentraba lo que hoy serían cinco poderes distintos. Esa concentración es justo lo que se pregunta: no basta con saber quién era, hay que poder listar los cinco sombreros.</div></details></div>
+
+    <div class="card"><div class="name">Real Consejo de Indias</div><div class="fbody">
+      <div class="io"><span class="io-k">Dónde</span><span class="io-v">en <b>España</b>, junto al rey</span></div>
+      <div class="io"><span class="io-k">Qué hacía</span><span class="io-v">redactaba las <b>leyes</b> de América, nombraba a los funcionarios y era el <b>tribunal más alto</b></span></div>
+      <div class="io"><span class="io-k">No veía</span><span class="io-v">el <b>comercio</b>: eso era de otra institución</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Era el cerebro administrativo, desde el otro lado del océano. Todo lo de gobierno y justicia pasaba por ahí.</div></details></div>
+
+    <div class="card"><div class="name">Casa de Contratación</div><div class="fbody">
+      <div class="io"><span class="io-k">Dónde</span><span class="io-v"><b>Sevilla</b> (después Cádiz)</span></div>
+      <div class="io"><span class="io-k">Qué hacía</span><span class="io-v">controlaba <b>todo el comercio</b> con América: mercancías, barcos, pasajeros y metales</span></div>
+      <div class="io"><span class="io-k">Consecuencia</span><span class="io-v">el <b>monopolio</b>: nadie podía comerciar por fuera, y de ahí el contrabando</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">La aduana única del imperio. Si algo cruzaba el Atlántico, cruzaba por ahí o era ilegal.</div></details></div>
+
+    <div class="card"><div class="name">Real Audiencia</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué era</span><span class="io-v">el <b>tribunal</b> de justicia de la colonia, ya en América</span></div>
+      <div class="io"><span class="io-k">Quién la presidía</span><span class="io-v">el <b>virrey</b> — pero los jueces (oidores) también lo <b>vigilaban a él</b></span></div>
+      <div class="io"><span class="io-k">Cuándo gobernaba</span><span class="io-v">cuando el puesto de virrey quedaba <b>vacante</b></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">La Corona nunca dejaba a nadie solo con el poder: siempre ponía a alguien a mirar por encima del hombro. Ese es el diseño de todo el sistema colonial.</div></details></div>
+
+    <div class="card"><div class="name">Encomienda</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué era</span><span class="io-v">se «<b>encomendaban</b>» indígenas a un español para que los <b>evangelizara y protegiera</b></span></div>
+      <div class="io"><span class="io-k">A cambio de</span><span class="io-v">su <b>trabajo y su tributo</b></span></div>
+      <div class="io"><span class="io-k">Cuándo</span><span class="io-v">el sistema <b>primero</b>, del siglo XVI; se fue extinguiendo</span></div>
+      <div class="io"><span class="io-k">Ojo</span><span class="io-v">daba derecho al trabajo, <b>no a la tierra</b></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">En el papel era una obligación de cuidar; en los hechos fue explotación. La Corona la fue quitando no por piedad, sino porque creaba señores demasiado poderosos en América.</div></details></div>
+
+    <div class="card"><div class="name">Repartimiento</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué era</span><span class="io-v">trabajo <b>forzoso pero por turnos y con paga</b>, repartido entre los pueblos</span></div>
+      <div class="io"><span class="io-k">Cuándo</span><span class="io-v">sustituyó al sistema anterior desde fines del <b>siglo XVI</b></span></div>
+      <div class="io"><span class="io-k">Diferencia</span><span class="io-v">aquí los trabajadores los asignaba <b>la autoridad</b>, no eran de un particular</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">El paso intermedio entre el trabajo entregado a un señor y el trabajo asalariado de la hacienda. Se pregunta casi siempre en pareja con el anterior.</div></details></div>
+
+    <div class="card"><div class="name">Hacienda</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué era</span><span class="io-v">gran <b>propiedad de la tierra</b>, casi autosuficiente</span></div>
+      <div class="io"><span class="io-k">Cuándo domina</span><span class="io-v">del <b>siglo XVII</b> hasta la Revolución</span></div>
+      <div class="io"><span class="io-k">Cómo retenía</span><span class="io-v">con el <b>peonaje por deudas</b> y la <b>tienda de raya</b></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Aquí sí hay propiedad de la tierra, y es lo que la distingue de los sistemas anteriores. Es también el problema que va a estallar tres siglos después con Zapata.</div></details></div>
+
+    <div class="card"><div class="name">Tienda de raya</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué era</span><span class="io-v">la tienda <b>del patrón</b>, única donde el peón podía comprar</span></div>
+      <div class="io"><span class="io-k">Cómo pagaba</span><span class="io-v">con <b>vales</b>, no con dinero</span></div>
+      <div class="io"><span class="io-k">Para qué servía</span><span class="io-v">para que el peón <b>siempre debiera</b> y no pudiera irse — la deuda se heredaba</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Una cárcel hecha de contabilidad. Formalmente eras libre; en la práctica no podías salir porque debías, y tus hijos nacían debiendo lo mismo.</div></details></div>
+
+    <div class="card"><div class="name">Reformas Borbónicas</div><div class="fbody">
+      <div class="io"><span class="io-k">Cuándo</span><span class="io-v">segunda mitad del <b>siglo XVIII</b>, sobre todo con <b>Carlos III</b></span></div>
+      <div class="io"><span class="io-k">Para qué</span><span class="io-v">sacarle <b>más dinero</b> a la colonia y recentralizar el poder en el rey</span></div>
+      <div class="io"><span class="io-k">Qué hicieron</span><span class="io-v">crearon las <b>intendencias</b>, subieron impuestos y <b>expulsaron a los jesuitas</b> (1767)</span></div>
+      <div class="io"><span class="io-k">A quién pegan</span><span class="io-v">a los <b>criollos</b>: los sacan de los altos cargos y los sustituyen por peninsulares</span></div>
+      <div class="io"><span class="io-k">Por eso</span><span class="io-v">son la <b>causa interna</b> principal de la Independencia</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">España quiso apretar y lo que consiguió fue enojar justo al grupo que tenía dinero, educación y arraigo. Es el clásico caso de la reforma que produce lo contrario de lo que buscaba.</div></details></div>
+
+    <div class="card"><div class="name">Expulsión de los jesuitas</div><div class="fbody">
+      <div class="io"><span class="io-k">Año</span><span class="io-v"><b>1767</b>, por orden de Carlos III</span></div>
+      <div class="io"><span class="io-k">Por qué</span><span class="io-v">eran <b>demasiado poderosos y autónomos</b>: escuelas, misiones y riqueza propias</span></div>
+      <div class="io"><span class="io-k">Consecuencia</span><span class="io-v">golpe a la <b>educación criolla</b> y agravio que alimentó el descontento</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Eran los maestros de la élite criolla. Al expulsarlos, la Corona se peleó con quienes formaban a la clase que después la iba a echar del país.</div></details></div>
+
+    <div class="card"><div class="name">Las castas</div><div class="fbody">
+      <div class="io"><span class="io-k">Mestizo</span><span class="io-v">español + <b>indígena</b></span></div>
+      <div class="io"><span class="io-k">Mulato</span><span class="io-v">español + <b>africano</b></span></div>
+      <div class="io"><span class="io-k">Zambo</span><span class="io-v">indígena + <b>africano</b></span></div>
+      <div class="io"><span class="io-k">Peninsular</span><span class="io-v">español <b>nacido en España</b> — la cúspide</span></div>
+      <div class="io"><span class="io-k">Criollo</span><span class="io-v">español <b>nacido en América</b> — con dinero, sin los altos cargos</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">La pregunta no suele ser la palabra suelta, sino la combinación exacta. Vale la pena decirla en voz alta hasta que salga sola.</div></details></div>
+
+    <div class="card"><div class="name">Andrés Manuel del Río</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué hizo</span><span class="io-v">descubrió el <b>vanadio</b> (lo llamó <em>eritronio</em>)</span></div>
+      <div class="io"><span class="io-k">Año y lugar</span><span class="io-v"><b>1801</b>, en el <b>Real Seminario de Minería</b> de la Ciudad de México</span></div>
+      <div class="io"><span class="io-k">Por qué importa</span><span class="io-v">es el primer descubrimiento <b>químico</b> de impacto mundial hecho en América</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Es el dato con el que el temario cubre «las ciencias y las artes» de la Nueva España. Suele venir con el Real Seminario de Minería, fundado en 1792.</div></details></div>
+  </div>
+
+  <h3 class="sec">La tira · Nueva España</h3>
+  <p class="tl-cap">Diez momentos, en orden. De ida ves el año y dices el hecho; volteado ves el hecho y dices el año.</p>
+  <div class="tl">
+    <div class="tl-row"><span class="tl-y">1325</span><span class="tl-e">Fundación de <b>México-Tenochtitlan</b></span></div>
+    <div class="tl-row"><span class="tl-y">1492</span><span class="tl-e">Llegada de <b>Colón</b> a América</span></div>
+    <div class="tl-row"><span class="tl-y">1517</span><span class="tl-e">Expedición de <b>Hernández de Córdoba</b> — el primer contacto con la costa</span></div>
+    <div class="tl-row"><span class="tl-y">1519</span><span class="tl-e"><b>Cortés</b> desembarca en Veracruz y entra a Tenochtitlan</span></div>
+    <div class="tl-row"><span class="tl-y">1521</span><span class="tl-e"><b>Caída de Tenochtitlan</b> — se rinde Cuauhtémoc</span></div>
+    <div class="tl-row"><span class="tl-y">1524</span><span class="tl-e">Llegan los <b>doce franciscanos</b>: empieza la conquista espiritual</span></div>
+    <div class="tl-row"><span class="tl-y">1535</span><span class="tl-e">Se establece el <b>virreinato</b>: Antonio de Mendoza, primer virrey</span></div>
+    <div class="tl-row"><span class="tl-y">1551</span><span class="tl-e">Fundación de la <b>Real y Pontificia Universidad de México</b></span></div>
+    <div class="tl-row"><span class="tl-y">1767</span><span class="tl-e"><b>Expulsión de los jesuitas</b></span></div>
+    <div class="tl-row"><span class="tl-y">1801</span><span class="tl-e">Del Río descubre el <b>vanadio</b> en el Real Seminario de Minería</span></div>
+  </div>
+
+  <div class="trap"><h4>Ojo en el examen</h4><ul>
+    <li><b>Peninsular ≠ criollo.</b> Los dos son españoles; lo que cambia es dónde nacieron, y de ahí sale todo lo demás.</li>
+    <li><b>Encomienda, repartimiento y hacienda no son sinónimos</b> y se preguntan juntos: la primera da trabajo indígena a un particular, el segundo lo reparte la autoridad por turnos y con paga, la tercera ya es propiedad de la tierra.</li>
+    <li><b>Consejo de Indias = gobierno y justicia · Casa de Contratación = comercio.</b> Es la confusión más común de la unidad.</li>
+    <li>Las Reformas Borbónicas <b>no buscaban modernizar por bondad</b>: buscaban recaudar. El descontento criollo fue el efecto secundario.</li>
+    <li>El virrey manda también en la Iglesia por el <b>Patronato Regio</b> — no porque fuera religioso.</li>
+  </ul></div>
+</section>
+
+<!-- ============ U2 INDEPENDENCIA ============ -->
+<section class="panel" data-num="2" data-short="Independencia">
+  <div class="panel-head">
+    <div class="u">Unidad 2 · 1810 – 1821</div>
+    <h2>El movimiento de Independencia</h2>
+    <p class="lead">Once años en cuatro etapas, cada una con su caudillo y su documento. Esta unidad es de las que más se preguntan por pares: quién con qué.</p>
+  </div>
+
+  <h3 class="sec">Conceptos clave</h3>
+  <div class="cgrid">
+    <div class="concept"><h4>Causas internas</h4><p>Las <b>Reformas Borbónicas</b> y el desplazamiento de los criollos, la desigualdad de castas, las crisis agrícolas y el <b>criollismo</b> como identidad propia.</p></div>
+    <div class="concept"><h4>Causas externas</h4><p>La <b>Ilustración</b>, la independencia de las Trece Colonias, la Revolución Francesa y —la chispa— la <b>invasión napoleónica a España en 1808</b>, que dejó el trono vacante.</p></div>
+    <div class="concept"><h4>Las cuatro etapas</h4><p><b>Iniciación</b> · <b>Organización</b> · <b>Resistencia</b> · <b>Consumación</b>. Cada una tiene su caudillo; saber el orden vale tanto como saber los nombres.</p></div>
+    <div class="concept"><h4>Soberanía popular</h4><p>La idea de que el poder no viene de Dios al rey, sino <b>del pueblo</b>. Es lo que permite decir que, sin rey legítimo, el poder «vuelve» a la nación. Motor ideológico de todo el movimiento.</p></div>
+    <div class="concept"><h4>Autonomismo vs. independentismo</h4><p>Al principio muchos criollos solo querían <b>gobernarse solos dentro del imperio</b>, en nombre de Fernando VII. La independencia absoluta es una idea posterior, y la formula Morelos.</p></div>
+    <div class="concept"><h4>El giro de 1820</h4><p>Cuando en España se restaura una <b>constitución liberal</b>, los grupos conservadores de la Nueva España —Iglesia y ricos— prefieren separarse para no obedecerla. Por eso la independencia la consuma un realista.</p></div>
+  </div>
+
+  <h3 class="sec">Las cuatro etapas y sus caudillos</h3>
+  <div class="fgrid">
+
+    <div class="card"><div class="name">Etapa 1 · Iniciación</div><div class="fbody">
+      <div class="io"><span class="io-k">Años</span><span class="io-v"><b>1810 – 1811</b></span></div>
+      <div class="io"><span class="io-k">Quién</span><span class="io-v"><b>Miguel Hidalgo</b>, con Allende y Aldama</span></div>
+      <div class="io"><span class="io-k">Cómo empieza</span><span class="io-v">el <b>Grito de Dolores</b>, 16 de septiembre de 1810, tras descubrirse la Conspiración de Querétaro</span></div>
+      <div class="io"><span class="io-k">Qué logró</span><span class="io-v">la toma de la <b>Alhóndiga de Granaditas</b> y la <b>abolición de la esclavitud</b> (Guadalajara, 1810)</span></div>
+      <div class="io"><span class="io-k">Cómo cae</span><span class="io-v">derrota en <b>Puente de Calderón</b> (1811) y fusilamiento en Chihuahua</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Un ejército enorme y sin disciplina, movido por el hambre más que por una idea de país. Prendió la mecha pero no supo qué hacer con el incendio.</div></details></div>
+
+    <div class="card"><div class="name">Etapa 2 · Organización</div><div class="fbody">
+      <div class="io"><span class="io-k">Años</span><span class="io-v"><b>1811 – 1815</b></span></div>
+      <div class="io"><span class="io-k">Quién</span><span class="io-v"><b>José María Morelos</b></span></div>
+      <div class="io"><span class="io-k">Qué hizo</span><span class="io-v">ejército <b>pequeño y disciplinado</b>, y le dio al movimiento <b>proyecto de país</b></span></div>
+      <div class="io"><span class="io-k">Sus documentos</span><span class="io-v"><b>Sentimientos de la Nación</b> (1813) y la <b>Constitución de Apatzingán</b> (1814)</span></div>
+      <div class="io"><span class="io-k">Cómo cae</span><span class="io-v"><b>fusilado en 1815</b>, en Ecatepec</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Es la etapa en que la rebelión se vuelve política: deja de ser una revuelta y empieza a escribir leyes. Por eso concentra tantas preguntas.</div></details></div>
+
+    <div class="card"><div class="name">Etapa 3 · Resistencia</div><div class="fbody">
+      <div class="io"><span class="io-k">Años</span><span class="io-v"><b>1815 – 1820</b></span></div>
+      <div class="io"><span class="io-k">Quiénes</span><span class="io-v"><b>Vicente Guerrero</b> en el sur y <b>Guadalupe Victoria</b> en Veracruz</span></div>
+      <div class="io"><span class="io-k">Cómo se pelea</span><span class="io-v">por <b>guerrillas</b>, sin grandes batallas: aguantar es la estrategia</span></div>
+      <div class="io"><span class="io-k">Quién llega</span><span class="io-v"><b>Francisco Xavier Mina</b>, liberal español, en 1817</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Cinco años de no ganar nada y no rendirse. Es la etapa que se olvida al estudiar y justo por eso la preguntan.</div></details></div>
+
+    <div class="card"><div class="name">Etapa 4 · Consumación</div><div class="fbody">
+      <div class="io"><span class="io-k">Año</span><span class="io-v"><b>1821</b></span></div>
+      <div class="io"><span class="io-k">Quiénes</span><span class="io-v"><b>Agustín de Iturbide</b> (realista) y <b>Vicente Guerrero</b> (insurgente)</span></div>
+      <div class="io"><span class="io-k">Cómo se pactó</span><span class="io-v"><b>Abrazo de Acatempan</b> → <b>Plan de Iguala</b> → <b>Tratados de Córdoba</b></span></div>
+      <div class="io"><span class="io-k">Cierre</span><span class="io-v">entrada del <b>Ejército Trigarante</b> a la capital, 27 de septiembre de 1821</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">La independencia no la ganó el bando insurgente: la pactó el bando que lo había estado combatiendo, cuando le convino. Eso explica que el país naciera como imperio y no como república.</div></details></div>
+
+    <div class="card"><div class="name">Francisco Xavier Mina</div><div class="fbody">
+      <div class="io"><span class="io-k">De dónde</span><span class="io-v"><b>español</b>, liberal</span></div>
+      <div class="io"><span class="io-k">Contra quién</span><span class="io-v">contra el <b>absolutismo de Fernando VII</b>, no contra España</span></div>
+      <div class="io"><span class="io-k">Cuándo</span><span class="io-v">llegó en <b>1817</b>; lo fusilaron ese mismo año</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">El caso que rompe el esquema «españoles contra mexicanos»: era una guerra entre ideas políticas, y había liberales de los dos lados del mar.</div></details></div>
+
+    <div class="card"><div class="name">Conspiración de Querétaro</div><div class="fbody">
+      <div class="io"><span class="io-k">Año</span><span class="io-v"><b>1810</b></span></div>
+      <div class="io"><span class="io-k">Quiénes</span><span class="io-v">Hidalgo, Allende, Aldama y el matrimonio Domínguez — <b>Josefa Ortiz</b></span></div>
+      <div class="io"><span class="io-k">Qué pasó</span><span class="io-v">los <b>descubrieron</b>, y por eso el levantamiento se adelantó al <b>16 de septiembre</b></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">El movimiento empezó antes de tiempo y a la carrera. Esa prisa explica por qué la primera etapa fue tan desordenada.</div></details></div>
+  </div>
+
+  <h3 class="sec">Los documentos</h3>
+  <div class="fgrid">
+
+    <div class="card"><div class="name">Sentimientos de la Nación</div><div class="fbody">
+      <div class="io"><span class="io-k">Año</span><span class="io-v"><b>1813</b>, en el <b>Congreso de Chilpancingo</b></span></div>
+      <div class="io"><span class="io-k">Quién</span><span class="io-v"><b>Morelos</b></span></div>
+      <div class="io"><span class="io-k">Qué pide</span><span class="io-v"><b>independencia absoluta</b> · <b>soberanía popular</b> · abolición de la <b>esclavitud</b> y de las <b>castas</b> · división de poderes</span></div>
+      <div class="io"><span class="io-k">Su frase</span><span class="io-v">que las leyes «moderen la <b>opulencia</b> y la <b>indigencia</b>»</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Es el primer texto que imagina el país completo, no solo la guerra: qué se quita, qué se pone y para quién. La frase de la opulencia y la indigencia es la más citada del periodo.</div></details></div>
+
+    <div class="card"><div class="name">Constitución de Apatzingán</div><div class="fbody">
+      <div class="io"><span class="io-k">Año</span><span class="io-v"><b>1814</b></span></div>
+      <div class="io"><span class="io-k">Nombre formal</span><span class="io-v">Decreto Constitucional para la <b>Libertad de la América Mexicana</b></span></div>
+      <div class="io"><span class="io-k">Qué propone</span><span class="io-v">una <b>república</b>, con división de poderes y soberanía del pueblo</span></div>
+      <div class="io"><span class="io-k">Ojo</span><span class="io-v">fue el primer intento de ley republicana, pero <b>nunca entró en vigor</b></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Se escribió mientras huían. Vale como declaración de intenciones, no como gobierno: el país que describía todavía no existía.</div></details></div>
+
+    <div class="card"><div class="name">Constitución de Cádiz</div><div class="fbody">
+      <div class="io"><span class="io-k">Año</span><span class="io-v"><b>1812</b></span></div>
+      <div class="io"><span class="io-k">De dónde</span><span class="io-v"><b>española</b>, hecha mientras Napoleón ocupaba España</span></div>
+      <div class="io"><span class="io-k">Qué traía</span><span class="io-v"><b>monarquía constitucional</b>, soberanía nacional, libertad de imprenta, igualdad de españoles de ambos hemisferios</span></div>
+      <div class="io"><span class="io-k">Efecto aquí</span><span class="io-v">se aplicó a medias y se suspendió; su <b>restauración en 1820</b> empujó a los conservadores a separarse</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">La constitución liberal que hizo que los ricos y la Iglesia de la Nueva España prefirieran la independencia. Sin ella, 1821 no se entiende.</div></details></div>
+
+    <div class="card"><div class="name">Plan de Iguala</div><div class="fbody">
+      <div class="io"><span class="io-k">Año</span><span class="io-v"><b>1821</b></span></div>
+      <div class="io"><span class="io-k">Quién</span><span class="io-v"><b>Iturbide</b>, pactando con Guerrero</span></div>
+      <div class="io"><span class="io-k">Cuántas garantías</span><span class="io-v"><b>tres</b> — de ahí «Trigarante»</span></div>
+      <div class="io"><span class="io-k">Cuáles</span><span class="io-v"><b>Religión</b> (católica, única) · <b>Independencia</b> · <b>Unión</b> de todos los habitantes</span></div>
+      <div class="io"><span class="io-k">Los colores</span><span class="io-v">verde, blanco y rojo de la bandera trigarante</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Un pacto diseñado para que nadie perdiera: la Iglesia conserva su religión, los criollos consiguen el país y los españoles residentes no son expulsados. Por eso funcionó donde diez años de guerra habían fracasado.</div></details></div>
+
+    <div class="card"><div class="name">Tratados de Córdoba</div><div class="fbody">
+      <div class="io"><span class="io-k">Fecha</span><span class="io-v"><b>24 de agosto de 1821</b></span></div>
+      <div class="io"><span class="io-k">Quiénes firman</span><span class="io-v"><b>Iturbide</b> y <b>Juan O'Donojú</b>, el último jefe político enviado por España</span></div>
+      <div class="io"><span class="io-k">Qué es</span><span class="io-v">el <b>reconocimiento legal</b> de la independencia</span></div>
+      <div class="io"><span class="io-k">Ojo</span><span class="io-v">España <b>no los ratificó</b>: solo reconoció a México hasta <b>1836</b></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Un funcionario español firmó algo que su gobierno después desconoció. La independencia era un hecho de todos modos, pero el reconocimiento tardó quince años más.</div></details></div>
+  </div>
+
+  <h3 class="sec">La tira · Independencia</h3>
+  <p class="tl-cap">Once años, en orden. Fíjate en el bloque 1810–1815: cuatro fechas muy juntas que es donde se confunde.</p>
+  <div class="tl">
+    <div class="tl-row"><span class="tl-y">1808</span><span class="tl-e"><b>Invasión napoleónica a España</b> — el trono queda vacante</span></div>
+    <div class="tl-row"><span class="tl-y">1810</span><span class="tl-e"><b>Grito de Dolores</b> (16 de septiembre) y toma de la Alhóndiga</span></div>
+    <div class="tl-row"><span class="tl-y">1811</span><span class="tl-e">Derrota en <b>Puente de Calderón</b> y fusilamiento de <b>Hidalgo</b></span></div>
+    <div class="tl-row"><span class="tl-y">1812</span><span class="tl-e"><b>Constitución de Cádiz</b></span></div>
+    <div class="tl-row"><span class="tl-y">1813</span><span class="tl-e">Congreso de Chilpancingo · <b>Sentimientos de la Nación</b></span></div>
+    <div class="tl-row"><span class="tl-y">1814</span><span class="tl-e"><b>Constitución de Apatzingán</b></span></div>
+    <div class="tl-row"><span class="tl-y">1815</span><span class="tl-e">Fusilamiento de <b>Morelos</b> — empieza la resistencia</span></div>
+    <div class="tl-row"><span class="tl-y">1817</span><span class="tl-e">Llega <b>Xavier Mina</b></span></div>
+    <div class="tl-row"><span class="tl-y">1820</span><span class="tl-e">Se restaura la <b>Constitución de Cádiz</b> en España</span></div>
+    <div class="tl-row"><span class="tl-y">1821</span><span class="tl-e"><b>Abrazo de Acatempan</b> · <b>Plan de Iguala</b> · <b>Tratados de Córdoba</b> · entra el Ejército Trigarante</span></div>
+  </div>
+
+  <div class="trap"><h4>Ojo en el examen</h4><ul>
+    <li><b>El orden de los caudillos es el orden de las etapas:</b> Hidalgo → Morelos → Guerrero → Iturbide. Si te sabes eso, la mitad de las preguntas se contestan solas.</li>
+    <li><b>Sentimientos de la Nación (1813) ≠ Constitución de Apatzingán (1814).</b> El primero es la declaración de principios; la segunda es la ley que nunca se aplicó. Las dos son de Morelos y van seguidas.</li>
+    <li><b>Cádiz es española (1812), Apatzingán es insurgente (1814).</b> Se confunden por ser de años cercanos y las dos «constituciones».</li>
+    <li><b>Plan de Iguala ≠ Tratados de Córdoba.</b> El plan es la propuesta de Iturbide; los tratados son la firma con el enviado español.</li>
+    <li>La independencia se <b>consuma en 1821</b>, pero España <b>reconoce a México en 1836</b>. No es la misma fecha.</li>
+  </ul></div>
+</section>
+
+<!-- ============ U3 MÉXICO INDEPENDIENTE ============ -->
+<section class="panel" data-num="3" data-short="México independiente">
+  <div class="panel-head">
+    <div class="u">Unidad 3 · 1821 – 1854</div>
+    <h2>México independiente</h2>
+    <p class="lead">Treinta años de inestabilidad: imperio, república, federalismo contra centralismo, y la pérdida de más de la mitad del territorio.</p>
+  </div>
+
+  <h3 class="sec">Conceptos clave</h3>
+  <div class="cgrid">
+    <div class="concept"><h4>Federalismo</h4><p>Los estados tienen <b>gobierno y leyes propias</b>; el poder está repartido. Bandera de los <b>liberales</b> y de los <b>yorkinos</b>. Su ley es la Constitución de 1824.</p></div>
+    <div class="concept"><h4>Centralismo</h4><p>Los estados se vuelven <b>departamentos</b> obedientes al centro. Bandera de los <b>conservadores</b> y de los <b>escoceses</b>. Su ley son las Siete Leyes de 1836.</p></div>
+    <div class="concept"><h4>Las logias</h4><p>Los partidos todavía no existían; la política se hacía en <b>logias masónicas</b>. La <b>yorkina</b> era liberal y federalista; la <b>escocesa</b>, conservadora y centralista.</p></div>
+    <div class="concept"><h4>Bancarrota permanente</h4><p>El país nació sin dinero: las minas destruidas, sin crédito y con <b>deuda externa</b> desde el primer día. Es el hilo que conecta casi todos los conflictos internacionales del periodo.</p></div>
+    <div class="concept"><h4>Santanismo</h4><p><b>Antonio López de Santa Anna</b> ocupó la presidencia once veces, con los dos bandos. Es el síntoma de que ningún proyecto lograba imponerse.</p></div>
+    <div class="concept"><h4>Bienes de manos muertas</h4><p>Tierras que la <b>Iglesia</b> y las comunidades acumulaban y que <b>no se podían vender</b>, así que no circulaban ni producían impuestos. El blanco de la reforma que viene después.</p></div>
+  </div>
+
+  <h3 class="sec">Los proyectos de organización política</h3>
+  <div class="fgrid">
+
+    <div class="card"><div class="name">Primer Imperio Mexicano</div><div class="fbody">
+      <div class="io"><span class="io-k">Años</span><span class="io-v"><b>1822 – 1823</b></span></div>
+      <div class="io"><span class="io-k">Quién</span><span class="io-v"><b>Agustín de Iturbide</b>, coronado Agustín I</span></div>
+      <div class="io"><span class="io-k">Por qué cae</span><span class="io-v">disolvió el Congreso, no tenía dinero y perdió el apoyo militar</span></div>
+      <div class="io"><span class="io-k">Quién lo tumba</span><span class="io-v"><b>Santa Anna</b>, con el <b>Plan de Casa Mata</b> (1823)</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Duró menos de un año. Con él termina la idea de que México podía ser una monarquía propia, y empieza la república.</div></details></div>
+
+    <div class="card"><div class="name">Plan de Casa Mata</div><div class="fbody">
+      <div class="io"><span class="io-k">Año</span><span class="io-v"><b>1823</b></span></div>
+      <div class="io"><span class="io-k">Quién</span><span class="io-v"><b>Santa Anna</b> y Guadalupe Victoria</span></div>
+      <div class="io"><span class="io-k">Qué pide</span><span class="io-v">desconocer el imperio y <b>convocar un nuevo Congreso</b></span></div>
+      <div class="io"><span class="io-k">Consecuencia</span><span class="io-v">abdica Iturbide y nace la <b>República</b></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">El primer pronunciamiento militar de la historia del país independiente. Marca el patrón: quien tiene tropa firma un plan y cambia el gobierno.</div></details></div>
+
+    <div class="card"><div class="name">Constitución de 1824</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué establece</span><span class="io-v"><b>República federal</b>, representativa y popular</span></div>
+      <div class="io"><span class="io-k">La religión</span><span class="io-v"><b>católica como oficial y única</b> — sin tolerancia de otras</span></div>
+      <div class="io"><span class="io-k">Conserva</span><span class="io-v">los <b>fueros</b> del ejército y de la Iglesia</span></div>
+      <div class="io"><span class="io-k">Primer presidente</span><span class="io-v"><b>Guadalupe Victoria</b> — el único de la época que terminó su periodo</span></div>
+      <div class="io"><span class="io-k">Influencias</span><span class="io-v">la de <b>Estados Unidos</b> y la de <b>Cádiz</b></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Es liberal en la forma de gobierno pero no en lo religioso: sigue siendo un país de una sola fe. Esa mezcla es lo que va a estallar treinta años después.</div></details></div>
+
+    <div class="card"><div class="name">Las Siete Leyes</div><div class="fbody">
+      <div class="io"><span class="io-k">Año</span><span class="io-v"><b>1836</b></span></div>
+      <div class="io"><span class="io-k">Qué instaura</span><span class="io-v">la <b>república centralista</b>: los estados pasan a ser <b>departamentos</b></span></div>
+      <div class="io"><span class="io-k">Qué inventa</span><span class="io-v">el <b>Supremo Poder Conservador</b>, un cuarto poder que podía anular a los otros tres</span></div>
+      <div class="io"><span class="io-k">Consecuencia</span><span class="io-v">la ruptura con <b>Texas</b>, que se separa ese mismo año</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Quitarles autonomía a los estados le dio a Texas el argumento perfecto para irse: no se separaban del país, se separaban de un gobierno que había cambiado las reglas.</div></details></div>
+
+    <div class="card"><div class="name">Logia yorkina</div><div class="fbody">
+      <div class="io"><span class="io-k">Postura</span><span class="io-v"><b>liberal</b> y <b>federalista</b></span></div>
+      <div class="io"><span class="io-k">Quién la apoya</span><span class="io-v">Estados Unidos, por medio de su ministro <b>Joel R. Poinsett</b></span></div>
+      <div class="io"><span class="io-k">Quiénes</span><span class="io-v">clases medias, militares de origen insurgente</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Es la pregunta clásica en pareja con la otra logia. El truco para no confundirlas: la de Nueva York mira al norte y al futuro; la otra mira a Europa y al pasado.</div></details></div>
+
+    <div class="card"><div class="name">Logia escocesa</div><div class="fbody">
+      <div class="io"><span class="io-k">Postura</span><span class="io-v"><b>conservadora</b> y <b>centralista</b></span></div>
+      <div class="io"><span class="io-k">Quién la apoya</span><span class="io-v">intereses <b>europeos</b>, la <b>Iglesia</b> y los grandes propietarios</span></div>
+      <div class="io"><span class="io-k">Quiénes</span><span class="io-v">antiguos peninsulares, altos militares realistas</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Querían el orden de la colonia sin el rey de España. Su proyecto reaparece más tarde con Maximiliano.</div></details></div>
+  </div>
+
+  <h3 class="sec">Los conflictos internacionales</h3>
+  <div class="fgrid">
+
+    <div class="card"><div class="name">Independencia de Texas</div><div class="fbody">
+      <div class="io"><span class="io-k">Año</span><span class="io-v"><b>1836</b></span></div>
+      <div class="io"><span class="io-k">Causas</span><span class="io-v">colonos estadounidenses ya mayoría, la <b>abolición de la esclavitud</b> que ellos no aceptaban, y el giro <b>centralista</b></span></div>
+      <div class="io"><span class="io-k">Cómo termina</span><span class="io-v">derrota en <b>San Jacinto</b>: capturan a Santa Anna y le hacen firmar los <b>Tratados de Velasco</b></span></div>
+      <div class="io"><span class="io-k">Ojo</span><span class="io-v">México <b>no reconoció</b> esos tratados: los firmó un prisionero</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">México había invitado a los colonos para poblar el norte y acabó perdiéndolo por eso mismo. Cuando en 1845 esa región se anexa al país vecino, se destapa la guerra siguiente.</div></details></div>
+
+    <div class="card"><div class="name">Guerra de los Pasteles</div><div class="fbody">
+      <div class="io"><span class="io-k">Año</span><span class="io-v"><b>1838</b></span></div>
+      <div class="io"><span class="io-k">Contra quién</span><span class="io-v"><b>Francia</b></span></div>
+      <div class="io"><span class="io-k">Pretexto</span><span class="io-v">reclamaciones de <b>daños a comerciantes franceses</b>, entre ellas la de un pastelero</span></div>
+      <div class="io"><span class="io-k">Dónde</span><span class="io-v">bloqueo y bombardeo de <b>Veracruz</b></span></div>
+      <div class="io"><span class="io-k">Consecuencia</span><span class="io-v">México pagó, y Santa Anna <b>perdió una pierna</b> y recuperó prestigio</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">El nombre suena a anécdota, pero el fondo es la deuda: el país no podía pagar y las potencias cobraban con cañones. El mismo mecanismo va a traer a los franceses otra vez en 1862.</div></details></div>
+
+    <div class="card"><div class="name">Guerra con Estados Unidos</div><div class="fbody">
+      <div class="io"><span class="io-k">Años</span><span class="io-v"><b>1846 – 1848</b></span></div>
+      <div class="io"><span class="io-k">Detonante</span><span class="io-v">la <b>anexión de Texas</b> (1845) y el pleito por el límite: río Nueces o río Bravo</span></div>
+      <div class="io"><span class="io-k">La idea de fondo</span><span class="io-v">el <b>Destino Manifiesto</b> estadounidense</span></div>
+      <div class="io"><span class="io-k">Episodio</span><span class="io-v">la defensa del <b>Castillo de Chapultepec</b> (1847)</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">México llegó a la guerra dividido entre federalistas y centralistas, sin dinero y con el ejército peleándose por dentro. El resultado no fue solo militar: fue el fracaso de treinta años sin acuerdo.</div></details></div>
+
+    <div class="card"><div class="name">Tratado de Guadalupe Hidalgo</div><div class="fbody">
+      <div class="io"><span class="io-k">Año</span><span class="io-v"><b>1848</b></span></div>
+      <div class="io"><span class="io-k">Qué se perdió</span><span class="io-v"><b>más de la mitad del territorio</b>: Alta California, Nuevo México y la confirmación de Texas</span></div>
+      <div class="io"><span class="io-k">Cuánto pagaron</span><span class="io-v"><b>15 millones de pesos</b> como «indemnización»</span></div>
+      <div class="io"><span class="io-k">Nueva frontera</span><span class="io-v">el <b>río Bravo</b></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">El hecho más grave de la historia del país en una sola firma. Casi cualquier examen que toque el siglo XIX pregunta por este tratado.</div></details></div>
+
+    <div class="card"><div class="name">Venta de La Mesilla</div><div class="fbody">
+      <div class="io"><span class="io-k">Año</span><span class="io-v"><b>1853</b></span></div>
+      <div class="io"><span class="io-k">Quién la vendió</span><span class="io-v"><b>Santa Anna</b>, en su última presidencia</span></div>
+      <div class="io"><span class="io-k">Para qué</span><span class="io-v">Estados Unidos la quería para tender un <b>ferrocarril</b> al Pacífico</span></div>
+      <div class="io"><span class="io-k">Consecuencia</span><span class="io-v">el escándalo que precipita la <b>Revolución de Ayutla</b></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Esta vez no hubo guerra ni derrota: hubo un cheque. Que el mismo presidente que ya había perdido el norte ahora entregara territorio a cambio de dinero fue lo que colmó la paciencia de los liberales.</div></details></div>
+  </div>
+
+  <h3 class="sec">La tira · México independiente</h3>
+  <p class="tl-cap">Del imperio a la caída de Santa Anna. Fíjate en la cadena 1836 → 1845 → 1846 → 1848: cada una causa la siguiente.</p>
+  <div class="tl">
+    <div class="tl-row"><span class="tl-y">1822</span><span class="tl-e"><b>Primer Imperio</b>: Iturbide es coronado</span></div>
+    <div class="tl-row"><span class="tl-y">1823</span><span class="tl-e"><b>Plan de Casa Mata</b>: cae el imperio, nace la República</span></div>
+    <div class="tl-row"><span class="tl-y">1824</span><span class="tl-e"><b>Constitución de 1824</b> · Guadalupe Victoria, primer presidente</span></div>
+    <div class="tl-row"><span class="tl-y">1829</span><span class="tl-e">Intento español de <b>reconquista</b>, derrotado en Tampico</span></div>
+    <div class="tl-row"><span class="tl-y">1836</span><span class="tl-e"><b>Siete Leyes</b> (centralismo) · <b>independencia de Texas</b> · España reconoce a México</span></div>
+    <div class="tl-row"><span class="tl-y">1838</span><span class="tl-e"><b>Guerra de los Pasteles</b> contra Francia</span></div>
+    <div class="tl-row"><span class="tl-y">1845</span><span class="tl-e">Estados Unidos <b>anexa Texas</b></span></div>
+    <div class="tl-row"><span class="tl-y">1846-48</span><span class="tl-e"><b>Guerra con Estados Unidos</b> · Chapultepec, 1847</span></div>
+    <div class="tl-row"><span class="tl-y">1848</span><span class="tl-e"><b>Tratado de Guadalupe Hidalgo</b>: se pierde más de la mitad del territorio</span></div>
+    <div class="tl-row"><span class="tl-y">1853</span><span class="tl-e"><b>Venta de La Mesilla</b></span></div>
+    <div class="tl-row"><span class="tl-y">1854</span><span class="tl-e"><b>Revolución de Ayutla</b>: se levantan contra Santa Anna</span></div>
+  </div>
+
+  <div class="trap"><h4>Ojo en el examen</h4><ul>
+    <li><b>Yorkinos = liberales federalistas · escoceses = conservadores centralistas.</b> Se pregunta seguidísimo y es puro amarrar nombre con postura.</li>
+    <li><b>1824 es federalista, 1836 es centralista.</b> Si te acuerdas de que Texas se va en 1836, te acuerdas de cuál es cuál.</li>
+    <li><b>Tratados de Velasco (1836) ≠ Tratado de Guadalupe Hidalgo (1848).</b> Los primeros son de Texas y México no los reconoció; el segundo es el de la guerra y sí se firmó.</li>
+    <li>La <b>Mesilla se vendió</b>, no se perdió en guerra. Es la diferencia que suelen preguntar.</li>
+    <li>La Constitución de 1824 es <b>federal pero intolerante en religión</b>: católica y única. No la confundas con la de 1857.</li>
+  </ul></div>
+</section>
+
+<!-- ============ U4 LA REFORMA ============ -->
+<section class="panel" data-num="4" data-short="Reforma">
+  <div class="panel-head">
+    <div class="u">Unidad 4 · 1854 – 1876</div>
+    <h2>La Reforma liberal y la resistencia de la República</h2>
+    <p class="lead">El pleito de fondo del siglo XIX se resuelve aquí: quién manda, el Estado o la Iglesia. Con una guerra civil y una invasión de por medio.</p>
+  </div>
+
+  <h3 class="sec">Conceptos clave</h3>
+  <div class="cgrid">
+    <div class="concept"><h4>Liberalismo</h4><p>Igualdad ante la ley (sin fueros), <b>separación Iglesia–Estado</b>, libertades individuales, propiedad privada que circule y educación fuera del clero.</p></div>
+    <div class="concept"><h4>Conservadurismo</h4><p>Mantener los <b>fueros</b> y los privilegios de Iglesia y ejército, orden jerárquico heredado de la colonia y —en su versión extrema— traer un <b>monarca europeo</b>.</p></div>
+    <div class="concept"><h4>Desamortización</h4><p><b>Poner a circular</b> las tierras que la Iglesia y las comunidades no podían vender: obligarlas a venderlas a particulares. No es lo mismo que nacionalizar.</p></div>
+    <div class="concept"><h4>Nacionalización</h4><p>Que los bienes <b>pasen al Estado</b>, sin pago. Es el paso más duro y llega después, ya en plena guerra: primero se intentó que se vendieran, luego se les quitaron.</p></div>
+    <div class="concept"><h4>Fuero</h4><p>El derecho de un grupo a <b>ser juzgado por sus propios tribunales</b>. Militares y clérigos lo tenían. Quitarlo es el primer golpe liberal, y el que desata todo.</p></div>
+    <div class="concept"><h4>República Restaurada</h4><p><b>1867 – 1876</b>: derrotado el imperio, Juárez y luego Lerdo por fin gobiernan en paz y aplican el programa liberal. Termina cuando Díaz se levanta.</p></div>
+  </div>
+
+  <h3 class="sec">Las leyes y la Constitución</h3>
+  <div class="fgrid">
+
+    <div class="card"><div class="name">Revolución de Ayutla</div><div class="fbody">
+      <div class="io"><span class="io-k">Año</span><span class="io-v"><b>1854</b></span></div>
+      <div class="io"><span class="io-k">Quiénes</span><span class="io-v"><b>Juan Álvarez</b> e <b>Ignacio Comonfort</b></span></div>
+      <div class="io"><span class="io-k">Qué pide</span><span class="io-v">derrocar a <b>Santa Anna</b> y convocar un <b>Congreso Constituyente</b></span></div>
+      <div class="io"><span class="io-k">Qué abre</span><span class="io-v">la <b>etapa liberal</b>: de aquí salen las Leyes de Reforma y la Constitución del 57</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Es la puerta de entrada de toda la unidad. Sin ese levantamiento no hay constituyente, y sin constituyente no hay nada de lo que sigue.</div></details></div>
+
+    <div class="card"><div class="name">Ley Juárez</div><div class="fbody">
+      <div class="io"><span class="io-k">Año</span><span class="io-v"><b>1855</b></span></div>
+      <div class="io"><span class="io-k">Qué hace</span><span class="io-v">suprime los <b>fueros militares y eclesiásticos</b> en asuntos civiles</span></div>
+      <div class="io"><span class="io-k">Principio</span><span class="io-v"><b>igualdad ante la ley</b>: un solo tribunal para todos</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Se llama así por su autor, ministro de Justicia en ese momento. El pleito no era el dinero todavía: era quién te juzga.</div></details></div>
+
+    <div class="card"><div class="name">Ley Lerdo</div><div class="fbody">
+      <div class="io"><span class="io-k">Año</span><span class="io-v"><b>1856</b></span></div>
+      <div class="io"><span class="io-k">Otro nombre</span><span class="io-v">Ley de <b>Desamortización</b> de fincas rústicas y urbanas</span></div>
+      <div class="io"><span class="io-k">Qué obliga</span><span class="io-v">a las <b>corporaciones</b> a vender las tierras que no usaran directamente</span></div>
+      <div class="io"><span class="io-k">A quién pegó</span><span class="io-v">a la <b>Iglesia</b> y también a las <b>comunidades indígenas</b>, que eran corporación</span></div>
+      <div class="io"><span class="io-k">Efecto no buscado</span><span class="io-v">las compraron los ricos: es una de las raíces del <b>latifundio</b> porfirista</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Querían crear una clase media de pequeños propietarios y crearon lo contrario. Los pobres no tenían con qué comprar, así que la tierra se concentró todavía más. Ese daño es lo que Zapata va a reclamar sesenta años después.</div></details></div>
+
+    <div class="card"><div class="name">Ley Iglesias</div><div class="fbody">
+      <div class="io"><span class="io-k">Año</span><span class="io-v"><b>1857</b></span></div>
+      <div class="io"><span class="io-k">Qué prohíbe</span><span class="io-v">el <b>cobro de obvenciones parroquiales</b> a los pobres — bautizos, entierros, matrimonios</span></div>
+      <div class="io"><span class="io-k">Es parte de</span><span class="io-v">el <b>primer paquete</b> reformista, junto con las otras dos leyes</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">La menos famosa de las tres, y justo por eso la que se pregunta para distinguir a quien estudió. Va contra el cobro por los sacramentos.</div></details></div>
+
+    <div class="card"><div class="name">Constitución de 1857</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué establece</span><span class="io-v"><b>república federal</b>, representativa y popular</span></div>
+      <div class="io"><span class="io-k">Qué garantiza</span><span class="io-v">derechos del hombre, <b>abolición de fueros</b> y de la esclavitud, libertad de enseñanza, de imprenta y de trabajo</span></div>
+      <div class="io"><span class="io-k">Su ausencia clave</span><span class="io-v">ya <b>no declara religión oficial</b>, aunque tampoco proclama expresamente la libertad de cultos</span></div>
+      <div class="io"><span class="io-k">Poderes</span><span class="io-v">Legislativo <b>unicameral</b> y muy fuerte frente al Ejecutivo</span></div>
+      <div class="io"><span class="io-k">Qué desata</span><span class="io-v">la <b>Guerra de Reforma</b>: la Iglesia excomulgó a quien la jurara</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">No hizo falta que dijera nada contra la religión: bastó con que dejara de declararla oficial. Ese silencio fue leído como una declaración de guerra, y lo fue.</div></details></div>
+
+    <div class="card"><div class="name">Leyes de Reforma</div><div class="fbody">
+      <div class="io"><span class="io-k">Años</span><span class="io-v"><b>1859 – 1860</b>, expedidas en <b>Veracruz</b> durante la guerra</span></div>
+      <div class="io"><span class="io-k">Quién</span><span class="io-v"><b>Benito Juárez</b> y su gabinete (Ocampo, Lerdo, Ruiz)</span></div>
+      <div class="io"><span class="io-k">Qué hacen</span><span class="io-v"><b>nacionalización</b> de los bienes del clero · separación <b>Iglesia–Estado</b> · <b>matrimonio y registro civil</b> civiles · secularización de <b>cementerios</b> · supresión de órdenes monásticas · <b>libertad de cultos</b></span></div>
+      <div class="io"><span class="io-k">Diferencia</span><span class="io-v">aquí ya <b>no se vende</b>, se <b>quita</b>: es más radical que la desamortización</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Nacer, casarse y morir dejaron de ser trámites de la Iglesia y pasaron a ser trámites del Estado. Es el cambio más profundo del siglo y todavía nos rige.</div></details></div>
+  </div>
+
+  <h3 class="sec">La guerra, el imperio y la República</h3>
+  <div class="fgrid">
+
+    <div class="card"><div class="name">Guerra de Reforma</div><div class="fbody">
+      <div class="io"><span class="io-k">Otro nombre</span><span class="io-v"><b>Guerra de los Tres Años</b></span></div>
+      <div class="io"><span class="io-k">Años</span><span class="io-v"><b>1858 – 1861</b></span></div>
+      <div class="io"><span class="io-k">Quiénes</span><span class="io-v"><b>liberales</b> (Juárez, con capital en Veracruz) contra <b>conservadores</b> (en la Ciudad de México)</span></div>
+      <div class="io"><span class="io-k">Cómo se disparó</span><span class="io-v">el <b>Plan de Tacubaya</b>: Comonfort desconoció la constitución que él mismo había jurado</span></div>
+      <div class="io"><span class="io-k">Quién gana</span><span class="io-v">los <b>liberales</b>: Juárez entra a la capital en 1861</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Dos gobiernos, dos capitales y dos legitimidades al mismo tiempo. La ganó el bando que estaba dispuesto a llegar hasta el final con las leyes, no el que tenía más ejército al principio.</div></details></div>
+
+    <div class="card"><div class="name">Suspensión de pagos</div><div class="fbody">
+      <div class="io"><span class="io-k">Año</span><span class="io-v"><b>1861</b></span></div>
+      <div class="io"><span class="io-k">Quién</span><span class="io-v"><b>Juárez</b>, recién ganada la guerra y con el país en quiebra</span></div>
+      <div class="io"><span class="io-k">Qué decretó</span><span class="io-v">suspender por dos años el pago de la <b>deuda externa</b></span></div>
+      <div class="io"><span class="io-k">Consecuencia</span><span class="io-v">la <b>Convención de Londres</b>: España, Inglaterra y Francia mandan tropas a Veracruz</span></div>
+      <div class="io"><span class="io-k">Quién se queda</span><span class="io-v">solo <b>Francia</b>; las otras dos se retiran al ver que Napoleón III quería conquistar</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Es el eslabón que conecta la guerra civil con la invasión. La deuda fue el pretexto legal; lo que Napoleón III quería era un imperio en América.</div></details></div>
+
+    <div class="card"><div class="name">Batalla de Puebla</div><div class="fbody">
+      <div class="io"><span class="io-k">Fecha</span><span class="io-v"><b>5 de mayo de 1862</b></span></div>
+      <div class="io"><span class="io-k">Quién</span><span class="io-v"><b>Ignacio Zaragoza</b> derrota al ejército francés</span></div>
+      <div class="io"><span class="io-k">Qué significó</span><span class="io-v">un <b>triunfo moral</b>: retrasó un año la ocupación, pero no la impidió</span></div>
+      <div class="io"><span class="io-k">Al año siguiente</span><span class="io-v">los franceses <b>toman Puebla</b> y entran a la capital</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Se celebra la victoria y se olvida lo que vino después. Para el examen importan las dos cosas: ganaron en el 62 y perdieron en el 63.</div></details></div>
+
+    <div class="card"><div class="name">Segundo Imperio</div><div class="fbody">
+      <div class="io"><span class="io-k">Años</span><span class="io-v"><b>1864 – 1867</b></span></div>
+      <div class="io"><span class="io-k">Quién</span><span class="io-v"><b>Maximiliano de Habsburgo</b> y <b>Carlota</b>, traídos por los conservadores</span></div>
+      <div class="io"><span class="io-k">Qué lo trae</span><span class="io-v">el <b>Tratado de Miramar</b>, firmado con Napoleón III</span></div>
+      <div class="io"><span class="io-k">La sorpresa</span><span class="io-v">resultó <b>liberal</b>: ratificó las Leyes de Reforma y no devolvió los bienes al clero</span></div>
+      <div class="io"><span class="io-k">Mientras tanto</span><span class="io-v"><b>Juárez</b> gobierna itinerante, hasta Paso del Norte</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Los conservadores trajeron a un emperador para restaurar sus privilegios y les salió un liberal moderado. Se quedaron sin aliado y sin causa.</div></details></div>
+
+    <div class="card"><div class="name">Caída del Imperio</div><div class="fbody">
+      <div class="io"><span class="io-k">Año</span><span class="io-v"><b>1867</b></span></div>
+      <div class="io"><span class="io-k">Por qué cae</span><span class="io-v">Napoleón III <b>retira las tropas</b>, presionado por Estados Unidos (fin de su guerra civil) y por Prusia en Europa</span></div>
+      <div class="io"><span class="io-k">Cómo termina</span><span class="io-v"><b>fusilamiento</b> en el <b>Cerro de las Campanas</b>, Querétaro, junto con Miramón y Mejía</span></div>
+      <div class="io"><span class="io-k">Qué empieza</span><span class="io-v">la <b>República Restaurada</b></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Todo se sostenía con soldados franceses; en cuanto se fueron, se derrumbó en meses. El fusilamiento fue una decisión política: dejar claro que ya no habría más tronos en México.</div></details></div>
+
+    <div class="card"><div class="name">República Restaurada</div><div class="fbody">
+      <div class="io"><span class="io-k">Años</span><span class="io-v"><b>1867 – 1876</b></span></div>
+      <div class="io"><span class="io-k">Quiénes gobiernan</span><span class="io-v"><b>Juárez</b> (hasta 1872) y <b>Sebastián Lerdo de Tejada</b></span></div>
+      <div class="io"><span class="io-k">Qué se hace</span><span class="io-v">se aplica por fin el programa liberal, se reduce el ejército y se impulsa la <b>educación laica</b> (Gabino Barreda) y el <b>ferrocarril México–Veracruz</b> (1873)</span></div>
+      <div class="io"><span class="io-k">Cómo termina</span><span class="io-v">con el <b>Plan de Tuxtepec</b> de Porfirio Díaz</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Nueve años sin guerra, los primeros del país. Y termina exactamente por donde había empezado el siglo: alguien con tropa que no acepta una reelección.</div></details></div>
+
+    <div class="card"><div class="name">Tratado McLane–Ocampo</div><div class="fbody">
+      <div class="io"><span class="io-k">Año</span><span class="io-v"><b>1859</b>, en plena guerra civil</span></div>
+      <div class="io"><span class="io-k">Qué concedía</span><span class="io-v"><b>libre tránsito a perpetuidad</b> por el Istmo de Tehuantepec a Estados Unidos</span></div>
+      <div class="io"><span class="io-k">Para qué</span><span class="io-v">para conseguir <b>reconocimiento y apoyo</b> del gobierno de Washington</span></div>
+      <div class="io"><span class="io-k">Qué pasó</span><span class="io-v"><b>nunca se ratificó</b>: el Senado estadounidense lo rechazó</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">La cara incómoda del bando liberal: para ganar la guerra estuvieron dispuestos a ceder algo grave. Se salvaron porque el otro país dijo que no.</div></details></div>
+
+    <div class="card"><div class="name">Tratado Mon–Almonte</div><div class="fbody">
+      <div class="io"><span class="io-k">Año</span><span class="io-v"><b>1859</b></span></div>
+      <div class="io"><span class="io-k">Quiénes</span><span class="io-v">el bando <b>conservador</b> con <b>España</b></span></div>
+      <div class="io"><span class="io-k">Qué buscaba</span><span class="io-v">reconocer reclamaciones y pagos a cambio de <b>apoyo español</b></span></div>
+      <div class="io"><span class="io-k">Su par</span><span class="io-v">es el <b>espejo</b> del que firmaron los liberales el mismo año</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Los dos bandos buscaron padrino extranjero el mismo año. Se preguntan en pareja justo por eso: uno miró al norte y el otro a Europa.</div></details></div>
+  </div>
+
+  <h3 class="sec">La tira · Reforma e Imperio</h3>
+  <p class="tl-cap">Veintidós años. Las fechas 1855-56-57 y 1858-59 van pegadísimas: ahí es donde se pierde el orden.</p>
+  <div class="tl">
+    <div class="tl-row"><span class="tl-y">1854</span><span class="tl-e"><b>Revolución de Ayutla</b> contra Santa Anna</span></div>
+    <div class="tl-row"><span class="tl-y">1855</span><span class="tl-e"><b>Ley Juárez</b>: se suprimen los fueros</span></div>
+    <div class="tl-row"><span class="tl-y">1856</span><span class="tl-e"><b>Ley Lerdo</b>: desamortización</span></div>
+    <div class="tl-row"><span class="tl-y">1857</span><span class="tl-e"><b>Constitución de 1857</b> y <b>Ley Iglesias</b></span></div>
+    <div class="tl-row"><span class="tl-y">1858</span><span class="tl-e">Empieza la <b>Guerra de Reforma</b> (Plan de Tacubaya, fines del 57)</span></div>
+    <div class="tl-row"><span class="tl-y">1859</span><span class="tl-e"><b>Leyes de Reforma</b> en Veracruz · tratados McLane–Ocampo y Mon–Almonte</span></div>
+    <div class="tl-row"><span class="tl-y">1861</span><span class="tl-e">Ganan los liberales · <b>suspensión de pagos</b> · Convención de Londres</span></div>
+    <div class="tl-row"><span class="tl-y">1862</span><span class="tl-e"><b>Batalla de Puebla</b>, 5 de mayo</span></div>
+    <div class="tl-row"><span class="tl-y">1863</span><span class="tl-e">Los franceses <b>toman la capital</b>; Juárez se va al norte</span></div>
+    <div class="tl-row"><span class="tl-y">1864</span><span class="tl-e">Llega <b>Maximiliano</b>: Segundo Imperio</span></div>
+    <div class="tl-row"><span class="tl-y">1867</span><span class="tl-e"><b>Cerro de las Campanas</b> · empieza la <b>República Restaurada</b></span></div>
+    <div class="tl-row"><span class="tl-y">1872</span><span class="tl-e">Muere <b>Juárez</b>; lo sucede <b>Lerdo de Tejada</b></span></div>
+    <div class="tl-row"><span class="tl-y">1876</span><span class="tl-e"><b>Plan de Tuxtepec</b>: llega Porfirio Díaz</span></div>
+  </div>
+
+  <div class="trap"><h4>Ojo en el examen</h4><ul>
+    <li><b>Ley Juárez = fueros · Ley Lerdo = tierras · Ley Iglesias = cobros parroquiales.</b> Tres leyes, tres apellidos, tres asuntos distintos. Es la pregunta más segura de la unidad.</li>
+    <li><b>Desamortizar ≠ nacionalizar.</b> Lo primero es obligar a vender (1856); lo segundo es que el Estado se quede con los bienes (1859).</li>
+    <li><b>La Constitución de 1857 no declara libertad de cultos</b>: simplemente deja de nombrar religión oficial. La libertad de cultos llega con las Leyes de Reforma.</li>
+    <li><b>Guerra de Reforma (1858–61) ≠ Intervención francesa (1862–67).</b> Una es civil, la otra extranjera, y van seguidas.</li>
+    <li><b>Maximiliano resultó liberal.</b> Suena a trampa pero es dato de examen: ratificó las Leyes de Reforma y por eso perdió a los conservadores.</li>
+    <li><b>Plan de la Noria (1871) fracasó contra Juárez · Plan de Tuxtepec (1876) triunfó contra Lerdo.</b> Los dos son de Díaz y los dos son contra la reelección.</li>
+  </ul></div>
+</section>
+
+<!-- ============ U5 EL PORFIRIATO ============ -->
+<section class="panel" data-num="5" data-short="Porfiriato">
+  <div class="panel-head">
+    <div class="u">Unidad 5 · 1876 – 1911</div>
+    <h2>El Porfiriato</h2>
+    <p class="lead">Treinta y cuatro años de paz, crecimiento y desigualdad. El régimen que ordenó el país y por eso mismo terminó reventando.</p>
+  </div>
+
+  <h3 class="sec">Conceptos clave</h3>
+  <div class="cgrid">
+    <div class="concept"><h4>Positivismo</h4><p>La filosofía de <b>Comte</b> que el régimen adoptó: la ciencia y el método ordenan la sociedad. Su lema aquí fue <b>«Orden y Progreso»</b> — primero el orden, la democracia después (o nunca).</p></div>
+    <div class="concept"><h4>Los Científicos</h4><p>El grupo de asesores positivistas del gobierno, encabezado por <b>José Yves Limantour</b> en Hacienda. Técnicos, no políticos electos: gobernaban por saber, no por voto.</p></div>
+    <div class="concept"><h4>Estado oligárquico</h4><p>Formalmente había constitución y elecciones; realmente mandaba un grupo pequeño de <b>propietarios y allegados</b>. Las formas liberales sin el contenido liberal.</p></div>
+    <div class="concept"><h4>«Pan o palo»</h4><p>El método de control: al que se deja, <b>puesto o negocio</b>; al que no, <b>represión</b>. Cooptar o golpear, según convenga.</p></div>
+    <div class="concept"><h4>Latifundio y deslinde</h4><p>Las <b>compañías deslindadoras</b> «medían» tierras baldías y se quedaban con una parte. Junto con la Ley Lerdo, dejaron a los pueblos sin tierra y a unas cuantas familias con casi todo.</p></div>
+    <div class="concept"><h4>Inversión extranjera</h4><p>Ferrocarriles, minas, petróleo y electricidad quedaron en manos <b>inglesas y estadounidenses</b>. Hubo crecimiento, pero la ganancia se iba y el trabajador mexicano ganaba menos que el extranjero.</p></div>
+  </div>
+
+  <h3 class="sec">El régimen</h3>
+  <div class="fgrid">
+
+    <div class="card"><div class="name">Plan de La Noria</div><div class="fbody">
+      <div class="io"><span class="io-k">Año</span><span class="io-v"><b>1871</b></span></div>
+      <div class="io"><span class="io-k">Contra quién</span><span class="io-v">contra la reelección de <b>Benito Juárez</b></span></div>
+      <div class="io"><span class="io-k">Resultado</span><span class="io-v"><b>fracasó</b></span></div>
+      <div class="io"><span class="io-k">Lema</span><span class="io-v">«sufragio efectivo, <b>no reelección</b>»</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">El primer intento, el que perdió. Se pregunta siempre en pareja con el que sí funcionó cinco años después.</div></details></div>
+
+    <div class="card"><div class="name">Plan de Tuxtepec</div><div class="fbody">
+      <div class="io"><span class="io-k">Año</span><span class="io-v"><b>1876</b></span></div>
+      <div class="io"><span class="io-k">Contra quién</span><span class="io-v">contra la reelección de <b>Lerdo de Tejada</b></span></div>
+      <div class="io"><span class="io-k">Resultado</span><span class="io-v"><b>triunfó</b>: con él llega Porfirio Díaz al poder</span></div>
+      <div class="io"><span class="io-k">La ironía</span><span class="io-v">quien llegó gritando «no reelección» se reeligió <b>siete veces</b></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">La bandera con la que subió es la misma con la que treinta y cuatro años después lo van a tumbar. Madero no inventó el lema: se lo devolvió.</div></details></div>
+
+    <div class="card"><div class="name">Manuel González</div><div class="fbody">
+      <div class="io"><span class="io-k">Años</span><span class="io-v"><b>1880 – 1884</b></span></div>
+      <div class="io"><span class="io-k">Quién era</span><span class="io-v">compadre de Díaz, presidente en el <b>único intervalo</b> del periodo</span></div>
+      <div class="io"><span class="io-k">Por qué existe</span><span class="io-v">para <b>guardar las formas</b> de la no reelección</span></div>
+      <div class="io"><span class="io-k">Después</span><span class="io-v">Díaz regresa en <b>1884</b> y ya no suelta el poder hasta 1911</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">El dato que hace que el Porfiriato «no sea» un periodo continuo en el papel. Preguntan por ese hueco de cuatro años porque casi nadie lo recuerda.</div></details></div>
+
+    <div class="card"><div class="name">José Yves Limantour</div><div class="fbody">
+      <div class="io"><span class="io-k">Cargo</span><span class="io-v">ministro de <b>Hacienda</b></span></div>
+      <div class="io"><span class="io-k">Qué logró</span><span class="io-v">equilibrar el presupuesto, sanear la deuda y dar <b>superávit</b> por primera vez</span></div>
+      <div class="io"><span class="io-k">Su grupo</span><span class="io-v">los <b>Científicos</b></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Las cuentas del país por fin cuadraron y eso le dio al régimen su mejor argumento. También lo volvió sordo: los números iban bien y la gente no.</div></details></div>
+
+    <div class="card"><div class="name">Huelga de Cananea</div><div class="fbody">
+      <div class="io"><span class="io-k">Año y lugar</span><span class="io-v"><b>1906</b>, <b>Sonora</b> — una mina de cobre</span></div>
+      <div class="io"><span class="io-k">Qué pedían</span><span class="io-v"><b>igual pago que los extranjeros</b>, jornada de 8 horas y trato digno</span></div>
+      <div class="io"><span class="io-k">Cómo terminó</span><span class="io-v">reprimida, con la entrada de <b>rangers estadounidenses</b></span></div>
+      <div class="io"><span class="io-k">Por qué importa</span><span class="io-v">es el <b>precursor obrero</b> de la Revolución</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Que policías de otro país entraran a reprimir mexicanos en territorio mexicano dijo, en un solo gesto, de quién era realmente el país.</div></details></div>
+
+    <div class="card"><div class="name">Huelga de Río Blanco</div><div class="fbody">
+      <div class="io"><span class="io-k">Año y lugar</span><span class="io-v"><b>1907</b>, <b>Veracruz</b> — una fábrica textil</span></div>
+      <div class="io"><span class="io-k">Qué la detonó</span><span class="io-v">un reglamento de fábrica abusivo y la <b>tienda de raya</b></span></div>
+      <div class="io"><span class="io-k">Cómo terminó</span><span class="io-v">reprimida a tiros por el <b>ejército federal</b></span></div>
+      <div class="io"><span class="io-k">Su par</span><span class="io-v">va siempre junto con la del año anterior, en el norte</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Una en el norte y minera, otra en el golfo y textil, con un año de diferencia. Juntas mostraron que el descontento no era local: era del modelo entero.</div></details></div>
+
+    <div class="card"><div class="name">Los Flores Magón</div><div class="fbody">
+      <div class="io"><span class="io-k">Quiénes</span><span class="io-v"><b>Ricardo</b> y Enrique Flores Magón</span></div>
+      <div class="io"><span class="io-k">Su periódico</span><span class="io-v"><b>Regeneración</b></span></div>
+      <div class="io"><span class="io-k">Su partido</span><span class="io-v"><b>Partido Liberal Mexicano</b> (PLM), con su programa de <b>1906</b></span></div>
+      <div class="io"><span class="io-k">Qué pedían</span><span class="io-v"><b>jornada de 8 horas</b>, salario mínimo, tierra para quien la trabaja, fin de la reelección</span></div>
+      <div class="io"><span class="io-k">Por qué importan</span><span class="io-v">su programa <b>anticipa</b> los artículos sociales de 1917</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Escribieron desde el exilio lo que once años después iba a acabar en la constitución. Son la oposición intelectual del régimen, distinta de la armada.</div></details></div>
+
+    <div class="card"><div class="name">Entrevista Díaz–Creelman</div><div class="fbody">
+      <div class="io"><span class="io-k">Año</span><span class="io-v"><b>1908</b></span></div>
+      <div class="io"><span class="io-k">Qué declaró</span><span class="io-v">que México ya estaba <b>listo para la democracia</b> y que él <b>no se reelegiría</b> en 1910</span></div>
+      <div class="io"><span class="io-k">Qué provocó</span><span class="io-v">el despertar de los <b>partidos</b> y la campaña de <b>Madero</b></span></div>
+      <div class="io"><span class="io-k">Qué pasó</span><span class="io-v">se reeligió de todos modos, y encarceló a Madero</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Unas declaraciones a un periodista estadounidense abrieron la puerta que el régimen llevaba treinta años cerrando. Cuando quiso cerrarla otra vez, ya no pudo.</div></details></div>
+
+    <div class="card"><div class="name">Francisco I. Madero</div><div class="fbody">
+      <div class="io"><span class="io-k">Su libro</span><span class="io-v"><b>La sucesión presidencial en 1910</b></span></div>
+      <div class="io"><span class="io-k">Su partido</span><span class="io-v"><b>Antirreeleccionista</b></span></div>
+      <div class="io"><span class="io-k">Qué proponía</span><span class="io-v">un cambio <b>político</b>, no social: elecciones libres y no reelección</span></div>
+      <div class="io"><span class="io-k">Qué le hicieron</span><span class="io-v">lo encarcelaron en <b>San Luis Potosí</b> durante las elecciones de 1910</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Su límite es su definición: quería cambiar quién gobierna, no cómo está repartida la tierra. Por eso Zapata lo va a desconocer al año siguiente.</div></details></div>
+  </div>
+
+  <h3 class="sec">La tira · Porfiriato</h3>
+  <p class="tl-cap">De la llegada a la caída. Fíjate en el hueco de 1880–1884 y en el bloque final 1906–1910.</p>
+  <div class="tl">
+    <div class="tl-row"><span class="tl-y">1871</span><span class="tl-e"><b>Plan de La Noria</b> (fracasa)</span></div>
+    <div class="tl-row"><span class="tl-y">1876</span><span class="tl-e"><b>Plan de Tuxtepec</b> (triunfa): llega <b>Porfirio Díaz</b></span></div>
+    <div class="tl-row"><span class="tl-y">1880-84</span><span class="tl-e">Presidencia de <b>Manuel González</b>, el paréntesis</span></div>
+    <div class="tl-row"><span class="tl-y">1884</span><span class="tl-e">Díaz <b>regresa</b> y se queda hasta 1911</span></div>
+    <div class="tl-row"><span class="tl-y">1906</span><span class="tl-e">Huelga de <b>Cananea</b> · programa del <b>Partido Liberal Mexicano</b></span></div>
+    <div class="tl-row"><span class="tl-y">1907</span><span class="tl-e">Huelga de <b>Río Blanco</b></span></div>
+    <div class="tl-row"><span class="tl-y">1908</span><span class="tl-e"><b>Entrevista Díaz–Creelman</b></span></div>
+    <div class="tl-row"><span class="tl-y">1910</span><span class="tl-e">Elección fraudulenta · <b>Plan de San Luis</b> · 20 de noviembre</span></div>
+    <div class="tl-row"><span class="tl-y">1911</span><span class="tl-e">Toma de <b>Ciudad Juárez</b> · <b>renuncia de Díaz</b> y exilio a Francia</span></div>
+  </div>
+
+  <div class="trap"><h4>Ojo en el examen</h4><ul>
+    <li><b>Cananea es 1906, minera y en Sonora · Río Blanco es 1907, textil y en Veracruz.</b> Es la confusión número uno de la unidad.</li>
+    <li>El Porfiriato <b>no fue continuo</b>: entre 1880 y 1884 gobernó Manuel González.</li>
+    <li><b>Positivismo = «Orden y Progreso»</b>, y llegó a México con <b>Gabino Barreda</b> desde la República Restaurada. No lo inventó Díaz, lo aprovechó.</li>
+    <li><b>Madero pedía cambio político, no agrario.</b> Ese matiz es la clave para entender el Plan de Ayala del año siguiente.</li>
+    <li>El régimen sí produjo <b>crecimiento económico</b>: ferrocarriles, minería, superávit. La pregunta suele ser justo esa doble cara, no solo la represión.</li>
+  </ul></div>
+</section>
+
+<!-- ============ U6 LA REVOLUCIÓN MEXICANA ============ -->
+<section class="panel" data-num="6" data-short="Revolución">
+  <div class="panel-head">
+    <div class="u">Unidad 6 · 1910 – 1920</div>
+    <h2>La Revolución Mexicana</h2>
+    <p class="lead">Diez años, tres etapas y un plan por cada bando. Aquí el examen pregunta casi siempre lo mismo: <b>quién firmó qué y contra quién</b>.</p>
+  </div>
+
+  <h3 class="sec">Conceptos clave</h3>
+  <div class="cgrid">
+    <div class="concept"><h4>Las tres etapas</h4><p><b>Maderismo</b> (1910–13): tumbar a Díaz. <b>Constitucionalismo</b> (1913–14): tumbar a Huerta. <b>Lucha de facciones</b> (1914–17): los vencedores peleando entre sí.</p></div>
+    <div class="concept"><h4>Revolución política vs. social</h4><p>Madero quería <b>elecciones</b>; Zapata y Villa querían <b>tierra</b>. Esa diferencia explica por qué la revolución no terminó cuando cayó Díaz: apenas empezaba lo otro.</p></div>
+    <div class="concept"><h4>Constitucionalismo</h4><p>La bandera de <b>Carranza</b>: no una revolución social, sino el <b>regreso al orden constitucional</b> roto por el golpe. De ahí el nombre de su ejército.</p></div>
+    <div class="concept"><h4>Agrarismo</h4><p>La exigencia de <b>restituir y repartir la tierra</b> a los pueblos despojados. Es el eje de Zapata en el sur y, con otro tono, de Villa en el norte.</p></div>
+    <div class="concept"><h4>Convención de Aguascalientes</h4><p><b>1914</b>: los vencedores se reúnen a ponerse de acuerdo y no lo logran. <b>Villa y Zapata</b> de un lado, <b>Carranza y Obregón</b> del otro. De ahí sale la guerra entre facciones.</p></div>
+    <div class="concept"><h4>Garantías sociales</h4><p>Lo nuevo de la Constitución de 1917: derechos que no son del individuo suelto sino de <b>grupos</b> —trabajadores, campesinos—. Es lo que la hizo la primera de su tipo en el mundo.</p></div>
+  </div>
+
+  <h3 class="sec">Los planes y quién los firmó</h3>
+  <div class="fgrid">
+
+    <div class="card"><div class="name">Plan de San Luis</div><div class="fbody">
+      <div class="io"><span class="io-k">Año</span><span class="io-v"><b>1910</b></span></div>
+      <div class="io"><span class="io-k">Quién</span><span class="io-v"><b>Francisco I. Madero</b></span></div>
+      <div class="io"><span class="io-k">Contra quién</span><span class="io-v">contra <b>Porfirio Díaz</b> y la elección fraudulenta</span></div>
+      <div class="io"><span class="io-k">Lema</span><span class="io-v">«<b>Sufragio efectivo, no reelección</b>»</span></div>
+      <div class="io"><span class="io-k">Fecha del llamado</span><span class="io-v"><b>20 de noviembre de 1910</b></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">El documento que fija el día en que arranca todo. Su artículo tercero prometía revisar los despojos de tierras, y esa promesa a medias es la que después le cobran.</div></details></div>
+
+    <div class="card"><div class="name">Tratados de Ciudad Juárez</div><div class="fbody">
+      <div class="io"><span class="io-k">Año</span><span class="io-v"><b>1911</b></span></div>
+      <div class="io"><span class="io-k">Qué pactan</span><span class="io-v">la <b>renuncia de Díaz</b> y un gobierno interino (León de la Barra)</span></div>
+      <div class="io"><span class="io-k">Lo que no tocan</span><span class="io-v">el <b>ejército federal</b> y la burocracia porfiristas <b>siguen en su lugar</b></span></div>
+      <div class="io"><span class="io-k">Consecuencia</span><span class="io-v">Madero llega a gobernar rodeado de <b>sus enemigos</b>: ahí nace el golpe de 1913</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Ganó la guerra y desarmó a su propio ejército dejando intacto el del enemigo. Es el error del que no se repuso.</div></details></div>
+
+    <div class="card"><div class="name">Plan de Ayala</div><div class="fbody">
+      <div class="io"><span class="io-k">Año</span><span class="io-v"><b>1911</b></span></div>
+      <div class="io"><span class="io-k">Quién</span><span class="io-v"><b>Emiliano Zapata</b></span></div>
+      <div class="io"><span class="io-k">Contra quién</span><span class="io-v">desconoce a <b>Madero</b> por no cumplir con la tierra</span></div>
+      <div class="io"><span class="io-k">Qué exige</span><span class="io-v"><b>restitución</b> de tierras despojadas y <b>expropiación</b> de un tercio de los latifundios</span></div>
+      <div class="io"><span class="io-k">Lema</span><span class="io-v">«<b>Tierra y Libertad</b>»</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Aquí la revolución deja de ser un cambio de presidente. Restituir no es repartir: es devolverle al pueblo lo que ya era suyo y le quitaron con papeles.</div></details></div>
+
+    <div class="card"><div class="name">Decena Trágica</div><div class="fbody">
+      <div class="io"><span class="io-k">Año</span><span class="io-v"><b>1913</b>, del 9 al 19 de febrero</span></div>
+      <div class="io"><span class="io-k">Quiénes</span><span class="io-v"><b>Victoriano Huerta</b>, <b>Félix Díaz</b> y el embajador <b>Henry Lane Wilson</b></span></div>
+      <div class="io"><span class="io-k">Cómo se llamó el pacto</span><span class="io-v"><b>Pacto de la Embajada</b> (o de la Ciudadela)</span></div>
+      <div class="io"><span class="io-k">Qué pasó</span><span class="io-v">diez días de combate en la capital y el <b>asesinato de Madero y Pino Suárez</b></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Un golpe planeado en la embajada de otro país. Huerta era el general al que Madero le había confiado su defensa: por eso lo que se pregunta es la traición, no la batalla.</div></details></div>
+
+    <div class="card"><div class="name">Plan de Guadalupe</div><div class="fbody">
+      <div class="io"><span class="io-k">Año</span><span class="io-v"><b>1913</b></span></div>
+      <div class="io"><span class="io-k">Quién</span><span class="io-v"><b>Venustiano Carranza</b>, gobernador de Coahuila</span></div>
+      <div class="io"><span class="io-k">Contra quién</span><span class="io-v">contra <b>Victoriano Huerta</b></span></div>
+      <div class="io"><span class="io-k">Qué propone</span><span class="io-v">solo lo <b>político</b>: desconocer al usurpador y restaurar el orden legal</span></div>
+      <div class="io"><span class="io-k">Qué crea</span><span class="io-v">el <b>Ejército Constitucionalista</b>, con Carranza como Primer Jefe</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Es un plan deliberadamente corto y sin promesas sociales: Carranza no quería repartir nada, quería legalidad. Tuvo que añadirle contenido social después, en 1914, para no quedarse sin gente.</div></details></div>
+
+    <div class="card"><div class="name">Convención de Aguascalientes</div><div class="fbody">
+      <div class="io"><span class="io-k">Año</span><span class="io-v"><b>1914</b>, ya caído Huerta</span></div>
+      <div class="io"><span class="io-k">Para qué</span><span class="io-v">para que los vencedores <b>acordaran</b> quién gobierna y con qué programa</span></div>
+      <div class="io"><span class="io-k">Qué acordó</span><span class="io-v">adoptó el <b>Plan de Ayala</b> y nombró presidente a <b>Eulalio Gutiérrez</b></span></div>
+      <div class="io"><span class="io-k">Quién la desconoce</span><span class="io-v"><b>Carranza</b> — y empieza la <b>lucha de facciones</b></span></div>
+      <div class="io"><span class="io-k">Cómo quedan</span><span class="io-v"><b>convencionistas</b> (Villa y Zapata) contra <b>constitucionalistas</b> (Carranza y Obregón)</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">El momento en que la revolución se parte en dos. La foto de Villa y Zapata en la silla presidencial es de estas semanas; unos meses después estaban matándose entre ellos.</div></details></div>
+
+    <div class="card"><div class="name">Batallas de Celaya</div><div class="fbody">
+      <div class="io"><span class="io-k">Año</span><span class="io-v"><b>1915</b></span></div>
+      <div class="io"><span class="io-k">Quiénes</span><span class="io-v"><b>Álvaro Obregón</b> derrota a <b>Francisco Villa</b></span></div>
+      <div class="io"><span class="io-k">Cómo</span><span class="io-v">con <b>trincheras, alambradas y ametralladoras</b>, tácticas aprendidas de la guerra en Europa</span></div>
+      <div class="io"><span class="io-k">Consecuencia</span><span class="io-v">la <b>División del Norte</b> queda deshecha y gana el bando constitucionalista</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">La caballería contra la ametralladora. Es el punto en que se decide quién va a escribir la constitución de 1917 — y por eso importa quién ganó.</div></details></div>
+
+    <div class="card"><div class="name">Expedición Punitiva</div><div class="fbody">
+      <div class="io"><span class="io-k">Años</span><span class="io-v"><b>1916 – 1917</b></span></div>
+      <div class="io"><span class="io-k">Por qué</span><span class="io-v">Villa atacó <b>Columbus, Nuevo México</b>, en represalia por el apoyo de EE. UU. a Carranza</span></div>
+      <div class="io"><span class="io-k">Quién entró</span><span class="io-v">el general <b>John J. Pershing</b>, con tropas estadounidenses</span></div>
+      <div class="io"><span class="io-k">Resultado</span><span class="io-v"><b>no lo capturaron</b> y se retiraron</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">La única invasión de territorio estadounidense por fuerzas mexicanas en el siglo XX, y la respuesta que provocó. Terminó reforzando el prestigio de quien perseguían.</div></details></div>
+
+    <div class="card"><div class="name">Plan de Agua Prieta</div><div class="fbody">
+      <div class="io"><span class="io-k">Año</span><span class="io-v"><b>1920</b></span></div>
+      <div class="io"><span class="io-k">Quiénes</span><span class="io-v">el <b>grupo Sonora</b>: Obregón, Calles y Adolfo de la Huerta</span></div>
+      <div class="io"><span class="io-k">Contra quién</span><span class="io-v">contra <b>Venustiano Carranza</b>, por querer imponer sucesor</span></div>
+      <div class="io"><span class="io-k">Cómo termina</span><span class="io-v">Carranza <b>asesinado en Tlaxcalantongo</b>, Puebla</span></div>
+      <div class="io"><span class="io-k">Qué cierra</span><span class="io-v">la <b>fase armada</b> de la Revolución</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">El último pronunciamiento que sí derriba a un presidente. Con él empieza el periodo en que el poder se hereda dentro del grupo ganador en vez de disputarse a tiros.</div></details></div>
+  </div>
+
+  <h3 class="sec">La Constitución de 1917</h3>
+  <div class="fgrid">
+
+    <div class="card"><div class="name">Congreso Constituyente</div><div class="fbody">
+      <div class="io"><span class="io-k">Dónde y cuándo</span><span class="io-v"><b>Querétaro</b>, diciembre de 1916 a febrero de <b>1917</b></span></div>
+      <div class="io"><span class="io-k">Quién lo convoca</span><span class="io-v"><b>Carranza</b>, con la idea de solo <b>reformar</b> la Constitución de 1857</span></div>
+      <div class="io"><span class="io-k">Qué pasó</span><span class="io-v">el ala <b>radical (jacobina)</b> se impuso y salió una constitución nueva</span></div>
+      <div class="io"><span class="io-k">Se promulga</span><span class="io-v"><b>5 de febrero de 1917</b></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">El resultado le salió mucho más lejos de lo que su convocante quería. Carranza pidió un ajuste y le entregaron el texto social más avanzado del mundo en ese momento.</div></details></div>
+
+    <div class="card"><div class="name">Artículo 3º</div><div class="fbody">
+      <div class="io"><span class="io-k">De qué trata</span><span class="io-v">la <b>educación</b></span></div>
+      <div class="io"><span class="io-k">Qué establece</span><span class="io-v"><b>laica, gratuita y obligatoria</b>, e impartida por el Estado</span></div>
+      <div class="io"><span class="io-k">Contra qué va</span><span class="io-v">contra el control de la <b>Iglesia</b> sobre las escuelas</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Es la continuación directa del pleito del siglo XIX, ahora ganado y escrito en la ley suprema.</div></details></div>
+
+    <div class="card"><div class="name">Artículo 27</div><div class="fbody">
+      <div class="io"><span class="io-k">De qué trata</span><span class="io-v">la <b>propiedad de la tierra, el agua y el subsuelo</b></span></div>
+      <div class="io"><span class="io-k">Qué establece</span><span class="io-v">son <b>propiedad originaria de la nación</b>; la propiedad privada es una concesión</span></div>
+      <div class="io"><span class="io-k">Qué habilita</span><span class="io-v">la <b>reforma agraria</b> y, más tarde, la <b>expropiación petrolera</b></span></div>
+      <div class="io"><span class="io-k">De quién es la herencia</span><span class="io-v">de la exigencia <b>agrarista</b> del sur</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">El artículo con más consecuencias del siglo XX mexicano. Todo lo que pasó con el ejido y con el petróleo cuelga de esta frase.</div></details></div>
+
+    <div class="card"><div class="name">Artículo 123</div><div class="fbody">
+      <div class="io"><span class="io-k">De qué trata</span><span class="io-v">el <b>trabajo</b></span></div>
+      <div class="io"><span class="io-k">Qué establece</span><span class="io-v"><b>jornada de 8 horas</b>, salario mínimo, descanso semanal, derecho de <b>huelga</b> y a formar <b>sindicatos</b>, protección a mujeres y menores</span></div>
+      <div class="io"><span class="io-k">De quién es la herencia</span><span class="io-v">de Cananea, Río Blanco y el programa del <b>Partido Liberal Mexicano</b></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Lo que los huelguistas pedían en 1906 y les costó la vida quedó escrito once años después como derecho. Junto con el 27, es lo que hace «social» a esta constitución.</div></details></div>
+
+    <div class="card"><div class="name">Artículo 130</div><div class="fbody">
+      <div class="io"><span class="io-k">De qué trata</span><span class="io-v">la relación entre el <b>Estado y las iglesias</b></span></div>
+      <div class="io"><span class="io-k">Qué establece</span><span class="io-v"><b>separación</b>, sin personalidad jurídica para las iglesias y sin culto público fuera de los templos</span></div>
+      <div class="io"><span class="io-k">Qué provocó después</span><span class="io-v">al aplicarse con dureza, la <b>Guerra Cristera</b> (1926–29)</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">El cuarto artículo que hay que saber. Su aplicación en los años veinte es la causa directa del conflicto religioso de la unidad siguiente.</div></details></div>
+  </div>
+
+  <h3 class="sec">La tira · Revolución</h3>
+  <p class="tl-cap">Diez años exactos. Nota que los planes van alternando de bando: cada uno responde al anterior.</p>
+  <div class="tl">
+    <div class="tl-row"><span class="tl-y">1910</span><span class="tl-e"><b>Plan de San Luis</b> · 20 de noviembre: inicia la Revolución</span></div>
+    <div class="tl-row"><span class="tl-y">1911</span><span class="tl-e"><b>Tratados de Ciudad Juárez</b> · renuncia Díaz · Madero presidente · <b>Plan de Ayala</b></span></div>
+    <div class="tl-row"><span class="tl-y">1913</span><span class="tl-e"><b>Decena Trágica</b>: cae y muere Madero · <b>Plan de Guadalupe</b> contra Huerta</span></div>
+    <div class="tl-row"><span class="tl-y">1914</span><span class="tl-e">Renuncia <b>Huerta</b> · <b>Convención de Aguascalientes</b> · se parte la revolución</span></div>
+    <div class="tl-row"><span class="tl-y">1915</span><span class="tl-e"><b>Batallas de Celaya</b>: Obregón derrota a Villa</span></div>
+    <div class="tl-row"><span class="tl-y">1916</span><span class="tl-e">Ataque a <b>Columbus</b> · <b>Expedición Punitiva</b> · se instala el Constituyente</span></div>
+    <div class="tl-row"><span class="tl-y">1917</span><span class="tl-e"><b>Constitución de 1917</b>, 5 de febrero · Carranza, presidente</span></div>
+    <div class="tl-row"><span class="tl-y">1919</span><span class="tl-e">Asesinato de <b>Emiliano Zapata</b> en Chinameca</span></div>
+    <div class="tl-row"><span class="tl-y">1920</span><span class="tl-e"><b>Plan de Agua Prieta</b> · muere Carranza · termina la fase armada</span></div>
+  </div>
+
+  <div class="trap"><h4>Ojo en el examen</h4><ul>
+    <li><b>Cada plan tiene su autor y su enemigo:</b> San Luis = Madero contra Díaz · Ayala = Zapata contra Madero · Guadalupe = Carranza contra Huerta · Agua Prieta = Obregón y Calles contra Carranza. Es la pregunta más frecuente de toda la materia.</li>
+    <li><b>Pacto de la Embajada y Pacto de la Ciudadela son lo mismo</b>: el acuerdo para derrocar a Madero.</li>
+    <li><b>Artículo 3 = educación · 27 = tierra · 123 = trabajo · 130 = iglesias.</b> Cuatro números, cuatro temas; no hay dónde perderse si se recitan juntos.</li>
+    <li><b>El Plan de Guadalupe era puramente político.</b> Las promesas sociales se le añadieron después (adiciones de Veracruz, 1914).</li>
+    <li><b>Restitución ≠ dotación.</b> Restituir es devolver tierra despojada con documentos; dotar es entregar tierra nueva a un pueblo que no la tenía.</li>
+    <li>La Constitución se promulga el <b>5 de febrero de 1917</b> — la misma fecha que la de 1857, y a propósito.</li>
+  </ul></div>
+</section>
+
+<!-- ============ U7 RECONSTRUCCIÓN NACIONAL ============ -->
+<section class="panel" data-num="7" data-short="Reconstrucción">
+  <div class="panel-head">
+    <div class="u">Unidad 7 · 1920 – 1940</div>
+    <h2>La reconstrucción nacional</h2>
+    <p class="lead">Veinte años para pasar del general que se impone con tropa al presidente que se impone con partido. Es la historia de cómo se inventó el sistema político mexicano.</p>
+  </div>
+
+  <h3 class="sec">Conceptos clave</h3>
+  <div class="cgrid">
+    <div class="concept"><h4>Caudillismo</h4><p>Manda quien tiene <b>tropa y prestigio personal</b>. El poder es del hombre, no del cargo, y la sucesión se resuelve a balazos. Es lo que hay al empezar el periodo.</p></div>
+    <div class="concept"><h4>Presidencialismo</h4><p>Manda quien ocupa el <b>cargo</b>, y la sucesión se resuelve dentro de una institución. Es a lo que se llega al terminar el periodo: <em>del hombre fuerte al puesto fuerte</em>.</p></div>
+    <div class="concept"><h4>Corporativismo</h4><p>La sociedad se organiza en <b>sectores</b> —obrero, campesino, popular, militar— que negocian con el gobierno a cambio de apoyo. Es la base del control del partido oficial.</p></div>
+    <div class="concept"><h4>Doctrina Estrada</h4><p><b>1930</b>: México <b>no reconoce ni desconoce</b> gobiernos de otros países; solo decide si mantiene relaciones. Es no intervención, y fue pilar de la política exterior por décadas.</p></div>
+    <div class="concept"><h4>Ejido</h4><p>Tierra entregada a un <b>pueblo</b> para trabajarla, <b>inalienable</b>: no se puede vender ni embargar. La forma en que se hizo la reforma agraria, sobre todo con Cárdenas.</p></div>
+    <div class="concept"><h4>Educación socialista</h4><p>Reforma al artículo 3º en <b>1934</b>: educación no solo laica sino que <b>combata el fanatismo</b> y forme en una idea colectiva. Provocó fuerte resistencia y se derogó en 1946.</p></div>
+  </div>
+
+  <h3 class="sec">Del caudillo al partido</h3>
+  <div class="fgrid">
+
+    <div class="card"><div class="name">Álvaro Obregón</div><div class="fbody">
+      <div class="io"><span class="io-k">Años</span><span class="io-v"><b>1920 – 1924</b></span></div>
+      <div class="io"><span class="io-k">Qué hizo</span><span class="io-v">pacificó el país, repartió tierra con moderación y creó la <b>SEP</b> con <b>José Vasconcelos</b></span></div>
+      <div class="io"><span class="io-k">Qué firmó</span><span class="io-v">los <b>Tratados de Bucareli</b> (1923) con Estados Unidos</span></div>
+      <div class="io"><span class="io-k">Cómo termina</span><span class="io-v"><b>asesinado en 1928</b>, tras ser reelecto, por José de León Toral</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Su muerte es la bisagra del periodo: dejó al país sin caudillo indiscutible, y esa crisis es la que obliga a inventar un partido.</div></details></div>
+
+    <div class="card"><div class="name">José Vasconcelos</div><div class="fbody">
+      <div class="io"><span class="io-k">Cargo</span><span class="io-v">primer secretario de <b>Educación Pública</b> (SEP, 1921)</span></div>
+      <div class="io"><span class="io-k">Qué impulsó</span><span class="io-v"><b>misiones culturales</b>, campañas de alfabetización, bibliotecas y el <b>muralismo</b></span></div>
+      <div class="io"><span class="io-k">Su libro</span><span class="io-v"><b>La raza cósmica</b></span></div>
+      <div class="io"><span class="io-k">Los muralistas</span><span class="io-v"><b>Diego Rivera</b>, <b>José Clemente Orozco</b> y <b>David Alfaro Siqueiros</b></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Encargar murales en edificios públicos fue una forma de enseñar historia a un país que no sabía leer. Es la parte cultural de la unidad y sí se pregunta.</div></details></div>
+
+    <div class="card"><div class="name">Tratados de Bucareli</div><div class="fbody">
+      <div class="io"><span class="io-k">Año</span><span class="io-v"><b>1923</b></span></div>
+      <div class="io"><span class="io-k">Entre quiénes</span><span class="io-v"><b>Obregón</b> y <b>Estados Unidos</b></span></div>
+      <div class="io"><span class="io-k">Sobre qué</span><span class="io-v">reclamaciones por daños de la Revolución y la aplicación del <b>artículo 27</b> al petróleo</span></div>
+      <div class="io"><span class="io-k">Qué consiguió</span><span class="io-v">el <b>reconocimiento</b> del gobierno mexicano, a cambio de no aplicar el 27 con efecto retroactivo</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Reconocimiento a cambio de suavizar el artículo que más le dolía a las petroleras. Se le criticó como claudicación; el pleito de fondo se resolvió quince años después.</div></details></div>
+
+    <div class="card"><div class="name">Plutarco Elías Calles</div><div class="fbody">
+      <div class="io"><span class="io-k">Años</span><span class="io-v"><b>1924 – 1928</b> como presidente</span></div>
+      <div class="io"><span class="io-k">Qué fundó</span><span class="io-v">el <b>Banco de México</b> (1925) y bancos de crédito agrícola</span></div>
+      <div class="io"><span class="io-k">Qué desató</span><span class="io-v">la <b>Guerra Cristera</b>, al aplicar con dureza el artículo 130 (Ley Calles)</span></div>
+      <div class="io"><span class="io-k">Su apodo</span><span class="io-v"><b>Jefe Máximo</b> de la Revolución</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Construyó instituciones económicas sólidas y al mismo tiempo provocó la peor guerra religiosa del país. Las dos cosas son suyas y las dos se preguntan.</div></details></div>
+
+    <div class="card"><div class="name">Guerra Cristera</div><div class="fbody">
+      <div class="io"><span class="io-k">Años</span><span class="io-v"><b>1926 – 1929</b></span></div>
+      <div class="io"><span class="io-k">Por qué</span><span class="io-v">por la aplicación estricta del <b>artículo 130</b>: registro de sacerdotes, cierre de escuelas religiosas</span></div>
+      <div class="io"><span class="io-k">Dónde</span><span class="io-v">sobre todo en el <b>Bajío</b>: Jalisco, Guanajuato, Michoacán, Colima</span></div>
+      <div class="io"><span class="io-k">Grito</span><span class="io-v">«¡Viva <b>Cristo Rey</b>!»</span></div>
+      <div class="io"><span class="io-k">Cómo termina</span><span class="io-v">con los <b>arreglos</b> de 1929, negociados con mediación del embajador Morrow</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Una guerra campesina y católica contra un Estado que se decía revolucionario. Terminó sin cambiar la ley: solo se acordó no aplicarla a fondo.</div></details></div>
+
+    <div class="card"><div class="name">Fundación del PNR</div><div class="fbody">
+      <div class="io"><span class="io-k">Año</span><span class="io-v"><b>1929</b></span></div>
+      <div class="io"><span class="io-k">Quién</span><span class="io-v"><b>Calles</b>, tras el asesinato de Obregón</span></div>
+      <div class="io"><span class="io-k">Para qué</span><span class="io-v">para que la sucesión se resolviera <b>por acuerdo y no por las armas</b></span></div>
+      <div class="io"><span class="io-k">Sus nombres</span><span class="io-v"><b>PNR</b> (1929) → <b>PRM</b> (1938, con Cárdenas) → <b>PRI</b> (1946)</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">El invento político más duradero del siglo XX mexicano: en vez de que los generales se mataran cada cuatro años, se repartieron el poder dentro de una sola casa.</div></details></div>
+
+    <div class="card"><div class="name">El Maximato</div><div class="fbody">
+      <div class="io"><span class="io-k">Años</span><span class="io-v"><b>1928 – 1934</b></span></div>
+      <div class="io"><span class="io-k">Quién manda de verdad</span><span class="io-v"><b>Calles</b>, desde fuera de la presidencia</span></div>
+      <div class="io"><span class="io-k">Cuántos presidentes</span><span class="io-v"><b>tres</b>: Emilio Portes Gil, Pascual Ortiz Rubio y Abelardo L. Rodríguez</span></div>
+      <div class="io"><span class="io-k">Cómo termina</span><span class="io-v"><b>Cárdenas lo expulsa</b> del país en 1936</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Seis años en que el presidente no era el que mandaba. Que Cárdenas rompiera eso es lo que le dio al cargo la fuerza que tuvo después.</div></details></div>
+
+    <div class="card"><div class="name">Plan Sexenal</div><div class="fbody">
+      <div class="io"><span class="io-k">Año</span><span class="io-v"><b>1933</b>, aprobado por el partido</span></div>
+      <div class="io"><span class="io-k">Qué es</span><span class="io-v">el <b>programa de gobierno</b> para el siguiente sexenio, con metas concretas</span></div>
+      <div class="io"><span class="io-k">Qué proponía</span><span class="io-v">reparto agrario, educación socialista, control estatal de la economía y derechos obreros</span></div>
+      <div class="io"><span class="io-k">Quién lo aplicó</span><span class="io-v"><b>Lázaro Cárdenas</b></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Con él se asienta la costumbre de que cada gobierno llegue con metas escritas y aprobadas de antemano, en vez de improvisar. Es el origen de que en México se hable de «sexenio».</div></details></div>
+
+    <div class="card"><div class="name">El Cardenismo</div><div class="fbody">
+      <div class="io"><span class="io-k">Años</span><span class="io-v"><b>1934 – 1940</b></span></div>
+      <div class="io"><span class="io-k">Reparto agrario</span><span class="io-v">el <b>mayor de la historia</b>: ~18 millones de hectáreas, en <b>ejidos</b> — el caso emblema es <b>La Laguna</b></span></div>
+      <div class="io"><span class="io-k">Qué organizó</span><span class="io-v">a los obreros en la <b>CTM</b> (Lombardo Toledano) y a los campesinos en la <b>CNC</b></span></div>
+      <div class="io"><span class="io-k">Qué nacionalizó</span><span class="io-v">los <b>ferrocarriles</b> (1937) y el <b>petróleo</b> (1938)</span></div>
+      <div class="io"><span class="io-k">A quién recibió</span><span class="io-v">a los <b>refugiados españoles</b> de la Guerra Civil</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Es el sexenio en que la Constitución de 1917 por fin se cumple. También es cuando el Estado se organiza a la sociedad desde arriba, y eso es lo que después sostiene al PRI.</div></details></div>
+
+    <div class="card"><div class="name">Expropiación petrolera</div><div class="fbody">
+      <div class="io"><span class="io-k">Fecha</span><span class="io-v"><b>18 de marzo de 1938</b></span></div>
+      <div class="io"><span class="io-k">Quién</span><span class="io-v"><b>Lázaro Cárdenas</b></span></div>
+      <div class="io"><span class="io-k">Por qué</span><span class="io-v">las compañías se <b>negaron a acatar un fallo</b> de la Suprema Corte a favor del sindicato</span></div>
+      <div class="io"><span class="io-k">En qué se apoyó</span><span class="io-v">en el <b>artículo 27</b>: el subsuelo es de la nación</span></div>
+      <div class="io"><span class="io-k">Qué creó</span><span class="io-v"><b>PEMEX</b>; el país pagó la indemnización y sufrió un <b>boicot</b> internacional</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">No empezó como un plan nacionalista sino como un conflicto laboral: la empresa desobedeció a la Corte y el gobierno respondió con el artículo más fuerte que tenía. La gente donó dinero y hasta gallinas para pagarla.</div></details></div>
+  </div>
+
+  <h3 class="sec">La tira · Reconstrucción</h3>
+  <p class="tl-cap">Veinte años. Fíjate en la cadena 1928 → 1929: el asesinato produce el partido.</p>
+  <div class="tl">
+    <div class="tl-row"><span class="tl-y">1920</span><span class="tl-e">Empieza el gobierno de <b>Obregón</b></span></div>
+    <div class="tl-row"><span class="tl-y">1921</span><span class="tl-e">Se crea la <b>SEP</b>, con Vasconcelos</span></div>
+    <div class="tl-row"><span class="tl-y">1923</span><span class="tl-e"><b>Tratados de Bucareli</b> · asesinato de <b>Francisco Villa</b></span></div>
+    <div class="tl-row"><span class="tl-y">1924</span><span class="tl-e">Llega <b>Calles</b> a la presidencia</span></div>
+    <div class="tl-row"><span class="tl-y">1925</span><span class="tl-e">Fundación del <b>Banco de México</b></span></div>
+    <div class="tl-row"><span class="tl-y">1926-29</span><span class="tl-e"><b>Guerra Cristera</b></span></div>
+    <div class="tl-row"><span class="tl-y">1928</span><span class="tl-e"><b>Asesinato de Obregón</b>, ya reelecto</span></div>
+    <div class="tl-row"><span class="tl-y">1929</span><span class="tl-e">Fundación del <b>PNR</b> · <b>autonomía de la UNAM</b> · arreglos con la Iglesia</span></div>
+    <div class="tl-row"><span class="tl-y">1928-34</span><span class="tl-e"><b>Maximato</b>: tres presidentes bajo Calles</span></div>
+    <div class="tl-row"><span class="tl-y">1930</span><span class="tl-e"><b>Doctrina Estrada</b></span></div>
+    <div class="tl-row"><span class="tl-y">1934</span><span class="tl-e">Llega <b>Cárdenas</b> · reforma de la <b>educación socialista</b></span></div>
+    <div class="tl-row"><span class="tl-y">1936</span><span class="tl-e"><b>Expulsión de Calles</b> · nace la <b>CTM</b></span></div>
+    <div class="tl-row"><span class="tl-y">1938</span><span class="tl-e"><b>Expropiación petrolera</b>, 18 de marzo · el PNR se vuelve <b>PRM</b></span></div>
+  </div>
+
+  <div class="trap"><h4>Ojo en el examen</h4><ul>
+    <li><b>PNR (1929) → PRM (1938) → PRI (1946).</b> Tres nombres, tres fechas; se pregunta el orden y quién hizo cada cambio.</li>
+    <li><b>Maximato es 1928–1934 y son tres presidentes.</b> El nombre viene del apodo «Jefe Máximo», no de que durara mucho.</li>
+    <li><b>La Guerra Cristera la provoca el artículo 130</b>, no el 3º. Aunque el cierre de escuelas religiosas también pesó.</li>
+    <li><b>Cárdenas expulsó a Calles</b>, que era su padrino político. Ese rompimiento es lo que crea el presidencialismo fuerte.</li>
+    <li>La expropiación se apoya en el <b>artículo 27</b> y su detonante fue un <b>conflicto sindical</b>, no una decisión ideológica de arranque.</li>
+    <li><b>Autonomía de la UNAM: 1929.</b> Se cuela seguido como pregunta suelta.</li>
+  </ul></div>
+</section>
+
+<!-- ============ U8 MÉXICO CONTEMPORÁNEO ============ -->
+<section class="panel" data-num="8" data-short="Contemporáneo">
+  <div class="panel-head">
+    <div class="u">Unidad 8 · 1940 – 2000</div>
+    <h2>México contemporáneo</h2>
+    <p class="lead">Sesenta años en cuatro modelos económicos. Aquí lo que hay que amarrar es <b>modelo ↔ años ↔ presidente</b>, y esa es exactamente la pregunta.</p>
+  </div>
+
+  <h3 class="sec">Conceptos clave</h3>
+  <div class="cgrid">
+    <div class="concept"><h4>Sustitución de importaciones</h4><p>Producir <b>aquí</b> lo que antes se compraba fuera, protegiendo la industria nacional con <b>aranceles altos</b>. Es el motor de todo el crecimiento de 1940 a 1970.</p></div>
+    <div class="concept"><h4>Proteccionismo</h4><p>Poner <b>barreras a lo importado</b> para que la industria de casa pueda competir. Funcionó para crecer y, con los años, produjo empresas caras y poco competitivas.</p></div>
+    <div class="concept"><h4>Milagro mexicano</h4><p>El nombre del crecimiento sostenido de <b>~6% anual</b> entre 1940 y 1970, sin inflación alta y con el peso estable. Es el resultado de los dos conceptos de arriba.</p></div>
+    <div class="concept"><h4>Populismo</h4><p>Gasto público alto y discurso a favor de los de abajo, financiado con <b>deuda</b>. Etiqueta que se usa para los años setenta y que termina en crisis.</p></div>
+    <div class="concept"><h4>Neoliberalismo</h4><p><b>Privatizar</b> empresas del Estado, <b>abrir</b> la economía al exterior y reducir el gasto. El giro de los ochenta, opuesto al modelo anterior.</p></div>
+    <div class="concept"><h4>Tecnócratas</h4><p>Los gobernantes con formación <b>económica de posgrado en el extranjero</b> que sustituyen a los políticos de carrera desde los ochenta. Ellos hacen el giro anterior.</p></div>
+  </div>
+
+  <h3 class="sec">Los cuatro modelos y sus crisis</h3>
+  <div class="fgrid">
+
+    <div class="card"><div class="name">Unidad Nacional</div><div class="fbody">
+      <div class="io"><span class="io-k">Años</span><span class="io-v"><b>1940 – 1952</b></span></div>
+      <div class="io"><span class="io-k">Presidentes</span><span class="io-v"><b>Manuel Ávila Camacho</b> y <b>Miguel Alemán</b></span></div>
+      <div class="io"><span class="io-k">De qué se trata</span><span class="io-v">acabar los pleitos internos y <b>unir al país</b> ante la Segunda Guerra Mundial; se frena el reparto agrario</span></div>
+      <div class="io"><span class="io-k">Qué se crea</span><span class="io-v">el <b>IMSS</b> (1943) y, con Alemán, la <b>Ciudad Universitaria</b></span></div>
+      <div class="io"><span class="io-k">La guerra</span><span class="io-v">México entra en <b>1942</b>, tras el hundimiento de dos buques petroleros; manda el <b>Escuadrón 201</b> a Filipinas</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Se pasó de la revolución al orden: con Alemán llega el primer presidente civil y termina la era de los generales. La guerra en Europa fue, de paso, un negocio para la industria mexicana.</div></details></div>
+
+    <div class="card"><div class="name">Desarrollo estabilizador</div><div class="fbody">
+      <div class="io"><span class="io-k">Años</span><span class="io-v"><b>1952 – 1970</b></span></div>
+      <div class="io"><span class="io-k">Presidentes</span><span class="io-v">Ruiz Cortines, <b>López Mateos</b> y <b>Díaz Ordaz</b></span></div>
+      <div class="io"><span class="io-k">Qué buscaba</span><span class="io-v">crecer <b>sin inflación y sin devaluar</b>: el peso quedó fijo en <b>12.50</b> por dólar</span></div>
+      <div class="io"><span class="io-k">Qué se logró</span><span class="io-v">el periodo de mayor crecimiento del PIB: el <b>milagro mexicano</b></span></div>
+      <div class="io"><span class="io-k">Qué se crea</span><span class="io-v">el <b>ISSSTE</b> (1959) y se nacionaliza la <b>industria eléctrica</b> (1960)</span></div>
+      <div class="io"><span class="io-k">Su costo</span><span class="io-v">estabilidad económica con <b>autoritarismo político</b> y desigualdad creciente</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Dieciocho años con el mismo tipo de cambio. La economía iba tan bien que el sistema creyó que podía seguir cerrado políticamente para siempre: 1968 le contestó que no.</div></details></div>
+
+    <div class="card"><div class="name">Movimiento del 68</div><div class="fbody">
+      <div class="io"><span class="io-k">Año</span><span class="io-v"><b>1968</b>, bajo <b>Gustavo Díaz Ordaz</b></span></div>
+      <div class="io"><span class="io-k">Quiénes</span><span class="io-v">estudiantes de la <b>UNAM</b> y el <b>IPN</b>, con el Consejo Nacional de Huelga</span></div>
+      <div class="io"><span class="io-k">Qué pedían</span><span class="io-v"><b>libertades políticas</b>, liberación de presos políticos y derogación del delito de disolución social</span></div>
+      <div class="io"><span class="io-k">Cómo terminó</span><span class="io-v"><b>matanza de Tlatelolco</b>, 2 de octubre, días antes de los <b>Juegos Olímpicos</b></span></div>
+      <div class="io"><span class="io-k">Qué significó</span><span class="io-v">la <b>ruptura</b> de la imagen de estabilidad del régimen</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">El país iba a mostrarle al mundo su modernidad en unos Juegos Olímpicos y lo que enseñó fue cómo reprimía. De ahí arranca la larga transición hacia la democracia.</div></details></div>
+
+    <div class="card"><div class="name">Halconazo</div><div class="fbody">
+      <div class="io"><span class="io-k">Año</span><span class="io-v"><b>1971</b>, con <b>Luis Echeverría</b></span></div>
+      <div class="io"><span class="io-k">Otro nombre</span><span class="io-v"><b>Matanza del Jueves de Corpus</b>, 10 de junio</span></div>
+      <div class="io"><span class="io-k">Quiénes</span><span class="io-v">un grupo paramilitar, <b>«los Halcones»</b>, contra una manifestación estudiantil</span></div>
+      <div class="io"><span class="io-k">Qué demostró</span><span class="io-v">que la <b>apertura democrática</b> prometida no era real</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">La segunda represión, tres años después de la primera y con el presidente que prometía abrir. Es lo que empuja a parte de esa generación a la guerrilla.</div></details></div>
+
+    <div class="card"><div class="name">Desarrollo compartido</div><div class="fbody">
+      <div class="io"><span class="io-k">Años</span><span class="io-v"><b>1970 – 1976</b></span></div>
+      <div class="io"><span class="io-k">Presidente</span><span class="io-v"><b>Luis Echeverría</b></span></div>
+      <div class="io"><span class="io-k">Qué buscaba</span><span class="io-v"><b>repartir</b> el crecimiento, no solo producirlo: más gasto social y más empresas estatales</span></div>
+      <div class="io"><span class="io-k">Cómo se pagó</span><span class="io-v">con <b>deuda externa</b> e inflación</span></div>
+      <div class="io"><span class="io-k">Cómo terminó</span><span class="io-v"><b>devaluación de 1976</b>: se rompen los 12.50 después de 22 años</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">El nombre lo dice: ya no bastaba con que el pastel creciera, había que repartirlo. La intención era buena y la factura la pagó el peso.</div></details></div>
+
+    <div class="card"><div class="name">Auge y crisis petrolera</div><div class="fbody">
+      <div class="io"><span class="io-k">Años</span><span class="io-v"><b>1976 – 1982</b></span></div>
+      <div class="io"><span class="io-k">Presidente</span><span class="io-v"><b>José López Portillo</b></span></div>
+      <div class="io"><span class="io-k">Qué pasó</span><span class="io-v">se descubren enormes yacimientos y el país se endeuda apostando al <b>precio alto del petróleo</b></span></div>
+      <div class="io"><span class="io-k">Su frase</span><span class="io-v">«administrar la <b>abundancia</b>»</span></div>
+      <div class="io"><span class="io-k">Cómo terminó</span><span class="io-v">cae el precio, sube el interés y estalla la <b>crisis de la deuda de 1982</b>: <b>nacionalización de la banca</b></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Seis años de apostarlo todo a una sola materia prima. Cuando el precio bajó, el país quedó debiendo lo que no podía pagar — y ese es el hecho que abre el modelo siguiente.</div></details></div>
+
+    <div class="card"><div class="name">El giro neoliberal</div><div class="fbody">
+      <div class="io"><span class="io-k">Años</span><span class="io-v">de <b>1982</b> en adelante</span></div>
+      <div class="io"><span class="io-k">Quién lo inicia</span><span class="io-v"><b>Miguel de la Madrid</b></span></div>
+      <div class="io"><span class="io-k">Qué se hace</span><span class="io-v"><b>privatizar</b> empresas del Estado, recortar el gasto y <b>abrir</b> el comercio</span></div>
+      <div class="io"><span class="io-k">Primer paso de apertura</span><span class="io-v">entrada al <b>GATT</b> en <b>1986</b></span></div>
+      <div class="io"><span class="io-k">Quién lo profundiza</span><span class="io-v"><b>Carlos Salinas</b>: vende Telmex y los bancos, y reforma el <b>artículo 27</b> (1992) para permitir vender ejidos</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Es el desmontaje de lo que se había construido desde Cárdenas. La reforma al 27 en 1992 cierra formalmente el ciclo de la reforma agraria abierto en 1917.</div></details></div>
+
+    <div class="card"><div class="name">TLCAN</div><div class="fbody">
+      <div class="io"><span class="io-k">Año</span><span class="io-v">firmado en 1992, <b>en vigor el 1 de enero de 1994</b></span></div>
+      <div class="io"><span class="io-k">Quiénes</span><span class="io-v">México, <b>Estados Unidos</b> y <b>Canadá</b></span></div>
+      <div class="io"><span class="io-k">Quién lo negoció</span><span class="io-v"><b>Carlos Salinas de Gortari</b></span></div>
+      <div class="io"><span class="io-k">Qué hace</span><span class="io-v">elimina aranceles y crea una <b>zona de libre comercio</b></span></div>
+      <div class="io"><span class="io-k">Qué pasó ese día</span><span class="io-v">el levantamiento del <b>EZLN</b> en Chiapas</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">El mismo día en que el país entraba oficialmente al primer mundo, una rebelión indígena mostró al otro México. La coincidencia fue deliberada por parte de los alzados.</div></details></div>
+
+    <div class="card"><div class="name">Crisis de 1994</div><div class="fbody">
+      <div class="io"><span class="io-k">Cómo se le dice</span><span class="io-v">el <b>«error de diciembre»</b> o efecto tequila</span></div>
+      <div class="io"><span class="io-k">Cuándo</span><span class="io-v">diciembre de <b>1994</b>, al inicio del gobierno de <b>Ernesto Zedillo</b></span></div>
+      <div class="io"><span class="io-k">Qué pasó</span><span class="io-v">fuga de capitales y <b>devaluación</b> brusca del peso</span></div>
+      <div class="io"><span class="io-k">Qué dejó</span><span class="io-v">el rescate bancario (<b>FOBAPROA</b>) y una deuda pública enorme</span></div>
+      <div class="io"><span class="io-k">El año además</span><span class="io-v">trajo el <b>EZLN</b> y el asesinato de <b>Luis Donaldo Colosio</b></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Un solo año lo concentra todo: entra el tratado comercial, se alza Chiapas, matan al candidato y se hunde el peso. Es el que más se pregunta de las últimas décadas.</div></details></div>
+
+    <div class="card"><div class="name">La transición democrática</div><div class="fbody">
+      <div class="io"><span class="io-k">Antecedentes</span><span class="io-v">reforma electoral de <b>1977</b> · la <b>caída del sistema</b> en 1988 (Salinas–Cárdenas)</span></div>
+      <div class="io"><span class="io-k">La institución</span><span class="io-v">el <b>IFE</b> (1990) y su <b>autonomía</b> plena en 1996</span></div>
+      <div class="io"><span class="io-k">1997</span><span class="io-v">el PRI <b>pierde la mayoría</b> en la Cámara de Diputados</span></div>
+      <div class="io"><span class="io-k">2000</span><span class="io-v"><b>Vicente Fox</b> (PAN) gana la presidencia: la <b>alternancia</b>, tras 71 años del partido oficial</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">No fue un solo día sino veinte años de reformas. Lo que cambió en el 2000 no fue el modelo económico: fue quién ocupaba la silla, y eso ya era mucho.</div></details></div>
+  </div>
+
+  <h3 class="sec">La tira · México contemporáneo</h3>
+  <p class="tl-cap">Sesenta años. La regla para orientarte: cada crisis abre el modelo siguiente.</p>
+  <div class="tl">
+    <div class="tl-row"><span class="tl-y">1942</span><span class="tl-e">México entra a la <b>Segunda Guerra Mundial</b></span></div>
+    <div class="tl-row"><span class="tl-y">1943</span><span class="tl-e">Se crea el <b>IMSS</b></span></div>
+    <div class="tl-row"><span class="tl-y">1953</span><span class="tl-e"><b>Voto femenino</b> a nivel federal</span></div>
+    <div class="tl-row"><span class="tl-y">1959</span><span class="tl-e">Se crea el <b>ISSSTE</b></span></div>
+    <div class="tl-row"><span class="tl-y">1960</span><span class="tl-e">Nacionalización de la <b>industria eléctrica</b></span></div>
+    <div class="tl-row"><span class="tl-y">1968</span><span class="tl-e"><b>Matanza de Tlatelolco</b>, 2 de octubre · Juegos Olímpicos</span></div>
+    <div class="tl-row"><span class="tl-y">1971</span><span class="tl-e"><b>Halconazo</b>, 10 de junio</span></div>
+    <div class="tl-row"><span class="tl-y">1976</span><span class="tl-e"><b>Devaluación</b>: se rompen los 12.50 por dólar</span></div>
+    <div class="tl-row"><span class="tl-y">1982</span><span class="tl-e"><b>Crisis de la deuda</b> · <b>nacionalización de la banca</b> · empieza el giro neoliberal</span></div>
+    <div class="tl-row"><span class="tl-y">1985</span><span class="tl-e"><b>Terremoto</b> de la Ciudad de México y despertar de la sociedad civil</span></div>
+    <div class="tl-row"><span class="tl-y">1986</span><span class="tl-e">México entra al <b>GATT</b></span></div>
+    <div class="tl-row"><span class="tl-y">1988</span><span class="tl-e">Elección de la <b>«caída del sistema»</b></span></div>
+    <div class="tl-row"><span class="tl-y">1992</span><span class="tl-e">Reforma al <b>artículo 27</b>: los ejidos se pueden vender</span></div>
+    <div class="tl-row"><span class="tl-y">1994</span><span class="tl-e"><b>TLCAN</b> · <b>EZLN</b> · asesinato de <b>Colosio</b> · <b>crisis</b> de diciembre</span></div>
+    <div class="tl-row"><span class="tl-y">1997</span><span class="tl-e">El PRI <b>pierde la mayoría</b> en Diputados</span></div>
+    <div class="tl-row"><span class="tl-y">2000</span><span class="tl-e"><b>Alternancia</b>: gana Vicente Fox</span></div>
+  </div>
+
+  <div class="trap"><h4>Ojo en el examen</h4><ul>
+    <li><b>Los cuatro modelos con sus años:</b> Unidad Nacional 1940–52 · Desarrollo estabilizador 1952–70 · Desarrollo compartido 1970–76 · auge y crisis petrolera 1976–82 · neoliberalismo desde 1982. Es la pregunta central de la unidad.</li>
+    <li><b>«Milagro mexicano» y «desarrollo estabilizador» se usan casi como sinónimos</b>, pero el milagro abarca 1940–1970 y el estabilizador es la segunda mitad, la del peso fijo.</li>
+    <li><b>IMSS 1943 · ISSSTE 1959.</b> Dos siglas, dos fechas, y se preguntan juntas.</li>
+    <li><b>1968 es Díaz Ordaz · 1971 es Echeverría.</b> Son dos represiones distintas con tres años de diferencia.</li>
+    <li><b>1982 nacionalización de la banca (López Portillo) · años noventa privatización de la banca (Salinas).</b> Una cosa y su contraria en diez años.</li>
+    <li>La <b>sustitución de importaciones</b> es proteccionista; el <b>TLCAN</b> es lo opuesto. Si te acuerdas de eso, ubicas cualquier medida en su modelo.</li>
+  </ul></div>
+</section>
+
+<!-- ============ LÍNEA COMPLETA ============ -->
+<section class="panel" data-short="Línea completa">
+  <div class="panel-head">
+    <div class="u">Repaso · todos los periodos</div>
+    <h2>La línea completa</h2>
+    <p class="lead">Los hitos de las ocho unidades en una sola tira, para ver el siglo entero de corrido. Es donde se entrena el orden entre periodos, no solo dentro de cada uno.</p>
+  </div>
+
+  <h3 class="sec">De 1325 a 2000</h3>
+  <p class="tl-cap">Treinta y seis hitos, en orden. De ida ves el año; volteado ves el hecho y dices el año.</p>
+  <div class="tl">
+    <div class="tl-row"><span class="tl-y">1325</span><span class="tl-e">Fundación de <b>México-Tenochtitlan</b></span></div>
+    <div class="tl-row"><span class="tl-y">1521</span><span class="tl-e"><b>Caída de Tenochtitlan</b></span></div>
+    <div class="tl-row"><span class="tl-y">1535</span><span class="tl-e">Se establece el <b>virreinato</b></span></div>
+    <div class="tl-row"><span class="tl-y">1767</span><span class="tl-e"><b>Expulsión de los jesuitas</b></span></div>
+    <div class="tl-row"><span class="tl-y">1810</span><span class="tl-e"><b>Grito de Dolores</b></span></div>
+    <div class="tl-row"><span class="tl-y">1813</span><span class="tl-e"><b>Sentimientos de la Nación</b></span></div>
+    <div class="tl-row"><span class="tl-y">1821</span><span class="tl-e"><b>Consumación de la Independencia</b></span></div>
+    <div class="tl-row"><span class="tl-y">1824</span><span class="tl-e"><b>Constitución de 1824</b>: república federal</span></div>
+    <div class="tl-row"><span class="tl-y">1836</span><span class="tl-e"><b>Siete Leyes</b> e independencia de <b>Texas</b></span></div>
+    <div class="tl-row"><span class="tl-y">1848</span><span class="tl-e"><b>Tratado de Guadalupe Hidalgo</b></span></div>
+    <div class="tl-row"><span class="tl-y">1853</span><span class="tl-e"><b>Venta de La Mesilla</b></span></div>
+    <div class="tl-row"><span class="tl-y">1854</span><span class="tl-e"><b>Revolución de Ayutla</b></span></div>
+    <div class="tl-row"><span class="tl-y">1857</span><span class="tl-e"><b>Constitución de 1857</b></span></div>
+    <div class="tl-row"><span class="tl-y">1859</span><span class="tl-e"><b>Leyes de Reforma</b></span></div>
+    <div class="tl-row"><span class="tl-y">1862</span><span class="tl-e"><b>Batalla de Puebla</b></span></div>
+    <div class="tl-row"><span class="tl-y">1864</span><span class="tl-e">Llega <b>Maximiliano</b>: Segundo Imperio</span></div>
+    <div class="tl-row"><span class="tl-y">1867</span><span class="tl-e">Fusilamiento de Maximiliano · <b>República Restaurada</b></span></div>
+    <div class="tl-row"><span class="tl-y">1876</span><span class="tl-e"><b>Plan de Tuxtepec</b>: empieza el Porfiriato</span></div>
+    <div class="tl-row"><span class="tl-y">1906-07</span><span class="tl-e">Huelgas de <b>Cananea</b> y <b>Río Blanco</b></span></div>
+    <div class="tl-row"><span class="tl-y">1910</span><span class="tl-e"><b>Plan de San Luis</b>: inicia la Revolución</span></div>
+    <div class="tl-row"><span class="tl-y">1911</span><span class="tl-e">Renuncia <b>Díaz</b> · <b>Plan de Ayala</b></span></div>
+    <div class="tl-row"><span class="tl-y">1913</span><span class="tl-e"><b>Decena Trágica</b> · <b>Plan de Guadalupe</b></span></div>
+    <div class="tl-row"><span class="tl-y">1917</span><span class="tl-e"><b>Constitución de 1917</b></span></div>
+    <div class="tl-row"><span class="tl-y">1920</span><span class="tl-e"><b>Plan de Agua Prieta</b>: fin de la fase armada</span></div>
+    <div class="tl-row"><span class="tl-y">1926-29</span><span class="tl-e"><b>Guerra Cristera</b></span></div>
+    <div class="tl-row"><span class="tl-y">1929</span><span class="tl-e">Fundación del <b>PNR</b> · <b>autonomía de la UNAM</b></span></div>
+    <div class="tl-row"><span class="tl-y">1934</span><span class="tl-e">Llega <b>Lázaro Cárdenas</b></span></div>
+    <div class="tl-row"><span class="tl-y">1938</span><span class="tl-e"><b>Expropiación petrolera</b></span></div>
+    <div class="tl-row"><span class="tl-y">1942</span><span class="tl-e">México entra a la <b>Segunda Guerra Mundial</b></span></div>
+    <div class="tl-row"><span class="tl-y">1953</span><span class="tl-e"><b>Voto femenino</b></span></div>
+    <div class="tl-row"><span class="tl-y">1968</span><span class="tl-e"><b>Tlatelolco</b></span></div>
+    <div class="tl-row"><span class="tl-y">1976</span><span class="tl-e"><b>Devaluación</b>: termina el peso fijo</span></div>
+    <div class="tl-row"><span class="tl-y">1982</span><span class="tl-e"><b>Crisis de la deuda</b> y giro <b>neoliberal</b></span></div>
+    <div class="tl-row"><span class="tl-y">1985</span><span class="tl-e"><b>Terremoto</b> de la Ciudad de México</span></div>
+    <div class="tl-row"><span class="tl-y">1994</span><span class="tl-e"><b>TLCAN</b> · <b>EZLN</b> · crisis de diciembre</span></div>
+    <div class="tl-row"><span class="tl-y">2000</span><span class="tl-e"><b>Alternancia</b>: fin de 71 años del partido oficial</span></div>
+  </div>
+
+  <div class="trap"><h4>Cómo usar esta pestaña</h4><ul>
+    <li>Recórrela <b>en modo memoria y de ida</b>: ves los años y vas diciendo qué pasó en cada uno. Es lo más parecido a la pregunta de «ordena estos sucesos».</li>
+    <li>Después <b>voltéala</b>: ves los hechos y dices el año. Esa dirección es la que de verdad cuesta.</li>
+    <li>Si un año se te resiste, ve a su unidad: ahí está la tarjeta completa con el quién y el por qué.</li>
+  </ul></div>
+</section>
+
+</main>
+
+<footer>Las 8 unidades del temario oficial de la Guía UNAM · Área 2 · uso personal de estudio</footer>
+
+<script>
+  const panels = [...document.querySelectorAll('.panel')];
+  const tabs = document.getElementById('tabs');
+  panels.forEach((p,i)=>{
+    const b = document.createElement('button');
+    b.className = 'tab';
+    b.innerHTML = (p.dataset.num ? '<b>'+p.dataset.num+'</b>' : '') + p.dataset.short;
+    b.onclick = ()=> show(i);
+    tabs.appendChild(b);
+  });
+  function show(i){
+    panels.forEach((p,j)=>p.classList.toggle('active', i===j));
+    [...tabs.children].forEach((t,j)=>t.classList.toggle('active', i===j));
+    localStorage.setItem('hmx-unidad', i);
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+  show(Math.min(+localStorage.getItem('hmx-unidad')||0, panels.length-1));
+
+  document.addEventListener('keydown', e=>{
+    if(e.target.tagName==='INPUT') return;
+    const cur = panels.findIndex(p=>p.classList.contains('active'));
+    if(e.key==='ArrowRight' && cur<panels.length-1) show(cur+1);
+    if(e.key==='ArrowLeft'  && cur>0) show(cur-1);
+  });
+
+  const hint = document.getElementById('hint');
+  function pista(){
+    if(!document.body.classList.contains('memo')){
+      hint.innerHTML = 'Enciende el <b>modo memoria</b> para taparte. El <b>En palabras</b> de cada tarjeta se abre siempre, en cualquier modo.';
+    } else if(document.body.classList.contains('flip')){
+      hint.innerHTML = 'Volteado: ves el <b>contenido</b> y dices <b>cómo se llama</b>; en la tira ves el <b>hecho</b> y dices el <b>año</b>. Toca para comprobar.';
+    } else {
+      hint.innerHTML = 'Ves el <b>nombre</b> y recitas el contenido; en la tira ves el <b>año</b> y dices qué pasó. Toca para comprobar.';
+    }
+  }
+
+  function cerrarTodas(){
+    document.querySelectorAll('.card.open, .tl-row.open').forEach(c=>c.classList.remove('open'));
+  }
+
+  const memoBtn = document.getElementById('memoBtn');
+  memoBtn.onclick = ()=>{
+    document.body.classList.toggle('memo');
+    cerrarTodas();
+    localStorage.setItem('hmx-memo', document.body.classList.contains('memo')?'1':'0');
+    pista();
+  };
+  const flipBtn = document.getElementById('flipBtn');
+  flipBtn.onclick = ()=>{
+    document.body.classList.toggle('flip');
+    cerrarTodas();
+    localStorage.setItem('hmx-flip', document.body.classList.contains('flip')?'1':'0');
+    pista();
+  };
+  if(localStorage.getItem('hmx-memo')==='1') document.body.classList.add('memo');
+  if(localStorage.getItem('hmx-flip')==='1') document.body.classList.add('flip');
+  pista();
+
+  let abiertas = [];
+  window.addEventListener('beforeprint', ()=>{
+    abiertas = [...document.querySelectorAll('details.why')].filter(d=>d.open);
+    document.querySelectorAll('details.why').forEach(d=>d.open=true);
+  });
+  window.addEventListener('afterprint', ()=>{
+    document.querySelectorAll('details.why').forEach(d=>d.open = abiertas.includes(d));
+  });
+
+  document.addEventListener('click', e=>{
+    if(e.target.closest('details.why')) return;
+    if(e.target.closest('.switch')) return;
+    if(!document.body.classList.contains('memo')) return;
+    const r = e.target.closest('.tl-row');
+    if(r){ r.classList.toggle('open'); return; }
+    const c = e.target.closest('.card');
+    if(c) c.classList.toggle('open');
+  });
+</script>
+</body>
+</html>

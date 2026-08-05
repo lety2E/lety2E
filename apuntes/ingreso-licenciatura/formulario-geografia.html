@@ -1,0 +1,1092 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Formulario de Geografía · Área 2 · UNAM</title>
+<style>
+  :root{
+    --M:#FF00AA;          /* magenta */
+    --T:#00B8B8;          /* turquesa */
+    --P:#6A2A8C;          /* morado */
+    --bg:#FFF7FB;
+    --card:#FFFFFF;
+    --ink:#1A0828;
+    --muted:#7B5A50;
+    --border:#F0D7E6;
+    --hover:#FFE3F1;
+    --soft:#FDF1F8;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,system-ui,sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* ---------- Encabezado ---------- */
+  header{text-align:center;padding:2.2rem 1rem .8rem}
+  header .eyebrow{
+    font-size:.76rem;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--T);font-weight:700;
+  }
+  header h1{margin:.35rem 0 .25rem;font-size:clamp(1.5rem,3.8vw,2.1rem);color:var(--P)}
+  header p{margin:0 auto;max-width:50ch;color:var(--muted);font-size:.93rem}
+
+  /* ---------- Barra de control ---------- */
+  .controls{
+    display:flex;justify-content:center;align-items:center;gap:.6rem;
+    flex-wrap:wrap;padding:1rem 1rem 0;
+  }
+  .switch{
+    display:inline-flex;align-items:center;gap:.55rem;
+    background:var(--card);border:1.5px solid var(--border);
+    border-radius:999px;padding:.42rem .9rem;cursor:pointer;
+    font-size:.86rem;font-weight:600;color:var(--ink);
+    transition:all .15s ease;font-family:inherit;
+  }
+  .switch:hover{border-color:var(--T);background:#F0FBFB}
+  .switch .dot{
+    width:34px;height:19px;border-radius:999px;background:var(--border);
+    position:relative;transition:background .18s ease;flex:none;
+  }
+  .switch .dot::after{
+    content:"";position:absolute;top:2.5px;left:2.5px;
+    width:14px;height:14px;border-radius:50%;background:#fff;
+    box-shadow:0 1px 3px rgba(0,0,0,.25);transition:transform .18s ease;
+  }
+  body.memo .switch#memoBtn .dot{background:var(--T)}
+  body.memo .switch#memoBtn .dot::after{transform:translateX(15px)}
+  body.flip .switch#flipBtn .dot{background:var(--M)}
+  body.flip .switch#flipBtn .dot::after{transform:translateX(15px)}
+  #flipBtn{display:none}
+  body.memo #flipBtn{display:inline-flex}
+  .hint{
+    text-align:center;color:var(--muted);font-size:.8rem;
+    padding:.55rem 1rem 0;min-height:1.4rem;
+  }
+
+  /* ---------- Pestañas ---------- */
+  .tabs{
+    max-width:1180px;margin:.9rem auto 0;padding:0 1rem;
+    display:flex;flex-wrap:wrap;gap:.45rem;justify-content:center;
+  }
+  .tab{
+    background:var(--card);border:1.5px solid var(--border);color:var(--ink);
+    border-radius:999px;padding:.45rem .9rem;font-size:.87rem;font-weight:600;
+    cursor:pointer;transition:all .15s ease;font-family:inherit;white-space:nowrap;
+  }
+  .tab b{color:var(--T);margin-right:.35rem;font-weight:800}
+  .tab:hover{background:var(--hover);border-color:var(--M)}
+  .tab.active{background:var(--M);color:#fff;border-color:var(--M);box-shadow:0 4px 12px rgba(255,0,170,.25)}
+  .tab.active b{color:#fff}
+  .tab.foco{border-style:solid;border-color:#BFE9E9;background:#F3FCFC}
+  .tab.foco:hover{background:var(--hover);border-color:var(--M)}
+  .tab.foco.active{background:var(--M);border-color:var(--M)}
+
+  /* ---------- Paneles ---------- */
+  main{max-width:1000px;margin:1.5rem auto 4rem;padding:0 1rem}
+  .panel{display:none}
+  .panel.active{display:block;animation:fade .25s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+
+  .panel-head{margin-bottom:1.3rem;padding-bottom:.8rem;border-bottom:2px solid var(--border)}
+  .panel-head .u{
+    font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--T);font-weight:800;
+  }
+  .panel-head h2{margin:.2rem 0 .3rem;color:var(--P);font-size:clamp(1.25rem,3vw,1.65rem)}
+  .panel-head .lead{color:var(--muted);font-size:.9rem;margin:0}
+
+  h3.sec{
+    display:flex;align-items:center;gap:.6rem;
+    margin:2rem 0 .9rem;font-size:.8rem;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--P);
+  }
+  h3.sec::after{content:"";flex:1;height:1.5px;background:var(--border)}
+
+  /* ---------- Conceptos (no se tapan: son el marco) ---------- */
+  .cgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:.7rem}
+  .concept{
+    background:var(--card);border:1.5px solid var(--border);
+    border-left:4px solid var(--T);border-radius:12px;padding:.75rem .9rem;
+  }
+  .concept h4{margin:0 0 .25rem;font-size:.93rem;color:var(--P)}
+  .concept p{margin:0;font-size:.87rem;color:var(--ink)}
+  .concept em{color:var(--muted);font-style:normal}
+  .concept b{color:var(--P)}
+
+  /* ---------- Fichas (el dato que se memoriza) ---------- */
+  /* el min() evita que en pantalla angosta la columna fija desborde y saque scroll horizontal */
+  .fgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(300px,100%),1fr));gap:.7rem}
+  .fgrid.ancha{grid-template-columns:repeat(auto-fill,minmax(min(430px,100%),1fr))}
+  .card{
+    background:var(--card);border:1.5px solid var(--border);border-radius:14px;
+    padding:.8rem .9rem .7rem;position:relative;
+    transition:border-color .15s ease,box-shadow .15s ease;
+  }
+  .card:hover{border-color:var(--M);box-shadow:0 6px 18px rgba(255,0,170,.10)}
+  .card .name{font-size:.82rem;font-weight:700;color:var(--M);margin-bottom:.45rem;padding-right:5.5rem;transition:filter .18s ease}
+  .fbody .dato{transition:filter .18s ease}
+  .dato{
+    font-size:.95rem;padding:.35rem .1rem .45rem;color:var(--ink);
+  }
+  .dato + .dato{border-top:1px dashed var(--border);}
+  .dato b{color:var(--P)}
+  .dato ul{margin:.15rem 0 0;padding-left:1.05rem}
+  .dato li{margin-bottom:.18rem}
+  .dato li:last-child{margin-bottom:0}
+  .dato .big{
+    font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+    font-size:1.14rem;text-align:center;display:block;padding:.15rem 0;
+  }
+  .leg{
+    font-size:.78rem;color:var(--muted);border-top:1.5px solid var(--soft);
+    padding-top:.45rem;margin-top:.15rem;
+  }
+  .leg b{color:var(--P);font-weight:700}
+
+  /* ---------- Explicación en palabras ---------- */
+  details.why{margin-top:.55rem;border-top:1.5px solid var(--soft);padding-top:.45rem}
+  details.why > summary{
+    list-style:none;cursor:pointer;display:flex;align-items:center;gap:.35rem;
+    font-size:.76rem;font-weight:700;color:var(--T);letter-spacing:.02em;
+  }
+  details.why > summary::-webkit-details-marker{display:none}
+  details.why > summary::after{content:"▾";font-size:.8rem;transition:transform .15s ease}
+  details.why[open] > summary::after{transform:rotate(180deg)}
+  details.why > summary:hover{color:var(--M)}
+  details.why .why-body{
+    font-size:.83rem;line-height:1.45;color:var(--ink);
+    background:var(--soft);border-radius:10px;padding:.55rem .7rem;margin-top:.45rem;
+  }
+
+  /* ---------- Trampas ---------- */
+  .trap{
+    background:#FFF9E8;border:1.5px solid #F5E2A8;border-left:4px solid #E8B93B;
+    border-radius:12px;padding:.8rem 1rem;margin-top:.9rem;
+  }
+  .trap h4{margin:0 0 .4rem;font-size:.86rem;color:#8A6410}
+  .trap ul{margin:0;padding-left:1.1rem;font-size:.86rem;color:#5C4712}
+  .trap li{margin-bottom:.25rem}
+  .trap li:last-child{margin-bottom:0}
+
+  /* ---------- Modo memoria ---------- */
+  /* De ida se tapa el DATO. El rótulo y la pista quedan visibles: son el andamio para recitar. */
+  body.memo:not(.flip) .fbody .dato{filter:blur(6.5px)}
+  body.memo:not(.flip) .card.open .fbody .dato{filter:none}
+  /* Volteado se tapa el RÓTULO: ves el dato y tienes que decir de qué es. */
+  body.memo.flip .card .name{filter:blur(6.5px)}
+  body.memo.flip .card.open .name{filter:none}
+  body.memo .card{cursor:pointer}
+  body.memo .card::after{
+    content:"toca para ver";position:absolute;right:.7rem;top:.72rem;
+    font-size:.66rem;color:var(--T);font-weight:700;letter-spacing:.04em;
+  }
+  body.memo .card.open::after{content:""}
+  body.memo details.why{filter:none}
+
+  /* ---------- Tablas ---------- */
+  table.t{
+    width:100%;border-collapse:collapse;background:var(--card);
+    border:1.5px solid var(--border);border-radius:12px;overflow:hidden;font-size:.87rem;
+  }
+  table.t th{
+    background:var(--soft);color:var(--P);text-align:left;
+    padding:.55rem .7rem;font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;
+  }
+  table.t td{padding:.5rem .7rem;border-top:1px solid var(--border);vertical-align:top}
+  table.t td:first-child{font-weight:600}
+  .wrap{overflow-x:auto}
+
+  footer{text-align:center;color:var(--muted);font-size:.8rem;padding:0 1rem 3rem}
+
+  @media print{
+    .tabs,.controls,.hint,footer{display:none}
+    .panel{display:block!important;page-break-after:always}
+    body.memo .fbody .dato,body.memo .card .name{filter:none}
+    body{background:#fff}
+  }
+</style>
+
+<style>
+/* ---- barra de regreso lety2E (prefijo l2e- para no chocar) ---- */
+.l2e-volver{
+  font-family:'DM Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
+  font-size:.85rem;font-weight:500;
+  padding:.7rem 1.1rem;
+  background:#1A0828;color:#F5E9F2;
+  display:flex;flex-wrap:wrap;align-items:center;gap:.45rem;
+  line-height:1.5;
+}
+.l2e-volver a{color:#00DEC8;text-decoration:none;}
+.l2e-volver a:hover{color:#FF00AA;text-decoration:underline;}
+.l2e-volver .l2e-sep{opacity:.45;}
+.l2e-volver .l2e-actual{opacity:.75;}
+.l2e-volver .l2e-marca{
+  margin-left:auto;font-family:Georgia,'Times New Roman',serif;
+  font-style:italic;font-weight:700;color:#FF00AA;text-decoration:none;
+}
+.l2e-volver .l2e-marca:hover{color:#00DEC8;}
+@media (max-width:520px){
+  .l2e-volver{font-size:.78rem;padding:.6rem .8rem;}
+  .l2e-volver .l2e-marca{margin-left:auto;}
+}
+</style>
+</head>
+<body data-section="apuntes">
+<nav class="l2e-volver">
+  <a href="../../index.html">Inicio</a>
+  <span class="l2e-sep">&rsaquo;</span>
+  <a href="../index.html">Apuntes</a>
+  <span class="l2e-sep">&rsaquo;</span>
+  <a href="index.html">Ingreso UNAM</a>
+  <span class="l2e-sep">&rsaquo;</span>
+  <span class="l2e-actual">Formulario de Geografía</span>
+  <a class="l2e-marca" href="../../index.html">lety2E</a>
+</nav>
+
+
+<header>
+  <div class="eyebrow">Guía UNAM · Área 2 · Ciencias Biológicas, Químicas y de la Salud</div>
+  <h1>Formulario de Geografía</h1>
+  <p>Las 2 unidades del temario oficial, abiertas en 10 bloques. Con el peso en la <b>geografía humana</b>: población, economía, bloques, organización política y zonas de tensión.</p>
+</header>
+
+<div class="controls">
+  <button class="switch" id="memoBtn"><span class="dot"></span> Modo memoria</button>
+  <button class="switch" id="flipBtn"><span class="dot"></span> Voltear</button>
+</div>
+<div class="hint" id="hint">Tapa los datos, recítalos y toca la tarjeta para comprobar. El <b>rótulo</b> y la <b>pista</b> nunca se tapan: son el pie para recitar. El <b>En palabras</b> se abre en cualquier modo.</div>
+
+<nav class="tabs" id="tabs"></nav>
+
+<main id="main">
+
+<!-- ============ 1 · COORDENADAS Y HUSOS ============ -->
+<section class="panel" data-num="1" data-short="Coordenadas y husos">
+  <div class="panel-head">
+    <div class="u">Unidad 1 · La Tierra</div>
+    <h2>Ubicación: coordenadas y husos horarios</h2>
+    <p class="lead">Lo único de Geografía que se calcula con números. Casi siempre cae una pregunta de husos.</p>
+  </div>
+
+  <h3 class="sec">Conceptos clave</h3>
+  <div class="cgrid">
+    <div class="concept"><h4>Paralelos y latitud</h4><p>Líneas <b>horizontales</b>. La latitud se mide desde el Ecuador (0°) hacia los polos: de <b>0° a 90°</b>, N o S. <em>Determina el clima.</em></p></div>
+    <div class="concept"><h4>Meridianos y longitud</h4><p>Líneas <b>verticales</b> de polo a polo. La longitud se mide desde Greenwich (0°): de <b>0° a 180°</b>, E u O. <em>Determina la hora.</em></p></div>
+    <div class="concept"><h4>Paralelos con nombre</h4><p>Ecuador 0° · Trópico de Cáncer 23°27′ N · Trópico de Capricornio 23°27′ S · Círculos polares 66°33′.</p></div>
+    <div class="concept"><h4>Altitud</h4><p>Altura sobre el nivel del mar. Junto con la latitud explica por qué en el trópico hay nieve (Pico de Orizaba) y por qué hace frío en Toluca.</p></div>
+    <div class="concept"><h4>Movimientos de la Tierra</h4><p><b>Rotación</b> (24 h, sobre su eje) → día y noche y los husos. <b>Traslación</b> (365 días, alrededor del Sol) → estaciones, junto con la inclinación de 23°27′.</p></div>
+    <div class="concept"><h4>Escala del mapa</h4><p>1:50 000 significa que 1 cm del mapa son 50 000 cm (500 m) reales. <em>Número grande = escala pequeña = menos detalle.</em></p></div>
+  </div>
+
+  <h3 class="sec">Datos y cálculos</h3>
+  <div class="fgrid">
+    <div class="card"><div class="name">Cuántos husos hay y de cuánto es cada uno</div><div class="fbody">
+      <div class="dato"><span class="big">24 husos · 15° cada uno · 1 hora cada uno</span></div></div>
+      <div class="leg">Sale de repartir los 360° de la vuelta completa entre las horas del día. <b>Pista:</b> son tres números ligados.</div>
+      <details class="why"><summary>En palabras</summary><div class="why-body">La Tierra da una vuelta completa (360°) en 24 horas, así que en una hora gira 15°. Por eso el mundo se partió en 24 gajos de 15° y cada gajo tiene su hora.</div></details></div>
+
+    <div class="card"><div class="name">Cómo se calcula la hora de otro lugar</div><div class="fbody">
+      <div class="dato"><span class="big">horas = longitud ÷ 15</span></div>
+      <div class="dato">Al <b>este</b> de Greenwich se <b>suma</b>; al <b>oeste</b> se <b>resta</b>.</div></div>
+      <div class="leg"><b>Pista:</b> el Sol sale primero por el este, así que allá van adelantados.</div>
+      <details class="why"><summary>En palabras</summary><div class="why-body">Ejemplo del examen muestra: en el huso 0° son las 20:00 y quieren la hora en Tijuana (120° <b>O</b>). 120 ÷ 15 = 8 horas; como es oeste, se restan: 20 − 8 = <b>12:00 h</b>.</div></details></div>
+
+    <div class="card"><div class="name">Meridiano de origen y línea del cambio de fecha</div><div class="fbody">
+      <div class="dato">Origen: <b>meridiano de Greenwich, 0°</b> (Londres).</div>
+      <div class="dato">Cambio de fecha: <b>meridiano 180°</b>, en el Pacífico.</div></div>
+      <div class="leg">Cruzándola hacia el <b>oeste</b> se gana un día; hacia el <b>este</b> se pierde.</div>
+      <details class="why"><summary>En palabras</summary><div class="why-body">Si vas sumando horas al dar la vuelta al mundo, en algún punto tienes que "reiniciar" el calendario. Ese punto es el meridiano 180°, escogido a propósito porque casi solo pasa por mar abierto.</div></details></div>
+
+    <div class="card"><div class="name">Husos horarios de México</div><div class="fbody">
+      <div class="dato"><b>Centro</b> (la mayor parte del país) · <b>Pacífico</b> (Sonora, Sinaloa, Nayarit, BCS, Chihuahua) · <b>Noroeste</b> (Baja California) · <b>Sureste</b> (Quintana Roo).</div></div>
+      <div class="leg"><b>Pista:</b> son 4, y el país se recorre de este a oeste restando horas.</div>
+      <details class="why"><summary>En palabras</summary><div class="why-body">Cancún va una hora adelante de la Ciudad de México y Tijuana dos horas atrás: en el mismo país puede haber tres horas de diferencia porque México es muy ancho en longitud.</div></details></div>
+
+    <div class="card"><div class="name">Cuánto mide un grado</div><div class="fbody">
+      <div class="dato"><span class="big">1° de latitud ≈ 111 km</span></div></div>
+      <div class="leg">En longitud ese valor solo se cumple en el Ecuador: hacia los polos los meridianos se juntan.</div>
+      <details class="why"><summary>En palabras</summary><div class="why-body">Los paralelos siempre están a la misma distancia entre sí, pero los meridianos se van cerrando como los gajos de una naranja hasta tocarse en los polos.</div></details></div>
+
+    <div class="card"><div class="name">Coordenadas de México</div><div class="fbody">
+      <div class="dato">Entre los <b>14° y 32° de latitud norte</b> y los <b>86° y 118° de longitud oeste</b>.</div></div>
+      <div class="leg">El <b>Trópico de Cáncer</b> lo parte por la mitad: al norte, seco; al sur, tropical.</div>
+      <details class="why"><summary>En palabras</summary><div class="why-body">Ese trópico atravesando el país explica de una sola vez los desiertos del norte y las selvas del sur. Es el dato de geografía física que más se conecta con lo demás.</div></details></div>
+  </div>
+
+  <div class="trap"><h4>Ojo en el examen</h4><ul>
+    <li>La <b>latitud</b> llega a 90°, la <b>longitud</b> a 180°. Si una opción dice "latitud 120°", está mal por definición.</li>
+    <li>Al oeste se <b>resta</b>. El error clásico es sumar y quedar en la hora de Europa.</li>
+    <li>La latitud manda en el <b>clima</b>; la longitud, en la <b>hora</b>. No los cambies.</li>
+  </ul></div>
+</section>
+
+<!-- ============ 2 · TIERRA DINÁMICA ============ -->
+<section class="panel" data-num="2" data-short="Tectónica y relieve">
+  <div class="panel-head">
+    <div class="u">Unidad 1 · La Tierra</div>
+    <h2>Tectónica, relieve y zonas de riesgo</h2>
+    <p class="lead">Por qué tiembla donde tiembla y por qué la gente vive donde vive.</p>
+  </div>
+
+  <h3 class="sec">Conceptos clave</h3>
+  <div class="cgrid">
+    <div class="concept"><h4>Tectónica de placas</h4><p>La litósfera está partida en placas que flotan sobre el manto y se mueven. Donde chocan o se separan hay <b>sismos y volcanes</b>.</p></div>
+    <div class="concept"><h4>Los tres bordes</h4><p><b>Convergente</b>: chocan (subducción → fosas, cordilleras, volcanes). <b>Divergente</b>: se separan (dorsales oceánicas). <b>Transformante</b>: se rozan de lado (falla de San Andrés).</p></div>
+    <div class="concept"><h4>Fuerzas internas y externas</h4><p>Internas (<b>endógenas</b>): tectonismo, vulcanismo, sismos — <em>construyen</em> el relieve. Externas (<b>exógenas</b>): erosión del agua, viento y hielo — <em>lo desgastan</em>.</p></div>
+    <div class="concept"><h4>Relieve y población</h4><p>La gente se concentra en <b>llanuras y mesetas</b> de clima templado: son planas, tienen suelo fértil y se puede construir y transportar. Las montañas altas y los desiertos quedan casi vacíos.</p></div>
+    <div class="concept"><h4>Sismo vs. temblor de tierra</h4><p><b>Epicentro</b>: punto en la superficie. <b>Hipocentro o foco</b>: donde de verdad se origina, bajo tierra. Escala de <b>Richter</b> = magnitud (energía); <b>Mercalli</b> = intensidad (daños).</p></div>
+    <div class="concept"><h4>Ciclones</h4><p>Se forman sobre mar caliente (más de 26 °C), de junio a noviembre. Entran a México por el <b>Golfo/Caribe</b> y por el <b>Pacífico</b>. Traen viento, lluvia y marea de tormenta.</p></div>
+  </div>
+
+  <h3 class="sec">Datos que se preguntan</h3>
+  <div class="fgrid">
+    <div class="card"><div class="name">Las placas que afectan a México</div><div class="fbody">
+      <div class="dato"><b>Norteamericana</b> (sobre ella está casi todo el país) · <b>Cocos</b> · <b>Rivera</b> · <b>Pacífica</b> (Baja California) · <b>del Caribe</b> (sur de Chiapas).</div></div>
+      <div class="leg"><b>Pista:</b> son 5 y solo una carga con el territorio.</div>
+      <details class="why"><summary>En palabras</summary><div class="why-body">México está justo en la orilla de una placa, que es el peor lugar para vivir si hablamos de sismos y el mejor si hablamos de suelos volcánicos fértiles.</div></details></div>
+
+    <div class="card"><div class="name">Qué choque provoca los sismos de México y a quién afecta</div><div class="fbody">
+      <div class="dato">La placa de <b>Cocos</b> se mete (subduce) bajo la <b>Norteamericana</b>.</div>
+      <div class="dato">Estados más afectados: <b>Michoacán, Guerrero y Oaxaca</b> (también Colima, Jalisco y Chiapas).</div></div>
+      <div class="leg"><b>Pista:</b> la costa del <b>Pacífico sur</b>. Esta pregunta cayó tal cual en el examen muestra.</div>
+      <details class="why"><summary>En palabras</summary><div class="why-body">Cocos empuja desde el Pacífico y se hunde bajo el continente. Esa fricción es la que suelta los sismos grandes: 1985 (Michoacán) y 2017 llegaron a la Ciudad de México desde ahí.</div></details></div>
+
+    <div class="card"><div class="name">Por qué la CDMX se sacude tanto sin estar en la costa</div><div class="fbody">
+      <div class="dato">Está sobre el <b>lecho de un lago</b>: suelo blando que <b>amplifica</b> las ondas sísmicas.</div></div>
+      <div class="leg">El sismo nace lejos, pero el suelo lo multiplica.</div>
+      <details class="why"><summary>En palabras</summary><div class="why-body">Es como sacudir una gelatina: la misma sacudida que apenas mueve una mesa de piedra hace temblar mucho más lo que está encima de algo blando.</div></details></div>
+
+    <div class="card"><div class="name">Cinturón de Fuego del Pacífico</div><div class="fbody">
+      <div class="dato">Anillo alrededor del Pacífico donde ocurren cerca del <b>80 % de los sismos</b> y está la mayoría de los volcanes activos.</div></div>
+      <div class="leg">Pasa por Chile, México, EUA, Japón, Filipinas e Indonesia.</div>
+      <details class="why"><summary>En palabras</summary><div class="why-body">Es el borde de la placa del Pacífico, que va chocando con todas las de alrededor. Por eso México y Japón comparten el mismo problema aunque estén en lados opuestos del océano.</div></details></div>
+
+    <div class="card"><div class="name">Eje Neovolcánico</div><div class="fbody">
+      <div class="dato">Franja de volcanes que cruza México de <b>oeste a este</b>, del Nevado de Colima al Pico de Orizaba, pasando por el Popocatépetl y el Iztaccíhuatl.</div></div>
+      <div class="leg">Ahí están las <b>cumbres más altas</b> y la mayor concentración de población.</div>
+      <details class="why"><summary>En palabras</summary><div class="why-body">Es la parte más peligrosa y a la vez la más poblada del país: las cenizas volcánicas dejaron los mejores suelos, y ahí crecieron la CDMX, Puebla, Toluca y Guadalajara.</div></details></div>
+
+    <div class="card"><div class="name">Las cumbres más altas de México</div><div class="fbody">
+      <div class="dato"><b>Pico de Orizaba o Citlaltépetl</b> (5 610 m) · <b>Popocatépetl</b> (5 452 m) · <b>Iztaccíhuatl</b> (5 286 m).</div></div>
+      <div class="leg"><b>Pista:</b> las tres están en el Eje Neovolcánico y las tres pasan de 5 000 m.</div>
+      <details class="why"><summary>En palabras</summary><div class="why-body">El Pico de Orizaba está en pleno trópico y tiene nieve todo el año: eso es la altitud ganándole a la latitud.</div></details></div>
+
+    <div class="card"><div class="name">Grandes formas del relieve mundial</div><div class="fbody">
+      <div class="dato"><b>Montañas:</b> Himalaya (Everest, 8 848 m), Andes (la más larga), Rocallosas, Alpes.</div>
+      <div class="dato"><b>Llanuras:</b> Amazónica, del Misisipi, Europea, Siberiana. <b>Mesetas:</b> Tibet, Brasil, Anahuac.</div></div>
+      <div class="leg">Pista: van en tres grupos —montañas, llanuras y mesetas— y de cada uno hay cuatro. Las cadenas jóvenes salen todas de un choque de placas.</div>
+      <details class="why"><summary>En palabras</summary><div class="why-body">Toda cordillera grande es una cicatriz de un choque de placas. Si en el mapa ves una cadena de montañas junto a la costa, casi seguro hay una fosa oceánica enfrente.</div></details></div>
+
+    <div class="card"><div class="name">Relieve de México</div><div class="fbody">
+      <div class="dato">Sierra Madre <b>Occidental</b> (oeste) · Sierra Madre <b>Oriental</b> (este) · <b>Altiplano Mexicano</b> entre las dos · Sierra Madre del <b>Sur</b> · <b>Península de Yucatán</b>, plana y caliza.</div></div>
+      <div class="leg"><b>Pista:</b> dos sierras encerrando una meseta, como un taco.</div>
+      <details class="why"><summary>En palabras</summary><div class="why-body">Ese "taco" es la razón de que México sea tan seco por dentro: las sierras detienen la humedad que viene de los dos océanos y el altiplano se queda con las sobras.</div></details></div>
+  </div>
+
+  <div class="trap"><h4>Ojo en el examen</h4><ul>
+    <li>El sismo se origina en el <b>hipocentro</b> (bajo tierra); el epicentro es solo su proyección arriba.</li>
+    <li><b>Richter mide energía, Mercalli mide daños.</b> Un sismo tiene una sola magnitud pero muchas intensidades.</li>
+    <li>Las poblaciones grandes se asientan en <b>llanuras y mesetas</b>, no en montañas: si una opción dice montaña alta, sospecha.</li>
+  </ul></div>
+</section>
+
+<!-- ============ 3 · AGUA ============ -->
+<section class="panel" data-num="3" data-short="Agua y mares">
+  <div class="panel-head">
+    <div class="u">Unidad 1 · La Tierra</div>
+    <h2>El agua: ríos, mares y corrientes</h2>
+    <p class="lead">El recurso que decide dónde hay ciudades, pesca y sequía.</p>
+  </div>
+
+  <h3 class="sec">Conceptos clave</h3>
+  <div class="cgrid">
+    <div class="concept"><h4>Ciclo hidrológico</h4><p>Evaporación → condensación → precipitación → escurrimiento/infiltración. Enlaza <b>hidrósfera, atmósfera, litósfera y biósfera</b>: por eso el agua es el hilo que conecta todo el sistema.</p></div>
+    <div class="concept"><h4>Cuánta agua es dulce</h4><p>Solo el <b>2.5 %</b> del agua del planeta, y la mayor parte está congelada en glaciares. Disponible de verdad, menos del 1 %.</p></div>
+    <div class="concept"><h4>Aguas subterráneas</h4><p>Los <b>acuíferos</b> abastecen a buena parte de México. Si se extrae más de lo que se recarga hay <b>sobreexplotación</b> y el suelo se hunde (CDMX).</p></div>
+    <div class="concept"><h4>Corrientes marinas</h4><p><b>Cálidas</b> (van del Ecuador a los polos): llevan lluvia y suavizan inviernos. <b>Frías</b> (van de los polos al Ecuador): traen nutrientes y generan <b>desiertos costeros</b>.</p></div>
+    <div class="concept"><h4>Mareas</h4><p>Subida y bajada del mar por la atracción de la <b>Luna</b> (y el Sol). Se aprovechan para generar <b>energía mareomotriz</b>.</p></div>
+    <div class="concept"><h4>Plataforma continental</h4><p>La orilla poco profunda del mar. Ahí está casi toda la <b>pesca comercial</b> y también el <b>petróleo marino</b>.</p></div>
+  </div>
+
+  <h3 class="sec">Datos que se preguntan</h3>
+  <div class="fgrid">
+    <div class="card"><div class="name">Río más largo y río más caudaloso del mundo</div><div class="fbody">
+      <div class="dato">Más largo: <b>Nilo</b> (África) · Más caudaloso: <b>Amazonas</b> (Sudamérica).</div></div>
+      <div class="leg">Uno gana por kilómetros y el otro por litros: son dos ríos distintos y de continentes distintos.</div>
+      <details class="why"><summary>En palabras</summary><div class="why-body">Largo y caudaloso no son lo mismo: el Nilo es larguísimo pero atraviesa desierto y va perdiendo agua; el Amazonas es más corto pero recibe lluvia de selva todo el año.</div></details></div>
+
+    <div class="card"><div class="name">El río que comunica Moscú con el mar Caspio</div><div class="fbody">
+      <div class="dato"><span class="big">Volga</span></div></div>
+      <div class="leg">El <b>más largo de Europa</b>. Ojo: desemboca en un mar que en realidad es un <b>lago</b> cerrado.</div>
+      <details class="why"><summary>En palabras</summary><div class="why-body">Pregunta literal del examen muestra. Truco para no confundirlo: el Volga es ruso y "vuelve" al Caspio; el Ural también es ruso pero es el que marca la frontera Europa–Asia.</div></details></div>
+
+    <div class="card"><div class="name">Ríos grandes por continente</div><div class="fbody">
+      <div class="dato"><b>Asia:</b> Yangtsé, Amarillo, Ganges, Éufrates. <b>Europa:</b> Volga, Danubio, Rin.</div>
+      <div class="dato"><b>América:</b> Misisipi-Misuri, Amazonas, Paraná. <b>África:</b> Nilo, Congo, Níger.</div></div>
+      <div class="leg">Junto a los ríos grandes nacieron las civilizaciones y hoy están las mayores concentraciones de población.</div>
+      <details class="why"><summary>En palabras</summary><div class="why-body">La regla que sirve para todo el examen: agua + terreno plano = gente. Casi todas las megaciudades del mundo están sobre un río o en la costa.</div></details></div>
+
+    <div class="card"><div class="name">Ríos y lago de México</div><div class="fbody">
+      <div class="dato">Más largo: <b>Bravo</b> (frontera con EUA). Más caudaloso: <b>Grijalva-Usumacinta</b> (Chiapas y Tabasco).</div>
+      <div class="dato">Otros: Lerma-Santiago, Balsas, Pánuco, Papaloapan. Lago más grande: <b>Chapala</b>.</div></div>
+      <div class="leg"><b>Pista:</b> el agua está en el sureste; la gente y la industria, en el centro y el norte.</div>
+      <details class="why"><summary>En palabras</summary><div class="why-body">Ese desajuste es el gran problema hídrico de México: el sur tiene casi toda el agua y poca población, y el norte y el centro tienen la mayoría de la población con poca agua.</div></details></div>
+
+    <div class="card"><div class="name">Corrientes frías y pesca</div><div class="fbody">
+      <div class="dato">Frías: <b>Humboldt o del Perú, California, Canarias, Benguela, Labrador, Oyashio</b>.</div>
+      <div class="dato">Suben nutrientes del fondo (<b>afloramiento</b>) → grandes <b>bancos de pesca</b>.</div></div>
+      <div class="leg">Pista: son seis, y todas producen el mismo efecto en la costa que tocan.</div>
+      <details class="why"><summary>En palabras</summary><div class="why-body">El agua fría trae del fondo el "abono" del mar; con él crece el plancton, y donde hay plancton hay peces. Por eso las mejores pesquerías del mundo están sobre corrientes frías.</div></details></div>
+
+    <div class="card"><div class="name">Corrientes frías y desiertos costeros</div><div class="fbody">
+      <div class="dato">Enfrían el aire, impiden que se evapore agua y <b>frenan la lluvia</b>: desierto de <b>Atacama</b> (Humboldt), <b>Namib</b> (Benguela), <b>Sahara</b> occidental (Canarias) y <b>Baja California</b> (corriente de California).</div></div>
+      <div class="leg"><b>Pista:</b> desierto pegado al mar = corriente fría enfrente.</div>
+      <details class="why"><summary>En palabras</summary><div class="why-body">Parece contradictorio tener un desierto junto al océano, pero el aire frío no carga humedad: se queda como neblina y nunca llueve. Atacama es el lugar más seco del planeta y está en la costa.</div></details></div>
+
+    <div class="card"><div class="name">Corrientes cálidas</div><div class="fbody">
+      <div class="dato"><b>Corriente del Golfo</b> (templa el noroeste de Europa), <b>Kuroshio</b> (Japón), <b>del Brasil</b>, <b>Ecuatoriales</b>.</div></div>
+      <div class="leg">Gracias a una de ellas, Londres y Oslo no tienen inviernos como los de Canadá.</div>
+      <details class="why"><summary>En palabras</summary><div class="why-body">Es el mejor ejemplo de cómo el mar decide el clima: dos ciudades a la misma latitud pueden tener climas muy distintos según qué corriente les pase enfrente.</div></details></div>
+
+    <div class="card"><div class="name">Riqueza del mar</div><div class="fbody">
+      <div class="dato"><b>Pesqueros:</b> bancos de especies de aguas frías (sardina, anchoveta, bacalao) y cálidas (atún, camarón).</div>
+      <div class="dato"><b>Minerales:</b> petróleo y gas de la plataforma, sal y <b>nódulos polimetálicos</b> del fondo.</div></div>
+      <div class="leg">México: la principal zona petrolera está en la <b>Sonda de Campeche</b>.</div>
+      <details class="why"><summary>En palabras</summary><div class="why-body">El mar no solo da pescado: la mayor parte del petróleo mexicano sale de plataformas marinas frente a Campeche y Tabasco.</div></details></div>
+  </div>
+
+  <div class="trap"><h4>Ojo en el examen</h4><ul>
+    <li>Si la pregunta dice "más caudaloso" no contestes Nilo; si dice "más largo" no contestes Amazonas.</li>
+    <li>Las corrientes <b>frías</b> son las de la pesca y los desiertos; las <b>cálidas</b>, las de la lluvia y los inviernos suaves.</li>
+    <li>El Caspio y el Mar Muerto son <b>lagos salados</b>, no mares.</li>
+  </ul></div>
+</section>
+
+<!-- ============ 4 · REGIONES NATURALES Y AMBIENTE ============ -->
+<section class="panel" data-num="4" data-short="Regiones y ambiente">
+  <div class="panel-head">
+    <div class="u">Unidad 2 · Geografía humana</div>
+    <h2>Regiones naturales, recursos y deterioro ambiental</h2>
+    <p class="lead">Dónde están los recursos, cómo los usamos y qué se está rompiendo.</p>
+  </div>
+
+  <h3 class="sec">Conceptos clave</h3>
+  <div class="cgrid">
+    <div class="concept"><h4>Región natural</h4><p>Zona con clima, vegetación, fauna y suelo propios. La define sobre todo la <b>latitud</b>, corregida por la altitud y la cercanía al mar.</p></div>
+    <div class="concept"><h4>Recursos renovables</h4><p>Se regeneran: agua, bosques, suelo, pesca, viento, sol. <em>Ojo: se agotan igual si se explotan más rápido de lo que se recuperan.</em></p></div>
+    <div class="concept"><h4>Recursos no renovables</h4><p>No se regeneran en escala humana: <b>petróleo, gas, carbón y minerales</b>. Son la base de la industria pesada y de los conflictos por territorio.</p></div>
+    <div class="concept"><h4>Desarrollo sustentable</h4><p>Satisfacer las necesidades de hoy <b>sin comprometer</b> las de las generaciones futuras. Es la definición que suelen pedir tal cual.</p></div>
+    <div class="concept"><h4>Efecto invernadero</h4><p>Gases (CO₂, metano) retienen el calor en la parte <b>baja</b> de la atmósfera. Es natural y necesario; el problema es que lo <b>aumentamos</b> quemando combustibles fósiles.</p></div>
+    <div class="concept"><h4>Capa de ozono</h4><p>Está en la <b>estratósfera</b> y filtra los rayos ultravioleta. La adelgazan los <b>CFC</b>. Problema <em>distinto</em> del cambio climático.</p></div>
+  </div>
+
+  <h3 class="sec">Datos que se preguntan</h3>
+  <div class="fgrid">
+    <div class="card"><div class="name">Las regiones naturales y dónde están</div><div class="fbody">
+      <div class="dato"><ul>
+        <li><b>Selva</b> — cerca del Ecuador, lluvia todo el año: Amazonia, Congo, Sudeste asiático.</li>
+        <li><b>Sabana</b> — pasto y lluvia estacional: África oriental, llanos de Venezuela.</li>
+        <li><b>Desierto</b> — sobre los trópicos, 30°: Sahara, Arábigo, Gobi, Atacama, Sonora.</li>
+        <li><b>Bosque templado</b> y <b>mediterráneo</b> — latitudes medias.</li>
+        <li><b>Pradera o estepa</b> — el granero del mundo: EUA, Ucrania, Argentina.</li>
+        <li><b>Taiga</b> — bosque de coníferas: Canadá, Siberia. <b>Tundra</b> — musgos, suelo helado.</li>
+      </ul></div></div>
+      <div class="leg"><b>Pista:</b> son seis y van en orden, del Ecuador al polo. Recítalas en ese orden.</div>
+      <details class="why"><summary>En palabras</summary><div class="why-body">No hay que memorizarlas sueltas: son una escalera desde el Ecuador hasta el polo. Si sabes en qué latitud está un lugar, ya casi sabes qué región natural le toca.</div></details></div>
+
+    <div class="card"><div class="name">Para qué sirve cada mineral</div><div class="fbody">
+      <div class="dato"><b>Carbón</b> e <b>hierro</b> → <b>industria pesada</b> (acero). <b>Cobre</b> → cables y electricidad. <b>Aluminio (bauxita)</b> → transporte y envases. <b>Plata</b> → joyería y electrónica. <b>Uranio</b> → energía nuclear.</div></div>
+      <div class="leg"><b>Pista:</b> en el examen muestra preguntaron cuál <em>sirve para la industria pesada</em>.</div>
+      <details class="why"><summary>En palabras</summary><div class="why-body">La industria pesada es la que hace acero, maquinaria y barcos, y necesita muchísima energía: por eso las grandes zonas siderúrgicas nacieron pegadas a las minas de carbón.</div></details></div>
+
+    <div class="card"><div class="name">Los grandes problemas ambientales y su causa</div><div class="fbody">
+      <div class="dato"><ul>
+        <li><b>Cambio climático</b> ← CO₂ de combustibles fósiles y deforestación.</li>
+        <li><b>Adelgazamiento del ozono</b> ← CFC de aerosoles y refrigeración.</li>
+        <li><b>Lluvia ácida</b> ← azufre y nitrógeno de la industria.</li>
+        <li><b>Desertificación</b> ← sobrepastoreo, tala y mal riego.</li>
+        <li><b>Marea negra</b> ← derrames en la explotación y el transporte de petróleo.</li>
+      </ul></div></div>
+      <div class="leg">Cada uno tiene su gas y su culpable: no los mezcles.</div>
+      <details class="why"><summary>En palabras</summary><div class="why-body">El error más común del examen es contestar "capa de ozono" cuando hablan de calentamiento. Son dos capas distintas de la atmósfera y dos gases distintos: CO₂ abajo, CFC arriba.</div></details></div>
+
+    <div class="card"><div class="name">Acuerdos ambientales que hay que ubicar</div><div class="fbody">
+      <div class="dato"><b>Protocolo de Montreal</b> (1987) → CFC y ozono. <b>Cumbre de Río</b> (1992) → desarrollo sustentable. <b>Protocolo de Kioto</b> (1997) y <b>Acuerdo de París</b> (2015) → gases de efecto invernadero.</div></div>
+      <div class="leg">Uno va del ozono y los otros del clima. <b>Pista:</b> el del ozono es el más viejo y el único que sí funcionó.</div>
+      <details class="why"><summary>En palabras</summary><div class="why-body">Montreal es el único acuerdo ambiental que de verdad funcionó: el agujero de ozono se está cerrando. Kioto y París van sobre el clima y avanzan mucho más lento.</div></details></div>
+
+    <div class="card"><div class="name">El agua: quién la gasta</div><div class="fbody">
+      <div class="dato"><b>Agricultura ≈ 70 %</b> · industria ≈ 20 % · uso doméstico ≈ 10 %.</div></div>
+      <div class="leg"><b>Pista:</b> los tres usos suman 100 % y uno solo se lleva la mayor parte.</div>
+      <details class="why"><summary>En palabras</summary><div class="why-body">Sirve para descartar opciones: si preguntan quién consume o desperdicia más agua, la respuesta casi siempre es la actividad agropecuaria, no las casas.</div></details></div>
+
+    <div class="card"><div class="name">Regiones naturales de México</div><div class="fbody">
+      <div class="dato"><b>Norte:</b> desierto y estepa. <b>Sureste:</b> selva húmeda. <b>Sierras:</b> bosque templado de pino y encino. <b>Costas:</b> selva baja y manglar.</div></div>
+      <div class="leg">México es <b>megadiverso</b>: está entre los primeros países del mundo en número de especies.</div>
+      <details class="why"><summary>En palabras</summary><div class="why-body">Esa variedad viene de tener el trópico atravesado, dos océanos y montañas altas: en pocas horas se pasa del desierto a la selva.</div></details></div>
+  </div>
+
+  <div class="trap"><h4>Ojo en el examen</h4><ul>
+    <li><b>Efecto invernadero ≠ capa de ozono.</b> Es el error clásico y siempre ponen las dos como opciones.</li>
+    <li>Renovable no significa inagotable: un bosque o una pesquería se acaban si se explotan de más.</li>
+    <li>Las regiones naturales se acomodan por <b>latitud</b>; la altitud las repite en vertical dentro de una montaña.</li>
+  </ul></div>
+</section>
+
+<!-- ============ 5 · POBLACIÓN ============ -->
+<section class="panel" data-num="5" data-short="Población y migración" data-foco="1">
+  <div class="panel-head">
+    <div class="u">Unidad 2 · Geografía humana <b style="color:var(--M)">· foco</b></div>
+    <h2>Población y movimientos migratorios</h2>
+    <p class="lead">Dónde está la gente, por qué crece y por qué se mueve. Aquí empieza la parte social del examen.</p>
+  </div>
+
+  <h3 class="sec">Conceptos clave</h3>
+  <div class="cgrid">
+    <div class="concept"><h4>Densidad de población</h4><p>Habitantes ÷ km². Dice qué tan apretada vive la gente, no cuánta hay. <em>Mónaco es densísimo y minúsculo; Canadá es enorme y casi vacío.</em></p></div>
+    <div class="concept"><h4>Crecimiento natural</h4><p><b>Natalidad − mortalidad</b>. Si además cuentas migración, tienes el crecimiento <b>total</b> o real.</p></div>
+    <div class="concept"><h4>Transición demográfica</h4><p>El paso de <b>mucha natalidad y mucha mortalidad</b> (país pobre y rural) a <b>poca y poca</b> (país desarrollado). En medio se dispara la población: es la <b>explosión demográfica</b>.</p></div>
+    <div class="concept"><h4>Pirámide de población</h4><p><b>Ancha abajo</b> = población joven, país subdesarrollado. <b>Angosta abajo y ancha arriba</b> = población envejecida, país desarrollado (Japón, Alemania).</p></div>
+    <div class="concept"><h4>Migración: emigrar / inmigrar</h4><p><b>Emigra</b> el que sale, <b>inmigra</b> el que llega. La misma persona es emigrante allá e inmigrante acá.</p></div>
+    <div class="concept"><h4>Factores de expulsión y atracción</h4><p><b>Expulsan:</b> desempleo, pobreza, guerra, desastres. <b>Atraen:</b> trabajo, salarios, seguridad, servicios. <em>La causa dominante es la económica.</em></p></div>
+  </div>
+
+  <h3 class="sec">Datos que se preguntan</h3>
+  <div class="fgrid ancha">
+    <div class="card"><div class="name">Dónde se concentra la población mundial</div><div class="fbody">
+      <div class="dato">Cuatro grandes concentraciones: <b>Asia oriental</b> (China, Japón, Corea), <b>Asia meridional</b> (India, Pakistán, Bangladesh), <b>Europa occidental</b> y el <b>noreste de Estados Unidos</b>.</div>
+      <div class="dato">Son <b>llanuras costeras y valles de ríos</b>, con clima templado y suelo fértil.</div></div>
+      <div class="leg"><b>Pista:</b> son cuatro zonas y más de la mitad de la humanidad vive en un solo continente. En total, cerca de <b>8 000 millones</b> de personas.</div>
+      <details class="why"><summary>En palabras</summary><div class="why-body">No es casualidad ni cultura: donde se puede sembrar y navegar, se junta la gente. Las cuatro concentraciones están sobre llanuras junto al agua.</div></details></div>
+
+    <div class="card"><div class="name">Los vacíos demográficos y por qué lo son</div><div class="fbody">
+      <div class="dato"><ul>
+        <li><b>Desiertos</b> — Sahara, Arábigo, Gobi, Atacama, Australia central: falta agua.</li>
+        <li><b>Selvas</b> — Amazonia, Congo: suelo pobre, calor y enfermedades.</li>
+        <li><b>Zonas polares y frías</b> — Groenlandia, Siberia, Canadá del norte, Antártida.</li>
+        <li><b>Altas montañas</b> — Himalaya, Andes altos: poco oxígeno y terreno imposible.</li>
+      </ul></div></div>
+      <div class="leg"><b>Pista:</b> son cuatro y todos son climas o relieves <b>extremos</b>.</div>
+      <details class="why"><summary>En palabras</summary><div class="why-body">Si en el examen te dan un lugar y preguntan por qué está despoblado, la respuesta casi siempre es una de estas cuatro: demasiado seco, demasiado húmedo y caliente, demasiado frío o demasiado alto.</div></details></div>
+
+    <div class="card"><div class="name">Migración sur–norte: qué es y por qué pasa</div><div class="fbody">
+      <div class="dato">Va de países <b>subdesarrollados a desarrollados</b>: México y Centroamérica → EUA; norte de África y Medio Oriente → Europa; sur y sureste de Asia → Golfo Pérsico.</div>
+      <div class="dato"><b>Causa:</b> la brecha económica. Los países ricos <b>demandan mano de obra</b>, sobre todo <b>no especializada</b> y barata, para el campo, la construcción y los servicios.</div></div>
+      <div class="leg">Es la pregunta del examen muestra: <em>por qué</em> los países desarrollados reciben tantos inmigrantes. La respuesta es económica, no cultural.</div>
+      <details class="why"><summary>En palabras</summary><div class="why-body">El país rico tiene población envejecida y nadie que quiera hacer los trabajos duros y mal pagados; el país pobre tiene población joven sin empleo. La migración es esas dos piezas embonando.</div></details></div>
+
+    <div class="card"><div class="name">Consecuencias de la migración internacional</div><div class="fbody">
+      <div class="dato"><b>Para el país que expulsa:</b> entran <b>remesas</b>, baja la presión de desempleo, pero se va la población joven y productiva (<b>fuga de cerebros</b> si son profesionistas) y se desintegran las familias.</div>
+      <div class="dato"><b>Para el que recibe:</b> mano de obra barata, rejuvenece su población; pero hay <b>xenofobia</b>, presión sobre servicios y trabajo informal.</div></div>
+      <div class="leg">Cada lado gana algo y pierde algo: piensa primero en el dinero y luego en la gente.</div>
+      <details class="why"><summary>En palabras</summary><div class="why-body">Las remesas se ven como algo bueno, y sostienen a millones de familias, pero son la otra cara de perder a la gente en edad de trabajar: el país exporta jóvenes e importa dólares.</div></details></div>
+
+    <div class="card"><div class="name">Migración campo–ciudad</div><div class="fbody">
+      <div class="dato">Movimiento <b>interno o nacional</b>, del medio rural al urbano, por falta de empleo y de servicios en el campo.</div>
+      <div class="dato"><b>Consecuencias:</b> crecimiento desordenado, <b>cinturones de miseria</b>, servicios rebasados, abandono del campo y <b>macrocefalia urbana</b> (una ciudad enorme y el resto chicas).</div></div>
+      <div class="leg">En México: hacia la <b>Zona Metropolitana del Valle de México</b>, Monterrey, Guadalajara y la <b>frontera norte</b>.</div>
+      <details class="why"><summary>En palabras</summary><div class="why-body">México pasó de ser rural a ser urbano en dos generaciones: hoy cerca de 8 de cada 10 personas viven en ciudades. Todos los problemas de vivienda y transporte de las grandes ciudades vienen de ahí.</div></details></div>
+
+    <div class="card"><div class="name">Causas y consecuencias del crecimiento acelerado</div><div class="fbody">
+      <div class="dato"><b>Causas:</b> baja la mortalidad (medicina, vacunas, agua potable) mientras la natalidad sigue alta.</div>
+      <div class="dato"><b>Consecuencias:</b> presión sobre alimentos, agua y suelo; desempleo; servicios insuficientes; deterioro ambiental; más migración.</div></div>
+      <div class="leg"><b>Pista:</b> de los dos indicadores, uno se desploma mucho antes que el otro. Ese desfase es toda la explicación.</div>
+      <details class="why"><summary>En palabras</summary><div class="why-body">La explosión demográfica no fue porque la gente empezara a tener más hijos, sino porque dejaron de morirse los niños. La natalidad tarda una o dos generaciones en bajar, y ese desfase es el que multiplica la población.</div></details></div>
+
+    <div class="card"><div class="name">Población de México</div><div class="fbody">
+      <div class="dato">Cerca de <b>130 millones</b> de habitantes. Entidades más pobladas: <b>Estado de México, Ciudad de México, Jalisco y Veracruz</b>. Menos pobladas: <b>Colima, Baja California Sur, Campeche</b>.</div>
+      <div class="dato">Concentración en el <b>centro</b> del país; vacíos en el <b>norte desértico</b> y en las sierras.</div></div>
+      <div class="leg">El censo lo levanta el <b>INEGI</b> cada 10 años (el último, 2020).</div>
+      <details class="why"><summary>En palabras</summary><div class="why-body">México repite en pequeño el patrón mundial: la gente en el altiplano templado y con agua, y los desiertos del norte casi vacíos salvo por las ciudades de la frontera, que crecieron por la industria maquiladora.</div></details></div>
+
+    <div class="card"><div class="name">Pirámide de población de México hoy</div><div class="fbody">
+      <div class="dato">Ya no es un triángulo ancho: la base se está <b>angostando</b> y crece la parte media. México está en plena <b>transición demográfica</b>, con un <b>bono demográfico</b> (mucha población en edad de trabajar) que se acabará hacia la mitad del siglo.</div></div>
+      <div class="leg">La esperanza de vida ronda los <b>75 años</b> y la natalidad bajó de 7 hijos por mujer a cerca de 2.</div>
+      <details class="why"><summary>En palabras</summary><div class="why-body">Es la ventana en la que hay más gente trabajando que dependiendo. Si no se aprovecha con empleo y educación, el país llega viejo antes de llegar rico.</div></details></div>
+  </div>
+
+  <div class="trap"><h4>Ojo en el examen</h4><ul>
+    <li><b>Emigrante</b> es el que se va; <b>inmigrante</b> el que llega. Lee bien de qué país habla la pregunta.</li>
+    <li>Sur–norte = <b>internacional</b>. Campo–ciudad = <b>nacional o interna</b>. Suelen ponerlas juntas para confundir.</li>
+    <li>Los desarrollados atraen migrantes por <b>necesidad de mano de obra</b>, no por generosidad ni por parecido cultural.</li>
+    <li>Alta densidad no significa mucha población: es población <b>por kilómetro cuadrado</b>.</li>
+  </ul></div>
+</section>
+
+<!-- ============ 6 · ECONOMÍA MUNDIAL ============ -->
+<section class="panel" data-num="6" data-short="Economía mundial" data-foco="1">
+  <div class="panel-head">
+    <div class="u">Unidad 2 · Geografía humana <b style="color:var(--M)">· foco</b></div>
+    <h2>La economía mundial y la globalización</h2>
+    <p class="lead">Desarrollados contra subdesarrollados, los indicadores que lo miden y quién manda en el dinero.</p>
+  </div>
+
+  <h3 class="sec">Conceptos clave</h3>
+  <div class="cgrid">
+    <div class="concept"><h4>Los tres sectores</h4><p><b>Primario:</b> sacar de la naturaleza (agricultura, ganadería, pesca, minería). <b>Secundario:</b> transformar (industria, construcción). <b>Terciario:</b> servicios (comercio, transporte, turismo, banca).</p></div>
+    <div class="concept"><h4>Cómo se reconoce a un país desarrollado</h4><p>Predomina el sector <b>terciario</b>, luego el secundario. En los subdesarrollados pesa mucho el <b>primario</b>. <em>Regla rápida de todo el examen.</em></p></div>
+    <div class="concept"><h4>Globalización</h4><p>Integración mundial de mercados, producción, capitales y comunicaciones. La empujan las <b>transnacionales</b>, la tecnología y los acuerdos de libre comercio.</p></div>
+    <div class="concept"><h4>Transnacional</h4><p>Empresa con matriz en un país y filiales en muchos. Busca <b>mano de obra barata</b> e impuestos bajos; su ganancia regresa al país de origen.</p></div>
+    <div class="concept"><h4>Maquiladora</h4><p>Planta que <b>ensambla</b> con partes importadas y reexporta. Da empleo pero deja poco valor agregado. En México, sobre todo en la <b>frontera norte</b>.</p></div>
+    <div class="concept"><h4>Norte y Sur</h4><p>Nombre corto de la brecha: el <b>Norte</b> desarrollado (Norteamérica, Europa, Japón, Australia) y el <b>Sur</b> subdesarrollado (América Latina, África, buena parte de Asia).</p></div>
+  </div>
+
+  <h3 class="sec">Datos que se preguntan</h3>
+  <div class="fgrid ancha">
+    <div class="card"><div class="name">Los indicadores socioeconómicos y qué mide cada uno</div><div class="fbody">
+      <div class="dato"><ul>
+        <li><b>PIB per cápita</b> — riqueza producida por habitante. Alto en desarrollados.</li>
+        <li><b>Esperanza de vida</b> — años que se espera vivir. Alta en desarrollados.</li>
+        <li><b>Alfabetismo y escolaridad</b> — educación. Alta en desarrollados.</li>
+        <li><b>Natalidad y mortalidad infantil</b> — <b>altas</b> en subdesarrollados.</li>
+        <li><b>IDH</b> — Índice de Desarrollo Humano (ONU): junta <b>salud, educación e ingreso</b> en un solo número de 0 a 1.</li>
+      </ul></div></div>
+      <div class="leg"><b>Pista:</b> son cinco. Casi todos suben con el desarrollo, pero dos <b>bajan</b>.</div>
+      <details class="why"><summary>En palabras</summary><div class="why-body">Si te dan una tabla y preguntan cuál país está más desarrollado, busca el que tenga <b>poca</b> natalidad y mortalidad infantil y <b>mucha</b> esperanza de vida, alfabetismo e ingreso. El IDH es el resumen de todo eso.</div></details></div>
+
+    <div class="card"><div class="name">Contrastes: desarrollado vs. subdesarrollado</div><div class="fbody">
+      <div class="dato"><b>Desarrollado:</b> industria y servicios, alta tecnología, exporta manufacturas, población urbana y envejecida, recibe inmigrantes.</div>
+      <div class="dato"><b>Subdesarrollado:</b> depende de <b>materias primas</b>, tecnología importada, población joven y en crecimiento, expulsa migrantes, gran desigualdad y deuda externa.</div></div>
+      <div class="leg">El fondo del asunto: unos venden barato lo que sacan del suelo y compran caro lo que otros fabrican.</div>
+      <details class="why"><summary>En palabras</summary><div class="why-body">Ese intercambio desigual es la explicación clásica de por qué la brecha no se cierra sola: quien vende café y petróleo crudo gana poco; quien vende medicinas, aviones y software gana mucho.</div></details></div>
+
+    <div class="card"><div class="name">FMI, Banco Mundial y OMC</div><div class="fbody">
+      <div class="dato"><b>FMI</b> — estabiliza monedas y presta a países en crisis, a cambio de <b>condiciones</b> (ajuste, recorte del gasto). Nació en <b>Bretton Woods, 1944</b>; sede en Washington.</div>
+      <div class="dato"><b>Banco Mundial</b> — presta para proyectos de desarrollo. <b>OMC</b> (1995, antes GATT) — regula el comercio mundial; sede en Ginebra.</div></div>
+      <div class="leg">Los tres son los "árbitros" de la economía global y se los critica por favorecer a los países ricos.</div>
+      <details class="why"><summary>En palabras</summary><div class="why-body">El papel del FMI en el temario es justo ese: junto con las transnacionales, es el que impone las reglas del juego. Presta cuando un país no puede pagar, pero le dice cómo gastar.</div></details></div>
+
+    <div class="card"><div class="name">Conjunto de empresas que controla la producción y venta de un producto</div><div class="fbody">
+      <div class="dato"><span class="big">Oligopolio</span></div>
+      <div class="dato">Si es <b>una sola</b> empresa, es <b>monopolio</b>. Si son pocos <b>compradores</b>, oligopsonio.</div></div>
+      <div class="leg">Pregunta literal del examen muestra. <b>Pista:</b> el prefijo griego dice cuántas empresas son.</div>
+      <details class="why"><summary>En palabras</summary><div class="why-body">Un puñado de empresas se reparte el mercado mundial de algo —refrescos, chips, semillas— y entre ellas fijan el precio. No compiten de verdad, aunque parezca que sí.</div></details></div>
+
+    <div class="card"><div class="name">Efectos de la globalización</div><div class="fbody">
+      <div class="dato"><b>A favor:</b> más comercio y tecnología, productos baratos, comunicación instantánea, inversión extranjera.</div>
+      <div class="dato"><b>En contra:</b> más <b>desigualdad</b>, dependencia, pérdida de industrias locales y de identidad cultural, deterioro ambiental, crisis que se contagian de un país a otro.</div></div>
+      <div class="leg">La otra cara: se globalizan las mercancías y el capital, <b>no las personas</b> (las fronteras siguen cerradas para migrar).</div>
+      <details class="why"><summary>En palabras</summary><div class="why-body">Un tenis se diseña en EUA, se hace en Vietnam y se vende en México: eso es globalización. El dinero cruza fronteras en un segundo, pero el trabajador que lo cosió no puede cruzar ninguna.</div></details></div>
+
+    <div class="card"><div class="name">Las tres potencias que el temario nombra</div><div class="fbody">
+      <div class="dato"><b>Estados Unidos</b> (bloque americano), <b>Alemania</b> (bloque europeo) y <b>Japón</b> (bloque asiático).</div>
+      <div class="dato">Hoy hay que agregar a <b>China</b>, la segunda economía del mundo y la "fábrica" global.</div></div>
+      <div class="leg"><b>Pista:</b> la guía pide exactamente ese trío como líderes de los bloques regionales.</div>
+      <details class="why"><summary>En palabras</summary><div class="why-body">La guía es de un temario ya con años encima, así que si la pregunta habla de "liderazgo de los bloques", contesta EUA–Alemania–Japón aunque tú sepas que hoy China pesa más que Japón.</div></details></div>
+  </div>
+
+  <div class="trap"><h4>Ojo en el examen</h4><ul>
+    <li>La <b>minería</b> y la <b>pesca</b> son sector <b>primario</b>, no industria: es un error muy frecuente.</li>
+    <li>El IDH no es dinero: mezcla <b>salud, educación e ingreso</b>. El PIB per cápita sí es solo dinero.</li>
+    <li>El FMI <b>presta con condiciones</b>; el Banco Mundial financia proyectos; la OMC solo regula comercio.</li>
+  </ul></div>
+</section>
+
+<!-- ============ 7 · BLOQUES ============ -->
+<section class="panel" data-num="7" data-short="Bloques y organismos" data-foco="1">
+  <div class="panel-head">
+    <div class="u">Unidad 2 · Geografía humana <b style="color:var(--M)">· foco</b></div>
+    <h2>Bloques económicos y organismos internacionales</h2>
+    <p class="lead">Quién está con quién. Es el tema que más se pregunta con nombres y siglas.</p>
+  </div>
+
+  <h3 class="sec">Conceptos clave</h3>
+  <div class="cgrid">
+    <div class="concept"><h4>Bloque económico</h4><p>Grupo de países vecinos que bajan o quitan aranceles entre ellos para comerciar más. Buscan <b>competir juntos</b> frente a los otros bloques.</p></div>
+    <div class="concept"><h4>Los grados de integración</h4><p><b>Zona de libre comercio</b> (sin aranceles) → <b>unión aduanera</b> (además, arancel común hacia afuera) → <b>mercado común</b> (circulan personas y capitales) → <b>unión económica</b> (moneda y política común). <em>La UE llegó hasta el último; el T-MEC se quedó en el primero.</em></p></div>
+    <div class="concept"><h4>Arancel</h4><p>Impuesto a lo que entra de otro país. Quitarlo abarata las importaciones y presiona a la industria nacional.</p></div>
+    <div class="concept"><h4>Bloques de la Guerra Fría</h4><p><b>Occidental o capitalista</b>, con EUA y la <b>OTAN</b>. <b>Oriental o socialista</b>, con la URSS y el <b>Pacto de Varsovia</b>. En medio, los <b>No Alineados</b> (Bandung, 1955) o Tercer Mundo.</p></div>
+    <div class="concept"><h4>La ONU</h4><p>Fundada en <b>1945</b> tras la Segunda Guerra Mundial; sede en <b>Nueva York</b>; 193 miembros. Busca la paz, la seguridad y la cooperación.</p></div>
+    <div class="concept"><h4>Consejo de Seguridad</h4><p>5 miembros permanentes con <b>derecho de veto</b>: <b>EUA, Rusia, China, Reino Unido y Francia</b> (los vencedores de 1945).</p></div>
+  </div>
+
+  <h3 class="sec">Los bloques, uno por uno</h3>
+  <div class="fgrid ancha">
+    <div class="card"><div class="name">Unión Europea (UE)</div><div class="fbody">
+      <div class="dato">El bloque <b>más integrado</b> del mundo: <b>27 países</b> (tras la salida del Reino Unido, el <b>Brexit</b>, en 2020).</div>
+      <div class="dato">Nació como CEE con el <b>Tratado de Roma (1957)</b> y se volvió Unión Europea con el <b>Tratado de Maastricht (1992)</b>. Moneda común: el <b>euro</b>. Líder económico: <b>Alemania</b>.</div></div>
+      <div class="leg"><b>Pista:</b> un tratado la funda y otro le pone el nombre actual y la moneda. No todos los miembros usan esa moneda.</div>
+      <details class="why"><summary>En palabras</summary><div class="why-body">Es el único bloque donde de verdad se borraron las fronteras: se circula sin pasaporte, se trabaja en cualquier país miembro y se paga con la misma moneda. Por eso se usa como ejemplo máximo de integración.</div></details></div>
+
+    <div class="card"><div class="name">T-MEC (antes TLCAN)</div><div class="fbody">
+      <div class="dato"><b>México, Estados Unidos y Canadá</b>. El <b>TLCAN</b> entró en vigor en <b>1994</b>; se renegoció y desde <b>2020</b> se llama <b>T-MEC</b> (en inglés USMCA).</div>
+      <div class="dato">Es solo una <b>zona de libre comercio</b>: no hay moneda común ni libre paso de personas.</div></div>
+      <div class="leg">EUA es el destino de cerca del <b>80 % de las exportaciones</b> mexicanas.</div>
+      <details class="why"><summary>En palabras</summary><div class="why-body">La comparación con la UE es la pregunta favorita: en Norteamérica se abrieron las fronteras para las mercancías, pero no para la gente. México quedó muy integrado y muy dependiente de un solo cliente.</div></details></div>
+
+    <div class="card"><div class="name">Mercosur</div><div class="fbody">
+      <div class="dato">Mercado Común del Sur, <b>1991</b> (Tratado de Asunción): <b>Argentina, Brasil, Paraguay y Uruguay</b> (Venezuela suspendida; Bolivia en incorporación).</div></div>
+      <div class="leg">El bloque del <b>Cono Sur</b>: cuatro fundadores, sin países andinos.</div>
+      <details class="why"><summary>En palabras</summary><div class="why-body">Si en las opciones hay un bloque sudamericano, casi siempre es Mercosur. Los cuatro fundadores se recuerdan como los países del sur de Sudamérica, sin los andinos.</div></details></div>
+
+    <div class="card"><div class="name">APEC</div><div class="fbody">
+      <div class="dato">Foro de Cooperación Económica <b>Asia-Pacífico</b>, 1989. <b>21 economías</b> de las dos orillas del Pacífico: EUA, China, Japón, Rusia, Australia, Chile, Perú y <b>México</b> (desde 1993).</div></div>
+      <div class="leg"><b>Pista:</b> no es un bloque de libre comercio, y es el grupo <b>más numeroso</b> de todos. En la lista hay latinoamericanos.</div>
+      <details class="why"><summary>En palabras</summary><div class="why-body">No es un tratado obligatorio sino un foro para irse abriendo entre países que comparten el océano Pacífico. Por eso caben juntos EUA, China y Chile.</div></details></div>
+
+    <div class="card"><div class="name">ASEAN</div><div class="fbody">
+      <div class="dato">Asociación de Naciones del <b>Sudeste Asiático</b>, 1967. 10 países: Indonesia, Malasia, Tailandia, Filipinas, Singapur, Vietnam, Myanmar, Camboya, Laos y Brunéi.</div></div>
+      <div class="leg">Los "tigres asiáticos" del sudeste: crecieron fabricando para el mundo.</div>
+      <details class="why"><summary>En palabras</summary><div class="why-body">Ojo con el nombre: es del <b>sudeste</b> asiático, así que ni China ni Japón ni India son miembros, aunque sean los grandes de Asia.</div></details></div>
+
+    <div class="card"><div class="name">OPEP</div><div class="fbody">
+      <div class="dato">Organización de Países <b>Exportadores de Petróleo</b>, fundada en <b>1960</b> en Bagdad; sede en <b>Viena</b>. Arabia Saudita, Irán, Irak, Kuwait, Venezuela, Nigeria, Libia, Emiratos…</div>
+      <div class="dato">Es un <b>cártel</b>: acuerdan cuánto producir para <b>controlar el precio</b> del crudo.</div></div>
+      <div class="leg"><b>México no es miembro</b>, aunque sea productor de petróleo.</div>
+      <details class="why"><summary>En palabras</summary><div class="why-body">No es un bloque de vecinos sino de un solo producto: lo que los une es el petróleo, no la geografía. Cuando deciden producir menos, sube la gasolina en todo el mundo.</div></details></div>
+
+    <div class="card"><div class="name">Otros bloques y grupos</div><div class="fbody">
+      <div class="dato"><ul>
+        <li><b>Comunidad Andina</b> — Bolivia, Colombia, Ecuador y Perú.</li>
+        <li><b>Caricom</b> — países del Caribe. <b>SICA</b> — Centroamérica.</li>
+        <li><b>Alianza del Pacífico</b> — México, Colombia, Perú y Chile.</li>
+        <li><b>BRICS</b> — Brasil, Rusia, India, China y Sudáfrica: las grandes economías emergentes.</li>
+        <li><b>G7</b> — las potencias industriales. <b>G20</b> — las 20 mayores economías; México sí está.</li>
+      </ul></div></div>
+      <div class="leg"><b>Pista:</b> BRICS y G20 no son de libre comercio, son <b>foros de peso político y económico</b>.</div>
+      <details class="why"><summary>En palabras</summary><div class="why-body">BRICS es el grupo de los que quieren dejar de depender del Norte; el G7 es el club de los ricos de siempre. Que México esté en el G20 pero no en el G7 dice exactamente en qué lugar está.</div></details></div>
+
+    <div class="card"><div class="name">Alianzas militares: OTAN y Pacto de Varsovia</div><div class="fbody">
+      <div class="dato"><b>OTAN</b> (1949) — alianza militar del bloque <b>capitalista</b>, encabezada por EUA; sede en Bruselas. <b>Sigue existiendo</b> y se ha ampliado hacia el este.</div>
+      <div class="dato"><b>Pacto de Varsovia</b> (1955) — su espejo <b>socialista</b>, encabezado por la URSS. <b>Se disolvió en 1991</b> con el fin de la Guerra Fría.</div></div>
+      <div class="leg"><b>Pista:</b> una sobrevivió y la otra no. Esa asimetría explica buena parte de las tensiones actuales con Rusia.</div>
+      <details class="why"><summary>En palabras</summary><div class="why-body">Al desaparecer la URSS, el bloque socialista se quedó sin alianza y varios de sus antiguos miembros se pasaron a la OTAN. Rusia lo vive como un cerco: de ahí viene el conflicto con Ucrania.</div></details></div>
+
+    <div class="card"><div class="name">Los organismos de la ONU y sus siglas</div><div class="fbody">
+      <div class="dato"><ul>
+        <li><b>UNESCO</b> — educación, ciencia y cultura (patrimonio de la humanidad).</li>
+        <li><b>OMS</b> — salud. <b>FAO</b> — alimentación y agricultura.</li>
+        <li><b>UNICEF</b> — infancia. <b>ACNUR</b> — refugiados. <b>OIT</b> — trabajo.</li>
+        <li><b>PNUD</b> — desarrollo; es quien publica el <b>IDH</b>.</li>
+      </ul></div></div>
+      <div class="leg"><b>Pista:</b> cada sigla tiene un solo tema. Dos de las más preguntadas son la del <b>IDH</b> y la del <b>patrimonio de la humanidad</b>.</div>
+      <details class="why"><summary>En palabras</summary><div class="why-body">Son las "áreas" en las que la ONU se dividió el trabajo. Basta con quedarse con el tema de cada sigla: salud, comida, niños, refugiados, cultura, trabajo, desarrollo.</div></details></div>
+  </div>
+
+  <div class="trap"><h4>Ojo en el examen</h4><ul>
+    <li><b>UE = unión económica con moneda; T-MEC = solo libre comercio.</b> Es la comparación que más piden.</li>
+    <li>La OPEP no es regional: agrupa <b>productores de petróleo</b> de tres continentes y México no está.</li>
+    <li>El <b>Pacto de Varsovia ya no existe</b>; la OTAN sí. No los pongas como si fueran contemporáneos.</li>
+    <li>El veto en la ONU lo tienen <b>cinco</b> países, no la Asamblea General.</li>
+  </ul></div>
+</section>
+
+<!-- ============ 8 · ORGANIZACIÓN POLÍTICA ============ -->
+<section class="panel" data-num="8" data-short="Organización política" data-foco="1">
+  <div class="panel-head">
+    <div class="u">Unidad 2 · Geografía humana <b style="color:var(--M)">· foco</b></div>
+    <h2>Organización política del mundo: Estados y regímenes</h2>
+    <p class="lead">Qué es un Estado, cómo se gobierna y qué países aparecieron o desaparecieron del mapa.</p>
+  </div>
+
+  <h3 class="sec">Conceptos clave</h3>
+  <div class="cgrid">
+    <div class="concept"><h4>Estado</h4><p>Necesita <b>territorio, población, gobierno y soberanía</b>, y que otros lo reconozcan. Es la unidad política del mapa.</p></div>
+    <div class="concept"><h4>Nación</h4><p>Grupo con <b>historia, lengua y cultura</b> comunes. <em>No es lo mismo que Estado:</em> hay naciones sin Estado (kurdos, palestinos) y Estados con muchas naciones (Rusia, India).</p></div>
+    <div class="concept"><h4>Soberanía</h4><p>Poder de un Estado para decidir dentro de su territorio sin que otro se meta. Es lo que se pone en juego en toda intervención o conflicto.</p></div>
+    <div class="concept"><h4>Límite y frontera</h4><p>El <b>límite</b> es la línea imaginaria acordada; la <b>frontera</b> es la franja de territorio con vida propia a ambos lados. Los límites pueden ser <b>naturales</b> (río, montaña) o <b>artificiales</b> (paralelo, muro).</p></div>
+    <div class="concept"><h4>Forma de gobierno</h4><p>Quién es jefe de Estado: <b>monarquía</b> (rey, hereditario) o <b>república</b> (presidente, electo).</p></div>
+    <div class="concept"><h4>Forma de organización del territorio</h4><p><b>Federal</b> — los estados tienen gobierno propio (México, EUA, Brasil, Alemania). <b>Central o unitario</b> — todo se decide desde la capital (Francia, Chile, Japón).</p></div>
+  </div>
+
+  <h3 class="sec">Regímenes: quién manda y cómo</h3>
+  <div class="fgrid ancha">
+    <div class="card"><div class="name">Los regímenes políticos, con su ejemplo</div><div class="fbody">
+      <div class="dato"><ul>
+        <li><b>Monarquía absoluta</b> — el rey concentra todo el poder: <b>Arabia Saudita</b>, Omán, Catar.</li>
+        <li><b>Monarquía constitucional o parlamentaria</b> — el rey reina pero no gobierna; manda un primer ministro: <b>Reino Unido, España, Japón, Suecia, Países Bajos</b>.</li>
+        <li><b>República presidencial</b> — el presidente es jefe de Estado y de gobierno, electo por voto: <b>México, EUA, Brasil, Francia</b>.</li>
+        <li><b>República parlamentaria</b> — el jefe de gobierno sale del parlamento: <b>Alemania, Italia, India</b>.</li>
+        <li><b>República socialista o de partido único</b> — <b>China, Cuba, Corea del Norte, Vietnam, Laos</b>.</li>
+        <li><b>Teocracia</b> — la religión rige el Estado: <b>Irán</b>, Ciudad del Vaticano.</li>
+        <li><b>Dictadura</b> — el poder se toma por la fuerza y no hay elecciones libres.</li>
+      </ul></div></div>
+      <div class="leg"><b>Pista:</b> primero pregúntate rey o presidente; luego, si el poder es de uno solo o está repartido.</div>
+      <details class="why"><summary>En palabras</summary><div class="why-body">Los que más se confunden son Reino Unido y España: son monarquías, pero <b>democráticas</b>, porque el rey es solo un símbolo y quien gobierna es un primer ministro electo. Monarquía no significa dictadura.</div></details></div>
+
+    <div class="card"><div class="name">Democracia y autoritarismo</div><div class="fbody">
+      <div class="dato"><b>Democracia:</b> elecciones libres, división de poderes, libertades y alternancia.</div>
+      <div class="dato"><b>Autoritarismo o totalitarismo:</b> un partido o una persona, sin oposición ni prensa libre; el Estado controla la vida entera (el totalitarismo).</div></div>
+      <div class="leg">Puede haber monarquía democrática (España) y república autoritaria (Corea del Norte).</div>
+      <details class="why"><summary>En palabras</summary><div class="why-body">Son dos preguntas distintas: <em>quién es el jefe de Estado</em> (rey o presidente) y <em>cómo se llegó ahí</em> (por voto o por la fuerza). El examen suele mezclarlas a propósito.</div></details></div>
+
+    <div class="card"><div class="name">Colonias y territorios que todavía existen</div><div class="fbody">
+      <div class="dato">Aún hay territorios sin soberanía plena: <b>Puerto Rico</b> (EUA), <b>Groenlandia</b> (Dinamarca), <b>Guayana Francesa</b>, <b>Gibraltar</b> y las <b>Malvinas</b> (Reino Unido), <b>Sáhara Occidental</b> (ocupado por Marruecos).</div></div>
+      <div class="leg">La <b>descolonización</b> de África y Asia ocurrió sobre todo en los años <b>50 y 60</b>.</div>
+      <details class="why"><summary>En palabras</summary><div class="why-body">Casi todas las fronteras rectas de África se trazaron con regla en Europa, sin ver qué pueblos partían. De ahí vienen muchos de los conflictos étnicos de hoy.</div></details></div>
+  </div>
+
+  <h3 class="sec">Estados que se dividieron o se unieron</h3>
+  <div class="fgrid ancha">
+    <div class="card"><div class="name">La desintegración de Yugoslavia</div><div class="fbody">
+      <div class="dato">Yugoslavia se rompió en <b>guerras entre 1991 y 2001</b>. De ella salieron: <b>Eslovenia, Croacia, Bosnia y Herzegovina, Serbia, Montenegro, Macedonia del Norte</b> y <b>Kosovo</b> (independencia declarada en 2008, reconocida solo en parte).</div>
+      <div class="dato">Es <b>el gran cambio territorial de los Balcanes</b>. Causas: nacionalismos, mezcla de etnias y religiones (católicos, ortodoxos y musulmanes) y el fin del socialismo.</div></div>
+      <div class="leg">Pregunta del examen muestra: los cambios territoriales de los <b>Balcanes</b> se deben a <b>esto</b> — no a Chechenia, ni a la unificación alemana.</div>
+      <details class="why"><summary>En palabras</summary><div class="why-body">Yugoslavia era un solo país que juntaba pueblos con lenguas y religiones distintas, sostenido por un gobierno socialista fuerte. Cuando ese pegamento desapareció, cada pueblo quiso su Estado y se fueron a la guerra por dónde poner las líneas. Por eso hoy donde había un país hay siete.</div></details></div>
+
+    <div class="card"><div class="name">La desintegración de la URSS</div><div class="fbody">
+      <div class="dato">Se disolvió en <b>1991</b> y dejó <b>15 repúblicas independientes</b>.</div>
+      <div class="dato">Las más preguntadas: <b>Rusia, Ucrania, Bielorrusia</b>; las bálticas <b>Estonia, Letonia y Lituania</b>; del Cáucaso <b>Georgia, Armenia y Azerbaiyán</b>; y las de Asia central, terminadas en <em>-istán</em>: <b>Kazajistán, Uzbekistán, Turkmenistán, Kirguistán y Tayikistán</b> (más Moldavia).</div></div>
+      <div class="leg"><b>Pista:</b> 15 países. Fue <b>el mayor cambio del mapa</b> del siglo XX y el fin de la Guerra Fría.</div>
+      <details class="why"><summary>En palabras</summary><div class="why-body">Con la URSS terminó el bloque socialista y quedó un solo gran poder, Estados Unidos. Todo lo que hoy pasa entre Rusia y Ucrania es una consecuencia tardía de ese rompimiento.</div></details></div>
+
+    <div class="card"><div class="name">Checoslovaquia y los "nuevos países de Europa"</div><div class="fbody">
+      <div class="dato"><b>Checoslovaquia</b> se dividió pacíficamente en <b>1993</b> en <b>República Checa (Chequia)</b> y <b>Eslovaquia</b>: el "divorcio de terciopelo".</div>
+      <div class="dato">Los nuevos países de Europa vienen de <b>tres rupturas</b>: la URSS, Yugoslavia y Checoslovaquia.</div></div>
+      <div class="leg"><b>Pista:</b> lo que preguntan es la comparación con Yugoslavia — una ruptura fue pacífica y la otra no.</div>
+      <details class="why"><summary>En palabras</summary><div class="why-body">La comparación es la enseñanza del tema: dos países socialistas se rompieron casi al mismo tiempo, uno negociando y otro a balazos. La diferencia fue qué tan mezcladas estaban las poblaciones.</div></details></div>
+
+    <div class="card"><div class="name">Unificaciones</div><div class="fbody">
+      <div class="dato"><b>Alemania</b> — el Muro de Berlín cae el <b>9 de noviembre de 1989</b> y la <b>RFA</b> (occidental, capitalista) y la <b>RDA</b> (oriental, socialista) se reunifican el <b>3 de octubre de 1990</b>.</div>
+      <div class="dato"><b>Yemen</b> — Yemen del Norte y del Sur se unieron también en <b>1990</b>.</div></div>
+      <div class="leg"><b>Pista:</b> son dos, las dos del mismo año, y son el contrapunto de la URSS y de Yugoslavia.</div>
+      <details class="why"><summary>En palabras</summary><div class="why-body">La caída del Muro es la imagen del fin de la Guerra Fría: un mismo pueblo llevaba 40 años partido en dos por el pleito entre bloques, y al desaparecer el pleito la línea dejó de tener sentido.</div></details></div>
+
+    <div class="card"><div class="name">Los países más nuevos del mundo</div><div class="fbody">
+      <div class="dato"><ul>
+        <li><b>Eritrea</b> (1993) — se separó de Etiopía.</li>
+        <li><b>Timor Oriental</b> (2002) — se separó de Indonesia.</li>
+        <li><b>Montenegro</b> (2006) — se separó de Serbia.</li>
+        <li><b>Kosovo</b> (2008) — declaración unilateral, reconocimiento parcial.</li>
+        <li><b>Sudán del Sur</b> (2011) — el más reciente; se separó de Sudán.</li>
+      </ul></div></div>
+      <div class="leg"><b>Pista:</b> el mapa político <b>no está terminado</b>: sigue cambiando cada década.</div>
+      <details class="why"><summary>En palabras</summary><div class="why-body">Todos nacieron por lo mismo: un grupo con identidad propia dentro de un Estado que sentía ajeno. Es exactamente el desajuste entre "nación" y "Estado" del que habla el temario.</div></details></div>
+
+    <div class="card"><div class="name">División política de México</div><div class="fbody">
+      <div class="dato"><b>32 entidades federativas</b> (31 estados + la Ciudad de México), divididas en municipios (alcaldías en la CDMX). Es una <b>república federal, democrática y representativa</b>.</div>
+      <div class="dato"><b>Fronteras:</b> al norte con <b>Estados Unidos</b> (≈3 150 km, el límite lo marca en gran parte el <b>río Bravo</b>); al sureste con <b>Guatemala</b> (≈960 km) y <b>Belice</b> (≈190 km).</div>
+      <div class="dato"><b>Fronterizos del norte:</b> Baja California, Sonora, Chihuahua, Coahuila, Nuevo León y Tamaulipas. <b>Del sureste:</b> Chiapas, Tabasco, Campeche y Quintana Roo.</div></div>
+      <div class="leg"><b>Pista:</b> son <b>6</b> estados fronterizos al norte y <b>4</b> al sureste.</div>
+      <details class="why"><summary>En palabras</summary><div class="why-body">Un río como límite es un límite <b>natural</b>; la línea recta del desierto de Sonora es <b>artificial</b>. México tiene los dos tipos en la misma frontera norte.</div></details></div>
+  </div>
+
+  <div class="trap"><h4>Ojo en el examen</h4><ul>
+    <li><b>Balcanes ⇒ Yugoslavia.</b> Si la pregunta habla de cambios territoriales en los Balcanes, no contestes Chechenia (eso es <b>Rusia</b>) ni unificación alemana (eso es <b>unión</b>, no división).</li>
+    <li>URSS = <b>15</b> países. Yugoslavia = <b>6 repúblicas + Kosovo</b>. Checoslovaquia = <b>2</b>.</li>
+    <li><b>Nación ≠ Estado.</b> Los kurdos son una nación sin Estado; ese es el ejemplo que siempre usan.</li>
+    <li>Monarquía no es sinónimo de dictadura: casi todas las de Europa son <b>parlamentarias y democráticas</b>.</li>
+  </ul></div>
+</section>
+
+<!-- ============ 9 · ZONAS DE TENSIÓN ============ -->
+<section class="panel" data-num="9" data-short="Zonas de tensión" data-foco="1">
+  <div class="panel-head">
+    <div class="u">Unidad 2 · Geografía humana <b style="color:var(--M)">· foco</b></div>
+    <h2>Principales zonas de tensión política del mundo</h2>
+    <p class="lead">Cada conflicto, con quiénes son y por qué pelean. Casi siempre preguntan la <b>causa</b>.</p>
+  </div>
+
+  <h3 class="sec">Conceptos clave</h3>
+  <div class="cgrid">
+    <div class="concept"><h4>Las cuatro causas típicas</h4><p><b>Territoriales</b> (quién manda en un pedazo), <b>étnicas y religiosas</b>, <b>por recursos</b> (petróleo, agua, minerales) y <b>separatistas</b> (una región quiere independizarse).</p></div>
+    <div class="concept"><h4>Separatismo</h4><p>Región que busca separarse de su Estado: <b>Cataluña y País Vasco</b> (España), <b>Escocia</b> (RU), <b>Quebec</b> (Canadá), <b>Chechenia</b> (Rusia).</p></div>
+    <div class="concept"><h4>Refugiado vs. migrante</h4><p>El <b>refugiado</b> huye de guerra o persecución y tiene protección internacional (ACNUR); el migrante económico busca trabajo.</p></div>
+    <div class="concept"><h4>Genocidio y limpieza étnica</h4><p>Exterminio o expulsión de un grupo por lo que es. Ejemplos del siglo XX: <b>Ruanda</b> (1994) y <b>Bosnia</b> (Srebrenica, 1995).</p></div>
+  </div>
+
+  <h3 class="sec">Los conflictos que hay que ubicar</h3>
+  <div class="fgrid ancha">
+    <div class="card"><div class="name">Israel y Palestina</div><div class="fbody">
+      <div class="dato">Conflicto por el <b>territorio</b> desde la creación de Israel en <b>1948</b>. Zonas en disputa: <b>Franja de Gaza, Cisjordania y Jerusalén</b>.</div>
+      <div class="dato">Mezcla lo <b>territorial</b> con lo <b>religioso</b>: judíos, musulmanes y cristianos reclaman los mismos lugares sagrados.</div></div>
+      <div class="leg">Es la zona de tensión más citada del <b>Medio Oriente</b>, junto con el petróleo.</div>
+      <details class="why"><summary>En palabras</summary><div class="why-body">Es el caso de libro de una nación sin Estado: los palestinos reclaman un país propio en un territorio que otro Estado ya ocupa. Por eso se usa siempre como ejemplo de "nación sin Estado".</div></details></div>
+
+    <div class="card"><div class="name">Cachemira</div><div class="fbody">
+      <div class="dato">Disputa entre <b>India y Pakistán</b> (con China de por medio) desde 1947. Causa <b>territorial y religiosa</b>: hindúes contra musulmanes.</div></div>
+      <div class="leg">Grave porque <b>los dos países tienen armas nucleares</b>.</div>
+      <details class="why"><summary>En palabras</summary><div class="why-body">Cuando el Reino Unido se fue de la India, partió el territorio por religión: India hindú y Pakistán musulmán. Cachemira quedó en medio y sigue sin resolverse.</div></details></div>
+
+    <div class="card"><div class="name">Península de Corea y Taiwán</div><div class="fbody">
+      <div class="dato"><b>Corea</b> quedó partida en el <b>paralelo 38</b> desde la Guerra de Corea (1950-1953): Corea del Norte socialista y Corea del Sur capitalista. <b>Nunca se firmó la paz</b>, solo un armisticio.</div>
+      <div class="dato"><b>Taiwán</b> se gobierna sola, pero <b>China</b> la reclama como parte de su territorio.</div></div>
+      <div class="leg">Son las <b>herencias vivas de la Guerra Fría</b> en Asia.</div>
+      <details class="why"><summary>En palabras</summary><div class="why-body">Corea es lo que le pasó a Alemania, pero sin final feliz: la línea que dibujaron los dos bloques sigue ahí, y ahora separa dos países con niveles de vida opuestos.</div></details></div>
+
+    <div class="card"><div class="name">Rusia: Chechenia y Ucrania</div><div class="fbody">
+      <div class="dato"><b>Chechenia</b> — región del <b>Cáucaso</b> que quiso independizarse de <b>Rusia</b>; dos guerras en los años 90. Es un conflicto <b>separatista</b>, no balcánico.</div>
+      <div class="dato"><b>Ucrania</b> — Rusia se anexó <b>Crimea</b> en 2014 e invadió el país en <b>2022</b>. En el fondo: la disputa por la zona de influencia entre Rusia y la <b>OTAN</b>.</div></div>
+      <div class="leg"><b>Pista:</b> no todo conflicto europeo es balcánico. Fíjate en qué región cae cada uno antes de contestar.</div>
+      <details class="why"><summary>En palabras</summary><div class="why-body">El examen muestra pone "separación de Chechenia" como distractor de la pregunta de los Balcanes: son conflictos parecidos —una región que quiere irse— pero en extremos opuestos de Europa.</div></details></div>
+
+    <div class="card"><div class="name">Medio Oriente y el mundo árabe</div><div class="fbody">
+      <div class="dato"><b>Kurdistán</b> — los <b>kurdos</b> son el pueblo sin Estado repartido entre Turquía, Irak, Irán y Siria.</div>
+      <div class="dato">Guerras y tensiones en <b>Siria, Irak, Yemen, Afganistán e Irán</b>. Detrás: religión (sunitas y chiitas), <b>petróleo</b> e intervención de las potencias.</div></div>
+      <div class="leg"><b>Pista:</b> además de la religión, hay un <b>recurso</b> que explica por qué se meten las potencias de fuera.</div>
+      <details class="why"><summary>En palabras</summary><div class="why-body">Si un conflicto de esa zona te pide la causa de fondo y dudas, el petróleo casi siempre está en la respuesta: es lo que hace que potencias lejanas se metan.</div></details></div>
+
+    <div class="card"><div class="name">África</div><div class="fbody">
+      <div class="dato"><b>Sáhara Occidental</b> — antigua colonia española ocupada por <b>Marruecos</b>. <b>Ruanda</b> (1994) — genocidio entre hutus y tutsis. Conflictos en <b>Sudán y Sudán del Sur</b>, <b>Congo</b> (minerales), <b>Sahel</b> y <b>Cuerno de África</b>.</div></div>
+      <div class="leg">Causa común: <b>fronteras coloniales</b> que partieron etnias + riqueza mineral.</div>
+      <details class="why"><summary>En palabras</summary><div class="why-body">El Congo es el ejemplo más claro de la "maldición de los recursos": tiene los minerales que necesita todo celular del mundo y es de los países más pobres y más violentos.</div></details></div>
+
+    <div class="card"><div class="name">América Latina</div><div class="fbody">
+      <div class="dato"><b>Islas Malvinas</b> — Argentina y Reino Unido (guerra en 1982). Tensiones por el <b>Esequibo</b> (Venezuela-Guyana), migración centroamericana, crimen organizado y crisis políticas.</div></div>
+      <div class="leg">También cuenta como tensión el <b>muro y la militarización</b> de la frontera México–EUA.</div>
+      <details class="why"><summary>En palabras</summary><div class="why-body">En América los conflictos abiertos entre países son raros; las tensiones fuertes son sociales: migración, desigualdad y violencia interna.</div></details></div>
+  </div>
+
+  <div class="trap"><h4>Ojo en el examen</h4><ul>
+    <li>Ubica cada conflicto en su <b>región</b>: los Balcanes son Yugoslavia; el Cáucaso es Chechenia y Nagorno Karabaj; Medio Oriente es Israel-Palestina y los kurdos.</li>
+    <li>Cuando pregunten la <b>causa</b>, casi siempre es territorial, étnico-religiosa o por <b>recursos</b>.</li>
+    <li>Corea sigue dividida en el <b>paralelo 38</b>; Alemania <b>ya se reunificó</b>.</li>
+  </ul></div>
+</section>
+
+<!-- ============ 10 · MÉXICO ECONÓMICO ============ -->
+<section class="panel" data-num="10" data-short="México económico">
+  <div class="panel-head">
+    <div class="u">Unidad 2 · Geografía humana</div>
+    <h2>México: aspectos económicos</h2>
+    <p class="lead">Qué se produce y dónde. Aquí las preguntas son de <b>estado + producto</b>.</p>
+  </div>
+
+  <h3 class="sec">Conceptos clave</h3>
+  <div class="cgrid">
+    <div class="concept"><h4>Agricultura de riego y de temporal</h4><p>De <b>riego</b> en el noroeste (Sinaloa, Sonora): comercial y de exportación. De <b>temporal</b> en el centro y sur: depende de la lluvia y es de autoconsumo.</p></div>
+    <div class="concept"><h4>Corredores industriales</h4><p>Valle de México, Monterrey, Guadalajara, el <b>Bajío</b> (automotriz: Guanajuato, Querétaro, Aguascalientes) y la <b>frontera norte</b> (maquiladoras).</p></div>
+    <div class="concept"><h4>Balanza comercial</h4><p>Exportaciones menos importaciones. Si se importa más de lo que se exporta, es <b>deficitaria</b>.</p></div>
+    <div class="concept"><h4>Vías de comunicación</h4><p>Carretera (mueve casi toda la carga), ferrocarril (minerales y granos), puertos (<b>Manzanillo, Lázaro Cárdenas, Veracruz, Altamira</b>) y aeropuertos. Sin ellas no hay comercio ni turismo.</p></div>
+  </div>
+
+  <h3 class="sec">Datos que se preguntan</h3>
+  <div class="fgrid ancha">
+    <div class="card"><div class="name">Principal estado productor de cobre</div><div class="fbody">
+      <div class="dato"><span class="big">Sonora</span></div>
+      <div class="dato">Ahí está <b>Cananea</b>, la mina de cobre más grande del país.</div></div>
+      <div class="leg">Pregunta literal del examen muestra (las otras opciones eran Coahuila, San Luis Potosí y Guanajuato).</div>
+      <details class="why"><summary>En palabras</summary><div class="why-body">Sonora = cobre. Es de los pocos datos de memoria pura que conviene fijar tal cual, porque lo preguntan con nombre y apellido.</div></details></div>
+
+    <div class="card"><div class="name">Minerales: quién produce qué</div><div class="fbody">
+      <div class="dato"><ul>
+        <li><b>Plata</b> — Zacatecas, Chihuahua, Durango. México es el <b>1er productor mundial</b>.</li>
+        <li><b>Cobre</b> — Sonora. <b>Oro</b> — Sonora, Zacatecas, Guerrero.</li>
+        <li><b>Hierro</b> — Michoacán y Colima. <b>Carbón</b> — Coahuila.</li>
+        <li><b>Plomo y zinc</b> — Zacatecas, Chihuahua. <b>Azufre</b> — Veracruz, Tabasco.</li>
+      </ul></div></div>
+      <div class="leg"><b>Pista:</b> la minería está en la <b>Sierra Madre Occidental</b> y el norte; el petróleo, en el <b>sureste</b>.</div>
+      <details class="why"><summary>En palabras</summary><div class="why-body">Esa división —minerales al norte, hidrocarburos al sureste— es la manera rápida de descartar opciones aunque no recuerdes el estado exacto.</div></details></div>
+
+    <div class="card"><div class="name">Petróleo y energía</div><div class="fbody">
+      <div class="dato">Principal zona: la <b>Sonda de Campeche</b> (Cantarell, Ku-Maloob-Zaap), más <b>Tabasco, Veracruz, Tamaulipas</b> y Chiapas.</div>
+      <div class="dato">Refinerías: Salamanca, Tula, Salina Cruz, Cadereyta, Minatitlán, Madero, Dos Bocas.</div></div>
+      <div class="leg">México <b>exporta crudo</b> e <b>importa gasolina</b>: ese es el problema de fondo.</div>
+      <details class="why"><summary>En palabras</summary><div class="why-body">Vender crudo y comprar gasolina es el ejemplo perfecto del intercambio desigual del que habla el temario, pero dentro de un mismo producto: se vende barato lo sin procesar y se compra caro lo procesado.</div></details></div>
+
+    <div class="card"><div class="name">La primera zona pesquera</div><div class="fbody">
+      <div class="dato">El <b>Pacífico noroeste</b>: península de <b>Baja California</b>, Sonora y Sinaloa.</div>
+      <div class="dato">Exporta sobre todo <b>atún y sardina</b> (y camarón).</div></div>
+      <div class="leg">Es rica por la <b>corriente fría</b> que baja por esa costa. Pregunta del examen muestra.</div>
+      <details class="why"><summary>En palabras</summary><div class="why-body">Aquí se conectan dos temas: corriente fría → afloramiento de nutrientes → banco de peces → primera zona pesquera. Si recuerdas la cadena, no necesitas memorizar la respuesta.</div></details></div>
+
+    <div class="card"><div class="name">Agricultura y ganadería</div><div class="fbody">
+      <div class="dato"><b>Maíz</b> — Sinaloa, Jalisco, Estado de México. <b>Trigo</b> — Sonora, Baja California. <b>Café</b> — Chiapas y Veracruz. <b>Caña</b> — Veracruz. <b>Aguacate</b> — Michoacán (1º del mundo). <b>Jitomate y hortalizas</b> — Sinaloa. <b>Agave</b> — Jalisco.</div>
+      <div class="dato"><b>Ganado bovino</b> — norte (Veracruz, Jalisco, Chihuahua). <b>Porcino y aves</b> — Jalisco, Sonora, Yucatán.</div></div>
+      <div class="leg"><b>Pista:</b> el norte riega y exporta; el sur siembra de temporal para comer.</div>
+      <details class="why"><summary>En palabras</summary><div class="why-body">La paradoja del campo mexicano: el norte, que es el seco, produce más, porque tiene riego, maquinaria y al cliente estadounidense enfrente.</div></details></div>
+
+    <div class="card"><div class="name">Comercio exterior</div><div class="fbody">
+      <div class="dato"><b>Exporta:</b> automóviles y autopartes, electrónicos y maquinaria (manufacturas), petróleo crudo, plata, aguacate, jitomate, cerveza y tequila.</div>
+      <div class="dato"><b>Importa:</b> insumos y partes para armar, maquinaria, <b>gasolina y gas</b>, maíz y granos, químicos.</div>
+      <div class="dato"><b>Socios:</b> <b>Estados Unidos</b> (≈80 %), luego China y Canadá.</div></div>
+      <div class="leg"><b>Pista:</b> son tres listas —lo que sale, lo que entra y con quién se comercia—. Ojo: un país solo se lleva casi todo.</div>
+      <details class="why"><summary>En palabras</summary><div class="why-body">México ya no es un país que solo exporte materias primas: la mayor parte de lo que vende son manufacturas. El problema es que muchas se <b>ensamblan</b> aquí con partes importadas, así que se queda con poca ganancia.</div></details></div>
+  </div>
+
+  <div class="trap"><h4>Ojo en el examen</h4><ul>
+    <li><b>Sonora = cobre. Zacatecas = plata. Coahuila = carbón. Campeche = petróleo.</b> Son los cuatro que más caen.</li>
+    <li>La primera zona pesquera es la del <b>Pacífico noroeste</b>, no la del Golfo.</li>
+    <li>México exporta sobre todo <b>manufacturas</b>, no petróleo: eso cambió desde los años noventa.</li>
+  </ul></div>
+</section>
+
+</main>
+
+<footer>Temario oficial de la Guía UNAM 2026 · Área 2 · uso personal de estudio</footer>
+
+<script>
+  const panels = [...document.querySelectorAll('.panel')];
+  const tabs = document.getElementById('tabs');
+  panels.forEach((p,i)=>{
+    const b = document.createElement('button');
+    b.className = 'tab' + (p.dataset.foco ? ' foco' : '');
+    b.innerHTML = (p.dataset.num ? '<b>'+p.dataset.num+'</b>' : '') + p.dataset.short;
+    b.onclick = ()=> show(i);
+    tabs.appendChild(b);
+  });
+  function show(i){
+    panels.forEach((p,j)=>p.classList.toggle('active', i===j));
+    [...tabs.children].forEach((t,j)=>t.classList.toggle('active', i===j));
+    localStorage.setItem('geo-unidad', i);
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+  show(Math.min(+localStorage.getItem('geo-unidad')||0, panels.length-1));
+
+  document.addEventListener('keydown', e=>{
+    if(e.target.tagName==='INPUT') return;
+    const cur = panels.findIndex(p=>p.classList.contains('active'));
+    if(e.key==='ArrowRight' && cur<panels.length-1) show(cur+1);
+    if(e.key==='ArrowLeft'  && cur>0) show(cur-1);
+  });
+
+  const hint = document.getElementById('hint');
+  function pista(){
+    if(!document.body.classList.contains('memo')){
+      hint.innerHTML = 'Tapa los datos, recítalos y toca la tarjeta para comprobar. El <b>rótulo</b> y la <b>pista</b> nunca se tapan: son el pie para recitar. El <b>En palabras</b> se abre en cualquier modo.';
+    } else if(document.body.classList.contains('flip')){
+      hint.innerHTML = 'Volteado: ves el <b>dato</b> y tienes que decir <b>de qué es</b>. Toca la tarjeta para comprobar.';
+    } else {
+      hint.innerHTML = 'Ves el <b>rótulo</b> y tienes que recitar el dato. Toca la tarjeta para comprobar.';
+    }
+  }
+
+  function cerrarTodas(){
+    document.querySelectorAll('.card.open').forEach(c=>c.classList.remove('open'));
+  }
+
+  const memoBtn = document.getElementById('memoBtn');
+  memoBtn.onclick = ()=>{
+    document.body.classList.toggle('memo');
+    cerrarTodas();
+    localStorage.setItem('geo-memo', document.body.classList.contains('memo')?'1':'0');
+    pista();
+  };
+  const flipBtn = document.getElementById('flipBtn');
+  flipBtn.onclick = ()=>{
+    document.body.classList.toggle('flip');
+    cerrarTodas();
+    localStorage.setItem('geo-flip', document.body.classList.contains('flip')?'1':'0');
+    pista();
+  };
+  if(localStorage.getItem('geo-memo')==='1') document.body.classList.add('memo');
+  if(localStorage.getItem('geo-flip')==='1') document.body.classList.add('flip');
+  pista();
+
+  // al imprimir, se abren todas las explicaciones
+  let abiertas = [];
+  window.addEventListener('beforeprint', ()=>{
+    abiertas = [...document.querySelectorAll('details.why')].filter(d=>d.open);
+    document.querySelectorAll('details.why').forEach(d=>d.open=true);
+  });
+  window.addEventListener('afterprint', ()=>{
+    document.querySelectorAll('details.why').forEach(d=>d.open = abiertas.includes(d));
+  });
+
+  document.addEventListener('click', e=>{
+    // la explicación se abre y cierra sola, sin destapar el dato
+    if(e.target.closest('details.why')) return;
+    if(e.target.closest('.switch')) return;
+    if(!document.body.classList.contains('memo')) return;
+    const c = e.target.closest('.card');
+    if(c) c.classList.toggle('open');
+  });
+</script>
+</body>
+</html>

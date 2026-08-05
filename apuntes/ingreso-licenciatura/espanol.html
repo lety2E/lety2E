@@ -1,0 +1,1172 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Español · Área 2 · UNAM</title>
+<style>
+  :root{
+    --M:#FF00AA; --T:#00B8B8; --P:#6A2A8C;
+    --bg:#FFF7FB; --card:#FFFFFF; --ink:#1A0828;
+    --muted:#7B5A50; --border:#F0D7E6; --hover:#FFE3F1; --soft:#FDF1F8;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,system-ui,sans-serif;
+    background:var(--bg);color:var(--ink);line-height:1.5;-webkit-font-smoothing:antialiased;
+  }
+
+  header{text-align:center;padding:2.2rem 1rem .8rem}
+  header .eyebrow{font-size:.76rem;letter-spacing:.18em;text-transform:uppercase;color:var(--T);font-weight:700}
+  header h1{margin:.35rem 0 .25rem;font-size:clamp(1.5rem,3.8vw,2.1rem);color:var(--P)}
+  header p{margin:0 auto;max-width:48ch;color:var(--muted);font-size:.93rem}
+
+  .controls{display:flex;justify-content:center;align-items:center;gap:.6rem;flex-wrap:wrap;padding:1rem 1rem 0}
+  .switch{
+    display:inline-flex;align-items:center;gap:.55rem;
+    background:var(--card);border:1.5px solid var(--border);
+    border-radius:999px;padding:.42rem .9rem;cursor:pointer;
+    font-size:.86rem;font-weight:600;color:var(--ink);transition:all .15s ease;font-family:inherit;
+  }
+  .switch:hover{border-color:var(--T);background:#F0FBFB}
+  .switch .dot{width:34px;height:19px;border-radius:999px;background:var(--border);position:relative;transition:background .18s ease;flex:none}
+  .switch .dot::after{
+    content:"";position:absolute;top:2.5px;left:2.5px;width:14px;height:14px;border-radius:50%;
+    background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.25);transition:transform .18s ease;
+  }
+  body.memo .switch#memoBtn .dot{background:var(--T)}
+  body.memo .switch#memoBtn .dot::after{transform:translateX(15px)}
+  body.flip .switch#flipBtn .dot{background:var(--M)}
+  body.flip .switch#flipBtn .dot::after{transform:translateX(15px)}
+  #flipBtn{display:none}
+  body.memo #flipBtn{display:inline-flex}
+  .hint{text-align:center;color:var(--muted);font-size:.8rem;padding:.55rem 1rem 0;min-height:1.4rem;max-width:62ch;margin:0 auto}
+
+  .tabs{max-width:1180px;margin:.9rem auto 0;padding:0 1rem;display:flex;flex-wrap:wrap;gap:.45rem;justify-content:center}
+  .tab{
+    background:var(--card);border:1.5px solid var(--border);color:var(--ink);
+    border-radius:999px;padding:.45rem .9rem;font-size:.87rem;font-weight:600;
+    cursor:pointer;transition:all .15s ease;font-family:inherit;white-space:nowrap;
+  }
+  .tab b{color:var(--T);margin-right:.35rem;font-weight:800}
+  .tab:hover{background:var(--hover);border-color:var(--M)}
+  .tab.active{background:var(--M);color:#fff;border-color:var(--M);box-shadow:0 4px 12px rgba(255,0,170,.25)}
+  .tab.active b{color:#fff}
+
+  main{max-width:1000px;margin:1.5rem auto 4rem;padding:0 1rem}
+  .panel{display:none}
+  .panel.active{display:block;animation:fade .25s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+
+  .panel-head{margin-bottom:1.3rem;padding-bottom:.8rem;border-bottom:2px solid var(--border)}
+  .panel-head .u{font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--T);font-weight:800}
+  .panel-head h2{margin:.2rem 0 .3rem;color:var(--P);font-size:clamp(1.25rem,3vw,1.65rem)}
+  .panel-head .lead{color:var(--muted);font-size:.9rem;margin:0}
+
+  h3.sec{
+    display:flex;align-items:center;gap:.6rem;margin:2rem 0 .9rem;
+    font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--P);
+  }
+  h3.sec::after{content:"";flex:1;height:1.5px;background:var(--border)}
+
+  .cgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:.7rem}
+  .concept{background:var(--card);border:1.5px solid var(--border);border-left:4px solid var(--T);border-radius:12px;padding:.75rem .9rem}
+  .concept h4{margin:0 0 .25rem;font-size:.93rem;color:var(--P)}
+  .concept p{margin:0;font-size:.87rem;color:var(--ink)}
+  .concept em{color:var(--muted);font-style:normal}
+
+  .fgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:.7rem}
+  .card{
+    background:var(--card);border:1.5px solid var(--border);border-radius:14px;
+    padding:.8rem .9rem .7rem;position:relative;transition:border-color .15s ease,box-shadow .15s ease;
+  }
+  .card:hover{border-color:var(--M);box-shadow:0 6px 18px rgba(255,0,170,.10)}
+  .card .name{font-size:.95rem;font-weight:700;color:var(--M);margin-bottom:.45rem;padding-right:5.2rem;transition:filter .18s ease}
+  .fbody .dato,.fbody .eq,.fbody .io-v{transition:filter .18s ease}
+
+  /* fórmula, en serif como el formulario de Física */
+  .eq{
+    font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+    font-size:1.14rem;text-align:center;padding:.45rem .2rem .5rem;color:var(--ink);overflow-x:auto;
+  }
+  .eq + .eq{border-top:1px dashed var(--border)}
+  .eq i{font-style:italic}
+  .eq sub{font-size:.72em}
+  .frac{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;margin:0 .16em;line-height:1.12;font-size:.92em}
+  .frac span:first-child{border-bottom:1.4px solid currentColor;padding:0 .3em}
+  .frac span:last-child{padding:0 .3em}
+
+  .io{display:grid;grid-template-columns:6.1rem 1fr;gap:.5rem;align-items:baseline;padding:.28rem 0}
+  .io + .io{border-top:1px dashed var(--border)}
+  .io-k{
+    font-size:.66rem;letter-spacing:.09em;text-transform:uppercase;color:var(--T);font-weight:800;
+    min-width:0;overflow-wrap:anywhere;line-height:1.25;
+  }
+  .io-v{font-size:.88rem;color:var(--ink)}
+  .io-v b{color:var(--P);font-weight:700}
+
+  .dato{font-size:.89rem;color:var(--ink);padding:.1rem 0 .2rem}
+  .dato ul{margin:.2rem 0;padding-left:1.1rem}
+  .dato li{margin-bottom:.25rem}
+  .dato li:last-child{margin-bottom:0}
+  .dato b{color:var(--P);font-weight:700}
+  .dato .f{font-family:"Iowan Old Style",Palatino,Georgia,serif;font-size:1.02em}
+
+  .leg{font-size:.78rem;color:var(--muted);border-top:1.5px solid var(--soft);padding-top:.45rem;margin-top:.35rem}
+  .leg b{color:var(--P);font-weight:700}
+
+  details.why{margin-top:.55rem;border-top:1.5px solid var(--soft);padding-top:.45rem}
+  details.why > summary{
+    list-style:none;cursor:pointer;display:flex;align-items:center;gap:.35rem;
+    font-size:.76rem;font-weight:700;color:var(--T);letter-spacing:.02em;
+  }
+  details.why > summary::-webkit-details-marker{display:none}
+  details.why > summary::after{content:"▾";font-size:.8rem;transition:transform .15s ease}
+  details.why[open] > summary::after{transform:rotate(180deg)}
+  details.why > summary:hover{color:var(--M)}
+  details.why .why-body{font-size:.83rem;line-height:1.45;color:var(--ink);background:var(--soft);border-radius:10px;padding:.55rem .7rem;margin-top:.45rem}
+
+  .trap{background:#FFF9E8;border:1.5px solid #F5E2A8;border-left:4px solid #E8B93B;border-radius:12px;padding:.8rem 1rem;margin-top:.7rem}
+  .trap h4{margin:0 0 .4rem;font-size:.86rem;color:#8A6410}
+  .trap ul{margin:0;padding-left:1.1rem;font-size:.86rem;color:#5C4712}
+  .trap li{margin-bottom:.25rem}
+  .trap li:last-child{margin-bottom:0}
+
+  /* ---------- Modo memoria ---------- */
+  /* se tapa el valor, nunca la etiqueta: el andamio queda para poder recitar */
+  body.memo:not(.flip) .fbody .io-v,
+  body.memo:not(.flip) .fbody .dato,
+  body.memo:not(.flip) .fbody .eq{filter:blur(6.5px)}
+  body.memo:not(.flip) .card.open .fbody .io-v,
+  body.memo:not(.flip) .card.open .fbody .dato,
+  body.memo:not(.flip) .card.open .fbody .eq{filter:none}
+
+  body.memo.flip .card .name{filter:blur(6.5px)}
+  body.memo.flip .card.open .name{filter:none}
+
+  body.memo .card{cursor:pointer}
+  body.memo .card::after{
+    content:"toca para ver";position:absolute;right:.7rem;top:.72rem;
+    font-size:.66rem;color:var(--T);font-weight:700;letter-spacing:.04em;
+  }
+  body.memo .card.open::after{content:""}
+  body.memo details.why{filter:none}
+
+  footer{text-align:center;color:var(--muted);font-size:.8rem;padding:0 1rem 3rem;max-width:60ch;margin:0 auto}
+
+  @media print{
+    .tabs,.controls,.hint,footer{display:none}
+    .panel{display:block!important;page-break-after:always}
+    body.memo .fbody .dato,body.memo .fbody .eq,body.memo .fbody .io-v,body.memo .card .name{filter:none}
+    body{background:#fff}
+  }
+</style>
+
+<style>
+/* ---- barra de regreso lety2E (prefijo l2e- para no chocar) ---- */
+.l2e-volver{
+  font-family:'DM Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
+  font-size:.85rem;font-weight:500;
+  padding:.7rem 1.1rem;
+  background:#1A0828;color:#F5E9F2;
+  display:flex;flex-wrap:wrap;align-items:center;gap:.45rem;
+  line-height:1.5;
+}
+.l2e-volver a{color:#00DEC8;text-decoration:none;}
+.l2e-volver a:hover{color:#FF00AA;text-decoration:underline;}
+.l2e-volver .l2e-sep{opacity:.45;}
+.l2e-volver .l2e-actual{opacity:.75;}
+.l2e-volver .l2e-marca{
+  margin-left:auto;font-family:Georgia,'Times New Roman',serif;
+  font-style:italic;font-weight:700;color:#FF00AA;text-decoration:none;
+}
+.l2e-volver .l2e-marca:hover{color:#00DEC8;}
+@media (max-width:520px){
+  .l2e-volver{font-size:.78rem;padding:.6rem .8rem;}
+  .l2e-volver .l2e-marca{margin-left:auto;}
+}
+</style>
+</head>
+<body data-section="apuntes">
+<nav class="l2e-volver">
+  <a href="../../index.html">Inicio</a>
+  <span class="l2e-sep">&rsaquo;</span>
+  <a href="../index.html">Apuntes</a>
+  <span class="l2e-sep">&rsaquo;</span>
+  <a href="index.html">Ingreso UNAM</a>
+  <span class="l2e-sep">&rsaquo;</span>
+  <span class="l2e-actual">Español</span>
+  <a class="l2e-marca" href="../../index.html">lety2E</a>
+</nav>
+
+
+<header>
+  <div class="eyebrow">Guía UNAM · Área 2 · Ciencias Biológicas, Químicas y de la Salud</div>
+  <h1>Español</h1>
+  <p>Media materia se memoriza y media es <b>oficio</b>. Aquí lo de oficio —leer y redactar— también va en tarjetas: <b>qué te preguntan y cómo se contesta</b>.</p>
+</header>
+
+<div class="controls">
+  <button class="switch" id="memoBtn"><span class="dot"></span> Modo memoria</button>
+  <button class="switch" id="flipBtn"><span class="dot"></span> Voltear</button>
+</div>
+<div class="hint" id="hint">Enciende el <b>modo memoria</b> para taparte. El <b>En palabras</b> de cada tarjeta se abre siempre, en cualquier modo.</div>
+
+<nav class="tabs" id="tabs"></nav>
+
+<main id="main">
+
+<!-- ============ U1 FUNCIONES DE LA LENGUA ============ -->
+<section class="panel" data-num="1" data-short="Funciones de la lengua">
+  <div class="panel-head">
+    <div class="u">Unidad 1</div>
+    <h2>Funciones de la lengua</h2>
+    <p class="lead">El temario pide tres, pero el examen usa las otras como distractores. Se contesta por las <b>marcas</b> del párrafo, no por el tema.</p>
+  </div>
+
+  <h3 class="sec">Conceptos clave</h3>
+  <div class="cgrid">
+    <div class="concept"><h4>Cómo se pregunta</h4><p>Te dan <b>cuatro párrafos que dicen casi lo mismo</b> y preguntan en cuál predomina tal función. Como el tema es idéntico en los cuatro, el tema no sirve para decidir: hay que ver <b>a quién le habla</b> y <b>cómo</b>.</p></div>
+    <div class="concept"><h4>Predomina, no es la única</h4><p>Un texto casi siempre tiene varias funciones a la vez. La pregunta es cuál <b>manda</b>, no cuál está presente.</p></div>
+    <div class="concept"><h4>El truco de la persona gramatical</h4><p>Es lo primero que hay que buscar: <b>yo</b> · <b>tú</b> · <b>él/ello</b>. Cada persona apunta a una función distinta y se ve de un golpe.</p></div>
+  </div>
+
+  <h3 class="sec">Las tres del temario</h3>
+  <div class="fgrid">
+
+    <div class="card"><div class="name">Función referencial</div><div class="fbody">
+      <div class="io"><span class="io-k">Para qué</span><span class="io-v"><b>informar</b> sobre la realidad: transmitir datos, sin opinar ni pedir nada</span></div>
+      <div class="io"><span class="io-k">Persona</span><span class="io-v"><b>tercera</b>: pasa, depende, existen</span></div>
+      <div class="io"><span class="io-k">Marcas</span><span class="io-v">datos, cifras, enumeraciones · lenguaje <b>objetivo</b> y directo · <b>sin adjetivos</b> de valoración</span></div>
+      <div class="io"><span class="io-k">Se ve en</span><span class="io-v">la nota informativa, el libro de texto, el artículo científico</span></div>
+      <div class="io"><span class="io-k">Otros nombres</span><span class="io-v">informativa, representativa, denotativa</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">El que escribe se hace a un lado. Si al leer no sabes si el autor está contento o enojado, es esta.</div></details></div>
+
+    <div class="card"><div class="name">Función apelativa</div><div class="fbody">
+      <div class="io"><span class="io-k">Para qué</span><span class="io-v"><b>mover al que lee</b>: convencerlo, aconsejarlo o hacerlo actuar</span></div>
+      <div class="io"><span class="io-k">Persona</span><span class="io-v"><b>segunda</b>: tú, usted, ustedes</span></div>
+      <div class="io"><span class="io-k">Marcas</span><span class="io-v">verbos en <b>imperativo</b> («toma en cuenta», «piensa», «no olvides») · preguntas al lector · vocativos</span></div>
+      <div class="io"><span class="io-k">Se ve en</span><span class="io-v">la publicidad, el instructivo, el discurso político, el consejo</span></div>
+      <div class="io"><span class="io-k">Otro nombre</span><span class="io-v">conativa</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">El texto te está hablando <em>a ti</em> y te está pidiendo algo. Basta con encontrar un «tú» o un mandato.</div></details></div>
+
+    <div class="card"><div class="name">Función poética</div><div class="fbody">
+      <div class="io"><span class="io-k">Para qué</span><span class="io-v">que importe <b>cómo está dicho</b>: la forma del mensaje es el fin, no el medio</span></div>
+      <div class="io"><span class="io-k">Marcas</span><span class="io-v"><b>figuras retóricas</b> · adjetivos abundantes y valorativos («prodigiosas», «encantador») · ritmo y repeticiones buscadas</span></div>
+      <div class="io"><span class="io-k">Se ve en</span><span class="io-v">el poema, el cuento, la novela — y en lemas, refranes y publicidad</span></div>
+      <div class="io"><span class="io-k">Otro nombre</span><span class="io-v">estética</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">La prueba: si al decirlo con palabras simples se pierde lo importante, es esta. En el examen es la del párrafo lleno de adjetivos bonitos.</div></details></div>
+  </div>
+
+  <h3 class="sec">Las otras tres (son los distractores)</h3>
+  <div class="fgrid">
+
+    <div class="card"><div class="name">Función emotiva</div><div class="fbody">
+      <div class="io"><span class="io-k">Para qué</span><span class="io-v">expresar lo que <b>siente el que habla</b>: emociones, estados de ánimo, opiniones</span></div>
+      <div class="io"><span class="io-k">Persona</span><span class="io-v"><b>primera</b>: yo, me, mi</span></div>
+      <div class="io"><span class="io-k">Marcas</span><span class="io-v"><b>exclamaciones</b>, diminutivos, interjecciones («¡ay!», «qué barbaridad»)</span></div>
+      <div class="io"><span class="io-k">Otro nombre</span><span class="io-v">expresiva o sintomática</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Aquí el centro es el emisor, no el mensaje ni el que lee. Se reconoce por el «yo» y los signos de admiración.</div></details></div>
+
+    <div class="card"><div class="name">Función fática</div><div class="fbody">
+      <div class="io"><span class="io-k">Para qué</span><span class="io-v"><b>abrir, mantener o cerrar</b> el contacto — no transmite contenido</span></div>
+      <div class="io"><span class="io-k">Marcas</span><span class="io-v">«bueno», «¿me escuchas?», «ajá», «¿verdad?», «hasta luego»</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">El «bueno» del teléfono no informa nada: solo comprueba que hay línea. Eso es todo lo que hace esta función.</div></details></div>
+
+    <div class="card"><div class="name">Función metalingüística</div><div class="fbody">
+      <div class="io"><span class="io-k">Para qué</span><span class="io-v">usar el idioma para <b>hablar del idioma mismo</b></span></div>
+      <div class="io"><span class="io-k">Marcas</span><span class="io-v">definiciones, reglas gramaticales, «se escribe con b», «significa que…»</span></div>
+      <div class="io"><span class="io-k">Se ve en</span><span class="io-v">el diccionario, la gramática — y en estas mismas tarjetas</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Cuando el idioma se explica a sí mismo. Un diccionario es esta función de principio a fin.</div></details></div>
+  </div>
+
+  <h3 class="sec">Los seis elementos de la comunicación</h3>
+  <div class="fgrid">
+
+    <div class="card"><div class="name">Quién es quién en el circuito</div><div class="fbody">
+      <div class="dato">Cada función pone el peso en un elemento distinto:
+        <ul>
+          <li><b>Emisor</b> — el que produce el mensaje → función <b>emotiva</b></li>
+          <li><b>Receptor</b> — a quien va dirigido → función <b>apelativa</b></li>
+          <li><b>Mensaje</b> — lo que se dice y cómo → función <b>poética</b></li>
+          <li><b>Referente</b> o contexto — de qué se habla → función <b>referencial</b></li>
+          <li><b>Canal</b> — el medio físico → función <b>fática</b></li>
+          <li><b>Código</b> — el idioma compartido → función <b>metalingüística</b></li>
+        </ul>
+      </div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Las seis funciones no se inventaron sueltas: cada una es «qué pasa cuando el peso cae en tal parte». Si te acuerdas de estas seis piezas, las funciones salen solas.</div></details></div>
+  </div>
+
+  <div class="trap"><h4>Ojo en el examen</h4><ul>
+    <li>Los cuatro párrafos <b>dicen lo mismo a propósito</b>. No los leas buscando el tema: busca el <b>«tú»</b>, el <b>«yo»</b> o los <b>adjetivos</b>.</li>
+    <li>Si el párrafo trae <b>«toma en cuenta esto siempre que…»</b> o cualquier mandato, es <b>apelativa</b>, aunque lo demás sea puro dato.</li>
+    <li>Si trae <b>«prodigiosas», «maravilloso», «encantador»</b> —adjetivos que valoran—, es <b>poética</b>, aunque informe.</li>
+    <li>Si trae <b>«es claro que»</b> o <b>«debemos»</b>, ya se salió de la referencial: alguien está opinando.</li>
+    <li>La <b>referencial</b> es la que <em>no</em> tiene marcas: ni tú, ni yo, ni adornos. Se identifica por descarte.</li>
+  </ul></div>
+</section>
+
+<!-- ============ U2 FORMAS DEL DISCURSO ============ -->
+<section class="panel" data-num="2" data-short="Formas del discurso">
+  <div class="panel-head">
+    <div class="u">Unidad 2</div>
+    <h2>Formas del discurso</h2>
+    <p class="lead">Cómo está organizado por dentro un texto. Se reconoce por el <b>tipo de verbo</b> y por si el tiempo avanza o se detiene.</p>
+  </div>
+
+  <h3 class="sec">Conceptos clave</h3>
+  <div class="cgrid">
+    <div class="concept"><h4>Forma ≠ función</h4><p>La <b>función</b> es para qué se escribe (informar, convencer). La <b>forma del discurso</b> es cómo se organiza por dentro (contando, describiendo, argumentando). Se preguntan por separado.</p></div>
+    <div class="concept"><h4>La pregunta clave</h4><p>¿El <b>tiempo avanza</b>? Si sí, es una. ¿Se <b>detiene</b> para mirar algo? Es otra. ¿Se <b>defiende</b> una postura con razones? Es la tercera.</p></div>
+    <div class="concept"><h4>También se mezclan</h4><p>Una novela describe y narra; un ensayo expone y argumenta. Se pregunta cuál <b>predomina</b>.</p></div>
+  </div>
+
+  <h3 class="sec">Las formas</h3>
+  <div class="fgrid">
+
+    <div class="card"><div class="name">Narrativa</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué hace</span><span class="io-v">contar <b>hechos que ocurren uno tras otro</b> en el tiempo</span></div>
+      <div class="io"><span class="io-k">Marcas</span><span class="io-v"><b>verbos de acción en pasado</b> (ordenó, fundaron, llegó) · conectores de tiempo (luego, después, hacia 1529)</span></div>
+      <div class="io"><span class="io-k">El tiempo</span><span class="io-v"><b>avanza</b>: al terminar el párrafo estás en otro momento</span></div>
+      <div class="io"><span class="io-k">Se ve en</span><span class="io-v">el cuento, la crónica, la nota, el relato histórico</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Pregúntate «¿y luego qué pasó?». Si el texto contesta, es esta.</div></details></div>
+
+    <div class="card"><div class="name">Descriptiva</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué hace</span><span class="io-v">decir <b>cómo es</b> algo o alguien: sus rasgos, sus partes, su aspecto</span></div>
+      <div class="io"><span class="io-k">Marcas</span><span class="io-v"><b>abundancia de adjetivos</b> · verbos <b>ser, estar, haber, tener</b> · presente o copretérito</span></div>
+      <div class="io"><span class="io-k">El tiempo</span><span class="io-v">se <b>detiene</b>: la escena se congela para mirarla</span></div>
+      <div class="io"><span class="io-k">Sus tipos</span><span class="io-v"><b>prosopografía</b> (lo físico) · <b>etopeya</b> (el carácter) · <b>retrato</b> (las dos) · <b>topografía</b> (un lugar)</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Es una fotografía en palabras. Si quitas los adjetivos no queda nada, porque el texto era los adjetivos.</div></details></div>
+
+    <div class="card"><div class="name">Argumentativa</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué hace</span><span class="io-v">defender una <b>postura con razones</b> para convencer al lector</span></div>
+      <div class="io"><span class="io-k">Estructura</span><span class="io-v"><b>tesis</b> (lo que se defiende) + <b>argumentos</b> (por qué) + <b>conclusión</b></span></div>
+      <div class="io"><span class="io-k">Marcas</span><span class="io-v">conectores causales y de consecuencia: <b>porque, ya que, puesto que, por lo tanto, en consecuencia</b></span></div>
+      <div class="io"><span class="io-k">Se ve en</span><span class="io-v">el editorial, el ensayo, el artículo de opinión, el alegato</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">La señal más segura es un «porque» repetido: cada afirmación viene con su razón pegada.</div></details></div>
+
+    <div class="card"><div class="name">Expositiva</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué hace</span><span class="io-v"><b>explicar</b> un tema para que se entienda, <b>sin tomar partido</b></span></div>
+      <div class="io"><span class="io-k">Marcas</span><span class="io-v">definiciones, ejemplos, clasificaciones, datos · lenguaje claro y <b>objetivo</b></span></div>
+      <div class="io"><span class="io-k">Diferencia</span><span class="io-v">explica pero <b>no busca convencer</b> de nada: ahí se separa de la anterior</span></div>
+      <div class="io"><span class="io-k">Se ve en</span><span class="io-v">el libro de texto, la enciclopedia, el artículo de divulgación</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Enseña sin empujar. Si al terminar no te queda claro qué opina el autor, es esta y no la argumentativa.</div></details></div>
+
+    <div class="card"><div class="name">Dialogada</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué hace</span><span class="io-v">reproducir el <b>intercambio de palabras</b> entre dos o más personas</span></div>
+      <div class="io"><span class="io-k">Marcas</span><span class="io-v"><b>guiones</b> o nombres seguidos de dos puntos · comillas · verbos de habla (dijo, respondió)</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Se ve antes de leerse: la página tiene forma de conversación.</div></details></div>
+  </div>
+
+  <div class="trap"><h4>Ojo en el examen</h4><ul>
+    <li>El fragmento histórico («Cortés ordenó traer frailes… fundaron conventos») es <b>narrativo</b>, no expositivo: hay <b>hechos encadenados en el tiempo</b> con verbos en pasado. Es la trampa clásica, porque el tema suena a libro de texto.</li>
+    <li><b>Argumentativa vs. expositiva:</b> las dos son serias y llenas de datos. La diferencia es si el autor <b>defiende algo</b>. Busca los «porque» y los «por lo tanto».</li>
+    <li>El texto que enumera mandatos («Aprende, viaja, estudia…») no es argumentativo: no da razones. Es <b>apelativo</b> por función y no argumenta.</li>
+    <li><b>Descriptiva = adjetivos y el tiempo detenido.</b> Si el párrafo tiene verbos de acción, aunque tenga adjetivos, es narrativa.</li>
+  </ul></div>
+</section>
+
+<!-- ============ U3 COMPRENSIÓN DE LECTURA ============ -->
+<section class="panel" data-num="3" data-short="Comprensión de lectura ★">
+  <div class="panel-head">
+    <div class="u">Unidad 3 · <b>foco</b></div>
+    <h2>Comprensión de lectura</h2>
+    <p class="lead">Esta unidad no es de saber, es de <b>método</b>. Aquí no hay contenido que memorizar: hay <b>reglas</b> — qué tipo de pregunta te están haciendo y dónde está la respuesta de cada tipo.</p>
+  </div>
+
+  <h3 class="sec">Conceptos clave</h3>
+  <div class="cgrid">
+    <div class="concept"><h4>La respuesta siempre está en el texto</h4><p>No es una prueba de cultura general ni de opinión. <b>Todo lo que preguntan se puede sostener con una línea del texto</b> — literal o deducida. Si una opción necesita algo que el texto no dice, está mal aunque sea verdad en el mundo.</p></div>
+    <div class="concept"><h4>Leer rápido no es el problema; leer sin saber qué buscas, sí</h4><p>Cada pregunta tiene <b>su lugar</b> en el texto y <b>su tipo de respuesta</b>. Si sabes qué te están pidiendo, no hace falta releer todo: hace falta releer <em>lo que toca</em>.</p></div>
+    <div class="concept"><h4>Se contesta dos veces</h4><p>Primero <b>tapa las opciones</b> y contesta con tus palabras. Luego busca cuál opción se parece a lo que pensaste. Así las opciones no te arrastran.</p></div>
+    <div class="concept"><h4>Descartar vale más que acertar</h4><p>Casi siempre hay <b>dos opciones fáciles de tirar</b>. Quedarte con dos y decidir entre esas es mucho más seguro que buscar la buena entre cuatro.</p></div>
+  </div>
+
+  <h3 class="sec">El orden de trabajo</h3>
+  <div class="fgrid">
+
+    <div class="card"><div class="name">Paso 1 · Mira las preguntas antes del texto</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué hacer</span><span class="io-v">leer <b>solo los enunciados</b>, sin las opciones, para saber qué te van a pedir</span></div>
+      <div class="io"><span class="io-k">Para qué</span><span class="io-v">porque ya lees <b>buscando</b>, no de corrido: el ojo se detiene solo donde importa</span></div>
+      <div class="io"><span class="io-k">Cuánto tarda</span><span class="io-v">unos <b>20 segundos</b>, y se recupera de sobra</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Es la diferencia entre entrar a un supermercado con lista y entrar a ver qué encuentras.</div></details></div>
+
+    <div class="card"><div class="name">Paso 2 · Lee completo, pero marcando</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué hacer</span><span class="io-v">una lectura seguida, subrayando <b>nombres propios, cifras, fechas</b> y los conectores que anuncian giro</span></div>
+      <div class="io"><span class="io-k">Qué anotar</span><span class="io-v">al margen de cada párrafo, <b>una palabra</b> que diga de qué trata</span></div>
+      <div class="io"><span class="io-k">Para qué</span><span class="io-v">esas palabras al margen son tu <b>índice</b>: te dicen a qué párrafo volver sin releer todo</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Leer rápido está bien si vas dejando migas. Lo que no funciona es leer rápido y no poder volver.</div></details></div>
+
+    <div class="card"><div class="name">Paso 3 · Contesta primero las de dato</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué hacer</span><span class="io-v">despachar las que se resuelven <b>volviendo a una línea</b> (cifras, nombres, definiciones)</span></div>
+      <div class="io"><span class="io-k">Para qué</span><span class="io-v">son las <b>rápidas y seguras</b>; te dan puntos y de paso te reacomodan el texto en la cabeza</span></div>
+      <div class="io"><span class="io-k">Al final</span><span class="io-v">las de <b>idea principal</b> e <b>intención</b>, que necesitan el texto entero</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Las preguntas globales salen mejor al final, cuando ya diste tres vueltas al texto contestando las otras.</div></details></div>
+
+    <div class="card"><div class="name">Paso 4 · Verifica señalando el renglón</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué hacer</span><span class="io-v">antes de marcar, poder <b>apuntar con el dedo</b> la parte del texto que sostiene tu respuesta</span></div>
+      <div class="io"><span class="io-k">Si no puedes</span><span class="io-v">es que la estás contestando <b>de memoria o por lógica</b>, y ahí es donde se falla</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Es la regla que corrige la lectura apresurada: no importa qué tan rápido leíste si puedes señalar de dónde lo sacaste.</div></details></div>
+  </div>
+
+  <h3 class="sec">Los tipos de pregunta y cómo se contesta cada uno</h3>
+  <div class="fgrid">
+
+    <div class="card"><div class="name">Pregunta de dato explícito</div><div class="fbody">
+      <div class="io"><span class="io-k">Cómo suena</span><span class="io-v">«¿en qué año…?», «¿cuántas toneladas…?», «según el texto, ¿quién…?»</span></div>
+      <div class="io"><span class="io-k">Dónde está</span><span class="io-v"><b>escrito tal cual</b> en el texto; basta con localizarlo</span></div>
+      <div class="io"><span class="io-k">Cómo se busca</span><span class="io-v">por la <b>palabra rara</b> del enunciado (un nombre propio, una cifra): se rastrea con la vista, no leyendo</span></div>
+      <div class="io"><span class="io-k">Trampa</span><span class="io-v">opciones con cifras <b>parecidas</b> que sí aparecen en el texto pero contestan otra cosa</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">La más fácil y la que no se debe fallar. Solo hay que volver y ver.</div></details></div>
+
+    <div class="card"><div class="name">Pregunta de idea principal</div><div class="fbody">
+      <div class="io"><span class="io-k">Cómo suena</span><span class="io-v">«¿cuál es la idea principal?», «el texto trata sobre…», «el mejor título sería…»</span></div>
+      <div class="io"><span class="io-k">Qué se busca</span><span class="io-v">la idea <b>más general</b>, la que <b>abarca a todas las demás</b> y sin la cual el texto se cae</span></div>
+      <div class="io"><span class="io-k">Dónde suele estar</span><span class="io-v">al <b>inicio</b> o al <b>final</b> del texto, y muchas veces en el <b>título</b></span></div>
+      <div class="io"><span class="io-k">La prueba</span><span class="io-v">¿la opción cubre <b>todo</b> el texto o solo un párrafo? Si solo cubre un párrafo, es secundaria</span></div>
+      <div class="io"><span class="io-k">Trampa</span><span class="io-v">la opción que trae un <b>dato llamativo</b> del texto (una comparación, una cifra) — es cierta pero es un detalle</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">No es «lo más interesante que dice»: es lo que si lo quitas, ya no queda texto.</div></details></div>
+
+    <div class="card"><div class="name">Pregunta de idea secundaria</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué se busca</span><span class="io-v">la que <b>apoya, ejemplifica o detalla</b> a la principal</span></div>
+      <div class="io"><span class="io-k">La prueba</span><span class="io-v">se puede <b>quitar</b> y el texto sigue en pie, solo queda más pobre</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Son las ramas. La principal es el tronco: si lo cortas se cae todo.</div></details></div>
+
+    <div class="card"><div class="name">Pregunta de inferencia</div><div class="fbody">
+      <div class="io"><span class="io-k">Cómo suena</span><span class="io-v">«se infiere que…», «se deduce que…», «a partir de la lectura…»</span></div>
+      <div class="io"><span class="io-k">Qué se busca</span><span class="io-v">algo que <b>no está escrito</b> pero que el texto <b>obliga</b> a concluir</span></div>
+      <div class="io"><span class="io-k">La regla</span><span class="io-v">debe <b>sostenerse con lo dicho</b>: si necesita un dato que el texto no da, está mal <em>aunque sea verdad</em></span></div>
+      <div class="io"><span class="io-k">Trampa</span><span class="io-v">la opción que es una <b>opinión razonable</b> («se deben tomar acciones», «hay que investigar más») pero que el texto no sostiene</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Deducir no es opinar. La pregunta es «¿qué se sigue de esto?», no «¿qué pienso yo de esto?».</div></details></div>
+
+    <div class="card"><div class="name">Pregunta de intención del autor</div><div class="fbody">
+      <div class="io"><span class="io-k">Cómo suena</span><span class="io-v">«la intención al escribir este texto es…», «el propósito del autor es…»</span></div>
+      <div class="io"><span class="io-k">Qué se busca</span><span class="io-v">un <b>verbo</b>: informar, divulgar, comparar, criticar, <b>concientizar</b>, persuadir, denunciar</span></div>
+      <div class="io"><span class="io-k">Cómo se decide</span><span class="io-v">por el <b>cierre</b> del texto y por el tono: si termina con una advertencia o una urgencia, no era solo informar</span></div>
+      <div class="io"><span class="io-k">Trampa</span><span class="io-v">la opción que describe <b>lo que el texto hace</b> («dar datos estadísticos») en vez de <b>para qué</b> lo hace</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Casi siempre el verbo correcto es el más ambicioso de los cuatro: el autor no se tomó la molestia solo para informar.</div></details></div>
+
+    <div class="card"><div class="name">Pregunta de actitud o sentimiento</div><div class="fbody">
+      <div class="io"><span class="io-k">Cómo suena</span><span class="io-v">«el investigador se muestra…», «¿cómo se siente el personaje?», «la postura del autor es…»</span></div>
+      <div class="io"><span class="io-k">Dónde está</span><span class="io-v">en los <b>verbos y adjetivos</b> que se usan al citarlo: «advierte», «lamenta», «celebra», «alarmante»</span></div>
+      <div class="io"><span class="io-k">Cómo se afina</span><span class="io-v">las cuatro opciones suelen ser <b>parecidas</b>; elige la que coincide con la <b>intensidad</b> del texto, ni más ni menos</span></div>
+      <div class="io"><span class="io-k">Trampa</span><span class="io-v">la opción <b>exagerada</b> (furioso, desesperado) cuando el texto solo estaba preocupado</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">El verbo con que se presenta la cita ya trae la carga: «advierte» no es lo mismo que «explica».</div></details></div>
+
+    <div class="card"><div class="name">Pregunta de vocabulario en contexto</div><div class="fbody">
+      <div class="io"><span class="io-k">Cómo suena</span><span class="io-v">«¿cuál es el sinónimo de X <b>en el texto</b>?», «la expresión Y se refiere a…»</span></div>
+      <div class="io"><span class="io-k">Cómo se contesta</span><span class="io-v"><b>sustituye</b> cada opción en la frase original y lee en voz baja: la buena deja la frase intacta</span></div>
+      <div class="io"><span class="io-k">La regla</span><span class="io-v">no es el sinónimo del diccionario: es el que <b>funciona ahí</b>. Varias opciones serán casi sinónimas</span></div>
+      <div class="io"><span class="io-k">Trampa</span><span class="io-v">el sinónimo <b>más elegante</b> o más largo suele ser el señuelo (conmemoraciones, rememoraciones) frente a la palabra sencilla que sí cabe (recuerdos)</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Es la única pregunta que se resuelve tapando la palabra y metiendo las cuatro opciones a ver cuál no rechina.</div></details></div>
+  </div>
+
+  <h3 class="sec">Cómo está armado un texto</h3>
+  <div class="fgrid">
+
+    <div class="card"><div class="name">Estructura del texto</div><div class="fbody">
+      <div class="io"><span class="io-k">Introducción</span><span class="io-v">presenta el tema y suele <b>anunciar la idea principal</b></span></div>
+      <div class="io"><span class="io-k">Desarrollo</span><span class="io-v">la sostiene con datos, ejemplos, citas y cifras</span></div>
+      <div class="io"><span class="io-k">Conclusión</span><span class="io-v">la <b>repite en otras palabras</b> y muchas veces revela la intención</span></div>
+      <div class="io"><span class="io-k">Para qué sirve</span><span class="io-v">porque te dice <b>dónde buscar</b> cada tipo de pregunta sin releer el resto</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Casi todo texto de examen dice su idea principal dos veces: al empezar y al terminar. Ahí es donde hay que ir.</div></details></div>
+
+    <div class="card"><div class="name">Frases clave: los conectores que avisan</div><div class="fbody">
+      <div class="dato">Marcan lo que viene y ahorran releer:
+        <ul>
+          <li><b>Anuncian lo importante</b> — «en conclusión», «lo esencial», «cabe destacar», «es urgente»</li>
+          <li><b>Anuncian un giro</b> — «sin embargo», «pero», «no obstante», «a pesar de» → lo que sigue vale más que lo anterior</li>
+          <li><b>Anuncian una razón</b> — «porque», «ya que», «debido a», «puesto que»</li>
+          <li><b>Anuncian consecuencia</b> — «por lo tanto», «así que», «de ahí que», «en consecuencia»</li>
+          <li><b>Anuncian ejemplo o aclaración</b> — «es decir», «por ejemplo», «o sea» → lo que sigue es detalle, no idea nueva</li>
+        </ul>
+      </div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Un «sin embargo» es una flecha: lo que de verdad quiere decir el autor casi siempre está después, no antes.</div></details></div>
+
+    <div class="card"><div class="name">Punto de vista del autor</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué es</span><span class="io-v">la <b>postura</b> desde la que escribe: a favor, en contra, neutral, preocupado</span></div>
+      <div class="io"><span class="io-k">Dónde se ve</span><span class="io-v">en los <b>adjetivos</b> («alarmante», «prodigioso»), en a quién <b>cita</b> y en qué <b>omite</b></span></div>
+      <div class="io"><span class="io-k">Ojo</span><span class="io-v">un texto puede parecer neutral y no serlo: si solo cita a los que le dan la razón, ya tomó partido</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Nadie escribe desde ningún lado. Los adjetivos son el lugar donde se le sale la postura.</div></details></div>
+  </div>
+
+  <h3 class="sec">Las cuatro trampas de las opciones</h3>
+  <div class="fgrid">
+
+    <div class="card"><div class="name">La verdadera que no contesta</div><div class="fbody">
+      <div class="io"><span class="io-k">Cómo es</span><span class="io-v">dice algo que el texto <b>sí afirma</b>, pero <b>no es lo que preguntaron</b></span></div>
+      <div class="io"><span class="io-k">Por qué cae</span><span class="io-v">porque la reconoces del texto y eso se siente como acertar</span></div>
+      <div class="io"><span class="io-k">Cómo se evita</span><span class="io-v">releyendo <b>el enunciado</b>, no el texto: casi siempre el error fue no leer bien la pregunta</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">La más peligrosa de las cuatro, justo porque es cierta.</div></details></div>
+
+    <div class="card"><div class="name">La copiada con el sentido cambiado</div><div class="fbody">
+      <div class="io"><span class="io-k">Cómo es</span><span class="io-v">usa <b>las mismas palabras</b> del texto pero invierte una relación: cambia el sujeto, niega, o voltea la causa por el efecto</span></div>
+      <div class="io"><span class="io-k">Cómo se evita</span><span class="io-v">yendo al renglón y comparando <b>palabra por palabra</b>, no de memoria</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Suena idéntica al texto porque está hecha con sus piezas, solo que mal armadas.</div></details></div>
+
+    <div class="card"><div class="name">La absoluta</div><div class="fbody">
+      <div class="io"><span class="io-k">Cómo es</span><span class="io-v">trae <b>siempre, nunca, todos, ninguno, único, imposible</b></span></div>
+      <div class="io"><span class="io-k">Por qué falla</span><span class="io-v">los textos de examen son <b>prudentes</b>: hablan de tendencias, no de leyes sin excepción</span></div>
+      <div class="io"><span class="io-k">Su reverso</span><span class="io-v">la correcta suele estar en <b>tono medido</b>: «suele», «puede», «en gran medida»</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Un absoluto se tumba con un solo contraejemplo, y quien redacta el examen lo sabe.</div></details></div>
+
+    <div class="card"><div class="name">La razonable de más</div><div class="fbody">
+      <div class="io"><span class="io-k">Cómo es</span><span class="io-v">una opinión <b>sensata y correcta en el mundo</b>, pero que el texto <b>no dice ni implica</b></span></div>
+      <div class="io"><span class="io-k">Dónde aparece</span><span class="io-v">sobre todo en las de <b>inferencia</b>: te ofrecen la conclusión moral que cualquiera sacaría</span></div>
+      <div class="io"><span class="io-k">Cómo se evita</span><span class="io-v">con la regla del dedo: ¿de <b>qué renglón</b> sale? Si no hay renglón, no es</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Estar de acuerdo con una opción no es razón para marcarla. La pregunta es si el texto lo dijo.</div></details></div>
+  </div>
+
+  <div class="trap"><h4>Ojo en el examen</h4><ul>
+    <li><b>La regla del dedo:</b> antes de marcar, señala el renglón que sostiene tu respuesta. Si no lo encuentras, estás contestando por intuición — y ahí es donde se pierde por leer rápido.</li>
+    <li><b>Idea principal</b> = la que abarca todo el texto. Si la opción es cierta pero solo cubre un párrafo, es <b>secundaria</b> y está mal.</li>
+    <li>En las de <b>intención</b>, el verbo correcto casi nunca es el más modesto. Entre «divulgar datos» y «concientizar», gana el que explica <em>por qué</em> se divulgaron los datos.</li>
+    <li>En las de <b>vocabulario</b>, sustituye en la frase. La palabra elegante suele ser el señuelo; gana la que no cambia nada.</li>
+    <li>Las opciones con <b>siempre / nunca / todos</b> casi siempre están mal.</li>
+    <li>Las preguntas de una lectura vienen <b>en el orden del texto</b>: la 74 se contesta antes que la 78. Si vas saltando, estás releyendo de más.</li>
+  </ul></div>
+</section>
+
+<!-- ============ U4 GRAMÁTICA ============ -->
+<section class="panel" data-num="4" data-short="Gramática">
+  <div class="panel-head">
+    <div class="u">Unidad 4</div>
+    <h2>Gramática: la oración, el sujeto y el predicado</h2>
+    <p class="lead">Se pregunta señalando un pedazo en mayúsculas: «¿qué es esto?». Se contesta con <b>preguntas al verbo</b> y con <b>sustituciones</b>, no de oído.</p>
+  </div>
+
+  <h3 class="sec">Conceptos clave</h3>
+  <div class="cgrid">
+    <div class="concept"><h4>Cómo lo pregunta el examen</h4><p>Te dan una oración con un fragmento <b>EN MAYÚSCULAS</b> y cuatro nombres técnicos. Todo el chiste es tener el método para etiquetar ese fragmento.</p></div>
+    <div class="concept"><h4>Primero el verbo, siempre</h4><p>Se localiza el <b>verbo conjugado</b>. Lo que concuerda con él es el sujeto; todo lo demás es predicado. Los complementos se preguntan <b>al verbo</b>.</p></div>
+    <div class="concept"><h4>Cuenta los verbos</h4><p><b>Un</b> verbo conjugado = oración simple. <b>Dos o más</b> = oración compuesta, y entonces la pregunta va a ser cómo se relacionan entre ellas.</p></div>
+  </div>
+
+  <h3 class="sec">La oración y sus partes</h3>
+  <div class="fgrid">
+
+    <div class="card"><div class="name">La oración</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué es</span><span class="io-v">la unidad más pequeña con <b>sentido completo</b> e independencia sintáctica</span></div>
+      <div class="io"><span class="io-k">Requisito</span><span class="io-v">tener un <b>verbo conjugado</b>. Sin él es una frase, no una oración</span></div>
+      <div class="io"><span class="io-k">Sus partes</span><span class="io-v"><b>sujeto</b> (de quién se habla) y <b>predicado</b> (lo que se dice de él)</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">«La casa blanca» no es oración: no dice nada de ella. «La casa es blanca» sí.</div></details></div>
+
+    <div class="card"><div class="name">El sujeto</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué es</span><span class="io-v">de quién o de qué se dice algo; <b>concuerda</b> con el verbo en número y persona</span></div>
+      <div class="io"><span class="io-k">Su núcleo</span><span class="io-v">un <b>sustantivo</b> o un <b>pronombre</b></span></div>
+      <div class="io"><span class="io-k">Cómo se halla</span><span class="io-v">preguntando <b>«¿quién?»</b> al verbo — o cambiando el verbo de singular a plural: lo que cambia con él, es</span></div>
+      <div class="io"><span class="io-k">Tipos</span><span class="io-v"><b>simple</b> (un núcleo) · <b>compuesto</b> (dos o más) · <b>tácito</b> o morfológico (no está escrito, lo dice la terminación del verbo)</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">El truco del plural nunca falla: si pones el verbo en plural, lo que se ve obligado a cambiar con él es lo que buscas.</div></details></div>
+
+    <div class="card"><div class="name">El predicado verbal</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué es</span><span class="io-v">todo lo que se dice del sujeto cuando el <b>núcleo es un verbo con significado propio</b></span></div>
+      <div class="io"><span class="io-k">Su núcleo</span><span class="io-v">el <b>verbo conjugado</b></span></div>
+      <div class="io"><span class="io-k">Qué contiene</span><span class="io-v">el verbo y sus <b>complementos</b></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Es el caso normal: alguien hace algo. El verbo por sí solo ya dice qué pasa.</div></details></div>
+
+    <div class="card"><div class="name">El predicado nominal</div><div class="fbody">
+      <div class="io"><span class="io-k">Cuándo es</span><span class="io-v">cuando el verbo es <b>ser, estar o parecer</b> — verbos copulativos, que casi no significan nada</span></div>
+      <div class="io"><span class="io-k">Lo importante</span><span class="io-v">el <b>atributo</b>: lo que va después y se le atribuye al sujeto</span></div>
+      <div class="io"><span class="io-k">Cómo se comprueba</span><span class="io-v">el atributo se sustituye por <b>«lo»</b>: <em>«María es doctora» → «María lo es»</em></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">En «Ana está cansada», el verbo no dice nada: lo que informa es «cansada». Por eso el peso está ahí y no en el verbo.</div></details></div>
+  </div>
+
+  <h3 class="sec">Los complementos</h3>
+  <div class="fgrid">
+
+    <div class="card"><div class="name">Complemento directo</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué es</span><span class="io-v">sobre <b>qué o quién recae</b> la acción del verbo</span></div>
+      <div class="io"><span class="io-k">Se pregunta</span><span class="io-v"><b>«¿qué?»</b> o «¿a quién?» al verbo</span></div>
+      <div class="io"><span class="io-k">La prueba</span><span class="io-v">se sustituye por <b>lo, la, los, las</b>: <em>«presencia la lucha» → «la presencia»</em></span></div>
+      <div class="io"><span class="io-k">Otra prueba</span><span class="io-v">al pasar a voz pasiva, se vuelve el <b>sujeto</b></span></div>
+      <div class="io"><span class="io-k">Ojo</span><span class="io-v">si es persona, lleva <b>«a»</b> y se confunde con el indirecto: <em>«vi <b>a</b> Juan» → «lo vi»</em>, entonces es directo</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">La sustitución por «lo/la» es la prueba definitiva. Si cabe «lo», es este; si cabe «le», es el otro.</div></details></div>
+
+    <div class="card"><div class="name">Complemento indirecto</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué es</span><span class="io-v">quién <b>recibe el beneficio o el daño</b> de la acción</span></div>
+      <div class="io"><span class="io-k">Se pregunta</span><span class="io-v"><b>«¿a quién?»</b> o <b>«¿para quién?»</b></span></div>
+      <div class="io"><span class="io-k">La prueba</span><span class="io-v">se sustituye por <b>le, les</b>: <em>«le preparaban el café»</em></span></div>
+      <div class="io"><span class="io-k">Siempre lleva</span><span class="io-v">preposición <b>a</b> o <b>para</b></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Es el destinatario. En «le di el libro a Ana», el libro es lo que se da y Ana quien lo recibe.</div></details></div>
+
+    <div class="card"><div class="name">Complemento circunstancial</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué es</span><span class="io-v">la <b>circunstancia</b> en que ocurre la acción</span></div>
+      <div class="io"><span class="io-k">Se pregunta</span><span class="io-v"><b>«¿dónde? ¿cuándo? ¿cómo? ¿por qué? ¿con qué? ¿con quién? ¿cuánto?»</b></span></div>
+      <div class="io"><span class="io-k">Tipos</span><span class="io-v">de <b>lugar, tiempo, modo, causa, finalidad, instrumento, compañía, cantidad</b></span></div>
+      <div class="io"><span class="io-k">La prueba</span><span class="io-v">se puede <b>quitar</b> y la oración sigue teniendo sentido — y se puede <b>mover</b> de lugar</span></div>
+      <div class="io"><span class="io-k">Ejemplo</span><span class="io-v"><em>«Chuang Tzu presencia <b>a las afueras del palacio</b> la lucha»</em> → ¿dónde? → de lugar</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Es el que se puede tachar sin romper nada. Esa es la señal: si lo quitas y la oración aguanta, es este.</div></details></div>
+
+    <div class="card"><div class="name">Complemento agente</div><div class="fbody">
+      <div class="io"><span class="io-k">Cuándo aparece</span><span class="io-v">solo en oraciones en <b>voz pasiva</b></span></div>
+      <div class="io"><span class="io-k">Qué es</span><span class="io-v">quien <b>realiza</b> la acción, introducido por <b>«por»</b></span></div>
+      <div class="io"><span class="io-k">Ejemplo</span><span class="io-v"><em>«la casa fue construida <b>por los albañiles</b>»</em></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Es el sujeto disfrazado: el que de verdad hace la acción, pero puesto al final con un «por».</div></details></div>
+  </div>
+
+  <h3 class="sec">Oración compuesta</h3>
+  <div class="fgrid">
+
+    <div class="card"><div class="name">Coordinadas</div><div class="fbody">
+      <div class="io"><span class="io-k">Cómo se unen</span><span class="io-v">con un <b>nexo</b>: y, e, ni, o, u, pero, sino, sin embargo</span></div>
+      <div class="io"><span class="io-k">Su relación</span><span class="io-v">están <b>al mismo nivel</b>: cada una tiene sentido completo por su cuenta</span></div>
+      <div class="io"><span class="io-k">La prueba</span><span class="io-v">se pueden <b>separar en dos oraciones</b> y las dos se entienden solas</span></div>
+      <div class="io"><span class="io-k">Ejemplo</span><span class="io-v"><em>«Los checoslovacos combatían en las calles <b>y</b> se oponían a la dictadura»</em></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Son dos socios: ninguna manda sobre la otra, solo van juntas.</div></details></div>
+
+    <div class="card"><div class="name">Yuxtapuestas</div><div class="fbody">
+      <div class="io"><span class="io-k">Cómo se unen</span><span class="io-v"><b>sin nexo</b>: solo con <b>coma, punto y coma o dos puntos</b></span></div>
+      <div class="io"><span class="io-k">Su relación</span><span class="io-v">también al mismo nivel; el signo hace el trabajo del nexo</span></div>
+      <div class="io"><span class="io-k">Ejemplo</span><span class="io-v"><em>«Llegué<b>,</b> vi<b>,</b> vencí»</em></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Yuxtaponer es poner una al lado de la otra sin pegamento. Si ves un punto y coma entre dos verbos, es esta.</div></details></div>
+
+    <div class="card"><div class="name">Principal y subordinada</div><div class="fbody">
+      <div class="io"><span class="io-k">Cómo se unen</span><span class="io-v">con <b>que, quien, cuyo, cuando, donde, si, porque, aunque</b></span></div>
+      <div class="io"><span class="io-k">Su relación</span><span class="io-v">una <b>depende</b> de la otra: la que depende no se sostiene sola</span></div>
+      <div class="io"><span class="io-k">La que manda</span><span class="io-v">es la <b>principal</b>; la que depende también se llama <b>secundaria</b> o subordinada</span></div>
+      <div class="io"><span class="io-k">La prueba</span><span class="io-v">léela suelta: si suena incompleta, es la que depende</span></div>
+      <div class="io"><span class="io-k">Ejemplo</span><span class="io-v"><em>«tomaba el café <b>que le preparaban en la hostería</b>»</em> — el trozo con «que» es el que depende</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">«Que le preparaban en la hostería», dicho solo, deja esperando. Por eso es la que depende.</div></details></div>
+
+    <div class="card"><div class="name">Los tres tipos de subordinada</div><div class="fbody">
+      <div class="dato">Según a qué palabra sustituyen:
+        <ul>
+          <li><b>Sustantiva</b> — hace de sustantivo; se cambia por <em>«eso»</em>. <em>«Me dijo <b>que vendría</b>» → «me dijo eso»</em>.</li>
+          <li><b>Adjetiva</b> o de relativo — hace de adjetivo; acompaña a un sustantivo y suele empezar con <em>que, quien, cuyo</em>. <em>«el café <b>que le preparaban</b>»</em>.</li>
+          <li><b>Adverbial</b> — hace de circunstancial; dice cuándo, dónde, cómo o por qué. <em>«Salió <b>cuando amaneció</b>»</em>.</li>
+        </ul>
+      </div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Cada una ocupa el lugar de una palabra: si puedes cambiar el bloque entero por «eso», por un adjetivo o por «entonces», ya sabes cuál es.</div></details></div>
+  </div>
+
+  <div class="trap"><h4>Ojo en el examen</h4><ul>
+    <li>El bloque que empieza con <b>«que»</b> y se pega a un sustantivo es <b>subordinada</b> (secundaria), no coordinada ni yuxtapuesta. Es la pregunta literal del examen muestra.</li>
+    <li><b>Directo o indirecto:</b> sustituye. Si cabe <b>«lo/la»</b> es directo; si cabe <b>«le»</b> es indirecto. No te fíes de la preposición «a», la llevan los dos.</li>
+    <li>Un bloque que contesta <b>«¿dónde?»</b> es <b>circunstancial</b>, aunque sea largo y esté a media oración («a las afueras del palacio»).</li>
+    <li><b>Yuxtapuesta = sin nexo.</b> Si hay «y» o «pero», ya es coordinada.</li>
+    <li>El <b>sujeto tácito</b> existe aunque no se vea: en «Llegamos tarde» el sujeto es «nosotros», y sigue siendo sujeto.</li>
+  </ul></div>
+</section>
+
+<!-- ============ U5 REDACCIÓN ============ -->
+<section class="panel" data-num="5" data-short="Redacción">
+  <div class="panel-head">
+    <div class="u">Unidad 5</div>
+    <h2>Redacción</h2>
+    <p class="lead">Te dan cuatro versiones del mismo párrafo y preguntas cuál está bien escrita. Se contesta <b>buscando el error</b> en las otras tres, no admirando la buena.</p>
+  </div>
+
+  <h3 class="sec">Conceptos clave</h3>
+  <div class="cgrid">
+    <div class="concept"><h4>Se resuelve por eliminación</h4><p>Las cuatro opciones dicen lo mismo. En tres hay <b>un error puntual</b>: una coma mal puesta, un acento, una concordancia rota, un nexo que no viene al caso. Encuéntralo y ya.</p></div>
+    <div class="concept"><h4>Los cuatro errores que se repiten</h4><p>Casi siempre es uno de estos: <b>concordancia</b> rota, <b>puntuación</b> mal usada, <b>acento</b> equivocado (ésta / está) o <b>conector</b> que no corresponde a la relación entre las ideas.</p></div>
+    <div class="concept"><h4>Las cuatro virtudes</h4><p><b>Claridad</b> (se entiende a la primera) · <b>concisión</b> (sin palabras de más) · <b>precisión</b> (la palabra exacta) · <b>coherencia</b> (las ideas en orden y sin contradicción).</p></div>
+  </div>
+
+  <h3 class="sec">Lo que se revisa</h3>
+  <div class="fgrid">
+
+    <div class="card"><div class="name">Concordancia sujeto-verbo</div><div class="fbody">
+      <div class="io"><span class="io-k">La regla</span><span class="io-v">el verbo va con el <b>núcleo</b> del sujeto, no con la palabra más cercana</span></div>
+      <div class="io"><span class="io-k">El error típico</span><span class="io-v">un colectivo en singular con verbo en plural: <em>«un sinnúmero de feligreses <b>acudieron</b>»</em> — el núcleo es «sinnúmero», singular</span></div>
+      <div class="io"><span class="io-k">Otro error</span><span class="io-v">sujeto plural con verbo singular: <em>«la creación de muchas cosas no se <b>tenían</b> contempladas»</em></span></div>
+      <div class="io"><span class="io-k">Cómo se revisa</span><span class="io-v"><b>tapa</b> todo lo que va entre el núcleo y el verbo y vuelve a leer: el error salta solo</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">El oído se deja llevar por el sustantivo que quedó pegado al verbo. Taparlo es lo único que lo arregla.</div></details></div>
+
+    <div class="card"><div class="name">Concordancia de género y número</div><div class="fbody">
+      <div class="io"><span class="io-k">La regla</span><span class="io-v">artículo, sustantivo y adjetivo van <b>en el mismo género y número</b></span></div>
+      <div class="io"><span class="io-k">Caso difícil</span><span class="io-v">dos sustantivos con un solo verbo: <em>«los constantes flujo y reflujo… <b>provocó</b>»</em> — son dos, va en plural</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Dos sustantivos unidos por «y» hacen un sujeto compuesto, y un sujeto compuesto pide verbo en plural.</div></details></div>
+
+    <div class="card"><div class="name">El signo para separar dos ideas</div><div class="fbody">
+      <div class="dato">
+        <ul>
+          <li><b>Punto</b> — cierra una idea completa; lo que sigue empieza con mayúscula.</li>
+          <li><b>Coma</b> — separa elementos <b>dentro</b> de una idea. <b>No</b> puede unir dos oraciones independientes.</li>
+          <li><b>El error clásico</b> — unir con coma lo que pide punto: <em>«sabe que no hay nadie más<b>,</b> todos los otros seres han muerto»</em>.</li>
+          <li><b>Nunca</b> — coma entre el sujeto y su verbo: <em>«Los alumnos<b>,</b> llegaron»</em> está mal.</li>
+        </ul>
+      </div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Dos oraciones que podrían vivir solas no se pegan con coma. Piden punto, punto y coma, o un nexo.</div></details></div>
+
+    <div class="card"><div class="name">El punto y coma</div><div class="fbody">
+      <div class="io"><span class="io-k">Para qué</span><span class="io-v">unir dos ideas <b>independientes pero relacionadas</b>, o separar elementos de una lista que ya traen comas</span></div>
+      <div class="io"><span class="io-k">Su fuerza</span><span class="io-v"><b>más que la coma, menos que el punto</b></span></div>
+      <div class="io"><span class="io-k">El error</span><span class="io-v">encadenar <b>toda</b> la secuencia con él, cuando las ideas ya no se relacionan tan de cerca</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Es una pausa a medias. Si abusas de él, el párrafo se vuelve una lista sin fin.</div></details></div>
+
+    <div class="card"><div class="name">Los dos puntos</div><div class="fbody">
+      <div class="io"><span class="io-k">Para qué</span><span class="io-v">anunciar una <b>enumeración</b>, una <b>cita textual</b>, una <b>explicación</b> o una conclusión de lo dicho</span></div>
+      <div class="io"><span class="io-k">Después van</span><span class="io-v">en minúscula, salvo que empiece una cita o un nombre propio</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Siempre miran hacia adelante: lo que sigue explica o desglosa lo que acabas de decir.</div></details></div>
+
+    <div class="card"><div class="name">Comillas y punto final</div><div class="fbody">
+      <div class="io"><span class="io-k">La regla</span><span class="io-v">el <b>punto va después</b> de cerrar comillas, no antes</span></div>
+      <div class="io"><span class="io-k">Bien</span><span class="io-v"><em>…un mantra «las mujeres viven más que los hombres»<b>.</b></em></span></div>
+      <div class="io"><span class="io-k">Mal</span><span class="io-v"><em>…un mantra «las mujeres viven más que los hombres<b>.</b>»</em></span></div>
+      <div class="io"><span class="io-k">Se pregunta</span><span class="io-v">es de las diferencias más finas entre las cuatro opciones: revísala siempre</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Lo entrecomillado es lo citado; el punto es de tu oración, no de la de él. Por eso va afuera.</div></details></div>
+
+    <div class="card"><div class="name">El nexo que no corresponde</div><div class="fbody">
+      <div class="io"><span class="io-k">El error</span><span class="io-v">poner un conector que <b>anuncia una relación distinta</b> a la que hay entre las ideas</span></div>
+      <div class="io"><span class="io-k">Ejemplo</span><span class="io-v">«ya que» anuncia <b>causa</b>; «aunque» anuncia <b>concesión</b>. Si la segunda idea contradice a la primera, «ya que» está mal</span></div>
+      <div class="io"><span class="io-k">Cómo se revisa</span><span class="io-v">pregúntate qué relación hay <b>de verdad</b> entre las dos ideas, y luego mira si el nexo la nombra</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Es el error más difícil de ver porque la frase suena bien. Hay que fijarse en la lógica, no en el sonido.</div></details></div>
+  </div>
+
+  <h3 class="sec">Vicios de redacción</h3>
+  <div class="fgrid">
+
+    <div class="card"><div class="name">Pleonasmo</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué es</span><span class="io-v">repetir una idea <b>que ya estaba</b> en la palabra anterior</span></div>
+      <div class="io"><span class="io-k">Ejemplos</span><span class="io-v"><em>subir arriba · salir afuera · lapso de tiempo · volver a repetir · me duele mi cabeza</em></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Si quitas la palabra y no se pierde nada, sobraba.</div></details></div>
+
+    <div class="card"><div class="name">Cacofonía</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué es</span><span class="io-v">repetición de <b>sonidos</b> que suena mal al leer en voz alta</span></div>
+      <div class="io"><span class="io-k">Ejemplo</span><span class="io-v"><em>«en el manantial de Manuel, mantel de mano»</em></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Se detecta con el oído: si al leerlo tropiezas, ahí está.</div></details></div>
+
+    <div class="card"><div class="name">Anfibología</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué es</span><span class="io-v"><b>ambigüedad</b>: la frase admite dos lecturas y no se sabe cuál es</span></div>
+      <div class="io"><span class="io-k">Ejemplo</span><span class="io-v"><em>«Vi a Juan con sus amigos en su coche»</em> — ¿de quién es el coche?</span></div>
+      <div class="io"><span class="io-k">Se arregla</span><span class="io-v">reordenando o repitiendo el nombre</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Casi siempre la culpa es de un «su» o de un pronombre que no se sabe a quién apunta.</div></details></div>
+
+    <div class="card"><div class="name">Sobra o falta un «de»</div><div class="fbody">
+      <div class="dato">
+        <ul>
+          <li><b>Dequeísmo</b> — poner «de que» donde va solo «que»: <em>«pienso <b>de que</b> vendrá»</em>.</li>
+          <li><b>Queísmo</b> — quitar el «de» donde sí va: <em>«me acuerdo <b>que</b> llovía»</em> (debe ser «me acuerdo de que»).</li>
+          <li><b>La prueba</b> — cámbialo por «eso»: se dice «pienso eso» (sin <em>de</em>) y «me acuerdo <b>de</b> eso» (con <em>de</em>).</li>
+        </ul>
+      </div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">La prueba del «eso» resuelve los dos casos de una vez y nunca falla.</div></details></div>
+
+    <div class="card"><div class="name">Barbarismo</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué es</span><span class="io-v">palabra <b>mal escrita o mal dicha</b> — el error está en <b>la palabra misma</b></span></div>
+      <div class="io"><span class="io-k">Ejemplos</span><span class="io-v"><em>haiga, dentrar, nadien, aigre, cercas</em></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Se oye raro en cuanto sale, porque esa palabra no existe así.</div></details></div>
+
+    <div class="card"><div class="name">Solecismo</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué es</span><span class="io-v">error de <b>sintaxis</b> — las palabras existen, pero están <b>mal armadas</b></span></div>
+      <div class="io"><span class="io-k">Ejemplos</span><span class="io-v"><em>«habían muchas personas», «lo dije a él», «detrás mío», «me recuerdo»</em></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Aquí ninguna palabra está mal escrita: lo que está mal es cómo se juntaron.</div></details></div>
+
+    <div class="card"><div class="name">Palabras que sobran</div><div class="fbody">
+      <div class="dato">
+        <ul>
+          <li><b>Muletilla</b> — palabra que se repite sin aportar: <em>o sea, este, digamos, ¿verdad?, cosa</em>.</li>
+          <li><b>Redundancia</b> — repetir la misma palabra en pocas líneas cuando había sinónimo o se podía omitir.</li>
+        </ul>
+      </div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">En el examen se ven como opciones «más largas que las otras». Casi siempre la correcta es la más limpia.</div></details></div>
+  </div>
+
+  <div class="trap"><h4>Ojo en el examen</h4><ul>
+    <li>Antes de decidir, busca en cada opción <b>por este orden</b>: acentos raros (<em>ésta/está</em>), comas entre sujeto y verbo, concordancia, nexo que no cuadra, punto respecto de las comillas.</li>
+    <li>La opción que <b>encadena todo con punto y coma</b> suele ser la mala; la que <b>une dos oraciones con coma</b>, también.</li>
+    <li>La <b>concordancia</b> se revisa tapando lo que hay entre el núcleo del sujeto y el verbo: «un sinnúmero <s>de feligreses</s> acudió».</li>
+    <li>El <b>punto va fuera de las comillas</b>. Es una diferencia de un solo carácter entre dos opciones.</li>
+    <li>Entre dos opciones que ya te parecen correctas, gana la <b>más breve y más clara</b>: la concisión es criterio, no gusto.</li>
+  </ul></div>
+</section>
+
+<!-- ============ U6 VOCABULARIO ============ -->
+<section class="panel" data-num="6" data-short="Vocabulario">
+  <div class="panel-head">
+    <div class="u">Unidad 6</div>
+    <h2>Vocabulario</h2>
+    <p class="lead">Analogías, sinónimos, antónimos y homófonos. Las analogías tienen <b>método</b>; los homófonos son de <b>lista</b> y hay que sabérselos.</p>
+  </div>
+
+  <h3 class="sec">Conceptos clave</h3>
+  <div class="cgrid">
+    <div class="concept"><h4>El método de la analogía</h4><p>Arma una <b>frase</b> que explique la relación del primer par, y pásala tal cual al segundo. La opción en la que la frase sigue siendo cierta es la buena. No compares significados: compara <b>relaciones</b>.</p></div>
+    <div class="concept"><h4>El contexto manda</h4><p>En sinónimos, la pregunta nunca es «¿qué significa?» sino «¿cuál cabe <b>aquí</b>?». Se contesta <b>sustituyendo en la frase</b>, no recordando el diccionario.</p></div>
+    <div class="concept"><h4>Los homófonos no tienen truco</h4><p>Suenan igual y se escriben distinto. Es la única parte de la materia que <b>se aprende de lista</b> — y por eso es de las más seguras: o te la sabes o no.</p></div>
+  </div>
+
+  <h3 class="sec">Analogías</h3>
+  <div class="fgrid">
+
+    <div class="card"><div class="name">Los tipos de relación que se preguntan</div><div class="fbody">
+      <div class="dato">
+        <ul>
+          <li><b>Parte–todo</b> — <em>página : libro</em></li>
+          <li><b>Género–especie</b> — <em>ave : águila</em></li>
+          <li><b>Objeto–función</b> — <em>tijeras : cortar</em></li>
+          <li><b>Agente–instrumento</b> — <em>pintor : pincel</em></li>
+          <li><b>Causa–efecto</b> — <em>lluvia : inundación</em></li>
+          <li><b>Sinonimia</b> — <em>alegre : contento</em></li>
+          <li><b>Antonimia</b> — <em>claro : oscuro</em></li>
+          <li><b>Grado o intensidad</b> — <em>tibio : ardiente</em></li>
+          <li><b>Producto–materia</b> — <em>mesa : madera</em></li>
+          <li><b>Lugar–actividad</b> — <em>escuela : estudiar</em></li>
+        </ul>
+      </div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Son casi siempre estas diez. Si identificas cuál de las diez es, la respuesta ya está resuelta.</div></details></div>
+
+    <div class="card"><div class="name">Cómo se resuelve paso a paso</div><div class="fbody">
+      <div class="io"><span class="io-k">Primero</span><span class="io-v">arma una <b>frase</b> con el primer par: «la <em>página</em> es una parte del <em>libro</em>»</span></div>
+      <div class="io"><span class="io-k">Después</span><span class="io-v">mete cada opción en <b>esa misma frase</b>, sin cambiarle nada</span></div>
+      <div class="io"><span class="io-k">Cuidado</span><span class="io-v">respeta el <b>orden</b>: parte–todo no es lo mismo que todo–parte</span></div>
+      <div class="io"><span class="io-k">Si empatan dos</span><span class="io-v">haz la frase <b>más específica</b> hasta que solo una la cumpla</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Todo el método es no dejar la relación en la cabeza: decirla en voz alta como frase, y probar las cuatro contra ella.</div></details></div>
+  </div>
+
+  <h3 class="sec">Sinónimos, antónimos y parónimos</h3>
+  <div class="fgrid">
+
+    <div class="card"><div class="name">Sinónimos</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué son</span><span class="io-v">palabras de <b>significado parecido</b> — casi nunca idéntico</span></div>
+      <div class="io"><span class="io-k">Cómo se elige</span><span class="io-v"><b>sustituyendo</b> en la frase original: gana el que no cambia el sentido ni el tono</span></div>
+      <div class="io"><span class="io-k">El matiz</span><span class="io-v"><em>recuerdos</em> es lo que vive en la memoria; <em>conmemoraciones</em> son ceremonias públicas. No son intercambiables</span></div>
+      <div class="io"><span class="io-k">Trampa</span><span class="io-v">la opción <b>más culta o más larga</b> suele ser el señuelo</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Si tres opciones parecen buenas, es que el examen está preguntando por el matiz, no por el significado.</div></details></div>
+
+    <div class="card"><div class="name">Antónimos</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué son</span><span class="io-v">palabras de <b>significado opuesto</b></span></div>
+      <div class="io"><span class="io-k">Tipos</span><span class="io-v"><b>graduales</b> (frío/caliente, con puntos intermedios) · <b>complementarios</b> (vivo/muerto, sin término medio) · <b>recíprocos</b> (comprar/vender)</span></div>
+      <div class="io"><span class="io-k">Con prefijo</span><span class="io-v">muchos se forman quitando o poniendo <b>in-, im-, i-, des-, a-</b>: <em>útil / inútil</em></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">El truco del prefijo resuelve la mitad de estas preguntas sin pensar.</div></details></div>
+
+    <div class="card"><div class="name">Parónimos</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué son</span><span class="io-v">palabras que se <b>parecen</b> en el sonido o la escritura pero significan cosas distintas</span></div>
+      <div class="io"><span class="io-k">Ejemplos</span><span class="io-v"><em>absolver / absorber · adoptar / adaptar · actitud / aptitud · especie / especia · infringir / infligir</em></span></div>
+      <div class="io"><span class="io-k">Diferencia</span><span class="io-v">no suenan <b>idénticos</b>: solo se parecen. Ahí se separan de los que sí suenan igual</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Son los que uno confunde al hablar rápido. «Actitud» es cómo te portas; «aptitud» es para qué sirves.</div></details></div>
+
+    <div class="card"><div class="name">Prefijos y sufijos que se preguntan</div><div class="fbody">
+      <div class="io"><span class="io-k">De negación</span><span class="io-v"><b>in-, im-, i-, des-, a-, anti-</b>: <em>coherente → incoherente</em></span></div>
+      <div class="io"><span class="io-k">De cantidad</span><span class="io-v"><b>mono-</b> uno · <b>bi-</b> dos · <b>poli-</b> muchos · <b>semi-</b> medio</span></div>
+      <div class="io"><span class="io-k">De lugar</span><span class="io-v"><b>sub-</b> debajo · <b>super-</b> encima · <b>inter-</b> entre · <b>trans-</b> al otro lado</span></div>
+      <div class="io"><span class="io-k">De tiempo</span><span class="io-v"><b>pre-</b> antes · <b>post-</b> después · <b>re-</b> otra vez</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Con estos se descifra una palabra que nunca has visto, que es justo lo que el examen quiere comprobar.</div></details></div>
+  </div>
+
+  <h3 class="sec">Homófonos · la lista que hay que sabérsela</h3>
+  <div class="fgrid">
+
+    <div class="card"><div class="name">tubo · tuvo</div><div class="fbody">
+      <div class="io"><span class="io-k">Con b</span><span class="io-v">la <b>pieza cilíndrica</b>, el conducto</span></div>
+      <div class="io"><span class="io-k">Con v</span><span class="io-v">del <b>verbo tener</b>: él lo tuvo</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Si puedes cambiarlo por «obtuvo», va con v. Si es una cosa que se agarra, con b.</div></details></div>
+
+    <div class="card"><div class="name">hasta · asta</div><div class="fbody">
+      <div class="io"><span class="io-k">Con h</span><span class="io-v"><b>preposición</b> de límite: hasta mañana, hasta la esquina</span></div>
+      <div class="io"><span class="io-k">Sin h</span><span class="io-v">el <b>palo de la bandera</b> o el <b>cuerno</b> del toro</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">La sin h siempre es una cosa física: un palo o un cuerno. Todo lo demás lleva h.</div></details></div>
+
+    <div class="card"><div class="name">ciento · siento</div><div class="fbody">
+      <div class="io"><span class="io-k">Con c</span><span class="io-v">el <b>número</b> 100</span></div>
+      <div class="io"><span class="io-k">Con s</span><span class="io-v">del verbo <b>sentir</b> o <b>sentar</b>: yo siento</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Si se puede contar, con c. Si lo hace uno, con s.</div></details></div>
+
+    <div class="card"><div class="name">bienes · vienes</div><div class="fbody">
+      <div class="io"><span class="io-k">Con b</span><span class="io-v">las <b>propiedades</b>, lo que se posee — también lo bueno</span></div>
+      <div class="io"><span class="io-k">Con v</span><span class="io-v">del <b>verbo venir</b>: tú vienes</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Una fábrica no fabrica verbos: fabrica cosas que se poseen. Ese es el de la b.</div></details></div>
+
+    <div class="card"><div class="name">haya · halla · aya · allá</div><div class="fbody">
+      <div class="io"><span class="io-k">El verbo</span><span class="io-v">del verbo <b>haber</b>, «que él ___ llegado» — con <b>h</b> y con <b>y</b> (también es un árbol)</span></div>
+      <div class="io"><span class="io-k">Encontrar</span><span class="io-v">= encontrarse, «se ___ en el cajón» — con <b>h</b> y <b>doble l</b></span></div>
+      <div class="io"><span class="io-k">La niñera</span><span class="io-v">la institutriz que cuida niños — <b>sin h</b> y con <b>y</b></span></div>
+      <div class="io"><span class="io-k">El lugar</span><span class="io-v">adverbio: «___ lejos» — <b>sin h</b>, con <b>doble l</b> y con <b>tilde</b></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Prueba de sustitución: si cabe «encuentra», es la de la doble ele. Si cabe «exista», la otra.</div></details></div>
+
+    <div class="card"><div class="name">vaya · valla · baya</div><div class="fbody">
+      <div class="io"><span class="io-k">El verbo</span><span class="io-v">del verbo <b>ir</b> — se escribe con <b>v</b> y con <b>y</b></span></div>
+      <div class="io"><span class="io-k">La cerca</span><span class="io-v">el cercado o el anuncio grande de la calle — con <b>v</b> y <b>doble l</b></span></div>
+      <div class="io"><span class="io-k">La fruta</span><span class="io-v">el frutito pequeño y carnoso — con <b>b</b> y con <b>y</b></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Verbo con v; cerca con ll; fruta con b. Tres cosas que no se parecen en nada salvo en el sonido.</div></details></div>
+
+    <div class="card"><div class="name">hecho · echo</div><div class="fbody">
+      <div class="io"><span class="io-k">Con h</span><span class="io-v">participio de <b>hacer</b>, o un <b>suceso</b>: el hecho ocurrió</span></div>
+      <div class="io"><span class="io-k">Sin h</span><span class="io-v">del verbo <b>echar</b> = arrojar: yo echo sal</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Si se puede cambiar por «tiro» o «arrojo», va sin h. Si se puede cambiar por «realizado», con h.</div></details></div>
+
+    <div class="card"><div class="name">a ver · haber</div><div class="fbody">
+      <div class="io"><span class="io-k">Separado</span><span class="io-v">preposición + <b>verbo ver</b>: vamos a ver la película</span></div>
+      <div class="io"><span class="io-k">Junto</span><span class="io-v">el <b>verbo haber</b> en infinitivo: debe haber alguien</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Si puedes meter «mirar» en su lugar, va separado.</div></details></div>
+
+    <div class="card"><div class="name">ahí · hay · ay</div><div class="fbody">
+      <div class="io"><span class="io-k">ahí</span><span class="io-v"><b>lugar</b>: ponlo ahí</span></div>
+      <div class="io"><span class="io-k">hay</span><span class="io-v">del verbo <b>haber</b> = existe: hay comida</span></div>
+      <div class="io"><span class="io-k">ay</span><span class="io-v"><b>interjección</b> de dolor: ¡ay!</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">La frase que las junta todas: «ahí hay un niño que dice ay».</div></details></div>
+
+    <div class="card"><div class="name">sino · si no</div><div class="fbody">
+      <div class="io"><span class="io-k">Junto</span><span class="io-v"><b>contrapone</b>: no fue él, sino ella (también significa destino)</span></div>
+      <div class="io"><span class="io-k">Separado</span><span class="io-v"><b>condición negada</b>: si no vienes, me voy</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Si puedes meter una palabra en medio («si tú no vienes»), va separado.</div></details></div>
+
+    <div class="card"><div class="name">porque · por qué · porqué · por que</div><div class="fbody">
+      <div class="io"><span class="io-k">Responde</span><span class="io-v">da la causa: «no fui ___ llovía» — <b>junto y sin tilde</b></span></div>
+      <div class="io"><span class="io-k">Pregunta</span><span class="io-v">directa o indirecta: «¿___ llegaste tarde?» — <b>separado y con tilde</b></span></div>
+      <div class="io"><span class="io-k">Sustantivo</span><span class="io-v">lleva artículo: «no sé el ___» — <b>junto y con tilde</b></span></div>
+      <div class="io"><span class="io-k">Relativo</span><span class="io-v">preposición + relativo: «la razón ___ (la) que vine» — <b>separado y sin tilde</b></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">La prueba: si le puedes meter «la» en medio («por la que»), van separados y sin acento.</div></details></div>
+
+    <div class="card"><div class="name">Otros que caen seguido</div><div class="fbody">
+      <div class="dato">
+        <ul>
+          <li><b>casa</b> (vivienda) · <b>caza</b> (perseguir animales)</li>
+          <li><b>coser</b> (con aguja) · <b>cocer</b> (con fuego)</li>
+          <li><b>votar</b> (elegir) · <b>botar</b> (tirar o rebotar)</li>
+          <li><b>rebelar</b> (sublevarse) · <b>revelar</b> (descubrir)</li>
+          <li><b>grabar</b> (registrar) · <b>gravar</b> (imponer impuesto)</li>
+          <li><b>sesión</b> (reunión) · <b>cesión</b> (ceder algo)</li>
+          <li><b>abrasar</b> (quemar) · <b>abrazar</b> (con los brazos)</li>
+          <li><b>tan bien</b> (comparación) · <b>también</b> (además)</li>
+        </ul>
+      </div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Todos se resuelven igual: piensa qué significa cada uno y mete el que cuadra con la frase.</div></details></div>
+  </div>
+
+  <div class="trap"><h4>Ojo en el examen</h4><ul>
+    <li>En los <b>huecos con homófonos</b> ganan las opciones completas: si <em>una sola</em> de las cuatro palabras de una opción está mal, la opción entera se cae. Revisa las cuatro, no la primera.</li>
+    <li>En <b>sinónimos</b>, sustituye en la frase. La palabra más rebuscada casi nunca es la respuesta.</li>
+    <li>En <b>analogías</b>, respeta el <b>orden</b> del par. Media pregunta se falla por invertirlo.</li>
+    <li><b>Homófonos ≠ parónimos.</b> Los primeros suenan <em>idénticos</em>; los segundos solo se parecen.</li>
+  </ul></div>
+</section>
+
+<!-- ============ U7 ORTOGRAFÍA ============ -->
+<section class="panel" data-num="7" data-short="Ortografía">
+  <div class="panel-head">
+    <div class="u">Unidad 7</div>
+    <h2>Ortografía</h2>
+    <p class="lead">Reglas de grafías, acentuación, puntuación y mayúsculas. Se pregunta con un párrafo lleno de huecos: hay que acertarle a <b>todos</b> para que la opción sirva.</p>
+  </div>
+
+  <h3 class="sec">Conceptos clave</h3>
+  <div class="cgrid">
+    <div class="concept"><h4>Reglas y familias</h4><p>Cuando la regla no alcanza, funciona la <b>familia de palabras</b>: si <em>haber</em> lleva h, <em>haya</em> y <em>habría</em> también. Casi todos los huecos del examen se resuelven así.</p></div>
+    <div class="concept"><h4>El acento no es adorno</h4><p>La tilde <b>cambia el significado</b>: <em>ésta / está</em>, <em>público / publicó</em>, <em>él / el</em>. Por eso una opción con un acento de más ya está mal, aunque todo lo demás esté bien.</p></div>
+    <div class="concept"><h4>Todas o ninguna</h4><p>Las preguntas traen 4 o 5 huecos. La opción correcta es la que acierta <b>en todos</b>. Conviene revisar de atrás para adelante: el último hueco suele ser el que descarta.</p></div>
+  </div>
+
+  <h3 class="sec">Acentuación</h3>
+  <div class="fgrid">
+
+    <div class="card"><div class="name">Palabras agudas</div><div class="fbody">
+      <div class="io"><span class="io-k">Dónde carga</span><span class="io-v">en la <b>última</b> sílaba</span></div>
+      <div class="io"><span class="io-k">Llevan tilde</span><span class="io-v">cuando terminan en <b>n</b>, <b>s</b> o <b>vocal</b></span></div>
+      <div class="io"><span class="io-k">Ejemplos</span><span class="io-v"><em>can<b>ción</b>, com<b>pás</b>, ma<b>má</b></em> — pero <em>reloj, pared, feliz</em> no</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">La regla de las tres terminaciones (n, s, vocal) es la mitad de la acentuación española.</div></details></div>
+
+    <div class="card"><div class="name">Palabras graves o llanas</div><div class="fbody">
+      <div class="io"><span class="io-k">Dónde carga</span><span class="io-v">en la <b>penúltima</b> sílaba</span></div>
+      <div class="io"><span class="io-k">Llevan tilde</span><span class="io-v">cuando <b>NO</b> terminan en n, s ni vocal — al revés que las anteriores</span></div>
+      <div class="io"><span class="io-k">Ejemplos</span><span class="io-v"><em>ár<b>bol</b>, lá<b>piz</b>, cás<b>ter</b></em> — pero <em>casa, examen, crisis</em> no</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Son la mayoría de las palabras del español, y casi ninguna lleva tilde. Por eso llaman la atención las que sí.</div></details></div>
+
+    <div class="card"><div class="name">Esdrújulas y sobresdrújulas</div><div class="fbody">
+      <div class="io"><span class="io-k">Esdrújula</span><span class="io-v">carga en la <b>antepenúltima</b> — <b>siempre</b> lleva tilde: <em>página, médico, rápido</em></span></div>
+      <div class="io"><span class="io-k">Sobresdrújula</span><span class="io-v">carga <b>antes</b> de la antepenúltima — <b>siempre</b> lleva tilde: <em>dígamelo, cómpramelo</em></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Estas dos son regalo: no hay excepción que aprender, todas llevan tilde.</div></details></div>
+
+    <div class="card"><div class="name">Diptongo, triptongo e hiato</div><div class="fbody">
+      <div class="io"><span class="io-k">En una sílaba</span><span class="io-v">dos vocales juntas: una abierta (a, e, o) + una cerrada (i, u), o dos cerradas — <em>ai-re, cui-da</em></span></div>
+      <div class="io"><span class="io-k">En dos sílabas</span><span class="io-v">dos vocales separadas: dos abiertas (<em>le-ón</em>) o cerrada tónica + abierta (<em>ba-úl, dí-a</em>)</span></div>
+      <div class="io"><span class="io-k">Tres juntas</span><span class="io-v">cerrada + abierta + cerrada en una sola sílaba — <em>a-ve-ri-<b>guáis</b></em></span></div>
+      <div class="io"><span class="io-k">La tilde clave</span><span class="io-v">la <b>i</b> o la <b>u</b> tónicas junto a otra vocal <b>siempre</b> llevan tilde y rompen el diptongo: <em>ra-íz, ha-brí-a, pú-a</em></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Es la regla que se salta todas las demás: «raíz» es aguda terminada en z y aun así lleva tilde, porque las vocales quedan en sílabas distintas.</div></details></div>
+
+    <div class="card"><div class="name">Tilde diacrítica</div><div class="fbody">
+      <div class="dato">Distingue palabras que se escriben igual:
+        <ul>
+          <li><b>él</b> (pronombre) / <b>el</b> (artículo)</li>
+          <li><b>tú</b> (pronombre) / <b>tu</b> (posesivo)</li>
+          <li><b>mí</b> (pronombre) / <b>mi</b> (posesivo)</li>
+          <li><b>sé</b> (saber/ser) / <b>se</b> (pronombre)</li>
+          <li><b>sí</b> (afirmación) / <b>si</b> (condición)</li>
+          <li><b>té</b> (bebida) / <b>te</b> (pronombre)</li>
+          <li><b>más</b> (cantidad) / <b>mas</b> (= pero)</li>
+          <li><b>dé</b> (verbo dar) / <b>de</b> (preposición)</li>
+          <li><b>aún</b> (= todavía) / <b>aun</b> (= incluso)</li>
+          <li><b>qué, quién, cómo, cuándo, dónde, cuál</b> con tilde si preguntan o exclaman</li>
+        </ul>
+      </div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">La tilde aquí no marca el golpe de voz: marca de cuál de las dos palabras se trata.</div></details></div>
+
+    <div class="card"><div class="name">Monosílabos</div><div class="fbody">
+      <div class="io"><span class="io-k">La regla</span><span class="io-v">por norma <b>no llevan tilde</b>: fue, fui, vio, dio, fe, ti, guion</span></div>
+      <div class="io"><span class="io-k">La excepción</span><span class="io-v">solo la llevan cuando hay <b>otra palabra igual</b> con otro significado</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Si es de una sílaba y no tiene gemela, no lleva tilde. «Vio» y «fue» son las que más se acentúan de más.</div></details></div>
+  </div>
+
+  <h3 class="sec">Las grafías</h3>
+  <div class="fgrid">
+
+    <div class="card"><div class="name">Uso de la B</div><div class="fbody">
+      <div class="io"><span class="io-k">Cuándo</span><span class="io-v">antes de <b>consonante</b> (bl, br): <em>blanco, brazo, obtener</em></span></div>
+      <div class="io"><span class="io-k">Terminaciones</span><span class="io-v"><b>-aba</b> del copretérito (<em>cantaba, iba</em>) · <b>-bilidad</b>, <b>-bundo</b></span></div>
+      <div class="io"><span class="io-k">Prefijos</span><span class="io-v"><b>bi-, bio-, sub-, bene-, biblio-</b></span></div>
+      <div class="io"><span class="io-k">Verbos</span><span class="io-v">todos los terminados en <b>-bir</b> (<em>escribir, recibir</em>) salvo <em>hervir, servir, vivir</em></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">La terminación <em>-aba</em> resuelve sola muchísimos huecos: todos los copretéritos de la primera conjugación.</div></details></div>
+
+    <div class="card"><div class="name">Uso de la V</div><div class="fbody">
+      <div class="io"><span class="io-k">Después de</span><span class="io-v"><b>b, d, n</b>: <em>obvio, adverbio, invierno</em></span></div>
+      <div class="io"><span class="io-k">Terminaciones</span><span class="io-v"><b>-ívoro/-ívora</b> (<em>carnívoro</em>) · <b>-ave, -avo, -eve, -evo, -ivo</b> (<em>suave, nuevo, activo</em>)</span></div>
+      <div class="io"><span class="io-k">Prefijos</span><span class="io-v"><b>vice-, villa-</b></span></div>
+      <div class="io"><span class="io-k">Verbos</span><span class="io-v">el pretérito de <b>tener, estar, andar</b>: <em>tuve, estuvo, anduvieron</em></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">La de los verbos es la que más se pregunta: «tuvo» va con v porque viene de tener.</div></details></div>
+
+    <div class="card"><div class="name">Uso de S, C y Z</div><div class="fbody">
+      <div class="io"><span class="io-k">Con S</span><span class="io-v">terminaciones <b>-oso/-osa</b>, <b>-ísimo</b>, <b>-ense</b>, <b>-sión</b> tras -so/-sor (<em>expresión, admisión</em>)</span></div>
+      <div class="io"><span class="io-k">Con C</span><span class="io-v">terminaciones <b>-ción</b> cuando hay familia en -to o -do (<em>canto→canción</em>) · <b>-cito</b>, <b>-cillo</b> · plurales de z (<em>luz→luces</em>)</span></div>
+      <div class="io"><span class="io-k">Con Z</span><span class="io-v">terminaciones <b>-anza</b>, <b>-azo</b>, <b>-ez/-eza</b> (<em>esperanza, portazo, belleza</em>)</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">El atajo de -ción: busca una palabra de la familia. Si termina en -to o -do, va con c.</div></details></div>
+
+    <div class="card"><div class="name">Uso de G y J</div><div class="fbody">
+      <div class="io"><span class="io-k">Con G</span><span class="io-v"><b>gen-, geo-, ges-</b> · terminaciones <b>-gente, -gencia, -gía, -logía, -gión</b> (<em>vigente, biología, religión</em>)</span></div>
+      <div class="io"><span class="io-k">Con J</span><span class="io-v"><b>-aje, -jero, -jería</b> (<em>lenguaje, viajero</em>) · verbos en <b>-jar, -jear</b> · pretéritos de <b>decir, traer, conducir</b>: <em>dije, trajo, condujeron</em></span></div>
+      <div class="io"><span class="io-k">Ojo</span><span class="io-v">solo suenan igual ante <b>e</b> e <b>i</b>: ante a, o, u no hay duda</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">«Dije» y «trajo» son las que más se fallan: el verbo no tiene g por ningún lado, así que va con j.</div></details></div>
+
+    <div class="card"><div class="name">Uso de LL e Y</div><div class="fbody">
+      <div class="io"><span class="io-k">Con LL</span><span class="io-v">terminaciones <b>-illo, -illa, -ello, -alle</b> (<em>castillo, calle, castellano</em>) · verbos en <b>-llar</b>: <em>hallar, callar</em></span></div>
+      <div class="io"><span class="io-k">Con Y</span><span class="io-v">la conjunción <b>y</b> · verbos donde <b>no hay «ll» en el infinitivo</b>: de <em>oír</em> → <b>oyeron</b>; de <em>haber</em> → <b>haya</b>; de <em>caer</em> → <b>cayó</b></span></div>
+      <div class="io"><span class="io-k">La prueba</span><span class="io-v">ve al <b>infinitivo</b>: si no trae ll, la forma conjugada tampoco</span></div>
+      <div class="io"><span class="io-k">Ejemplo</span><span class="io-v"><em>hallar</em> → <b>hallar, halla</b> · <em>haber</em> → <b>haya, hayan</b> · <em>oír</em> → <b>oyeron</b></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Es la pregunta más larga del examen (cinco huecos en un solo párrafo) y toda se resuelve con la misma prueba: ir al infinitivo.</div></details></div>
+
+    <div class="card"><div class="name">Uso de la H</div><div class="fbody">
+      <div class="io"><span class="io-k">Siempre</span><span class="io-v">el verbo <b>haber</b> y el verbo <b>hacer</b> completos, en todas sus formas</span></div>
+      <div class="io"><span class="io-k">Antes de</span><span class="io-v">los diptongos <b>ia, ie, ue, ui</b>: <em>hielo, hueso, huir, hiato</em></span></div>
+      <div class="io"><span class="io-k">Prefijos</span><span class="io-v"><b>hidro-, hiper-, hipo-, hemi-, hetero-, homo-, hexa-</b></span></div>
+      <div class="io"><span class="io-k">Familia</span><span class="io-v">si la lleva la raíz, la llevan todos: <em>hombre → hombría</em>; <em>hueso → óseo</em> es la excepción famosa</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">No se oye, así que no hay más remedio que ir por familias: si el pariente la trae, la trae.</div></details></div>
+
+    <div class="card"><div class="name">Uso de R y RR</div><div class="fbody">
+      <div class="io"><span class="io-k">Sonido fuerte</span><span class="io-v">se escribe <b>r</b> al <b>principio</b> de palabra (<em>rosa</em>) y después de <b>n, l, s</b> (<em>honra, alrededor, israelí</em>)</span></div>
+      <div class="io"><span class="io-k">Doble</span><span class="io-v">solo <b>entre vocales</b>: <em>carro, perro, arriba</em></span></div>
+      <div class="io"><span class="io-k">En palabras compuestas</span><span class="io-v">se dobla al juntarse: <em>vice + rector → vicerrector</em></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">La doble nunca va al principio ni al final: solo puede vivir entre dos vocales.</div></details></div>
+  </div>
+
+  <h3 class="sec">Puntuación y mayúsculas</h3>
+  <div class="fgrid">
+
+    <div class="card"><div class="name">Los usos de la coma</div><div class="fbody">
+      <div class="dato">
+        <ul>
+          <li><b>Enumerar</b> — <em>compré pan, leche y café</em> (no va coma antes de la «y» final)</li>
+          <li><b>Vocativo</b> — <em>Miguel, ven acá</em></li>
+          <li><b>Inciso</b> o aclaración — <em>Ana, mi hermana, llegó</em></li>
+          <li><b>Elipsis del verbo</b> — <em>Ella quiere café; él, té</em></li>
+          <li>Antes de <b>pero, aunque, sino</b></li>
+          <li>Después de conectores como <b>sin embargo, es decir, por lo tanto</b></li>
+          <li><b>Nunca</b> entre el sujeto y su verbo</li>
+        </ul>
+      </div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">La regla del inciso es la que más rinde: si el pedazo se puede quitar sin romper la frase, va entre comas — pero entre <em>dos</em>, no una sola.</div></details></div>
+
+    <div class="card"><div class="name">Cuándo va mayúscula</div><div class="fbody">
+      <div class="dato">
+        <ul>
+          <li>Al <b>inicio</b> de escrito y después de <b>punto</b></li>
+          <li><b>Nombres propios</b>: personas, lugares, instituciones, marcas</li>
+          <li><b>Siglas</b>: UNAM, ONU</li>
+          <li>Después de <b>dos puntos</b> solo si empieza una <b>cita</b> o una carta</li>
+        </ul>
+        Y <b>no</b> llevan: los días, los meses, las estaciones, los gentilicios (<em>mexicano</em>), los idiomas, los cargos (<em>el presidente</em>) ni los títulos de libros más allá de la primera palabra.
+      </div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">La lista de las que <em>no</em> llevan es la que se pregunta: en español los meses y los gentilicios van en minúscula, al revés que en inglés.</div></details></div>
+  </div>
+
+  <div class="trap"><h4>Ojo en el examen</h4><ul>
+    <li>En la pregunta de <b>ll / y</b> con cinco huecos, ve verbo por verbo al <b>infinitivo</b>: <em>hayan</em> (haber, y) · <em>ayer</em> (adverbio, y) · <em>oyeron</em> (oír, y) · <em>hallar</em> (hallar, ll) · <em>haber</em> · <em>castellanos</em> (ll).</li>
+    <li>Una <b>tilde de más</b> descalifica la opción entera: <em>«una mujer <b>ésta</b> sentada»</em> está mal — ahí va <em>está</em>, del verbo estar.</li>
+    <li>Las <b>graves llevan tilde justo cuando las agudas no</b>. Es la simetría que hay que tener clara.</li>
+    <li><b>i</b> o <b>u</b> tónicas junto a otra vocal siempre llevan tilde, aunque la regla general diga que no: <em>raíz, había, baúl</em>.</li>
+    <li>En español, <b>meses, días y gentilicios van en minúscula</b>.</li>
+    <li>Revisa los huecos <b>de atrás para adelante</b>: el último suele ser el que separa las dos opciones que quedaron vivas.</li>
+  </ul></div>
+</section>
+
+</main>
+
+<footer>Las 7 unidades del temario oficial de la Guía UNAM 2026 · Área 2 · uso personal de estudio</footer>
+
+<script>
+  const panels = [...document.querySelectorAll('.panel')];
+  const tabs = document.getElementById('tabs');
+  panels.forEach((p,i)=>{
+    const b = document.createElement('button');
+    b.className = 'tab';
+    b.innerHTML = (p.dataset.num ? '<b>'+p.dataset.num+'</b>' : '') + p.dataset.short;
+    b.onclick = ()=> show(i);
+    tabs.appendChild(b);
+  });
+  function show(i){
+    panels.forEach((p,j)=>p.classList.toggle('active', i===j));
+    [...tabs.children].forEach((t,j)=>t.classList.toggle('active', i===j));
+    localStorage.setItem('esp-unidad', i);
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+  show(Math.min(+localStorage.getItem('esp-unidad')||0, panels.length-1));
+
+  document.addEventListener('keydown', e=>{
+    if(e.target.tagName==='INPUT') return;
+    const cur = panels.findIndex(p=>p.classList.contains('active'));
+    if(e.key==='ArrowRight' && cur<panels.length-1) show(cur+1);
+    if(e.key==='ArrowLeft'  && cur>0) show(cur-1);
+  });
+
+  const hint = document.getElementById('hint');
+  function pista(){
+    if(!document.body.classList.contains('memo')){
+      hint.innerHTML = 'Enciende el <b>modo memoria</b> para taparte. El <b>En palabras</b> de cada tarjeta se abre siempre, en cualquier modo.';
+    } else if(document.body.classList.contains('flip')){
+      hint.innerHTML = 'Volteado: ves el <b>contenido</b> y tienes que decir <b>cómo se llama</b>. Toca la tarjeta para comprobar.';
+    } else {
+      hint.innerHTML = 'Ves el <b>nombre</b> y tienes que recitar la regla. Toca la tarjeta para comprobar.';
+    }
+  }
+
+  function cerrarTodas(){
+    document.querySelectorAll('.card.open').forEach(c=>c.classList.remove('open'));
+  }
+
+  const memoBtn = document.getElementById('memoBtn');
+  memoBtn.onclick = ()=>{
+    document.body.classList.toggle('memo');
+    cerrarTodas();
+    localStorage.setItem('esp-memo', document.body.classList.contains('memo')?'1':'0');
+    pista();
+  };
+  const flipBtn = document.getElementById('flipBtn');
+  flipBtn.onclick = ()=>{
+    document.body.classList.toggle('flip');
+    cerrarTodas();
+    localStorage.setItem('esp-flip', document.body.classList.contains('flip')?'1':'0');
+    pista();
+  };
+  if(localStorage.getItem('esp-memo')==='1') document.body.classList.add('memo');
+  if(localStorage.getItem('esp-flip')==='1') document.body.classList.add('flip');
+  pista();
+
+  let abiertas = [];
+  window.addEventListener('beforeprint', ()=>{
+    abiertas = [...document.querySelectorAll('details.why')].filter(d=>d.open);
+    document.querySelectorAll('details.why').forEach(d=>d.open=true);
+  });
+  window.addEventListener('afterprint', ()=>{
+    document.querySelectorAll('details.why').forEach(d=>d.open = abiertas.includes(d));
+  });
+
+  document.addEventListener('click', e=>{
+    if(e.target.closest('details.why')) return;
+    if(e.target.closest('.switch')) return;
+    if(!document.body.classList.contains('memo')) return;
+    const c = e.target.closest('.card');
+    if(c) c.classList.toggle('open');
+  });
+</script>
+</body>
+</html>

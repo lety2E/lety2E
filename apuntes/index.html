@@ -6,7 +6,7 @@
   <title>Apuntes — lety2E</title>
   <link rel="icon" href="../favicon.svg" type="image/svg+xml">
   <link rel="icon" href="../favicon.ico">
-  <meta name="description" content="Apuntes, infografías y artefactos de Lety sobre lo que le interesa.">
+  <meta name="description" content="Apuntes, guías de estudio y simuladores de examen de Lety.">
   <link rel="stylesheet" href="../style.css">
 </head>
 <body data-section="apuntes">
@@ -17,57 +17,61 @@
 
   <div class="topic-header">
     <h1>Apuntes</h1>
-    <p>Notas, infografías y artefactos sobre lo que me interesa.</p>
+    <p>Guías de estudio, simuladores y notas sobre lo que me interesa.</p>
   </div>
 
   <section class="topic-content">
 
     <!--
-      INSTRUCCIONES PARA AGREGAR UN APUNTE NUEVO:
+      CÓMO ESTÁ ORGANIZADO ESTE ÍNDICE
 
-      1. Pega el archivo HTML del apunte en esta misma carpeta:
-         lety2E/apuntes/mi-apunte.html
+      Se agrupa por bloques. Cada bloque es:
+          <h2 class="apuntes-grupo">Nombre del grupo</h2>
+          <div class="apuntes-grid"> …sus cards… </div>
 
-      2. Añade una <a class="apunte-card"> al .apuntes-grid de abajo
-         siguiendo el patrón. Cambia:
-           - href:       nombre del archivo
-           - --card-accent: color del borde (var(--M), var(--T), var(--P), etc.)
-           - tipo badge: "artefacto" / "infografía" / "texto"
-           - título y hint
+      PARA AGREGAR UN GRUPO NUEVO (Apuntes va a seguir creciendo):
+      copia ese par de líneas y mete adentro las cards que le toquen.
 
-      3. El hint aparece sutil por defecto y se vuelve nítido al pasar el cursor.
+      PARA AGREGAR UNA CARD:
+        - href:           archivo o carpeta destino
+        - --card-accent:  var(--M) magenta · var(--T) turquesa · var(--P) morado
+        - apunte-tipo:    "guía" / "artefacto" / "simulador" / "temario"
+        - h3 + hint       (el hint se ve sutil y se aclara al pasar el cursor)
+
+      Si un material crece a varias páginas, hazle su propia carpeta con
+      index.html (como ingreso-licenciatura/) y deja aquí una sola card.
     -->
+
+    <h2 class="apuntes-grupo">Ingreso a licenciatura
+      <span class="apuntes-grupo-nota">UNAM · Área 2</span>
+    </h2>
 
     <div class="apuntes-grid">
 
-      <a href="mcp.html" class="apunte-card" style="--card-accent: var(--M);">
-        <span class="apunte-tipo">artefacto</span>
-        <h3>MCP</h3>
-        <p class="apunte-hint">Mapa mental, glosario y flashcards del Model Context Protocol.</p>
+      <a href="ingreso-licenciatura/" class="apunte-card" style="--card-accent: var(--T);">
+        <span class="apunte-tipo">guías</span>
+        <h3>Materias del examen</h3>
+        <p class="apunte-hint">Temario completo y guías de Biología, Química, Español, Literatura, las dos Historias, y formularios de Física y Geografía.</p>
       </a>
 
-      <a href="compresion.html" class="apunte-card" style="--card-accent: var(--T);">
-        <span class="apunte-tipo">artefacto</span>
-        <h3>Compresión</h3>
-        <p class="apunte-hint">Compresores vocales y técnicas de compresión, paso a paso.</p>
-      </a>
-
-      <a href="segunda-guerra-mundial.html" class="apunte-card" style="--card-accent: var(--P);">
-        <span class="apunte-tipo">artefacto</span>
-        <h3>Segunda Guerra Mundial</h3>
-        <p class="apunte-hint">Síntesis en 4 niveles de profundidad + 40 flashcards y quiz interactivo.</p>
-      </a>
-
-      <a href="comipems-simulador/" class="apunte-card" style="--card-accent: var(--M);">
-        <span class="apunte-tipo">artefacto</span>
-        <h3>Simulador COMIPEMS</h3>
-        <p class="apunte-hint">Examen de ingreso a bachillerato: 400 preguntas por bloques, modo examen completo cronometrado y repaso de errores.</p>
-      </a>
-
-      <a href="unam-simulador/" class="apunte-card" style="--card-accent: var(--T);">
-        <span class="apunte-tipo">artefacto</span>
+      <a href="unam-simulador/" class="apunte-card" style="--card-accent: var(--M);">
+        <span class="apunte-tipo">simulador</span>
         <h3>Simulador UNAM</h3>
-        <p class="apunte-hint">Examen de ingreso a la UNAM, Área 2 (Ciencias Biológicas, Químicas y de la Salud): banco del examen muestra 2025 y repaso de errores.</p>
+        <p class="apunte-hint">Examen de ingreso Área 2 (Ciencias Biológicas, Químicas y de la Salud): banco del examen muestra 2025 y repaso de errores.</p>
+      </a>
+
+    </div>
+
+    <h2 class="apuntes-grupo">Ingreso a bachillerato
+      <span class="apuntes-grupo-nota">COMIPEMS</span>
+    </h2>
+
+    <div class="apuntes-grid">
+
+      <a href="comipems-simulador/" class="apunte-card" style="--card-accent: var(--P);">
+        <span class="apunte-tipo">simulador</span>
+        <h3>Simulador COMIPEMS</h3>
+        <p class="apunte-hint">400 preguntas por bloques, modo examen completo cronometrado y repaso de errores.</p>
       </a>
 
     </div>

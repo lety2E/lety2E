@@ -1,0 +1,1163 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Literatura · Área 2 · UNAM</title>
+<style>
+  :root{
+    --M:#FF00AA; --T:#00B8B8; --P:#6A2A8C;
+    --bg:#FFF7FB; --card:#FFFFFF; --ink:#1A0828;
+    --muted:#7B5A50; --border:#F0D7E6; --hover:#FFE3F1; --soft:#FDF1F8;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,system-ui,sans-serif;
+    background:var(--bg);color:var(--ink);line-height:1.5;-webkit-font-smoothing:antialiased;
+  }
+
+  header{text-align:center;padding:2.2rem 1rem .8rem}
+  header .eyebrow{font-size:.76rem;letter-spacing:.18em;text-transform:uppercase;color:var(--T);font-weight:700}
+  header h1{margin:.35rem 0 .25rem;font-size:clamp(1.5rem,3.8vw,2.1rem);color:var(--P)}
+  header p{margin:0 auto;max-width:48ch;color:var(--muted);font-size:.93rem}
+
+  .controls{display:flex;justify-content:center;align-items:center;gap:.6rem;flex-wrap:wrap;padding:1rem 1rem 0}
+  .switch{
+    display:inline-flex;align-items:center;gap:.55rem;
+    background:var(--card);border:1.5px solid var(--border);
+    border-radius:999px;padding:.42rem .9rem;cursor:pointer;
+    font-size:.86rem;font-weight:600;color:var(--ink);transition:all .15s ease;font-family:inherit;
+  }
+  .switch:hover{border-color:var(--T);background:#F0FBFB}
+  .switch .dot{width:34px;height:19px;border-radius:999px;background:var(--border);position:relative;transition:background .18s ease;flex:none}
+  .switch .dot::after{
+    content:"";position:absolute;top:2.5px;left:2.5px;width:14px;height:14px;border-radius:50%;
+    background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.25);transition:transform .18s ease;
+  }
+  body.memo .switch#memoBtn .dot{background:var(--T)}
+  body.memo .switch#memoBtn .dot::after{transform:translateX(15px)}
+  body.flip .switch#flipBtn .dot{background:var(--M)}
+  body.flip .switch#flipBtn .dot::after{transform:translateX(15px)}
+  #flipBtn{display:none}
+  body.memo #flipBtn{display:inline-flex}
+  .hint{text-align:center;color:var(--muted);font-size:.8rem;padding:.55rem 1rem 0;min-height:1.4rem;max-width:62ch;margin:0 auto}
+
+  .tabs{max-width:1180px;margin:.9rem auto 0;padding:0 1rem;display:flex;flex-wrap:wrap;gap:.45rem;justify-content:center}
+  .tab{
+    background:var(--card);border:1.5px solid var(--border);color:var(--ink);
+    border-radius:999px;padding:.45rem .9rem;font-size:.87rem;font-weight:600;
+    cursor:pointer;transition:all .15s ease;font-family:inherit;white-space:nowrap;
+  }
+  .tab b{color:var(--T);margin-right:.35rem;font-weight:800}
+  .tab:hover{background:var(--hover);border-color:var(--M)}
+  .tab.active{background:var(--M);color:#fff;border-color:var(--M);box-shadow:0 4px 12px rgba(255,0,170,.25)}
+  .tab.active b{color:#fff}
+
+  main{max-width:1000px;margin:1.5rem auto 4rem;padding:0 1rem}
+  .panel{display:none}
+  .panel.active{display:block;animation:fade .25s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+
+  .panel-head{margin-bottom:1.3rem;padding-bottom:.8rem;border-bottom:2px solid var(--border)}
+  .panel-head .u{font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--T);font-weight:800}
+  .panel-head h2{margin:.2rem 0 .3rem;color:var(--P);font-size:clamp(1.25rem,3vw,1.65rem)}
+  .panel-head .lead{color:var(--muted);font-size:.9rem;margin:0}
+
+  h3.sec{
+    display:flex;align-items:center;gap:.6rem;margin:2rem 0 .9rem;
+    font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--P);
+  }
+  h3.sec::after{content:"";flex:1;height:1.5px;background:var(--border)}
+
+  .cgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:.7rem}
+  .concept{background:var(--card);border:1.5px solid var(--border);border-left:4px solid var(--T);border-radius:12px;padding:.75rem .9rem}
+  .concept h4{margin:0 0 .25rem;font-size:.93rem;color:var(--P)}
+  .concept p{margin:0;font-size:.87rem;color:var(--ink)}
+  .concept em{color:var(--muted);font-style:normal}
+
+  .fgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:.7rem}
+  .card{
+    background:var(--card);border:1.5px solid var(--border);border-radius:14px;
+    padding:.8rem .9rem .7rem;position:relative;transition:border-color .15s ease,box-shadow .15s ease;
+  }
+  .card:hover{border-color:var(--M);box-shadow:0 6px 18px rgba(255,0,170,.10)}
+  .card .name{font-size:.95rem;font-weight:700;color:var(--M);margin-bottom:.45rem;padding-right:5.2rem;transition:filter .18s ease}
+  .fbody .dato,.fbody .eq,.fbody .io-v{transition:filter .18s ease}
+
+  /* fórmula, en serif como el formulario de Física */
+  .eq{
+    font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+    font-size:1.14rem;text-align:center;padding:.45rem .2rem .5rem;color:var(--ink);overflow-x:auto;
+  }
+  .eq + .eq{border-top:1px dashed var(--border)}
+  .eq i{font-style:italic}
+  .eq sub{font-size:.72em}
+  .frac{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;margin:0 .16em;line-height:1.12;font-size:.92em}
+  .frac span:first-child{border-bottom:1.4px solid currentColor;padding:0 .3em}
+  .frac span:last-child{padding:0 .3em}
+
+  .io{display:grid;grid-template-columns:6.1rem 1fr;gap:.5rem;align-items:baseline;padding:.28rem 0}
+  .io + .io{border-top:1px dashed var(--border)}
+  .io-k{
+    font-size:.66rem;letter-spacing:.09em;text-transform:uppercase;color:var(--T);font-weight:800;
+    min-width:0;overflow-wrap:anywhere;line-height:1.25;
+  }
+  .io-v{font-size:.88rem;color:var(--ink)}
+  .io-v b{color:var(--P);font-weight:700}
+
+  .dato{font-size:.89rem;color:var(--ink);padding:.1rem 0 .2rem}
+  .dato ul{margin:.2rem 0;padding-left:1.1rem}
+  .dato li{margin-bottom:.25rem}
+  .dato li:last-child{margin-bottom:0}
+  .dato b{color:var(--P);font-weight:700}
+  .dato .f{font-family:"Iowan Old Style",Palatino,Georgia,serif;font-size:1.02em}
+
+  .leg{font-size:.78rem;color:var(--muted);border-top:1.5px solid var(--soft);padding-top:.45rem;margin-top:.35rem}
+  .leg b{color:var(--P);font-weight:700}
+
+  details.why{margin-top:.55rem;border-top:1.5px solid var(--soft);padding-top:.45rem}
+  details.why > summary{
+    list-style:none;cursor:pointer;display:flex;align-items:center;gap:.35rem;
+    font-size:.76rem;font-weight:700;color:var(--T);letter-spacing:.02em;
+  }
+  details.why > summary::-webkit-details-marker{display:none}
+  details.why > summary::after{content:"▾";font-size:.8rem;transition:transform .15s ease}
+  details.why[open] > summary::after{transform:rotate(180deg)}
+  details.why > summary:hover{color:var(--M)}
+  details.why .why-body{font-size:.83rem;line-height:1.45;color:var(--ink);background:var(--soft);border-radius:10px;padding:.55rem .7rem;margin-top:.45rem}
+
+  .trap{background:#FFF9E8;border:1.5px solid #F5E2A8;border-left:4px solid #E8B93B;border-radius:12px;padding:.8rem 1rem;margin-top:.7rem}
+  .trap h4{margin:0 0 .4rem;font-size:.86rem;color:#8A6410}
+  .trap ul{margin:0;padding-left:1.1rem;font-size:.86rem;color:#5C4712}
+  .trap li{margin-bottom:.25rem}
+  .trap li:last-child{margin-bottom:0}
+
+  /* ---------- Modo memoria ---------- */
+  /* se tapa el valor, nunca la etiqueta: el andamio queda para poder recitar */
+  body.memo:not(.flip) .fbody .io-v,
+  body.memo:not(.flip) .fbody .dato,
+  body.memo:not(.flip) .fbody .eq{filter:blur(6.5px)}
+  body.memo:not(.flip) .card.open .fbody .io-v,
+  body.memo:not(.flip) .card.open .fbody .dato,
+  body.memo:not(.flip) .card.open .fbody .eq{filter:none}
+
+  body.memo.flip .card .name{filter:blur(6.5px)}
+  body.memo.flip .card.open .name{filter:none}
+
+  body.memo .card{cursor:pointer}
+  body.memo .card::after{
+    content:"toca para ver";position:absolute;right:.7rem;top:.72rem;
+    font-size:.66rem;color:var(--T);font-weight:700;letter-spacing:.04em;
+  }
+  body.memo .card.open::after{content:""}
+  body.memo details.why{filter:none}
+
+  footer{text-align:center;color:var(--muted);font-size:.8rem;padding:0 1rem 3rem;max-width:60ch;margin:0 auto}
+
+  @media print{
+    .tabs,.controls,.hint,footer{display:none}
+    .panel{display:block!important;page-break-after:always}
+    body.memo .fbody .dato,body.memo .fbody .eq,body.memo .fbody .io-v,body.memo .card .name{filter:none}
+    body{background:#fff}
+  }
+</style>
+
+<style>
+/* ---- barra de regreso lety2E (prefijo l2e- para no chocar) ---- */
+.l2e-volver{
+  font-family:'DM Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
+  font-size:.85rem;font-weight:500;
+  padding:.7rem 1.1rem;
+  background:#1A0828;color:#F5E9F2;
+  display:flex;flex-wrap:wrap;align-items:center;gap:.45rem;
+  line-height:1.5;
+}
+.l2e-volver a{color:#00DEC8;text-decoration:none;}
+.l2e-volver a:hover{color:#FF00AA;text-decoration:underline;}
+.l2e-volver .l2e-sep{opacity:.45;}
+.l2e-volver .l2e-actual{opacity:.75;}
+.l2e-volver .l2e-marca{
+  margin-left:auto;font-family:Georgia,'Times New Roman',serif;
+  font-style:italic;font-weight:700;color:#FF00AA;text-decoration:none;
+}
+.l2e-volver .l2e-marca:hover{color:#00DEC8;}
+@media (max-width:520px){
+  .l2e-volver{font-size:.78rem;padding:.6rem .8rem;}
+  .l2e-volver .l2e-marca{margin-left:auto;}
+}
+</style>
+</head>
+<body data-section="apuntes">
+<nav class="l2e-volver">
+  <a href="../../index.html">Inicio</a>
+  <span class="l2e-sep">&rsaquo;</span>
+  <a href="../index.html">Apuntes</a>
+  <span class="l2e-sep">&rsaquo;</span>
+  <a href="index.html">Ingreso UNAM</a>
+  <span class="l2e-sep">&rsaquo;</span>
+  <span class="l2e-actual">Literatura</span>
+  <a class="l2e-marca" href="../../index.html">lety2E</a>
+</nav>
+
+
+<header>
+  <div class="eyebrow">Guía UNAM · Área 2 · Ciencias Biológicas, Químicas y de la Salud</div>
+  <h1>Literatura</h1>
+  <p>Materia de <b>amarrar nombres</b>: género ↔ características, corriente ↔ autores, ficha ↔ para qué sirve. El peso está en las <b>corrientes literarias</b>.</p>
+</header>
+
+<div class="controls">
+  <button class="switch" id="memoBtn"><span class="dot"></span> Modo memoria</button>
+  <button class="switch" id="flipBtn"><span class="dot"></span> Voltear</button>
+</div>
+<div class="hint" id="hint">Enciende el <b>modo memoria</b> para taparte. El <b>En palabras</b> de cada tarjeta se abre siempre, en cualquier modo.</div>
+
+<nav class="tabs" id="tabs"></nav>
+
+<main id="main">
+
+<!-- ============ U1 PROPIEDADES DEL TEXTO ============ -->
+<section class="panel" data-num="1" data-short="Propiedades del texto">
+  <div class="panel-head">
+    <div class="u">Unidad 1 · El texto</div>
+    <h2>Propiedades del texto</h2>
+    <p class="lead">La lista de cotejo con la que se juzga si un escrito funciona. El examen te da la definición y pregunta cómo se llama.</p>
+  </div>
+
+  <h3 class="sec">Conceptos clave</h3>
+  <div class="cgrid">
+    <div class="concept"><h4>Qué hace que algo sea un texto</h4><p>No es un montón de oraciones juntas: es una <b>unidad de comunicación con sentido completo</b>. Las propiedades son lo que se revisa para comprobar que lo logra.</p></div>
+    <div class="concept"><h4>Hacia adentro y hacia afuera</h4><p>Unas propiedades miran <b>adentro</b> del texto (que las ideas se sostengan entre sí, que esté entero, que se vea ordenado) y otras <b>afuera</b> (a quién le hablas y para qué lo escribes).</p></div>
+    <div class="concept"><h4>Cómo lo pregunta el examen</h4><p>Casi siempre te da la <em>definición</em> y pide el <em>nombre</em>; a veces te da un texto defectuoso y pregunta qué propiedad le falta. Por eso conviene saberlo en las dos direcciones.</p></div>
+  </div>
+
+  <h3 class="sec">Las seis propiedades</h3>
+  <div class="fgrid">
+
+    <div class="card"><div class="name">Propósito</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué es</span><span class="io-v">la <b>intención</b> con la que se escribe: informar, convencer, conmover, entretener, instruir</span></div>
+      <div class="io"><span class="io-k">Pregunta</span><span class="io-v">«¿para qué lo escribió?» — la respuesta siempre es un <b>verbo</b></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Es lo primero que decides antes de escribir una línea: qué quieres que le pase al que lea.</div></details></div>
+
+    <div class="card"><div class="name">Adecuación</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué es</span><span class="io-v">que el texto se <b>ajuste a quién lo va a leer</b> y a la situación en que se lee</span></div>
+      <div class="io"><span class="io-k">Se rompe</span><span class="io-v">cuando el registro no corresponde: lenguaje técnico para niños, jerga en un documento oficial, tuteo en una carta formal</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">No le hablas igual a tu jefe que a tu hermana. Un texto que no mide a quién le habla falla aunque todo lo demás esté bien.</div></details></div>
+
+    <div class="card"><div class="name">Cabalidad</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué es</span><span class="io-v">que el texto esté <b>completo</b> y tenga <b>unidad de sentido</b>: nada le falta para entenderse solo</span></div>
+      <div class="io"><span class="io-k">Ojo</span><span class="io-v">el examen la confunde con «datos comprobables» — no se trata de que sea <em>verdad</em>, sino de que esté <b>entero</b></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Cabal = cabales, completo. Si te quedas esperando el final, le falta esta propiedad.</div></details></div>
+
+    <div class="card"><div class="name">Coherencia</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué es</span><span class="io-v">que las ideas <b>se sostengan entre sí</b> y no se contradigan: hay un hilo y cada parte cabe en el conjunto</span></div>
+      <div class="io"><span class="io-k">Se rompe</span><span class="io-v">al meter una idea que no viene al caso, o al afirmar algo que el párrafo anterior negaba</span></div>
+      <div class="io"><span class="io-k">Su pareja</span><span class="io-v">la <b>cohesión</b>, que es lo mismo pero en lo pequeño: los conectores y pronombres que amarran frase con frase</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Una cosa es que el edificio se sostenga; otra, la mezcla que pega ladrillo con ladrillo. Esta es la del edificio.</div></details></div>
+
+    <div class="card"><div class="name">Organización textual</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué es</span><span class="io-v">el <b>orden de las partes</b>: introducción, desarrollo y cierre — o entrada, cuerpo y remate, según el tipo de texto</span></div>
+      <div class="io"><span class="io-k">Depende de</span><span class="io-v">la <b>función</b> del texto: uno que informa no se ordena como uno que convence</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Es el esqueleto. El mismo material contado en otro orden puede volverse ilegible.</div></details></div>
+
+    <div class="card"><div class="name">Disposición espacial</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué es</span><span class="io-v">cómo se <b>acomoda en la página</b>: párrafos, versos, columnas, sangrías, títulos, viñetas, blancos</span></div>
+      <div class="io"><span class="io-k">Se nota</span><span class="io-v">antes de leer una sola palabra: de un vistazo ya sabes si es poema, receta, nota o diálogo</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Es la única propiedad que se ve de lejos, sin leer.</div></details></div>
+  </div>
+
+  <h3 class="sec">Función lingüística ↔ tipo de texto</h3>
+  <div class="fgrid">
+
+    <div class="card"><div class="name">Función referencial → texto expositivo</div><div class="fbody">
+      <div class="io"><span class="io-k">Para qué</span><span class="io-v"><b>informar</b> sobre la realidad, sin opinar</span></div>
+      <div class="io"><span class="io-k">Se ve en</span><span class="io-v">la <b>nota informativa</b>, el texto científico, el escolar, el instructivo de datos</span></div>
+      <div class="io"><span class="io-k">Marcas</span><span class="io-v"><b>tercera persona</b>, verbos en indicativo, datos y cifras, sin adjetivos de valoración</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">El que la usa se hace a un lado: lo importante es el hecho, no quien lo cuenta.</div></details></div>
+
+    <div class="card"><div class="name">Función apelativa → texto argumentativo</div><div class="fbody">
+      <div class="io"><span class="io-k">Para qué</span><span class="io-v"><b>mover al que lee</b>: convencerlo o hacerlo actuar</span></div>
+      <div class="io"><span class="io-k">Se ve en</span><span class="io-v">el <b>editorial</b>, el artículo de opinión, la publicidad, el discurso político, el instructivo</span></div>
+      <div class="io"><span class="io-k">Marcas</span><span class="io-v"><b>segunda persona</b> y verbos en <b>imperativo</b>: «toma en cuenta», «piensa», «no olvides»</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Apelar es llamarle a alguien. Si el texto te está hablando a ti y te pide algo, es esta.</div></details></div>
+
+    <div class="card"><div class="name">Función poética → texto literario</div><div class="fbody">
+      <div class="io"><span class="io-k">Para qué</span><span class="io-v">que importe <b>cómo está dicho</b>, no solo qué dice: el mensaje se cuida a sí mismo</span></div>
+      <div class="io"><span class="io-k">Se ve en</span><span class="io-v">el poema, el cuento, la novela, la obra de teatro — y también en lemas y refranes</span></div>
+      <div class="io"><span class="io-k">Marcas</span><span class="io-v"><b>figuras retóricas</b>, adjetivos abundantes, ritmo, repeticiones buscadas, palabras raras a propósito</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">La prueba: si al decirlo con otras palabras se pierde lo esencial, es esta función.</div></details></div>
+  </div>
+
+  <div class="trap"><h4>Ojo en el examen</h4><ul>
+    <li><b>Cabalidad = unidad de sentido</b>, no «datos comprobables» ni «opinión del autor». Es la que más se falla.</li>
+    <li>Te dan cuatro párrafos que dicen <em>lo mismo</em> y preguntan cuál tiene tal función. <b>No leas el tema, lee las marcas</b>: si hay «tú» e imperativo es apelativa; si hay adjetivos y ritmo es poética; si son puros datos es referencial.</li>
+    <li><b>Coherencia ≠ cohesión.</b> La primera es de las ideas; la segunda, de las palabras que las amarran.</li>
+    <li>El <b>propósito</b> se responde con un verbo (informar, persuadir, conmover); la <b>adecuación</b>, con un destinatario.</li>
+  </ul></div>
+</section>
+
+<!-- ============ U2 TEXTO PERIODÍSTICO ============ -->
+<section class="panel" data-num="2" data-short="Periodístico">
+  <div class="panel-head">
+    <div class="u">Unidad 1 · El texto</div>
+    <h2>El texto periodístico</h2>
+    <p class="lead">El territorio de la función referencial. Lo que se pregunta: qué géneros hay, qué lleva una nota y cómo se ordena la información.</p>
+  </div>
+
+  <h3 class="sec">Conceptos clave</h3>
+  <div class="cgrid">
+    <div class="concept"><h4>Su propósito</h4><p><b>Dar información, emitir opinión y persuadir al lector</b>: las tres cosas a la vez, según el género. Es la definición que pide el examen textualmente.</p></div>
+    <div class="concept"><h4>Informativos vs. de opinión</h4><p>Los <b>informativos</b> reportan hechos y usan función referencial. Los <b>de opinión</b> los interpretan y usan función apelativa. Los <b>híbridos</b> (crónica, reportaje) mezclan.</p></div>
+    <div class="concept"><h4>La regla de oro</h4><p>Lo más importante va <b>primero</b>. El lector puede soltar la nota en cualquier renglón y ya se enteró de lo esencial.</p></div>
+  </div>
+
+  <h3 class="sec">La nota informativa</h3>
+  <div class="fgrid">
+
+    <div class="card"><div class="name">Las seis preguntas de la nota</div><div class="fbody">
+      <div class="io"><span class="io-k">Cuáles</span><span class="io-v"><b>qué</b> pasó · <b>quién</b> · <b>cuándo</b> · <b>dónde</b> · <b>cómo</b> · <b>por qué</b></span></div>
+      <div class="io"><span class="io-k">Dónde van</span><span class="io-v">las primeras cuatro, en la <b>entrada</b>; el cómo y el porqué se desarrollan después</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Si al terminar el primer párrafo no sabes qué pasó, quién, cuándo y dónde, la nota está mal hecha.</div></details></div>
+
+    <div class="card"><div class="name">Pirámide invertida</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué es</span><span class="io-v">ordenar de <b>mayor a menor importancia</b>: lo esencial arriba y los detalles al final</span></div>
+      <div class="io"><span class="io-k">Para qué</span><span class="io-v">para que se pueda <b>cortar por abajo</b> sin perder lo que importa cuando falta espacio</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Es lo contrario de un cuento: aquí el final va al principio, porque nadie promete que te van a leer completo.</div></details></div>
+
+    <div class="card"><div class="name">Cabeza o titular</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué es</span><span class="io-v">la <b>frase de arriba</b> que resume el hecho en pocas palabras y decide si te leen</span></div>
+      <div class="io"><span class="io-k">Acompañantes</span><span class="io-v">el <b>balazo</b> (línea pequeña antes) y el <b>sumario</b> o bajada (una o dos líneas después)</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Es el gancho y el resumen al mismo tiempo. Tiene que ser cierto sin necesidad de leer lo demás.</div></details></div>
+
+    <div class="card"><div class="name">Entrada o lead</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué es</span><span class="io-v">el <b>primer párrafo</b>, donde se concentra lo esencial del hecho</span></div>
+      <div class="io"><span class="io-k">Contiene</span><span class="io-v">las preguntas básicas ya contestadas, para que el resto sea solo detalle</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Es la nota en miniatura. Todo lo que sigue solo la explica más despacio.</div></details></div>
+
+    <div class="card"><div class="name">Cuerpo</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué es</span><span class="io-v">el <b>desarrollo</b>: antecedentes, declaraciones, cifras y consecuencias, en orden decreciente</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Aquí se responde el cómo y el por qué, que no cupieron arriba.</div></details></div>
+  </div>
+
+  <h3 class="sec">Cómo se trata la información</h3>
+  <div class="fgrid">
+
+    <div class="card"><div class="name">Selección</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué hace</span><span class="io-v"><b>escoger</b> qué datos entran y cuáles no, de todo lo que se sabe del hecho</span></div>
+      <div class="io"><span class="io-k">Efecto</span><span class="io-v">ya es una <b>toma de postura</b>: dos diarios con los mismos hechos publican notas distintas</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Nadie cuenta todo. Lo que se deja fuera dice tanto como lo que se publica.</div></details></div>
+
+    <div class="card"><div class="name">Jerarquización</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué hace</span><span class="io-v"><b>ordenar por importancia</b>: qué va en el titular, qué en la entrada, qué hasta el final</span></div>
+      <div class="io"><span class="io-k">Efecto</span><span class="io-v">lo que va arriba se lee como lo más grave o lo más nuevo, aunque no lo sea</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">El lugar donde pones un dato le cambia el peso sin cambiarle una letra.</div></details></div>
+
+    <div class="card"><div class="name">Omisión</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué hace</span><span class="io-v"><b>dejar fuera</b> datos: por espacio, por irrelevancia o para inclinar la lectura</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Callar un nombre o una cifra puede cambiar por completo de qué parece que trata la nota.</div></details></div>
+
+    <div class="card"><div class="name">Reiteración</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué hace</span><span class="io-v"><b>repetir</b> un dato o una palabra a lo largo del texto para fijarlo en el lector</span></div>
+      <div class="io"><span class="io-k">Efecto</span><span class="io-v">lo repetido se vuelve <b>el tema</b>, aunque solo sea un detalle del hecho</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Lo que se dice tres veces se recuerda; lo que se dijo una, no.</div></details></div>
+  </div>
+
+  <h3 class="sec">Los géneros periodísticos</h3>
+  <div class="fgrid">
+
+    <div class="card"><div class="name">Nota informativa</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué hace</span><span class="io-v">reportar un hecho <b>reciente</b>, sin opinión, en el menor espacio posible</span></div>
+      <div class="io"><span class="io-k">Función</span><span class="io-v"><b>referencial</b> pura</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">La más corta y la más seca: qué pasó y ya.</div></details></div>
+
+    <div class="card"><div class="name">Crónica</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué hace</span><span class="io-v">contar el hecho <b>en orden temporal</b>, con la mirada de quien lo presenció</span></div>
+      <div class="io"><span class="io-k">Mezcla</span><span class="io-v">información <b>y</b> estilo personal: es el género más cercano a lo literario</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Aquí sí importa el orden en que pasaron las cosas, y se nota quién las está contando.</div></details></div>
+
+    <div class="card"><div class="name">Reportaje</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué hace</span><span class="io-v"><b>investigar a fondo</b> un tema, con varias fuentes, documentos y contexto</span></div>
+      <div class="io"><span class="io-k">Se distingue</span><span class="io-v">por su <b>extensión</b> y porque no depende de que el hecho sea de hoy</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">El más largo y el más trabajado. No reporta un hecho: explica un asunto completo.</div></details></div>
+
+    <div class="card"><div class="name">Entrevista</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué hace</span><span class="io-v">recoger las <b>declaraciones</b> de alguien en forma de preguntas y respuestas</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Se reconoce de un vistazo por la disposición espacial: pregunta, respuesta, pregunta.</div></details></div>
+
+    <div class="card"><div class="name">Editorial</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué hace</span><span class="io-v">dar la <b>postura del periódico</b> —no de una persona— sobre un asunto</span></div>
+      <div class="io"><span class="io-k">Se distingue</span><span class="io-v">porque va <b>sin firma</b>: opina la institución</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Si opina y nadie lo firma, es el diario entero el que está hablando.</div></details></div>
+
+    <div class="card"><div class="name">Artículo de opinión y columna</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué hacen</span><span class="io-v">dar la postura <b>de una persona</b>, que <b>firma</b> y se hace responsable</span></div>
+      <div class="io"><span class="io-k">Diferencia</span><span class="io-v">la <b>columna</b> es fija: mismo autor, mismo lugar, misma periodicidad</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Van firmados, y el que además aparece cada martes en la misma página es el fijo.</div></details></div>
+  </div>
+
+  <div class="trap"><h4>Ojo en el examen</h4><ul>
+    <li>La definición que pide es exactamente: <b>«dar información, emitir opinión y persuadir al lector»</b>. Si una opción dice solo «informar», es la incompleta.</li>
+    <li><b>Editorial sin firma · artículo y columna con firma.</b> Es la diferencia que más se pregunta.</li>
+    <li><b>Reportaje ≠ crónica.</b> El reportaje investiga y usa varias fuentes; la crónica narra en orden de tiempo lo que se presenció.</li>
+    <li>Las <b>cuatro operaciones</b> (selección, jerarquización, omisión, reiteración) son cómo un medio toma partido <em>sin</em> opinar. Suelen preguntarlas con un ejemplo, no con la definición.</li>
+  </ul></div>
+</section>
+
+<!-- ============ U3 TEXTO DRAMÁTICO ============ -->
+<section class="panel" data-num="3" data-short="Dramático">
+  <div class="panel-head">
+    <div class="u">Unidad 1 · El texto</div>
+    <h2>El texto dramático</h2>
+    <p class="lead">El que se escribe <b>para ser representado</b>. Todo lo demás —el diálogo, las acotaciones, la división en actos— sale de ahí.</p>
+  </div>
+
+  <h3 class="sec">Conceptos clave</h3>
+  <div class="cgrid">
+    <div class="concept"><h4>Lo que lo define</h4><p>Su autor lo escribe con la <b>intención de que se represente</b>. Está incompleto en el papel: le falta el escenario. Esa es la respuesta que pide el examen.</p></div>
+    <div class="concept"><h4>Por qué no hay narrador</h4><p>Nadie te cuenta lo que pasa: <b>los personajes lo dicen y lo hacen</b> frente a ti. Todo lo que sabes, lo sabes por el diálogo o por lo que ves.</p></div>
+    <div class="concept"><h4>Género y subgénero</h4><p><b>Dramático</b> es el género; <b>tragedia, comedia y drama</b> son sus subgéneros. Ojo: el examen pone «tragedia» y «dramático» como opciones de la misma pregunta para ver si los confundes.</p></div>
+  </div>
+
+  <h3 class="sec">La organización dialógica</h3>
+  <div class="fgrid">
+
+    <div class="card"><div class="name">Diálogo</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué es</span><span class="io-v">la conversación entre dos o más personajes: es <b>el cuerpo entero</b> de la obra</span></div>
+      <div class="io"><span class="io-k">Cómo se ve</span><span class="io-v">el <b>nombre del personaje</b> seguido de dos puntos o guion, y luego lo que dice</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Aquí no hay «dijo Juan»: dice Juan y ya. El nombre está afuera, en el margen.</div></details></div>
+
+    <div class="card"><div class="name">Monólogo</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué es</span><span class="io-v">un personaje <b>solo</b> hablando en voz alta, largamente</span></div>
+      <div class="io"><span class="io-k">Para qué</span><span class="io-v">para que el público sepa lo que <b>piensa o siente</b>, ya que no hay narrador que lo cuente</span></div>
+      <div class="io"><span class="io-k">Su pariente</span><span class="io-v">el <b>soliloquio</b>: lo mismo, pero hablándose a sí mismo, sin conciencia de público</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Es el truco para meter al espectador dentro de una cabeza sin narrador. El «ser o no ser» es esto.</div></details></div>
+
+    <div class="card"><div class="name">Aparte</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué es</span><span class="io-v">lo que un personaje dice <b>al público</b> fingiendo que los otros personajes no lo oyen</span></div>
+      <div class="io"><span class="io-k">Para qué</span><span class="io-v">para revelar una intención oculta; es motor del <b>enredo</b> en la comedia</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">El personaje se voltea, te cuenta el secreto a ti, y sigue como si nada.</div></details></div>
+
+    <div class="card"><div class="name">Acotación</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué es</span><span class="io-v">la <b>indicación del autor</b> sobre escenografía, luces, gestos, tono o movimientos</span></div>
+      <div class="io"><span class="io-k">Cómo se ve</span><span class="io-v">entre <b>paréntesis</b> y en <b>cursiva</b>; es lo único que no dicen los personajes</span></div>
+      <div class="io"><span class="io-k">Se nota</span><span class="io-v">no se pronuncia en escena: se <b>obedece</b></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Es la voz del autor colada entre los diálogos. En la representación no se oye: se ve.</div></details></div>
+  </div>
+
+  <h3 class="sec">La acción y su estructura</h3>
+  <div class="fgrid">
+
+    <div class="card"><div class="name">Planteamiento o desarrollo</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué pasa</span><span class="io-v">se presentan los <b>personajes</b>, el lugar y el <b>conflicto</b> que va a mover todo</span></div>
+      <div class="io"><span class="io-k">Dónde va</span><span class="io-v">al principio; suele coincidir con el <b>primer acto</b></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Aquí se te dice quiénes son y qué quieren. Sin eso, nada de lo que sigue importa.</div></details></div>
+
+    <div class="card"><div class="name">Nudo o clímax</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué pasa</span><span class="io-v">el conflicto llega a su <b>punto más alto</b>: ya no hay salida cómoda</span></div>
+      <div class="io"><span class="io-k">Se reconoce</span><span class="io-v">porque es donde más <b>tensión</b> hay y donde el personaje tiene que decidir</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">El momento en que ya no se puede volver atrás.</div></details></div>
+
+    <div class="card"><div class="name">Desenlace</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué pasa</span><span class="io-v">el conflicto <b>se resuelve</b>, para bien o para mal, y la obra cierra</span></div>
+      <div class="io"><span class="io-k">Marca el género</span><span class="io-v">si termina en desgracia y muerte es de un tipo; si termina en boda o reconciliación, del otro</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Cómo acaba no es un detalle: es lo que decide de qué subgénero es la obra.</div></details></div>
+
+    <div class="card"><div class="name">Cómo se divide la obra</div><div class="fbody">
+      <div class="dato">De mayor a menor:
+        <ul>
+          <li><b>Acto</b> — la división mayor; se marca con la <b>caída del telón</b> (lo común son 3).</li>
+          <li><b>Cuadro</b> — cambia la <b>escenografía</b>: otro lugar u otro momento.</li>
+          <li><b>Escena</b> — cambia por <b>entrada o salida</b> de un personaje: es la unidad más pequeña.</li>
+        </ul>
+      </div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">De grande a chico: telón, decorado, personaje que entra o sale.</div></details></div>
+  </div>
+
+  <h3 class="sec">Los personajes</h3>
+  <div class="fgrid">
+
+    <div class="card"><div class="name">Protagonista</div><div class="fbody">
+      <div class="io"><span class="io-k">Quién es</span><span class="io-v">el que <b>quiere algo</b> y a cuyo alrededor gira la acción; no siempre es el bueno</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Se identifica por el deseo, no por la simpatía: es el que mueve la historia.</div></details></div>
+
+    <div class="card"><div class="name">Antagonista</div><div class="fbody">
+      <div class="io"><span class="io-k">Quién es</span><span class="io-v">el que <b>se opone</b> a ese deseo; puede ser una persona, una ley, el destino o la sociedad</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">No tiene que ser un villano. En la tragedia griega el que se opone suele ser el destino mismo.</div></details></div>
+
+    <div class="card"><div class="name">Secundarios e incidentales</div><div class="fbody">
+      <div class="io"><span class="io-k">Secundario</span><span class="io-v">acompaña y ayuda o estorba, pero no mueve el conflicto principal</span></div>
+      <div class="io"><span class="io-k">Incidental</span><span class="io-v">aparece <b>una vez</b>, cumple una función y desaparece</span></div>
+      <div class="io"><span class="io-k">Coro</span><span class="io-v">en la tragedia griega, el grupo que <b>comenta</b> la acción y le explica al público lo que significa</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">El coro es lo más parecido a un narrador que tiene el teatro antiguo: no actúa, opina.</div></details></div>
+  </div>
+
+  <h3 class="sec">Tragedia y comedia</h3>
+  <div class="fgrid">
+
+    <div class="card"><div class="name">Tragedia</div><div class="fbody">
+      <div class="io"><span class="io-k">Personajes</span><span class="io-v"><b>nobles, reyes, héroes o dioses</b>: gente de alto rango</span></div>
+      <div class="io"><span class="io-k">Tono</span><span class="io-v"><b>solemne</b>, lenguaje elevado; el conflicto es con el <b>destino</b>, los dioses o una ley superior</span></div>
+      <div class="io"><span class="io-k">Final</span><span class="io-v"><b>desgraciado</b>: muerte, ruina o castigo del protagonista</span></div>
+      <div class="io"><span class="io-k">Efecto</span><span class="io-v"><b>catarsis</b>: el público se purga de sus propias pasiones sintiendo compasión y temor</span></div>
+      <div class="io"><span class="io-k">La falla</span><span class="io-v">la <b>hybris</b> o desmesura: el héroe se pasa de la raya y eso lo hunde</span></div>
+      <div class="io"><span class="io-k">Autores</span><span class="io-v"><b>Esquilo, Sófocles, Eurípides</b> · <em>Edipo rey</em>, <em>Antígona</em>, <em>Medea</em></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Cae alguien que estaba muy alto, y cae por algo que llevaba adentro. Ahí está lo terrible.</div></details></div>
+
+    <div class="card"><div class="name">Comedia</div><div class="fbody">
+      <div class="io"><span class="io-k">Personajes</span><span class="io-v"><b>gente común</b>, con defectos exagerados: el avaro, el celoso, el fanfarrón</span></div>
+      <div class="io"><span class="io-k">Tono</span><span class="io-v"><b>ligero</b>, lenguaje coloquial; el conflicto es <b>social o de enredo</b>, no cósmico</span></div>
+      <div class="io"><span class="io-k">Final</span><span class="io-v"><b>feliz</b>: bodas, reconciliación, el engaño se descubre</span></div>
+      <div class="io"><span class="io-k">Efecto</span><span class="io-v">la <b>risa</b>, y con ella la <b>crítica de costumbres</b>: se ríe uno de sus propios vicios</span></div>
+      <div class="io"><span class="io-k">Autores</span><span class="io-v"><b>Aristófanes, Plauto, Molière</b> · <em>El avaro</em>, <em>Tartufo</em></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Se ríe de gente como uno. Y como termina bien, el vicio se corrige en vez de matar a nadie.</div></details></div>
+
+    <div class="card"><div class="name">Drama y tragicomedia</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué son</span><span class="io-v">la mezcla: personajes comunes en conflictos <b>serios pero no fatales</b></span></div>
+      <div class="io"><span class="io-k">Final</span><span class="io-v"><b>abierto o agridulce</b>: ni la ruina total ni la boda</span></div>
+      <div class="io"><span class="io-k">Es el moderno</span><span class="io-v">casi todo el teatro de los últimos dos siglos cae aquí (Ibsen, Chéjov, Lorca)</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">La vida real casi nunca acaba en catástrofe ni en boda. Este subgénero se inventó para eso.</div></details></div>
+
+    <div class="card"><div class="name">Los subgéneros cómicos menores</div><div class="fbody">
+      <div class="io"><span class="io-k">Entremés</span><span class="io-v">pieza <b>breve y cómica</b> que se representaba <b>entre</b> los actos de una obra larga</span></div>
+      <div class="io"><span class="io-k">Farsa</span><span class="io-v">comedia de situaciones <b>exageradas hasta lo absurdo</b></span></div>
+      <div class="io"><span class="io-k">Sainete</span><span class="io-v">cuadro breve de <b>costumbres populares</b>, con lenguaje callejero</span></div>
+      <div class="io"><span class="io-k">Ópera</span><span class="io-v">obra dramática <b>cantada</b> de principio a fin</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Todos son cortos y todos hacen reír; cambia dónde se representaban y qué tan exagerados eran.</div></details></div>
+  </div>
+
+  <div class="trap"><h4>Ojo en el examen</h4><ul>
+    <li>La pregunta clásica: <em>«el autor lo escribe con intención de ser representado»</em> → <b>dramático</b>. No «épico» ni «narrativo», aunque cuente una historia.</li>
+    <li><b>Tragedia = nobles + destino + final desgraciado.</b> <b>Comedia = gente común + enredo + final feliz.</b> Los tres rasgos juntos, no uno solo.</li>
+    <li>La <b>acotación</b> es lo único que no se pronuncia. Si en un fragmento hay algo entre paréntesis y en cursiva, ya sabes que el texto es dramático.</li>
+    <li>Cuidado con <b>acto / cuadro / escena</b>: la escena cambia con la <em>entrada o salida de un personaje</em>, no con el telón.</li>
+  </ul></div>
+</section>
+
+<!-- ============ U4 TEXTO POÉTICO ============ -->
+<section class="panel" data-num="4" data-short="Poético">
+  <div class="panel-head">
+    <div class="u">Unidad 1 · El texto</div>
+    <h2>El texto poético</h2>
+    <p class="lead">Análisis <b>intratextual</b> (métrica, rima, ritmo, figuras) y <b>contextual</b> (época y autor). Lo que más se pregunta: identificar la figura retórica.</p>
+  </div>
+
+  <h3 class="sec">Conceptos clave</h3>
+  <div class="cgrid">
+    <div class="concept"><h4>Intratextual vs. contextual</h4><p><b>Intratextual</b>: lo que se ve dentro del poema —cómo está hecho—. <b>Contextual</b>: lo que lo rodea —época, corriente, biografía, a qué respondía el autor—.</p></div>
+    <div class="concept"><h4>Verso y estrofa</h4><p>El <b>verso</b> es cada renglón; la <b>estrofa</b>, el grupo de versos separado por un blanco. El <b>poema</b> es el conjunto.</p></div>
+    <div class="concept"><h4>Yo lírico ≠ autor</h4><p>El que habla en el poema es una voz construida, aunque diga «yo». No se le atribuye automáticamente al autor lo que dice.</p></div>
+    <div class="concept"><h4>Verso libre</h4><p>La poesía moderna suele no tener metro fijo ni rima. Que no rime <b>no</b> la saca del género lírico: el ritmo y las imágenes siguen ahí.</p></div>
+  </div>
+
+  <h3 class="sec">Métrica, rima y ritmo</h3>
+  <div class="fgrid">
+
+    <div class="card"><div class="name">Metro</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué es</span><span class="io-v">la <b>medida del verso</b> en sílabas métricas (que no siempre son las gramaticales)</span></div>
+      <div class="io"><span class="io-k">Arte menor</span><span class="io-v">de <b>2 a 8</b> sílabas</span></div>
+      <div class="io"><span class="io-k">Arte mayor</span><span class="io-v">de <b>9 en adelante</b></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Contar sílabas de un verso no es contarlas como se escriben: hay reglas que las juntan o las separan.</div></details></div>
+
+    <div class="card"><div class="name">Sinalefa</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué hace</span><span class="io-v"><b>une en una sola sílaba</b> la vocal final de una palabra con la inicial de la siguiente</span></div>
+      <div class="io"><span class="io-k">Ejemplo</span><span class="io-v"><em>«ho-ja_a-ma-ri-lla»</em> cuenta una sílaba menos de las que parece</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Es lo que haces al hablar rápido: «se_va_a_ir» te sale en tres golpes, no en cinco.</div></details></div>
+
+    <div class="card"><div class="name">Ley del acento final</div><div class="fbody">
+      <div class="io"><span class="io-k">Aguda</span><span class="io-v">si el verso acaba en palabra aguda, se <b>suma una</b> sílaba</span></div>
+      <div class="io"><span class="io-k">Grave</span><span class="io-v">si acaba en grave, <b>no cambia</b></span></div>
+      <div class="io"><span class="io-k">Esdrújula</span><span class="io-v">si acaba en esdrújula, se <b>resta una</b></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Es un ajuste para que todos los versos suenen igual de largos aunque acaben distinto.</div></details></div>
+
+    <div class="card"><div class="name">Rima consonante</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué repite</span><span class="io-v"><b>todos los sonidos</b> —vocales y consonantes— desde la última vocal acentuada</span></div>
+      <div class="io"><span class="io-k">Ejemplo</span><span class="io-v"><em>can-<b>tar</b> / a-<b>mar</b></em>; <em>vi-<b>ento</b> / a-li-<b>ento</b></em></span></div>
+      <div class="io"><span class="io-k">También</span><span class="io-v">se le dice <b>perfecta</b> o <b>total</b></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Es la rima que se oye de inmediato, la de las canciones infantiles.</div></details></div>
+
+    <div class="card"><div class="name">Rima asonante</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué repite</span><span class="io-v"><b>solo las vocales</b> desde la última acentuada; las consonantes cambian</span></div>
+      <div class="io"><span class="io-k">Ejemplo</span><span class="io-v"><em>s<b>o</b>mbr<b>a</b> / al<b>o</b>ndr<b>a</b></em>; <em>c<b>a</b>ll<b>e</b> / t<b>a</b>rd<b>e</b></em></span></div>
+      <div class="io"><span class="io-k">También</span><span class="io-v">se le dice <b>parcial</b> o <b>imperfecta</b>; es la del <b>romance</b></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Suena a rima sin serlo del todo. Es más disimulada y por eso más usada en poesía culta.</div></details></div>
+
+    <div class="card"><div class="name">Ritmo</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué es</span><span class="io-v">la <b>repetición ordenada</b> de acentos, pausas y sonidos que le da música al verso</span></div>
+      <div class="io"><span class="io-k">De qué depende</span><span class="io-v">de dónde caen las <b>sílabas tónicas</b>, no de la rima: hay ritmo aunque no haya rima</span></div>
+      <div class="io"><span class="io-k">Recursos</span><span class="io-v">aliteración, anáfora, paralelismo y repetición de estructuras</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Es lo que hace que un poema se pueda leer en voz alta sin tropezarse. Se oye antes de entenderse.</div></details></div>
+
+    <div class="card"><div class="name">Estrofas más preguntadas</div><div class="fbody">
+      <div class="io"><span class="io-k">Pareado</span><span class="io-v"><b>2</b> versos que riman entre sí</span></div>
+      <div class="io"><span class="io-k">Terceto</span><span class="io-v"><b>3</b> versos de arte mayor</span></div>
+      <div class="io"><span class="io-k">Cuarteto</span><span class="io-v"><b>4</b> versos de arte mayor (la <b>redondilla</b> es de arte menor)</span></div>
+      <div class="io"><span class="io-k">Décima</span><span class="io-v"><b>10</b> versos octosílabos</span></div>
+      <div class="io"><span class="io-k">Soneto</span><span class="io-v">poema completo de <b>14</b> versos endecasílabos: <b>2 cuartetos + 2 tercetos</b></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">El soneto es el que más se pregunta porque su cuenta es fija: 14 versos, siempre.</div></details></div>
+  </div>
+
+  <h3 class="sec">Figuras retóricas</h3>
+  <div class="fgrid">
+
+    <div class="card"><div class="name">Metáfora</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué hace</span><span class="io-v"><b>sustituye</b> una cosa por otra con la que guarda semejanza, <b>sin decir «como»</b></span></div>
+      <div class="io"><span class="io-k">Ejemplo</span><span class="io-v"><em>«sus cabellos son oro»</em> · <em>«el otoño de la vida»</em></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Se nombra una cosa con el nombre de otra y el que lee hace solo el puente.</div></details></div>
+
+    <div class="card"><div class="name">Símil o comparación</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué hace</span><span class="io-v">compara dos cosas <b>diciendo el nexo</b>: como, cual, parecido a, semejante a</span></div>
+      <div class="io"><span class="io-k">Ejemplo</span><span class="io-v"><em>«sus cabellos son <b>como</b> el oro»</em></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Es la versión con el puente puesto. Si aparece la palabra «como», ya no es la otra.</div></details></div>
+
+    <div class="card"><div class="name">Hipérbole</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué hace</span><span class="io-v"><b>exagera</b> desmedidamente, para más o para menos</span></div>
+      <div class="io"><span class="io-k">Ejemplo</span><span class="io-v"><em>«érase un hombre a una nariz pegado»</em> · <em>«te lo he dicho un millón de veces»</em></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">La exageración a propósito. Se usa tanto en la calle que casi no se nota que es figura.</div></details></div>
+
+    <div class="card"><div class="name">Personificación o prosopopeya</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué hace</span><span class="io-v">da <b>cualidades humanas</b> a animales, cosas o ideas abstractas</span></div>
+      <div class="io"><span class="io-k">Ejemplo</span><span class="io-v"><em>«el viento gemía»</em> · <em>«la muerte lo esperaba sentada»</em></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Si algo que no puede sentir ni hablar está sintiendo o hablando, es esta.</div></details></div>
+
+    <div class="card"><div class="name">Aliteración</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué hace</span><span class="io-v">repite un mismo <b>sonido</b> a lo largo del verso para imitarlo o para dar textura</span></div>
+      <div class="io"><span class="io-k">Ejemplo</span><span class="io-v"><em>«el <b>s</b>u<b>s</b>urro de la<b>s</b> <b>s</b>erpiente<b>s</b>»</em></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">La figura que se oye en vez de entenderse. Léelo en voz alta y la cachas.</div></details></div>
+
+    <div class="card"><div class="name">Anáfora</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué hace</span><span class="io-v">repite <b>la misma palabra al principio</b> de varios versos u oraciones</span></div>
+      <div class="io"><span class="io-k">Ejemplo</span><span class="io-v"><em>«Aquí todo se sabe, aquí todo se dice, aquí todo se olvida»</em></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Es martillar el mismo arranque. Se usa en discursos políticos por lo mismo: se queda pegado.</div></details></div>
+
+    <div class="card"><div class="name">Hipérbaton</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué hace</span><span class="io-v"><b>altera el orden</b> normal de las palabras de la oración</span></div>
+      <div class="io"><span class="io-k">Ejemplo</span><span class="io-v"><em>«de la mano de mi padre venía yo»</em> · <em>«volverán las oscuras golondrinas»</em></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">La frase suena rara pero se entiende: si la reacomodas queda normal. Eso es la señal.</div></details></div>
+
+    <div class="card"><div class="name">Antítesis</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué hace</span><span class="io-v">enfrenta dos ideas <b>opuestas</b> en la misma frase</span></div>
+      <div class="io"><span class="io-k">Ejemplo</span><span class="io-v"><em>«es tan corto el amor y tan largo el olvido»</em></span></div>
+      <div class="io"><span class="io-k">Su extremo</span><span class="io-v">el <b>oxímoron</b>, que junta dos términos contradictorios en <b>una sola expresión</b>: <em>«hielo abrasador»</em></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Esta pone los contrarios uno frente a otro; el oxímoron los mete en la misma bolsa.</div></details></div>
+
+    <div class="card"><div class="name">Metonimia</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué hace</span><span class="io-v">nombra algo con el nombre de otra cosa <b>relacionada</b>: causa por efecto, autor por obra, envase por contenido</span></div>
+      <div class="io"><span class="io-k">Ejemplo</span><span class="io-v"><em>«leí a Borges»</em> (la obra) · <em>«se tomó dos copas»</em> (el contenido)</span></div>
+      <div class="io"><span class="io-k">La relación</span><span class="io-v">de <b>cercanía</b>, no de parecido</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">No leíste al señor, leíste sus libros. Se usa el nombre de al lado.</div></details></div>
+
+    <div class="card"><div class="name">Sinécdoque</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué hace</span><span class="io-v">usa <b>la parte por el todo</b> o el todo por la parte</span></div>
+      <div class="io"><span class="io-k">Ejemplo</span><span class="io-v"><em>«cien cabezas de ganado»</em> · <em>«no tiene techo»</em> · <em>«ganó el oro»</em></span></div>
+      <div class="io"><span class="io-k">La relación</span><span class="io-v">de <b>pertenencia</b>: una cosa está dentro de la otra</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Nadie tiene solo cabezas de vaca ni vive en un techo suelto: se nombra el pedazo y se entiende el conjunto.</div></details></div>
+
+    <div class="card"><div class="name">Sinestesia</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué hace</span><span class="io-v"><b>cruza dos sentidos</b>: describe algo con la cualidad de otro sentido</span></div>
+      <div class="io"><span class="io-k">Ejemplo</span><span class="io-v"><em>«verde chillante»</em> · <em>«música dulce»</em> · <em>«silencio áspero»</em></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Un color no puede chillar ni un sonido ser dulce. Ahí está la figura.</div></details></div>
+
+    <div class="card"><div class="name">Epíteto</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué hace</span><span class="io-v">usa un adjetivo que <b>no añade información</b>, solo realza una cualidad ya sabida</span></div>
+      <div class="io"><span class="io-k">Ejemplo</span><span class="io-v"><em>«la <b>blanca</b> nieve»</em> · <em>«la <b>verde</b> hierba»</em></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Adjetivo de adorno: quítalo y no pierdes ningún dato, solo la música.</div></details></div>
+
+    <div class="card"><div class="name">Ironía</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué hace</span><span class="io-v">dice <b>lo contrario</b> de lo que se quiere dar a entender</span></div>
+      <div class="io"><span class="io-k">Ejemplo</span><span class="io-v"><em>«¡qué puntual, solo dos horas tarde!»</em></span></div>
+      <div class="io"><span class="io-k">Su extremo</span><span class="io-v">el <b>sarcasmo</b>, cuando la burla se vuelve hiriente</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Se entiende por el tono, no por las palabras: literalmente está diciendo lo opuesto.</div></details></div>
+
+    <div class="card"><div class="name">Paradoja</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué hace</span><span class="io-v">afirma algo que <b>parece absurdo</b> pero encierra una verdad</span></div>
+      <div class="io"><span class="io-k">Ejemplo</span><span class="io-v"><em>«vivo sin vivir en mí»</em> · <em>«lo único constante es el cambio»</em></span></div>
+      <div class="io"><span class="io-k">No es burla</span><span class="io-v">de verdad está diciendo algo, aunque suene imposible</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Al primer golpe suena a error; si te detienes, resulta que tenía razón.</div></details></div>
+  </div>
+
+  <div class="trap"><h4>Ojo en el examen</h4><ul>
+    <li><b>Metáfora vs. símil:</b> si aparece «como», «cual» o «parecido a», es símil. Sin nexo, metáfora. Es la pareja que más se confunde.</li>
+    <li><b>Consonante = vocales y consonantes · asonante = solo vocales.</b> Cuenta desde la <em>última vocal acentuada</em>, no desde el final de la palabra.</li>
+    <li>Que un poema <b>no rime no lo saca de la lírica</b>. El verso libre sigue siendo poesía.</li>
+    <li><b>Personificación</b> es dar rasgos humanos; <b>sinestesia</b> es cruzar sentidos. No se mezclan.</li>
+    <li>El <b>soneto</b> siempre son <b>14 versos</b> (2 cuartetos + 2 tercetos). Si te dan un conteo, ahí está la respuesta.</li>
+  </ul></div>
+</section>
+
+<!-- ============ U5 GÉNEROS LITERARIOS ============ -->
+<section class="panel" data-num="5" data-short="Géneros ★">
+  <div class="panel-head">
+    <div class="u">Unidad 2 · Géneros y corrientes · <b>foco</b></div>
+    <h2>Los géneros literarios</h2>
+    <p class="lead">Solo son <b>tres</b>. El examen te da un fragmento y pregunta a cuál pertenece: se contesta por la <b>forma</b>, no por el tema.</p>
+  </div>
+
+  <h3 class="sec">Conceptos clave</h3>
+  <div class="cgrid">
+    <div class="concept"><h4>Cómo se decide en un fragmento</h4><p>No preguntes de qué trata. Pregunta <b>quién está hablando</b>: si alguien <em>cuenta</em> lo que pasó, es uno; si alguien <em>siente</em> en primera persona, otro; si los personajes hablan solos entre sí, el tercero.</p></div>
+    <div class="concept"><h4>Género ≠ subgénero</h4><p>Los géneros son tres y no cambian. Los <b>subgéneros</b> (epopeya, oda, tragedia, cuento, novela…) son las formas concretas dentro de cada uno.</p></div>
+    <div class="concept"><h4>Verso y prosa no deciden</h4><p>Hubo narrativa en verso (la epopeya) y teatro en verso. Lo que decide es la <b>actitud del que habla</b>, no si hay renglones cortos.</p></div>
+  </div>
+
+  <h3 class="sec">Los tres géneros</h3>
+  <div class="fgrid">
+
+    <div class="card"><div class="name">Épico o narrativo</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué hace</span><span class="io-v">un <b>narrador cuenta hechos</b> que le pasan a unos personajes, en un tiempo y un lugar</span></div>
+      <div class="io"><span class="io-k">Se reconoce</span><span class="io-v">por los <b>verbos en pasado</b> y la <b>tercera persona</b>: «llegó», «reunió», «al llegar la fiesta la celebró»</span></div>
+      <div class="io"><span class="io-k">Subgéneros antiguos</span><span class="io-v"><b>epopeya</b>, <b>cantar de gesta</b>, poema épico — hazañas de héroes, en verso</span></div>
+      <div class="io"><span class="io-k">Subgéneros modernos</span><span class="io-v"><b>cuento, novela, leyenda, mito, fábula</b> — ya en prosa</span></div>
+      <div class="io"><span class="io-k">Ejemplos</span><span class="io-v"><em>La Ilíada</em>, <em>La Odisea</em>, <em>Cantar de Mío Cid</em>, las leyendas del rey Arturo</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Hay alguien afuera contando. Si puedes preguntar «¿y quién lo está contando?» y la respuesta no es un personaje, es este.</div></details></div>
+
+    <div class="card"><div class="name">Lírico</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué hace</span><span class="io-v">expresa el <b>mundo interior</b>: sentimientos, emociones, ideas de una voz que dice «yo»</span></div>
+      <div class="io"><span class="io-k">Se reconoce</span><span class="io-v">por la <b>primera persona</b>, la <b>función poética</b>, las figuras retóricas y casi siempre el <b>verso</b></span></div>
+      <div class="io"><span class="io-k">No hay</span><span class="io-v"><b>historia que avance</b>: no pasa nada, se siente algo</span></div>
+      <div class="io"><span class="io-k">Subgéneros</span><span class="io-v"><b>oda</b> (exalta) · <b>elegía</b> (llora una pérdida) · <b>égloga</b> (pastores y campo) · <b>himno</b> (celebra en grupo) · <b>sátira</b> (ridiculiza) · <b>madrigal</b> (amor breve) · <b>epigrama</b> (agudeza corta)</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Es el género donde no pasa nada y ese es el punto: lo que se cuenta es lo que se siente.</div></details></div>
+
+    <div class="card"><div class="name">Dramático</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué hace</span><span class="io-v">presenta un conflicto <b>a través del diálogo</b> de los personajes, para ser <b>representado</b></span></div>
+      <div class="io"><span class="io-k">Se reconoce</span><span class="io-v">porque <b>no hay narrador</b>: aparecen nombres de personaje, dos puntos y acotaciones entre paréntesis</span></div>
+      <div class="io"><span class="io-k">Subgéneros</span><span class="io-v"><b>tragedia · comedia · drama</b> (más entremés, farsa, sainete, ópera)</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">El único que está incompleto en el papel: le falta el escenario para existir del todo.</div></details></div>
+  </div>
+
+  <h3 class="sec">Subgéneros que se confunden</h3>
+  <div class="fgrid">
+
+    <div class="card"><div class="name">Mito</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué explica</span><span class="io-v">el <b>origen</b> del mundo, de los dioses o de una costumbre, en un tiempo <b>fuera de la historia</b></span></div>
+      <div class="io"><span class="io-k">Personajes</span><span class="io-v"><b>dioses</b> y seres sobrenaturales</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Contesta un «¿por qué existe esto?» con una historia de dioses. No se ubica en ningún año.</div></details></div>
+
+    <div class="card"><div class="name">Leyenda</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué cuenta</span><span class="io-v">un hecho <b>con base real</b> —un lugar, un personaje— al que la tradición le agregó lo maravilloso</span></div>
+      <div class="io"><span class="io-k">Se ubica</span><span class="io-v">en un <b>lugar y una época concretos</b>; se transmite de boca en boca</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">La diferencia con el mito es el anclaje: aquí sí hay un pueblo, un río, una calle donde pasó.</div></details></div>
+
+    <div class="card"><div class="name">Fábula</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué es</span><span class="io-v">relato <b>breve</b> con <b>animales que hablan</b> y una <b>moraleja</b> al final</span></div>
+      <div class="io"><span class="io-k">Autores</span><span class="io-v"><b>Esopo</b>, <b>La Fontaine</b>, <b>Samaniego</b>, <b>Iriarte</b></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Se reconoce por la enseñanza explícita al final. Es el único subgénero que te dice para qué te lo contaron.</div></details></div>
+
+    <div class="card"><div class="name">Epopeya</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué es</span><span class="io-v">poema <b>extenso</b> sobre las hazañas de un héroe, con intervención de los <b>dioses</b></span></div>
+      <div class="io"><span class="io-k">Época</span><span class="io-v"><b>Grecia y Roma</b> antiguas</span></div>
+      <div class="io"><span class="io-k">Ejemplos</span><span class="io-v"><em>La Ilíada</em>, <em>La Odisea</em>, <em>La Eneida</em></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Un héroe peleando durante miles de versos, y los dioses metiendo mano cada tanto.</div></details></div>
+
+    <div class="card"><div class="name">Cantar de gesta</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué es</span><span class="io-v">la versión <b>medieval</b> del poema heroico: el protagonista es un <b>caballero nacional</b></span></div>
+      <div class="io"><span class="io-k">Cómo circulaba</span><span class="io-v">lo <b>cantaban los juglares</b> de pueblo en pueblo; era oral</span></div>
+      <div class="io"><span class="io-k">Ejemplos</span><span class="io-v"><em>Cantar de Mío Cid</em>, <em>Cantar de Roldán</em>, <em>Los Nibelungos</em></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Ya no hay dioses: hay un señor con espada y un reino. Y ya no se lee, se canta en la plaza.</div></details></div>
+  </div>
+
+  <div class="trap"><h4>Ojo en el examen</h4><ul>
+    <li>Te dan un fragmento de <em>caballeros y reyes</em> y ponen «Épico», «Lírico», «Tragedia», «Dramático» juntos. Si <b>hay narrador</b>, es <b>épico</b>, aunque el tema suene teatral. Y «Tragedia» no es un género: es subgénero.</li>
+    <li>La pregunta se resuelve por la <b>voz</b>: narrador → épico · «yo» que siente → lírico · personajes hablando sin narrador → dramático.</li>
+    <li><b>Mito</b> (dioses, origen, sin fecha) vs. <b>leyenda</b> (lugar y época reales, tradición oral). Se preguntan como pareja.</li>
+    <li>La <b>fábula</b> se identifica por la <b>moraleja</b>, no por los animales: hay fábulas sin animales.</li>
+  </ul></div>
+</section>
+
+<!-- ============ U6 CORRIENTES LITERARIAS ============ -->
+<section class="panel" data-num="6" data-short="Corrientes ★">
+  <div class="panel-head">
+    <div class="u">Unidad 2 · Géneros y corrientes · <b>foco</b></div>
+    <h2>Corrientes literarias</h2>
+    <p class="lead">El temario solo pide <b>Realismo</b> y <b>Contemporánea</b>, pero el examen usa las demás como <b>distractores</b>: hay que reconocerlas todas para descartar. Cada tarjeta va <em>época · rasgos · autores</em>.</p>
+  </div>
+
+  <h3 class="sec">Conceptos clave</h3>
+  <div class="cgrid">
+    <div class="concept"><h4>Qué es una corriente</h4><p>Un grupo de autores que <b>comparten forma de escribir</b>, <b>desarrollan temas similares</b> y <b>viven en una misma época</b>. Las tres cosas juntas — así lo pregunta el examen, con opciones que solo traen dos.</p></div>
+    <div class="concept"><h4>Van por reacción</h4><p>Cada corriente nace <b>en contra</b> de la anterior: al orden clásico le responde la pasión romántica; a la pasión, la objetividad realista; a la objetividad, la ruptura del siglo XX. Si recuerdas contra quién iba, recuerdas qué defendía.</p></div>
+    <div class="concept"><h4>El truco de las parejas</h4><p>Cuando preguntan por autores, dan <b>parejas</b>. Basta con que <em>uno</em> de los dos sea de otra época para tirar la opción entera. No necesitas conocerlos a los dos.</p></div>
+    <div class="concept"><h4>Corriente ≠ género</h4><p>El género es la <b>forma</b> (narrativo, lírico, dramático) y no cambia con el tiempo. La corriente es el <b>momento y el estilo</b>. Un mismo autor puede escribir en los tres géneros dentro de una sola corriente.</p></div>
+  </div>
+
+  <h3 class="sec">Antes del siglo XIX</h3>
+  <div class="fgrid">
+
+    <div class="card"><div class="name">Clasicismo</div><div class="fbody">
+      <div class="io"><span class="io-k">Época</span><span class="io-v"><b>Grecia y Roma antiguas</b> (s. VIII a.C. – s. V d.C.)</span></div>
+      <div class="io"><span class="io-k">Rasgos</span><span class="io-v"><b>equilibrio, razón y proporción</b>; reglas fijas; los dioses intervienen; el héroe es modelo de virtud</span></div>
+      <div class="io"><span class="io-k">Autores</span><span class="io-v"><b>Homero</b>, <b>Sófocles</b>, <b>Esquilo</b>, <b>Eurípides</b>, <b>Virgilio</b>, <b>Aristófanes</b></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">La medida por encima de todo: nada de excesos, cada cosa en su sitio. De ahí salieron las reglas contra las que después se rebelaron todos.</div></details></div>
+
+    <div class="card"><div class="name">Renacimiento</div><div class="fbody">
+      <div class="io"><span class="io-k">Época</span><span class="io-v">siglos <b>XV y XVI</b>, Europa</span></div>
+      <div class="io"><span class="io-k">Rasgos</span><span class="io-v"><b>humanismo</b>: el hombre al centro; se recupera lo grecolatino; amor idealizado, naturaleza serena, <em>carpe diem</em></span></div>
+      <div class="io"><span class="io-k">Autores</span><span class="io-v"><b>Cervantes</b>, <b>Garcilaso de la Vega</b>, <b>Shakespeare</b>, <b>Petrarca</b>, <b>Dante</b></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Se voltea a ver a los antiguos otra vez, pero ahora el que importa es el ser humano, no los dioses.</div></details></div>
+
+    <div class="card"><div class="name">Barroco</div><div class="fbody">
+      <div class="io"><span class="io-k">Época</span><span class="io-v">siglo <b>XVII</b>; en España, el Siglo de Oro</span></div>
+      <div class="io"><span class="io-k">Rasgos</span><span class="io-v"><b>recargado y difícil</b>: exceso de figuras, contrastes, pesimismo, el desengaño y la fugacidad de la vida</span></div>
+      <div class="io"><span class="io-k">Sus dos ramas</span><span class="io-v"><b>culteranismo</b> (adornar la forma) y <b>conceptismo</b> (retorcer la idea)</span></div>
+      <div class="io"><span class="io-k">Autores</span><span class="io-v"><b>Góngora</b>, <b>Quevedo</b>, <b>Calderón de la Barca</b>, <b>Lope de Vega</b>, <b>Sor Juana Inés de la Cruz</b></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Todo lo contrario del equilibrio: entre más adornado y más difícil, mejor. Y de fondo, la idea de que todo se acaba.</div></details></div>
+
+    <div class="card"><div class="name">Neoclasicismo</div><div class="fbody">
+      <div class="io"><span class="io-k">Época</span><span class="io-v">siglo <b>XVIII</b>, el Siglo de las Luces</span></div>
+      <div class="io"><span class="io-k">Rasgos</span><span class="io-v">vuelta a las <b>reglas y la razón</b>; la literatura debe <b>enseñar</b>; sobrio, didáctico, útil</span></div>
+      <div class="io"><span class="io-k">Su género</span><span class="io-v">la <b>fábula</b>, que trae moraleja: perfecta para instruir</span></div>
+      <div class="io"><span class="io-k">Autores</span><span class="io-v"><b>Molière</b>, <b>Samaniego</b>, <b>Iriarte</b>, <b>Fernández de Lizardi</b></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Reacción contra el exceso barroco: otra vez orden, claridad y provecho. Escribir para educar.</div></details></div>
+  </div>
+
+  <h3 class="sec">Siglo XIX</h3>
+  <div class="fgrid">
+
+    <div class="card"><div class="name">Romanticismo</div><div class="fbody">
+      <div class="io"><span class="io-k">Época</span><span class="io-v"><b>primera mitad del siglo XIX</b></span></div>
+      <div class="io"><span class="io-k">Rasgos</span><span class="io-v"><b>subjetividad</b> y el «yo» por encima de todo; libertad frente a las reglas; pasión, rebeldía, melancolía</span></div>
+      <div class="io"><span class="io-k">Temas</span><span class="io-v">amor imposible, muerte, noche, ruinas, naturaleza salvaje, lo sobrenatural, el héroe solitario</span></div>
+      <div class="io"><span class="io-k">Autores</span><span class="io-v"><b>Goethe</b>, <b>Bécquer</b>, <b>Espronceda</b>, <b>Víctor Hugo</b>, <b>Mary Shelley</b>, <b>Edgar Allan Poe</b>, <b>las hermanas Brontë</b></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Se rompen las reglas a propósito. Lo que siente el autor vale más que lo que dicta la norma — y de preferencia que sea de noche y con tormenta.</div></details></div>
+
+    <div class="card"><div class="name">Realismo</div><div class="fbody">
+      <div class="io"><span class="io-k">Época</span><span class="io-v"><b>segunda mitad del siglo XIX</b></span></div>
+      <div class="io"><span class="io-k">Rasgos</span><span class="io-v">predomina la <b>objetividad del narrador</b> y la <b>descripción</b> minuciosa; se retrata la sociedad tal cual, sin idealizarla</span></div>
+      <div class="io"><span class="io-k">Cómo escribe</span><span class="io-v">narrador <b>omnisciente</b> que no se mete a opinar; personajes de <b>clase media</b>; lenguaje sencillo; ambientes verificables</span></div>
+      <div class="io"><span class="io-k">Va contra</span><span class="io-v">la exaltación del «yo» de la corriente anterior</span></div>
+      <div class="io"><span class="io-k">Autores</span><span class="io-v"><b>Balzac</b>, <b>Stendhal</b>, <b>Flaubert</b>, <b>Dickens</b>, <b>Tolstói</b>, <b>Dostoievski</b>, <b>Pérez Galdós</b>, <b>Gógol</b>, <b>Jane Austen</b> (precursora)</span></div>
+      <div class="io"><span class="io-k">En México</span><span class="io-v"><b>Ignacio Manuel Altamirano</b>, <b>José López Portillo y Rojas</b>, <b>Rafael Delgado</b></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">El escritor se pone a observar como si fuera una cámara. Nada de héroes ni de tormentas: gente normal, calles reales, descrito con lupa.</div></details></div>
+
+    <div class="card"><div class="name">Naturalismo</div><div class="fbody">
+      <div class="io"><span class="io-k">Época</span><span class="io-v"><b>finales del siglo XIX</b>; es la corriente anterior llevada al extremo</span></div>
+      <div class="io"><span class="io-k">Rasgos</span><span class="io-v"><b>determinismo</b>: el personaje está condenado por su herencia y su medio; método <b>científico</b> aplicado a la novela</span></div>
+      <div class="io"><span class="io-k">Temas</span><span class="io-v">lo <b>sórdido</b>: miseria, alcoholismo, enfermedad, prostitución</span></div>
+      <div class="io"><span class="io-k">Autores</span><span class="io-v"><b>Émile Zola</b> (el fundador), <b>Guy de Maupassant</b>, <b>Emilia Pardo Bazán</b>, <b>Federico Gamboa</b> (México, <em>Santa</em>)</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">No solo describe la sociedad: la disecciona. El personaje no puede salvarse porque su origen ya lo decidió todo.</div></details></div>
+
+    <div class="card"><div class="name">Modernismo</div><div class="fbody">
+      <div class="io"><span class="io-k">Época</span><span class="io-v"><b>finales del XIX y principios del XX</b>; el primero que nace en <b>Hispanoamérica</b></span></div>
+      <div class="io"><span class="io-k">Rasgos</span><span class="io-v"><b>musicalidad</b> y belleza formal; exotismo (cisnes, princesas, Oriente); renovación del verso</span></div>
+      <div class="io"><span class="io-k">Autores</span><span class="io-v"><b>Rubén Darío</b> (el jefe), <b>José Martí</b>, <b>Amado Nervo</b>, <b>Manuel Gutiérrez Nájera</b>, <b>Leopoldo Lugones</b></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">El primero que va de América hacia Europa y no al revés. Le importa cómo suena el verso antes que lo que dice.</div></details></div>
+  </div>
+
+  <h3 class="sec">Siglo XX y XXI</h3>
+  <div class="fgrid">
+
+    <div class="card"><div class="name">Las vanguardias</div><div class="fbody">
+      <div class="io"><span class="io-k">Época</span><span class="io-v"><b>primeras décadas del siglo XX</b>, entre las dos guerras</span></div>
+      <div class="io"><span class="io-k">Rasgos</span><span class="io-v"><b>ruptura total</b> con lo anterior: se rompe la sintaxis, la puntuación y hasta la forma de la página</span></div>
+      <div class="io"><span class="io-k">Las principales</span><span class="io-v"><b>surrealismo</b> (el sueño y el inconsciente) · <b>futurismo</b> (máquina y velocidad) · <b>dadaísmo</b> (el absurdo, el azar) · <b>creacionismo</b> · <b>ultraísmo</b> · <b>estridentismo</b> (México)</span></div>
+      <div class="io"><span class="io-k">Autores</span><span class="io-v"><b>André Breton</b>, <b>Vicente Huidobro</b>, <b>Marinetti</b>, <b>Tristan Tzara</b>, <b>Manuel Maples Arce</b></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Los «ismos». Todos nacen con manifiesto y todos quieren empezar de cero. Duraron poco pero cambiaron todo lo que vino después.</div></details></div>
+
+    <div class="card"><div class="name">Literatura contemporánea</div><div class="fbody">
+      <div class="io"><span class="io-k">Época</span><span class="io-v">del <b>siglo XX a hoy</b> (de la posguerra en adelante)</span></div>
+      <div class="io"><span class="io-k">Rasgos</span><span class="io-v"><b>ruptura de la forma tradicional</b>: se rompe el orden del tiempo, se mezclan géneros y realidades</span></div>
+      <div class="io"><span class="io-k">Técnicas</span><span class="io-v"><b>monólogo interior</b> y flujo de conciencia · saltos temporales y <em>flashback</em> · varios narradores · final abierto</span></div>
+      <div class="io"><span class="io-k">Temas</span><span class="io-v">la <b>angustia</b>, el absurdo, la soledad, la identidad, la ciudad, la incomunicación</span></div>
+      <div class="io"><span class="io-k">Autores</span><span class="io-v"><b>Franz Kafka</b>, <b>James Joyce</b>, <b>Virginia Woolf</b>, <b>Luigi Pirandello</b>, <b>Albert Camus</b>, <b>José Saramago</b>, <b>Mariana Enríquez</b></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Ya no se cuenta de principio a fin ni desde afuera: se cuenta desde adentro de una cabeza, saltando en el tiempo, y muchas veces sin cerrar.</div></details></div>
+
+    <div class="card"><div class="name">Boom latinoamericano y realismo mágico</div><div class="fbody">
+      <div class="io"><span class="io-k">Época</span><span class="io-v"><b>años 1960 y 1970</b>, América Latina</span></div>
+      <div class="io"><span class="io-k">Rasgos</span><span class="io-v">lo <b>maravilloso dentro de lo cotidiano</b>, contado con toda naturalidad y sin asombro</span></div>
+      <div class="io"><span class="io-k">Autores</span><span class="io-v"><b>Gabriel García Márquez</b>, <b>Juan Rulfo</b>, <b>Julio Cortázar</b>, <b>Carlos Fuentes</b>, <b>Mario Vargas Llosa</b>, <b>Alejo Carpentier</b></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">La clave está en el tono: alguien sube al cielo tendiendo sábanas y nadie en el pueblo se sorprende. Por eso no es fantasía.</div></details></div>
+  </div>
+
+  <h3 class="sec">Amarres autor ↔ corriente</h3>
+  <div class="fgrid">
+
+    <div class="card"><div class="name">Kafka · Joyce · Woolf · Pirandello · Camus · Saramago · Enríquez</div><div class="fbody">
+      <div class="io"><span class="io-k">Corriente</span><span class="io-v"><b>contemporánea</b></span></div>
+      <div class="io"><span class="io-k">Pista</span><span class="io-v">todos son del <b>siglo XX o XXI</b>; los une romper la forma, no un tema</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Si te suena a siglo XX y a algo raro con la estructura, es de este grupo.</div></details></div>
+
+    <div class="card"><div class="name">Balzac · Stendhal · Flaubert · Dickens · Tolstói · Galdós · Gógol</div><div class="fbody">
+      <div class="io"><span class="io-k">Corriente</span><span class="io-v"><b>realismo</b></span></div>
+      <div class="io"><span class="io-k">Pista</span><span class="io-v">todos de la <b>segunda mitad del XIX</b>, novelistas largos y descriptivos</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Los novelones del XIX con narrador que todo lo sabe y no opina.</div></details></div>
+
+    <div class="card"><div class="name">Mary Shelley · Bécquer · Espronceda · Poe · las Brontë · Víctor Hugo</div><div class="fbody">
+      <div class="io"><span class="io-k">Corriente</span><span class="io-v"><b>romanticismo</b></span></div>
+      <div class="io"><span class="io-k">Pista</span><span class="io-v"><b>primera mitad del XIX</b>; noche, pasión, monstruos y héroes solitarios</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Este es el grupo con el que el examen arma las parejas trampa: mete a uno de aquí junto a uno del XX.</div></details></div>
+
+    <div class="card"><div class="name">Góngora · Quevedo · Sor Juana · Calderón · Lope</div><div class="fbody">
+      <div class="io"><span class="io-k">Corriente</span><span class="io-v"><b>barroco</b> (Siglo de Oro)</span></div>
+      <div class="io"><span class="io-k">Pista</span><span class="io-v">siglo <b>XVII</b>, español recargado y difícil de leer</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Si el texto es en español y no le entiendes a la primera aunque conozcas todas las palabras, probablemente es de aquí.</div></details></div>
+  </div>
+
+  <div class="trap"><h4>Ojo en el examen</h4><ul>
+    <li>Definición de <b>corriente</b>: los autores <em>comparten características en su forma de escribir</em> + <em>desarrollan temas similares</em> + <em>viven en una misma época</em>. La opción correcta trae las <b>tres</b>; las falsas traen dos y le agregan «heredan el estilo» o «abordan un género determinado».</li>
+    <li><b>Realismo = segunda mitad del XIX + objetividad del narrador + descripción.</b> Es la pregunta literal del examen muestra. No confundir con Romanticismo (primera mitad, subjetividad).</li>
+    <li>En la pregunta de <b>autores contemporáneos</b>, revisa la pareja completa: <em>Kafka</em> sí es del XX, pero si viene con <em>Charlotte Brontë</em> la opción ya está mal. Igual <em>Pirandello</em> con <em>Mary Shelley</em>.</li>
+    <li>Todas las corrientes van <b>por reacción</b> a la anterior: clasicismo → barroco → neoclasicismo → romanticismo → realismo → vanguardias. Si te acuerdas de la cadena, te acuerdas del siglo.</li>
+    <li><b>Naturalismo no es lo mismo que Realismo</b>: comparten época y objetividad, pero el naturalismo agrega determinismo y temas sórdidos. Zola es la marca.</li>
+  </ul></div>
+</section>
+
+<!-- ============ U7 NARRATIVA ============ -->
+<section class="panel" data-num="7" data-short="Cuento y novela">
+  <div class="panel-head">
+    <div class="u">Unidad 2 · Géneros y corrientes</div>
+    <h2>El texto narrativo: cuento y novela</h2>
+    <p class="lead">Las dos formas del género épico que hoy se leen. Se preguntan por <b>contraste</b>: lo que una tiene, la otra no.</p>
+  </div>
+
+  <h3 class="sec">Conceptos clave</h3>
+  <div class="cgrid">
+    <div class="concept"><h4>No es cuestión de páginas</h4><p>La diferencia de fondo no es la <b>extensión</b> sino la <b>estructura</b>: uno sostiene <em>un solo</em> conflicto de principio a fin; la otra abre varias líneas y las entreteje.</p></div>
+    <div class="concept"><h4>Todo relato tiene lo mismo</h4><p>Narrador, personajes, espacio, tiempo y trama. Cambia cuántos de cada uno y qué tan complicado se pone.</p></div>
+    <div class="concept"><h4>Narrador ≠ autor</h4><p>El autor es la persona que escribió; el narrador es la voz que cuenta. Aunque diga «yo» y se llame igual, no son el mismo.</p></div>
+  </div>
+
+  <h3 class="sec">Cuento y novela</h3>
+  <div class="fgrid">
+
+    <div class="card"><div class="name">El cuento</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué es</span><span class="io-v">relato <b>breve en prosa</b> que plantea <b>un solo problema</b> y suele cerrar con un <b>final sorpresivo</b></span></div>
+      <div class="io"><span class="io-k">Personajes</span><span class="io-v"><b>pocos</b> y apenas caracterizados: no hay espacio para profundizar</span></div>
+      <div class="io"><span class="io-k">Tiempo y lugar</span><span class="io-v"><b>reducidos</b>: pocas horas o días, uno o dos escenarios</span></div>
+      <div class="io"><span class="io-k">Su ley</span><span class="io-v">todo apunta al <b>desenlace</b>; nada sobra, no hay digresiones</span></div>
+      <div class="io"><span class="io-k">Autores</span><span class="io-v"><b>Poe</b>, <b>Chéjov</b>, <b>Maupassant</b>, <b>Borges</b>, <b>Cortázar</b>, <b>Rulfo</b>, <b>Arreola</b>, <b>Monterroso</b></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Se lee de una sentada y se recuerda por el final. Si le quitas una escena, se cae.</div></details></div>
+
+    <div class="card"><div class="name">La novela</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué es</span><span class="io-v">relato <b>extenso en prosa</b> con <b>trama compleja</b>: varias líneas de acción entretejidas</span></div>
+      <div class="io"><span class="io-k">Personajes</span><span class="io-v"><b>numerosos</b> y con <b>hondura psicológica</b>: cambian a lo largo del libro</span></div>
+      <div class="io"><span class="io-k">Tiempo y lugar</span><span class="io-v"><b>amplios</b>: años o generaciones, muchos escenarios</span></div>
+      <div class="io"><span class="io-k">Permite</span><span class="io-v">descripciones largas, digresiones, subtramas y varios narradores</span></div>
+      <div class="io"><span class="io-k">Tipos</span><span class="io-v">de aventuras, policiaca, histórica, psicológica, de ciencia ficción, de formación</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Aquí sí hay espacio para que los personajes cambien de opinión, envejezcan y se contradigan.</div></details></div>
+  </div>
+
+  <h3 class="sec">Los elementos de la narración</h3>
+  <div class="fgrid">
+
+    <div class="card"><div class="name">Narrador omnisciente</div><div class="fbody">
+      <div class="io"><span class="io-k">Persona</span><span class="io-v"><b>tercera</b>: él, ella, ellos</span></div>
+      <div class="io"><span class="io-k">Qué sabe</span><span class="io-v"><b>todo</b>: los hechos, el pasado y hasta lo que los personajes piensan y sienten</span></div>
+      <div class="io"><span class="io-k">Dónde abunda</span><span class="io-v">en el <b>realismo</b> del siglo XIX</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Se reconoce en cuanto te dice qué está pensando alguien: solo un narrador así puede saberlo.</div></details></div>
+
+    <div class="card"><div class="name">Narrador protagonista</div><div class="fbody">
+      <div class="io"><span class="io-k">Persona</span><span class="io-v"><b>primera</b>: yo</span></div>
+      <div class="io"><span class="io-k">Qué sabe</span><span class="io-v"><b>solo lo suyo</b>: lo que vio, oyó y sintió — puede equivocarse o mentir</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Como cuenta desde adentro, no hay garantía de que tenga razón. De ahí sale el narrador poco confiable.</div></details></div>
+
+    <div class="card"><div class="name">Narrador testigo</div><div class="fbody">
+      <div class="io"><span class="io-k">Persona</span><span class="io-v"><b>primera</b>, pero <b>no es el protagonista</b>: cuenta lo que le pasó a otro</span></div>
+      <div class="io"><span class="io-k">Qué sabe</span><span class="io-v">solo lo que <b>presenció</b> o le contaron</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">El amigo, el vecino, el ayudante que estaba ahí. Watson contando a Sherlock.</div></details></div>
+
+    <div class="card"><div class="name">Estructura del relato</div><div class="fbody">
+      <div class="io"><span class="io-k">Planteamiento</span><span class="io-v">se presentan personajes, lugar y el <b>conflicto</b></span></div>
+      <div class="io"><span class="io-k">Nudo</span><span class="io-v">el conflicto se <b>complica</b> hasta el punto más tenso</span></div>
+      <div class="io"><span class="io-k">Desenlace</span><span class="io-v">el conflicto <b>se resuelve</b> o se cierra</span></div>
+      <div class="io"><span class="io-k">Alteraciones</span><span class="io-v"><b>in medias res</b> (empieza a media acción) · <b>flashback</b> o analepsis (salta al pasado) · <b>prolepsis</b> (adelanta el futuro)</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">El orden en que se cuenta no tiene que ser el orden en que pasó: eso lo aprovecha toda la narrativa del siglo XX.</div></details></div>
+
+    <div class="card"><div class="name">El marco del relato</div><div class="fbody">
+      <div class="dato">
+        <ul>
+          <li><b>Espacio</b> — dónde ocurre; puede ser <b>real, verosímil o fantástico</b>, abierto o cerrado.</li>
+          <li><b>Tiempo externo</b> — la <b>época</b> en la que sucede.</li>
+          <li><b>Tiempo interno</b> — cuánto <b>dura</b> la historia por dentro: una tarde o cien años.</li>
+        </ul>
+      </div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Son dos relojes distintos: en qué siglo pasa y cuánto abarca lo contado.</div></details></div>
+  </div>
+
+  <div class="trap"><h4>Ojo en el examen</h4><ul>
+    <li>La definición que pide del cuento: <b>«subgénero en prosa que plantea un solo problema y contiene un final sorpresivo»</b>. Las opciones falsas le meten «amplio número de personajes», «gran extensión» o «hondura psicológica» — esas son de la novela.</li>
+    <li><b>Un cuento no es una novela corta.</b> La diferencia es de estructura (un conflicto contra varios), no de páginas.</li>
+    <li>El cuento es <b>narrativo, no expositivo ni dialogado</b>. Ojo con la opción que dice «texto expositivo… breve historia dialogada».</li>
+    <li>Para el <b>tipo de narrador</b>: fíjate en la persona gramatical <em>y</em> en cuánto sabe. Tercera + sabe lo que piensan = omnisciente. Primera + protagonista = protagonista. Primera + le pasó a otro = testigo.</li>
+  </ul></div>
+</section>
+
+<!-- ============ U8 FICHAS ============ -->
+<section class="panel" data-num="8" data-short="Fichas y citas">
+  <div class="panel-head">
+    <div class="u">Unidad 3 · Redacción y técnicas de investigación documental</div>
+    <h2>Fichas, citas y registro de fuentes</h2>
+    <p class="lead">Dos cosas que se preguntan siempre: distinguir la <b>ficha bibliográfica de la hemerográfica</b> y decir de qué <b>tipo</b> es una ficha de trabajo.</p>
+  </div>
+
+  <h3 class="sec">Conceptos clave</h3>
+  <div class="cgrid">
+    <div class="concept"><h4>Dos familias de fichas</h4><p>Las de <b>registro de la fuente</b> (dicen de dónde salió: bibliográfica, hemerográfica, audiográfica…) y las de <b>trabajo</b> (guardan el contenido: textual, de paráfrasis, de resumen, de comentario).</p></div>
+    <div class="concept"><h4>El dato que delata</h4><p>Si aparece una <b>fecha completa con día y mes</b> y el nombre de un <b>diario o revista</b>, ya no es un libro. Ese es el atajo para contestar sin leer todo.</p></div>
+    <div class="concept"><h4>Para qué sirven</h4><p>Para <b>no plagiar</b> y para poder volver a la fuente. Toda idea que no es tuya lleva su ficha.</p></div>
+  </div>
+
+  <h3 class="sec">Registro de las fuentes</h3>
+  <div class="fgrid">
+
+    <div class="card"><div class="name">Ficha bibliográfica</div><div class="fbody">
+      <div class="io"><span class="io-k">De qué</span><span class="io-v">de un <b>libro</b></span></div>
+      <div class="io"><span class="io-k">Qué lleva</span><span class="io-v"><b>autor</b> (apellido, inicial) · <b>año</b> entre paréntesis · <b>título en cursiva</b> · <b>editorial</b></span></div>
+      <div class="io"><span class="io-k">Ejemplo</span><span class="io-v"><em>Ocampo, A. M. y Prado, E. (1976). Diccionario de escritores mexicanos. UNAM.</em></span></div>
+      <div class="io"><span class="io-k">No lleva</span><span class="io-v">día ni mes: <b>solo el año</b></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Un libro sale una vez al año y punto. Por eso no necesita día.</div></details></div>
+
+    <div class="card"><div class="name">Ficha hemerográfica</div><div class="fbody">
+      <div class="io"><span class="io-k">De qué</span><span class="io-v">de una <b>publicación periódica</b>: periódico, revista, suplemento</span></div>
+      <div class="io"><span class="io-k">Qué lleva</span><span class="io-v">autor · <b>fecha con día y mes</b> · <b>título del artículo entre comillas</b> · <b>nombre del diario o revista en cursiva</b> · número y páginas</span></div>
+      <div class="io"><span class="io-k">Ejemplo</span><span class="io-v"><em>Peguero, R. (2005, 31 de septiembre). «La filosofía de lucro…». El País.</em></span></div>
+      <div class="io"><span class="io-k">La marca</span><span class="io-v">la <b>fecha exacta</b> — es lo que la delata de un vistazo</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Hemeroteca es donde se guardan los periódicos. De ahí el nombre, y de ahí que necesite el día: salió uno cada día.</div></details></div>
+
+    <div class="card"><div class="name">Otras fichas de fuente</div><div class="fbody">
+      <div class="io"><span class="io-k">Audiográfica</span><span class="io-v">de una grabación de <b>audio</b></span></div>
+      <div class="io"><span class="io-k">Videográfica</span><span class="io-v">de una película o <b>video</b></span></div>
+      <div class="io"><span class="io-k">Iconográfica</span><span class="io-v">de una <b>imagen</b>: pintura, fotografía, grabado</span></div>
+      <div class="io"><span class="io-k">Electrónica</span><span class="io-v">de una <b>página web</b>: agrega la URL y la fecha de consulta</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">El nombre siempre dice el soporte: audio, video, icono. Si te acuerdas de eso no necesitas memorizarlas.</div></details></div>
+  </div>
+
+  <h3 class="sec">Fichas de trabajo</h3>
+  <div class="fgrid">
+
+    <div class="card"><div class="name">Ficha textual</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué guarda</span><span class="io-v">las <b>palabras exactas</b> del autor, sin cambiarles una letra</span></div>
+      <div class="io"><span class="io-k">Cómo se marca</span><span class="io-v">entre <b>comillas</b> y con la página de donde salió</span></div>
+      <div class="io"><span class="io-k">Si se corta</span><span class="io-v">se ponen <b>puntos suspensivos entre corchetes</b> […]</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Se usa cuando la frase es tan buena o tan precisa que cambiarla la echaría a perder.</div></details></div>
+
+    <div class="card"><div class="name">Ficha de paráfrasis</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué guarda</span><span class="io-v">la <b>misma idea con tus palabras</b>, sin quitarle ni agregarle contenido</span></div>
+      <div class="io"><span class="io-k">Extensión</span><span class="io-v"><b>parecida</b> a la del original: no se acorta, se traduce</span></div>
+      <div class="io"><span class="io-k">Ojo</span><span class="io-v">aunque esté con tus palabras, <b>sigue llevando la fuente</b></span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Es explicar lo mismo con otras palabras. No es más corto: es más claro, o más tuyo.</div></details></div>
+
+    <div class="card"><div class="name">Ficha de resumen</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué guarda</span><span class="io-v">solo las <b>ideas principales</b>, en forma <b>más breve</b> que el original</span></div>
+      <div class="io"><span class="io-k">Qué quita</span><span class="io-v">ejemplos, repeticiones y detalles secundarios</span></div>
+      <div class="io"><span class="io-k">Qué no hace</span><span class="io-v"><b>no opina</b>: respeta lo que dijo el autor</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">La prueba es la longitud: si quedó más corto y no se perdió nada esencial, está bien hecho.</div></details></div>
+
+    <div class="card"><div class="name">Ficha de comentario</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué guarda</span><span class="io-v">el <b>juicio o valoración de quien investiga</b> sobre la obra: qué aporta, qué le falta, para qué sirve</span></div>
+      <div class="io"><span class="io-k">Se reconoce</span><span class="io-v">porque aparecen palabras de <b>apreciación</b>: «tiene como mérito principal», «resulta útil», «adolece de»</span></div>
+      <div class="io"><span class="io-k">Ojo</span><span class="io-v">es la <b>única</b> en la que habla el investigador y no el autor citado</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Si en la ficha alguien está calificando el libro, ya no está guardando información: está opinando.</div></details></div>
+
+    <div class="card"><div class="name">Ficha mixta</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué guarda</span><span class="io-v"><b>dos cosas a la vez</b>: por ejemplo, una cita entre comillas y enseguida el comentario propio</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Es la más usada en la práctica: guardas la frase buena y anotas para qué te va a servir.</div></details></div>
+  </div>
+
+  <h3 class="sec">La cita en el texto</h3>
+  <div class="fgrid">
+
+    <div class="card"><div class="name">Cita textual corta</div><div class="fbody">
+      <div class="io"><span class="io-k">Cuándo</span><span class="io-v">menos de <b>40 palabras</b></span></div>
+      <div class="io"><span class="io-k">Cómo va</span><span class="io-v"><b>dentro del párrafo</b>, entre <b>comillas</b>, con autor, año y página</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Cabe en la línea, así que se queda en la línea.</div></details></div>
+
+    <div class="card"><div class="name">Cita textual larga</div><div class="fbody">
+      <div class="io"><span class="io-k">Cuándo</span><span class="io-v"><b>40 palabras o más</b></span></div>
+      <div class="io"><span class="io-k">Cómo va</span><span class="io-v">en <b>bloque aparte</b>, con sangría, <b>sin comillas</b> y a veces en letra menor</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">Al separarla en bloque, la sangría ya hace el trabajo de las comillas. Por eso se quitan.</div></details></div>
+
+    <div class="card"><div class="name">Plagio</div><div class="fbody">
+      <div class="io"><span class="io-k">Qué es</span><span class="io-v">usar ideas o palabras ajenas <b>sin dar el crédito</b></span></div>
+      <div class="io"><span class="io-k">Ojo</span><span class="io-v">también se comete <b>parafraseando sin citar</b>: cambiar las palabras no vuelve tuya la idea</span></div>
+    </div><details class="why"><summary>En palabras</summary><div class="why-body">La regla simple: si no se te ocurrió a ti, lleva fuente — aunque lo hayas escrito con tus palabras.</div></details></div>
+  </div>
+
+  <div class="trap"><h4>Ojo en el examen</h4><ul>
+    <li>Para hallar la <b>hemerográfica</b> entre cuatro fichas: busca la que trae <b>día y mes</b> y el nombre de un <b>periódico o revista</b>. Es el único dato que hace falta revisar.</li>
+    <li>Si la ficha trae una <b>valoración</b> del texto («tiene como mérito principal…»), es de <b>comentario</b>, aunque también incluya datos. Es la que más se falla.</li>
+    <li><b>Paráfrasis ≠ resumen.</b> La paráfrasis mantiene la extensión y cambia las palabras; el resumen mantiene las ideas y acorta.</li>
+    <li>Un capítulo dentro de un libro se registra como <b>bibliográfica</b> aunque el título del capítulo vaya entre comillas: sigue sin tener día ni mes.</li>
+  </ul></div>
+</section>
+
+</main>
+
+<footer>Las 3 unidades del temario oficial de la Guía UNAM 2026 · Área 2 · abiertas en 8 pestañas, con el peso en corrientes · uso personal de estudio</footer>
+
+<script>
+  const panels = [...document.querySelectorAll('.panel')];
+  const tabs = document.getElementById('tabs');
+  panels.forEach((p,i)=>{
+    const b = document.createElement('button');
+    b.className = 'tab';
+    b.innerHTML = (p.dataset.num ? '<b>'+p.dataset.num+'</b>' : '') + p.dataset.short;
+    b.onclick = ()=> show(i);
+    tabs.appendChild(b);
+  });
+  function show(i){
+    panels.forEach((p,j)=>p.classList.toggle('active', i===j));
+    [...tabs.children].forEach((t,j)=>t.classList.toggle('active', i===j));
+    localStorage.setItem('lit-unidad', i);
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+  show(Math.min(+localStorage.getItem('lit-unidad')||0, panels.length-1));
+
+  document.addEventListener('keydown', e=>{
+    if(e.target.tagName==='INPUT') return;
+    const cur = panels.findIndex(p=>p.classList.contains('active'));
+    if(e.key==='ArrowRight' && cur<panels.length-1) show(cur+1);
+    if(e.key==='ArrowLeft'  && cur>0) show(cur-1);
+  });
+
+  const hint = document.getElementById('hint');
+  function pista(){
+    if(!document.body.classList.contains('memo')){
+      hint.innerHTML = 'Enciende el <b>modo memoria</b> para taparte. El <b>En palabras</b> de cada tarjeta se abre siempre, en cualquier modo.';
+    } else if(document.body.classList.contains('flip')){
+      hint.innerHTML = 'Volteado: ves el <b>contenido</b> y tienes que decir <b>cómo se llama</b>. Toca la tarjeta para comprobar.';
+    } else {
+      hint.innerHTML = 'Ves el <b>nombre</b> y tienes que recitar lo que le toca. Toca la tarjeta para comprobar.';
+    }
+  }
+
+  function cerrarTodas(){
+    document.querySelectorAll('.card.open').forEach(c=>c.classList.remove('open'));
+  }
+
+  const memoBtn = document.getElementById('memoBtn');
+  memoBtn.onclick = ()=>{
+    document.body.classList.toggle('memo');
+    cerrarTodas();
+    localStorage.setItem('lit-memo', document.body.classList.contains('memo')?'1':'0');
+    pista();
+  };
+  const flipBtn = document.getElementById('flipBtn');
+  flipBtn.onclick = ()=>{
+    document.body.classList.toggle('flip');
+    cerrarTodas();
+    localStorage.setItem('lit-flip', document.body.classList.contains('flip')?'1':'0');
+    pista();
+  };
+  if(localStorage.getItem('lit-memo')==='1') document.body.classList.add('memo');
+  if(localStorage.getItem('lit-flip')==='1') document.body.classList.add('flip');
+  pista();
+
+  let abiertas = [];
+  window.addEventListener('beforeprint', ()=>{
+    abiertas = [...document.querySelectorAll('details.why')].filter(d=>d.open);
+    document.querySelectorAll('details.why').forEach(d=>d.open=true);
+  });
+  window.addEventListener('afterprint', ()=>{
+    document.querySelectorAll('details.why').forEach(d=>d.open = abiertas.includes(d));
+  });
+
+  document.addEventListener('click', e=>{
+    if(e.target.closest('details.why')) return;
+    if(e.target.closest('.switch')) return;
+    if(!document.body.classList.contains('memo')) return;
+    const c = e.target.closest('.card');
+    if(c) c.classList.toggle('open');
+  });
+</script>
+</body>
+</html>
