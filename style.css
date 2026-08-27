@@ -61,9 +61,10 @@
   --section-hover: var(--T);
 }
 
-/* Secciones académicas (Math, Apuntes y subsecciones): turquesa principal, magenta hover */
+/* Secciones académicas (Math, Apuntes, Docencia y subsecciones): turquesa principal, magenta hover */
 body[data-section="math"],
-body[data-section="apuntes"] {
+body[data-section="apuntes"],
+body[data-section="docencia"] {
   --section-color: var(--T);
   --section-hover: var(--M);
   --logo-text: var(--P);
@@ -1572,6 +1573,21 @@ body[data-section="relatos"].relato-morado .topic-header h1 {
   color: var(--text-3);
   font-style: italic;
 }
+
+/* Apunte-card variant: marca un material como "próximamente".
+   Se usa en un <div> (no <a>), porque todavía no hay destino real. */
+.apunte-card.pronto {
+  opacity: 0.78;
+  cursor: default;
+}
+.apunte-card.pronto:hover {
+  opacity: 1;
+  transform: none;
+  box-shadow: none;
+  border-color: transparent;
+}
+.apunte-card.pronto:hover h3 { color: var(--text); }
+.apunte-card.pronto .apunte-hint { opacity: 1; transform: none; }
 
 /* Course-card variant: marca un curso como "próximamente" */
 .course-card.pronto {

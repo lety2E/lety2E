@@ -20,6 +20,10 @@
       name: 'Apuntes',
       links: []
     },
+    docencia: {
+      name: 'Docencia',
+      links: []
+    },
     math: {
       name: 'Math',
       links: [
@@ -54,7 +58,8 @@
   const ROOT_LINKS = [
     { text: 'Math', href: 'math/index.html' },
     { text: 'Lupián', href: 'lupian/index.html' },
-    { text: 'Apuntes', href: 'apuntes/index.html' }
+    { text: 'Apuntes', href: 'apuntes/index.html' },
+    { text: 'Docencia', href: 'docencia/index.html' }
   ];
 
   /* ── Detectar profundidad (cuántos ../ hay en src) */

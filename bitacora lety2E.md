@@ -5,6 +5,36 @@
 
 ---
 
+## 2026-08-26
+- **Nace `docencia/` — cuarta sección del menú principal.** Es la primera sección del sitio que
+  **le habla a colegas docentes** y no a estudiantes: ahí va la metodología de Lety (sus flujos,
+  sus prompts, cómo construye un sitio de clase con agentes de IA). Va en el menú y no dentro de
+  Apuntes justamente por eso — todo lo de Apuntes (COMIPEMS, ingreso a licenciatura) le habla a
+  alumnos. El nombre sigue el patrón del sitio: una palabra, el oficio (`math`, `lupian`,
+  `apuntes`, `docencia`).
+- **Lo que urgía:** el sitio de GICAIA ya está publicado y su pestaña Recursos enlaza a
+  `lety2e.com/docencia` — el enlace estaba **roto**. Ya no: `/docencia` redirige a `/docencia/`
+  y ahí hay una página real que dice qué viene.
+- Cinco toques: carpeta `docencia/index.html` · `docencia` sumada al bloque académico de
+  `style.css:65` (turquesa + títulos morados, igual que Math y Apuntes) · alta en `SECTIONS` y
+  `ROOT_LINKS` de `nav.js` · card morada en el `index.html` raíz (+ su meta-descripción) ·
+  nueva regla `.apunte-card.pronto` en `style.css` para cards sin destino real.
+- **Decisiones de Lety:** color académico (no magenta — Docencia es trabajo, no arte);
+  la portada se queda en grid de 3 columnas, así que Docencia cae sola en el segundo renglón
+  (3+1); y la card de **"Aula propia"** ya se ve, marcada `próximamente`, para que el colega que
+  llegue de GICAIA sepa qué esperar. Como todavía no hay destino, la card es un `<div>`
+  (nunca `href="#"`, por la regla del `CLAUDE.md`).
+- Las páginas de Docencia usarán `style.css` global + `data-section="docencia"` (patrón de Math),
+  **no** el patrón self-contained de Apuntes: esas son self-contained porque llegan de fuera como
+  artefactos sueltos; las de Docencia se escriben aquí y así heredan nav, footer y mobile-safety.
+- Quedó escrita en `CLAUDE.md` la **regla de propiedad** que explica por qué esto vive aquí y no
+  en GICAIA: *"lo que hace una persona sola es de esa persona y vive en su sitio; lo que sale de
+  una sesión del grupo es del grupo"*. Así ninguna sesión futura propone mudarla.
+- Verificado en local (`serve.py`): `/docencia` → 301 → 200, nav con las cuatro secciones,
+  h1 morado, y en 375×812 y 360×800 sin overflow horizontal y la card dentro del contenedor.
+
+---
+
 ## 2026-08-05
 - **KaTeX ahora vive en el repo: el sitio dejó de depender del CDN.** Se descargó KaTeX 0.16.9
   (css + js + auto-render + 40 archivos de fuente en `woff2`/`woff`, ~940 KB) a

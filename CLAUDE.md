@@ -56,6 +56,7 @@ La estructura de carpetas se ve con `ls`. Lo importante saber:
 | `lupian` | `lupian/index.html` y `lupian/cantos/` |
 | `relatos` | `lupian/relatos/` |
 | `apuntes` | Todo dentro de `apuntes/` (index y artefactos) |
+| `docencia` | Todo dentro de `docencia/` |
 
 ### Sistema de color por sección
 
@@ -64,7 +65,7 @@ El CSS usa `--section-color` y `--section-hover`:
 | Sección | `--section-color` | `--section-hover` | h1 cuerpo |
 |---------|-------------------|-------------------|-----------|
 | Home, Lupián, Cantos | Magenta | Turquesa | Magenta |
-| Math, Apuntes | Turquesa | Magenta | Morado (`--P`) |
+| Math, Apuntes, Docencia | Turquesa | Magenta | Morado (`--P`) |
 | Relatos | Magenta | Turquesa | Magenta (override en `.relato-morado` → morado) |
 
 **Regla:** NUNCA inventar colores fuera del palette de `style.css`. Excepción: pills de fórmula en math (ver § Estilo de resoluciones).
@@ -191,7 +192,31 @@ KaTeX: ver template en cualquier tema existente — patrón estándar `katex@0.1
 - **Subsección de Apuntes:** carpeta con su `index.html` (usa `style.css` + `nav.js` globales, `data-section="apuntes"`) y adentro los `.html` self-contained. Si las páginas vienen de fuera (artefactos sueltos), hay que inyectarles la barra `.l2e-volver` para que no queden como callejón sin salida — el helper está en el scratchpad de la sesión del 5-ago-2026, o se copia a mano de cualquier página de `ingreso-licenciatura/`.
 - **Relato nuevo:** archivo en `lupian/relatos/` (.html, .mp3, .mp4 o imagen) + `<a class="entrada-item">` en `.lista-organica` del index de relatos.
 - **Cover de cantos:** `<article class="video-cover">` con iframe de YouTube en `lupian/cantos/index.html` (canal: `@Lety2eLupian`).
+- **Material de Docencia:** archivo en `docencia/` que usa `style.css` + `nav.js` globales (patrón de Math, **no** self-contained como Apuntes — estas páginas se escriben aquí, no llegan de fuera) + su card en el índice de la sección. Mientras no exista el destino real, la card va como `<div class="apunte-card pronto">` con `<span class="pronto-badge">` — nunca `href="#"`.
 - **Sección nueva:** carpeta + `index.html` con su `data-section` + alta en `SECTIONS`/`ROOT_LINKS` de `nav.js` + card en el `index.html` raíz.
+
+---
+
+## 🎓 Docencia — a quién le habla y qué NO va aquí
+
+`docencia/` (alta el 26-ago-2026) es la única sección del sitio que **le habla a colegas
+docentes**, no a estudiantes. Todo lo de Apuntes (COMIPEMS, ingreso a licenciatura) le habla
+a alumnos; por eso Docencia vive en el menú principal y no colgada de Apuntes. Adentro va la
+metodología de Lety: sus flujos de trabajo, sus prompts, cómo construye un sitio con agentes
+de IA. Primera pieza: **"Aula propia — la guía para arrancar"** (cómo montar tu aula desde cero).
+
+**Regla de propiedad (viene del proyecto GICAIA):**
+
+> Lo que hace una persona sola es de esa persona y vive en su sitio;
+> lo que sale de una sesión del grupo es del grupo.
+
+GICAIA es un grupo de docentes del IEMS que formó Lety. Su sitio (`gicaia.github.io`) es un
+directorio ligero y su pestaña Recursos **enlaza hacia `lety2e.com/docencia`**. Por eso:
+
+- El cuerpo de trabajo de Lety vive **aquí**, no allá — no se va con el grupo si el grupo se enfría.
+- **No mover Docencia a GICAIA** ni proponer replicar su contenido allá.
+- `docencia/index.html` no se borra ni se renombra: hay un enlace externo apuntándole.
+  GitHub Pages redirige `/docencia` → `/docencia/`, así que el enlace sin barra final funciona.
 
 ---
 
