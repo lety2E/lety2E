@@ -7,6 +7,10 @@ Falta el contenido: cómo montar tu aula desde cero, paso a paso. Cuando exista,
 y quitarle el `pronto-badge`. Formato: `style.css` global + `data-section="docencia"`
 (patrón de Math, no self-contained).
 
+**Avisar a GICAIA cuando exista "Aula propia"** — en su pestaña Recursos el enlace se llama
+*"Aula propia — la guía para arrancar"* pero apunta a `lety2e.com/docencia` (el índice), así que
+hoy promete más de lo que hay. Cuando la guía se publique, que ese enlace apunte directo a ella.
+
 **Física y Geografía de Área 2** — hoy solo tienen formulario, no guía completa. Lety va a
 revisar si con el formulario basta. Si decide que no, el contenido completo de Física ya
 existe dentro de `Guias-unam.html` (proyecto Artefactos, carpeta `Ingreso licenciatura`) y de

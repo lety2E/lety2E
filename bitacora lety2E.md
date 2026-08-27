@@ -33,6 +33,24 @@
 - Verificado en local (`serve.py`): `/docencia` → 301 → 200, nav con las cuatro secciones,
   h1 morado, y en 375×812 y 360×800 sin overflow horizontal y la card dentro del contenedor.
 
+### Segunda pasada, el mismo día
+- **La portada pasó a 2×2.** Lety lo repensó y tiene razón: con cuatro secciones el 3+1 dejaba
+  a Docencia sola y descolgada. `.root-cards-grid` ahora es `repeat(2, 1fr)` con `max-width: 720px`
+  centrado, así que Math·Lupián arriba y Apuntes·Docencia abajo, todas del mismo ancho. Si algún
+  día son 5 o 6 secciones, se vuelve a `repeat(3, 1fr)` (queda anotado en el CSS).
+- **Card de ida y vuelta hacia GICAIA** al final del índice de Docencia, bajo el grupo "El grupo".
+  Clase nueva `.enlace-grupo`: fondo oscuro (`--dark`, la misma superficie del nav y el footer),
+  filo magenta que se vuelve turquesa al pasar el cursor, y la flecha ↗ en la etiqueta. Se ve
+  **distinta a propósito** — es la única card del sitio que lleva fuera. Trae el nombre completo
+  del grupo, qué es, y la regla de propiedad dicha para el lector.
+- **Hallazgo al revisar el sitio de GICAIA:** el enlace de su pestaña Recursos no se llama
+  "Docencia" sino **"Aula propia — la guía para arrancar"** y apunta a `lety2e.com/docencia`.
+  O sea que promete la guía, no el índice. Mientras la guía siga en `próximamente`, el colega
+  que llega de allá encuentra menos de lo que el enlace ofrecía. Anotado en `CLAUDE.md` y en
+  pendientes. (También descubrimos que GICAIA enlaza a `lety2e.com/math`.)
+- Verificado: 2×2 real (350px cada card, dos renglones), la card de GICAIA con `target="_blank"`
+  y `rel="noopener"`, sin overflow horizontal en 375, 420 ni 1100 de ancho.
+
 ---
 
 ## 2026-08-05

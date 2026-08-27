@@ -217,6 +217,13 @@ directorio ligero y su pestaña Recursos **enlaza hacia `lety2e.com/docencia`**.
 - **No mover Docencia a GICAIA** ni proponer replicar su contenido allá.
 - `docencia/index.html` no se borra ni se renombra: hay un enlace externo apuntándole.
   GitHub Pages redirige `/docencia` → `/docencia/`, así que el enlace sin barra final funciona.
+- El enlace es de **ida y vuelta**: el índice de Docencia devuelve a GICAIA con la card
+  `.enlace-grupo` (fondo oscuro, la superficie del nav/footer — se ve distinta a propósito
+  porque lleva fuera del sitio). Es la única card del sitio con ese tratamiento.
+- **Ojo con el texto del enlace allá:** en la pestaña Recursos de GICAIA el enlace se llama
+  *"Aula propia — la guía para arrancar"*, o sea promete la guía, no el índice de la sección.
+  Mientras la guía siga en `próximamente`, quien llega de allá encuentra menos de lo que
+  esperaba. Cuando la guía exista, conviene que ese enlace apunte directo a ella.
 
 ---
 

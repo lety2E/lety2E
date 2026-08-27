@@ -878,11 +878,15 @@ body[data-section="home"] main {
 /* ================================================
    TARJETAS RAÍZ (Math · Lupián · Apuntes)
    ================================================ */
+/* 2×2. Si algún día son 5 o 6 secciones, volver a repeat(3, 1fr). */
 .root-cards-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 1.25rem;
   margin-top: 1rem;
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
 }
 .root-card {
   background: var(--bg-card);
@@ -1572,6 +1576,74 @@ body[data-section="relatos"].relato-morado .topic-header h1 {
   font-size: 0.88rem;
   color: var(--text-3);
   font-style: italic;
+}
+
+/* ================================================
+   ENLACE AL GRUPO (Docencia → GICAIA)
+   Card deliberadamente distinta a las demás: fondo
+   oscuro (la misma superficie del nav y el footer)
+   porque lleva FUERA del sitio. Es una relación de
+   ida y vuelta — GICAIA enlaza de regreso hacia acá.
+   ================================================ */
+.enlace-grupo {
+  display: block;
+  background: var(--dark);
+  border: 2px solid transparent;
+  border-left: 4px solid var(--M);
+  border-radius: 14px;
+  padding: 1.6rem 1.6rem 1.7rem;
+  margin-top: 2rem;
+  text-decoration: none;
+  transition: transform .25s ease, box-shadow .25s ease, border-color .25s;
+}
+.enlace-grupo:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(26, 8, 40, 0.28);
+  border-color: var(--T);
+  border-left-color: var(--T);
+}
+.enlace-grupo-tipo {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--T);
+  margin-bottom: 0.7rem;
+}
+.enlace-grupo h3 {
+  font-family: var(--font-display);
+  font-style: italic; font-weight: 900;
+  font-size: 1.5rem;
+  color: var(--M);
+  margin: 0 0 0.15rem;
+  line-height: 1.2;
+  transition: color .2s;
+}
+.enlace-grupo:hover h3 { color: var(--T); }
+.enlace-grupo-nombre {
+  display: block;
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.4;
+  margin-bottom: 0.9rem;
+}
+.enlace-grupo p {
+  margin: 0;
+  font-size: 0.92rem;
+  color: rgba(255,255,255,0.82);
+  line-height: 1.6;
+}
+.enlace-grupo p + p { margin-top: 0.7rem; }
+.enlace-grupo .regla {
+  color: rgba(255,255,255,0.6);
+  font-style: italic;
+}
+
+@media (max-width: 600px) {
+  .enlace-grupo { padding: 1.3rem 1.2rem 1.4rem; }
+  .enlace-grupo h3 { font-size: 1.3rem; }
 }
 
 /* Apunte-card variant: marca un material como "próximamente".
