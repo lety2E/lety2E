@@ -1635,6 +1635,43 @@ body[data-section="relatos"].relato-morado .topic-header h1 {
   .enlace-grupo h3 { font-size: 1.25rem; }
 }
 
+/* ================================================
+   ENLACE AL CANAL DE WHATSAPP (índices de Math)
+   A propósito discreto: una pastilla al pie del
+   índice del curso, para que no compita con las
+   cards de temas. Lleva fuera del sitio, por eso
+   la flecha ↗. Sin el verde de WhatsApp: se queda
+   en el palette (turquesa = color de sección Math).
+   ================================================ */
+.canal-wrap { text-align: center; margin: 1.5rem 0 0; }
+
+.enlace-canal {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.6rem 1.15rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--bg-card);
+  color: var(--text-2);
+  font-size: 0.9rem;
+  line-height: 1.35;
+  text-decoration: none;
+  transition: border-color .2s, color .2s, transform .25s ease, box-shadow .25s ease;
+}
+.enlace-canal:hover {
+  border-color: var(--T);
+  color: var(--T);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 222, 200, 0.18);
+}
+.enlace-canal-flecha { transition: transform .25s ease; }
+.enlace-canal:hover .enlace-canal-flecha { transform: translate(2px, -2px); }
+
+@media (max-width: 600px) {
+  .enlace-canal { font-size: 0.85rem; padding: 0.55rem 0.95rem; }
+}
+
 /* Apunte-card variant: marca un material como "próximamente".
    Se usa en un <div> (no <a>), porque todavía no hay destino real. */
 .apunte-card.pronto {

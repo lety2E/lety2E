@@ -5,6 +5,15 @@
 
 ---
 
+## 2026-08-31
+- **Enlace al canal de WhatsApp al pie de los índices de Math** (Mate 1, 2 y 5 — los cursos que
+  hoy tienen temas). Va después de "Más temas en construcción", como pastilla discreta a
+  propósito: es un aviso, no un tema, y no debe competir con las cards del curso.
+- Estilo nuevo `.enlace-canal` / `.canal-wrap` en `style.css` (junto a `.enlace-grupo`, que es el
+  otro enlace que sale del sitio). **Sin el verde de WhatsApp** — se queda en el palette:
+  turquesa, el color de sección de Math. Flecha ↗ porque lleva fuera, `target="_blank"`.
+- Verificado en escritorio y en 375×812: el texto se parte en dos renglones y no desborda.
+
 ## 2026-08-26
 - **Nace `docencia/` — cuarta sección del menú principal.** Es la primera sección del sitio que
   **le habla a colegas docentes** y no a estudiantes: ahí va la metodología de Lety (sus flujos,
