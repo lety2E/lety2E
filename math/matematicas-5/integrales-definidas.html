@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Integrales indefinidas — Matemáticas 5 — LetyMath</title>
-  <meta name="description" content="Formulario de integración y resolución de integrales indefinidas término a término, con ejercicios resueltos." />
+  <title>Integrales definidas — Matemáticas 5 — LetyMath</title>
+  <meta name="description" content="La regla de Barrow: evaluar la antiderivada en los límites y restar, con ejercicios resueltos paso a paso." />
   <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
   <link rel="icon" href="../../favicon.ico">
   <link rel="stylesheet" href="../../style.css">
@@ -222,10 +222,10 @@
       <p class="breadcrumb">
         <a href="../index.html">Inicio</a> ›
         <a href="index.html">Matemáticas 5</a> ›
-        Integrales indefinidas
+        Integrales definidas
       </p>
-      <div class="topic-tag">Matemáticas 5 · Tema 13</div>
-      <h1>Integrales indefinidas</h1>
+      <div class="topic-tag">Matemáticas 5 · Tema 14</div>
+      <h1>Integrales definidas</h1>
     </header>
 
     <!-- ══════════ APUNTES ══════════ -->
@@ -234,40 +234,13 @@
         <div class="sec-icon">
           <svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
         </div>
-        <h2>Apuntes — Formulario de integración</h2>
+        <h2>Apuntes — Regla de Barrow</h2>
       </div>
-      <div class="reglas-grid">
-        <div class="regla-card">
-          <div class="regla-card-title">Constante</div>
-          <div class="regla-card-body">$\displaystyle \int k \, dx = kx + c$</div>
-        </div>
-        <div class="regla-card">
-          <div class="regla-card-title">Potencia</div>
-          <div class="regla-card-body">$\displaystyle \int x^n \, dx = \dfrac{x^{n+1}}{n+1} + c$</div>
-        </div>
-        <div class="regla-card">
-          <div class="regla-card-title">Uno entre x</div>
-          <div class="regla-card-body">$\displaystyle \int \dfrac{1}{x} \, dx = \ln|x| + c$</div>
-        </div>
-        <div class="regla-card">
-          <div class="regla-card-title">Seno</div>
-          <div class="regla-card-body">$\displaystyle \int \operatorname{sen} x \, dx = -\cos x + c$</div>
-        </div>
-        <div class="regla-card">
-          <div class="regla-card-title">Coseno</div>
-          <div class="regla-card-body">$\displaystyle \int \cos x \, dx = \operatorname{sen} x + c$</div>
-        </div>
-        <div class="regla-card">
-          <div class="regla-card-title">Secante al cuadrado</div>
-          <div class="regla-card-body">$\displaystyle \int \sec^2 x \, dx = \tan x + c$</div>
-        </div>
-        <div class="regla-card">
-          <div class="regla-card-title">Exponencial $e^x$</div>
-          <div class="regla-card-body">$\displaystyle \int e^x \, dx = e^x + c$</div>
-        </div>
-        <div class="regla-card">
-          <div class="regla-card-title">Exponencial $a^x$</div>
-          <div class="regla-card-body">$\displaystyle \int a^x (\ln a) \, dx = a^x + c$</div>
+      <div class="regla-unica">
+        $$\int_{a}^{b} f(x) \, dx = F(b) - F(a)$$
+        <p>La función $F$ se llama <strong>primitiva</strong> o <strong>antiderivada</strong>: su derivada es la función $f$, es decir $F' = f$.</p>
+        <div class="pill-row">
+          <span class="formula-pill">$\displaystyle \int x^n \, dx = \frac{x^{n+1}}{n+1} + C$</span>
         </div>
       </div>
     </section>
@@ -281,10 +254,12 @@
         <h3>Ejemplo</h3>
       </div>
       <div class="ejemplo-block">
-        <p class="ejemplo-enunciado">Se integra término a término, cada uno con su fórmula del formulario:</p>
         $$\begin{aligned}
-          &\int \left( 5x^2 + 4\operatorname{sen} x - 2 + 3\sec^2 x + \frac{5}{x} + 7e^x \right) dx = \\
-          &= \mathbf{\frac{5x^3}{3} - 4\cos x - 2x + 3\tan x + 5\ln|x| + 7e^x + c}
+          \int_{-3}^{5} (4x^2 - x) \, dx &= \left[ \frac{4x^3}{3} - \frac{x^2}{2} \right]_{-3}^{5} \\
+          &= \left[ \frac{4(5)^3}{3} - \frac{(5)^2}{2} \right] - \left[ \frac{4(-3)^3}{3} - \frac{(-3)^2}{2} \right] \\
+          &= \left[ \frac{4(125)}{3} - \frac{25}{2} \right] - \left[ \frac{4(-27)}{3} - \frac{9}{2} \right] \\
+          &= \frac{500}{3} - \frac{25}{2} + \frac{108}{3} + \frac{9}{2} \\
+          &= \frac{608}{3} - \frac{16}{2} = \frac{1168}{6} = \mathbf{\frac{584}{3}} \approx \mathbf{194.67}
         \end{aligned}$$
       </div>
     </section>
@@ -297,21 +272,21 @@
         </div>
         <h2>Ejercicios</h2>
       </div>
-      <div class="bloques-1">
+      <div class="bloques-2">
         <div class="mini-card">
           <div class="mini-card-head">Bloque 1</div>
           <div class="mini-card-body">
-            <div class="ej-line">$\displaystyle \int \left( 4\sec^2 x - 8x + 6 - 3\operatorname{sen} x + 4e^x - 6x^4 \right) dx$</div>
-            <div class="ej-line">$\displaystyle \int \left( -4\cos x - 5 + \frac{3}{x} - 2^x \ln 2 - 8x^3 + 4e^x \right) dx$</div>
-            <div class="ej-line">$\displaystyle \int \left( 5\operatorname{sen} x - 4 - 7x^4 - \frac{5}{x} + 7\sec^2 x - 5x \right) dx$</div>
+            <div class="ej-line">$\displaystyle \int_{-2}^{4} (5x^2 + 6x) \, dx$</div>
+            <div class="ej-line">$\displaystyle \int_{1}^{5} (4 - 5x^2) \, dx$</div>
+            <div class="ej-line">$\displaystyle \int_{-2}^{3} (-4x^2 + x) \, dx$</div>
           </div>
         </div>
         <div class="mini-card">
           <div class="mini-card-head">Bloque 2</div>
           <div class="mini-card-body">
-            <div class="ej-line">$\displaystyle \int \left( 6 - 7x^2 - \frac{8}{x} + 4\cos x - 7^x \ln 7 - e^x \right) dx$</div>
-            <div class="ej-line">$\displaystyle \int \left( 2\operatorname{sen} x - 9x^2 + 6x^3 - \frac{3}{x} + 2e^x - 4\cos x \right) dx$</div>
-            <div class="ej-line">$\displaystyle \int \left( 7x^2 - 4x + \frac{3}{x} - 2 + 4e^x - 5\operatorname{sen} x - \sec^2 x \right) dx$</div>
+            <div class="ej-line">$\displaystyle \int_{3}^{4} (-2x^2 - 7) \, dx$</div>
+            <div class="ej-line">$\displaystyle \int_{-1}^{5} (-8 + 3x) \, dx$</div>
+            <div class="ej-line">$\displaystyle \int_{4}^{6} (5x^2 - 4x) \, dx$</div>
           </div>
         </div>
       </div>
@@ -327,29 +302,41 @@
         <span class="chev">▼</span>
       </div>
       <div class="collapsible">
-        <div class="bloques-1">
+        <div class="bloques-2">
           <div class="mini-card">
             <div class="mini-card-head">Bloque 1</div>
             <div class="mini-card-body">
               <div class="sol">
+                <div class="sol-rotulo">Ejercicio 1</div>
                 $$\begin{aligned}
-                  &\int \left( 4\sec^2 x - 8x + 6 - 3\operatorname{sen} x + 4e^x - 6x^4 \right) dx = \\
-                  &= 4\tan x - \frac{8x^2}{2} + 6x - 3(-\cos x) + 4e^x - \frac{6x^5}{5} + c = \\
-                  &= \mathbf{4\tan x - 4x^2 + 6x + 3\cos x + 4e^x - \frac{6x^5}{5} + c}
+                  \int_{-2}^{4} (5x^2 + 6x) \, dx &= \left[ \frac{5x^3}{3} + 3x^2 \right]_{-2}^{4} \\
+                  &= \left[ \frac{5(4)^3}{3} + 3(4)^2 \right] - \left[ \frac{5(-2)^3}{3} + 3(-2)^2 \right] \\
+                  &= \left[ \frac{5(64)}{3} + 3(16) \right] - \left[ \frac{5(-8)}{3} + 3(4) \right] \\
+                  &= \left[ \frac{320}{3} + 48 \right] - \left[ \frac{-40}{3} + 12 \right] \\
+                  &= \frac{320}{3} + 48 + \frac{40}{3} - 12 \\
+                  &= \frac{360}{3} + 36 = 120 + 36 = \mathbf{156}
                 \end{aligned}$$
               </div>
               <div class="sol">
+                <div class="sol-rotulo">Ejercicio 2</div>
                 $$\begin{aligned}
-                  &\int \left( -4\cos x - 5 + \frac{3}{x} - 2^x \ln 2 - 8x^3 + 4e^x \right) dx = \\
-                  &= -4\operatorname{sen} x - 5x + 3\ln|x| - 2^x - \frac{8x^4}{4} + 4e^x + c = \\
-                  &= \mathbf{-4\operatorname{sen} x - 5x + 3\ln|x| - 2^x - 2x^4 + 4e^x + c}
+                  \int_{1}^{5} (4 - 5x^2) \, dx &= \left[ 4x - \frac{5x^3}{3} \right]_{1}^{5} \\
+                  &= \left[ 4(5) - \frac{5(5)^3}{3} \right] - \left[ 4(1) - \frac{5(1)^3}{3} \right] \\
+                  &= \left[ 20 - \frac{5(125)}{3} \right] - \left[ 4 - \frac{5(1)}{3} \right] \\
+                  &= 20 - \frac{625}{3} - 4 + \frac{5}{3} \\
+                  &= 16 - \frac{620}{3} \\
+                  &= \frac{48 - 620}{3} = \mathbf{-\frac{572}{3}} \approx \mathbf{-190.67}
                 \end{aligned}$$
               </div>
               <div class="sol">
+                <div class="sol-rotulo">Ejercicio 3</div>
                 $$\begin{aligned}
-                  &\int \left( 5\operatorname{sen} x - 4 - 7x^4 - \frac{5}{x} + 7\sec^2 x - 5x \right) dx = \\
-                  &= 5(-\cos x) - 4x - \frac{7x^5}{5} - 5\ln|x| + 7\tan x - \frac{5x^2}{2} + c = \\
-                  &= \mathbf{-5\cos x - 4x - \frac{7x^5}{5} - 5\ln|x| + 7\tan x - \frac{5x^2}{2} + c}
+                  \int_{-2}^{3} (-4x^2 + x) \, dx &= \left[ -\frac{4x^3}{3} + \frac{x^2}{2} \right]_{-2}^{3} \\
+                  &= \left[ -\frac{4(3)^3}{3} + \frac{(3)^2}{2} \right] - \left[ -\frac{4(-2)^3}{3} + \frac{(-2)^2}{2} \right] \\
+                  &= \left[ -\frac{4(27)}{3} + \frac{9}{2} \right] - \left[ \frac{32}{3} + \frac{4}{2} \right] \\
+                  &= -\frac{108}{3} + \frac{9}{2} - \frac{32}{3} - 2 \\
+                  &= -\frac{140}{3} + \frac{5}{2} \\
+                  &= \frac{-280 + 15}{6} = \mathbf{-\frac{265}{6}} \approx \mathbf{-44.17}
                 \end{aligned}$$
               </div>
             </div>
@@ -358,23 +345,35 @@
             <div class="mini-card-head">Bloque 2</div>
             <div class="mini-card-body">
               <div class="sol">
+                <div class="sol-rotulo">Ejercicio 4</div>
                 $$\begin{aligned}
-                  &\int \left( 6 - 7x^2 - \frac{8}{x} + 4\cos x - 7^x \ln 7 - e^x \right) dx = \\
-                  &= \mathbf{6x - \frac{7x^3}{3} - 8\ln|x| + 4\operatorname{sen} x - 7^x - e^x + c}
+                  \int_{3}^{4} (-2x^2 - 7) \, dx &= \left[ -\frac{2x^3}{3} - 7x \right]_{3}^{4} \\
+                  &= \left[ -\frac{2(4)^3}{3} - 7(4) \right] - \left[ -\frac{2(3)^3}{3} - 7(3) \right] \\
+                  &= \left[ -\frac{128}{3} - 28 \right] - \left[ -\frac{54}{3} - 21 \right] \\
+                  &= -\frac{128}{3} - 28 + \frac{54}{3} + 21 \\
+                  &= -\frac{74}{3} - 7 \\
+                  &= \frac{-74 - 21}{3} = \mathbf{-\frac{95}{3}} \approx \mathbf{-31.67}
                 \end{aligned}$$
               </div>
               <div class="sol">
+                <div class="sol-rotulo">Ejercicio 5</div>
                 $$\begin{aligned}
-                  &\int \left( 2\operatorname{sen} x - 9x^2 + 6x^3 - \frac{3}{x} + 2e^x - 4\cos x \right) dx = \\
-                  &= 2(-\cos x) - \frac{9x^3}{3} + \frac{6x^4}{4} - 3\ln|x| + 2e^x - 4\operatorname{sen} x + c = \\
-                  &= \mathbf{-2\cos x - 3x^3 + \frac{3x^4}{2} - 3\ln|x| + 2e^x - 4\operatorname{sen} x + c}
+                  \int_{-1}^{5} (-8 + 3x) \, dx &= \left[ -8x + \frac{3x^2}{2} \right]_{-1}^{5} \\
+                  &= \left[ -8(5) + \frac{3(5)^2}{2} \right] - \left[ -8(-1) + \frac{3(-1)^2}{2} \right] \\
+                  &= \left[ -40 + \frac{75}{2} \right] - \left[ 8 + \frac{3}{2} \right] \\
+                  &= -40 + \frac{75}{2} - 8 - \frac{3}{2} \\
+                  &= -48 + \frac{72}{2} = -48 + 36 = \mathbf{-12}
                 \end{aligned}$$
               </div>
               <div class="sol">
+                <div class="sol-rotulo">Ejercicio 6</div>
                 $$\begin{aligned}
-                  &\int \left( 7x^2 - 4x + \frac{3}{x} - 2 + 4e^x - 5\operatorname{sen} x - \sec^2 x \right) dx = \\
-                  &= \frac{7x^3}{3} - \frac{4x^2}{2} + 3\ln|x| - 2x + 4e^x - 5(-\cos x) - \tan x + c = \\
-                  &= \mathbf{\frac{7x^3}{3} - 2x^2 + 3\ln|x| - 2x + 4e^x + 5\cos x - \tan x + c}
+                  \int_{4}^{6} (5x^2 - 4x) \, dx &= \left[ \frac{5x^3}{3} - 2x^2 \right]_{4}^{6} \\
+                  &= \left[ \frac{5(6)^3}{3} - 2(6)^2 \right] - \left[ \frac{5(4)^3}{3} - 2(4)^2 \right] \\
+                  &= \left[ \frac{1080}{3} - 72 \right] - \left[ \frac{320}{3} - 32 \right] \\
+                  &= \frac{1080}{3} - 72 - \frac{320}{3} + 32 \\
+                  &= \frac{760}{3} - 40 \\
+                  &= \frac{760 - 120}{3} = \mathbf{\frac{640}{3}} \approx \mathbf{213.33}
                 \end{aligned}$$
               </div>
             </div>
@@ -393,37 +392,37 @@
         <span class="chev">▼</span>
       </div>
       <div class="collapsible">
-        <div class="bloques-1">
+        <div class="bloques-2">
           <div class="mini-card">
             <div class="mini-card-head">Bloque 1</div>
             <div class="mini-card-body">
-              <div class="ej-line">$\displaystyle \int \left( 3\sec^2 x - 5x + 2 - 4\operatorname{sen} x + 6e^x - 10x^3 \right) dx$</div>
-              <div class="ej-line">$\displaystyle \int \left( -6\cos x - 2 + \frac{4}{x} - 3^x \ln 3 - 5x^4 + 2e^x \right) dx$</div>
-              <div class="ej-line">$\displaystyle \int \left( 8\operatorname{sen} x - 7 - 3x^2 - \frac{2}{x} + 5\sec^2 x - 4x \right) dx$</div>
+              <div class="ej-line">$\displaystyle \int_{1}^{3} (2x^2 + 5x) \, dx$</div>
+              <div class="ej-line">$\displaystyle \int_{-2}^{2} (6 - 3x^2) \, dx$</div>
+              <div class="ej-line">$\displaystyle \int_{0}^{4} (-x^2 + 4x) \, dx$</div>
             </div>
           </div>
           <div class="mini-card">
             <div class="mini-card-head">Bloque 2</div>
             <div class="mini-card-body">
-              <div class="ej-line">$\displaystyle \int \left( 5 - 4x^3 - \frac{7}{x} + 2\cos x - 5^x \ln 5 - e^x \right) dx$</div>
-              <div class="ej-line">$\displaystyle \int \left( 3\operatorname{sen} x - 6x^2 + 8x^3 - \frac{2}{x} + 5e^x - 2\cos x \right) dx$</div>
-              <div class="ej-line">$\displaystyle \int \left( 5x^2 - 6x + \frac{2}{x} - 1 + 3e^x - 4\operatorname{sen} x - \sec^2 x \right) dx$</div>
+              <div class="ej-line">$\displaystyle \int_{-1}^{3} (3x^2 - 2x) \, dx$</div>
+              <div class="ej-line">$\displaystyle \int_{2}^{5} (-5x^2 + 8) \, dx$</div>
+              <div class="ej-line">$\displaystyle \int_{-3}^{1} (4 - 6x) \, dx$</div>
             </div>
           </div>
           <div class="mini-card">
             <div class="mini-card-head">Bloque 3</div>
             <div class="mini-card-body">
-              <div class="ej-line">$\displaystyle \int \left( 2\sec^2 x - 9x^2 + 5 - 2\operatorname{sen} x + 3e^x - 7x^4 \right) dx$</div>
-              <div class="ej-line">$\displaystyle \int \left( -3\cos x - 4 + \frac{6}{x} - 4^x \ln 4 - 9x^2 + 5e^x \right) dx$</div>
-              <div class="ej-line">$\displaystyle \int \left( 6\operatorname{sen} x - 1 - 2x^4 - \frac{3}{x} + 4\sec^2 x - 2x \right) dx$</div>
+              <div class="ej-line">$\displaystyle \int_{0}^{2} (5x^2 - 3x) \, dx$</div>
+              <div class="ej-line">$\displaystyle \int_{-2}^{4} (2 - x^2) \, dx$</div>
+              <div class="ej-line">$\displaystyle \int_{1}^{4} (-3x^2 + 2x) \, dx$</div>
             </div>
           </div>
           <div class="mini-card">
             <div class="mini-card-head">Bloque 4</div>
             <div class="mini-card-body">
-              <div class="ej-line">$\displaystyle \int \left( 9 - 3x^2 - \frac{4}{x} + 5\cos x - 6^x \ln 6 - 2e^x \right) dx$</div>
-              <div class="ej-line">$\displaystyle \int \left( 4\operatorname{sen} x - 12x^2 + 10x^3 - \frac{5}{x} + 6e^x - 3\cos x \right) dx$</div>
-              <div class="ej-line">$\displaystyle \int \left( 8x^2 - 2x + \frac{4}{x} - 3 + 2e^x - 3\operatorname{sen} x - 2\sec^2 x \right) dx$</div>
+              <div class="ej-line">$\displaystyle \int_{-1}^{2} (6x^2 + 4x) \, dx$</div>
+              <div class="ej-line">$\displaystyle \int_{3}^{6} (8 - 2x^2) \, dx$</div>
+              <div class="ej-line">$\displaystyle \int_{-3}^{0} (-4x^2 - 5) \, dx$</div>
             </div>
           </div>
         </div>
@@ -432,8 +431,8 @@
 
     <!-- ══════════ NAVEGACIÓN ══════════ -->
     <div class="topic-nav-btns">
-      <a href="historia-calculo.html" class="btn-anterior">← Historia del cálculo</a>
-      <a href="integrales-definidas.html" class="btn-siguiente">Integrales definidas →</a>
+      <a href="integrales-indefinidas.html" class="btn-anterior">← Integrales indefinidas</a>
+      <a href="suma-riemann.html" class="btn-siguiente">Suma de Riemann →</a>
     </div>
 
   </main>

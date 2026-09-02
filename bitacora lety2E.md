@@ -5,6 +5,23 @@
 
 ---
 
+## 2026-09-01 (9)
+- **Temas 14 y 15:** `integrales-definidas.html` (regla de Barrow) y `suma-riemann.html`
+  (la integral como límite de sumas de rectángulos, con el desarrollo algebraico completo).
+  Sin video ninguno.
+- **Corrección publicada en Riemann, ejercicio 2** ($\int_2^6 (3-x^2)dx$): el doc trae
+  `-16/n` donde va `-4/n` —el término constante $-1$ multiplicado por $\Delta x = 4/n$ da
+  $-4/n$, no $-16/n$— y arrastra ese `16` a la línea siguiente. Con los números del doc las
+  constantes suman $-208/3$, no el $-172/3$ que él mismo da como resultado. **El resultado
+  final del doc es el correcto** (comprobado integrando directo: $-172/3 \approx -57.33$);
+  lo que estaba mal eran dos pasos intermedios. Aquí se publican corregidos. **Conviene
+  arreglarlo también en el doc de Lety.**
+- Los decimales del doc venían truncados en vez de redondeados (31.66, 46.66 para $95/3$ y
+  $140/3$). Aquí van redondeados: 31.67 y 46.67.
+- Verificadas a mano las 6 resoluciones de integrales definidas y las 4 de Riemann, más los
+  2 ejemplos.
+- Verificado en 375×812: cero errores de KaTeX, nada se sale.
+
 ## 2026-09-01 (8)
 - **Temas 11, 12 y 13:** `derivada-definicion.html`, `historia-calculo.html` e
   `integrales-indefinidas.html`. Ninguno tiene video.
