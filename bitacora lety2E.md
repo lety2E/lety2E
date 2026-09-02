@@ -5,6 +5,25 @@
 
 ---
 
+## 2026-09-01
+- **Mate 5: dos páginas huérfanas quedaron enlazadas.** `velocidad-media.html` y
+  `senos-cosenos.html` ya estaban hechas y subidas, pero el índice sólo mostraba una card
+  (reglas básicas), así que nadie las alcanzaba. Ahora tienen su card, con la rotación de color
+  del curso: magenta · turquesa · morado.
+- **Se cerró la cadena anterior/siguiente**: reglas básicas → velocidad media → senos y cosenos.
+  Reglas básicas no tenía ningún botón (hubo que agregarle también el CSS de `.topic-nav-btns`
+  a su `<style>` inline) y velocidad media no tenía el de siguiente.
+- **Se quitó un enlace roto ya publicado**: senos y cosenos remataba con "Derivadas de raíces →"
+  apuntando a `raices.html`, que no existe — daba 404 en vivo. Vuelve cuando publiquemos raíces.
+- Arreglado un renglón cortado en el ejemplo a) de velocidad media: `x(2) = 16(2) − (2)² =
+  32 − 4 = 28` se salía del borde de la card y tapaba el resultado. Se partió en dos líneas del
+  `aligned` (sin perder ningún paso).
+- Verificado en escritorio y en 375×812: sin overflow horizontal en ninguna de las tres.
+- Se revisó el `.docx` de Matemáticas 5 que pasó Lety: son **20 LaTeX independientes** pegados
+  uno tras otro, en orden de captura y no didáctico. No hay temas duplicados por error — los
+  títulos que se repiten son pares P1/P2 (uno algebraico, el otro trigonométrico). El único
+  título engañoso es "Cálculo Diferencial: Derivadas", que en realidad es **cadena P2**.
+
 ## 2026-08-31
 - **Enlace al canal de WhatsApp al pie de los índices de Math** (Mate 1, 2 y 5 — los cursos que
   hoy tienen temas). Va después de "Más temas en construcción", como pastilla discreta a

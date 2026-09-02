@@ -140,6 +140,24 @@
     /* Grid de bloques */
     .bloques-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2rem; }
     @media (max-width: 700px) { .bloques-2 { grid-template-columns: 1fr; } }
+
+    /* Navegación */
+    .topic-nav-btns {
+      display: flex; justify-content: flex-end; gap: 1rem;
+      margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border);
+    }
+    .btn-anterior, .btn-siguiente {
+      display: inline-flex; align-items: center; gap: .5rem;
+      padding: .65rem 1.4rem; border-radius: 99px;
+      font-weight: 700; font-size: .9rem; transition: background .2s, transform .18s;
+    }
+    .btn-anterior {
+      background: transparent; color: var(--accent);
+      border: 2px solid var(--accent);
+    }
+    .btn-anterior:hover { background: var(--accent-light); transform: translateX(-3px); }
+    .btn-siguiente { background: var(--accent); color: #fff; }
+    .btn-siguiente:hover { background: var(--M); color: #fff; transform: translateX(3px); }
   </style>
 </head>
 <body data-section="math">
@@ -518,6 +536,11 @@
         </div>
       </div>
     </section>
+
+    <!-- ══════════ NAVEGACIÓN ══════════ -->
+    <div class="topic-nav-btns">
+      <a href="velocidad-media.html" class="btn-siguiente">Velocidad media e instantánea →</a>
+    </div>
 
   </main>
   <script src="../../nav.js"></script>
