@@ -5,6 +5,44 @@
 
 ---
 
+## 2026-09-02 (1) — El sitio abre rápido: fuera los embeds de YouTube
+
+Los alumnos reportaron que la página tardaba en abrir. La causa medida no era el
+contenido matemático sino los **`<iframe>` de YouTube**: cada uno arrastra ~1 MB de
+JavaScript de Google y **retiene el evento `load`** de la página. En una página de
+tema con 2 videos, servida desde `localhost` (o sea sin excusa de red), el navegador
+seguía cargando a los **5.4 s** y el evento `load` no llegaba nunca. Ahora esa misma
+página termina de cargar en **~110 ms** y no toca YouTube hasta que el alumno da clic.
+
+- **Facade de video (`.yt-lite`).** Los 21 iframes del sitio (10 temas de Math,
+  3 covers de Cantos, 3 relatos, más la plantilla de la skill) se cambiaron por un
+  `<button class="yt-lite" data-yt="ID">`. Muestra la miniatura de YouTube (~8 KB) y
+  **sólo al dar clic** inserta el iframe real, ya con `autoplay=1` para que el video
+  arranque solo — un clic, igual que antes. Lógica al final de `footer.js` (que todas
+  las páginas ya cargaban), estilos `.yt-lite` en `style.css`.
+- Se usa la miniatura `mqdefault` y no `hqdefault`: la segunda pesa el doble, viene en
+  4:3 con barras negras y al recortarla a 16:9 se comía el encabezado de los videos.
+- Es un `<button>` de verdad: se abre con Enter/Espacio y el lector de pantalla anuncia
+  "Reproducir video: <título>". Sin internet queda la tarjeta oscura con el botón ▶.
+- **Hero de la portada: 300 KB → 31 KB en celular.** Estaba guardado a 2528 px cuando el
+  sitio nunca lo muestra a más de 1200. Ahora hay `hero-nocturno-800.webp` (31 KB) y
+  `-1600.webp` (76 KB) con `srcset`, respaldo `.jpg`, y `width`/`height` para que no
+  brinque el layout. Los dos archivos viejos se borraron.
+- **Fuentes: un viaje de red menos.** `style.css` traía las tipografías con
+  `@import url('assets/fonts/fonts.css')`, lo que obliga al navegador a bajar el CSS
+  entero *antes* de enterarse de que existen las fuentes. Las `@font-face` ahora van
+  pegadas dentro de `style.css`; `assets/fonts/fonts.css` se queda sólo como referencia
+  para actualizarlas.
+- **Retratos de Lupián** recomprimidos: 43 → 26 KB y 41 → 25 KB, mismo tamaño en pantalla.
+- Lo que se revisó y **ya estaba bien**: KaTeX y las tipografías son self-hosted (cero
+  CDNs), GitHub Pages sirve todo con gzip (`style.css` viaja en 12 KB, KaTeX en 77 KB) y
+  `font-display: swap` ya estaba puesto. El HTML pesado de los simuladores no es problema
+  porque va comprimido.
+- Las reglas quedaron escritas en `CLAUDE.md` (§ Velocidad de carga) y en la skill
+  `letymath-html`, para que los temas nuevos ya nazcan con el facade y no con un iframe.
+- Verificado en el navegador a 375×812: portada, Cantos, un relato vertical y tres temas
+  de Math — miniaturas correctas, clic reproduce, KaTeX renderea, cero errores de consola.
+
 ## 2026-09-01 (12) — Mate 5 reordenado al orden de letymath.com
 - **El índice de Mate 5 pasa al orden del sitio viejo**, que es el que Lety quiere (lo mandó en
   capturas de `letymath.com/matemáticas-5`). Historia del cálculo queda al final, como allá.

@@ -39,7 +39,9 @@ No todos los temas tienen video:
 2. Si no aparece, preguntar al usuario: "¿Este tema tiene video de YouTube? Si sí, pásame el link." (Lety a veces los pasa directo en el chat.)
 3. Si no hay video, omitir la sección de Video — no es error.
 
-Formato del link: `https://youtu.be/XXXXX` → extraer ID `XXXXX` para usar en `https://www.youtube.com/embed/XXXXX?rel=0`.
+Formato del link: `https://youtu.be/XXXXX` → extraer el ID `XXXXX` y ponerlo en
+`<button type="button" class="yt-lite" data-yt="XXXXX" data-title="Título" aria-label="Reproducir video: Título"></button>`.
+**Nunca un `<iframe>` de YouTube directo**: cada embed pesa ~1 MB y frena la carga. El botón muestra la miniatura y el video real entra al dar clic (lógica en `footer.js`, estilos `.yt-lite` en `style.css`).
 
 ### 3. Decidir estructura
 
@@ -182,7 +184,7 @@ En los botones:
 - [ ] ¿Los colores son solo `var(--...)`, ninguno inventado?
 - [ ] ¿La navegación prev/next tiene los nombres correctos?
 - [ ] ¿El archivo está en `math/matematicas-1/` (no `letymath/`)?
-- [ ] ¿El video (si hay) usa el ID correcto en `youtube.com/embed/ID?rel=0`?
+- [ ] ¿El video (si hay) usa `<button class="yt-lite" data-yt="ID">` con el ID correcto (y **no** un `<iframe>`)?
 - [ ] ¿Los delimitadores KaTeX son `$...$` inline y `$$...$$` display?
 - [ ] ¿Los escapes del doc (`\-`, `\+`, `\[`) están limpios?
 

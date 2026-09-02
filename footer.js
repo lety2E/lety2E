@@ -44,3 +44,65 @@
 
   document.body.insertAdjacentHTML('beforeend', footer);
 })();
+
+/* ================================================
+   lety2E — facade de video (.yt-lite)
+   Los <iframe> de YouTube pesan ~1 MB cada uno y detienen
+   la carga de la página. En su lugar el HTML trae
+   <button class="yt-lite" data-yt="ID" data-title="...">;
+   aquí le pintamos la miniatura y sólo al dar clic se
+   inserta el iframe real (ya con autoplay).
+   Estilos: ver .yt-lite en style.css
+   ================================================ */
+(function () {
+  'use strict';
+
+  function pintar(btn) {
+    if (btn.dataset.listo) return;
+    btn.dataset.listo = '1';
+
+    var id = btn.getAttribute('data-yt');
+    if (!id || id.indexOf('{{') === 0) return;   /* placeholder del template */
+
+    var img = document.createElement('img');
+    img.className = 'yt-thumb';
+    img.alt = '';
+    img.loading = 'lazy';
+    img.decoding = 'async';
+    /* mqdefault es la única miniatura 16:9 que YouTube garantiza (320x180,
+       ~8 KB). hqdefault pesa el doble y viene en 4:3 con barras negras, y al
+       recortarla a 16:9 se comía el encabezado de los videos de Lety. */
+    img.width = 320; img.height = 180;
+    img.referrerPolicy = 'no-referrer';
+    img.onerror = function () { img.remove(); };   /* sin internet: queda el fondo oscuro + play */
+    img.src = 'https://i.ytimg.com/vi/' + id + '/mqdefault.jpg';
+    btn.appendChild(img);
+
+    var play = document.createElement('span');
+    play.className = 'yt-play';
+    btn.appendChild(play);
+  }
+
+  function reproducir(btn) {
+    var id = btn.getAttribute('data-yt');
+    if (!id) return;
+
+    var iframe = document.createElement('iframe');
+    iframe.src = 'https://www.youtube.com/embed/' + id + '?rel=0&autoplay=1';
+    iframe.title = btn.getAttribute('data-title') || 'Video';
+    iframe.setAttribute('frameborder', '0');
+    iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
+    iframe.setAttribute('allowfullscreen', '');
+
+    btn.parentNode.replaceChild(iframe, btn);
+  }
+
+  var botones = document.querySelectorAll('.yt-lite[data-yt]');
+  for (var i = 0; i < botones.length; i++) pintar(botones[i]);
+
+  /* Delegado: sirve también si alguna página inyecta videos después. */
+  document.addEventListener('click', function (e) {
+    var btn = e.target.closest && e.target.closest('.yt-lite[data-yt]');
+    if (btn) reproducir(btn);
+  });
+})();

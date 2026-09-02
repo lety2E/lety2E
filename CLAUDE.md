@@ -191,7 +191,7 @@ KaTeX: ver template en cualquier tema existente — patrón estándar `katex@0.1
 - **Apunte nuevo:** archivo self-contained en `apuntes/`. El índice está **agrupado** por bloques (`<h2 class="apuntes-grupo">` + su `.apuntes-grid`); la card nueva va en el grupo que le toque, y un grupo nuevo se crea copiando ese par. Referencia viva: `apuntes/ingreso-licenciatura/` (subsección con índice propio y barra de regreso `.l2e-volver` en cada página). El patrón viejo de zoom N1–N5 está documentado en `apuntes/Templete-apuntes.md`; su prototipo se retiró del sitio el 5-ago-2026 y se guardó como recurso en `Recursos lety2E/formato-apunte-zoom-N1-N5 (segunda-guerra-mundial).html` (ya no se publica, pero sirve para copiar componentes).
 - **Subsección de Apuntes:** carpeta con su `index.html` (usa `style.css` + `nav.js` globales, `data-section="apuntes"`) y adentro los `.html` self-contained. Si las páginas vienen de fuera (artefactos sueltos), hay que inyectarles la barra `.l2e-volver` para que no queden como callejón sin salida — el helper está en el scratchpad de la sesión del 5-ago-2026, o se copia a mano de cualquier página de `ingreso-licenciatura/`.
 - **Relato nuevo:** archivo en `lupian/relatos/` (.html, .mp3, .mp4 o imagen) + `<a class="entrada-item">` en `.lista-organica` del index de relatos.
-- **Cover de cantos:** `<article class="video-cover">` con iframe de YouTube en `lupian/cantos/index.html` (canal: `@Lety2eLupian`).
+- **Cover de cantos:** `<article class="video-cover">` con el botón `.yt-lite` (ver § Videos) en `lupian/cantos/index.html` (canal: `@Lety2eLupian`).
 - **Material de Docencia:** archivo en `docencia/` que usa `style.css` + `nav.js` globales (patrón de Math, **no** self-contained como Apuntes — estas páginas se escriben aquí, no llegan de fuera) + su card en el índice de la sección. Mientras no exista el destino real, la card va como `<div class="apunte-card pronto">` con `<span class="pronto-badge">` — nunca `href="#"`.
 - **Sección nueva:** carpeta + `index.html` con su `data-section` + alta en `SECTIONS`/`ROOT_LINKS` de `nav.js` + card en el `index.html` raíz.
 
@@ -290,6 +290,56 @@ Por eso también el **bloque Ejemplo** (no sólo los ejercicios) debe usar `.ej-
 ```
 
 ❌ NO usar `$...$<br>$...$<br>` dentro de `.ejemplo-block` — el espacio HTML entre la ecuación y `<strong>$resultado$</strong>` sí es breakable y separa el resultado de su ecuación.
+
+---
+
+## ⚡ Velocidad de carga (los alumnos entran con datos móviles)
+
+Reglas que **no** se pueden inferir del código y que hay que respetar al agregar
+contenido nuevo. Auditoría y arreglo: 2-sep-2026, porque los alumnos reportaron
+que el sitio tardaba en abrir.
+
+### Videos — nunca un `<iframe>` de YouTube directo
+
+Cada embed de YouTube arrastra ~1 MB de JS y **retiene el evento `load`**: una
+página de tema con 2 videos tardaba varios segundos en terminar de cargar aunque
+el alumno nunca los tocara. En su lugar va un *facade*:
+
+```html
+<div class="video-wrapper">
+  <button type="button" class="yt-lite" data-yt="ID_DEL_VIDEO"
+          data-title="Titulo del video"
+          aria-label="Reproducir video: Titulo del video"></button>
+</div>
+```
+
+- Lógica en `footer.js` (bloque final) · estilos `.yt-lite` en `style.css`.
+- Pinta la miniatura `i.ytimg.com/vi/ID/mqdefault.jpg` (~8 KB, 16:9 real — `hqdefault`
+  viene en 4:3 y al recortarla se comía el encabezado de los videos de Lety) y
+  sólo al dar clic inserta el `<iframe>` con `autoplay=1`.
+- Funciona igual en `.video-wrapper` (temas de Math), `.video-cover .video-frame`
+  (cantos) y `.relato-media` (relatos): los tres ya son `position: relative`.
+- Sin internet la miniatura no carga y queda la tarjeta oscura con el botón — no truena.
+- Es un `<button>` a propósito: se abre con Enter/Espacio y lo anuncia el lector de pantalla.
+
+### Imágenes
+
+- Ancho máximo real **1600 px** (el sitio nunca muestra más de 1200). El hero de la
+  portada llegó a pesar 300 KB por estar guardado a 2528 px.
+- WebP con `srcset` de dos tamaños (800 / 1600) + un `.jpg` de respaldo en el `<img>`,
+  y siempre `width`/`height` para que no salte el layout.
+- En la Mac **`sips` no exporta WebP**; usar Pillow (sí está instalado).
+
+### Red
+
+- **Cero CDNs.** KaTeX y las tipografías están self-hosted en `assets/`. No volver a
+  meter `cdn.jsdelivr`, `cdnjs` ni `fonts.googleapis.com`.
+- **Nada de `@import` en CSS.** Las `@font-face` van pegadas dentro de `style.css`:
+  un `@import` obliga al navegador a bajar `style.css` entero antes de descubrir el
+  archivo de fuentes, un viaje extra de red en la ruta crítica. La copia original de
+  las fuentes sigue en `assets/fonts/fonts.css` sólo como referencia para actualizarlas.
+- GitHub Pages ya sirve todo con gzip, así que el HTML pesado con CSS/JS inline
+  (simuladores, apuntes largos) no es el problema.
 
 ---
 
