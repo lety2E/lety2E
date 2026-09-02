@@ -5,6 +5,21 @@
 
 ---
 
+## 2026-09-01 (3)
+- **Nace `math/matematicas-5/regla-producto-p1.html` — Tema 5.** Con video (sí estaba en el CSV:
+  `6rf8dzKTXvU`), apunte de la regla $f = uv \implies f' = u'v + uv'$, el ejemplo del doc,
+  2 bloques de 3 ejercicios con sus resoluciones y 2 bloques de 6 extras.
+- Se nombró `regla-producto-p1` (no `regla-producto`) porque el doc trae una **P2** con las
+  mismas reglas aplicadas a trigonométricas y logaritmos; así el par queda parejo.
+- **Las resoluciones se cortan en dos renglones en la costura de la regla** (`u'v` arriba,
+  `+ uv'` abajo, con `&\quad`). Sin ese corte, las líneas de expansión —ocho términos— medían
+  más que el ancho del celular y se salían. El corte no es arbitrario: cae justo donde la regla
+  separa sus dos productos, así que se lee mejor, no peor. Se aplicó igual en el ejemplo.
+- Verificadas a mano las 6 resoluciones y el ejemplo: todas correctas, ninguna corrección
+  que publicar.
+- Verificado en 375×812 y escritorio: la fórmula más ancha mide 318px contra 320px de card
+  disponible — entra sin desbordar. Cero errores de KaTeX.
+
 ## 2026-09-01 (2)
 - **Nace `math/matematicas-5/raices.html` — Tema 4, derivadas de raíces.** Sin video (no está en
   el CSV, y no es error). Apunte de una sola regla ($\sqrt[n]{x^m} = x^{m/n}$), 3 ejemplos en
