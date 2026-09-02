@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Regla del cociente (P1) — Matemáticas 5 — LetyMath</title>
-  <meta name="description" content="Regla del cociente para derivar una fracción de funciones, con ejemplo y ejercicios resueltos paso a paso." />
+  <title>Regla del cociente (P2) — Matemáticas 5 — LetyMath</title>
+  <meta name="description" content="Regla del cociente con funciones trigonométricas: senos, cosenos y tangentes, con ejemplos y ejercicios resueltos paso a paso." />
   <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
   <link rel="icon" href="../../favicon.ico">
   <link rel="stylesheet" href="../../style.css">
@@ -63,7 +63,7 @@
       transition: max-height .4s ease, padding .3s ease;
       padding: 0;
     }
-    .collapsible.show { max-height: 16000px; padding: .8rem 0; }
+    .collapsible.show { max-height: 20000px; padding: .8rem 0; }
 
     /* Apuntes */
     .regla-unica {
@@ -72,7 +72,6 @@
       text-align: center; color: var(--text);
     }
     .regla-unica p { margin: 0 0 .4rem; line-height: 1.75; color: var(--text-2); font-size: .95rem; }
-    .regla-unica p:not(:first-child) { margin-top: .6rem; }
 
     /* Ejemplo */
     .ejemplo-section { margin: 2rem 0 2.5rem; }
@@ -94,7 +93,9 @@
       text-align: center;
     }
     .ejemplo-block strong { color: var(--M); font-weight: 700; }
-    .ejemplo-enunciado { margin: 0 0 .6rem; line-height: 1.75; font-size: .95rem; color: var(--text-2); }
+    .ejemplo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem 2rem; }
+    @media (max-width: 860px) { .ejemplo-grid { grid-template-columns: 1fr; } }
+    .ejemplo-item { text-align: center; }
 
     /* Mini card (bloque) */
     .mini-card {
@@ -124,6 +125,7 @@
     .mini-card-body .sol:last-child { border-bottom: none; padding-bottom: .1rem; }
 
     /* Grid de bloques */
+    .bloques-1 { display: grid; grid-template-columns: 1fr; gap: 1.2rem; }
     .bloques-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2rem; }
     @media (max-width: 700px) { .bloques-2 { grid-template-columns: 1fr; } }
     .bloques-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
@@ -156,10 +158,10 @@
       <p class="breadcrumb">
         <a href="../index.html">Inicio</a> ›
         <a href="index.html">Matemáticas 5</a> ›
-        Regla del cociente (P1)
+        Regla del cociente (P2)
       </p>
-      <div class="topic-tag">Matemáticas 5 · Tema 7</div>
-      <h1>Regla del cociente (P1)</h1>
+      <div class="topic-tag">Matemáticas 5 · Tema 8</div>
+      <h1>Regla del cociente (P2)</h1>
     </header>
 
     <!-- ══════════ APUNTES ══════════ -->
@@ -171,30 +173,36 @@
         <h2>Apuntes</h2>
       </div>
       <div class="regla-unica">
-        <p>La regla del cociente sirve para derivar una función que es el cociente de otras dos. Si la función tiene la forma:</p>
-        $$f(x) = \dfrac{u}{v}$$
-        <p>su derivada está dada por:</p>
-        $$f'(x) = \dfrac{u'v - uv'}{v^2}$$
-        <p>donde $u$ es el numerador y $v$ el denominador.</p>
+        <p>La misma regla del cociente, ahora con senos, cosenos y tangentes:</p>
+        $$f(x) = \frac{u}{v} \implies f'(x) = \frac{u'v - uv'}{v^2}$$
       </div>
     </section>
 
-    <!-- ══════════ EJEMPLO ══════════ -->
+    <!-- ══════════ EJEMPLOS ══════════ -->
     <section class="section-block ejemplo-section">
       <div class="ejemplo-head">
         <div class="sec-icon">
           <svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
         </div>
-        <h3>Ejemplo</h3>
+        <h3>Ejemplos</h3>
       </div>
       <div class="ejemplo-block">
-        <p class="ejemplo-enunciado">Sea la función $f(x) = \dfrac{5x^2 - 3x}{4x^2 + x}$</p>
-        $$\begin{aligned}
-          f'(x) &= \frac{(10x - 3)(4x^2 + x) - (5x^2 - 3x)(8x + 1)}{(4x^2 + x)^2} \\
-          f'(x) &= \frac{40x^3 + 10x^2 - 12x^2 - 3x - (40x^3 + 5x^2 - 24x^2 - 3x)}{(4x^2)^2 + 2(4x^2)(x) + (x)^2} \\
-          f'(x) &= \frac{40x^3 + 10x^2 - 12x^2 - 3x - 40x^3 - 5x^2 + 24x^2 + 3x}{16x^4 + 8x^3 + x^2} \\
-          \mathbf{f'(x)} &= \mathbf{\frac{17x^2}{16x^4 + 8x^3 + x^2}}
-        \end{aligned}$$
+        <div class="ejemplo-grid">
+          <div class="ejemplo-item">
+            $$\begin{aligned}
+              f(x) &= \frac{3x^2}{5\cos x} \\
+              f'(x) &= \frac{(6x)(5\cos x) - (3x^2)(-5\operatorname{sen} x)}{(5\cos x)^2} \\
+              \mathbf{f'(x)} &= \mathbf{\frac{30x\cos x + 15x^2\operatorname{sen} x}{25\cos^2 x}}
+            \end{aligned}$$
+          </div>
+          <div class="ejemplo-item">
+            $$\begin{aligned}
+              f(x) &= \frac{-6x^2 + 3\cos x}{\operatorname{sen} x} \\
+              f'(x) &= \frac{(-12x - 3\operatorname{sen} x)(\operatorname{sen} x) - (-6x^2 + 3\cos x)(\cos x)}{\operatorname{sen}^2 x} \\
+              \mathbf{f'(x)} &= \mathbf{\frac{-12x\operatorname{sen} x - 3\operatorname{sen}^2 x + 6x^2\cos x - 3\cos^2 x}{\operatorname{sen}^2 x}}
+            \end{aligned}$$
+          </div>
+        </div>
       </div>
     </section>
 
@@ -206,21 +214,34 @@
         </div>
         <h2>Ejercicios</h2>
       </div>
-      <div class="bloques-2">
+      <div class="bloques-3">
         <div class="mini-card">
           <div class="mini-card-head">Bloque 1</div>
           <div class="mini-card-body">
-            <div class="ej-line">$f(x) = \dfrac{4x^2 - 5x}{6x^2 + 3}$</div>
-            <div class="ej-line">$f(x) = \dfrac{5x^4 - 2x}{3x^2 + 8}$</div>
-            <div class="ej-line">$f(x) = \dfrac{2x^3 + 4x}{5x^3 - 1}$</div>
+            <div class="ej-line">$f(x) = \dfrac{4x^2}{5\cos x}$</div>
+            <div class="ej-line">$g(x) = \dfrac{7x^3}{6\operatorname{sen} x}$</div>
+            <div class="ej-line">$h(x) = \dfrac{2\tan x}{8x^2}$</div>
+            <div class="ej-line">$f(x) = \dfrac{-4\cos x}{6x^2}$</div>
           </div>
         </div>
         <div class="mini-card">
           <div class="mini-card-head">Bloque 2</div>
           <div class="mini-card-body">
-            <div class="ej-line">$f(x) = \dfrac{x^5 - 6x^2}{2x^3 + 4x}$</div>
-            <div class="ej-line">$f(x) = \dfrac{3x^4 - 5x}{4x^3 - 2x}$</div>
-            <div class="ej-line">$f(x) = \dfrac{4x^2 - 7x}{5x^4 + 3x^2}$</div>
+            <div class="ej-line">$f(x) = \dfrac{5x^2 - 3\operatorname{sen} x}{2\cos x}$</div>
+            <div class="ej-line">$g(x) = \dfrac{7\cos x}{2x^2 - 4\operatorname{sen} x}$</div>
+            <div class="ej-line">$h(x) = \dfrac{3x^2 - 2\operatorname{sen} x}{4\cos x}$</div>
+            <div class="ej-line">$f(x) = \dfrac{4x^3 + 2\cos x}{\operatorname{sen} x}$</div>
+          </div>
+        </div>
+        <div class="mini-card">
+          <div class="mini-card-head">Bloque 3</div>
+          <div class="mini-card-body">
+            <div class="ej-line">$f(x) = \dfrac{2x^4}{3\cos x}$</div>
+            <div class="ej-line">$g(x) = \dfrac{-5\tan x}{2x^3}$</div>
+            <div class="ej-line">$h(x) = \dfrac{5x^3}{2\cos x}$</div>
+            <div class="ej-line">$f(x) = \dfrac{2\cos x}{3x^2 - 5\operatorname{sen} x}$</div>
+            <div class="ej-line">$g(x) = \dfrac{4x^2 - 2\cos x}{\operatorname{sen} x}$</div>
+            <div class="ej-line">$h(x) = \dfrac{6\cos x}{3x^2 - 2\operatorname{sen} x}$</div>
           </div>
         </div>
       </div>
@@ -236,35 +257,36 @@
         <span class="chev">▼</span>
       </div>
       <div class="collapsible">
-        <div class="bloques-2">
+        <div class="bloques-1">
           <div class="mini-card">
             <div class="mini-card-head">Bloque 1</div>
             <div class="mini-card-body">
               <div class="sol">
                 $$\begin{aligned}
-                  f(x) &= \frac{4x^2 - 5x}{6x^2 + 3} \\
-                  f'(x) &= \frac{(6x^2 + 3)(8x - 5) - (4x^2 - 5x)(12x)}{(6x^2 + 3)^2} \\
-                  f'(x) &= \frac{48x^3 - 30x^2 + 24x - 15 - (48x^3 - 60x^2)}{(6x^2 + 3)^2} \\
-                  f'(x) &= \frac{48x^3 - 30x^2 + 24x - 15 - 48x^3 + 60x^2}{(6x^2 + 3)^2} \\
-                  \mathbf{f'(x)} &= \mathbf{\frac{30x^2 + 24x - 15}{(6x^2 + 3)^2}}
+                  f(x) &= \frac{4x^2}{5\cos x} \\
+                  f'(x) &= \frac{(8x)(5\cos x) - (4x^2)(-5\operatorname{sen} x)}{(5\cos x)^2} \\
+                  \mathbf{f'(x)} &= \mathbf{\frac{40x\cos x + 20x^2\operatorname{sen} x}{25\cos^2 x}}
                 \end{aligned}$$
               </div>
               <div class="sol">
                 $$\begin{aligned}
-                  f(x) &= \frac{5x^4 - 2x}{3x^2 + 8} \\
-                  f'(x) &= \frac{(3x^2 + 8)(20x^3 - 2) - (5x^4 - 2x)(6x)}{(3x^2 + 8)^2} \\
-                  f'(x) &= \frac{60x^5 - 6x^2 + 160x^3 - 16 - (30x^5 - 12x^2)}{(3x^2 + 8)^2} \\
-                  f'(x) &= \frac{60x^5 - 6x^2 + 160x^3 - 16 - 30x^5 + 12x^2}{(3x^2 + 8)^2} \\
-                  \mathbf{f'(x)} &= \mathbf{\frac{30x^5 + 160x^3 + 6x^2 - 16}{(3x^2 + 8)^2}}
+                  g(x) &= \frac{7x^3}{6\operatorname{sen} x} \\
+                  g'(x) &= \frac{(21x^2)(6\operatorname{sen} x) - (7x^3)(6\cos x)}{(6\operatorname{sen} x)^2} \\
+                  \mathbf{g'(x)} &= \mathbf{\frac{126x^2\operatorname{sen} x - 42x^3\cos x}{36\operatorname{sen}^2 x}}
                 \end{aligned}$$
               </div>
               <div class="sol">
                 $$\begin{aligned}
-                  f(x) &= \frac{2x^3 + 4x}{5x^3 - 1} \\
-                  f'(x) &= \frac{(5x^3 - 1)(6x^2 + 4) - (2x^3 + 4x)(15x^2)}{(5x^3 - 1)^2} \\
-                  f'(x) &= \frac{30x^5 + 20x^3 - 6x^2 - 4 - (30x^5 + 60x^3)}{(5x^3 - 1)^2} \\
-                  f'(x) &= \frac{30x^5 + 20x^3 - 6x^2 - 4 - 30x^5 - 60x^3}{(5x^3 - 1)^2} \\
-                  \mathbf{f'(x)} &= \mathbf{\frac{-40x^3 - 6x^2 - 4}{(5x^3 - 1)^2}}
+                  h(x) &= \frac{2\tan x}{8x^2} \\
+                  h'(x) &= \frac{(2\sec^2 x)(8x^2) - (2\tan x)(16x)}{(8x^2)^2} \\
+                  \mathbf{h'(x)} &= \mathbf{\frac{16x^2\sec^2 x - 32x\tan x}{64x^4}}
+                \end{aligned}$$
+              </div>
+              <div class="sol">
+                $$\begin{aligned}
+                  f(x) &= \frac{-4\cos x}{6x^2} \\
+                  f'(x) &= \frac{(4\operatorname{sen} x)(6x^2) - (-4\cos x)(12x)}{(6x^2)^2} \\
+                  \mathbf{f'(x)} &= \mathbf{\frac{24x^2\operatorname{sen} x + 48x\cos x}{36x^4}}
                 \end{aligned}$$
               </div>
             </div>
@@ -274,29 +296,77 @@
             <div class="mini-card-body">
               <div class="sol">
                 $$\begin{aligned}
-                  f(x) &= \frac{x^5 - 6x^2}{2x^3 + 4x} \\
-                  f'(x) &= \frac{(2x^3 + 4x)(5x^4 - 12x) - (x^5 - 6x^2)(6x^2 + 4)}{(2x^3 + 4x)^2} \\
-                  f'(x) &= \frac{10x^7 - 24x^4 + 20x^5 - 48x^2 - (6x^7 + 4x^5 - 36x^4 - 24x^2)}{(2x^3 + 4x)^2} \\
-                  f'(x) &= \frac{10x^7 - 24x^4 + 20x^5 - 48x^2 - 6x^7 - 4x^5 + 36x^4 + 24x^2}{(2x^3 + 4x)^2} \\
-                  \mathbf{f'(x)} &= \mathbf{\frac{4x^7 + 16x^5 + 12x^4 - 24x^2}{(2x^3 + 4x)^2}}
+                  f(x) &= \frac{5x^2 - 3\operatorname{sen} x}{2\cos x} \\
+                  f'(x) &= \frac{(10x - 3\cos x)(2\cos x) - (5x^2 - 3\operatorname{sen} x)(-2\operatorname{sen} x)}{(2\cos x)^2} \\
+                  \mathbf{f'(x)} &= \mathbf{\frac{20x\cos x - 6\cos^2 x + 10x^2\operatorname{sen} x - 6\operatorname{sen}^2 x}{4\cos^2 x}}
                 \end{aligned}$$
               </div>
               <div class="sol">
                 $$\begin{aligned}
-                  f(x) &= \frac{3x^4 - 5x}{4x^3 - 2x} \\
-                  f'(x) &= \frac{(4x^3 - 2x)(12x^3 - 5) - (3x^4 - 5x)(12x^2 - 2)}{(4x^3 - 2x)^2} \\
-                  f'(x) &= \frac{48x^6 - 20x^3 - 24x^4 + 10x - (36x^6 - 6x^4 - 60x^3 + 10x)}{(4x^3 - 2x)^2} \\
-                  f'(x) &= \frac{48x^6 - 20x^3 - 24x^4 + 10x - 36x^6 + 6x^4 + 60x^3 - 10x}{(4x^3 - 2x)^2} \\
-                  \mathbf{f'(x)} &= \mathbf{\frac{12x^6 - 18x^4 + 40x^3}{(4x^3 - 2x)^2}}
+                  g(x) &= \frac{7\cos x}{2x^2 - 4\operatorname{sen} x} \\
+                  g'(x) &= \frac{(-7\operatorname{sen} x)(2x^2 - 4\operatorname{sen} x) - (7\cos x)(4x - 4\cos x)}{(2x^2 - 4\operatorname{sen} x)^2} \\
+                  \mathbf{g'(x)} &= \mathbf{\frac{-14x^2\operatorname{sen} x + 28\operatorname{sen}^2 x - 28x\cos x + 28\cos^2 x}{(2x^2 - 4\operatorname{sen} x)^2}}
                 \end{aligned}$$
               </div>
               <div class="sol">
                 $$\begin{aligned}
-                  f(x) &= \frac{4x^2 - 7x}{5x^4 + 3x^2} \\
-                  f'(x) &= \frac{(5x^4 + 3x^2)(8x - 7) - (4x^2 - 7x)(20x^3 + 6x)}{(5x^4 + 3x^2)^2} \\
-                  f'(x) &= \frac{40x^5 - 35x^4 + 24x^3 - 21x^2 - (80x^5 + 24x^3 - 140x^4 - 42x^2)}{(5x^4 + 3x^2)^2} \\
-                  f'(x) &= \frac{40x^5 - 35x^4 + 24x^3 - 21x^2 - 80x^5 - 24x^3 + 140x^4 + 42x^2}{(5x^4 + 3x^2)^2} \\
-                  \mathbf{f'(x)} &= \mathbf{\frac{-40x^5 + 105x^4 + 21x^2}{(5x^4 + 3x^2)^2}}
+                  h(x) &= \frac{3x^2 - 2\operatorname{sen} x}{4\cos x} \\
+                  h'(x) &= \frac{(6x - 2\cos x)(4\cos x) - (3x^2 - 2\operatorname{sen} x)(-4\operatorname{sen} x)}{(4\cos x)^2} \\
+                  \mathbf{h'(x)} &= \mathbf{\frac{24x\cos x - 8\cos^2 x + 12x^2\operatorname{sen} x - 8\operatorname{sen}^2 x}{16\cos^2 x}}
+                \end{aligned}$$
+              </div>
+              <div class="sol">
+                $$\begin{aligned}
+                  f(x) &= \frac{4x^3 + 2\cos x}{\operatorname{sen} x} \\
+                  f'(x) &= \frac{(12x^2 - 2\operatorname{sen} x)(\operatorname{sen} x) - (4x^3 + 2\cos x)(\cos x)}{\operatorname{sen}^2 x} \\
+                  \mathbf{f'(x)} &= \mathbf{\frac{12x^2\operatorname{sen} x - 2\operatorname{sen}^2 x - 4x^3\cos x - 2\cos^2 x}{\operatorname{sen}^2 x}}
+                \end{aligned}$$
+              </div>
+            </div>
+          </div>
+          <div class="mini-card">
+            <div class="mini-card-head">Bloque 3</div>
+            <div class="mini-card-body">
+              <div class="sol">
+                $$\begin{aligned}
+                  f(x) &= \frac{2x^4}{3\cos x} \\
+                  f'(x) &= \frac{(8x^3)(3\cos x) - (2x^4)(-3\operatorname{sen} x)}{(3\cos x)^2} \\
+                  \mathbf{f'(x)} &= \mathbf{\frac{24x^3\cos x + 6x^4\operatorname{sen} x}{9\cos^2 x}}
+                \end{aligned}$$
+              </div>
+              <div class="sol">
+                $$\begin{aligned}
+                  g(x) &= \frac{-5\tan x}{2x^3} \\
+                  g'(x) &= \frac{(-5\sec^2 x)(2x^3) - (-5\tan x)(6x^2)}{(2x^3)^2} \\
+                  \mathbf{g'(x)} &= \mathbf{\frac{-10x^3\sec^2 x + 30x^2\tan x}{4x^6}}
+                \end{aligned}$$
+              </div>
+              <div class="sol">
+                $$\begin{aligned}
+                  h(x) &= \frac{5x^3}{2\cos x} \\
+                  h'(x) &= \frac{(15x^2)(2\cos x) - (5x^3)(-2\operatorname{sen} x)}{(2\cos x)^2} \\
+                  \mathbf{h'(x)} &= \mathbf{\frac{30x^2\cos x + 10x^3\operatorname{sen} x}{4\cos^2 x}}
+                \end{aligned}$$
+              </div>
+              <div class="sol">
+                $$\begin{aligned}
+                  f(x) &= \frac{2\cos x}{3x^2 - 5\operatorname{sen} x} \\
+                  f'(x) &= \frac{(-2\operatorname{sen} x)(3x^2 - 5\operatorname{sen} x) - (2\cos x)(6x - 5\cos x)}{(3x^2 - 5\operatorname{sen} x)^2} \\
+                  \mathbf{f'(x)} &= \mathbf{\frac{-6x^2\operatorname{sen} x + 10\operatorname{sen}^2 x - 12x\cos x + 10\cos^2 x}{(3x^2 - 5\operatorname{sen} x)^2}}
+                \end{aligned}$$
+              </div>
+              <div class="sol">
+                $$\begin{aligned}
+                  g(x) &= \frac{4x^2 - 2\cos x}{\operatorname{sen} x} \\
+                  g'(x) &= \frac{(8x + 2\operatorname{sen} x)(\operatorname{sen} x) - (4x^2 - 2\cos x)(\cos x)}{\operatorname{sen}^2 x} \\
+                  \mathbf{g'(x)} &= \mathbf{\frac{8x\operatorname{sen} x + 2\operatorname{sen}^2 x - 4x^2\cos x + 2\cos^2 x}{\operatorname{sen}^2 x}}
+                \end{aligned}$$
+              </div>
+              <div class="sol">
+                $$\begin{aligned}
+                  h(x) &= \frac{6\cos x}{3x^2 - 2\operatorname{sen} x} \\
+                  h'(x) &= \frac{(-6\operatorname{sen} x)(3x^2 - 2\operatorname{sen} x) - (6\cos x)(6x - 2\cos x)}{(3x^2 - 2\operatorname{sen} x)^2} \\
+                  \mathbf{h'(x)} &= \mathbf{\frac{-18x^2\operatorname{sen} x + 12\operatorname{sen}^2 x - 36x\cos x + 12\cos^2 x}{(3x^2 - 2\operatorname{sen} x)^2}}
                 \end{aligned}$$
               </div>
             </div>
@@ -315,38 +385,27 @@
         <span class="chev">▼</span>
       </div>
       <div class="collapsible">
-        <div class="bloques-3">
+        <div class="bloques-2">
           <div class="mini-card">
             <div class="mini-card-head">Bloque 1</div>
             <div class="mini-card-body">
-              <div class="ej-line">$f(x) = \dfrac{7x^2 - 4x}{5x + 2}$</div>
-              <div class="ej-line">$g(x) = \dfrac{-8x^2 - 3x}{x - 2x^3}$</div>
-              <div class="ej-line">$h(x) = \dfrac{4x^2 - 5}{7x + 2x^3}$</div>
-              <div class="ej-line">$h(x) = \dfrac{3x^2 - 5}{8x + 5x^2}$</div>
-              <div class="ej-line">$g(x) = \dfrac{7x^2 - 5x}{6x + 10x^3}$</div>
-              <div class="ej-line">$h(x) = \dfrac{4 - 8x^2}{7x + x^2}$</div>
+              <div class="ej-line">$f(x) = \dfrac{3x^4}{4\cos x}$</div>
+              <div class="ej-line">$g(x) = \dfrac{-2\tan x}{5x^3}$</div>
+              <div class="ej-line">$h(x) = \dfrac{6x^2}{5\cos x}$</div>
+              <div class="ej-line">$f(x) = \dfrac{4\cos x}{2x^3 - 3\operatorname{sen} x}$</div>
+              <div class="ej-line">$g(x) = \dfrac{5x^2 - 3\cos x}{\operatorname{sen} x}$</div>
+              <div class="ej-line">$h(x) = \dfrac{4\cos x}{2x^2 - 5\operatorname{sen} x}$</div>
             </div>
           </div>
           <div class="mini-card">
             <div class="mini-card-head">Bloque 2</div>
             <div class="mini-card-body">
-              <div class="ej-line">$f(x) = \dfrac{6x^3 - 2x}{4x^2 + 5}$</div>
-              <div class="ej-line">$g(x) = \dfrac{x^4 - 8x}{3x^3 - 2x}$</div>
-              <div class="ej-line">$h(x) = \dfrac{5x^2 - 9}{2x^4 + x}$</div>
-              <div class="ej-line">$f(x) = \dfrac{2x^5 - 4x^2}{5x^3 + 6}$</div>
-              <div class="ej-line">$g(x) = \dfrac{7x^2 - 3x}{x^4 - 5x}$</div>
-              <div class="ej-line">$h(x) = \dfrac{3x^4 - 1}{8x^2 + 4x}$</div>
-            </div>
-          </div>
-          <div class="mini-card">
-            <div class="mini-card-head">Bloque 3</div>
-            <div class="mini-card-body">
-              <div class="ej-line">$f(x) = \dfrac{4x^3 + 2x}{6x^2 - 7}$</div>
-              <div class="ej-line">$g(x) = \dfrac{-5x^2 - x}{2x^3 + 3}$</div>
-              <div class="ej-line">$h(x) = \dfrac{x^6 - 2x^2}{4x^3 - x}$</div>
-              <div class="ej-line">$f(x) = \dfrac{8x^2 - 5x}{3x^4 + 2}$</div>
-              <div class="ej-line">$g(x) = \dfrac{2x^4 - 6x}{5x^2 - 3x}$</div>
-              <div class="ej-line">$h(x) = \dfrac{9x^3 - 4}{x^5 + 7x}$</div>
+              <div class="ej-line">$f(x) = \dfrac{6x^3}{2\cos x}$</div>
+              <div class="ej-line">$g(x) = \dfrac{4\tan x}{3x^4}$</div>
+              <div class="ej-line">$h(x) = \dfrac{-3x^2}{4\cos x}$</div>
+              <div class="ej-line">$f(x) = \dfrac{3\cos x}{4x^2 - 2\operatorname{sen} x}$</div>
+              <div class="ej-line">$g(x) = \dfrac{2x^2 - 4\cos x}{\operatorname{sen} x}$</div>
+              <div class="ej-line">$h(x) = \dfrac{8\cos x}{5x^2 - 3\operatorname{sen} x}$</div>
             </div>
           </div>
         </div>
@@ -355,8 +414,7 @@
 
     <!-- ══════════ NAVEGACIÓN ══════════ -->
     <div class="topic-nav-btns">
-      <a href="regla-producto-p2.html" class="btn-anterior">← Regla del producto (P2)</a>
-      <a href="regla-cociente-p2.html" class="btn-siguiente">Regla del cociente (P2) →</a>
+      <a href="regla-cociente-p1.html" class="btn-anterior">← Regla del cociente (P1)</a>
     </div>
 
   </main>

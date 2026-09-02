@@ -5,6 +5,19 @@
 
 ---
 
+## 2026-09-01 (6)
+- **Nace `math/matematicas-5/regla-cociente-p2.html` — Tema 8.** Sin video. La misma regla del
+  cociente, ahora con senos, cosenos y tangentes. 2 ejemplos, **3 bloques de ejercicios (4, 4 y 6)
+  con sus 14 resoluciones** y 2 bloques de 6 extras. Es el tema más cargado del curso hasta ahora.
+- **Las respuestas van a ancho completo, una debajo de otra (`.bloques-1`), no en columnas.**
+  Aquí el numerador de cada derivada es la resta cruzada sin simplificar —cosas como
+  `(-7 sen x)(2x² - 4 sen x) - (7 cos x)(4x - 4 cos x)`—; en dos o tres columnas no cabía.
+  Los ejercicios sí van en 3 columnas, porque ahí las fracciones son cortas.
+- Verificadas a mano las **14 resoluciones** y los 2 ejemplos: todas correctas.
+- Verificado en 375×812 y 1200px: nada se sale. En escritorio el peor caso mide 482px contra
+  528px de card. Cero errores de KaTeX.
+- Con esto quedan cerrados los cuatro pares de reglas: producto P1/P2 y cociente P1/P2.
+
 ## 2026-09-01 (5)
 - **Nace `math/matematicas-5/regla-cociente-p1.html` — Tema 7.** Sin video (no está en el CSV).
   Apunte con las dos fórmulas ($f = u/v$ y su derivada), el ejemplo del doc, 2 bloques de 3
