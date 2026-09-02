@@ -12,9 +12,14 @@
   (queda pegada a las reglas de derivación, que es donde se usa la derivada como pendiente),
   máximos y mínimos y área máxima suben a 12 y 13, y **derivada por definición baja al 19**.
 - Dos temas del doc **no existen en el sitio viejo**: `suma-riemann` y `derivada-definicion`.
-  El sitio viejo tiene un tema llamado *"Derivada / Integrales"* en la posición 19 — ahí quedó
-  derivada por definición. Y suma de Riemann se metió en 16, entre integrales definidas y área
-  bajo la curva, que es donde encaja (es la definición de la integral definida).
+  Derivada por definición quedó en la 18, donde el sitio viejo tiene *"Derivada / Integrales"*,
+  y **suma de Riemann de penúltima (19), como pidió Lety** — primero se había metido en la 16,
+  entre integrales definidas y área bajo la curva, y ella la movió al final.
+- El script quedó guardado como `Recursos lety2E/reordenar-temas-math.py`: se edita su lista
+  `ORDEN` y él solo recoloca las cards, recalcula la rotación de color, reescribe los números
+  de Tema, regenera los botones prev/next y verifica que no queden enlaces rotos ni desfases.
+  Reordenar el curso a mano son 20 cards + 20 números + 38 botones; con esto es cambiar
+  una lista.
 - El reordenamiento se hizo con un script, no a mano: recoloca las 20 cards recalculando la
   rotación de color (magenta · turquesa · morado por posición), reescribe los 20 números de
   Tema y regenera los 38 botones prev/next tomando la etiqueta del `<h1>` de cada página.
