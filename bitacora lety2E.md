@@ -5,6 +5,22 @@
 
 ---
 
+## 2026-09-01 (12) — Mate 5 reordenado al orden de letymath.com
+- **El índice de Mate 5 pasa al orden del sitio viejo**, que es el que Lety quiere (lo mandó en
+  capturas de `letymath.com/matemáticas-5`). Historia del cálculo queda al final, como allá.
+- Cambios de fondo respecto al orden de publicación: **recta tangente sube del 20 al 11**
+  (queda pegada a las reglas de derivación, que es donde se usa la derivada como pendiente),
+  máximos y mínimos y área máxima suben a 12 y 13, y **derivada por definición baja al 19**.
+- Dos temas del doc **no existen en el sitio viejo**: `suma-riemann` y `derivada-definicion`.
+  El sitio viejo tiene un tema llamado *"Derivada / Integrales"* en la posición 19 — ahí quedó
+  derivada por definición. Y suma de Riemann se metió en 16, entre integrales definidas y área
+  bajo la curva, que es donde encaja (es la definición de la integral definida).
+- El reordenamiento se hizo con un script, no a mano: recoloca las 20 cards recalculando la
+  rotación de color (magenta · turquesa · morado por posición), reescribe los 20 números de
+  Tema y regenera los 38 botones prev/next tomando la etiqueta del `<h1>` de cada página.
+- Verificado por script: 20 cards, 0 enlaces rotos, 0 desfases entre orden del índice, número
+  de Tema y cadena prev/next.
+
 ## 2026-09-01 (11) — Matemáticas 5 queda completo
 - **Temas 18, 19 y 20:** `puntos-criticos.html` (criterio de la segunda derivada),
   `optimizacion-areas.html` (área máxima de un rectángulo con perímetro dado) y
