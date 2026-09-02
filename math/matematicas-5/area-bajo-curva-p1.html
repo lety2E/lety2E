@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Suma de Riemann — Matemáticas 5 — LetyMath</title>
-  <meta name="description" content="La integral definida como límite de sumas de rectángulos, con el desarrollo algebraico completo y ejercicios resueltos." />
+  <title>Área bajo la curva (P1) — Matemáticas 5 — LetyMath</title>
+  <meta name="description" content="Área bajo una recta con integral definida: tabulación, gráfica y cálculo, con ejercicios resueltos." />
   <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
   <link rel="icon" href="../../favicon.ico">
   <link rel="stylesheet" href="../../style.css">
@@ -222,10 +222,10 @@
       <p class="breadcrumb">
         <a href="../index.html">Inicio</a> ›
         <a href="index.html">Matemáticas 5</a> ›
-        Suma de Riemann
+        Área bajo la curva (P1)
       </p>
-      <div class="topic-tag">Matemáticas 5 · Tema 15</div>
-      <h1>Suma de Riemann</h1>
+      <div class="topic-tag">Matemáticas 5 · Tema 16</div>
+      <h1>Área bajo la curva (P1)</h1>
     </header>
 
     <!-- ══════════ APUNTES ══════════ -->
@@ -237,24 +237,8 @@
         <h2>Apuntes</h2>
       </div>
       <div class="regla-unica">
-        <p>La integral definida de una función continua $f(x)$ en el intervalo cerrado $[a,\,b]$ es el límite del área bajo la curva calculada con rectángulos, cuando el número de divisiones tiende a infinito:</p>
-        $$\int_{a}^{b} f(x) \, dx = \lim_{n \to \infty} \sum_{i=1}^{n} f(x_i) \, \Delta x$$
-        <p>donde:</p>
-        $$\Delta x = \frac{b - a}{n} \qquad x_i = a + \Delta x \cdot i$$
-      </div>
-      <div class="reglas-grid" style="margin-top:1.2rem;">
-        <div class="regla-card">
-          <div class="regla-card-title">Sumatoria de $i^2$</div>
-          <div class="regla-card-body">$\displaystyle \sum_{i=1}^{n} i^2 = \frac{n^3}{3} + \frac{n^2}{2} + \frac{n}{6} = \frac{n(n+1)(2n+1)}{6}$</div>
-        </div>
-        <div class="regla-card">
-          <div class="regla-card-title">Sumatoria de $i$</div>
-          <div class="regla-card-body">$\displaystyle \sum_{i=1}^{n} i = \frac{n^2}{2} + \frac{n}{2} = \frac{n(n+1)}{2}$</div>
-        </div>
-        <div class="regla-card">
-          <div class="regla-card-title">Sumatoria de $1$</div>
-          <div class="regla-card-body">$\displaystyle \sum_{i=1}^{n} 1 = n$</div>
-        </div>
+        <p>Para encontrar el área bajo una curva en un intervalo $[a,\,b]$, se tabula la función para trazar su gráfica y luego se plantea y resuelve la integral definida:</p>
+        $$A = \int_{a}^{b} f(x) \, dx$$
       </div>
     </section>
 
@@ -264,31 +248,59 @@
         <div class="sec-icon">
           <svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
         </div>
-        <h3>Ejemplo desarrollado</h3>
+        <h3>Ejemplo</h3>
       </div>
       <div class="ejemplo-block">
-        <p class="ejemplo-enunciado">Calcular con sumas de Riemann: $\displaystyle \int_{-2}^{3} (x^2 + 4) \, dx$</p>
-        <div class="ej-rotulo">1. Los componentes</div>
-        $$\begin{aligned}
-          \Delta x &= \frac{3 - (-2)}{n} = \frac{5}{n} \\
-          x_i &= -2 + \frac{5}{n}i
-        \end{aligned}$$
-        <div class="ej-rotulo">2. Evaluar $f(x_i)$ y armar $f(x_i)\Delta x$</div>
-        $$\begin{aligned}
-          f(x_i) &= \left( -2 + \frac{5}{n}i \right)^2 + 4 \\
-          &= 4 - \frac{20}{n}i + \frac{25}{n^2}i^2 + 4 \\
-          &= \frac{25}{n^2}i^2 - \frac{20}{n}i + 8 \\
-          f(x_i)\Delta x &= \left( \frac{25}{n^2}i^2 - \frac{20}{n}i + 8 \right) \frac{5}{n} \\
-          &= \frac{125}{n^3}i^2 - \frac{100}{n^2}i + \frac{40}{n}
-        \end{aligned}$$
-        <div class="ej-rotulo">3. Sumatoria y límite al infinito</div>
-        $$\begin{aligned}
-          \sum_{i=1}^{n} f(x_i)\Delta x &= \frac{125}{n^3}\sum_{i=1}^{n}i^2 - \frac{100}{n^2}\sum_{i=1}^{n}i + \frac{40}{n}\sum_{i=1}^{n}1 \\
-          &= \frac{125}{n^3}\left( \frac{n^3}{3} + \frac{n^2}{2} + \frac{n}{6} \right) - \frac{100}{n^2}\left( \frac{n^2}{2} + \frac{n}{2} \right) + \frac{40}{n}(n) \\
-          &= \frac{125}{3} + \frac{125}{2n} + \frac{125}{6n^2} - 50 - \frac{50}{n} + 40 \\
-          &= \frac{95}{3} + \frac{125}{6n^2} + \frac{25}{2n} \\
-          \lim_{n \to \infty} \sum_{i=1}^{n} f(x_i)\Delta x &= \mathbf{\frac{95}{3}} \approx \mathbf{31.67}
-        \end{aligned}$$
+        <p class="ejemplo-enunciado">Encontrar el área bajo la curva $f(x) = x + 5$ en el intervalo $[1,\,3]$.</p>
+        <div class="graficas-row">
+          <div>
+            <div class="ej-rotulo">Gráfica y tabulación</div>
+            <div class="grafica-wrap">
+              <svg viewBox="0 0 180 330" xmlns="http://www.w3.org/2000/svg" role="img">
+          <g stroke="#E0C4BC" stroke-width="0.5"><line x1="0" y1="0" x2="0" y2="330"/><line x1="30" y1="0" x2="30" y2="330"/><line x1="60" y1="0" x2="60" y2="330"/><line x1="90" y1="0" x2="90" y2="330"/><line x1="120" y1="0" x2="120" y2="330"/><line x1="150" y1="0" x2="150" y2="330"/><line x1="180" y1="0" x2="180" y2="330"/><line x1="0" y1="330" x2="180" y2="330"/><line x1="0" y1="300" x2="180" y2="300"/><line x1="0" y1="270" x2="180" y2="270"/><line x1="0" y1="240" x2="180" y2="240"/><line x1="0" y1="210" x2="180" y2="210"/><line x1="0" y1="180" x2="180" y2="180"/><line x1="0" y1="150" x2="180" y2="150"/><line x1="0" y1="120" x2="180" y2="120"/><line x1="0" y1="90" x2="180" y2="90"/><line x1="0" y1="60" x2="180" y2="60"/><line x1="0" y1="30" x2="180" y2="30"/><line x1="0" y1="0" x2="180" y2="0"/></g>
+          <g stroke="#7B5A50" stroke-width="1.2"><line x1="0" y1="300" x2="180" y2="300"/><line x1="30" y1="0" x2="30" y2="330"/></g>
+          <polygon points="60,300 60,120 120,60 120,300" fill="#FF00AA" fill-opacity="0.15"/>
+          <polyline points="15.0,165.0 15.94,164.06 16.88,163.12 17.81,162.19 18.75,161.25 19.69,160.31 20.62,159.38 21.56,158.44 22.5,157.5 23.44,156.56 24.38,155.62 25.31,154.69 26.25,153.75 27.19,152.81 28.12,151.88 29.06,150.94 30.0,150.0 30.94,149.06 31.88,148.12 32.81,147.19 33.75,146.25 34.69,145.31 35.62,144.38 36.56,143.44 37.5,142.5 38.44,141.56 39.38,140.62 40.31,139.69 41.25,138.75 42.19,137.81 43.12,136.88 44.06,135.94 45.0,135.0 45.94,134.06 46.88,133.12 47.81,132.19 48.75,131.25 49.69,130.31 50.62,129.38 51.56,128.44 52.5,127.5 53.44,126.56 54.38,125.62 55.31,124.69 56.25,123.75 57.19,122.81 58.12,121.88 59.06,120.94 60.0,120.0 60.94,119.06 61.88,118.12 62.81,117.19 63.75,116.25 64.69,115.31 65.62,114.38 66.56,113.44 67.5,112.5 68.44,111.56 69.38,110.62 70.31,109.69 71.25,108.75 72.19,107.81 73.12,106.88 74.06,105.94 75.0,105.0 75.94,104.06 76.88,103.12 77.81,102.19 78.75,101.25 79.69,100.31 80.62,99.38 81.56,98.44 82.5,97.5 83.44,96.56 84.38,95.62 85.31,94.69 86.25,93.75 87.19,92.81 88.12,91.88 89.06,90.94 90.0,90.0 90.94,89.06 91.88,88.12 92.81,87.19 93.75,86.25 94.69,85.31 95.62,84.38 96.56,83.44 97.5,82.5 98.44,81.56 99.38,80.62 100.31,79.69 101.25,78.75 102.19,77.81 103.12,76.88 104.06,75.94 105.0,75.0 105.94,74.06 106.88,73.12 107.81,72.19 108.75,71.25 109.69,70.31 110.62,69.38 111.56,68.44 112.5,67.5 113.44,66.56 114.38,65.62 115.31,64.69 116.25,63.75 117.19,62.81 118.12,61.88 119.06,60.94 120.0,60.0 120.94,59.06 121.88,58.12 122.81,57.19 123.75,56.25 124.69,55.31 125.62,54.38 126.56,53.44 127.5,52.5 128.44,51.56 129.38,50.62 130.31,49.69 131.25,48.75 132.19,47.81 133.12,46.88 134.06,45.94 135.0,45.0 135.94,44.06 136.88,43.12 137.81,42.19 138.75,41.25 139.69,40.31 140.62,39.38 141.56,38.44 142.5,37.5 143.44,36.56 144.38,35.62 145.31,34.69 146.25,33.75 147.19,32.81 148.12,31.88 149.06,30.94 150.0,30.0 150.94,29.06 151.88,28.12 152.81,27.19 153.75,26.25 154.69,25.31 155.62,24.38 156.56,23.44 157.5,22.5 158.44,21.56 159.38,20.62 160.31,19.69 161.25,18.75 162.19,17.81 163.12,16.88 164.06,15.94 165.0,15.0" fill="none" stroke="#FF00AA" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
+          <line x1="60" y1="300" x2="60" y2="120" stroke="#7B5A50" stroke-width="1" stroke-dasharray="4 3"/>
+          <line x1="120" y1="300" x2="120" y2="60" stroke="#7B5A50" stroke-width="1" stroke-dasharray="4 3"/>
+          <circle cx="30" cy="150" r="3" fill="#1A0828"/>
+          <circle cx="60" cy="120" r="3" fill="#1A0828"/>
+          <circle cx="90" cy="90" r="3" fill="#1A0828"/>
+          <circle cx="120" cy="60" r="3" fill="#1A0828"/>
+          <circle cx="150" cy="30" r="3" fill="#1A0828"/>
+          <text x="60" y="312" font-size="9" fill="#7B5A50" text-anchor="middle" font-family="system-ui, sans-serif">1</text>
+          <text x="90" y="312" font-size="9" fill="#7B5A50" text-anchor="middle" font-family="system-ui, sans-serif">2</text>
+          <text x="120" y="312" font-size="9" fill="#7B5A50" text-anchor="middle" font-family="system-ui, sans-serif">3</text>
+          <text x="150" y="312" font-size="9" fill="#7B5A50" text-anchor="middle" font-family="system-ui, sans-serif">4</text>
+          <text x="25" y="243" font-size="9" fill="#7B5A50" text-anchor="end" font-family="system-ui, sans-serif">2</text>
+          <text x="25" y="183" font-size="9" fill="#7B5A50" text-anchor="end" font-family="system-ui, sans-serif">4</text>
+          <text x="25" y="123" font-size="9" fill="#7B5A50" text-anchor="end" font-family="system-ui, sans-serif">6</text>
+          <text x="25" y="63" font-size="9" fill="#7B5A50" text-anchor="end" font-family="system-ui, sans-serif">8</text>
+          </svg>
+            </div>
+            <table class="tabla-valores">
+              <tr><th>$x$</th><th>$y$</th><th>$x + 5$</th></tr>
+              <tr><td>$0$</td><td>$5$</td><td>$0 + 5$</td></tr>
+              <tr><td>$1$</td><td>$6$</td><td>$1 + 5$</td></tr>
+              <tr><td>$2$</td><td>$7$</td><td>$2 + 5$</td></tr>
+              <tr><td>$3$</td><td>$8$</td><td>$3 + 5$</td></tr>
+              <tr><td>$4$</td><td>$9$</td><td>$4 + 5$</td></tr>
+            </table>
+          </div>
+          <div>
+            <div class="ej-rotulo">Cálculo integral</div>
+            $$\begin{aligned}
+              \int_{1}^{3} (x+5) \, dx &= \left. \frac{x^2}{2} + 5x \right|_{1}^{3} \\
+              &= \frac{(3)^2}{2} + 5(3) - \left[ \frac{(1)^2}{2} + 5(1) \right] \\
+              &= \frac{9}{2} + 15 - \frac{1}{2} - 5 \\
+              &= \frac{8}{2} + 10 \\
+              &= \mathbf{14}
+            \end{aligned}$$
+            <div class="pill-row">
+              <span class="resultado-pill">$A = 14\ u^2$</span>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -300,19 +312,21 @@
         </div>
         <h2>Ejercicios</h2>
       </div>
+      <p class="ejemplo-enunciado">Encontrar el área bajo la curva en el intervalo indicado.</p>
       <div class="bloques-2">
         <div class="mini-card">
           <div class="mini-card-head">Bloque 1</div>
           <div class="mini-card-body">
-            <div class="ej-line">$\displaystyle \int_{-1}^{4} (x^2 + 5) \, dx$</div>
-            <div class="ej-line">$\displaystyle \int_{2}^{6} (3 - x^2) \, dx$</div>
+            <div class="ej-line">$f(x) = x + 4$ en $[3,\,5]$</div>
+            <div class="ej-line">$f(x) = -x + 3$ en $[2,\,4]$</div>
+            <div class="ej-line">$f(x) = x + 6$ en $[2,\,4]$</div>
           </div>
         </div>
         <div class="mini-card">
           <div class="mini-card-head">Bloque 2</div>
           <div class="mini-card-body">
-            <div class="ej-line">$\displaystyle \int_{5}^{8} (4 + 3x^2) \, dx$</div>
-            <div class="ej-line">$\displaystyle \int_{-2}^{5} (x^2 - 6) \, dx$</div>
+            <div class="ej-line">$f(x) = x + 2$ en $[1,\,4]$</div>
+            <div class="ej-line">$f(x) = -x + 5$ en $[3,\,6]$</div>
           </div>
         </div>
       </div>
@@ -328,34 +342,32 @@
         <span class="chev">▼</span>
       </div>
       <div class="collapsible">
-        <div class="bloques-1">
+        <div class="bloques-2">
           <div class="mini-card">
             <div class="mini-card-head">Bloque 1</div>
             <div class="mini-card-body">
               <div class="sol">
-                <div class="sol-rotulo">Ejercicio 1 — $\displaystyle \int_{-1}^{4} (x^2 + 5) \, dx$</div>
                 $$\begin{aligned}
-                  \Delta x &= \frac{4 - (-1)}{n} = \frac{5}{n} \\
-                  x_i &= -1 + \frac{5}{n}i \\
-                  f(x_i) &= \left( -1 + \frac{5}{n}i \right)^2 + 5 = \frac{25}{n^2}i^2 - \frac{10}{n}i + 6 \\
-                  f(x_i)\Delta x &= \left( \frac{25}{n^2}i^2 - \frac{10}{n}i + 6 \right) \frac{5}{n} = \frac{125}{n^3}i^2 - \frac{50}{n^2}i + \frac{30}{n} \\
-                  \sum_{i=1}^{n} f(x_i)\Delta x &= \frac{125}{n^3}\left( \frac{n^3}{3} + \frac{n^2}{2} + \frac{n}{6} \right) - \frac{50}{n^2}\left( \frac{n^2}{2} + \frac{n}{2} \right) + \frac{30}{n}(n) \\
-                  &= \frac{125}{3} + \frac{125}{2n} + \frac{125}{6n^2} - 25 - \frac{25}{n} + 30 \\
-                  &= \frac{140}{3} + \frac{125}{6n^2} + \frac{75}{2n} \\
-                  \lim_{n \to \infty} \sum_{i=1}^{n} f(x_i)\Delta x &= \mathbf{\frac{140}{3}} \approx \mathbf{46.67}
+                  \int_{3}^{5} (x+4) \, dx &= \left. \frac{x^2}{2} + 4x \right|_{3}^{5} \\
+                  &= \frac{(5)^2}{2} + 4(5) - \left[ \frac{(3)^2}{2} + 4(3) \right] \\
+                  &= \frac{25}{2} + 20 - \frac{9}{2} - 12 \\
+                  &= \frac{16}{2} + 8 = \mathbf{16}
                 \end{aligned}$$
               </div>
               <div class="sol">
-                <div class="sol-rotulo">Ejercicio 2 — $\displaystyle \int_{2}^{6} (3 - x^2) \, dx$</div>
                 $$\begin{aligned}
-                  \Delta x &= \frac{6 - 2}{n} = \frac{4}{n} \\
-                  x_i &= 2 + \frac{4}{n}i \\
-                  f(x_i) &= 3 - \left( 2 + \frac{4}{n}i \right)^2 = -\frac{16}{n^2}i^2 - \frac{16}{n}i - 1 \\
-                  f(x_i)\Delta x &= \left( -\frac{16}{n^2}i^2 - \frac{16}{n}i - 1 \right) \frac{4}{n} = -\frac{64}{n^3}i^2 - \frac{64}{n^2}i - \frac{4}{n} \\
-                  \sum_{i=1}^{n} f(x_i)\Delta x &= -\frac{64}{n^3}\left( \frac{n^3}{3} + \frac{n^2}{2} + \frac{n}{6} \right) - \frac{64}{n^2}\left( \frac{n^2}{2} + \frac{n}{2} \right) - \frac{4}{n}(n) \\
-                  &= -\frac{64}{3} - \frac{32}{n} - \frac{32}{3n^2} - 32 - \frac{32}{n} - 4 \\
-                  &= -\frac{172}{3} - \frac{32}{3n^2} - \frac{64}{n} \\
-                  \lim_{n \to \infty} \sum_{i=1}^{n} f(x_i)\Delta x &= \mathbf{-\frac{172}{3}} \approx \mathbf{-57.33}
+                  \int_{2}^{4} (-x+3) \, dx &= \left. -\frac{x^2}{2} + 3x \right|_{2}^{4} \\
+                  &= -\frac{(4)^2}{2} + 3(4) - \left[ -\frac{(2)^2}{2} + 3(2) \right] \\
+                  &= -\frac{16}{2} + 12 + \frac{4}{2} - 6 \\
+                  &= -\frac{12}{2} + 6 = \mathbf{0}
+                \end{aligned}$$
+              </div>
+              <div class="sol">
+                $$\begin{aligned}
+                  \int_{2}^{4} (x+6) \, dx &= \left. \frac{x^2}{2} + 6x \right|_{2}^{4} \\
+                  &= \frac{(4)^2}{2} + 6(4) - \left[ \frac{(2)^2}{2} + 6(2) \right] \\
+                  &= \frac{16}{2} + 24 - \frac{4}{2} - 12 \\
+                  &= \frac{12}{2} + 12 = \mathbf{18}
                 \end{aligned}$$
               </div>
             </div>
@@ -364,29 +376,19 @@
             <div class="mini-card-head">Bloque 2</div>
             <div class="mini-card-body">
               <div class="sol">
-                <div class="sol-rotulo">Ejercicio 3 — $\displaystyle \int_{5}^{8} (4 + 3x^2) \, dx$</div>
                 $$\begin{aligned}
-                  \Delta x &= \frac{8 - 5}{n} = \frac{3}{n} \\
-                  x_i &= 5 + \frac{3}{n}i \\
-                  f(x_i) &= 4 + 3\left( 5 + \frac{3}{n}i \right)^2 = \frac{27}{n^2}i^2 + \frac{90}{n}i + 79 \\
-                  f(x_i)\Delta x &= \left( \frac{27}{n^2}i^2 + \frac{90}{n}i + 79 \right) \frac{3}{n} = \frac{81}{n^3}i^2 + \frac{270}{n^2}i + \frac{237}{n} \\
-                  \sum_{i=1}^{n} f(x_i)\Delta x &= \frac{81}{n^3}\left( \frac{n^3}{3} + \frac{n^2}{2} + \frac{n}{6} \right) + \frac{270}{n^2}\left( \frac{n^2}{2} + \frac{n}{2} \right) + \frac{237}{n}(n) \\
-                  &= 27 + \frac{81}{2n} + \frac{27}{2n^2} + 135 + \frac{135}{n} + 237 \\
-                  &= 399 + \frac{27}{2n^2} + \frac{351}{2n} \\
-                  \lim_{n \to \infty} \sum_{i=1}^{n} f(x_i)\Delta x &= \mathbf{399}
+                  \int_{1}^{4} (x+2) \, dx &= \left. \frac{x^2}{2} + 2x \right|_{1}^{4} \\
+                  &= \frac{(4)^2}{2} + 2(4) - \left[ \frac{(1)^2}{2} + 2(1) \right] \\
+                  &= \frac{16}{2} + 8 - \frac{1}{2} - 2 \\
+                  &= \frac{15}{2} + 6 = \mathbf{\frac{27}{2}}
                 \end{aligned}$$
               </div>
               <div class="sol">
-                <div class="sol-rotulo">Ejercicio 4 — $\displaystyle \int_{-2}^{5} (x^2 - 6) \, dx$</div>
                 $$\begin{aligned}
-                  \Delta x &= \frac{5 - (-2)}{n} = \frac{7}{n} \\
-                  x_i &= -2 + \frac{7}{n}i \\
-                  f(x_i) &= \left( -2 + \frac{7}{n}i \right)^2 - 6 = \frac{49}{n^2}i^2 - \frac{28}{n}i - 2 \\
-                  f(x_i)\Delta x &= \left( \frac{49}{n^2}i^2 - \frac{28}{n}i - 2 \right) \frac{7}{n} = \frac{343}{n^3}i^2 - \frac{196}{n^2}i - \frac{14}{n} \\
-                  \sum_{i=1}^{n} f(x_i)\Delta x &= \frac{343}{n^3}\left( \frac{n^3}{3} + \frac{n^2}{2} + \frac{n}{6} \right) - \frac{196}{n^2}\left( \frac{n^2}{2} + \frac{n}{2} \right) - \frac{14}{n}(n) \\
-                  &= \frac{343}{3} + \frac{343}{2n} + \frac{343}{6n^2} - 98 - \frac{98}{n} - 14 \\
-                  &= \frac{7}{3} + \frac{343}{6n^2} + \frac{147}{2n} \\
-                  \lim_{n \to \infty} \sum_{i=1}^{n} f(x_i)\Delta x &= \mathbf{\frac{7}{3}} \approx \mathbf{2.33}
+                  \int_{3}^{6} (-x+5) \, dx &= \left. -\frac{x^2}{2} + 5x \right|_{3}^{6} \\
+                  &= -\frac{(6)^2}{2} + 5(6) - \left[ -\frac{(3)^2}{2} + 5(3) \right] \\
+                  &= -\frac{36}{2} + 30 + \frac{9}{2} - 15 \\
+                  &= -\frac{27}{2} + 15 = \mathbf{\frac{3}{2}}
                 \end{aligned}$$
               </div>
             </div>
@@ -409,33 +411,33 @@
           <div class="mini-card">
             <div class="mini-card-head">Bloque 1</div>
             <div class="mini-card-body">
-              <div class="ej-line">$\displaystyle \int_{1}^{3} (x^2 + 2) \, dx$</div>
-              <div class="ej-line">$\displaystyle \int_{-1}^{2} (4 - x^2) \, dx$</div>
-              <div class="ej-line">$\displaystyle \int_{0}^{4} (2x^2 + 1) \, dx$</div>
+              <div class="ej-line">$f(x) = x + 3$ en $[1,\,5]$</div>
+              <div class="ej-line">$f(x) = -x + 4$ en $[1,\,3]$</div>
+              <div class="ej-line">$f(x) = x + 1$ en $[2,\,6]$</div>
             </div>
           </div>
           <div class="mini-card">
             <div class="mini-card-head">Bloque 2</div>
             <div class="mini-card-body">
-              <div class="ej-line">$\displaystyle \int_{-2}^{2} (3x^2 - 5) \, dx$</div>
-              <div class="ej-line">$\displaystyle \int_{1}^{5} (10 - 2x^2) \, dx$</div>
-              <div class="ej-line">$\displaystyle \int_{-3}^{1} (x^2 + 3) \, dx$</div>
+              <div class="ej-line">$f(x) = -x + 6$ en $[2,\,5]$</div>
+              <div class="ej-line">$f(x) = x + 7$ en $[0,\,3]$</div>
+              <div class="ej-line">$f(x) = -x + 2$ en $[-1,\,1]$</div>
             </div>
           </div>
           <div class="mini-card">
             <div class="mini-card-head">Bloque 3</div>
             <div class="mini-card-body">
-              <div class="ej-line">$\displaystyle \int_{2}^{5} (5 + 2x^2) \, dx$</div>
-              <div class="ej-line">$\displaystyle \int_{-1}^{3} (x^2 - 4) \, dx$</div>
-              <div class="ej-line">$\displaystyle \int_{0}^{3} (6 - 3x^2) \, dx$</div>
+              <div class="ej-line">$f(x) = x + 8$ en $[1,\,4]$</div>
+              <div class="ej-line">$f(x) = -x + 7$ en $[3,\,5]$</div>
+              <div class="ej-line">$f(x) = x + 3$ en $[2,\,5]$</div>
             </div>
           </div>
           <div class="mini-card">
             <div class="mini-card-head">Bloque 4</div>
             <div class="mini-card-body">
-              <div class="ej-line">$\displaystyle \int_{-4}^{0} (2x^2 + 3) \, dx$</div>
-              <div class="ej-line">$\displaystyle \int_{3}^{6} (x^2 - 1) \, dx$</div>
-              <div class="ej-line">$\displaystyle \int_{-2}^{1} (8 - x^2) \, dx$</div>
+              <div class="ej-line">$f(x) = -x + 8$ en $[2,\,6]$</div>
+              <div class="ej-line">$f(x) = x + 5$ en $[1,\,4]$</div>
+              <div class="ej-line">$f(x) = -x + 9$ en $[4,\,7]$</div>
             </div>
           </div>
         </div>
@@ -444,8 +446,8 @@
 
     <!-- ══════════ NAVEGACIÓN ══════════ -->
     <div class="topic-nav-btns">
-      <a href="integrales-definidas.html" class="btn-anterior">← Integrales definidas</a>
-      <a href="area-bajo-curva-p1.html" class="btn-siguiente">Área bajo la curva (P1) →</a>
+      <a href="suma-riemann.html" class="btn-anterior">← Suma de Riemann</a>
+      <a href="area-bajo-curva-p2.html" class="btn-siguiente">Área bajo la curva (P2) →</a>
     </div>
 
   </main>

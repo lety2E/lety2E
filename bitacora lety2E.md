@@ -5,6 +5,23 @@
 
 ---
 
+## 2026-09-01 (10)
+- **Temas 16 y 17:** `area-bajo-curva-p1.html` (bajo una recta) y `area-bajo-curva-p2.html`
+  (bajo una parábola). Ambos con tabulación, gráfica y resolución analítica.
+- **Primeras gráficas SVG de Mate 5.** Las del doc venían en TikZ, que no sirve en el sitio;
+  se rehicieron como SVG inline con el helper `svgplot.py` del scratchpad, respetando la paleta
+  de `CLAUDE.md` (cuadrícula `#E0C4BC`, ejes `#7B5A50`, curva magenta, puntos `#1A0828`,
+  región con magenta al 15%) y la regla de 1 cuadro = 1 unidad.
+- **Truco de verificación que sí sirve:** en vez de mirar la captura —el panel no permite
+  recortar—, se mide por JS la distancia de cada punto marcado al trazo de la curva. Así se
+  cachó que en la parábola el punto $(0,11)$ quedaba a 59px de la curva, porque el dominio del
+  trazo empezaba en $x=0.4$. Ahora los seis puntos caen sobre la curva (menos de 1.7px).
+- **Ojo con los heredoc de bash al armar estas páginas**: sin comillas en el delimitador, un
+  `$[a,\,b]` se interpreta como expresión aritmética y revienta. Los cuerpos van con
+  `<<'BODYEOF'` (comillado) y la gráfica se inyecta después sobre un marcador `@@GRAFICA@@`.
+- Verificadas a mano las 5 resoluciones de P1 y las 5 de P2, más los 2 ejemplos: todas correctas.
+- Verificado: cero errores de KaTeX, nada se sale.
+
 ## 2026-09-01 (9)
 - **Temas 14 y 15:** `integrales-definidas.html` (regla de Barrow) y `suma-riemann.html`
   (la integral como límite de sumas de rectángulos, con el desarrollo algebraico completo).
