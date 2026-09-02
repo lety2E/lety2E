@@ -5,6 +5,20 @@
 
 ---
 
+## 2026-09-01 (5)
+- **Nace `math/matematicas-5/regla-cociente-p1.html` — Tema 7.** Sin video (no está en el CSV).
+  Apunte con las dos fórmulas ($f = u/v$ y su derivada), el ejemplo del doc, 2 bloques de 3
+  ejercicios con sus resoluciones y **3 bloques de 6 extras**.
+- Primera página del sitio que usa **`.bloques-3`** (los extras vienen en tres bloques en el doc,
+  y en 2 columnas quedaba uno huérfano). Colapsa a 2 columnas abajo de 980px y a 1 abajo de 700.
+- `.ej-line` con `line-height: 2.6` en vez de 2.4: aquí cada ejercicio es una fracción apilada
+  (numerador y denominador), que pide más aire que una raíz.
+- Verificadas a mano el ejemplo y las 6 resoluciones: todas correctas. Estas son las más largas
+  del curso hasta ahora (cuatro pasos con la resta cruzada expandida).
+- Verificado en 375×812 y en 1200px: **nada se sale** — la fórmula más ancha mide 245px contra
+  341px de caja en móvil, y en escritorio el peor caso queda con 13px de holgura. Cero errores
+  de KaTeX.
+
 ## 2026-09-01 (4)
 - **Nace `math/matematicas-5/regla-producto-p2.html` — Tema 6.** La misma regla del producto,
   ahora con trigonométricas, logaritmos, exponenciales y raíces. Sin video (no está en el CSV).
