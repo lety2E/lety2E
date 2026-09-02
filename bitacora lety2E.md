@@ -5,6 +5,33 @@
 
 ---
 
+## 2026-09-01 (11) — Matemáticas 5 queda completo
+- **Temas 18, 19 y 20:** `puntos-criticos.html` (criterio de la segunda derivada),
+  `optimizacion-areas.html` (área máxima de un rectángulo con perímetro dado) y
+  `recta-tangente.html` (el más grande del curso: 6 desarrollos, 12 tablas de valores y
+  6 gráficas). Ninguno tiene video.
+- **Con esto el índice de Mate 5 llega a 20 cards** y la cadena anterior/siguiente va completa
+  de reglas básicas hasta recta tangente. Verificado por script: 0 enlaces rotos, 0 desfases
+  entre el orden del índice, la cadena prev/next y el número de Tema de cada página.
+- **Las figuras de optimización** (el rectángulo con lados $y$ y $x+n$) son SVG hechos con
+  `rect.py`; llevan clase `.figura-rect` para que no hereden el `max-width: 260px` de las
+  gráficas y salgan gigantes.
+- **En recta tangente la recta va en turquesa (`#00A896`) y la parábola en magenta**, para que
+  se distingan de un vistazo; el punto de tangencia va en morado y más grande. Las 6 gráficas,
+  las 12 tablas y los 6 desarrollos se generan con `gen_tangente.py` a partir de los parámetros
+  $(a, h, k, m, b, x_1, y_1)$ de cada caso — nada se tecleó a mano, así que las tablas no
+  pueden desincronizarse de la gráfica.
+- Verificación de las gráficas por geometría, no por captura: se mide que el punto de tangencia
+  caiga sobre la recta (distancia 0 en las 6) y sobre la parábola (menos de 1.6px).
+- Verificadas a mano las resoluciones de los tres temas: 4 de puntos críticos, 4 de
+  optimización y 5 de recta tangente. Todas correctas.
+- Verificado en 375×812: cero errores de KaTeX, nada se sale, ninguna tabla desborda.
+
+**Pendiente para Lety:** el orden del índice es el orden en que se publicaron (el del doc), no
+el didáctico. Si quiere moverlos —historia y derivada por definición al principio, velocidad
+media entre las aplicaciones— es una pasada aparte que toca las 20 cards, los 20 números de
+Tema y los 38 botones de la cadena.
+
 ## 2026-09-01 (10)
 - **Temas 16 y 17:** `area-bajo-curva-p1.html` (bajo una recta) y `area-bajo-curva-p2.html`
   (bajo una parábola). Ambos con tabulación, gráfica y resolución analítica.

@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Recta tangente — Matemáticas 5 — LetyMath</title>
+  <meta name="description" content="Ecuación de la recta tangente a una parábola: pendiente por derivada, punto-pendiente, tablas y gráfica." />
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../../favicon.ico">
+  <link rel="stylesheet" href="../../style.css">
+  <link rel="stylesheet" href="../../assets/katex/katex.min.css" />
+  <script defer src="../../assets/katex/katex.min.js"></script>
+  <script defer src="../../assets/katex/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body, {
+      delimiters: [
+        {left:'$$', right:'$$', display:true},
+        {left:'$', right:'$', display:false}
+      ]
+    });"></script>
+
+  <style>
+    .topic-tag {
+      display: inline-flex; align-items: center; gap: .35rem;
+      padding: .22rem .75rem; border-radius: 99px;
+      background: var(--accent-light); color: var(--accent);
+      font-size: .78rem; font-weight: 700; letter-spacing: .03em;
+      margin-bottom: .55rem;
+    }
+    .topic-tag::before {
+      content: ''; width: 7px; height: 7px; border-radius: 50%;
+      background: var(--accent); display: inline-block;
+    }
+
+    .section-block { margin-bottom: 2.5rem; }
+    .section-block:last-child { margin-bottom: 0; }
+
+    .sec-head {
+      display: flex; align-items: center; gap: .65rem;
+      margin-bottom: 1.1rem;
+    }
+    .sec-head h2 { margin: 0; font-size: 1.2rem; line-height: 1; }
+    .sec-icon {
+      width: 30px; height: 30px; border-radius: 8px;
+      display: grid; place-items: center; flex-shrink: 0;
+      background: var(--accent);
+    }
+    .sec-icon svg { width: 15px; height: 15px; stroke: #fff; fill: none; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+
+    .sec-toggle {
+      display: flex; align-items: center; gap: .65rem;
+      cursor: pointer; user-select: none;
+      padding: .8rem 0; margin: 0 0 .4rem;
+    }
+    .sec-toggle h2 { margin: 0; font-size: 1.2rem; line-height: 1; }
+    .sec-toggle .chev {
+      margin-left: auto; font-size: .75rem; color: var(--text-3);
+      transition: transform .25s;
+    }
+    .sec-toggle.open .chev { transform: rotate(180deg); }
+
+    .collapsible {
+      max-height: 0; overflow: hidden;
+      transition: max-height .4s ease, padding .3s ease;
+      padding: 0;
+    }
+    .collapsible.show { max-height: 20000px; padding: .8rem 0; }
+
+    /* Video */
+    .video-single { max-width: 640px; margin: 0 auto; }
+    .videos-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    @media (max-width: 700px) { .videos-row { grid-template-columns: 1fr; } }
+    .video-label {
+      font-family: var(--font-mono, monospace); font-size: .68rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .07em; color: var(--text-3); margin-bottom: .4rem;
+    }
+    .video-wrapper {
+      position: relative; padding-bottom: 56.25%; height: 0;
+      overflow: hidden; border-radius: var(--r-md); background: #000;
+    }
+    .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+
+    /* Apuntes */
+    .regla-unica {
+      background: var(--bg-card); border: 1.5px solid var(--border);
+      border-radius: var(--r-md); padding: 1.4rem 1.5rem;
+      text-align: center; color: var(--text);
+    }
+    .regla-unica p { margin: 0 0 .4rem; line-height: 1.75; color: var(--text-2); font-size: .95rem; }
+    .regla-unica p:not(:first-child) { margin-top: .6rem; }
+    .reglas-grid { display: grid; grid-template-columns: 1fr 1fr; gap: .85rem; margin: 1rem 0; }
+    @media (max-width: 480px) { .reglas-grid { grid-template-columns: 1fr; } }
+    .regla-card {
+      background: var(--bg-card); border: 1.5px solid var(--border);
+      border-radius: var(--r-sm); padding: .85rem;
+    }
+    .regla-card-title { font-weight: 700; font-size: .85rem; margin-bottom: .4rem; color: var(--course-1); }
+    .regla-card-body { font-size: .82rem; color: var(--text-2); line-height: 1.65; }
+
+    /* Pills de fórmula */
+    .formula-pill {
+      display: inline-block; background: #FFF1A8;
+      padding: .25rem .75rem; border-radius: 99px;
+      font-size: .9rem; font-weight: 600; color: var(--text);
+      margin: .35rem 0; border: 1.5px solid #F5DC6A;
+    }
+    .formula-pill.salmon { background: #FFD9B8; border-color: #F5B584; }
+    .resultado-pill {
+      display: inline-block; background: #FFD0E5;
+      padding: .25rem .75rem; border-radius: 99px;
+      font-size: .9rem; font-weight: 700; color: var(--M);
+      margin: .35rem 0; border: 1.5px solid #FF8AC0;
+    }
+    .pill-row { text-align: center; margin: .2rem 0 .4rem; }
+
+    /* Ejemplo */
+    .ejemplo-section { margin: 2rem 0 2.5rem; }
+    .ejemplo-head {
+      display: flex; align-items: center; gap: .65rem;
+      margin-bottom: 1rem;
+    }
+    .ejemplo-head h3 {
+      margin: 0; font-family: var(--font-display);
+      font-size: 1.2rem; line-height: 1;
+      color: var(--M); font-style: italic;
+    }
+    .ejemplo-block {
+      padding: 1.8rem 1.5rem;
+      background: var(--bg-card);
+      border: 1.5px solid var(--border);
+      border-radius: var(--r-md);
+      color: var(--text);
+      text-align: center;
+    }
+    .ejemplo-block strong { color: var(--M); font-weight: 700; }
+    .ejemplo-enunciado { margin: 0 0 .6rem; line-height: 1.75; font-size: .95rem; color: var(--text-2); }
+    .ejemplo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem 2rem; }
+    @media (max-width: 860px) { .ejemplo-grid { grid-template-columns: 1fr; } }
+    .ejemplo-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem 2rem; }
+    @media (max-width: 860px) { .ejemplo-grid-3 { grid-template-columns: 1fr; } }
+    .ejemplo-item { text-align: center; }
+    .ejemplo-item .ej-rotulo {
+      font-size: .72rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .06em; color: var(--text-3); margin-bottom: .2rem;
+    }
+
+    /* Mini card (bloque) */
+    .mini-card {
+      background: var(--bg-card); border: 1.5px solid var(--border);
+      border-radius: var(--r-md); overflow: hidden;
+    }
+    .mini-card-head {
+      padding: .4rem .8rem; background: var(--course-1);
+      font-family: var(--font-display); font-size: .85rem; color: #fff; font-weight: 700;
+    }
+    .mini-card-body {
+      padding: .8rem 1rem;
+      font-size: .9rem; line-height: 1.6; color: var(--text);
+    }
+    .mini-card-body .ej-line {
+      padding: .7rem 0;
+      border-bottom: 1px solid var(--border-s);
+      line-height: 2.6; /* radical / fraccion-safe */
+    }
+    .mini-card-body .ej-line:last-child { border-bottom: none; padding-bottom: .25rem; }
+    .mini-card-body .ej-line:first-child { padding-top: .25rem; }
+    .mini-card-body .sol {
+      padding: .4rem 0 .6rem;
+      border-bottom: 1px solid var(--border-s);
+      text-align: center;
+    }
+    .mini-card-body .sol:last-child { border-bottom: none; padding-bottom: .1rem; }
+    .sol-rotulo {
+      font-size: .75rem; font-weight: 700; color: var(--course-1);
+      text-align: left; margin-bottom: .1rem;
+    }
+
+    /* Grid de bloques */
+    .bloques-1 { display: grid; grid-template-columns: 1fr; gap: 1.2rem; }
+    .bloques-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2rem; }
+    @media (max-width: 700px) { .bloques-2 { grid-template-columns: 1fr; } }
+    .bloques-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
+    @media (max-width: 980px) { .bloques-3 { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 700px) { .bloques-3 { grid-template-columns: 1fr; } }
+
+    /* Graficas SVG */
+    .grafica-wrap { display: flex; justify-content: center; margin: 1rem 0; }
+    .grafica-wrap svg { max-width: 260px; max-height: 380px; height: auto; }
+    .graficas-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; align-items: start; }
+    @media (max-width: 700px) { .graficas-row { grid-template-columns: 1fr; } }
+
+    .grafica-wrap svg.figura-rect { max-width: 150px; max-height: 90px; }
+    .mini-card-body .ej-line .grafica-wrap { margin: .2rem 0 .4rem; }
+
+    /* Tabla de valores */
+    .tabla-valores { width: 100%; border-collapse: collapse; font-size: .85rem; margin: .6rem 0; }
+    .tabla-valores th, .tabla-valores td {
+      border: 1px solid var(--border); padding: .35rem .5rem; text-align: center;
+    }
+    .tabla-valores th { background: var(--accent-light); color: var(--accent); font-weight: 700; }
+
+    /* Navegacion */
+    .topic-nav-btns {
+      display: flex; justify-content: space-between; gap: 1rem;
+      margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border);
+    }
+    .topic-nav-btns.solo-siguiente { justify-content: flex-end; }
+    .btn-anterior, .btn-siguiente {
+      display: inline-flex; align-items: center; gap: .5rem;
+      padding: .65rem 1.4rem; border-radius: 99px;
+      font-weight: 700; font-size: .9rem; transition: background .2s, transform .18s;
+    }
+    .btn-anterior {
+      background: transparent; color: var(--accent);
+      border: 2px solid var(--accent);
+    }
+    .btn-anterior:hover { background: var(--accent-light); transform: translateX(-3px); }
+    .btn-siguiente { background: var(--accent); color: #fff; }
+    .btn-siguiente:hover { background: var(--M); color: #fff; transform: translateX(3px); }
+  </style>
+</head>
+<body data-section="math">
+  <main class="topic-content">
+
+    <header class="topic-header">
+      <p class="breadcrumb">
+        <a href="../index.html">Inicio</a> ›
+        <a href="index.html">Matemáticas 5</a> ›
+        Recta tangente
+      </p>
+      <div class="topic-tag">Matemáticas 5 · Tema 20</div>
+      <h1>Recta tangente</h1>
+    </header>
+
+    <!-- ══════════ APUNTES ══════════ -->
+    <section class="section-block">
+      <div class="sec-head">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+        </div>
+        <h2>Apuntes</h2>
+      </div>
+      <div class="regla-unica">
+        <p>La ecuación de la recta tangente a una curva $y = g(x)$ en un punto $(x_1,\,y_1)$ se obtiene con la ecuación punto-pendiente:</p>
+        $$y - y_1 = m(x - x_1)$$
+        <p>donde la pendiente $m$ es la derivada de la función evaluada en la abscisa del punto de tangencia:</p>
+        $$g'(x_1) = m$$
+        <p>Para graficar con detalle la parábola y su recta tangente se construyen tablas de valores con puntos simétricos respecto al vértice. En la forma ordinaria $g(x) = (x-h)^2 + k$, el vértice está directamente en $(h,\,k)$.</p>
+      </div>
+    </section>
+
+    <!-- ══════════ EJEMPLO ══════════ -->
+    <section class="section-block ejemplo-section">
+      <div class="ejemplo-head">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        </div>
+        <h3>Ejemplo</h3>
+      </div>
+      <div class="ejemplo-block" style="text-align:left;">
+        <p class="ejemplo-enunciado" style="text-align:center;">Encuentra la ecuación de la recta tangente en el punto $(-3,\,2)$ de la función $g(x) = (x+1)^2-2$.</p>
+        <div class="tan-bloque">
+                <div class="ej-rotulo">Desarrollo algebraico</div>
+                $$\begin{aligned}
+                  
+g'(x) &= 2(x + 1)^1(1) \\                  g'(x) &= 2x + 2 \\                  g'(-3) &= 2(-3) + 2 \\                  g'(-3) &= -6 + 2 \\                  g'(-3) &= -4 \\                  m &= -4 \\                  y - (2) &= -4(x - (-3)) \\                  y - 2 &= -4(x + 3) \\                  y - 2 &= -4x - 12 \\                  y &= -4x - 12 + 2 \\                  \mathbf{y} &= \mathbf{-4x - 10}
+                \end{aligned}$$
+                <div class="pill-row"><span class="resultado-pill">$y = -4x - 10$</span></div>
+                <div class="graficas-row" style="margin-top:1rem;">
+                  <div>
+                    <div class="ej-rotulo">Parábola $g(x) = (x + 1)^2 - 2$ — vértice $(-1,\,-2)$</div>
+                    <table class="tabla-valores"><tr><th>$x$</th><th>$g(x)$</th><th>$(x + 1)^2 - 2$</th></tr><tr><td>$-3$</td><td>$2$</td><td>$(-3 + 1)^2 - 2 = 2$</td></tr><tr><td>$-2$</td><td>$-1$</td><td>$(-2 + 1)^2 - 2 = -1$</td></tr><tr><td>$-1$</td><td>$-2$</td><td>$(-1 + 1)^2 - 2 = -2$</td></tr><tr><td>$0$</td><td>$-1$</td><td>$(0 + 1)^2 - 2 = -1$</td></tr><tr><td>$1$</td><td>$2$</td><td>$(1 + 1)^2 - 2 = 2$</td></tr></table>
+                    <div class="ej-rotulo" style="margin-top:.8rem;">Recta tangente $y = -4x - 10$ — en $(-3,\,2)$</div>
+                    <table class="tabla-valores"><tr><th>$x$</th><th>$y$</th><th>$-4x - 10$</th></tr><tr><td>$-5$</td><td>$10$</td><td>$-4(-5) - 10 = 10$</td></tr><tr><td>$-4$</td><td>$6$</td><td>$-4(-4) - 10 = 6$</td></tr><tr><td>$-3$</td><td>$2$</td><td>$-4(-3) - 10 = 2$</td></tr><tr><td>$-2$</td><td>$-2$</td><td>$-4(-2) - 10 = -2$</td></tr><tr><td>$-1$</td><td>$-6$</td><td>$-4(-1) - 10 = -6$</td></tr></table>
+                  </div>
+                  <div>
+                    <div class="ej-rotulo">Representación gráfica</div>
+                    <div class="grafica-wrap">
+                      <svg viewBox="0 0 168 378" xmlns="http://www.w3.org/2000/svg" role="img">
+          <g stroke="#E0C4BC" stroke-width="0.5"><line x1="0" y1="0" x2="0" y2="378"/><line x1="21" y1="0" x2="21" y2="378"/><line x1="42" y1="0" x2="42" y2="378"/><line x1="63" y1="0" x2="63" y2="378"/><line x1="84" y1="0" x2="84" y2="378"/><line x1="105" y1="0" x2="105" y2="378"/><line x1="126" y1="0" x2="126" y2="378"/><line x1="147" y1="0" x2="147" y2="378"/><line x1="168" y1="0" x2="168" y2="378"/><line x1="0" y1="378" x2="168" y2="378"/><line x1="0" y1="357" x2="168" y2="357"/><line x1="0" y1="336" x2="168" y2="336"/><line x1="0" y1="315" x2="168" y2="315"/><line x1="0" y1="294" x2="168" y2="294"/><line x1="0" y1="273" x2="168" y2="273"/><line x1="0" y1="252" x2="168" y2="252"/><line x1="0" y1="231" x2="168" y2="231"/><line x1="0" y1="210" x2="168" y2="210"/><line x1="0" y1="189" x2="168" y2="189"/><line x1="0" y1="168" x2="168" y2="168"/><line x1="0" y1="147" x2="168" y2="147"/><line x1="0" y1="126" x2="168" y2="126"/><line x1="0" y1="105" x2="168" y2="105"/><line x1="0" y1="84" x2="168" y2="84"/><line x1="0" y1="63" x2="168" y2="63"/><line x1="0" y1="42" x2="168" y2="42"/><line x1="0" y1="21" x2="168" y2="21"/><line x1="0" y1="0" x2="168" y2="0"/></g>
+          <g stroke="#7B5A50" stroke-width="1.2"><line x1="0" y1="231" x2="168" y2="231"/><line x1="126" y1="0" x2="126" y2="378"/></g>
+          <polyline points="26.7,-18.98 27.67,-11.78 28.64,-4.67 29.61,2.35 30.58,9.28 31.55,16.12 32.52,22.87 33.49,29.53 34.47,36.09 35.44,42.57 36.41,48.96 37.38,55.26 38.35,61.47 39.32,67.59 40.29,73.62 41.27,79.56 42.24,85.41 43.21,91.18 44.18,96.85 45.15,102.43 46.12,107.92 47.09,113.32 48.06,118.63 49.03,123.85 50.01,128.99 50.98,134.03 51.95,138.98 52.92,143.84 53.89,148.61 54.86,153.3 55.83,157.89 56.8,162.39 57.78,166.81 58.75,171.13 59.72,175.36 60.69,179.51 61.66,183.56 62.63,187.52 63.6,191.4 64.57,195.18 65.55,198.88 66.52,202.48 67.49,206.0 68.46,209.42 69.43,212.76 70.4,216.0 71.37,219.16 72.34,222.22 73.32,225.2 74.29,228.08 75.26,230.88 76.23,233.59 77.2,236.2 78.17,238.73 79.14,241.16 80.11,243.51 81.09,245.77 82.06,247.94 83.03,250.01 84.0,252.0 84.97,253.9 85.94,255.71 86.91,257.42 87.89,259.05 88.86,260.59 89.83,262.04 90.8,263.4 91.77,264.67 92.74,265.84 93.71,266.93 94.68,267.93 95.66,268.84 96.63,269.66 97.6,270.39 98.57,271.03 99.54,271.58 100.51,272.04 101.48,272.41 102.45,272.69 103.42,272.88 104.4,272.98 105.37,272.99 106.34,272.91 107.31,272.75 108.28,272.49 109.25,272.14 110.22,271.7 111.19,271.17 112.17,270.55 113.14,269.85 114.11,269.05 115.08,268.16 116.05,267.18 117.02,266.12 117.99,264.96 118.97,263.71 119.94,262.38 120.91,260.95 121.88,259.43 122.85,257.83 123.82,256.13 124.79,254.35 125.76,252.47 126.73,250.5 127.71,248.45 128.68,246.3 129.65,244.07 130.62,241.74 131.59,239.33 132.56,236.82 133.53,234.23 134.5,231.55 135.48,228.77 136.45,225.91 137.42,222.95 138.39,219.91 139.36,216.78 140.33,213.55 141.3,210.24 142.27,206.84 143.25,203.34 144.22,199.76 145.19,196.09 146.16,192.33 147.13,188.47 148.1,184.53 149.07,180.5 150.05,176.38 151.02,172.17 151.99,167.87 152.96,163.47 153.93,158.99 154.9,154.42 155.87,149.76 156.84,145.01 157.81,140.17 158.79,135.24 159.76,130.22 160.73,125.11 161.7,119.91" fill="none" stroke="#FF00AA" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
+          <line x1="6.3" y1="-37.8" x2="161.7" y2="583.8" stroke="#00A896" stroke-width="2"/>
+          <circle cx="63" cy="189" r="2.6" fill="#1A0828"/>
+          <circle cx="84" cy="252" r="2.6" fill="#1A0828"/>
+          <circle cx="105" cy="273" r="2.6" fill="#1A0828"/>
+          <circle cx="126" cy="252" r="2.6" fill="#1A0828"/>
+          <circle cx="147" cy="189" r="2.6" fill="#1A0828"/>
+          <circle cx="63" cy="189" r="4.2" fill="#4A0080"/>
+          <text x="0" y="243" font-size="9" fill="#7B5A50" text-anchor="middle" font-family="system-ui, sans-serif">-6</text>
+          <text x="42" y="243" font-size="9" fill="#7B5A50" text-anchor="middle" font-family="system-ui, sans-serif">-4</text>
+          <text x="84" y="243" font-size="9" fill="#7B5A50" text-anchor="middle" font-family="system-ui, sans-serif">-2</text>
+          <text x="168" y="243" font-size="9" fill="#7B5A50" text-anchor="middle" font-family="system-ui, sans-serif">2</text>
+          <text x="121" y="360" font-size="9" fill="#7B5A50" text-anchor="end" font-family="system-ui, sans-serif">-6</text>
+          <text x="121" y="318" font-size="9" fill="#7B5A50" text-anchor="end" font-family="system-ui, sans-serif">-4</text>
+          <text x="121" y="276" font-size="9" fill="#7B5A50" text-anchor="end" font-family="system-ui, sans-serif">-2</text>
+          <text x="121" y="192" font-size="9" fill="#7B5A50" text-anchor="end" font-family="system-ui, sans-serif">2</text>
+          <text x="121" y="150" font-size="9" fill="#7B5A50" text-anchor="end" font-family="system-ui, sans-serif">4</text>
+          <text x="121" y="108" font-size="9" fill="#7B5A50" text-anchor="end" font-family="system-ui, sans-serif">6</text>
+          <text x="121" y="66" font-size="9" fill="#7B5A50" text-anchor="end" font-family="system-ui, sans-serif">8</text>
+          <text x="121" y="24" font-size="9" fill="#7B5A50" text-anchor="end" font-family="system-ui, sans-serif">10</text>
+          </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+      </div>
+    </section>
+
+    <!-- ══════════ EJERCICIOS (siempre visibles) ══════════ -->
+    <section class="section-block">
+      <div class="sec-head">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+        </div>
+        <h2>Ejercicios</h2>
+      </div>
+      <p class="ejemplo-enunciado">Encuentra la ecuación de la recta tangente en el punto indicado, y grafica la parábola junto con su tangente.</p>
+      <div class="bloques-1">
+        <div class="mini-card">
+          <div class="mini-card-head">Bloque único</div>
+          <div class="mini-card-body">
+            <div class="ej-line">$f(x) = (x+2)^2 - 5$ en el punto $(-3,\,-4)$</div>
+            <div class="ej-line">$f(x) = (x-5)^2 + 2$ en el punto $(6,\,3)$</div>
+            <div class="ej-line">$f(x) = (x-1)^2 + 3$ en el punto $(2,\,4)$</div>
+            <div class="ej-line">$f(x) = -(x-1)^2 + 1$ en el punto $(2,\,0)$</div>
+            <div class="ej-line">$f(x) = -(x-4)^2 + 3$ en el punto $(5,\,2)$</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ RESPUESTAS (colapsable) ══════════ -->
+    <section class="section-block">
+      <div class="sec-toggle" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('show');">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <h2>Respuestas</h2>
+        <span class="chev">▼</span>
+      </div>
+      <div class="collapsible">
+        <div class="bloques-1">
+          <div class="mini-card">
+            <div class="mini-card-head">Bloque único</div>
+            <div class="mini-card-body" style="text-align:left;">
+              <div class="sol">
+                <div class="sol-rotulo">Ejercicio 1 — $f(x) = (x + 2)^2 - 5$ en el punto $(-3,\,-4)$</div>
+                <div class="ej-rotulo">Desarrollo algebraico</div>
+                $$\begin{aligned}
+                  
+f'(x) &= 2(x + 2)^1(1) \\                  f'(x) &= 2x + 4 \\                  f'(-3) &= 2(-3) + 4 \\                  f'(-3) &= -6 + 4 \\                  f'(-3) &= -2 \\                  m &= -2 \\                  y - (-4) &= -2(x - (-3)) \\                  y + 4 &= -2(x + 3) \\                  y + 4 &= -2x - 6 \\                  y &= -2x - 6 - 4 \\                  \mathbf{y} &= \mathbf{-2x - 10}
+                \end{aligned}$$
+                <div class="pill-row"><span class="resultado-pill">$y = -2x - 10$</span></div>
+                <div class="graficas-row" style="margin-top:1rem;">
+                  <div>
+                    <div class="ej-rotulo">Parábola $f(x) = (x + 2)^2 - 5$ — vértice $(-2,\,-5)$</div>
+                    <table class="tabla-valores"><tr><th>$x$</th><th>$f(x)$</th><th>$(x + 2)^2 - 5$</th></tr><tr><td>$-4$</td><td>$-1$</td><td>$(-4 + 2)^2 - 5 = -1$</td></tr><tr><td>$-3$</td><td>$-4$</td><td>$(-3 + 2)^2 - 5 = -4$</td></tr><tr><td>$-2$</td><td>$-5$</td><td>$(-2 + 2)^2 - 5 = -5$</td></tr><tr><td>$-1$</td><td>$-4$</td><td>$(-1 + 2)^2 - 5 = -4$</td></tr><tr><td>$0$</td><td>$-1$</td><td>$(0 + 2)^2 - 5 = -1$</td></tr></table>
+                    <div class="ej-rotulo" style="margin-top:.8rem;">Recta tangente $y = -2x - 10$ — en $(-3,\,-4)$</div>
+                    <table class="tabla-valores"><tr><th>$x$</th><th>$y$</th><th>$-2x - 10$</th></tr><tr><td>$-5$</td><td>$0$</td><td>$-2(-5) - 10 = 0$</td></tr><tr><td>$-4$</td><td>$-2$</td><td>$-2(-4) - 10 = -2$</td></tr><tr><td>$-3$</td><td>$-4$</td><td>$-2(-3) - 10 = -4$</td></tr><tr><td>$-2$</td><td>$-6$</td><td>$-2(-2) - 10 = -6$</td></tr><tr><td>$-1$</td><td>$-8$</td><td>$-2(-1) - 10 = -8$</td></tr></table>
+                  </div>
+                  <div>
+                    <div class="ej-rotulo">Representación gráfica</div>
+                    <div class="grafica-wrap">
+                      <svg viewBox="0 0 210 300" xmlns="http://www.w3.org/2000/svg" role="img">
+          <g stroke="#E0C4BC" stroke-width="0.5"><line x1="0" y1="0" x2="0" y2="300"/><line x1="30" y1="0" x2="30" y2="300"/><line x1="60" y1="0" x2="60" y2="300"/><line x1="90" y1="0" x2="90" y2="300"/><line x1="120" y1="0" x2="120" y2="300"/><line x1="150" y1="0" x2="150" y2="300"/><line x1="180" y1="0" x2="180" y2="300"/><line x1="210" y1="0" x2="210" y2="300"/><line x1="0" y1="300" x2="210" y2="300"/><line x1="0" y1="270" x2="210" y2="270"/><line x1="0" y1="240" x2="210" y2="240"/><line x1="0" y1="210" x2="210" y2="210"/><line x1="0" y1="180" x2="210" y2="180"/><line x1="0" y1="150" x2="210" y2="150"/><line x1="0" y1="120" x2="210" y2="120"/><line x1="0" y1="90" x2="210" y2="90"/><line x1="0" y1="60" x2="210" y2="60"/><line x1="0" y1="30" x2="210" y2="30"/><line x1="0" y1="0" x2="210" y2="0"/></g>
+          <g stroke="#7B5A50" stroke-width="1.2"><line x1="0" y1="30" x2="210" y2="30"/><line x1="180" y1="0" x2="180" y2="300"/></g>
+          <polyline points="41.4,-25.93 42.6,-19.69 43.8,-13.55 45.0,-7.5 46.2,-1.55 47.4,4.31 48.6,10.07 49.8,15.73 51.0,21.3 52.2,26.77 53.4,32.15 54.6,37.43 55.8,42.61 57.0,47.7 58.2,52.69 59.4,57.59 60.6,62.39 61.8,67.09 63.0,71.7 64.2,76.21 65.4,80.63 66.6,84.95 67.8,89.17 69.0,93.3 70.2,97.33 71.4,101.27 72.6,105.11 73.8,108.85 75.0,112.5 76.2,116.05 77.4,119.51 78.6,122.87 79.8,126.13 81.0,129.3 82.2,132.37 83.4,135.35 84.6,138.23 85.8,141.01 87.0,143.7 88.2,146.29 89.4,148.79 90.6,151.19 91.8,153.49 93.0,155.7 94.2,157.81 95.4,159.83 96.6,161.75 97.8,163.57 99.0,165.3 100.2,166.93 101.4,168.47 102.6,169.91 103.8,171.25 105.0,172.5 106.2,173.65 107.4,174.71 108.6,175.67 109.8,176.53 111.0,177.3 112.2,177.97 113.4,178.55 114.6,179.03 115.8,179.41 117.0,179.7 118.2,179.89 119.4,179.99 120.6,179.99 121.8,179.89 123.0,179.7 124.2,179.41 125.4,179.03 126.6,178.55 127.8,177.97 129.0,177.3 130.2,176.53 131.4,175.67 132.6,174.71 133.8,173.65 135.0,172.5 136.2,171.25 137.4,169.91 138.6,168.47 139.8,166.93 141.0,165.3 142.2,163.57 143.4,161.75 144.6,159.83 145.8,157.81 147.0,155.7 148.2,153.49 149.4,151.19 150.6,148.79 151.8,146.29 153.0,143.7 154.2,141.01 155.4,138.23 156.6,135.35 157.8,132.37 159.0,129.3 160.2,126.13 161.4,122.87 162.6,119.51 163.8,116.05 165.0,112.5 166.2,108.85 167.4,105.11 168.6,101.27 169.8,97.33 171.0,93.3 172.2,89.17 173.4,84.95 174.6,80.63 175.8,76.21 177.0,71.7 178.2,67.09 179.4,62.39 180.6,57.59 181.8,52.69 183.0,47.7 184.2,42.61 185.4,37.43 186.6,32.15 187.8,26.77 189.0,21.3 190.2,15.73 191.4,10.07 192.6,4.31 193.8,-1.55 195.0,-7.5 196.2,-13.55 197.4,-19.69 198.6,-25.93" fill="none" stroke="#FF00AA" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
+          <line x1="9.0" y1="-12.0" x2="201.0" y2="372.0" stroke="#00A896" stroke-width="2"/>
+          <circle cx="60" cy="60" r="2.6" fill="#1A0828"/>
+          <circle cx="90" cy="150" r="2.6" fill="#1A0828"/>
+          <circle cx="120" cy="180" r="2.6" fill="#1A0828"/>
+          <circle cx="150" cy="150" r="2.6" fill="#1A0828"/>
+          <circle cx="180" cy="60" r="2.6" fill="#1A0828"/>
+          <circle cx="90" cy="150" r="4.2" fill="#4A0080"/>
+          <text x="0" y="42" font-size="9" fill="#7B5A50" text-anchor="middle" font-family="system-ui, sans-serif">-6</text>
+          <text x="60" y="42" font-size="9" fill="#7B5A50" text-anchor="middle" font-family="system-ui, sans-serif">-4</text>
+          <text x="120" y="42" font-size="9" fill="#7B5A50" text-anchor="middle" font-family="system-ui, sans-serif">-2</text>
+          <text x="175" y="273" font-size="9" fill="#7B5A50" text-anchor="end" font-family="system-ui, sans-serif">-8</text>
+          <text x="175" y="213" font-size="9" fill="#7B5A50" text-anchor="end" font-family="system-ui, sans-serif">-6</text>
+          <text x="175" y="153" font-size="9" fill="#7B5A50" text-anchor="end" font-family="system-ui, sans-serif">-4</text>
+          <text x="175" y="93" font-size="9" fill="#7B5A50" text-anchor="end" font-family="system-ui, sans-serif">-2</text>
+          </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="sol">
+                <div class="sol-rotulo">Ejercicio 2 — $f(x) = (x - 5)^2 + 2$ en el punto $(6,\,3)$</div>
+                <div class="ej-rotulo">Desarrollo algebraico</div>
+                $$\begin{aligned}
+                  
+f'(x) &= 2(x - 5)^1(1) \\                  f'(x) &= 2x - 10 \\                  f'(6) &= 2(6) - 10 \\                  f'(6) &= 12 - 10 \\                  f'(6) &= 2 \\                  m &= 2 \\                  y - (3) &= 2(x - (6)) \\                  y - 3 &= 2(x - 6) \\                  y - 3 &= 2x - 12 \\                  y &= 2x - 12 + 3 \\                  \mathbf{y} &= \mathbf{2x - 9}
+                \end{aligned}$$
+                <div class="pill-row"><span class="resultado-pill">$y = 2x - 9$</span></div>
+                <div class="graficas-row" style="margin-top:1rem;">
+                  <div>
+                    <div class="ej-rotulo">Parábola $f(x) = (x - 5)^2 + 2$ — vértice $(5,\,2)$</div>
+                    <table class="tabla-valores"><tr><th>$x$</th><th>$f(x)$</th><th>$(x - 5)^2 + 2$</th></tr><tr><td>$3$</td><td>$6$</td><td>$(3 - 5)^2 + 2 = 6$</td></tr><tr><td>$4$</td><td>$3$</td><td>$(4 - 5)^2 + 2 = 3$</td></tr><tr><td>$5$</td><td>$2$</td><td>$(5 - 5)^2 + 2 = 2$</td></tr><tr><td>$6$</td><td>$3$</td><td>$(6 - 5)^2 + 2 = 3$</td></tr><tr><td>$7$</td><td>$6$</td><td>$(7 - 5)^2 + 2 = 6$</td></tr></table>
+                    <div class="ej-rotulo" style="margin-top:.8rem;">Recta tangente $y = 2x - 9$ — en $(6,\,3)$</div>
+                    <table class="tabla-valores"><tr><th>$x$</th><th>$y$</th><th>$2x - 9$</th></tr><tr><td>$4$</td><td>$-1$</td><td>$2(4) - 9 = -1$</td></tr><tr><td>$5$</td><td>$1$</td><td>$2(5) - 9 = 1$</td></tr><tr><td>$6$</td><td>$3$</td><td>$2(6) - 9 = 3$</td></tr><tr><td>$7$</td><td>$5$</td><td>$2(7) - 9 = 5$</td></tr><tr><td>$8$</td><td>$7$</td><td>$2(8) - 9 = 7$</td></tr></table>
+                  </div>
+                  <div>
+                    <div class="ej-rotulo">Representación gráfica</div>
+                    <div class="grafica-wrap">
+                      <svg viewBox="0 0 210 300" xmlns="http://www.w3.org/2000/svg" role="img">
+          <g stroke="#E0C4BC" stroke-width="0.5"><line x1="0" y1="0" x2="0" y2="300"/><line x1="30" y1="0" x2="30" y2="300"/><line x1="60" y1="0" x2="60" y2="300"/><line x1="90" y1="0" x2="90" y2="300"/><line x1="120" y1="0" x2="120" y2="300"/><line x1="150" y1="0" x2="150" y2="300"/><line x1="180" y1="0" x2="180" y2="300"/><line x1="210" y1="0" x2="210" y2="300"/><line x1="0" y1="300" x2="210" y2="300"/><line x1="0" y1="270" x2="210" y2="270"/><line x1="0" y1="240" x2="210" y2="240"/><line x1="0" y1="210" x2="210" y2="210"/><line x1="0" y1="180" x2="210" y2="180"/><line x1="0" y1="150" x2="210" y2="150"/><line x1="0" y1="120" x2="210" y2="120"/><line x1="0" y1="90" x2="210" y2="90"/><line x1="0" y1="60" x2="210" y2="60"/><line x1="0" y1="30" x2="210" y2="30"/><line x1="0" y1="0" x2="210" y2="0"/></g>
+          <g stroke="#7B5A50" stroke-width="1.2"><line x1="0" y1="240" x2="210" y2="240"/><line x1="-60" y1="0" x2="-60" y2="300"/></g>
+          <polyline points="11.4,-25.93 12.6,-19.69 13.8,-13.55 15.0,-7.5 16.2,-1.55 17.4,4.31 18.6,10.07 19.8,15.73 21.0,21.3 22.2,26.77 23.4,32.15 24.6,37.43 25.8,42.61 27.0,47.7 28.2,52.69 29.4,57.59 30.6,62.39 31.8,67.09 33.0,71.7 34.2,76.21 35.4,80.63 36.6,84.95 37.8,89.17 39.0,93.3 40.2,97.33 41.4,101.27 42.6,105.11 43.8,108.85 45.0,112.5 46.2,116.05 47.4,119.51 48.6,122.87 49.8,126.13 51.0,129.3 52.2,132.37 53.4,135.35 54.6,138.23 55.8,141.01 57.0,143.7 58.2,146.29 59.4,148.79 60.6,151.19 61.8,153.49 63.0,155.7 64.2,157.81 65.4,159.83 66.6,161.75 67.8,163.57 69.0,165.3 70.2,166.93 71.4,168.47 72.6,169.91 73.8,171.25 75.0,172.5 76.2,173.65 77.4,174.71 78.6,175.67 79.8,176.53 81.0,177.3 82.2,177.97 83.4,178.55 84.6,179.03 85.8,179.41 87.0,179.7 88.2,179.89 89.4,179.99 90.6,179.99 91.8,179.89 93.0,179.7 94.2,179.41 95.4,179.03 96.6,178.55 97.8,177.97 99.0,177.3 100.2,176.53 101.4,175.67 102.6,174.71 103.8,173.65 105.0,172.5 106.2,171.25 107.4,169.91 108.6,168.47 109.8,166.93 111.0,165.3 112.2,163.57 113.4,161.75 114.6,159.83 115.8,157.81 117.0,155.7 118.2,153.49 119.4,151.19 120.6,148.79 121.8,146.29 123.0,143.7 124.2,141.01 125.4,138.23 126.6,135.35 127.8,132.37 129.0,129.3 130.2,126.13 131.4,122.87 132.6,119.51 133.8,116.05 135.0,112.5 136.2,108.85 137.4,105.11 138.6,101.27 139.8,97.33 141.0,93.3 142.2,89.17 143.4,84.95 144.6,80.63 145.8,76.21 147.0,71.7 148.2,67.09 149.4,62.39 150.6,57.59 151.8,52.69 153.0,47.7 154.2,42.61 155.4,37.43 156.6,32.15 157.8,26.77 159.0,21.3 160.2,15.73 161.4,10.07 162.6,4.31 163.8,-1.55 165.0,-7.5 166.2,-13.55 167.4,-19.69 168.6,-25.93" fill="none" stroke="#FF00AA" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
+          <line x1="9.0" y1="372.0" x2="201.0" y2="-12.0" stroke="#00A896" stroke-width="2"/>
+          <circle cx="30" cy="60" r="2.6" fill="#1A0828"/>
+          <circle cx="60" cy="150" r="2.6" fill="#1A0828"/>
+          <circle cx="90" cy="180" r="2.6" fill="#1A0828"/>
+          <circle cx="120" cy="150" r="2.6" fill="#1A0828"/>
+          <circle cx="150" cy="60" r="2.6" fill="#1A0828"/>
+          <circle cx="120" cy="150" r="4.2" fill="#4A0080"/>
+          <text x="0" y="252" font-size="9" fill="#7B5A50" text-anchor="middle" font-family="system-ui, sans-serif">2</text>
+          <text x="60" y="252" font-size="9" fill="#7B5A50" text-anchor="middle" font-family="system-ui, sans-serif">4</text>
+          <text x="120" y="252" font-size="9" fill="#7B5A50" text-anchor="middle" font-family="system-ui, sans-serif">6</text>
+          <text x="180" y="252" font-size="9" fill="#7B5A50" text-anchor="middle" font-family="system-ui, sans-serif">8</text>
+          <text x="-65" y="303" font-size="9" fill="#7B5A50" text-anchor="end" font-family="system-ui, sans-serif">-2</text>
+          <text x="-65" y="183" font-size="9" fill="#7B5A50" text-anchor="end" font-family="system-ui, sans-serif">2</text>
+          <text x="-65" y="123" font-size="9" fill="#7B5A50" text-anchor="end" font-family="system-ui, sans-serif">4</text>
+          <text x="-65" y="63" font-size="9" fill="#7B5A50" text-anchor="end" font-family="system-ui, sans-serif">6</text>
+          <text x="-65" y="3" font-size="9" fill="#7B5A50" text-anchor="end" font-family="system-ui, sans-serif">8</text>
+          </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="sol">
+                <div class="sol-rotulo">Ejercicio 3 — $f(x) = (x - 1)^2 + 3$ en el punto $(2,\,4)$</div>
+                <div class="ej-rotulo">Desarrollo algebraico</div>
+                $$\begin{aligned}
+                  
+f'(x) &= 2(x - 1)^1(1) \\                  f'(x) &= 2x - 2 \\                  f'(2) &= 2(2) - 2 \\                  f'(2) &= 4 - 2 \\                  f'(2) &= 2 \\                  m &= 2 \\                  y - (4) &= 2(x - (2)) \\                  y - 4 &= 2(x - 2) \\                  y - 4 &= 2x - 4 \\                  y &= 2x - 4 + 4 \\                  \mathbf{y} &= \mathbf{2x}
+                \end{aligned}$$
+                <div class="pill-row"><span class="resultado-pill">$y = 2x$</span></div>
+                <div class="graficas-row" style="margin-top:1rem;">
+                  <div>
+                    <div class="ej-rotulo">Parábola $f(x) = (x - 1)^2 + 3$ — vértice $(1,\,3)$</div>
+                    <table class="tabla-valores"><tr><th>$x$</th><th>$f(x)$</th><th>$(x - 1)^2 + 3$</th></tr><tr><td>$-1$</td><td>$7$</td><td>$(-1 - 1)^2 + 3 = 7$</td></tr><tr><td>$0$</td><td>$4$</td><td>$(0 - 1)^2 + 3 = 4$</td></tr><tr><td>$1$</td><td>$3$</td><td>$(1 - 1)^2 + 3 = 3$</td></tr><tr><td>$2$</td><td>$4$</td><td>$(2 - 1)^2 + 3 = 4$</td></tr><tr><td>$3$</td><td>$7$</td><td>$(3 - 1)^2 + 3 = 7$</td></tr></table>
+                    <div class="ej-rotulo" style="margin-top:.8rem;">Recta tangente $y = 2x$ — en $(2,\,4)$</div>
+                    <table class="tabla-valores"><tr><th>$x$</th><th>$y$</th><th>$2x$</th></tr><tr><td>$0$</td><td>$0$</td><td>$2(0) + 0 = 0$</td></tr><tr><td>$1$</td><td>$2$</td><td>$2(1) + 0 = 2$</td></tr><tr><td>$2$</td><td>$4$</td><td>$2(2) + 0 = 4$</td></tr><tr><td>$3$</td><td>$6$</td><td>$2(3) + 0 = 6$</td></tr><tr><td>$4$</td><td>$8$</td><td>$2(4) + 0 = 8$</td></tr></table>
+                  </div>
+                  <div>
+                    <div class="ej-rotulo">Representación gráfica</div>
+                    <div class="grafica-wrap">
+                      <svg viewBox="0 0 210 300" xmlns="http://www.w3.org/2000/svg" role="img">
+          <g stroke="#E0C4BC" stroke-width="0.5"><line x1="0" y1="0" x2="0" y2="300"/><line x1="30" y1="0" x2="30" y2="300"/><line x1="60" y1="0" x2="60" y2="300"/><line x1="90" y1="0" x2="90" y2="300"/><line x1="120" y1="0" x2="120" y2="300"/><line x1="150" y1="0" x2="150" y2="300"/><line x1="180" y1="0" x2="180" y2="300"/><line x1="210" y1="0" x2="210" y2="300"/><line x1="0" y1="300" x2="210" y2="300"/><line x1="0" y1="270" x2="210" y2="270"/><line x1="0" y1="240" x2="210" y2="240"/><line x1="0" y1="210" x2="210" y2="210"/><line x1="0" y1="180" x2="210" y2="180"/><line x1="0" y1="150" x2="210" y2="150"/><line x1="0" y1="120" x2="210" y2="120"/><line x1="0" y1="90" x2="210" y2="90"/><line x1="0" y1="60" x2="210" y2="60"/><line x1="0" y1="30" x2="210" y2="30"/><line x1="0" y1="0" x2="210" y2="0"/></g>
+          <g stroke="#7B5A50" stroke-width="1.2"><line x1="0" y1="270" x2="210" y2="270"/><line x1="60" y1="0" x2="60" y2="300"/></g>
+          <polyline points="11.4,-25.93 12.6,-19.69 13.8,-13.55 15.0,-7.5 16.2,-1.55 17.4,4.31 18.6,10.07 19.8,15.73 21.0,21.3 22.2,26.77 23.4,32.15 24.6,37.43 25.8,42.61 27.0,47.7 28.2,52.69 29.4,57.59 30.6,62.39 31.8,67.09 33.0,71.7 34.2,76.21 35.4,80.63 36.6,84.95 37.8,89.17 39.0,93.3 40.2,97.33 41.4,101.27 42.6,105.11 43.8,108.85 45.0,112.5 46.2,116.05 47.4,119.51 48.6,122.87 49.8,126.13 51.0,129.3 52.2,132.37 53.4,135.35 54.6,138.23 55.8,141.01 57.0,143.7 58.2,146.29 59.4,148.79 60.6,151.19 61.8,153.49 63.0,155.7 64.2,157.81 65.4,159.83 66.6,161.75 67.8,163.57 69.0,165.3 70.2,166.93 71.4,168.47 72.6,169.91 73.8,171.25 75.0,172.5 76.2,173.65 77.4,174.71 78.6,175.67 79.8,176.53 81.0,177.3 82.2,177.97 83.4,178.55 84.6,179.03 85.8,179.41 87.0,179.7 88.2,179.89 89.4,179.99 90.6,179.99 91.8,179.89 93.0,179.7 94.2,179.41 95.4,179.03 96.6,178.55 97.8,177.97 99.0,177.3 100.2,176.53 101.4,175.67 102.6,174.71 103.8,173.65 105.0,172.5 106.2,171.25 107.4,169.91 108.6,168.47 109.8,166.93 111.0,165.3 112.2,163.57 113.4,161.75 114.6,159.83 115.8,157.81 117.0,155.7 118.2,153.49 119.4,151.19 120.6,148.79 121.8,146.29 123.0,143.7 124.2,141.01 125.4,138.23 126.6,135.35 127.8,132.37 129.0,129.3 130.2,126.13 131.4,122.87 132.6,119.51 133.8,116.05 135.0,112.5 136.2,108.85 137.4,105.11 138.6,101.27 139.8,97.33 141.0,93.3 142.2,89.17 143.4,84.95 144.6,80.63 145.8,76.21 147.0,71.7 148.2,67.09 149.4,62.39 150.6,57.59 151.8,52.69 153.0,47.7 154.2,42.61 155.4,37.43 156.6,32.15 157.8,26.77 159.0,21.3 160.2,15.73 161.4,10.07 162.6,4.31 163.8,-1.55 165.0,-7.5 166.2,-13.55 167.4,-19.69 168.6,-25.93" fill="none" stroke="#FF00AA" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
+          <line x1="9.0" y1="372.0" x2="201.0" y2="-12.0" stroke="#00A896" stroke-width="2"/>
+          <circle cx="30" cy="60" r="2.6" fill="#1A0828"/>
+          <circle cx="60" cy="150" r="2.6" fill="#1A0828"/>
+          <circle cx="90" cy="180" r="2.6" fill="#1A0828"/>
+          <circle cx="120" cy="150" r="2.6" fill="#1A0828"/>
+          <circle cx="150" cy="60" r="2.6" fill="#1A0828"/>
+          <circle cx="120" cy="150" r="4.2" fill="#4A0080"/>
+          <text x="0" y="282" font-size="9" fill="#7B5A50" text-anchor="middle" font-family="system-ui, sans-serif">-2</text>
+          <text x="120" y="282" font-size="9" fill="#7B5A50" text-anchor="middle" font-family="system-ui, sans-serif">2</text>
+          <text x="180" y="282" font-size="9" fill="#7B5A50" text-anchor="middle" font-family="system-ui, sans-serif">4</text>
+          <text x="55" y="213" font-size="9" fill="#7B5A50" text-anchor="end" font-family="system-ui, sans-serif">2</text>
+          <text x="55" y="153" font-size="9" fill="#7B5A50" text-anchor="end" font-family="system-ui, sans-serif">4</text>
+          <text x="55" y="93" font-size="9" fill="#7B5A50" text-anchor="end" font-family="system-ui, sans-serif">6</text>
+          <text x="55" y="33" font-size="9" fill="#7B5A50" text-anchor="end" font-family="system-ui, sans-serif">8</text>
+          </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="sol">
+                <div class="sol-rotulo">Ejercicio 4 — $f(x) = -(x - 1)^2 + 1$ en el punto $(2,\,0)$</div>
+                <div class="ej-rotulo">Desarrollo algebraico</div>
+                $$\begin{aligned}
+                  
+f'(x) &= -2(x - 1)^1(1) \\                  f'(x) &= -2x + 2 \\                  f'(2) &= -2(2) + 2 \\                  f'(2) &= -4 + 2 \\                  f'(2) &= -2 \\                  m &= -2 \\                  y - (0) &= -2(x - (2)) \\                  y + 0 &= -2(x - 2) \\                  y + 0 &= -2x + 4 \\                  y &= -2x + 4 + 0 \\                  \mathbf{y} &= \mathbf{-2x + 4}
+                \end{aligned}$$
+                <div class="pill-row"><span class="resultado-pill">$y = -2x + 4$</span></div>
+                <div class="graficas-row" style="margin-top:1rem;">
+                  <div>
+                    <div class="ej-rotulo">Parábola $f(x) = -(x - 1)^2 + 1$ — vértice $(1,\,1)$</div>
+                    <table class="tabla-valores"><tr><th>$x$</th><th>$f(x)$</th><th>$-(x - 1)^2 + 1$</th></tr><tr><td>$-1$</td><td>$-3$</td><td>$-(-1 - 1)^2 + 1 = -3$</td></tr><tr><td>$0$</td><td>$0$</td><td>$-(0 - 1)^2 + 1 = 0$</td></tr><tr><td>$1$</td><td>$1$</td><td>$-(1 - 1)^2 + 1 = 1$</td></tr><tr><td>$2$</td><td>$0$</td><td>$-(2 - 1)^2 + 1 = 0$</td></tr><tr><td>$3$</td><td>$-3$</td><td>$-(3 - 1)^2 + 1 = -3$</td></tr></table>
+                    <div class="ej-rotulo" style="margin-top:.8rem;">Recta tangente $y = -2x + 4$ — en $(2,\,0)$</div>
+                    <table class="tabla-valores"><tr><th>$x$</th><th>$y$</th><th>$-2x + 4$</th></tr><tr><td>$0$</td><td>$4$</td><td>$-2(0) + 4 = 4$</td></tr><tr><td>$1$</td><td>$2$</td><td>$-2(1) + 4 = 2$</td></tr><tr><td>$2$</td><td>$0$</td><td>$-2(2) + 4 = 0$</td></tr><tr><td>$3$</td><td>$-2$</td><td>$-2(3) + 4 = -2$</td></tr><tr><td>$4$</td><td>$-4$</td><td>$-2(4) + 4 = -4$</td></tr></table>
+                  </div>
+                  <div>
+                    <div class="ej-rotulo">Representación gráfica</div>
+                    <div class="grafica-wrap">
+                      <svg viewBox="0 0 210 300" xmlns="http://www.w3.org/2000/svg" role="img">
+          <g stroke="#E0C4BC" stroke-width="0.5"><line x1="0" y1="0" x2="0" y2="300"/><line x1="30" y1="0" x2="30" y2="300"/><line x1="60" y1="0" x2="60" y2="300"/><line x1="90" y1="0" x2="90" y2="300"/><line x1="120" y1="0" x2="120" y2="300"/><line x1="150" y1="0" x2="150" y2="300"/><line x1="180" y1="0" x2="180" y2="300"/><line x1="210" y1="0" x2="210" y2="300"/><line x1="0" y1="300" x2="210" y2="300"/><line x1="0" y1="270" x2="210" y2="270"/><line x1="0" y1="240" x2="210" y2="240"/><line x1="0" y1="210" x2="210" y2="210"/><line x1="0" y1="180" x2="210" y2="180"/><line x1="0" y1="150" x2="210" y2="150"/><line x1="0" y1="120" x2="210" y2="120"/><line x1="0" y1="90" x2="210" y2="90"/><line x1="0" y1="60" x2="210" y2="60"/><line x1="0" y1="30" x2="210" y2="30"/><line x1="0" y1="0" x2="210" y2="0"/></g>
+          <g stroke="#7B5A50" stroke-width="1.2"><line x1="0" y1="150" x2="210" y2="150"/><line x1="60" y1="0" x2="60" y2="300"/></g>
+          <polyline points="11.4,325.93 12.6,319.69 13.8,313.55 15.0,307.5 16.2,301.55 17.4,295.69 18.6,289.93 19.8,284.27 21.0,278.7 22.2,273.23 23.4,267.85 24.6,262.57 25.8,257.39 27.0,252.3 28.2,247.31 29.4,242.41 30.6,237.61 31.8,232.91 33.0,228.3 34.2,223.79 35.4,219.37 36.6,215.05 37.8,210.83 39.0,206.7 40.2,202.67 41.4,198.73 42.6,194.89 43.8,191.15 45.0,187.5 46.2,183.95 47.4,180.49 48.6,177.13 49.8,173.87 51.0,170.7 52.2,167.63 53.4,164.65 54.6,161.77 55.8,158.99 57.0,156.3 58.2,153.71 59.4,151.21 60.6,148.81 61.8,146.51 63.0,144.3 64.2,142.19 65.4,140.17 66.6,138.25 67.8,136.43 69.0,134.7 70.2,133.07 71.4,131.53 72.6,130.09 73.8,128.75 75.0,127.5 76.2,126.35 77.4,125.29 78.6,124.33 79.8,123.47 81.0,122.7 82.2,122.03 83.4,121.45 84.6,120.97 85.8,120.59 87.0,120.3 88.2,120.11 89.4,120.01 90.6,120.01 91.8,120.11 93.0,120.3 94.2,120.59 95.4,120.97 96.6,121.45 97.8,122.03 99.0,122.7 100.2,123.47 101.4,124.33 102.6,125.29 103.8,126.35 105.0,127.5 106.2,128.75 107.4,130.09 108.6,131.53 109.8,133.07 111.0,134.7 112.2,136.43 113.4,138.25 114.6,140.17 115.8,142.19 117.0,144.3 118.2,146.51 119.4,148.81 120.6,151.21 121.8,153.71 123.0,156.3 124.2,158.99 125.4,161.77 126.6,164.65 127.8,167.63 129.0,170.7 130.2,173.87 131.4,177.13 132.6,180.49 133.8,183.95 135.0,187.5 136.2,191.15 137.4,194.89 138.6,198.73 139.8,202.67 141.0,206.7 142.2,210.83 143.4,215.05 144.6,219.37 145.8,223.79 147.0,228.3 148.2,232.91 149.4,237.61 150.6,242.41 151.8,247.31 153.0,252.3 154.2,257.39 155.4,262.57 156.6,267.85 157.8,273.23 159.0,278.7 160.2,284.27 161.4,289.93 162.6,295.69 163.8,301.55 165.0,307.5 166.2,313.55 167.4,319.69 168.6,325.93" fill="none" stroke="#FF00AA" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
+          <line x1="9.0" y1="-72.0" x2="201.0" y2="312.0" stroke="#00A896" stroke-width="2"/>
+          <circle cx="30" cy="240" r="2.6" fill="#1A0828"/>
+          <circle cx="60" cy="150" r="2.6" fill="#1A0828"/>
+          <circle cx="90" cy="120" r="2.6" fill="#1A0828"/>
+          <circle cx="120" cy="150" r="2.6" fill="#1A0828"/>
+          <circle cx="150" cy="240" r="2.6" fill="#1A0828"/>
+          <circle cx="120" cy="150" r="4.2" fill="#4A0080"/>
+          <text x="0" y="162" font-size="9" fill="#7B5A50" text-anchor="middle" font-family="system-ui, sans-serif">-2</text>
+          <text x="120" y="162" font-size="9" fill="#7B5A50" text-anchor="middle" font-family="system-ui, sans-serif">2</text>
+          <text x="180" y="162" font-size="9" fill="#7B5A50" text-anchor="middle" font-family="system-ui, sans-serif">4</text>
+          <text x="55" y="273" font-size="9" fill="#7B5A50" text-anchor="end" font-family="system-ui, sans-serif">-4</text>
+          <text x="55" y="213" font-size="9" fill="#7B5A50" text-anchor="end" font-family="system-ui, sans-serif">-2</text>
+          <text x="55" y="93" font-size="9" fill="#7B5A50" text-anchor="end" font-family="system-ui, sans-serif">2</text>
+          <text x="55" y="33" font-size="9" fill="#7B5A50" text-anchor="end" font-family="system-ui, sans-serif">4</text>
+          </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="sol">
+                <div class="sol-rotulo">Ejercicio 5 — $f(x) = -(x - 4)^2 + 3$ en el punto $(5,\,2)$</div>
+                <div class="ej-rotulo">Desarrollo algebraico</div>
+                $$\begin{aligned}
+                  
+f'(x) &= -2(x - 4)^1(1) \\                  f'(x) &= -2x + 8 \\                  f'(5) &= -2(5) + 8 \\                  f'(5) &= -10 + 8 \\                  f'(5) &= -2 \\                  m &= -2 \\                  y - (2) &= -2(x - (5)) \\                  y - 2 &= -2(x - 5) \\                  y - 2 &= -2x + 10 \\                  y &= -2x + 10 + 2 \\                  \mathbf{y} &= \mathbf{-2x + 12}
+                \end{aligned}$$
+                <div class="pill-row"><span class="resultado-pill">$y = -2x + 12$</span></div>
+                <div class="graficas-row" style="margin-top:1rem;">
+                  <div>
+                    <div class="ej-rotulo">Parábola $f(x) = -(x - 4)^2 + 3$ — vértice $(4,\,3)$</div>
+                    <table class="tabla-valores"><tr><th>$x$</th><th>$f(x)$</th><th>$-(x - 4)^2 + 3$</th></tr><tr><td>$2$</td><td>$-1$</td><td>$-(2 - 4)^2 + 3 = -1$</td></tr><tr><td>$3$</td><td>$2$</td><td>$-(3 - 4)^2 + 3 = 2$</td></tr><tr><td>$4$</td><td>$3$</td><td>$-(4 - 4)^2 + 3 = 3$</td></tr><tr><td>$5$</td><td>$2$</td><td>$-(5 - 4)^2 + 3 = 2$</td></tr><tr><td>$6$</td><td>$-1$</td><td>$-(6 - 4)^2 + 3 = -1$</td></tr></table>
+                    <div class="ej-rotulo" style="margin-top:.8rem;">Recta tangente $y = -2x + 12$ — en $(5,\,2)$</div>
+                    <table class="tabla-valores"><tr><th>$x$</th><th>$y$</th><th>$-2x + 12$</th></tr><tr><td>$3$</td><td>$6$</td><td>$-2(3) + 12 = 6$</td></tr><tr><td>$4$</td><td>$4$</td><td>$-2(4) + 12 = 4$</td></tr><tr><td>$5$</td><td>$2$</td><td>$-2(5) + 12 = 2$</td></tr><tr><td>$6$</td><td>$0$</td><td>$-2(6) + 12 = 0$</td></tr><tr><td>$7$</td><td>$-2$</td><td>$-2(7) + 12 = -2$</td></tr></table>
+                  </div>
+                  <div>
+                    <div class="ej-rotulo">Representación gráfica</div>
+                    <div class="grafica-wrap">
+                      <svg viewBox="0 0 210 300" xmlns="http://www.w3.org/2000/svg" role="img">
+          <g stroke="#E0C4BC" stroke-width="0.5"><line x1="0" y1="0" x2="0" y2="300"/><line x1="30" y1="0" x2="30" y2="300"/><line x1="60" y1="0" x2="60" y2="300"/><line x1="90" y1="0" x2="90" y2="300"/><line x1="120" y1="0" x2="120" y2="300"/><line x1="150" y1="0" x2="150" y2="300"/><line x1="180" y1="0" x2="180" y2="300"/><line x1="210" y1="0" x2="210" y2="300"/><line x1="0" y1="300" x2="210" y2="300"/><line x1="0" y1="270" x2="210" y2="270"/><line x1="0" y1="240" x2="210" y2="240"/><line x1="0" y1="210" x2="210" y2="210"/><line x1="0" y1="180" x2="210" y2="180"/><line x1="0" y1="150" x2="210" y2="150"/><line x1="0" y1="120" x2="210" y2="120"/><line x1="0" y1="90" x2="210" y2="90"/><line x1="0" y1="60" x2="210" y2="60"/><line x1="0" y1="30" x2="210" y2="30"/><line x1="0" y1="0" x2="210" y2="0"/></g>
+          <g stroke="#7B5A50" stroke-width="1.2"><line x1="0" y1="210" x2="210" y2="210"/><line x1="-30" y1="0" x2="-30" y2="300"/></g>
+          <polyline points="11.4,325.93 12.6,319.69 13.8,313.55 15.0,307.5 16.2,301.55 17.4,295.69 18.6,289.93 19.8,284.27 21.0,278.7 22.2,273.23 23.4,267.85 24.6,262.57 25.8,257.39 27.0,252.3 28.2,247.31 29.4,242.41 30.6,237.61 31.8,232.91 33.0,228.3 34.2,223.79 35.4,219.37 36.6,215.05 37.8,210.83 39.0,206.7 40.2,202.67 41.4,198.73 42.6,194.89 43.8,191.15 45.0,187.5 46.2,183.95 47.4,180.49 48.6,177.13 49.8,173.87 51.0,170.7 52.2,167.63 53.4,164.65 54.6,161.77 55.8,158.99 57.0,156.3 58.2,153.71 59.4,151.21 60.6,148.81 61.8,146.51 63.0,144.3 64.2,142.19 65.4,140.17 66.6,138.25 67.8,136.43 69.0,134.7 70.2,133.07 71.4,131.53 72.6,130.09 73.8,128.75 75.0,127.5 76.2,126.35 77.4,125.29 78.6,124.33 79.8,123.47 81.0,122.7 82.2,122.03 83.4,121.45 84.6,120.97 85.8,120.59 87.0,120.3 88.2,120.11 89.4,120.01 90.6,120.01 91.8,120.11 93.0,120.3 94.2,120.59 95.4,120.97 96.6,121.45 97.8,122.03 99.0,122.7 100.2,123.47 101.4,124.33 102.6,125.29 103.8,126.35 105.0,127.5 106.2,128.75 107.4,130.09 108.6,131.53 109.8,133.07 111.0,134.7 112.2,136.43 113.4,138.25 114.6,140.17 115.8,142.19 117.0,144.3 118.2,146.51 119.4,148.81 120.6,151.21 121.8,153.71 123.0,156.3 124.2,158.99 125.4,161.77 126.6,164.65 127.8,167.63 129.0,170.7 130.2,173.87 131.4,177.13 132.6,180.49 133.8,183.95 135.0,187.5 136.2,191.15 137.4,194.89 138.6,198.73 139.8,202.67 141.0,206.7 142.2,210.83 143.4,215.05 144.6,219.37 145.8,223.79 147.0,228.3 148.2,232.91 149.4,237.61 150.6,242.41 151.8,247.31 153.0,252.3 154.2,257.39 155.4,262.57 156.6,267.85 157.8,273.23 159.0,278.7 160.2,284.27 161.4,289.93 162.6,295.69 163.8,301.55 165.0,307.5 166.2,313.55 167.4,319.69 168.6,325.93" fill="none" stroke="#FF00AA" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
+          <line x1="9.0" y1="-72.0" x2="201.0" y2="312.0" stroke="#00A896" stroke-width="2"/>
+          <circle cx="30" cy="240" r="2.6" fill="#1A0828"/>
+          <circle cx="60" cy="150" r="2.6" fill="#1A0828"/>
+          <circle cx="90" cy="120" r="2.6" fill="#1A0828"/>
+          <circle cx="120" cy="150" r="2.6" fill="#1A0828"/>
+          <circle cx="150" cy="240" r="2.6" fill="#1A0828"/>
+          <circle cx="120" cy="150" r="4.2" fill="#4A0080"/>
+          <text x="30" y="222" font-size="9" fill="#7B5A50" text-anchor="middle" font-family="system-ui, sans-serif">2</text>
+          <text x="90" y="222" font-size="9" fill="#7B5A50" text-anchor="middle" font-family="system-ui, sans-serif">4</text>
+          <text x="150" y="222" font-size="9" fill="#7B5A50" text-anchor="middle" font-family="system-ui, sans-serif">6</text>
+          <text x="210" y="222" font-size="9" fill="#7B5A50" text-anchor="middle" font-family="system-ui, sans-serif">8</text>
+          <text x="-35" y="273" font-size="9" fill="#7B5A50" text-anchor="end" font-family="system-ui, sans-serif">-2</text>
+          <text x="-35" y="153" font-size="9" fill="#7B5A50" text-anchor="end" font-family="system-ui, sans-serif">2</text>
+          <text x="-35" y="93" font-size="9" fill="#7B5A50" text-anchor="end" font-family="system-ui, sans-serif">4</text>
+          <text x="-35" y="33" font-size="9" fill="#7B5A50" text-anchor="end" font-family="system-ui, sans-serif">6</text>
+          </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ EJERCICIOS EXTRA (colapsable) ══════════ -->
+    <section class="section-block">
+      <div class="sec-toggle" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('show');">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+        </div>
+        <h2>Ejercicios extra</h2>
+        <span class="chev">▼</span>
+      </div>
+      <div class="collapsible">
+        <div class="bloques-2">
+          <div class="mini-card">
+            <div class="mini-card-head">Bloque 1</div>
+            <div class="mini-card-body">
+              <div class="ej-line">$f(x) = (x+3)^2 - 4$ en $(-2,\,-3)$</div>
+              <div class="ej-line">$f(x) = -(x-2)^2 + 5$ en $(1,\,4)$</div>
+              <div class="ej-line">$f(x) = (x-3)^2 + 1$ en $(4,\,2)$</div>
+            </div>
+          </div>
+          <div class="mini-card">
+            <div class="mini-card-head">Bloque 2</div>
+            <div class="mini-card-body">
+              <div class="ej-line">$f(x) = -(x+1)^2 + 6$ en $(0,\,5)$</div>
+              <div class="ej-line">$f(x) = (x+4)^2 - 2$ en $(-3,\,-1)$</div>
+              <div class="ej-line">$f(x) = -(x-5)^2 + 3$ en $(4,\,2)$</div>
+            </div>
+          </div>
+          <div class="mini-card">
+            <div class="mini-card-head">Bloque 3</div>
+            <div class="mini-card-body">
+              <div class="ej-line">$f(x) = (x-2)^2 - 1$ en $(3,\,0)$</div>
+              <div class="ej-line">$f(x) = -(x+3)^2 + 4$ en $(-4,\,3)$</div>
+              <div class="ej-line">$f(x) = (x+1)^2 + 2$ en $(-2,\,3)$</div>
+            </div>
+          </div>
+          <div class="mini-card">
+            <div class="mini-card-head">Bloque 4</div>
+            <div class="mini-card-body">
+              <div class="ej-line">$f(x) = -(x-3)^2 + 2$ en $(2,\,1)$</div>
+              <div class="ej-line">$f(x) = (x-4)^2 - 3$ en $(5,\,-2)$</div>
+              <div class="ej-line">$f(x) = -(x+2)^2 + 1$ en $(-1,\,0)$</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ NAVEGACIÓN ══════════ -->
+    <div class="topic-nav-btns">
+      <a href="optimizacion-areas.html" class="btn-anterior">← Optimización de áreas</a>
+    </div>
+
+  </main>
+  <script src="../../nav.js"></script>
+  <script src="../../footer.js"></script>
+</body>
+</html>
