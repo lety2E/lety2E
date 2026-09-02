@@ -5,6 +5,21 @@
 
 ---
 
+## 2026-09-01 (4)
+- **Nace `math/matematicas-5/regla-producto-p2.html` — Tema 6.** La misma regla del producto,
+  ahora con trigonométricas, logaritmos, exponenciales y raíces. Sin video (no está en el CSV).
+  4 ejemplos en 2×2, 2 bloques de 5 ejercicios con sus resoluciones y 2 bloques de 6 extras.
+- **El doc escribe `\sin`; aquí va `\operatorname{sen}`**, como en `senos-cosenos.html` — el sitio
+  usa la notación en español. Vale para todos los temas que vengan: hay que traducirlo al pasar
+  del doc al HTML.
+- Verificadas a mano las 10 resoluciones y los 4 ejemplos: todas correctas. Ojo con dos que el
+  doc deja sin simplificar del todo (`∛(x⁵)/x` y `x^{5/3}/x`) — son correctas, sólo no reducidas;
+  se respetaron tal cual porque así las enseña Lety.
+- El índice de Mate 5 llega a **6 cards** y la cadena prev/next va completa de reglas básicas
+  hasta aquí.
+- Verificado en 375×812: la fórmula más ancha mide 154px contra 315px de caja. Cero errores
+  de KaTeX.
+
 ## 2026-09-01 (3)
 - **Nace `math/matematicas-5/regla-producto-p1.html` — Tema 5.** Con video (sí estaba en el CSV:
   `6rf8dzKTXvU`), apunte de la regla $f = uv \implies f' = u'v + uv'$, el ejemplo del doc,
