@@ -5,6 +5,27 @@
 
 ---
 
+## 2026-09-01 (2)
+- **Nace `math/matematicas-5/raices.html` — Tema 4, derivadas de raíces.** Sin video (no está en
+  el CSV, y no es error). Apunte de una sola regla ($\sqrt[n]{x^m} = x^{m/n}$), 3 ejemplos en
+  columna triple, 2 bloques de 6 ejercicios, sus respuestas y 2 bloques de extras.
+- Los ejemplos usan una `.ejemplo-grid` de **3 columnas** (las otras páginas de Mate 5 usan 2):
+  los tres desarrollos del doc son angostos y caben bien; colapsan a 1 columna abajo de 860px.
+- En las respuestas, cada resolución **arranca con la raíz original** antes de la forma con
+  exponente. El doc empezaba ya convertido; así el alumno ve de dónde salió. También se dejó el
+  paso de la resta de exponentes (`x^{2/3 - 3/3}`) en los 12, porque el doc lo traía sólo en
+  la mitad.
+- **Bug global de móvil, arreglado en `style.css`:** las media queries de Math ponían font-size
+  tanto a `.katex` como a `.katex-display`, y como KaTeX anida `.katex` **dentro** de
+  `.katex-display`, los dos se multiplicaban: las fórmulas en `$$` salían a ~8px en vez de ~13px
+  (un 36% más chicas de lo previsto). Se agregó
+  `body[data-section="math"] .katex-display > .katex { font-size: 1.21em }` en las dos media
+  queries (1.21em es el valor propio de KaTeX). **Afecta a todas las páginas de Math con
+  display math** — no sólo a raíces: velocidad media, por ejemplo, ya se lee bien en el celular.
+- Verificado en 375×812 y en escritorio: sin overflow de página, ninguna card desborda, cada
+  `\sqrt` muestra su barra superior completa y cero errores de KaTeX.
+- Vuelve el botón "Derivadas de raíces →" al pie de senos y cosenos, ahora sí con destino real.
+
 ## 2026-09-01
 - **Mate 5: dos páginas huérfanas quedaron enlazadas.** `velocidad-media.html` y
   `senos-cosenos.html` ya estaban hechas y subidas, pero el índice sólo mostraba una card

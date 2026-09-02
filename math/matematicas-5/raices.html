@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Derivadas de raíces — Matemáticas 5 — LetyMath</title>
+  <meta name="description" content="Derivar raíces convirtiéndolas en exponente fraccionario, con ejemplos y ejercicios resueltos paso a paso." />
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../../favicon.ico">
+  <link rel="stylesheet" href="../../style.css">
+  <link rel="stylesheet" href="../../assets/katex/katex.min.css" />
+  <script defer src="../../assets/katex/katex.min.js"></script>
+  <script defer src="../../assets/katex/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body, {
+      delimiters: [
+        {left:'$$', right:'$$', display:true},
+        {left:'$', right:'$', display:false}
+      ]
+    });"></script>
+
+  <style>
+    .topic-tag {
+      display: inline-flex; align-items: center; gap: .35rem;
+      padding: .22rem .75rem; border-radius: 99px;
+      background: var(--accent-light); color: var(--accent);
+      font-size: .78rem; font-weight: 700; letter-spacing: .03em;
+      margin-bottom: .55rem;
+    }
+    .topic-tag::before {
+      content: ''; width: 7px; height: 7px; border-radius: 50%;
+      background: var(--accent); display: inline-block;
+    }
+
+    .section-block { margin-bottom: 2.5rem; }
+    .section-block:last-child { margin-bottom: 0; }
+
+    .sec-head {
+      display: flex; align-items: center; gap: .65rem;
+      margin-bottom: 1.1rem;
+    }
+    .sec-head h2 { margin: 0; font-size: 1.2rem; line-height: 1; }
+    .sec-icon {
+      width: 30px; height: 30px; border-radius: 8px;
+      display: grid; place-items: center; flex-shrink: 0;
+      background: var(--accent);
+    }
+    .sec-icon svg { width: 15px; height: 15px; stroke: #fff; fill: none; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+
+    .sec-toggle {
+      display: flex; align-items: center; gap: .65rem;
+      cursor: pointer; user-select: none;
+      padding: .8rem 0; margin: 0 0 .4rem;
+    }
+    .sec-toggle h2 { margin: 0; font-size: 1.2rem; line-height: 1; }
+    .sec-toggle .chev {
+      margin-left: auto; font-size: .75rem; color: var(--text-3);
+      transition: transform .25s;
+    }
+    .sec-toggle.open .chev { transform: rotate(180deg); }
+
+    .collapsible {
+      max-height: 0; overflow: hidden;
+      transition: max-height .4s ease, padding .3s ease;
+      padding: 0;
+    }
+    .collapsible.show { max-height: 12000px; padding: .8rem 0; }
+
+    /* Apuntes */
+    .regla-unica {
+      background: var(--bg-card); border: 1.5px solid var(--border);
+      border-radius: var(--r-md); padding: 1.4rem 1.5rem;
+      text-align: center; color: var(--text);
+    }
+    .regla-unica p { margin: 0 0 .4rem; line-height: 1.75; color: var(--text-2); font-size: .95rem; }
+
+    /* Pills de fórmula */
+    .formula-pill {
+      display: inline-block;
+      background: #FFF1A8;
+      padding: .25rem .75rem;
+      border-radius: 99px;
+      font-size: .9rem;
+      font-weight: 600;
+      color: var(--text);
+      margin: .35rem 0;
+      border: 1.5px solid #F5DC6A;
+    }
+    .pill-row { text-align: center; margin: .2rem 0 .4rem; }
+
+    /* Ejemplo */
+    .ejemplo-section { margin: 2rem 0 2.5rem; }
+    .ejemplo-head {
+      display: flex; align-items: center; gap: .65rem;
+      margin-bottom: 1rem;
+    }
+    .ejemplo-head h3 {
+      margin: 0; font-family: var(--font-display);
+      font-size: 1.2rem; line-height: 1;
+      color: var(--M); font-style: italic;
+    }
+    .ejemplo-block {
+      padding: 1.8rem 1.5rem;
+      background: var(--bg-card);
+      border: 1.5px solid var(--border);
+      border-radius: var(--r-md);
+      color: var(--text);
+      text-align: center;
+    }
+    .ejemplo-block strong { color: var(--M); font-weight: 700; }
+    .ejemplo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem 2rem; }
+    @media (max-width: 860px) { .ejemplo-grid { grid-template-columns: 1fr; } }
+    .ejemplo-item { text-align: center; }
+
+    /* Mini card (bloque) */
+    .mini-card {
+      background: var(--bg-card); border: 1.5px solid var(--border);
+      border-radius: var(--r-md); overflow: hidden;
+    }
+    .mini-card-head {
+      padding: .4rem .8rem; background: var(--course-1);
+      font-family: var(--font-display); font-size: .85rem; color: #fff; font-weight: 700;
+    }
+    .mini-card-body {
+      padding: .8rem 1rem;
+      font-size: .9rem; line-height: 1.6; color: var(--text);
+    }
+    .mini-card-body .ej-line {
+      padding: .6rem 0;
+      border-bottom: 1px solid var(--border-s);
+      line-height: 2.4; /* radical-safe */
+    }
+    .mini-card-body .ej-line:last-child { border-bottom: none; padding-bottom: .25rem; }
+    .mini-card-body .ej-line:first-child { padding-top: .25rem; }
+    .mini-card-body .sol {
+      padding: .4rem 0 .6rem;
+      border-bottom: 1px solid var(--border-s);
+      text-align: center;
+    }
+    .mini-card-body .sol:last-child { border-bottom: none; padding-bottom: .1rem; }
+
+    /* Grid de bloques */
+    .bloques-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2rem; }
+    @media (max-width: 700px) { .bloques-2 { grid-template-columns: 1fr; } }
+
+    /* Navegación */
+    .topic-nav-btns {
+      display: flex; justify-content: space-between; gap: 1rem;
+      margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border);
+    }
+    .btn-anterior, .btn-siguiente {
+      display: inline-flex; align-items: center; gap: .5rem;
+      padding: .65rem 1.4rem; border-radius: 99px;
+      font-weight: 700; font-size: .9rem; transition: background .2s, transform .18s;
+    }
+    .btn-anterior {
+      background: transparent; color: var(--accent);
+      border: 2px solid var(--accent);
+    }
+    .btn-anterior:hover { background: var(--accent-light); transform: translateX(-3px); }
+    .btn-siguiente { background: var(--accent); color: #fff; }
+    .btn-siguiente:hover { background: var(--M); color: #fff; transform: translateX(3px); }
+  </style>
+</head>
+<body data-section="math">
+  <main class="topic-content">
+
+    <header class="topic-header">
+      <p class="breadcrumb">
+        <a href="../index.html">Inicio</a> ›
+        <a href="index.html">Matemáticas 5</a> ›
+        Derivadas de raíces
+      </p>
+      <div class="topic-tag">Matemáticas 5 · Tema 4</div>
+      <h1>Derivadas de raíces</h1>
+    </header>
+
+    <!-- ══════════ APUNTES ══════════ -->
+    <section class="section-block">
+      <div class="sec-head">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+        </div>
+        <h2>Apuntes</h2>
+      </div>
+      <div class="regla-unica">
+        <p>Para derivar una raíz, primero la transformamos en un exponente fraccionario usando la regla:</p>
+        $$\sqrt[n]{x^m} = x^{\frac{m}{n}}$$
+      </div>
+    </section>
+
+    <!-- ══════════ EJEMPLOS ══════════ -->
+    <section class="section-block ejemplo-section">
+      <div class="ejemplo-head">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        </div>
+        <h3>Ejemplos</h3>
+      </div>
+      <div class="ejemplo-block">
+        <div class="ejemplo-grid">
+          <div class="ejemplo-item">
+            $$\begin{aligned}
+              f(x) &= -6\sqrt[3]{x^4} \\
+              f(x) &= -6x^{\frac{4}{3}} \\
+              f'(x) &= -6\left(\frac{4}{3}\right)x^{\frac{4}{3} - \frac{3}{3}} \\
+              &= \left(-\frac{6}{1}\right)\left(\frac{4}{3}\right)x^{\frac{1}{3}} \\
+              &= -\frac{24}{3}x^{\frac{1}{3}} \\
+              &= \mathbf{-8\sqrt[3]{x}}
+            \end{aligned}$$
+          </div>
+          <div class="ejemplo-item">
+            $$\begin{aligned}
+              g(x) &= 5\sqrt[4]{x} \\
+              g(x) &= 5x^{\frac{1}{4}} \\
+              g'(x) &= (5)\left(\frac{1}{4}\right)x^{\frac{1}{4} - \frac{4}{4}} \\
+              &= \frac{5}{1}\left(\frac{1}{4}\right)x^{-\frac{3}{4}} \\
+              &= \frac{5}{4}x^{-\frac{3}{4}} \\
+              &= \frac{5}{4x^{\frac{3}{4}}} \\
+              &= \mathbf{\frac{5}{4\sqrt[4]{x^3}}}
+            \end{aligned}$$
+          </div>
+          <div class="ejemplo-item">
+            $$\begin{aligned}
+              h(x) &= \frac{-5}{6\sqrt[3]{x^2}} \\
+              h(x) &= \left(-\frac{5}{6}\right)x^{-\frac{2}{3}} \\
+              h'(x) &= \left(-\frac{5}{6}\right)\left(-\frac{2}{3}\right)x^{-\frac{2}{3} - \frac{3}{3}} \\
+              &= \frac{10}{18}x^{-\frac{5}{3}} \\
+              &= \frac{10}{18x^{\frac{5}{3}}} \\
+              &= \mathbf{\frac{5}{9\sqrt[3]{x^5}}}
+            \end{aligned}$$
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ EJERCICIOS (siempre visibles) ══════════ -->
+    <section class="section-block">
+      <div class="sec-head">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+        </div>
+        <h2>Ejercicios</h2>
+      </div>
+      <div class="bloques-2">
+        <div class="mini-card">
+          <div class="mini-card-head">Bloque 1</div>
+          <div class="mini-card-body">
+            <div class="ej-line">$f(x) = -4\sqrt{x^5}$</div>
+            <div class="ej-line">$f(x) = -5\sqrt{x^3}$</div>
+            <div class="ej-line">$f(x) = 7\sqrt[4]{x}$</div>
+            <div class="ej-line">$f(x) = -9\sqrt[5]{x^2}$</div>
+            <div class="ej-line">$f(x) = \dfrac{-2}{6\sqrt[3]{x^4}}$</div>
+            <div class="ej-line">$f(x) = \dfrac{-6}{4\sqrt[3]{x^2}}$</div>
+          </div>
+        </div>
+        <div class="mini-card">
+          <div class="mini-card-head">Bloque 2</div>
+          <div class="mini-card-body">
+            <div class="ej-line">$f(x) = 8\sqrt[3]{x^2}$</div>
+            <div class="ej-line">$f(x) = -2\sqrt[5]{x^3}$</div>
+            <div class="ej-line">$f(x) = 6\sqrt{x}$</div>
+            <div class="ej-line">$f(x) = -4\sqrt[4]{x^5}$</div>
+            <div class="ej-line">$f(x) = \dfrac{-3}{9\sqrt{x^3}}$</div>
+            <div class="ej-line">$f(x) = \dfrac{-10}{5\sqrt[4]{x}}$</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ RESPUESTAS (colapsable) ══════════ -->
+    <section class="section-block">
+      <div class="sec-toggle" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('show');">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <h2>Respuestas</h2>
+        <span class="chev">▼</span>
+      </div>
+      <div class="collapsible">
+        <div class="bloques-2">
+          <div class="mini-card">
+            <div class="mini-card-head">Bloque 1</div>
+            <div class="mini-card-body">
+              <div class="sol">
+                $$\begin{aligned}
+                  f(x) &= -4\sqrt{x^5} \\
+                  f(x) &= -4x^{\frac{5}{2}} \\
+                  f'(x) &= -4\left(\frac{5}{2}\right)x^{\frac{5}{2} - \frac{2}{2}} \\
+                  &= -\frac{20}{2}x^{\frac{3}{2}} \\
+                  &= \mathbf{-10\sqrt{x^3}}
+                \end{aligned}$$
+              </div>
+              <div class="sol">
+                $$\begin{aligned}
+                  f(x) &= -5\sqrt{x^3} \\
+                  f(x) &= -5x^{\frac{3}{2}} \\
+                  f'(x) &= -5\left(\frac{3}{2}\right)x^{\frac{3}{2} - \frac{2}{2}} \\
+                  &= \mathbf{-\frac{15}{2}\sqrt{x}}
+                \end{aligned}$$
+              </div>
+              <div class="sol">
+                $$\begin{aligned}
+                  f(x) &= 7\sqrt[4]{x} \\
+                  f(x) &= 7x^{\frac{1}{4}} \\
+                  f'(x) &= 7\left(\frac{1}{4}\right)x^{\frac{1}{4} - \frac{4}{4}} \\
+                  &= \frac{7}{4}x^{-\frac{3}{4}} \\
+                  &= \mathbf{\frac{7}{4\sqrt[4]{x^3}}}
+                \end{aligned}$$
+              </div>
+              <div class="sol">
+                $$\begin{aligned}
+                  f(x) &= -9\sqrt[5]{x^2} \\
+                  f(x) &= -9x^{\frac{2}{5}} \\
+                  f'(x) &= -9\left(\frac{2}{5}\right)x^{\frac{2}{5} - \frac{5}{5}} \\
+                  &= -\frac{18}{5}x^{-\frac{3}{5}} \\
+                  &= \mathbf{-\frac{18}{5\sqrt[5]{x^3}}}
+                \end{aligned}$$
+              </div>
+              <div class="sol">
+                $$\begin{aligned}
+                  f(x) &= \frac{-2}{6\sqrt[3]{x^4}} \\
+                  f(x) &= -\frac{1}{3}x^{-\frac{4}{3}} \\
+                  f'(x) &= \left(-\frac{1}{3}\right)\left(-\frac{4}{3}\right)x^{-\frac{4}{3} - \frac{3}{3}} \\
+                  &= \frac{4}{9}x^{-\frac{7}{3}} \\
+                  &= \mathbf{\frac{4}{9\sqrt[3]{x^7}}}
+                \end{aligned}$$
+              </div>
+              <div class="sol">
+                $$\begin{aligned}
+                  f(x) &= \frac{-6}{4\sqrt[3]{x^2}} \\
+                  f(x) &= -\frac{3}{2}x^{-\frac{2}{3}} \\
+                  f'(x) &= \left(-\frac{3}{2}\right)\left(-\frac{2}{3}\right)x^{-\frac{2}{3} - \frac{3}{3}} \\
+                  &= 1x^{-\frac{5}{3}} \\
+                  &= \mathbf{\frac{1}{\sqrt[3]{x^5}}}
+                \end{aligned}$$
+              </div>
+            </div>
+          </div>
+          <div class="mini-card">
+            <div class="mini-card-head">Bloque 2</div>
+            <div class="mini-card-body">
+              <div class="sol">
+                $$\begin{aligned}
+                  f(x) &= 8\sqrt[3]{x^2} \\
+                  f(x) &= 8x^{\frac{2}{3}} \\
+                  f'(x) &= 8\left(\frac{2}{3}\right)x^{\frac{2}{3} - \frac{3}{3}} \\
+                  &= \frac{16}{3}x^{-\frac{1}{3}} \\
+                  &= \mathbf{\frac{16}{3\sqrt[3]{x}}}
+                \end{aligned}$$
+              </div>
+              <div class="sol">
+                $$\begin{aligned}
+                  f(x) &= -2\sqrt[5]{x^3} \\
+                  f(x) &= -2x^{\frac{3}{5}} \\
+                  f'(x) &= -2\left(\frac{3}{5}\right)x^{\frac{3}{5} - \frac{5}{5}} \\
+                  &= -\frac{6}{5}x^{-\frac{2}{5}} \\
+                  &= \mathbf{-\frac{6}{5\sqrt[5]{x^2}}}
+                \end{aligned}$$
+              </div>
+              <div class="sol">
+                $$\begin{aligned}
+                  f(x) &= 6\sqrt{x} \\
+                  f(x) &= 6x^{\frac{1}{2}} \\
+                  f'(x) &= 6\left(\frac{1}{2}\right)x^{\frac{1}{2} - \frac{2}{2}} \\
+                  &= 3x^{-\frac{1}{2}} \\
+                  &= \mathbf{\frac{3}{\sqrt{x}}}
+                \end{aligned}$$
+              </div>
+              <div class="sol">
+                $$\begin{aligned}
+                  f(x) &= -4\sqrt[4]{x^5} \\
+                  f(x) &= -4x^{\frac{5}{4}} \\
+                  f'(x) &= -4\left(\frac{5}{4}\right)x^{\frac{5}{4} - \frac{4}{4}} \\
+                  &= -5x^{\frac{1}{4}} \\
+                  &= \mathbf{-5\sqrt[4]{x}}
+                \end{aligned}$$
+              </div>
+              <div class="sol">
+                $$\begin{aligned}
+                  f(x) &= \frac{-3}{9\sqrt{x^3}} \\
+                  f(x) &= -\frac{1}{3}x^{-\frac{3}{2}} \\
+                  f'(x) &= \left(-\frac{1}{3}\right)\left(-\frac{3}{2}\right)x^{-\frac{3}{2} - \frac{2}{2}} \\
+                  &= \frac{1}{2}x^{-\frac{5}{2}} \\
+                  &= \mathbf{\frac{1}{2\sqrt{x^5}}}
+                \end{aligned}$$
+              </div>
+              <div class="sol">
+                $$\begin{aligned}
+                  f(x) &= \frac{-10}{5\sqrt[4]{x}} \\
+                  f(x) &= -2x^{-\frac{1}{4}} \\
+                  f'(x) &= (-2)\left(-\frac{1}{4}\right)x^{-\frac{1}{4} - \frac{4}{4}} \\
+                  &= \frac{1}{2}x^{-\frac{5}{4}} \\
+                  &= \mathbf{\frac{1}{2\sqrt[4]{x^5}}}
+                \end{aligned}$$
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ EJERCICIOS EXTRA (colapsable) ══════════ -->
+    <section class="section-block">
+      <div class="sec-toggle" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('show');">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+        </div>
+        <h2>Ejercicios extra</h2>
+        <span class="chev">▼</span>
+      </div>
+      <div class="collapsible">
+        <div class="bloques-2">
+          <div class="mini-card">
+            <div class="mini-card-head">Bloque 1</div>
+            <div class="mini-card-body">
+              <div class="ej-line">$f(x) = -3\sqrt[5]{x^4}$</div>
+              <div class="ej-line">$f(x) = 10\sqrt{x^7}$</div>
+              <div class="ej-line">$f(x) = \dfrac{-1}{5\sqrt[3]{x^2}}$</div>
+              <div class="ej-line">$f(x) = 12\sqrt[6]{x^5}$</div>
+              <div class="ej-line">$f(x) = \dfrac{-8}{2\sqrt{x^3}}$</div>
+              <div class="ej-line">$f(x) = -6\sqrt[4]{x^9}$</div>
+            </div>
+          </div>
+          <div class="mini-card">
+            <div class="mini-card-head">Bloque 2</div>
+            <div class="mini-card-body">
+              <div class="ej-line">$f(x) = 4\sqrt[3]{x}$</div>
+              <div class="ej-line">$f(x) = -7\sqrt{x^3}$</div>
+              <div class="ej-line">$f(x) = \dfrac{5}{10\sqrt[4]{x^3}}$</div>
+              <div class="ej-line">$f(x) = -9\sqrt[5]{x^8}$</div>
+              <div class="ej-line">$f(x) = \dfrac{-3}{6\sqrt[3]{x^5}}$</div>
+              <div class="ej-line">$f(x) = 2\sqrt[3]{x^2}$</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ NAVEGACIÓN ══════════ -->
+    <div class="topic-nav-btns">
+      <a href="senos-cosenos.html" class="btn-anterior">← Derivadas: senos, cosenos…</a>
+    </div>
+
+  </main>
+  <script src="../../nav.js"></script>
+  <script src="../../footer.js"></script>
+</body>
+</html>

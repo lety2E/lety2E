@@ -1853,6 +1853,10 @@ body[data-section="math"] .katex svg {
   /* Mantén line-height radical-safe incluso en móvil estándar */
   body[data-section="math"] .mini-card-body .ej-line,
   body[data-section="math"] .mini-card-body .sol { line-height: 2.3; }
+  /* KaTeX anida .katex DENTRO de .katex-display: sin esto los dos
+     font-size de arriba se multiplican y la fórmula en $$ queda
+     diminuta. 1.21em es el valor propio de KaTeX. */
+  body[data-section="math"] .katex-display > .katex { font-size: 1.21em; }
 }
 
 /* Pantallas muy angostas (iPhone SE / mini, ~360–390px):
@@ -1878,6 +1882,9 @@ body[data-section="math"] .katex svg {
   /* Tag de tema (Mat 2 · Tema 1) más chico para que no sobresalga */
   body[data-section="math"] .topic-tag { font-size: .72rem; padding: .2rem .65rem; }
   body[data-section="math"] .topic-header h1 { font-size: 1.7rem; }
+
+  /* Ver la nota de arriba: el .katex interno no debe volver a encoger. */
+  body[data-section="math"] .katex-display > .katex { font-size: 1.21em; }
 }
 
 /* (Eliminado: scroll-shadow horizontal en cards.
