@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Regla de la cadena (P2) — Matemáticas 5 — LetyMath</title>
-  <meta name="description" content="Regla de la cadena con trigonométricas, logaritmos y raíces, con ejemplos y ejercicios resueltos paso a paso." />
+  <title>Derivada por definición — Matemáticas 5 — LetyMath</title>
+  <meta name="description" content="La derivada como límite del cociente de diferencias, con ejemplos y ejercicios resueltos paso a paso." />
   <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
   <link rel="icon" href="../../favicon.ico">
   <link rel="stylesheet" href="../../style.css">
@@ -222,10 +222,10 @@
       <p class="breadcrumb">
         <a href="../index.html">Inicio</a> ›
         <a href="index.html">Matemáticas 5</a> ›
-        Regla de la cadena (P2)
+        Derivada por definición
       </p>
-      <div class="topic-tag">Matemáticas 5 · Tema 10</div>
-      <h1>Regla de la cadena (P2)</h1>
+      <div class="topic-tag">Matemáticas 5 · Tema 11</div>
+      <h1>Derivada por definición</h1>
     </header>
 
     <!-- ══════════ APUNTES ══════════ -->
@@ -237,8 +237,9 @@
         <h2>Apuntes</h2>
       </div>
       <div class="regla-unica">
-        <p>La misma regla de la cadena, ahora con senos, cosenos, logaritmos y raíces:</p>
-        $$h(x) = f(g(x)) \longrightarrow h'(x) = [f'(g(x))][g'(x)]$$
+        <p>La derivada de una función $f(x)$ medida bajo la definición de límite se determina con la fórmula del cociente de diferencias:</p>
+        $$f'(x) = \lim_{h \to 0} \frac{f(x+h) - f(x)}{h}$$
+        <p>Para resolverla se calcula $f(x+h)$, se sustituye en el límite, se simplifica el numerador para poder factorizar y cancelar la $h$ que causa la indeterminación, y al final se evalúa el límite.</p>
       </div>
     </section>
 
@@ -253,34 +254,26 @@
       <div class="ejemplo-block">
         <div class="ejemplo-grid">
           <div class="ejemplo-item">
+            <div class="ej-rotulo">Ejemplo 1</div>
+            <p class="ejemplo-enunciado">Dada $f(x) = 5x - 3$, con $f(x+h) = 5(x+h) - 3$:</p>
             $$\begin{aligned}
-              g &= \sqrt[5]{\cos^3 x} \\
-              g &= (\cos x)^{3/5} \\
-              g' &= \frac{3}{5}(\cos x)^{\frac{3}{5}-\frac{5}{5}}(-\operatorname{sen} x) \\
-              g' &= \frac{3}{5}(\cos x)^{-\frac{2}{5}}(-\operatorname{sen} x) \\
-              g' &= -\frac{3\operatorname{sen} x}{5(\cos x)^{2/5}} \\
-              \mathbf{g'} &= \mathbf{-\frac{3\operatorname{sen} x}{5\sqrt[5]{\cos^2 x}}}
+              f'(x) &= \lim_{h \to 0} \frac{5(x+h) - 3 - (5x - 3)}{h} \\
+              &= \lim_{h \to 0} \frac{5x + 5h - 3 - 5x + 3}{h} \\
+              &= \lim_{h \to 0} \frac{5h}{h} \\
+              &= \lim_{h \to 0} 5 \\
+              \mathbf{f'(x)} &= \mathbf{5}
             \end{aligned}$$
           </div>
           <div class="ejemplo-item">
+            <div class="ej-rotulo">Ejemplo 2</div>
+            <p class="ejemplo-enunciado">Dada $f(x) = 2x^2 + 4$, con $f(x+h) = 2(x+h)^2 + 4$:</p>
             $$\begin{aligned}
-              h &= \cos(3x - 5x^2) \\
-              h' &= -\operatorname{sen}(3x - 5x^2)[3 - 10x] \\
-              \mathbf{h'} &= \mathbf{-3\operatorname{sen}(3x - 5x^2) + 10x\operatorname{sen}(3x - 5x^2)}
-            \end{aligned}$$
-          </div>
-          <div class="ejemplo-item">
-            $$\begin{aligned}
-              g(x) &= \ln(5x^2 - 5) \\
-              g'(x) &= \left[\frac{1}{5x^2 - 5}\right](10x) \\
-              \mathbf{g'(x)} &= \mathbf{\frac{10x}{5x^2 - 5}}
-            \end{aligned}$$
-          </div>
-          <div class="ejemplo-item">
-            $$\begin{aligned}
-              f &= 5\operatorname{sen}^3 x \\
-              f &= 5(\operatorname{sen} x)^3 \\
-              \mathbf{f'} &= \mathbf{15\operatorname{sen}^2 x \cdot \cos x}
+              f'(x) &= \lim_{h \to 0} \frac{2(x+h)^2 + 4 - (2x^2 + 4)}{h} \\
+              &= \lim_{h \to 0} \frac{2(x^2 + 2xh + h^2) + 4 - 2x^2 - 4}{h} \\
+              &= \lim_{h \to 0} \frac{2x^2 + 4xh + 2h^2 - 2x^2}{h} \\
+              &= \lim_{h \to 0} \frac{h(4x + 2h)}{h} \\
+              &= \lim_{h \to 0} (4x + 2h) \\
+              \mathbf{f'(x)} &= \mathbf{4x}
             \end{aligned}$$
           </div>
         </div>
@@ -299,19 +292,17 @@
         <div class="mini-card">
           <div class="mini-card-head">Bloque 1</div>
           <div class="mini-card-body">
-            <div class="ej-line">$f = \sqrt[3]{\cos^7 x}$</div>
-            <div class="ej-line">$f = \cos(7x - 5x^2)$</div>
-            <div class="ej-line">$f = \ln(3x^2 - 4)$</div>
-            <div class="ej-line">$f = -5\operatorname{sen}^5 x$</div>
+            <div class="ej-line">$f(x) = 4x + 2$</div>
+            <div class="ej-line">$f(x) = 6x - 5$</div>
+            <div class="ej-line">$f(x) = 3x^2$</div>
           </div>
         </div>
         <div class="mini-card">
           <div class="mini-card-head">Bloque 2</div>
           <div class="mini-card-body">
-            <div class="ej-line">$f = \sqrt{\operatorname{sen}^3 x}$</div>
-            <div class="ej-line">$f = \operatorname{sen}(6x - 4x^2)$</div>
-            <div class="ej-line">$f = \ln(2x^2 - 5x)$</div>
-            <div class="ej-line">$f = 4\cos^3 x$</div>
+            <div class="ej-line">$f(x) = -5x^2$</div>
+            <div class="ej-line">$f(x) = x^2 - 3x - 2$</div>
+            <div class="ej-line">$f(x) = x^2 - x + 5$</div>
           </div>
         </div>
       </div>
@@ -332,34 +323,34 @@
             <div class="mini-card-head">Bloque 1</div>
             <div class="mini-card-body">
               <div class="sol">
+                <div class="sol-rotulo">Dada $f(x) = 4x + 2$</div>
                 $$\begin{aligned}
-                  f &= \sqrt[3]{\cos^7 x} \\
-                  f &= (\cos x)^{7/3} \\
-                  f' &= \frac{7}{3}(\cos x)^{\frac{7}{3} - \frac{3}{3}}(-\operatorname{sen} x) \\
-                  f' &= \frac{7}{3}(\cos x)^{4/3}(-\operatorname{sen} x) \\
-                  \mathbf{f'} &= \mathbf{-\frac{7\operatorname{sen} x \cdot \sqrt[3]{\cos^4 x}}{3}}
+                  f'(x) &= \lim_{h \to 0} \frac{4(x+h) + 2 - (4x + 2)}{h} \\
+                  &= \lim_{h \to 0} \frac{4x + 4h + 2 - 4x - 2}{h} \\
+                  &= \lim_{h \to 0} \frac{4h}{h} \\
+                  &= \lim_{h \to 0} 4 \\
+                  \mathbf{f'(x)} &= \mathbf{4}
                 \end{aligned}$$
               </div>
               <div class="sol">
+                <div class="sol-rotulo">Dada $f(x) = 6x - 5$</div>
                 $$\begin{aligned}
-                  f &= \cos(7x - 5x^2) \\
-                  f' &= -\operatorname{sen}(7x - 5x^2)[7 - 10x] \\
-                  \mathbf{f'} &= \mathbf{-7\operatorname{sen}(7x - 5x^2) + 10x\operatorname{sen}(7x - 5x^2)}
+                  f'(x) &= \lim_{h \to 0} \frac{6(x+h) - 5 - (6x - 5)}{h} \\
+                  &= \lim_{h \to 0} \frac{6x + 6h - 5 - 6x + 5}{h} \\
+                  &= \lim_{h \to 0} \frac{6h}{h} \\
+                  &= \lim_{h \to 0} 6 \\
+                  \mathbf{f'(x)} &= \mathbf{6}
                 \end{aligned}$$
               </div>
               <div class="sol">
+                <div class="sol-rotulo">Dada $f(x) = 3x^2$</div>
                 $$\begin{aligned}
-                  f &= \ln(3x^2 - 4) \\
-                  f' &= \left[\frac{1}{3x^2 - 4}\right](6x) \\
-                  \mathbf{f'} &= \mathbf{\frac{6x}{3x^2 - 4}}
-                \end{aligned}$$
-              </div>
-              <div class="sol">
-                $$\begin{aligned}
-                  f &= -5\operatorname{sen}^5 x \\
-                  f &= -5(\operatorname{sen} x)^5 \\
-                  f' &= -25(\operatorname{sen} x)^4 \cdot \cos x \\
-                  \mathbf{f'} &= \mathbf{-25\operatorname{sen}^4 x \cdot \cos x}
+                  f'(x) &= \lim_{h \to 0} \frac{3(x+h)^2 - 3x^2}{h} \\
+                  &= \lim_{h \to 0} \frac{3(x^2 + 2xh + h^2) - 3x^2}{h} \\
+                  &= \lim_{h \to 0} \frac{3x^2 + 6xh + 3h^2 - 3x^2}{h} \\
+                  &= \lim_{h \to 0} \frac{h(6x + 3h)}{h} \\
+                  &= \lim_{h \to 0} (6x + 3h) \\
+                  \mathbf{f'(x)} &= \mathbf{6x}
                 \end{aligned}$$
               </div>
             </div>
@@ -368,34 +359,36 @@
             <div class="mini-card-head">Bloque 2</div>
             <div class="mini-card-body">
               <div class="sol">
+                <div class="sol-rotulo">Dada $f(x) = -5x^2$</div>
                 $$\begin{aligned}
-                  f &= \sqrt{\operatorname{sen}^3 x} \\
-                  f &= (\operatorname{sen} x)^{3/2} \\
-                  f' &= \frac{3}{2}(\operatorname{sen} x)^{\frac{3}{2} - \frac{2}{2}}(\cos x) \\
-                  f' &= \frac{3}{2}(\operatorname{sen} x)^{1/2}(\cos x) \\
-                  \mathbf{f'} &= \mathbf{\frac{3\cos x \sqrt{\operatorname{sen} x}}{2}}
+                  f'(x) &= \lim_{h \to 0} \frac{-5(x+h)^2 - (-5x^2)}{h} \\
+                  &= \lim_{h \to 0} \frac{-5(x^2 + 2xh + h^2) + 5x^2}{h} \\
+                  &= \lim_{h \to 0} \frac{-5x^2 - 10xh - 5h^2 + 5x^2}{h} \\
+                  &= \lim_{h \to 0} \frac{h(-10x - 5h)}{h} \\
+                  &= \lim_{h \to 0} (-10x - 5h) \\
+                  \mathbf{f'(x)} &= \mathbf{-10x}
                 \end{aligned}$$
               </div>
               <div class="sol">
+                <div class="sol-rotulo">Dada $f(x) = x^2 - 3x - 2$</div>
                 $$\begin{aligned}
-                  f &= \operatorname{sen}(6x - 4x^2) \\
-                  f' &= \cos(6x - 4x^2)[6 - 8x] \\
-                  \mathbf{f'} &= \mathbf{6\cos(6x - 4x^2) - 8x\cos(6x - 4x^2)}
+                  f'(x) &= \lim_{h \to 0} \frac{(x+h)^2 - 3(x+h) - 2 - (x^2 - 3x - 2)}{h} \\
+                  &= \lim_{h \to 0} \frac{x^2 + 2xh + h^2 - 3x - 3h - 2 - x^2 + 3x + 2}{h} \\
+                  &= \lim_{h \to 0} \frac{2xh + h^2 - 3h}{h} \\
+                  &= \lim_{h \to 0} \frac{h(2x + h - 3)}{h} \\
+                  &= \lim_{h \to 0} (2x + h - 3) \\
+                  \mathbf{f'(x)} &= \mathbf{2x - 3}
                 \end{aligned}$$
               </div>
               <div class="sol">
+                <div class="sol-rotulo">Dada $f(x) = x^2 - x + 5$</div>
                 $$\begin{aligned}
-                  f &= \ln(2x^2 - 5x) \\
-                  f' &= \left[\frac{1}{2x^2 - 5x}\right](4x - 5) \\
-                  \mathbf{f'} &= \mathbf{\frac{4x - 5}{2x^2 - 5x}}
-                \end{aligned}$$
-              </div>
-              <div class="sol">
-                $$\begin{aligned}
-                  f &= 4\cos^3 x \\
-                  f &= 4(\cos x)^3 \\
-                  f' &= 12(\cos x)^2(-\operatorname{sen} x) \\
-                  \mathbf{f'} &= \mathbf{-12\cos^2 x \cdot \operatorname{sen} x}
+                  f'(x) &= \lim_{h \to 0} \frac{(x+h)^2 - (x+h) + 5 - (x^2 - x + 5)}{h} \\
+                  &= \lim_{h \to 0} \frac{x^2 + 2xh + h^2 - x - h + 5 - x^2 + x - 5}{h} \\
+                  &= \lim_{h \to 0} \frac{2xh + h^2 - h}{h} \\
+                  &= \lim_{h \to 0} \frac{h(2x + h - 1)}{h} \\
+                  &= \lim_{h \to 0} (2x + h - 1) \\
+                  \mathbf{f'(x)} &= \mathbf{2x - 1}
                 \end{aligned}$$
               </div>
             </div>
@@ -418,27 +411,33 @@
           <div class="mini-card">
             <div class="mini-card-head">Bloque 1</div>
             <div class="mini-card-body">
-              <div class="ej-line">$y = \sqrt[4]{\cos^3 x}$</div>
-              <div class="ej-line">$y = \sqrt[3]{\operatorname{sen}^2 x}$</div>
-              <div class="ej-line">$y = \cos(8x - 3x^2)$</div>
-              <div class="ej-line">$y = \operatorname{sen}(5x^3 - 2x^2)$</div>
-              <div class="ej-line">$y = \ln(5x^2 - 2x)$</div>
-              <div class="ej-line">$y = \ln(3x^3 - 6x)$</div>
-              <div class="ej-line">$y = -3\operatorname{sen}^4 x$</div>
-              <div class="ej-line">$y = 6\cos^4 x$</div>
+              <div class="ej-line">$f(x) = 3x + 7$</div>
+              <div class="ej-line">$f(x) = 2x^2$</div>
+              <div class="ej-line">$f(x) = x^2 - 5x + 4$</div>
             </div>
           </div>
           <div class="mini-card">
             <div class="mini-card-head">Bloque 2</div>
             <div class="mini-card-body">
-              <div class="ej-line">$y = \sqrt[5]{\operatorname{sen}^4 x}$</div>
-              <div class="ej-line">$y = \sqrt{\cos^5 x}$</div>
-              <div class="ej-line">$y = \cos(4x^2 - 9x)$</div>
-              <div class="ej-line">$y = \operatorname{sen}(7x - 2x^3)$</div>
-              <div class="ej-line">$y = \ln(6x^2 - 3)$</div>
-              <div class="ej-line">$y = \ln(x^3 - 4x)$</div>
-              <div class="ej-line">$y = -2\cos^5 x$</div>
-              <div class="ej-line">$y = 7\operatorname{sen}^3 x$</div>
+              <div class="ej-line">$f(x) = -2x + 9$</div>
+              <div class="ej-line">$f(x) = -4x^2$</div>
+              <div class="ej-line">$f(x) = 2x^2 + 3x - 1$</div>
+            </div>
+          </div>
+          <div class="mini-card">
+            <div class="mini-card-head">Bloque 3</div>
+            <div class="mini-card-body">
+              <div class="ej-line">$f(x) = 5x - 4$</div>
+              <div class="ej-line">$f(x) = 6x^2$</div>
+              <div class="ej-line">$f(x) = -x^2 + 4x + 6$</div>
+            </div>
+          </div>
+          <div class="mini-card">
+            <div class="mini-card-head">Bloque 4</div>
+            <div class="mini-card-body">
+              <div class="ej-line">$f(x) = -7x - 2$</div>
+              <div class="ej-line">$f(x) = -3x^2$</div>
+              <div class="ej-line">$f(x) = 3x^2 - 2x + 5$</div>
             </div>
           </div>
         </div>
@@ -447,8 +446,8 @@
 
     <!-- ══════════ NAVEGACIÓN ══════════ -->
     <div class="topic-nav-btns">
-      <a href="regla-cadena-p1.html" class="btn-anterior">← Regla de la cadena (P1)</a>
-      <a href="derivada-definicion.html" class="btn-siguiente">Derivada por definición →</a>
+      <a href="regla-cadena-p2.html" class="btn-anterior">← Regla de la cadena (P2)</a>
+      <a href="historia-calculo.html" class="btn-siguiente">Historia del cálculo →</a>
     </div>
 
   </main>

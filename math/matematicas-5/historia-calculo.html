@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Regla de la cadena (P2) — Matemáticas 5 — LetyMath</title>
-  <meta name="description" content="Regla de la cadena con trigonométricas, logaritmos y raíces, con ejemplos y ejercicios resueltos paso a paso." />
+  <title>Historia del cálculo — Matemáticas 5 — LetyMath</title>
+  <meta name="description" content="Guía de investigación sobre el nacimiento del cálculo: Descartes, Fermat, Barrow, Newton y Leibniz." />
   <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
   <link rel="icon" href="../../favicon.ico">
   <link rel="stylesheet" href="../../style.css">
@@ -213,6 +213,15 @@
     .btn-anterior:hover { background: var(--accent-light); transform: translateX(-3px); }
     .btn-siguiente { background: var(--accent); color: #fff; }
     .btn-siguiente:hover { background: var(--M); color: #fff; transform: translateX(3px); }
+    .mini-card-body .pregunta {
+      padding: .7rem 0;
+      border-bottom: 1px solid var(--border-s);
+      line-height: 1.65;
+      white-space: normal;
+      text-align: left;
+    }
+    .mini-card-body .pregunta:last-child { border-bottom: none; padding-bottom: .25rem; }
+    .mini-card-body .pregunta:first-child { padding-top: .25rem; }
   </style>
 </head>
 <body data-section="math">
@@ -222,10 +231,10 @@
       <p class="breadcrumb">
         <a href="../index.html">Inicio</a> ›
         <a href="index.html">Matemáticas 5</a> ›
-        Regla de la cadena (P2)
+        Historia del cálculo
       </p>
-      <div class="topic-tag">Matemáticas 5 · Tema 10</div>
-      <h1>Regla de la cadena (P2)</h1>
+      <div class="topic-tag">Matemáticas 5 · Tema 12</div>
+      <h1>Historia del cálculo</h1>
     </header>
 
     <!-- ══════════ APUNTES ══════════ -->
@@ -234,56 +243,16 @@
         <div class="sec-icon">
           <svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
         </div>
-        <h2>Apuntes</h2>
+        <h2>De qué se trata</h2>
       </div>
       <div class="regla-unica">
-        <p>La misma regla de la cadena, ahora con senos, cosenos, logaritmos y raíces:</p>
-        $$h(x) = f(g(x)) \longrightarrow h'(x) = [f'(g(x))][g'(x)]$$
-      </div>
-    </section>
-
-    <!-- ══════════ EJEMPLOS ══════════ -->
-    <section class="section-block ejemplo-section">
-      <div class="ejemplo-head">
-        <div class="sec-icon">
-          <svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
-        </div>
-        <h3>Ejemplos</h3>
-      </div>
-      <div class="ejemplo-block">
-        <div class="ejemplo-grid">
-          <div class="ejemplo-item">
-            $$\begin{aligned}
-              g &= \sqrt[5]{\cos^3 x} \\
-              g &= (\cos x)^{3/5} \\
-              g' &= \frac{3}{5}(\cos x)^{\frac{3}{5}-\frac{5}{5}}(-\operatorname{sen} x) \\
-              g' &= \frac{3}{5}(\cos x)^{-\frac{2}{5}}(-\operatorname{sen} x) \\
-              g' &= -\frac{3\operatorname{sen} x}{5(\cos x)^{2/5}} \\
-              \mathbf{g'} &= \mathbf{-\frac{3\operatorname{sen} x}{5\sqrt[5]{\cos^2 x}}}
-            \end{aligned}$$
-          </div>
-          <div class="ejemplo-item">
-            $$\begin{aligned}
-              h &= \cos(3x - 5x^2) \\
-              h' &= -\operatorname{sen}(3x - 5x^2)[3 - 10x] \\
-              \mathbf{h'} &= \mathbf{-3\operatorname{sen}(3x - 5x^2) + 10x\operatorname{sen}(3x - 5x^2)}
-            \end{aligned}$$
-          </div>
-          <div class="ejemplo-item">
-            $$\begin{aligned}
-              g(x) &= \ln(5x^2 - 5) \\
-              g'(x) &= \left[\frac{1}{5x^2 - 5}\right](10x) \\
-              \mathbf{g'(x)} &= \mathbf{\frac{10x}{5x^2 - 5}}
-            \end{aligned}$$
-          </div>
-          <div class="ejemplo-item">
-            $$\begin{aligned}
-              f &= 5\operatorname{sen}^3 x \\
-              f &= 5(\operatorname{sen} x)^3 \\
-              \mathbf{f'} &= \mathbf{15\operatorname{sen}^2 x \cdot \cos x}
-            \end{aligned}$$
-          </div>
-        </div>
+        <p>
+          Este tema no se resuelve con fórmulas: es una <strong>investigación</strong>.
+          Las preguntas de abajo recorren de dónde viene el cálculo — de la geometría analítica
+          del siglo XVII a la disputa entre Newton y Leibniz — y se contestan buscando,
+          leyendo y escribiendo con tus propias palabras.
+        </p>
+        <p>Por eso esta página no lleva sección de respuestas.</p>
       </div>
     </section>
 
@@ -293,153 +262,29 @@
         <div class="sec-icon">
           <svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
         </div>
-        <h2>Ejercicios</h2>
+        <h2>Preguntas de investigación</h2>
       </div>
       <div class="bloques-2">
         <div class="mini-card">
-          <div class="mini-card-head">Bloque 1</div>
+          <div class="mini-card-head">Los antecesores</div>
           <div class="mini-card-body">
-            <div class="ej-line">$f = \sqrt[3]{\cos^7 x}$</div>
-            <div class="ej-line">$f = \cos(7x - 5x^2)$</div>
-            <div class="ej-line">$f = \ln(3x^2 - 4)$</div>
-            <div class="ej-line">$f = -5\operatorname{sen}^5 x$</div>
+            <div class="pregunta">¿Qué estudia la Geometría Analítica? ¿En qué siglo surgió?</div>
+            <div class="pregunta">¿A qué matemáticos se atribuye el nacimiento de la Geometría Analítica? Escribe brevemente algo acerca de su biografía.</div>
+            <div class="pregunta">Escribe brevemente la biografía de Barrow.</div>
+            <div class="pregunta">Los matemáticos Barrow y Fermat se consideran los antecesores inmediatos del cálculo. Menciona algunas de sus aportaciones que sirvieron de base para la invención formal del cálculo.</div>
+            <div class="pregunta">¿Cuáles fueron los cuatro problemas que motivaron la invención del cálculo? Describe e ilustra cada uno de ellos.</div>
           </div>
         </div>
         <div class="mini-card">
-          <div class="mini-card-head">Bloque 2</div>
+          <div class="mini-card-head">Newton y Leibniz</div>
           <div class="mini-card-body">
-            <div class="ej-line">$f = \sqrt{\operatorname{sen}^3 x}$</div>
-            <div class="ej-line">$f = \operatorname{sen}(6x - 4x^2)$</div>
-            <div class="ej-line">$f = \ln(2x^2 - 5x)$</div>
-            <div class="ej-line">$f = 4\cos^3 x$</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ══════════ RESPUESTAS (colapsable) ══════════ -->
-    <section class="section-block">
-      <div class="sec-toggle" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('show');">
-        <div class="sec-icon">
-          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-        </div>
-        <h2>Respuestas</h2>
-        <span class="chev">▼</span>
-      </div>
-      <div class="collapsible">
-        <div class="bloques-2">
-          <div class="mini-card">
-            <div class="mini-card-head">Bloque 1</div>
-            <div class="mini-card-body">
-              <div class="sol">
-                $$\begin{aligned}
-                  f &= \sqrt[3]{\cos^7 x} \\
-                  f &= (\cos x)^{7/3} \\
-                  f' &= \frac{7}{3}(\cos x)^{\frac{7}{3} - \frac{3}{3}}(-\operatorname{sen} x) \\
-                  f' &= \frac{7}{3}(\cos x)^{4/3}(-\operatorname{sen} x) \\
-                  \mathbf{f'} &= \mathbf{-\frac{7\operatorname{sen} x \cdot \sqrt[3]{\cos^4 x}}{3}}
-                \end{aligned}$$
-              </div>
-              <div class="sol">
-                $$\begin{aligned}
-                  f &= \cos(7x - 5x^2) \\
-                  f' &= -\operatorname{sen}(7x - 5x^2)[7 - 10x] \\
-                  \mathbf{f'} &= \mathbf{-7\operatorname{sen}(7x - 5x^2) + 10x\operatorname{sen}(7x - 5x^2)}
-                \end{aligned}$$
-              </div>
-              <div class="sol">
-                $$\begin{aligned}
-                  f &= \ln(3x^2 - 4) \\
-                  f' &= \left[\frac{1}{3x^2 - 4}\right](6x) \\
-                  \mathbf{f'} &= \mathbf{\frac{6x}{3x^2 - 4}}
-                \end{aligned}$$
-              </div>
-              <div class="sol">
-                $$\begin{aligned}
-                  f &= -5\operatorname{sen}^5 x \\
-                  f &= -5(\operatorname{sen} x)^5 \\
-                  f' &= -25(\operatorname{sen} x)^4 \cdot \cos x \\
-                  \mathbf{f'} &= \mathbf{-25\operatorname{sen}^4 x \cdot \cos x}
-                \end{aligned}$$
-              </div>
-            </div>
-          </div>
-          <div class="mini-card">
-            <div class="mini-card-head">Bloque 2</div>
-            <div class="mini-card-body">
-              <div class="sol">
-                $$\begin{aligned}
-                  f &= \sqrt{\operatorname{sen}^3 x} \\
-                  f &= (\operatorname{sen} x)^{3/2} \\
-                  f' &= \frac{3}{2}(\operatorname{sen} x)^{\frac{3}{2} - \frac{2}{2}}(\cos x) \\
-                  f' &= \frac{3}{2}(\operatorname{sen} x)^{1/2}(\cos x) \\
-                  \mathbf{f'} &= \mathbf{\frac{3\cos x \sqrt{\operatorname{sen} x}}{2}}
-                \end{aligned}$$
-              </div>
-              <div class="sol">
-                $$\begin{aligned}
-                  f &= \operatorname{sen}(6x - 4x^2) \\
-                  f' &= \cos(6x - 4x^2)[6 - 8x] \\
-                  \mathbf{f'} &= \mathbf{6\cos(6x - 4x^2) - 8x\cos(6x - 4x^2)}
-                \end{aligned}$$
-              </div>
-              <div class="sol">
-                $$\begin{aligned}
-                  f &= \ln(2x^2 - 5x) \\
-                  f' &= \left[\frac{1}{2x^2 - 5x}\right](4x - 5) \\
-                  \mathbf{f'} &= \mathbf{\frac{4x - 5}{2x^2 - 5x}}
-                \end{aligned}$$
-              </div>
-              <div class="sol">
-                $$\begin{aligned}
-                  f &= 4\cos^3 x \\
-                  f &= 4(\cos x)^3 \\
-                  f' &= 12(\cos x)^2(-\operatorname{sen} x) \\
-                  \mathbf{f'} &= \mathbf{-12\cos^2 x \cdot \operatorname{sen} x}
-                \end{aligned}$$
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ══════════ EJERCICIOS EXTRA (colapsable) ══════════ -->
-    <section class="section-block">
-      <div class="sec-toggle" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('show');">
-        <div class="sec-icon">
-          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
-        </div>
-        <h2>Ejercicios extra</h2>
-        <span class="chev">▼</span>
-      </div>
-      <div class="collapsible">
-        <div class="bloques-2">
-          <div class="mini-card">
-            <div class="mini-card-head">Bloque 1</div>
-            <div class="mini-card-body">
-              <div class="ej-line">$y = \sqrt[4]{\cos^3 x}$</div>
-              <div class="ej-line">$y = \sqrt[3]{\operatorname{sen}^2 x}$</div>
-              <div class="ej-line">$y = \cos(8x - 3x^2)$</div>
-              <div class="ej-line">$y = \operatorname{sen}(5x^3 - 2x^2)$</div>
-              <div class="ej-line">$y = \ln(5x^2 - 2x)$</div>
-              <div class="ej-line">$y = \ln(3x^3 - 6x)$</div>
-              <div class="ej-line">$y = -3\operatorname{sen}^4 x$</div>
-              <div class="ej-line">$y = 6\cos^4 x$</div>
-            </div>
-          </div>
-          <div class="mini-card">
-            <div class="mini-card-head">Bloque 2</div>
-            <div class="mini-card-body">
-              <div class="ej-line">$y = \sqrt[5]{\operatorname{sen}^4 x}$</div>
-              <div class="ej-line">$y = \sqrt{\cos^5 x}$</div>
-              <div class="ej-line">$y = \cos(4x^2 - 9x)$</div>
-              <div class="ej-line">$y = \operatorname{sen}(7x - 2x^3)$</div>
-              <div class="ej-line">$y = \ln(6x^2 - 3)$</div>
-              <div class="ej-line">$y = \ln(x^3 - 4x)$</div>
-              <div class="ej-line">$y = -2\cos^5 x$</div>
-              <div class="ej-line">$y = 7\operatorname{sen}^3 x$</div>
-            </div>
+            <div class="pregunta">Narra en cinco renglones la disputa que hubo entre Leibniz y Newton acerca de la invención del cálculo.</div>
+            <div class="pregunta">Escribe brevemente la biografía de Leibniz.</div>
+            <div class="pregunta">Escribe brevemente la biografía de Newton.</div>
+            <div class="pregunta">¿Qué enfoque le daba Newton al cálculo?</div>
+            <div class="pregunta">¿Qué enfoque le daba Leibniz al cálculo?</div>
+            <div class="pregunta">Realiza una caricatura o meme acerca de esta disputa.</div>
+            <div class="pregunta">Realiza una reflexión a modo de conclusión acerca del nacimiento del cálculo.</div>
           </div>
         </div>
       </div>
@@ -447,8 +292,8 @@
 
     <!-- ══════════ NAVEGACIÓN ══════════ -->
     <div class="topic-nav-btns">
-      <a href="regla-cadena-p1.html" class="btn-anterior">← Regla de la cadena (P1)</a>
-      <a href="derivada-definicion.html" class="btn-siguiente">Derivada por definición →</a>
+      <a href="derivada-definicion.html" class="btn-anterior">← Derivada por definición</a>
+      <a href="integrales-indefinidas.html" class="btn-siguiente">Integrales indefinidas →</a>
     </div>
 
   </main>

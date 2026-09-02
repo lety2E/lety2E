@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Regla de la cadena (P2) — Matemáticas 5 — LetyMath</title>
-  <meta name="description" content="Regla de la cadena con trigonométricas, logaritmos y raíces, con ejemplos y ejercicios resueltos paso a paso." />
+  <title>Integrales indefinidas — Matemáticas 5 — LetyMath</title>
+  <meta name="description" content="Formulario de integración y resolución de integrales indefinidas término a término, con ejercicios resueltos." />
   <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
   <link rel="icon" href="../../favicon.ico">
   <link rel="stylesheet" href="../../style.css">
@@ -222,10 +222,10 @@
       <p class="breadcrumb">
         <a href="../index.html">Inicio</a> ›
         <a href="index.html">Matemáticas 5</a> ›
-        Regla de la cadena (P2)
+        Integrales indefinidas
       </p>
-      <div class="topic-tag">Matemáticas 5 · Tema 10</div>
-      <h1>Regla de la cadena (P2)</h1>
+      <div class="topic-tag">Matemáticas 5 · Tema 13</div>
+      <h1>Integrales indefinidas</h1>
     </header>
 
     <!-- ══════════ APUNTES ══════════ -->
@@ -234,56 +234,58 @@
         <div class="sec-icon">
           <svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
         </div>
-        <h2>Apuntes</h2>
+        <h2>Apuntes — Formulario de integración</h2>
       </div>
-      <div class="regla-unica">
-        <p>La misma regla de la cadena, ahora con senos, cosenos, logaritmos y raíces:</p>
-        $$h(x) = f(g(x)) \longrightarrow h'(x) = [f'(g(x))][g'(x)]$$
+      <div class="reglas-grid">
+        <div class="regla-card">
+          <div class="regla-card-title">Constante</div>
+          <div class="regla-card-body">$\displaystyle \int k \, dx = kx + c$</div>
+        </div>
+        <div class="regla-card">
+          <div class="regla-card-title">Potencia</div>
+          <div class="regla-card-body">$\displaystyle \int x^n \, dx = \dfrac{x^{n+1}}{n+1} + c$</div>
+        </div>
+        <div class="regla-card">
+          <div class="regla-card-title">Uno entre x</div>
+          <div class="regla-card-body">$\displaystyle \int \dfrac{1}{x} \, dx = \ln|x| + c$</div>
+        </div>
+        <div class="regla-card">
+          <div class="regla-card-title">Seno</div>
+          <div class="regla-card-body">$\displaystyle \int \operatorname{sen} x \, dx = -\cos x + c$</div>
+        </div>
+        <div class="regla-card">
+          <div class="regla-card-title">Coseno</div>
+          <div class="regla-card-body">$\displaystyle \int \cos x \, dx = \operatorname{sen} x + c$</div>
+        </div>
+        <div class="regla-card">
+          <div class="regla-card-title">Secante al cuadrado</div>
+          <div class="regla-card-body">$\displaystyle \int \sec^2 x \, dx = \tan x + c$</div>
+        </div>
+        <div class="regla-card">
+          <div class="regla-card-title">Exponencial $e^x$</div>
+          <div class="regla-card-body">$\displaystyle \int e^x \, dx = e^x + c$</div>
+        </div>
+        <div class="regla-card">
+          <div class="regla-card-title">Exponencial $a^x$</div>
+          <div class="regla-card-body">$\displaystyle \int a^x (\ln a) \, dx = a^x + c$</div>
+        </div>
       </div>
     </section>
 
-    <!-- ══════════ EJEMPLOS ══════════ -->
+    <!-- ══════════ EJEMPLO ══════════ -->
     <section class="section-block ejemplo-section">
       <div class="ejemplo-head">
         <div class="sec-icon">
           <svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
         </div>
-        <h3>Ejemplos</h3>
+        <h3>Ejemplo</h3>
       </div>
       <div class="ejemplo-block">
-        <div class="ejemplo-grid">
-          <div class="ejemplo-item">
-            $$\begin{aligned}
-              g &= \sqrt[5]{\cos^3 x} \\
-              g &= (\cos x)^{3/5} \\
-              g' &= \frac{3}{5}(\cos x)^{\frac{3}{5}-\frac{5}{5}}(-\operatorname{sen} x) \\
-              g' &= \frac{3}{5}(\cos x)^{-\frac{2}{5}}(-\operatorname{sen} x) \\
-              g' &= -\frac{3\operatorname{sen} x}{5(\cos x)^{2/5}} \\
-              \mathbf{g'} &= \mathbf{-\frac{3\operatorname{sen} x}{5\sqrt[5]{\cos^2 x}}}
-            \end{aligned}$$
-          </div>
-          <div class="ejemplo-item">
-            $$\begin{aligned}
-              h &= \cos(3x - 5x^2) \\
-              h' &= -\operatorname{sen}(3x - 5x^2)[3 - 10x] \\
-              \mathbf{h'} &= \mathbf{-3\operatorname{sen}(3x - 5x^2) + 10x\operatorname{sen}(3x - 5x^2)}
-            \end{aligned}$$
-          </div>
-          <div class="ejemplo-item">
-            $$\begin{aligned}
-              g(x) &= \ln(5x^2 - 5) \\
-              g'(x) &= \left[\frac{1}{5x^2 - 5}\right](10x) \\
-              \mathbf{g'(x)} &= \mathbf{\frac{10x}{5x^2 - 5}}
-            \end{aligned}$$
-          </div>
-          <div class="ejemplo-item">
-            $$\begin{aligned}
-              f &= 5\operatorname{sen}^3 x \\
-              f &= 5(\operatorname{sen} x)^3 \\
-              \mathbf{f'} &= \mathbf{15\operatorname{sen}^2 x \cdot \cos x}
-            \end{aligned}$$
-          </div>
-        </div>
+        <p class="ejemplo-enunciado">Se integra término a término, cada uno con su fórmula del formulario:</p>
+        $$\begin{aligned}
+          &\int \left( 5x^2 + 4\operatorname{sen} x - 2 + 3\sec^2 x + \frac{5}{x} + 7e^x \right) dx = \\
+          &= \mathbf{\frac{5x^3}{3} - 4\cos x - 2x + 3\tan x + 5\ln|x| + 7e^x + c}
+        \end{aligned}$$
       </div>
     </section>
 
@@ -295,23 +297,21 @@
         </div>
         <h2>Ejercicios</h2>
       </div>
-      <div class="bloques-2">
+      <div class="bloques-1">
         <div class="mini-card">
           <div class="mini-card-head">Bloque 1</div>
           <div class="mini-card-body">
-            <div class="ej-line">$f = \sqrt[3]{\cos^7 x}$</div>
-            <div class="ej-line">$f = \cos(7x - 5x^2)$</div>
-            <div class="ej-line">$f = \ln(3x^2 - 4)$</div>
-            <div class="ej-line">$f = -5\operatorname{sen}^5 x$</div>
+            <div class="ej-line">$\displaystyle \int \left( 4\sec^2 x - 8x + 6 - 3\operatorname{sen} x + 4e^x - 6x^4 \right) dx$</div>
+            <div class="ej-line">$\displaystyle \int \left( -4\cos x - 5 + \frac{3}{x} - 2^x \ln 2 - 8x^3 + 4e^x \right) dx$</div>
+            <div class="ej-line">$\displaystyle \int \left( 5\operatorname{sen} x - 4 - 7x^4 - \frac{5}{x} + 7\sec^2 x - 5x \right) dx$</div>
           </div>
         </div>
         <div class="mini-card">
           <div class="mini-card-head">Bloque 2</div>
           <div class="mini-card-body">
-            <div class="ej-line">$f = \sqrt{\operatorname{sen}^3 x}$</div>
-            <div class="ej-line">$f = \operatorname{sen}(6x - 4x^2)$</div>
-            <div class="ej-line">$f = \ln(2x^2 - 5x)$</div>
-            <div class="ej-line">$f = 4\cos^3 x$</div>
+            <div class="ej-line">$\displaystyle \int \left( 6 - 7x^2 - \frac{8}{x} + 4\cos x - 7^x \ln 7 - e^x \right) dx$</div>
+            <div class="ej-line">$\displaystyle \int \left( 2\operatorname{sen} x - 9x^2 + 6x^3 - \frac{3}{x} + 2e^x - 4\cos x \right) dx$</div>
+            <div class="ej-line">$\displaystyle \int \left( 7x^2 - 4x + \frac{3}{x} - 2 + 4e^x - 5\operatorname{sen} x - \sec^2 x \right) dx$</div>
           </div>
         </div>
       </div>
@@ -327,39 +327,29 @@
         <span class="chev">▼</span>
       </div>
       <div class="collapsible">
-        <div class="bloques-2">
+        <div class="bloques-1">
           <div class="mini-card">
             <div class="mini-card-head">Bloque 1</div>
             <div class="mini-card-body">
               <div class="sol">
                 $$\begin{aligned}
-                  f &= \sqrt[3]{\cos^7 x} \\
-                  f &= (\cos x)^{7/3} \\
-                  f' &= \frac{7}{3}(\cos x)^{\frac{7}{3} - \frac{3}{3}}(-\operatorname{sen} x) \\
-                  f' &= \frac{7}{3}(\cos x)^{4/3}(-\operatorname{sen} x) \\
-                  \mathbf{f'} &= \mathbf{-\frac{7\operatorname{sen} x \cdot \sqrt[3]{\cos^4 x}}{3}}
+                  &\int \left( 4\sec^2 x - 8x + 6 - 3\operatorname{sen} x + 4e^x - 6x^4 \right) dx = \\
+                  &= 4\tan x - \frac{8x^2}{2} + 6x - 3(-\cos x) + 4e^x - \frac{6x^5}{5} + c = \\
+                  &= \mathbf{4\tan x - 4x^2 + 6x + 3\cos x + 4e^x - \frac{6x^5}{5} + c}
                 \end{aligned}$$
               </div>
               <div class="sol">
                 $$\begin{aligned}
-                  f &= \cos(7x - 5x^2) \\
-                  f' &= -\operatorname{sen}(7x - 5x^2)[7 - 10x] \\
-                  \mathbf{f'} &= \mathbf{-7\operatorname{sen}(7x - 5x^2) + 10x\operatorname{sen}(7x - 5x^2)}
+                  &\int \left( -4\cos x - 5 + \frac{3}{x} - 2^x \ln 2 - 8x^3 + 4e^x \right) dx = \\
+                  &= -4\operatorname{sen} x - 5x + 3\ln|x| - 2^x - \frac{8x^4}{4} + 4e^x + c = \\
+                  &= \mathbf{-4\operatorname{sen} x - 5x + 3\ln|x| - 2^x - 2x^4 + 4e^x + c}
                 \end{aligned}$$
               </div>
               <div class="sol">
                 $$\begin{aligned}
-                  f &= \ln(3x^2 - 4) \\
-                  f' &= \left[\frac{1}{3x^2 - 4}\right](6x) \\
-                  \mathbf{f'} &= \mathbf{\frac{6x}{3x^2 - 4}}
-                \end{aligned}$$
-              </div>
-              <div class="sol">
-                $$\begin{aligned}
-                  f &= -5\operatorname{sen}^5 x \\
-                  f &= -5(\operatorname{sen} x)^5 \\
-                  f' &= -25(\operatorname{sen} x)^4 \cdot \cos x \\
-                  \mathbf{f'} &= \mathbf{-25\operatorname{sen}^4 x \cdot \cos x}
+                  &\int \left( 5\operatorname{sen} x - 4 - 7x^4 - \frac{5}{x} + 7\sec^2 x - 5x \right) dx = \\
+                  &= 5(-\cos x) - 4x - \frac{7x^5}{5} - 5\ln|x| + 7\tan x - \frac{5x^2}{2} + c = \\
+                  &= \mathbf{-5\cos x - 4x - \frac{7x^5}{5} - 5\ln|x| + 7\tan x - \frac{5x^2}{2} + c}
                 \end{aligned}$$
               </div>
             </div>
@@ -369,33 +359,22 @@
             <div class="mini-card-body">
               <div class="sol">
                 $$\begin{aligned}
-                  f &= \sqrt{\operatorname{sen}^3 x} \\
-                  f &= (\operatorname{sen} x)^{3/2} \\
-                  f' &= \frac{3}{2}(\operatorname{sen} x)^{\frac{3}{2} - \frac{2}{2}}(\cos x) \\
-                  f' &= \frac{3}{2}(\operatorname{sen} x)^{1/2}(\cos x) \\
-                  \mathbf{f'} &= \mathbf{\frac{3\cos x \sqrt{\operatorname{sen} x}}{2}}
+                  &\int \left( 6 - 7x^2 - \frac{8}{x} + 4\cos x - 7^x \ln 7 - e^x \right) dx = \\
+                  &= \mathbf{6x - \frac{7x^3}{3} - 8\ln|x| + 4\operatorname{sen} x - 7^x - e^x + c}
                 \end{aligned}$$
               </div>
               <div class="sol">
                 $$\begin{aligned}
-                  f &= \operatorname{sen}(6x - 4x^2) \\
-                  f' &= \cos(6x - 4x^2)[6 - 8x] \\
-                  \mathbf{f'} &= \mathbf{6\cos(6x - 4x^2) - 8x\cos(6x - 4x^2)}
+                  &\int \left( 2\operatorname{sen} x - 9x^2 + 6x^3 - \frac{3}{x} + 2e^x - 4\cos x \right) dx = \\
+                  &= 2(-\cos x) - \frac{9x^3}{3} + \frac{6x^4}{4} - 3\ln|x| + 2e^x - 4\operatorname{sen} x + c = \\
+                  &= \mathbf{-2\cos x - 3x^3 + \frac{3x^4}{2} - 3\ln|x| + 2e^x - 4\operatorname{sen} x + c}
                 \end{aligned}$$
               </div>
               <div class="sol">
                 $$\begin{aligned}
-                  f &= \ln(2x^2 - 5x) \\
-                  f' &= \left[\frac{1}{2x^2 - 5x}\right](4x - 5) \\
-                  \mathbf{f'} &= \mathbf{\frac{4x - 5}{2x^2 - 5x}}
-                \end{aligned}$$
-              </div>
-              <div class="sol">
-                $$\begin{aligned}
-                  f &= 4\cos^3 x \\
-                  f &= 4(\cos x)^3 \\
-                  f' &= 12(\cos x)^2(-\operatorname{sen} x) \\
-                  \mathbf{f'} &= \mathbf{-12\cos^2 x \cdot \operatorname{sen} x}
+                  &\int \left( 7x^2 - 4x + \frac{3}{x} - 2 + 4e^x - 5\operatorname{sen} x - \sec^2 x \right) dx = \\
+                  &= \frac{7x^3}{3} - \frac{4x^2}{2} + 3\ln|x| - 2x + 4e^x - 5(-\cos x) - \tan x + c = \\
+                  &= \mathbf{\frac{7x^3}{3} - 2x^2 + 3\ln|x| - 2x + 4e^x + 5\cos x - \tan x + c}
                 \end{aligned}$$
               </div>
             </div>
@@ -414,31 +393,37 @@
         <span class="chev">▼</span>
       </div>
       <div class="collapsible">
-        <div class="bloques-2">
+        <div class="bloques-1">
           <div class="mini-card">
             <div class="mini-card-head">Bloque 1</div>
             <div class="mini-card-body">
-              <div class="ej-line">$y = \sqrt[4]{\cos^3 x}$</div>
-              <div class="ej-line">$y = \sqrt[3]{\operatorname{sen}^2 x}$</div>
-              <div class="ej-line">$y = \cos(8x - 3x^2)$</div>
-              <div class="ej-line">$y = \operatorname{sen}(5x^3 - 2x^2)$</div>
-              <div class="ej-line">$y = \ln(5x^2 - 2x)$</div>
-              <div class="ej-line">$y = \ln(3x^3 - 6x)$</div>
-              <div class="ej-line">$y = -3\operatorname{sen}^4 x$</div>
-              <div class="ej-line">$y = 6\cos^4 x$</div>
+              <div class="ej-line">$\displaystyle \int \left( 3\sec^2 x - 5x + 2 - 4\operatorname{sen} x + 6e^x - 10x^3 \right) dx$</div>
+              <div class="ej-line">$\displaystyle \int \left( -6\cos x - 2 + \frac{4}{x} - 3^x \ln 3 - 5x^4 + 2e^x \right) dx$</div>
+              <div class="ej-line">$\displaystyle \int \left( 8\operatorname{sen} x - 7 - 3x^2 - \frac{2}{x} + 5\sec^2 x - 4x \right) dx$</div>
             </div>
           </div>
           <div class="mini-card">
             <div class="mini-card-head">Bloque 2</div>
             <div class="mini-card-body">
-              <div class="ej-line">$y = \sqrt[5]{\operatorname{sen}^4 x}$</div>
-              <div class="ej-line">$y = \sqrt{\cos^5 x}$</div>
-              <div class="ej-line">$y = \cos(4x^2 - 9x)$</div>
-              <div class="ej-line">$y = \operatorname{sen}(7x - 2x^3)$</div>
-              <div class="ej-line">$y = \ln(6x^2 - 3)$</div>
-              <div class="ej-line">$y = \ln(x^3 - 4x)$</div>
-              <div class="ej-line">$y = -2\cos^5 x$</div>
-              <div class="ej-line">$y = 7\operatorname{sen}^3 x$</div>
+              <div class="ej-line">$\displaystyle \int \left( 5 - 4x^3 - \frac{7}{x} + 2\cos x - 5^x \ln 5 - e^x \right) dx$</div>
+              <div class="ej-line">$\displaystyle \int \left( 3\operatorname{sen} x - 6x^2 + 8x^3 - \frac{2}{x} + 5e^x - 2\cos x \right) dx$</div>
+              <div class="ej-line">$\displaystyle \int \left( 5x^2 - 6x + \frac{2}{x} - 1 + 3e^x - 4\operatorname{sen} x - \sec^2 x \right) dx$</div>
+            </div>
+          </div>
+          <div class="mini-card">
+            <div class="mini-card-head">Bloque 3</div>
+            <div class="mini-card-body">
+              <div class="ej-line">$\displaystyle \int \left( 2\sec^2 x - 9x^2 + 5 - 2\operatorname{sen} x + 3e^x - 7x^4 \right) dx$</div>
+              <div class="ej-line">$\displaystyle \int \left( -3\cos x - 4 + \frac{6}{x} - 4^x \ln 4 - 9x^2 + 5e^x \right) dx$</div>
+              <div class="ej-line">$\displaystyle \int \left( 6\operatorname{sen} x - 1 - 2x^4 - \frac{3}{x} + 4\sec^2 x - 2x \right) dx$</div>
+            </div>
+          </div>
+          <div class="mini-card">
+            <div class="mini-card-head">Bloque 4</div>
+            <div class="mini-card-body">
+              <div class="ej-line">$\displaystyle \int \left( 9 - 3x^2 - \frac{4}{x} + 5\cos x - 6^x \ln 6 - 2e^x \right) dx$</div>
+              <div class="ej-line">$\displaystyle \int \left( 4\operatorname{sen} x - 12x^2 + 10x^3 - \frac{5}{x} + 6e^x - 3\cos x \right) dx$</div>
+              <div class="ej-line">$\displaystyle \int \left( 8x^2 - 2x + \frac{4}{x} - 3 + 2e^x - 3\operatorname{sen} x - 2\sec^2 x \right) dx$</div>
             </div>
           </div>
         </div>
@@ -447,8 +432,7 @@
 
     <!-- ══════════ NAVEGACIÓN ══════════ -->
     <div class="topic-nav-btns">
-      <a href="regla-cadena-p1.html" class="btn-anterior">← Regla de la cadena (P1)</a>
-      <a href="derivada-definicion.html" class="btn-siguiente">Derivada por definición →</a>
+      <a href="historia-calculo.html" class="btn-anterior">← Historia del cálculo</a>
     </div>
 
   </main>

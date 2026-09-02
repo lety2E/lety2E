@@ -5,6 +5,23 @@
 
 ---
 
+## 2026-09-01 (8)
+- **Temas 11, 12 y 13:** `derivada-definicion.html`, `historia-calculo.html` e
+  `integrales-indefinidas.html`. Ninguno tiene video.
+- **Historia del cálculo no lleva sección de respuestas**: en el doc son 12 preguntas de
+  investigación (biografías, la disputa Newton–Leibniz, hasta hacer un meme), no ejercicios con
+  resultado. La página lo dice de entrada para que nadie busque un desplegable que no existe.
+- **Ojo con `.ej-line` cuando el contenido es texto y no fórmula.** `style.css` le pone
+  `white-space: nowrap` a todo `.ej-line` de Math —para que las ecuaciones no se partan a la
+  mitad—, así que un párrafo dentro de un `.ej-line` se saldría de la pantalla sin cortar nunca.
+  Historia usa una clase propia `.pregunta`, con `white-space: normal` y alineada a la izquierda.
+- Integrales indefinidas: el formulario va como 8 `.regla-card` (como la tabla de senos y
+  cosenos) en vez de tabla; los ejercicios y las respuestas a ancho completo, porque cada
+  integral trae seis o siete términos.
+- Verificadas a mano las 8 resoluciones de derivada por definición y las 6 de integrales,
+  más los 3 ejemplos: todas correctas.
+- Verificado en 375×812: cero errores de KaTeX, nada se sale en las tres.
+
 ## 2026-09-01 (7)
 - **Nacen los Temas 9 y 10: `regla-cadena-p1.html` y `regla-cadena-p2.html`.** Sin video ninguno.
   P1 con potencias y raíces de polinomios (3 ejemplos, 6 resoluciones, 4 bloques de extras);
