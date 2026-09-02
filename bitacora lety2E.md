@@ -5,6 +5,21 @@
 
 ---
 
+## 2026-09-01 (7)
+- **Nacen los Temas 9 y 10: `regla-cadena-p1.html` y `regla-cadena-p2.html`.** Sin video ninguno.
+  P1 con potencias y raíces de polinomios (3 ejemplos, 6 resoluciones, 4 bloques de extras);
+  P2 con trigonométricas, logaritmos y raíces (4 ejemplos, 8 resoluciones, 2 bloques de 8 extras).
+- **El doc titula la P2 "Cálculo Diferencial: Derivadas"**, que no dice nada: su contenido es
+  cadena con cos, sen, ln y raíces. Aquí se publica como "Regla de la cadena (P2)".
+- La notación `\sqrt[3]{...}^2` del doc (radical con exponente colgando) se escribe aquí como
+  `\left(\sqrt[3]{...}\right)^2`: es lo mismo, pero sin la ambigüedad visual de un superíndice
+  pegado al radicando.
+- A partir de aquí las páginas se arman con dos ayudantes en el scratchpad —`css-tema.txt` (el
+  bloque `<style>` común) y `mkpage.sh` (ensambla head + CSS + cuerpo)—, más `addcard.py` y
+  `addnext.py` para el índice y la cadena prev/next. Bajan el riesgo de que se desincronicen
+  los estilos entre temas.
+- Verificado en 375×812: cero errores de KaTeX, nada se sale en ninguna de las dos.
+
 ## 2026-09-01 (6)
 - **Nace `math/matematicas-5/regla-cociente-p2.html` — Tema 8.** Sin video. La misma regla del
   cociente, ahora con senos, cosenos y tangentes. 2 ejemplos, **3 bloques de ejercicios (4, 4 y 6)
