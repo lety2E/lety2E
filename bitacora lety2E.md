@@ -11,14 +11,16 @@
   2 bloques de 3 ejercicios con sus resoluciones y 2 bloques de 6 extras.
 - Se nombró `regla-producto-p1` (no `regla-producto`) porque el doc trae una **P2** con las
   mismas reglas aplicadas a trigonométricas y logaritmos; así el par queda parejo.
-- **Las resoluciones se cortan en dos renglones en la costura de la regla** (`u'v` arriba,
-  `+ uv'` abajo, con `&\quad`). Sin ese corte, las líneas de expansión —ocho términos— medían
-  más que el ancho del celular y se salían. El corte no es arbitrario: cae justo donde la regla
-  separa sus dos productos, así que se lee mejor, no peor. Se aplicó igual en el ejemplo.
+- **Las resoluciones van en una sola línea, como en el doc** — Lety lo pidió así.
+  (Primero se habían partido en dos renglones en la costura de la regla, `u'v` arriba y
+  `+ uv'` abajo, suponiendo que las expansiones de ocho términos no cabrían en el celular.
+  **La suposición estaba mal medida**: sin corte, la línea más ancha de las resoluciones mide
+  188px contra 320px de card en 375×812. Caben de sobra. Regla para la próxima: medir el ancho
+  real de la fórmula —el `.base` que renderiza KaTeX, no el `.katex-html`, que siempre reporta
+  el ancho del contenedor— antes de partir nada.)
 - Verificadas a mano las 6 resoluciones y el ejemplo: todas correctas, ninguna corrección
   que publicar.
-- Verificado en 375×812 y escritorio: la fórmula más ancha mide 318px contra 320px de card
-  disponible — entra sin desbordar. Cero errores de KaTeX.
+- Verificado en 375×812 y escritorio: nada desborda, cero errores de KaTeX.
 
 ## 2026-09-01 (2)
 - **Nace `math/matematicas-5/raices.html` — Tema 4, derivadas de raíces.** Sin video (no está en
