@@ -133,6 +133,28 @@
     }
     .br { color: var(--M); }
 
+    /* El nombre de ejemplo, resaltado igual en toda la guía para que se pueda
+       seguir su recorrido: carpeta → usuaria de GitHub → repositorio → dirección. */
+    .nombre {
+      background: #FFF1A8;
+      border: 1px solid #F5DC6A;
+      border-radius: 5px;
+      padding: .05em .35em;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .quien {
+      font-family: var(--font-body);
+      font-style: normal;
+      font-weight: 700;
+      font-size: .82rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--P);
+      margin: 1.8rem 0 .6rem;
+    }
+
     .cita {
       padding-left: 1.1rem;
       border-left: 3px solid var(--border);
@@ -199,9 +221,11 @@
       adentro: no hay que instalar nada más.</li>
       <li>Tiene una suscripción mensual, unos <strong>20 dólares</strong>. Cada quien
       la suya. El plan gratuito no incluye al agente.</li>
-      <li>Ve pensando <strong>el nombre de tu sitio</strong>. Ese mismo va a ser el
-      nombre de tu carpeta, tu usuaria de GitHub y tu dirección: un solo nombre para
-      todo, para que no se te enrede.</li>
+      <li>Ve pensando <strong>el nombre de tu sitio</strong>: ese mismo va a ser el
+      nombre de tu carpeta, tu usuaria de GitHub y tu dirección. Sólo letras y números
+      —sin acentos, sin espacios y sin guion bajo, que GitHub no lo acepta—. En esta
+      guía el ejemplo es <span class="nombre">profelety</span>: síguelo y vas a ver a
+      dónde llega.</li>
     </ul>
 
   </div>
@@ -214,7 +238,8 @@
     </div>
 
     <p>Crea una carpeta en tu escritorio y ponle <strong>el nombre que pensaste para
-    tu sitio</strong>. Ahí van a vivir todos los archivos de tu página.
+    tu sitio</strong> — en el ejemplo, <span class="nombre">profelety</span>.
+    Ahí van a vivir todos los archivos de tu página.
     <strong>Eso es tu proyecto.</strong></p>
 
     <p>Ahora abre la app de <strong>Claude</strong> en tu computadora y entra a la
@@ -349,19 +374,10 @@
     Es gratis.</p>
 
     <p>Crea tu cuenta con <strong>el nombre que ya pensaste</strong>. Ese nombre de
-    usuaria es tu dirección: usuaria.github.io — con punto io, no punto com.</p>
+    usuaria es tu dirección: si te registras como <span class="nombre">profelety</span>,
+    tu página va a vivir en <span class="nombre">profelety.github.io</span> — con punto
+    io, no punto com.</p>
 
-    <p>Antes de registrarlo, léelo una vez en voz alta, como si lo estuvieras dictando
-    frente a un grupo y alguien lo fuera a escribir en el pizarrón: corto, sin acentos,
-    sin guiones raros, fácil de deletrear. Es la parte de todo esto que más caro cuesta
-    cambiar después.</p>
-
-    <div class="atoron">
-      <p>La verificación del correo. GitHub te manda un mensaje para confirmar que
-      eres tú, y a veces tarda o se va directo a la carpeta de spam.</p>
-      <p>Revisa spam y dale diez minutos. Si no llega, no lo pelees: lo vemos
-      el jueves.</p>
-    </div>
   </section>
 
   <!-- ══════════ 5 ══════════ -->
@@ -371,41 +387,42 @@
       <h2>El repositorio</h2>
     </div>
 
-    <p>Un repositorio es la copia de tu carpeta que vive en GitHub. Vas a crear uno,
-    y tiene que llamarse <strong>exactamente igual que tu dirección</strong>, con el
-    punto io incluido. Público.</p>
+    <p>Un repositorio es la copia de tu carpeta que vive dentro de GitHub. Esa copia
+    es la que el mundo ve.</p>
 
-    <p>Ese nombre no es un detalle de forma: es lo que hace que la página se publique
-    sola. Si le pones otro, no aparece nada y no te avisa por qué.</p>
+    <h3 class="quien">Lo que haces tú</h3>
 
-    <p>Hecho eso, lo demás se lo pides al agente: <strong>que conecte tu carpeta con
-    ese repositorio y que publique lo que hay dentro.</strong> Pídele también que te
-    diga tu dirección cuando termine.</p>
+    <p>En GitHub, crea un repositorio nuevo. Sólo dos cosas importan: que se llame
+    <strong>exactamente igual que tu dirección</strong> —o sea
+    <span class="nombre">profelety.github.io</span>, con el punto io incluido— y que
+    sea <strong>público</strong>.</p>
+
+
+    <h3 class="quien">Lo que le pides al agente</h3>
+
+    <p class="cita">«Conecta mi carpeta con mi repositorio
+    <span class="nombre">profelety.github.io</span> y publica lo que hay dentro.
+    Avísame cuando ya se pueda abrir.»</p>
 
     <div class="atoron">
       <p>En algún momento el agente te va a pedir que autorices GitHub desde el
       navegador. Es el único paso que no puede hacer solo: necesita que tú digas
-      que sí.</p>
-      <p>Dale diez minutos. Si no sale, lo vemos el jueves — y no habrás perdido
-      nada, tu página ya está escrita.</p>
+      que sí. Puede que también te pida instalar algo que le falta a tu computadora;
+      acéptalo.</p>
     </div>
 
-    <p>La primera vez, tu dirección tarda uno o dos minutos en abrir. Si al principio
-    no carga, no es que haya fallado: espera y vuelve a intentar.</p>
   </section>
 
   <!-- ══════════ CIERRE ══════════ -->
   <section class="cierre">
     <h2>Ya está</h2>
 
-    <p>Abre tu dirección desde el celular. Si ahí está tu tema, terminaste — eso que
-    estás viendo lo puede ver cualquiera de tus alumnos, ahora mismo, desde el suyo.</p>
+    <p>Abre tu dirección desde el celular. Si ahí está tu tema, terminaste.</p>
 
-    <p>De aquí en adelante el movimiento siempre es el mismo: abres el agente en tu
+    <p>De aquí en adelante el movimiento siempre es el mismo: abres la app en tu
     carpeta, le dices qué quieres cambiar, y le pides que lo publique. Nada más
     que eso.</p>
 
-    <p>Trae el jueves lo que se haya atorado. Y tu dirección, para verla.</p>
 
     <p class="firma">Lety · lety2e.com</p>
   </section>

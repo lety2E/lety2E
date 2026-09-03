@@ -5,6 +5,38 @@
 
 ---
 
+## 2026-09-02 (3) — "Primeros pasos": segunda ronda con Lety
+
+Ronda de recortes y dos cosas nuevas. La guía adelgazó bastante: Lety fue quitando todo
+lo que explicaba de más y quedó sólo lo que se hace.
+
+- **El nombre de ejemplo ahora se sigue con la vista.** `profelety`, resaltado en amarillo
+  (`.nombre`, el mismo amarillo de las pills de Math), aparece seis veces y deja ver su
+  recorrido: nombre → carpeta → cuenta → dirección → repositorio → la frase que le dictan.
+  Se descartaron `lety2E` (existe, pero `lety2e.github.io` da **404**: el repo de Lety se
+  llama `lety2E` y el sitio vive en `lety2e.com` por CNAME, o sea la versión avanzada que
+  la guía todavía no enseña) y `letymath` (está libre y es su marca; publicarlo de ejemplo
+  era regalarlo). También se verificó que **GitHub no acepta guion bajo** en el usuario,
+  así que el `profe_lety` que Lety propuso las habría rebotado.
+- **Paso 5 partido en "Lo que haces tú" / "Lo que le pides al agente"** (`.quien`). Era el
+  único paso que mezclaba las dos cosas y por eso se leía raro. Ahora trae su frase para
+  dictar, como los pasos 2 y 3.
+- **No hace falta el conector de GitHub.** Lety preguntó; se verificó en la documentación:
+  el conector es un MCP para la API (issues, PRs), mientras que publicar es `git`, que el
+  agente ya corre solo. Lo único necesario es autorizar GitHub una vez desde el navegador
+  — que es justo el recuadro rosa que ya estaba. Se le sumó ahí la línea de "puede que
+  también te pida instalar algo que le falta a tu computadora; acéptalo".
+- **Paso 4 y cierre, a lo mínimo.** Se fueron: leer el nombre en voz alta, el recuadro de
+  la verificación del correo, "el nombre no es un detalle de forma", "la primera vez tarda
+  uno o dos minutos" y el cierre largo.
+- **Se acabó el "diez minutos, y si no sale, el jueves".** Era una de las dos reglas de
+  escritura del encargo original (permiso explícito de parar en cada atorón); Lety la fue
+  quitando renglón por renglón y al final también salió el "trae el jueves lo que se haya
+  atorado". Quedan dos recuadros rosas que sólo describen qué va a pasar. Consecuencia
+  consciente: la guía ya no promete acompañamiento, se sostiene sola.
+
+---
+
 ## 2026-09-02 (2) — Docencia estrena guía: "Primeros pasos"
 
 La primera pieza real de Docencia. Le habla a **dos compañeras del IEMS, profesoras de
