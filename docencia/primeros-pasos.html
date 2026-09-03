@@ -32,17 +32,6 @@
       margin-bottom: .8rem;
     }
 
-    /* ── Cómo se usa ───────────────────────────── */
-    .guia-uso {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 1.4rem 1.6rem;
-      margin-bottom: 2.4rem;
-    }
-    .guia-uso p { margin-bottom: .8rem; font-size: .97rem; }
-    .guia-uso p:last-child { margin-bottom: 0; }
-
     /* ── Antes de empezar ──────────────────────── */
     .previa {
       border: 2px solid var(--P);
@@ -100,15 +89,6 @@
       padding: 1.1rem 1.3rem;
       margin: 1.6rem 0;
     }
-    .atoron h3 {
-      margin: 0 0 .45rem;
-      font-size: 1rem;
-      color: var(--M);
-      font-style: normal;
-      font-family: var(--font-body);
-      font-weight: 700;
-      letter-spacing: .01em;
-    }
     .atoron p { margin: 0; font-size: .94rem; line-height: 1.6; }
     .atoron p + p { margin-top: .6rem; }
 
@@ -133,6 +113,18 @@
       color: var(--P);
       margin: 0 0 .5rem;
     }
+    /* Turquesa oscuro (#008878, ya usado en style.css): el --T de marca
+       no alcanza contraste para texto chico sobre blanco. */
+    .tq { color: #008878; font-style: italic; }
+
+    .ctx-bloque p.ctx-que {
+      font-size: .88rem;
+      color: #008878;
+      font-style: italic;
+      margin: 0 0 .5rem !important;
+      line-height: 1.5;
+    }
+
     .ctx-bloque p {
       margin: 0;
       font-size: .96rem;
@@ -140,7 +132,12 @@
       color: var(--text);
     }
     .br { color: var(--M); }
-    .ctx-abierto p { color: var(--M); }
+
+    .cita {
+      padding-left: 1.1rem;
+      border-left: 3px solid var(--border);
+      color: var(--text-2);
+    }
 
     .ctx-nota {
       font-size: .88rem;
@@ -166,7 +163,7 @@
     }
 
     @media (max-width: 600px) {
-      .guia-uso, .previa, .contexto { padding: 1.2rem 1.1rem; }
+      .previa, .contexto { padding: 1.2rem 1.1rem; }
       .atoron { padding: 1rem 1.1rem; }
       .paso-num { font-size: 1.8rem; }
       .paso-head h2 { font-size: 1.25rem; }
@@ -192,36 +189,21 @@
     <p style="margin:0; max-width:none;">Tu primera página de clase, en línea y desde cero.</p>
   </header>
 
-  <!-- ══════════ CÓMO SE USA ══════════ -->
-  <div class="guia-uso">
-    <p>Esta guía se lee <strong>haciendo</strong>: con la computadora abierta al lado y
-    la página a un costado, un paso a la vez. No es para leerla de corrido y hacerla
-    después.</p>
-    <p>Termina cuando abras tu dirección desde el celular y ahí esté tu tema.</p>
-    <p>Hay puntos donde atorarse es lo normal, no un error tuyo. Están marcados en
-    rosa. Cuando llegues a uno, dale diez minutos: si no sale, ahí lo dejas y lo
-    vemos juntas.</p>
-  </div>
-
   <!-- ══════════ ANTES DE EMPEZAR ══════════ -->
   <div class="previa">
     <h2>Antes de empezar</h2>
     <ul>
-      <li>Hay que instalar el agente. Se llama <strong>Claude Code</strong> y se
-      descarga de su página.</li>
+      <li>Descarga la app de Claude en
+      <a href="https://claude.com/download" target="_blank" rel="noopener">claude.com/download</a>
+      — la de escritorio, para tu computadora. Es una sola app y el agente ya viene
+      adentro: no hay que instalar nada más.</li>
       <li>Tiene una suscripción mensual, unos <strong>20 dólares</strong>. Cada quien
-      la suya.</li>
-      <li>Ve pensando tu nombre de usuaria: va a ser tu dirección.</li>
+      la suya. El plan gratuito no incluye al agente.</li>
+      <li>Ve pensando <strong>el nombre de tu sitio</strong>. Ese mismo va a ser el
+      nombre de tu carpeta, tu usuaria de GitHub y tu dirección: un solo nombre para
+      todo, para que no se te enrede.</li>
     </ul>
 
-    <div class="atoron">
-      <h3>⏸ Aquí es normal atorarse</h3>
-      <p>La instalación. Es el único momento de toda la guía en el que estás sola de
-      verdad — todavía no tienes al agente para que te ayude. Puede pedirte cosas que
-      no entiendas.</p>
-      <p>Diez minutos. Si no sale, hasta aquí llegaste hoy y lo destrabamos el jueves;
-      es un rato entre las dos.</p>
-    </div>
   </div>
 
   <!-- ══════════ 1 ══════════ -->
@@ -231,23 +213,24 @@
       <h2>La carpeta en el escritorio</h2>
     </div>
 
-    <p>Crea una carpeta en tu escritorio y ponle el nombre de lo que vas a hacer.
-    Ahí van a vivir todos los archivos de tu página. <strong>Eso es tu proyecto.</strong></p>
+    <p>Crea una carpeta en tu escritorio y ponle <strong>el nombre que pensaste para
+    tu sitio</strong>. Ahí van a vivir todos los archivos de tu página.
+    <strong>Eso es tu proyecto.</strong></p>
 
-    <p>Ahora abre el agente <em>dentro</em> de esa carpeta. Es la parte que más
-    confunde al principio y la más importante: el agente sólo ve la carpeta donde
-    está parado. Si lo abres en otro lado, va a escribir en otro lado.</p>
+    <p>Ahora abre la app de <strong>Claude</strong> en tu computadora y entra a la
+    pestaña <strong>Code</strong>: ésa es la que trabaja con tus archivos. Te va a pedir que escojas una carpeta — escoge la que
+    acabas de crear.</p>
+
+    <p>Es lo más importante de este paso: <strong>el agente sólo ve la carpeta que le
+    señalaste.</strong> Si le das otra, va a escribir en otra.</p>
 
     <p>Cada vez que quieras trabajar en tu página, el movimiento es el mismo: abrir
-    el agente en esa carpeta. Siempre esa.</p>
+    la app en esa carpeta. Siempre esa.</p>
 
     <div class="atoron">
-      <h3>⏸ Aquí es normal atorarse</h3>
       <p>La primera vez, tu computadora va a preguntarte si le das permiso al agente
       para ver tus archivos. Hay que decirle que sí — sin ese permiso no puede
       escribir nada y todo lo demás se queda parado.</p>
-      <p>Si te aparece un aviso que no entiendes y te da miedo aceptarlo, no lo
-      aceptes a ciegas: tómale foto de la pantalla y seguimos el jueves.</p>
     </div>
   </section>
 
@@ -258,80 +241,92 @@
       <h2>El contexto</h2>
     </div>
 
-    <p>Antes de pedirle nada, hay que decirle quién eres y qué estás haciendo. Se lo
-    <strong>dictas con tus palabras</strong> y le pides que lo guarde. Él sabe dónde va;
-    tú no tienes que saberlo.</p>
+    <p>Antes de pedirle nada, hay que decirle quién eres y qué estás haciendo. Eso es
+    el contexto, y vive en un archivo que se llama <strong>CLAUDE.md</strong>. Se lo
+    <strong>dictas con tus palabras</strong> y él lo guarda ahí.</p>
 
-    <p>Es lo que más cambia el resultado. Un agente sin contexto adivina y te entrega
-    algo genérico. Con contexto, propone — y lo que propone se parece a tu clase.</p>
-
-    <p>Este es el ejemplo, ya lleno. Lo que está <span class="br">[entre corchetes]</span>
-    es lo que cambias por lo tuyo:</p>
+    <p>Este es el ejemplo. Lo que va <span class="br">en rosa</span> lo cambias por lo
+    tuyo; lo que va <span class="tq">en turquesa</span> no se escribe, es para que lo
+    pienses. Lo demás se dicta tal cual:</p>
 
     <div class="contexto">
 
       <div class="ctx-bloque">
         <h4>Quién soy</h4>
-        <p>Soy <span class="br">[Marisol]</span>, profesora de
-        <span class="br">[matemáticas]</span> en el
-        <span class="br">[IEMS, plantel Iztapalapa]</span>. Doy
-        <span class="br">[Matemáticas I y II]</span> a grupos de bachillerato.
-        No soy técnica: nunca he hecho una página web ni sé programar.</p>
+        <p class="ctx-que">Quién eres y qué das.</p>
+        <p><span class="br">Soy Lety, profesora de matemáticas a nivel
+        bachillerato.</span> No soy técnica: nunca he hecho una página web ni sé
+        programar.</p>
       </div>
 
       <div class="ctx-bloque">
         <h4>Qué es esto</h4>
-        <p>Es mi sitio de clase. Quiero que mis alumnos entren desde el celular y
-        encuentren <span class="br">[el tema que estamos viendo]</span>:
-        <span class="br">[una explicación corta, ejemplos resueltos y ejercicios
-        con sus respuestas]</span>. Empiezo con
-        <span class="br">[un solo tema]</span>; si funciona, le voy agregando.</p>
+        <p class="ctx-que">Para qué es el sitio y qué quieres que encuentren tus
+        alumnos.</p>
+        <p><span class="br">Es mi sitio de clase. Quiero que mis alumnos lo abran desde
+        su celular y encuentren el tema que estamos viendo.</span></p>
       </div>
 
       <div class="ctx-bloque">
         <h4>Cómo está armada la carpeta</h4>
-        <p><span class="br">[Por ahora está vacía. Conforme vayamos creando archivos,
-        anota aquí qué es cada uno y para qué sirve, para que la próxima vez que
-        abras el agente ya sepa dónde está todo.]</span></p>
+        <p class="ctx-que">Qué hay en tu carpeta y para qué sirve cada cosa. El primer
+        día está vacía y se llena sola.</p>
+        <p>Por ahora está vacía. Conforme vayamos creando archivos, anota aquí qué es
+        cada uno y para qué sirve, para que la próxima vez que abramos ya sepas dónde
+        está todo.</p>
       </div>
 
-      <div class="ctx-bloque ctx-abierto">
+      <div class="ctx-bloque">
         <h4>Cómo quiero que me hables</h4>
-        <p>[Esto lo escribes tú, con tus palabras — es el único que no viene lleno,
-        a propósito. Piensa en cómo te explica bien alguien: ¿corto o con detalle?
-        ¿te pregunta antes de hacer algo o lo hace y luego te cuenta? ¿te avisa
-        cuando algo no se puede? Dícteselo tal cual lo pensaste.]</p>
+        <p class="ctx-que">Cómo quieres que el agente se dirija a ti y trabaje contigo.
+        ¿Corto o con detalle? ¿Te pregunta antes de hacer algo, o lo hace y luego te
+        cuenta? ¿Te avisa cuando algo no se puede? Éste es el único bloque sin ejemplo:
+        es a propósito, para que lo escribas con tus palabras.</p>
       </div>
 
       <div class="ctx-bloque">
         <h4>Qué no hacer</h4>
+        <p class="ctx-que">Los límites: lo que no quieres que haga nunca.</p>
         <p>No inventes contenido para rellenar: si algo todavía no existe, márcalo
         como pendiente y dímelo. No borres nada sin preguntarme. No cambies páginas
-        que ya di por buenas.
-        <span class="br">[No pongas nombres de mis alumnos en ningún lado.]</span></p>
+        que ya di por buenas. <span class="br">No pongas nombres de mis alumnos en
+        ningún lado.</span></p>
       </div>
 
     </div>
 
-    <p class="ctx-nota">De aquí en adelante el agente lo lee solo, cada vez que lo
-    abres en esa carpeta. No se lo vuelves a dictar nunca.</p>
+    <p>Cuando termines de dictárselo, dile esto:</p>
+
+    <p class="cita">«Guarda esto en un archivo que se llame CLAUDE.md, en mi carpeta,
+    y léelo cada vez que empecemos a trabajar aquí.»</p>
+
+    <p class="ctx-nota">Se escribe así, con mayúsculas y con “a”: <strong>CLAUDE.md</strong>.
+    Es el único archivo de toda la guía que te conviene conocer por su nombre. Vive en
+    tu carpeta, es texto normal, y lo puedes abrir y editar tú cuando quieras. El agente
+    lo lee solo al empezar cada sesión.</p>
   </section>
 
   <!-- ══════════ 3 ══════════ -->
   <section class="paso">
     <div class="paso-head">
       <span class="paso-num">3</span>
-      <h2>Los archivos</h2>
+      <h2>Tu página</h2>
     </div>
 
     <p>Ahora sí, pídele tu página. Con tus palabras, como se lo dirías a alguien:</p>
 
-    <p style="padding-left:1.1rem; border-left:3px solid var(--border); color:var(--text-2);">
+    <p class="cita">
     «Hazme una página con el tema de <span class="br">[fracciones]</span>: una
     explicación corta, tres ejemplos resueltos y cinco ejercicios con sus respuestas.
     Que se vea bien en celular.»</p>
 
-    <p>El agente escribe los archivos y te dice cómo verla. Ábrela y <strong>léela como
+    <p>Y si ya tienes material hecho —tus apuntes, una lista de ejercicios, el examen
+    del semestre pasado, fotos de lo que escribiste en el pizarrón— no empieces de
+    cero: <strong>mete esos archivos en tu carpeta</strong> y dile que se base en ellos.
+    Los lee y arma la página con tu contenido, no con contenido inventado.</p>
+
+    <p>El agente escribe la página —un archivo HTML, que es el idioma en el que están
+    hechas todas las páginas web— y te dice cómo verla. Ábrela y <strong>léela como
     si fueras tu alumno</strong>. Lo que no te guste, se lo dices igual de simple: «esto
     no se entiende», «los ejercicios están muy fáciles», «la letra está chica»,
     «quítale ese color». Lo corrige las veces que haga falta y no se cansa.</p>
@@ -353,15 +348,15 @@
     <p>GitHub es el lugar donde va a vivir tu página para que el mundo la vea.
     Es gratis.</p>
 
-    <p>Crea tu cuenta. <strong>El nombre de usuaria que escojas es tu dirección:</strong>
-    usuaria.github.io — con punto io, no punto com.</p>
+    <p>Crea tu cuenta con <strong>el nombre que ya pensaste</strong>. Ese nombre de
+    usuaria es tu dirección: usuaria.github.io — con punto io, no punto com.</p>
 
-    <p>Escógelo pensando que lo vas a dictar en voz alta frente a un grupo y que
-    alguien lo va a escribir en el pizarrón: corto, sin acentos, sin guiones raros,
-    fácil de deletrear. Es la parte de todo esto que más caro cuesta cambiar después.</p>
+    <p>Antes de registrarlo, léelo una vez en voz alta, como si lo estuvieras dictando
+    frente a un grupo y alguien lo fuera a escribir en el pizarrón: corto, sin acentos,
+    sin guiones raros, fácil de deletrear. Es la parte de todo esto que más caro cuesta
+    cambiar después.</p>
 
     <div class="atoron">
-      <h3>⏸ Aquí es normal atorarse</h3>
       <p>La verificación del correo. GitHub te manda un mensaje para confirmar que
       eres tú, y a veces tarda o se va directo a la carpeta de spam.</p>
       <p>Revisa spam y dale diez minutos. Si no llega, no lo pelees: lo vemos
@@ -388,7 +383,6 @@
     diga tu dirección cuando termine.</p>
 
     <div class="atoron">
-      <h3>⏸ Aquí es normal atorarse</h3>
       <p>En algún momento el agente te va a pedir que autorices GitHub desde el
       navegador. Es el único paso que no puede hacer solo: necesita que tú digas
       que sí.</p>

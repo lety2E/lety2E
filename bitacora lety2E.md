@@ -10,31 +10,43 @@
 La primera pieza real de Docencia. Le habla a **dos compañeras del IEMS, profesoras de
 matemáticas**, que nunca han hecho una página: montar la carpeta, dictarle el contexto al
 agente, crear la cuenta de GitHub y publicar. Termina cuando abren su dirección desde el
-celular y ahí está su tema.
+celular y ahí está su tema. Se publicó y luego se trabajó en vivo con Lety toda una ronda
+de ajustes; esto es el estado final del día.
 
 - **Se llama "Primeros pasos"**, no "Aula propia" como decía la card en `próximamente`.
-  La card del índice ya es enlace real (`docencia/primeros-pasos.html`) y la nota de abajo
-  cambió: la sección ya no está vacía.
-- **Formato de uso, no de lectura.** La leen solas, con la computadora al lado, antes de
-  vernos el jueves — aula invertida aplicada a ellas. Por eso el ancho es de lectura (720 px)
-  y los pasos van numerados grandes.
-- **Dos reglas de escritura, sostenidas en toda la página:** ningún nombre de archivo ni
-  comando (lo técnico lo hace el agente, ellas le hablan), y los puntos donde atorarse es
-  normal van marcados en rosa con permiso explícito de parar — *"diez minutos, y si no sale,
-  el jueves"*. Son cuatro: instalar el agente, el permiso a los archivos, la verificación de
-  correo de GitHub y la autorización de GitHub desde el navegador.
+  La card del índice ya es enlace real (`docencia/primeros-pasos.html`).
+- **Instalar NO es por terminal.** El primer borrador daba por hecho la instalación por
+  línea de comandos y marcaba ese momento como "aquí es normal atorarse". Se verificó en
+  la documentación: **la app de escritorio de Claude ya incluye Claude Code** — no hay que
+  instalar Node ni el CLI, no hay terminal. Se quitó ese aviso y el paso 1 se reescribió
+  al flujo real: abrir la app, pestaña **Code**, escoger la carpeta.
+- **Un solo nombre para todo.** Idea de Lety y es la que ordena la guía: el nombre del
+  sitio es el nombre de la carpeta, la usuaria de GitHub y la dirección. Los criterios para
+  escogerlo (corto, sin acentos, fácil de deletrear) pasaron al paso 4 como revisión final,
+  justo antes de que ese nombre quede fijo.
+- **El archivo de contexto se nombra: `CLAUDE.md`.** Única excepción a la regla de "ningún
+  nombre de archivo en la guía", y se la gana: es el archivo que van a seguir tocando cuando
+  la guía ya no exista. Verificado en la documentación: **Claude Code lee `CLAUDE.md`, no
+  `AGENTS.md`** — con AGENTS.md solo, el contexto no se lee y no avisa.
+- **El ejemplo de contexto es un sistema de tres colores**, no un archivo ajeno que se
+  copia: turquesa = de qué trata el bloque o la pregunta a pensar (no se escribe);
+  rosa = el ejemplo, lo que cambian por lo suyo; negro = se dicta tal cual. El turquesa usa
+  `#008878` (el de `.nb-apr` en `style.css`), porque el `--T` de marca no da contraste para
+  texto chico. "Cómo quiero que me hables" es el único bloque sin ejemplo, a propósito.
+- **Paso 3, "Tu página"** (antes "Los archivos"): incluye la opción de partir de material
+  propio — apuntes, ejercicios, fotos del pizarrón — metiéndolo a la carpeta. Evita de paso
+  que el agente invente ejercicios y respuestas.
+- **Quedan tres puntos marcados como "aquí es normal atorarse"** (permiso a los archivos,
+  verificación de correo de GitHub, autorización de GitHub desde el navegador), ya sin
+  título: el recuadro rosa marca solo.
 - **El paso 5 (el repositorio) se escribió a media altura a propósito:** dice lo que la
   pantalla les va a pedir (repositorio nuevo, nombre exactamente igual a su dirección,
   público) pero nunca dónde clickear. Los botones de GitHub cambian; lo que pide, no.
-- **El bloque de contexto va como ejemplo lleno** y lo intercambiable en corchetes magenta.
-  "Cómo está armada la carpeta" va entero en corchetes (el primer día está vacía y se llena
-  sola) y "cómo quiero que me hables" es el único abierto: para que el archivo sea suyo y no
-  una plantilla llenada.
 - **La suscripción va escrita**, seca, en "Antes de empezar" — unos 20 dólares al mes, cada
-  quien la suya. Si el cobro les aparece a media instalación sin aviso, se sienten emboscadas.
+  quien la suya, y el plan gratuito no la incluye.
 
-Sin CDNs ni imágenes: la página es HTML y el `style.css` global, con un bloque `<style>`
-propio. Verificada en 375×812 sin desbordes.
+Sin CDNs ni imágenes: HTML y el `style.css` global, con un bloque `<style>` propio.
+Verificada en 375×812 sin desbordes.
 
 ---
 

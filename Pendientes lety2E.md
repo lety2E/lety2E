@@ -6,6 +6,11 @@ Recursos de GICAIA el enlace todavía se llama *"Aula propia — la guía para a
 al índice `lety2e.com/docencia`. Hay que cambiar allá **las dos cosas**: el texto del enlace y
 el destino, que ahora sí puede ir directo a `lety2e.com/docencia/primeros-pasos.html`.
 
+**Seguir ajustando "Primeros pasos"** — Lety quiere continuar la ronda de ajustes (pausada
+el 2-sep-2026 por la noche). Lo que quedó sobre la mesa: el bloque "Quién soy" es el único
+con ejemplo lleno y se ve solo entre los demás; también se puede volver pregunta y dejar el
+archivo 100% plantilla. Al publicar quedó tal cual está descrito en la bitácora de ese día.
+
 **Probar la guía con las dos compañeras** — la escriben solas antes del jueves y lo que se
 atore se ve en persona (aula invertida aplicada a ellas). Después de esa sesión, corregir la
 guía con lo que de verdad las paró: los cuatro puntos marcados como "aquí es normal atorarse"
