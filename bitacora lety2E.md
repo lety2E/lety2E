@@ -7,6 +7,11 @@
 
 ## 2026-09-02 (3) — "Primeros pasos": segunda ronda con Lety
 
+*(cierre del día)* Último recorte: en "Antes de empezar" se quitó el "síguelo y vas a ver
+a dónde llega" — el resaltado amarillo ya invita solo a seguir el nombre. Y desde el sitio
+de GICAIA el enlace de Recursos ya apunta directo a la guía (antes iba al índice de
+Docencia) y perdió su nota de "en escritura"; el texto del enlace ya decía "Primeros pasos".
+
 Ronda de recortes y dos cosas nuevas. La guía adelgazó bastante: Lety fue quitando todo
 lo que explicaba de más y quedó sólo lo que se hace.
 
