@@ -5,6 +5,39 @@
 
 ---
 
+## 2026-09-02 (2) — Docencia estrena guía: "Primeros pasos"
+
+La primera pieza real de Docencia. Le habla a **dos compañeras del IEMS, profesoras de
+matemáticas**, que nunca han hecho una página: montar la carpeta, dictarle el contexto al
+agente, crear la cuenta de GitHub y publicar. Termina cuando abren su dirección desde el
+celular y ahí está su tema.
+
+- **Se llama "Primeros pasos"**, no "Aula propia" como decía la card en `próximamente`.
+  La card del índice ya es enlace real (`docencia/primeros-pasos.html`) y la nota de abajo
+  cambió: la sección ya no está vacía.
+- **Formato de uso, no de lectura.** La leen solas, con la computadora al lado, antes de
+  vernos el jueves — aula invertida aplicada a ellas. Por eso el ancho es de lectura (720 px)
+  y los pasos van numerados grandes.
+- **Dos reglas de escritura, sostenidas en toda la página:** ningún nombre de archivo ni
+  comando (lo técnico lo hace el agente, ellas le hablan), y los puntos donde atorarse es
+  normal van marcados en rosa con permiso explícito de parar — *"diez minutos, y si no sale,
+  el jueves"*. Son cuatro: instalar el agente, el permiso a los archivos, la verificación de
+  correo de GitHub y la autorización de GitHub desde el navegador.
+- **El paso 5 (el repositorio) se escribió a media altura a propósito:** dice lo que la
+  pantalla les va a pedir (repositorio nuevo, nombre exactamente igual a su dirección,
+  público) pero nunca dónde clickear. Los botones de GitHub cambian; lo que pide, no.
+- **El bloque de contexto va como ejemplo lleno** y lo intercambiable en corchetes magenta.
+  "Cómo está armada la carpeta" va entero en corchetes (el primer día está vacía y se llena
+  sola) y "cómo quiero que me hables" es el único abierto: para que el archivo sea suyo y no
+  una plantilla llenada.
+- **La suscripción va escrita**, seca, en "Antes de empezar" — unos 20 dólares al mes, cada
+  quien la suya. Si el cobro les aparece a media instalación sin aviso, se sienten emboscadas.
+
+Sin CDNs ni imágenes: la página es HTML y el `style.css` global, con un bloque `<style>`
+propio. Verificada en 375×812 sin desbordes.
+
+---
+
 ## 2026-09-02 (1) — El sitio abre rápido: fuera los embeds de YouTube
 
 Los alumnos reportaron que la página tardaba en abrir. La causa medida no era el

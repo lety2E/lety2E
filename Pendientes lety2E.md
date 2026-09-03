@@ -1,15 +1,16 @@
 # Pendientes — lety2E
 
-**Docencia: escribir "Aula propia — la guía para arrancar"** — la sección ya existe y la card
-está publicada como `próximamente` (26-ago-2026), así que el enlace de GICAIA ya no está roto.
-Falta el contenido: cómo montar tu aula desde cero, paso a paso. Cuando exista, cambiar el
-`<div class="apunte-card pronto">` de `docencia/index.html` por un `<a href="aula-propia.html">`
-y quitarle el `pronto-badge`. Formato: `style.css` global + `data-section="docencia"`
-(patrón de Math, no self-contained).
+**Avisar a GICAIA: la guía ya existe y cambió de nombre** — se publicó el 2-sep-2026 como
+**"Primeros pasos"** (`docencia/primeros-pasos.html`), no como "Aula propia". En la pestaña
+Recursos de GICAIA el enlace todavía se llama *"Aula propia — la guía para arrancar"* y apunta
+al índice `lety2e.com/docencia`. Hay que cambiar allá **las dos cosas**: el texto del enlace y
+el destino, que ahora sí puede ir directo a `lety2e.com/docencia/primeros-pasos.html`.
 
-**Avisar a GICAIA cuando exista "Aula propia"** — en su pestaña Recursos el enlace se llama
-*"Aula propia — la guía para arrancar"* pero apunta a `lety2e.com/docencia` (el índice), así que
-hoy promete más de lo que hay. Cuando la guía se publique, que ese enlace apunte directo a ella.
+**Probar la guía con las dos compañeras** — la escriben solas antes del jueves y lo que se
+atore se ve en persona (aula invertida aplicada a ellas). Después de esa sesión, corregir la
+guía con lo que de verdad las paró: los cuatro puntos marcados como "aquí es normal atorarse"
+son una apuesta, no un dato. El paso 5 (el repositorio) es el que más rápido envejece porque
+depende de pantallas de GitHub — revisarlo cada tanto.
 
 **Física y Geografía de Área 2** — hoy solo tienen formulario, no guía completa. Lety va a
 revisar si con el formulario basta. Si decide que no, el contenido completo de Física ya
