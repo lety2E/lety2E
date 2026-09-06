@@ -1,5 +1,16 @@
 # Pendientes — lety2E
 
+**Migrar Matemáticas 3 y 4** — son las dos carpetas que siguen vacías (solo el índice con
+*próximamente*). En letymath.com cada una tiene **18 temas**. Math 1 y Math 2 ya quedaron
+completas el 5-sep-2026. Falta que Lety pase el LaTeX de esos dos cursos; el flujo que ya
+funcionó es: LaTeX por tema → verificar la aritmética → armar el HTML → card en el índice
+y botones prev/next.
+
+**Math 5 se queda como está** — letymath.com tiene un tema más, *"Dx. Con x en el
+denominador"*, que **no se va a migrar**: Lety lo dio por incorporado dentro de
+*Reglas básicas*. O sea que Math 5 está completo aunque el conteo contra el sitio viejo
+dé 19 vs 20. No volver a proponerlo.
+
 **Avisar a GICAIA: la guía ya existe y cambió de nombre** — se publicó el 2-sep-2026 como
 **"Primeros pasos"** (`docencia/primeros-pasos.html`), no como "Aula propia". En la pestaña
 Recursos de GICAIA el enlace todavía se llama *"Aula propia — la guía para arrancar"* y apunta
