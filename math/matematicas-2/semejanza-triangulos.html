@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Semejanza de triángulos — Matemáticas 2 — LetyMath</title>
+  <meta name="description" content="Triángulos semejantes: escribir proporciones, encontrar medidas desconocidas y resolver problemas de sombras." />
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../../favicon.ico">
+  <link rel="stylesheet" href="../../style.css">
+  <link rel="stylesheet" href="../../assets/katex/katex.min.css" />
+  <script defer src="../../assets/katex/katex.min.js"></script>
+  <script defer src="../../assets/katex/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body, {
+      delimiters: [
+        {left:'$$', right:'$$', display:true},
+        {left:'$', right:'$', display:false}
+      ]
+    });"></script>
+
+  <style>
+    .topic-tag {
+      display: inline-flex; align-items: center; gap: .35rem;
+      padding: .22rem .75rem; border-radius: 99px;
+      background: var(--accent-light); color: var(--accent);
+      font-size: .78rem; font-weight: 700; letter-spacing: .03em;
+      margin-bottom: .55rem;
+    }
+    .topic-tag::before {
+      content: ''; width: 7px; height: 7px; border-radius: 50%;
+      background: var(--accent); display: inline-block;
+    }
+
+    .section-block { margin-bottom: 2.5rem; }
+    .section-block:last-child { margin-bottom: 0; }
+
+    .sec-head { display: flex; align-items: center; gap: .65rem; margin-bottom: 1.1rem; }
+    .sec-head h2 { margin: 0; font-size: 1.2rem; line-height: 1; }
+    .sec-icon {
+      width: 30px; height: 30px; border-radius: 8px;
+      display: grid; place-items: center; flex-shrink: 0;
+      background: var(--accent);
+    }
+    .sec-icon svg { width: 15px; height: 15px; stroke: #fff; fill: none; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+
+    .sec-toggle {
+      display: flex; align-items: center; gap: .65rem;
+      cursor: pointer; user-select: none;
+      padding: .8rem 0; margin: 0 0 .4rem;
+    }
+    .sec-toggle h2 { margin: 0; font-size: 1.2rem; line-height: 1; }
+    .sec-toggle .chev { margin-left: auto; font-size: .75rem; color: var(--text-3); transition: transform .25s; }
+    .sec-toggle.open .chev { transform: rotate(180deg); }
+    .collapsible { max-height: 0; overflow: hidden; transition: max-height .4s ease, padding .3s ease; padding: 0; }
+    .collapsible.show { max-height: 30000px; padding: .8rem 0; }
+
+    /* Apunte */
+    .apunte-box {
+      background: var(--bg-card); border: 1.5px solid var(--border);
+      border-radius: var(--r-md); padding: 1.4rem 1.5rem;
+    }
+    .apunte-intro { margin: 0 0 1.1rem; line-height: 1.75; color: var(--text-2); font-size: .95rem; }
+    .apunte-row {
+      display: grid; grid-template-columns: auto 1fr; gap: 1.5rem; align-items: center;
+    }
+    @media (max-width: 640px) { .apunte-row { grid-template-columns: 1fr; justify-items: center; } }
+    .apunte-card-title { font-weight: 700; font-size: .85rem; margin-bottom: .5rem; color: var(--course-1); }
+    .formula-line { margin: .35rem 0; }
+
+    /* Pills de formula */
+    .formula-pill {
+      display: inline-block; background: #FFF1A8;
+      padding: .25rem .75rem; border-radius: 99px;
+      font-size: .9rem; font-weight: 600; color: var(--text);
+      margin: .25rem .2rem; border: 1.5px solid #F5DC6A;
+    }
+    .formula-pill.salmon { background: #FFD9B8; border-color: #F5B584; }
+    .resultado-pill {
+      display: inline-block; background: #FFD0E5;
+      padding: .25rem .75rem; border-radius: 99px;
+      font-size: .9rem; font-weight: 700; color: var(--M);
+      margin: .25rem .2rem; border: 1.5px solid #FF8AC0;
+    }
+    .apunte-nota { margin: .6rem 0 0; font-size: .84rem; color: var(--text-3); line-height: 1.6; }
+
+    /* Ejemplo */
+    .ejemplo-section { margin: 2rem 0 2.5rem; }
+    .ejemplo-head { display: flex; align-items: center; gap: .65rem; margin-bottom: 1rem; }
+    .ejemplo-head h3 {
+      margin: 0; font-family: var(--font-display);
+      font-size: 1.2rem; line-height: 1; color: var(--M); font-style: italic;
+    }
+    .ejemplo-block {
+      padding: 1.6rem 1.5rem; background: var(--bg-card);
+      border: 1.5px solid var(--border); border-radius: var(--r-md);
+      color: var(--text);
+    }
+    .ejemplo-row { display: grid; grid-template-columns: auto 1fr; gap: 1.6rem; align-items: start; }
+    @media (max-width: 700px) { .ejemplo-row { grid-template-columns: 1fr; justify-items: center; } }
+    .paso { margin-bottom: 1.1rem; }
+    .paso:last-child { margin-bottom: 0; }
+    .paso-titulo { font-size: .8rem; font-weight: 700; color: var(--course-1); margin-bottom: .25rem; }
+
+    /* Triangulos */
+    .tri-svg { max-width: 100%; height: auto; display: block; }
+    .apunte-row > .tri-svg, .ejemplo-row .tri-wrap { flex-shrink: 0; }
+    .tri-body { display: flex; justify-content: center; align-items: center; padding: .9rem .6rem; }
+    .tri-wrap { display: flex; justify-content: center; }
+    .tri-wrap .tri-svg { max-width: 210px; }
+
+    /* Mini card (bloque) */
+    .mini-card {
+      background: var(--bg-card); border: 1.5px solid var(--border);
+      border-radius: var(--r-md); overflow: hidden;
+    }
+    .mini-card-head {
+      padding: .4rem .8rem; background: var(--course-1);
+      font-family: var(--font-display); font-size: .85rem; color: #fff; font-weight: 700;
+    }
+    .mini-card-body { padding: .8rem 1rem; font-size: .9rem; line-height: 1.6; color: var(--text); }
+
+    /* Grid de bloques */
+    .bloques-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2rem; }
+    @media (max-width: 700px) { .bloques-2 { grid-template-columns: 1fr; } }
+    .bloques-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
+    @media (max-width: 980px) { .bloques-3 { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 560px) { .bloques-3 { grid-template-columns: 1fr; } }
+
+    /* Resoluciones */
+    .resol-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2rem; }
+    @media (max-width: 760px) { .resol-grid { grid-template-columns: 1fr; } }
+    .resol-item {
+      background: var(--bg-card); border: 1.5px solid var(--border);
+      border-radius: var(--r-md); padding: .9rem 1.1rem;
+    }
+    .resol-num {
+      font-size: .75rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .06em; color: var(--course-1); margin-bottom: .1rem;
+    }
+    .extras-titulo {
+      font-family: var(--font-display); font-size: 1rem; font-style: italic;
+      color: var(--M); margin: 1.4rem 0 .8rem;
+    }
+    .extras-titulo:first-child { margin-top: 0; }
+
+    /* Navegacion */
+    .topic-nav-btns {
+      display: flex; justify-content: space-between; gap: 1rem;
+      margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border);
+    }
+    .btn-anterior, .btn-siguiente {
+      display: inline-flex; align-items: center; gap: .5rem;
+      padding: .65rem 1.4rem; border-radius: 99px;
+      font-weight: 700; font-size: .9rem; transition: background .2s, transform .18s;
+    }
+    .btn-anterior { background: transparent; color: var(--accent); border: 2px solid var(--accent); }
+    .btn-anterior:hover { background: var(--accent-light); transform: translateX(-3px); }
+    .btn-siguiente { background: var(--accent); color: #fff; }
+    .btn-siguiente:hover { background: var(--M); color: #fff; transform: translateX(3px); }
+  
+    /* Semejanza */
+    .par-figs { display: flex; align-items: flex-end; justify-content: center; gap: 14px; flex-wrap: wrap; }
+    .enunciado {
+      font-size: .86rem; line-height: 1.6; color: var(--text-2);
+      margin: 0 0 .7rem; text-align: left;
+    }
+    .fig-nota {
+      font-size: .74rem; text-transform: uppercase; letter-spacing: .06em;
+      color: var(--text-3); text-align: center; margin: .8rem 0 .3rem;
+    }
+    .props-grid {
+      display: grid; grid-template-columns: repeat(3, auto); gap: .2rem 1.6rem;
+      justify-content: center; margin-top: .8rem;
+    }
+    @media (max-width: 560px) { .props-grid { grid-template-columns: repeat(2, auto); } }
+  </style>
+</head>
+<body data-section="math">
+  <main class="topic-content">
+
+    <header class="topic-header">
+      <p class="breadcrumb">
+        <a href="../index.html">Inicio</a> ›
+        <a href="index.html">Matemáticas 2</a> ›
+        Semejanza de triángulos
+      </p>
+      <div class="topic-tag">Matemáticas 2 · Tema 11</div>
+      <h1>Semejanza de triángulos</h1>
+    </header>
+
+    <!-- ══════════ APUNTES ══════════ -->
+    <section class="section-block">
+      <div class="sec-head">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+        </div>
+        <h2>Apuntes</h2>
+      </div>
+      <div class="apunte-box">
+        <p class="apunte-intro">
+          Decimos que dos triángulos son <strong>semejantes</strong> cuando tienen la misma
+          forma, aunque sus tamaños sean diferentes. Esto significa que sus ángulos son
+          iguales y sus lados son proporcionales. Cuando un triángulo está dentro de otro,
+          podemos encontrar medidas desconocidas usando la relación:
+        </p>
+        <div style="text-align:center">
+          <span class="formula-pill">$\dfrac{\text{Altura}}{\text{Base}} = \dfrac{\text{altura}}{\text{base}}$</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ EJEMPLOS ══════════ -->
+    <section class="section-block ejemplo-section">
+      <div class="ejemplo-head">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        </div>
+        <h3>Ejemplos</h3>
+      </div>
+
+      <div class="ejemplo-block">
+        <p class="enunciado" style="text-align:center">Escribe seis proporciones:</p>
+        <div class="par-figs" style="gap:14px"><svg viewBox="0 0 144 98" width="144" height="98" xmlns="http://www.w3.org/2000/svg" class="tri-svg" role="img" aria-label="Triángulo de lados a, z y b">
+<polygon points="26.0,76.0 118.0,76.0 57.3,16.0" fill="#FF00AA" fill-opacity="0.12" stroke="#FF00AA" stroke-width="2" stroke-linejoin="round"/>
+<text x="31.6" y="50.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" font-style="italic" text-anchor="end">a</text>
+<text x="97.6" y="50.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" font-style="italic" text-anchor="start">z</text>
+<text x="72.0" y="93.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" font-style="italic" text-anchor="middle">b</text>
+</svg><svg viewBox="0 0 174 118" width="174" height="118" xmlns="http://www.w3.org/2000/svg" class="tri-svg" role="img" aria-label="Triángulo de lados y, x y c">
+<polygon points="26.0,96.0 148.0,96.0 67.5,16.0" fill="#FF00AA" fill-opacity="0.12" stroke="#FF00AA" stroke-width="2" stroke-linejoin="round"/>
+<text x="36.7" y="60.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" font-style="italic" text-anchor="end">y</text>
+<text x="117.7" y="60.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" font-style="italic" text-anchor="start">x</text>
+<text x="87.0" y="113.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" font-style="italic" text-anchor="middle">c</text>
+</svg></div>
+        <div class="props-grid"><div>$\frac{a}{b} = \frac{y}{c}$</div><div>$\frac{b}{c} = \frac{a}{y}$</div><div>$\frac{z}{a} = \frac{x}{y}$</div><div>$\frac{a}{y} = \frac{z}{x}$</div><div>$\frac{x}{c} = \frac{z}{b}$</div><div>$\frac{x}{z} = \frac{c}{b}$</div></div>
+      </div>
+
+      <div class="ejemplo-block" style="margin-top:1.2rem">
+        <div class="ejemplo-row">
+          <div class="tri-wrap" style="flex-direction:column">
+            <svg viewBox="0 0 194 163" width="194" height="163" xmlns="http://www.w3.org/2000/svg" class="tri-svg" role="img" aria-label="Triángulo rectángulo de altura x y base 12, con una vertical interna 6">
+<polygon points="28.0,119.0 168.0,119.0 28.0,14.0" fill="#FF00AA" fill-opacity="0.12" stroke="#FF00AA" stroke-width="2" stroke-linejoin="round"/>
+<line x1="74.7" y1="119.0" x2="74.7" y2="49.0" stroke="#FF00AA" stroke-width="1.6"/>
+<polyline points="28.0,111.0 36.0,111.0 36.0,119.0" fill="none" stroke="#7B5A50" stroke-width="1"/>
+<text x="21.0" y="70.5" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" font-style="italic" text-anchor="end">x</text>
+<text x="80.7" y="88.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="start">6</text>
+<text x="121.3" y="134.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="middle">8</text>
+<line x1="28.0" y1="149.0" x2="168.0" y2="149.0" stroke="#7B5A50" stroke-width="1"/>
+<line x1="28.0" y1="146.0" x2="28.0" y2="152.0" stroke="#7B5A50" stroke-width="1"/>
+<line x1="168.0" y1="146.0" x2="168.0" y2="152.0" stroke="#7B5A50" stroke-width="1"/>
+<text x="98.0" y="163.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="middle">12</text>
+</svg>
+            <p class="fig-nota">Separando los triángulos</p>
+            <div class="par-figs" style="gap:14px"><svg viewBox="0 0 132 100" width="132" height="100" xmlns="http://www.w3.org/2000/svg" class="tri-svg" role="img" aria-label="Triángulo rectángulo de cateto x y base 12">
+<polygon points="28.0,78.0 116.0,78.0 28.0,12.0" fill="#FF00AA" fill-opacity="0.12" stroke="#FF00AA" stroke-width="2" stroke-linejoin="round"/>
+<polyline points="28.0,70.0 36.0,70.0 36.0,78.0" fill="none" stroke="#7B5A50" stroke-width="1"/>
+<text x="21.0" y="49.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" font-style="italic" text-anchor="end">x</text>
+<text x="72.0" y="94.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="middle">12</text>
+</svg><svg viewBox="0 0 106 80" width="106" height="80" xmlns="http://www.w3.org/2000/svg" class="tri-svg" role="img" aria-label="Triángulo rectángulo de cateto 6 y base 8">
+<polygon points="28.0,58.5 90.0,58.5 28.0,12.0" fill="#FF00AA" fill-opacity="0.12" stroke="#FF00AA" stroke-width="2" stroke-linejoin="round"/>
+<polyline points="28.0,50.5 36.0,50.5 36.0,58.5" fill="none" stroke="#7B5A50" stroke-width="1"/>
+<text x="21.0" y="39.2" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="end">6</text>
+<text x="59.0" y="74.5" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="middle">8</text>
+</svg></div>
+          </div>
+          <div>
+            <p class="enunciado">Calcula el valor de $x$.</p>
+            <div class="paso"><div class="paso-titulo"></div>
+$$\begin{aligned}
+                \frac{x}{12} &= \frac{6}{8} \\
+                8x &= 6(12) \\
+                8x &= 72 \\
+                x &= \frac{72}{8}
+\end{aligned}$$
+<div style="text-align:center"><span class="resultado-pill">$x = 9$</span></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ejemplo-block" style="margin-top:1.2rem">
+        <div class="ejemplo-row">
+          <div class="tri-wrap" style="flex-direction:column">
+            <svg viewBox="0 0 204 133" width="204" height="133" xmlns="http://www.w3.org/2000/svg" class="tri-svg" role="img" aria-label="Triángulo rectángulo de altura 8 y base y, con una vertical interna 5">
+<polygon points="28.0,89.0 178.0,89.0 28.0,14.0" fill="#FF00AA" fill-opacity="0.12" stroke="#FF00AA" stroke-width="2" stroke-linejoin="round"/>
+<line x1="84.2" y1="89.0" x2="84.2" y2="42.1" stroke="#FF00AA" stroke-width="1.6"/>
+<polyline points="28.0,81.0 36.0,81.0 36.0,89.0" fill="none" stroke="#7B5A50" stroke-width="1"/>
+<text x="21.0" y="55.5" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="end">8</text>
+<text x="90.2" y="69.6" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="start">5</text>
+<text x="131.1" y="104.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="middle">10</text>
+<line x1="28.0" y1="119.0" x2="178.0" y2="119.0" stroke="#7B5A50" stroke-width="1"/>
+<line x1="28.0" y1="116.0" x2="28.0" y2="122.0" stroke="#7B5A50" stroke-width="1"/>
+<line x1="178.0" y1="116.0" x2="178.0" y2="122.0" stroke="#7B5A50" stroke-width="1"/>
+<text x="103.0" y="133.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" font-style="italic" text-anchor="middle">y</text>
+</svg>
+            <p class="fig-nota">Separando los triángulos</p>
+            <div class="par-figs" style="gap:14px"><svg viewBox="0 0 140 82" width="140" height="82" xmlns="http://www.w3.org/2000/svg" class="tri-svg" role="img" aria-label="Triángulo rectángulo de cateto 8 y base y">
+<polygon points="28.0,60.0 124.0,60.0 28.0,12.0" fill="#FF00AA" fill-opacity="0.12" stroke="#FF00AA" stroke-width="2" stroke-linejoin="round"/>
+<polyline points="28.0,52.0 36.0,52.0 36.0,60.0" fill="none" stroke="#7B5A50" stroke-width="1"/>
+<text x="21.0" y="40.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="end">8</text>
+<text x="76.0" y="76.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" font-style="italic" text-anchor="middle">y</text>
+</svg><svg viewBox="0 0 106 65" width="106" height="65" xmlns="http://www.w3.org/2000/svg" class="tri-svg" role="img" aria-label="Triángulo rectángulo de cateto 5 y base 10">
+<polygon points="28.0,43.0 90.0,43.0 28.0,12.0" fill="#FF00AA" fill-opacity="0.12" stroke="#FF00AA" stroke-width="2" stroke-linejoin="round"/>
+<polyline points="28.0,35.0 36.0,35.0 36.0,43.0" fill="none" stroke="#7B5A50" stroke-width="1"/>
+<text x="21.0" y="31.5" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="end">5</text>
+<text x="59.0" y="59.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="middle">10</text>
+</svg></div>
+          </div>
+          <div>
+            <p class="enunciado">Calcula el valor de $y$.</p>
+            <div class="paso"><div class="paso-titulo"></div>
+$$\begin{aligned}
+                \frac{y}{10} &= \frac{8}{5} \\
+                5y &= 8(10) \\
+                5y &= 80 \\
+                y &= \frac{80}{5}
+\end{aligned}$$
+<div style="text-align:center"><span class="resultado-pill">$y = 16$</span></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ejemplo-block" style="margin-top:1.2rem">
+        <div class="ejemplo-row">
+          <div class="tri-wrap"><div class="par-figs" style="gap:14px"><svg viewBox="0 0 112 139" width="112" height="139" xmlns="http://www.w3.org/2000/svg" class="tri-svg" role="img" aria-label="Triángulo rectángulo de cateto X y base 8.5">
+<polygon points="28.0,117.0 96.5,117.0 28.0,12.0" fill="#FF00AA" fill-opacity="0.12" stroke="#FF00AA" stroke-width="2" stroke-linejoin="round"/>
+<polyline points="28.0,109.0 36.0,109.0 36.0,117.0" fill="none" stroke="#7B5A50" stroke-width="1"/>
+<text x="21.0" y="68.5" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" font-style="italic" text-anchor="end">X</text>
+<text x="62.2" y="133.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="middle">8.5</text>
+</svg><svg viewBox="0 0 78 86" width="78" height="86" xmlns="http://www.w3.org/2000/svg" class="tri-svg" role="img" aria-label="Triángulo rectángulo de cateto 2.3 y base 1.5">
+<polygon points="28.0,64.0 61.9,64.0 28.0,12.0" fill="#FF00AA" fill-opacity="0.12" stroke="#FF00AA" stroke-width="2" stroke-linejoin="round"/>
+<polyline points="28.0,56.0 36.0,56.0 36.0,64.0" fill="none" stroke="#7B5A50" stroke-width="1"/>
+<text x="21.0" y="42.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="end">2.3</text>
+<text x="45.0" y="80.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="middle">1.5</text>
+</svg></div></div>
+          <div>
+            <p class="enunciado">
+              Calcula la altura de un edificio que da una sombra de $8.5$ m si a la misma
+              hora un poste de altura $2.3$ m da una sombra de $1.5$ m.
+            </p>
+            <div class="paso"><div class="paso-titulo"></div>
+$$\begin{aligned}
+                \frac{X}{8.5} &= \frac{2.3}{1.5} \\
+                1.5X &= 2.3(8.5) \\
+                1.5X &= 19.55 \\
+                X &= \frac{19.55}{1.5}
+\end{aligned}$$
+<div style="text-align:center"><span class="resultado-pill">$X \approx 13.03$</span></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ EJERCICIOS ══════════ -->
+    <section class="section-block">
+      <div class="sec-head">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+        </div>
+        <h2>Ejercicios</h2>
+      </div>
+      <p class="extras-titulo">Bloque 1</p>
+      <div class="bloques-3">
+        <div class="mini-card">
+          <div class="mini-card-head">1</div>
+          <div class="mini-card-body">
+            <p class="enunciado">Escribe seis proporciones</p><div class="par-figs" style="gap:14px"><svg viewBox="0 0 138 94" width="138" height="94" xmlns="http://www.w3.org/2000/svg" class="tri-svg" role="img" aria-label="Triángulo de lados x, y y a">
+            <polygon points="26.0,72.0 112.0,72.0 55.2,16.0" fill="#FF00AA" fill-opacity="0.12" stroke="#FF00AA" stroke-width="2" stroke-linejoin="round"/>
+            <text x="30.6" y="48.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" font-style="italic" text-anchor="end">x</text>
+            <text x="93.6" y="48.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" font-style="italic" text-anchor="start">y</text>
+            <text x="69.0" y="89.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" font-style="italic" text-anchor="middle">a</text>
+            </svg><svg viewBox="0 0 164 112" width="164" height="112" xmlns="http://www.w3.org/2000/svg" class="tri-svg" role="img" aria-label="Triángulo de lados b, z y c">
+            <polygon points="26.0,90.0 138.0,90.0 64.1,16.0" fill="#FF00AA" fill-opacity="0.12" stroke="#FF00AA" stroke-width="2" stroke-linejoin="round"/>
+            <text x="35.0" y="57.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" font-style="italic" text-anchor="end">b</text>
+            <text x="111.0" y="57.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" font-style="italic" text-anchor="start">z</text>
+            <text x="82.0" y="107.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" font-style="italic" text-anchor="middle">c</text>
+            </svg></div>
+          </div>
+        </div>
+        <div class="mini-card">
+          <div class="mini-card-head">2</div>
+          <div class="mini-card-body">
+            <p class="enunciado">Calcula los valores de $x$ e $y$</p><div class="par-figs" style="gap:18px"><svg viewBox="0 0 109 154" width="109" height="154" xmlns="http://www.w3.org/2000/svg" class="tri-svg" role="img" aria-label="Triángulo rectángulo de altura 10 y base y, con una vertical interna 7">
+            <polygon points="28.0,110.0 82.9,110.0 28.0,14.0" fill="#FF00AA" fill-opacity="0.12" stroke="#FF00AA" stroke-width="2" stroke-linejoin="round"/>
+            <line x1="44.5" y1="110.0" x2="44.5" y2="42.8" stroke="#FF00AA" stroke-width="1.6"/>
+            <polyline points="28.0,102.0 36.0,102.0 36.0,110.0" fill="none" stroke="#7B5A50" stroke-width="1"/>
+            <text x="21.0" y="66.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="end">10</text>
+            <text x="50.5" y="80.4" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="start">7</text>
+            <text x="63.7" y="125.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="middle">4</text>
+            <line x1="28.0" y1="140.0" x2="82.9" y2="140.0" stroke="#7B5A50" stroke-width="1"/>
+            <line x1="28.0" y1="137.0" x2="28.0" y2="143.0" stroke="#7B5A50" stroke-width="1"/>
+            <line x1="82.9" y1="137.0" x2="82.9" y2="143.0" stroke="#7B5A50" stroke-width="1"/>
+            <text x="55.4" y="154.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" font-style="italic" text-anchor="middle">y</text>
+            </svg><svg viewBox="0 0 133 168" width="133" height="168" xmlns="http://www.w3.org/2000/svg" class="tri-svg" role="img" aria-label="Triángulo rectángulo de altura x y base 12, con una vertical interna 7">
+            <polygon points="28.0,124.0 106.6,124.0 28.0,14.0" fill="#FF00AA" fill-opacity="0.12" stroke="#FF00AA" stroke-width="2" stroke-linejoin="round"/>
+            <line x1="73.8" y1="124.0" x2="73.8" y2="78.2" stroke="#FF00AA" stroke-width="1.6"/>
+            <polyline points="28.0,116.0 36.0,116.0 36.0,124.0" fill="none" stroke="#7B5A50" stroke-width="1"/>
+            <text x="21.0" y="73.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" font-style="italic" text-anchor="end">x</text>
+            <text x="79.8" y="105.1" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="start">7</text>
+            <text x="90.2" y="139.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="middle">5</text>
+            <line x1="28.0" y1="154.0" x2="106.6" y2="154.0" stroke="#7B5A50" stroke-width="1"/>
+            <line x1="28.0" y1="151.0" x2="28.0" y2="157.0" stroke="#7B5A50" stroke-width="1"/>
+            <line x1="106.6" y1="151.0" x2="106.6" y2="157.0" stroke="#7B5A50" stroke-width="1"/>
+            <text x="67.3" y="168.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="middle">12</text>
+            </svg></div>
+          </div>
+        </div>
+        <div class="mini-card">
+          <div class="mini-card-head">3</div>
+          <div class="mini-card-body">
+            <p class="enunciado">Calcula la altura de un edificio con sombra de $7.2$ m si un poste de $3.4$ m tiene sombra de $1.3$ m.</p>
+          </div>
+        </div>
+      </div>
+      <p class="extras-titulo">Bloque 2</p>
+      <div class="bloques-3">
+        <div class="mini-card">
+          <div class="mini-card-head">1</div>
+          <div class="mini-card-body">
+            <p class="enunciado">Escribe seis proporciones</p><div class="par-figs" style="gap:14px"><svg viewBox="0 0 138 94" width="138" height="94" xmlns="http://www.w3.org/2000/svg" class="tri-svg" role="img" aria-label="Triángulo de lados a, y y z">
+            <polygon points="26.0,72.0 112.0,72.0 55.2,16.0" fill="#FF00AA" fill-opacity="0.12" stroke="#FF00AA" stroke-width="2" stroke-linejoin="round"/>
+            <text x="30.6" y="48.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" font-style="italic" text-anchor="end">a</text>
+            <text x="93.6" y="48.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" font-style="italic" text-anchor="start">y</text>
+            <text x="69.0" y="89.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" font-style="italic" text-anchor="middle">z</text>
+            </svg><svg viewBox="0 0 164 112" width="164" height="112" xmlns="http://www.w3.org/2000/svg" class="tri-svg" role="img" aria-label="Triángulo de lados b, x y c">
+            <polygon points="26.0,90.0 138.0,90.0 64.1,16.0" fill="#FF00AA" fill-opacity="0.12" stroke="#FF00AA" stroke-width="2" stroke-linejoin="round"/>
+            <text x="35.0" y="57.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" font-style="italic" text-anchor="end">b</text>
+            <text x="111.0" y="57.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" font-style="italic" text-anchor="start">x</text>
+            <text x="82.0" y="107.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" font-style="italic" text-anchor="middle">c</text>
+            </svg></div>
+          </div>
+        </div>
+        <div class="mini-card">
+          <div class="mini-card-head">2</div>
+          <div class="mini-card-body">
+            <p class="enunciado">Calcula los valores de $x$ e $y$</p><div class="par-figs" style="gap:18px"><svg viewBox="0 0 158 150" width="158" height="150" xmlns="http://www.w3.org/2000/svg" class="tri-svg" role="img" aria-label="Triángulo rectángulo de altura x y base 15, con una vertical interna 8">
+            <polygon points="28.0,106.0 131.5,106.0 28.0,14.0" fill="#FF00AA" fill-opacity="0.12" stroke="#FF00AA" stroke-width="2" stroke-linejoin="round"/>
+            <line x1="69.4" y1="106.0" x2="69.4" y2="50.8" stroke="#FF00AA" stroke-width="1.6"/>
+            <polyline points="28.0,98.0 36.0,98.0 36.0,106.0" fill="none" stroke="#7B5A50" stroke-width="1"/>
+            <text x="21.0" y="64.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" font-style="italic" text-anchor="end">x</text>
+            <text x="75.4" y="82.4" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="start">8</text>
+            <text x="100.5" y="121.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="middle">9</text>
+            <line x1="28.0" y1="136.0" x2="131.5" y2="136.0" stroke="#7B5A50" stroke-width="1"/>
+            <line x1="28.0" y1="133.0" x2="28.0" y2="139.0" stroke="#7B5A50" stroke-width="1"/>
+            <line x1="131.5" y1="133.0" x2="131.5" y2="139.0" stroke="#7B5A50" stroke-width="1"/>
+            <text x="79.8" y="150.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="middle">15</text>
+            </svg><svg viewBox="0 0 117 168" width="117" height="168" xmlns="http://www.w3.org/2000/svg" class="tri-svg" role="img" aria-label="Triángulo rectángulo de altura 14 y base 8, con una vertical interna x">
+            <polygon points="28.0,124.0 90.9,124.0 28.0,14.0" fill="#FF00AA" fill-opacity="0.12" stroke="#FF00AA" stroke-width="2" stroke-linejoin="round"/>
+            <line x1="43.7" y1="124.0" x2="43.7" y2="41.5" stroke="#FF00AA" stroke-width="1.6"/>
+            <polyline points="28.0,116.0 36.0,116.0 36.0,124.0" fill="none" stroke="#7B5A50" stroke-width="1"/>
+            <text x="21.0" y="73.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="end">14</text>
+            <text x="49.7" y="86.8" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" font-style="italic" text-anchor="start">x</text>
+            <text x="67.3" y="139.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="middle">6</text>
+            <line x1="28.0" y1="154.0" x2="90.9" y2="154.0" stroke="#7B5A50" stroke-width="1"/>
+            <line x1="28.0" y1="151.0" x2="28.0" y2="157.0" stroke="#7B5A50" stroke-width="1"/>
+            <line x1="90.9" y1="151.0" x2="90.9" y2="157.0" stroke="#7B5A50" stroke-width="1"/>
+            <text x="59.4" y="168.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="middle">8</text>
+            </svg></div>
+          </div>
+        </div>
+        <div class="mini-card">
+          <div class="mini-card-head">3</div>
+          <div class="mini-card-body">
+            <p class="enunciado">Calcula la altura de un edificio con sombra de $6.5$ m si un poste de $2.7$ m tiene sombra de $1.4$ m.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ RESPUESTAS ══════════ -->
+    <section class="section-block">
+      <div class="sec-toggle" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('show');">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <h2>Respuestas</h2>
+        <span class="chev">▼</span>
+      </div>
+      <div class="collapsible">
+        <div class="resol-grid">
+          <div class="resol-item">
+            <div class="resol-num">Bloque 1 · Proporciones</div>
+            <div class="par-figs"><div class="par-figs" style="gap:14px"><svg viewBox="0 0 128 88" width="128" height="88" xmlns="http://www.w3.org/2000/svg" class="tri-svg" role="img" aria-label="Triángulo de lados x, y y a">
+<polygon points="26.0,66.0 102.0,66.0 51.8,16.0" fill="#FF00AA" fill-opacity="0.12" stroke="#FF00AA" stroke-width="2" stroke-linejoin="round"/>
+<text x="28.9" y="45.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" font-style="italic" text-anchor="end">x</text>
+<text x="86.9" y="45.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" font-style="italic" text-anchor="start">y</text>
+<text x="64.0" y="83.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" font-style="italic" text-anchor="middle">a</text>
+</svg><svg viewBox="0 0 148 100" width="148" height="100" xmlns="http://www.w3.org/2000/svg" class="tri-svg" role="img" aria-label="Triángulo de lados b, z y c">
+<polygon points="26.0,78.0 122.0,78.0 58.6,16.0" fill="#FF00AA" fill-opacity="0.12" stroke="#FF00AA" stroke-width="2" stroke-linejoin="round"/>
+<text x="32.3" y="51.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" font-style="italic" text-anchor="end">b</text>
+<text x="100.3" y="51.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" font-style="italic" text-anchor="start">z</text>
+<text x="74.0" y="95.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" font-style="italic" text-anchor="middle">c</text>
+</svg></div></div>
+            <div class="props-grid"><div>$\frac{x}{a} = \frac{b}{c}$</div><div>$\frac{y}{a} = \frac{z}{c}$</div><div>$\frac{x}{y} = \frac{b}{z}$</div><div>$\frac{a}{x} = \frac{c}{b}$</div><div>$\frac{a}{y} = \frac{c}{z}$</div><div>$\frac{y}{x} = \frac{z}{b}$</div></div>
+          </div>
+          <div class="resol-item">
+            <div class="resol-num">Bloque 1 · Valor de $y$</div>
+            <div class="par-figs"><svg viewBox="0 0 107 150" width="107" height="150" xmlns="http://www.w3.org/2000/svg" class="tri-svg" role="img" aria-label="Triángulo rectángulo de altura 10 y base y, con una vertical interna 7">
+<polygon points="28.0,106.0 80.6,106.0 28.0,14.0" fill="#FF00AA" fill-opacity="0.12" stroke="#FF00AA" stroke-width="2" stroke-linejoin="round"/>
+<line x1="43.8" y1="106.0" x2="43.8" y2="41.6" stroke="#FF00AA" stroke-width="1.6"/>
+<polyline points="28.0,98.0 36.0,98.0 36.0,106.0" fill="none" stroke="#7B5A50" stroke-width="1"/>
+<text x="21.0" y="64.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="end">10</text>
+<text x="49.8" y="77.8" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="start">7</text>
+<text x="62.2" y="121.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="middle">4</text>
+<line x1="28.0" y1="136.0" x2="80.6" y2="136.0" stroke="#7B5A50" stroke-width="1"/>
+<line x1="28.0" y1="133.0" x2="28.0" y2="139.0" stroke="#7B5A50" stroke-width="1"/>
+<line x1="80.6" y1="133.0" x2="80.6" y2="139.0" stroke="#7B5A50" stroke-width="1"/>
+<text x="54.3" y="150.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" font-style="italic" text-anchor="middle">y</text>
+</svg></div>
+            <div class="paso"><div class="paso-titulo"></div>
+$$\begin{aligned}
+                \frac{10}{y} &= \frac{7}{4} \\
+                7y &= 4(10) \\
+                7y &= 40 \\
+                y &= \frac{40}{7}
+\end{aligned}$$
+<div style="text-align:center"><span class="resultado-pill">$y \approx 5.71$</span></div></div>
+          </div>
+          <div class="resol-item">
+            <div class="resol-num">Bloque 1 · Valor de $x$</div>
+            <div class="par-figs"><svg viewBox="0 0 129 163" width="129" height="163" xmlns="http://www.w3.org/2000/svg" class="tri-svg" role="img" aria-label="Triángulo rectángulo de altura x y base 12, con una vertical interna 7">
+<polygon points="28.0,119.0 103.0,119.0 28.0,14.0" fill="#FF00AA" fill-opacity="0.12" stroke="#FF00AA" stroke-width="2" stroke-linejoin="round"/>
+<line x1="71.8" y1="119.0" x2="71.8" y2="75.2" stroke="#FF00AA" stroke-width="1.6"/>
+<polyline points="28.0,111.0 36.0,111.0 36.0,119.0" fill="none" stroke="#7B5A50" stroke-width="1"/>
+<text x="21.0" y="70.5" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" font-style="italic" text-anchor="end">x</text>
+<text x="77.8" y="101.1" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="start">7</text>
+<text x="87.4" y="134.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="middle">5</text>
+<line x1="28.0" y1="149.0" x2="103.0" y2="149.0" stroke="#7B5A50" stroke-width="1"/>
+<line x1="28.0" y1="146.0" x2="28.0" y2="152.0" stroke="#7B5A50" stroke-width="1"/>
+<line x1="103.0" y1="146.0" x2="103.0" y2="152.0" stroke="#7B5A50" stroke-width="1"/>
+<text x="65.5" y="163.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="middle">12</text>
+</svg></div>
+            <div class="paso"><div class="paso-titulo"></div>
+$$\begin{aligned}
+                \frac{x}{12} &= \frac{7}{5} \\
+                5x &= 7(12) \\
+                5x &= 84 \\
+                x &= \frac{84}{5}
+\end{aligned}$$
+<div style="text-align:center"><span class="resultado-pill">$x = 16.8$</span></div></div>
+          </div>
+          <div class="resol-item">
+            <div class="resol-num">Bloque 1 · Sombra</div>
+            <div class="par-figs"><div class="par-figs" style="gap:14px"><svg viewBox="0 0 84 139" width="84" height="139" xmlns="http://www.w3.org/2000/svg" class="tri-svg" role="img" aria-label="Triángulo rectángulo de cateto h y base 7.2">
+<polygon points="28.0,117.0 68.1,117.0 28.0,12.0" fill="#FF00AA" fill-opacity="0.12" stroke="#FF00AA" stroke-width="2" stroke-linejoin="round"/>
+<polyline points="28.0,109.0 36.0,109.0 36.0,117.0" fill="none" stroke="#7B5A50" stroke-width="1"/>
+<text x="21.0" y="68.5" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" font-style="italic" text-anchor="end">h</text>
+<text x="48.1" y="133.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="middle">7.2</text>
+</svg><svg viewBox="0 0 64 86" width="64" height="86" xmlns="http://www.w3.org/2000/svg" class="tri-svg" role="img" aria-label="Triángulo rectángulo de cateto 3.4 y base 1.3">
+<polygon points="28.0,64.0 47.9,64.0 28.0,12.0" fill="#FF00AA" fill-opacity="0.12" stroke="#FF00AA" stroke-width="2" stroke-linejoin="round"/>
+<polyline points="28.0,56.0 36.0,56.0 36.0,64.0" fill="none" stroke="#7B5A50" stroke-width="1"/>
+<text x="21.0" y="42.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="end">3.4</text>
+<text x="37.9" y="80.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="middle">1.3</text>
+</svg></div></div>
+            <div class="paso"><div class="paso-titulo"></div>
+$$\begin{aligned}
+                \frac{h}{7.2} &= \frac{3.4}{1.3} \\
+                1.3h &= 3.4(7.2) \\
+                1.3h &= 24.48 \\
+                h &= \frac{24.48}{1.3}
+\end{aligned}$$
+<div style="text-align:center"><span class="resultado-pill">$h \approx 18.83$</span></div></div>
+          </div>
+          <div class="resol-item">
+            <div class="resol-num">Bloque 2 · Proporciones</div>
+            <div class="par-figs"><div class="par-figs" style="gap:14px"><svg viewBox="0 0 128 88" width="128" height="88" xmlns="http://www.w3.org/2000/svg" class="tri-svg" role="img" aria-label="Triángulo de lados a, y y z">
+<polygon points="26.0,66.0 102.0,66.0 51.8,16.0" fill="#FF00AA" fill-opacity="0.12" stroke="#FF00AA" stroke-width="2" stroke-linejoin="round"/>
+<text x="28.9" y="45.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" font-style="italic" text-anchor="end">a</text>
+<text x="86.9" y="45.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" font-style="italic" text-anchor="start">y</text>
+<text x="64.0" y="83.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" font-style="italic" text-anchor="middle">z</text>
+</svg><svg viewBox="0 0 148 100" width="148" height="100" xmlns="http://www.w3.org/2000/svg" class="tri-svg" role="img" aria-label="Triángulo de lados b, x y c">
+<polygon points="26.0,78.0 122.0,78.0 58.6,16.0" fill="#FF00AA" fill-opacity="0.12" stroke="#FF00AA" stroke-width="2" stroke-linejoin="round"/>
+<text x="32.3" y="51.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" font-style="italic" text-anchor="end">b</text>
+<text x="100.3" y="51.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" font-style="italic" text-anchor="start">x</text>
+<text x="74.0" y="95.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" font-style="italic" text-anchor="middle">c</text>
+</svg></div></div>
+            <div class="props-grid"><div>$\frac{a}{z} = \frac{b}{c}$</div><div>$\frac{y}{z} = \frac{x}{c}$</div><div>$\frac{a}{y} = \frac{b}{x}$</div><div>$\frac{z}{a} = \frac{c}{b}$</div><div>$\frac{z}{y} = \frac{c}{x}$</div><div>$\frac{y}{a} = \frac{x}{b}$</div></div>
+          </div>
+          <div class="resol-item">
+            <div class="resol-num">Bloque 2 · Valor de $x$</div>
+            <div class="par-figs"><svg viewBox="0 0 153 146" width="153" height="146" xmlns="http://www.w3.org/2000/svg" class="tri-svg" role="img" aria-label="Triángulo rectángulo de altura x y base 15, con una vertical interna 8">
+<polygon points="28.0,102.0 127.0,102.0 28.0,14.0" fill="#FF00AA" fill-opacity="0.12" stroke="#FF00AA" stroke-width="2" stroke-linejoin="round"/>
+<line x1="67.6" y1="102.0" x2="67.6" y2="49.2" stroke="#FF00AA" stroke-width="1.6"/>
+<polyline points="28.0,94.0 36.0,94.0 36.0,102.0" fill="none" stroke="#7B5A50" stroke-width="1"/>
+<text x="21.0" y="62.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" font-style="italic" text-anchor="end">x</text>
+<text x="73.6" y="79.6" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="start">8</text>
+<text x="97.3" y="117.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="middle">9</text>
+<line x1="28.0" y1="132.0" x2="127.0" y2="132.0" stroke="#7B5A50" stroke-width="1"/>
+<line x1="28.0" y1="129.0" x2="28.0" y2="135.0" stroke="#7B5A50" stroke-width="1"/>
+<line x1="127.0" y1="129.0" x2="127.0" y2="135.0" stroke="#7B5A50" stroke-width="1"/>
+<text x="77.5" y="146.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="middle">15</text>
+</svg></div>
+            <div class="paso"><div class="paso-titulo"></div>
+$$\begin{aligned}
+                \frac{x}{15} &= \frac{8}{9} \\
+                9x &= 8(15) \\
+                9x &= 120 \\
+                x &= \frac{120}{9}
+\end{aligned}$$
+<div style="text-align:center"><span class="resultado-pill">$x \approx 13.33$</span></div></div>
+          </div>
+          <div class="resol-item">
+            <div class="resol-num">Bloque 2 · Valor de $x$</div>
+            <div class="par-figs"><svg viewBox="0 0 114 163" width="114" height="163" xmlns="http://www.w3.org/2000/svg" class="tri-svg" role="img" aria-label="Triángulo rectángulo de altura 14 y base 8, con una vertical interna x">
+<polygon points="28.0,119.0 88.0,119.0 28.0,14.0" fill="#FF00AA" fill-opacity="0.12" stroke="#FF00AA" stroke-width="2" stroke-linejoin="round"/>
+<line x1="43.0" y1="119.0" x2="43.0" y2="40.2" stroke="#FF00AA" stroke-width="1.6"/>
+<polyline points="28.0,111.0 36.0,111.0 36.0,119.0" fill="none" stroke="#7B5A50" stroke-width="1"/>
+<text x="21.0" y="70.5" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="end">14</text>
+<text x="49.0" y="83.6" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" font-style="italic" text-anchor="start">x</text>
+<text x="65.5" y="134.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="middle">6</text>
+<line x1="28.0" y1="149.0" x2="88.0" y2="149.0" stroke="#7B5A50" stroke-width="1"/>
+<line x1="28.0" y1="146.0" x2="28.0" y2="152.0" stroke="#7B5A50" stroke-width="1"/>
+<line x1="88.0" y1="146.0" x2="88.0" y2="152.0" stroke="#7B5A50" stroke-width="1"/>
+<text x="58.0" y="163.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="middle">8</text>
+</svg></div>
+            <div class="paso"><div class="paso-titulo"></div>
+$$\begin{aligned}
+                \frac{14}{8} &= \frac{x}{6} \\
+                8x &= 14(6) \\
+                8x &= 84 \\
+                x &= \frac{84}{8}
+\end{aligned}$$
+<div style="text-align:center"><span class="resultado-pill">$x = 10.5$</span></div></div>
+          </div>
+          <div class="resol-item">
+            <div class="resol-num">Bloque 2 · Sombra</div>
+            <div class="par-figs"><div class="par-figs" style="gap:14px"><svg viewBox="0 0 98 139" width="98" height="139" xmlns="http://www.w3.org/2000/svg" class="tri-svg" role="img" aria-label="Triángulo rectángulo de cateto h y base 6.5">
+<polygon points="28.0,117.0 82.5,117.0 28.0,12.0" fill="#FF00AA" fill-opacity="0.12" stroke="#FF00AA" stroke-width="2" stroke-linejoin="round"/>
+<polyline points="28.0,109.0 36.0,109.0 36.0,117.0" fill="none" stroke="#7B5A50" stroke-width="1"/>
+<text x="21.0" y="68.5" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" font-style="italic" text-anchor="end">h</text>
+<text x="55.2" y="133.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="middle">6.5</text>
+</svg><svg viewBox="0 0 71 86" width="71" height="86" xmlns="http://www.w3.org/2000/svg" class="tri-svg" role="img" aria-label="Triángulo rectángulo de cateto 2.7 y base 1.4">
+<polygon points="28.0,64.0 55.0,64.0 28.0,12.0" fill="#FF00AA" fill-opacity="0.12" stroke="#FF00AA" stroke-width="2" stroke-linejoin="round"/>
+<polyline points="28.0,56.0 36.0,56.0 36.0,64.0" fill="none" stroke="#7B5A50" stroke-width="1"/>
+<text x="21.0" y="42.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="end">2.7</text>
+<text x="41.5" y="80.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="middle">1.4</text>
+</svg></div></div>
+            <div class="paso"><div class="paso-titulo"></div>
+$$\begin{aligned}
+                \frac{h}{6.5} &= \frac{2.7}{1.4} \\
+                1.4h &= 2.7(6.5) \\
+                1.4h &= 17.55 \\
+                h &= \frac{17.55}{1.4}
+\end{aligned}$$
+<div style="text-align:center"><span class="resultado-pill">$h \approx 12.53$</span></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ EJERCICIOS EXTRA ══════════ -->
+    <section class="section-block">
+      <div class="sec-toggle" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('show');">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+        </div>
+        <h2>Ejercicios extra</h2>
+        <span class="chev">▼</span>
+      </div>
+      <div class="collapsible">
+        <div class="bloques-3">
+        <div class="mini-card">
+          <div class="mini-card-head">1</div>
+          <div class="mini-card-body">
+            <p class="enunciado">Escribe seis proporciones</p><div class="par-figs" style="gap:14px"><svg viewBox="0 0 136 92" width="136" height="92" xmlns="http://www.w3.org/2000/svg" class="tri-svg" role="img" aria-label="Triángulo de lados n, p y m">
+            <polygon points="26.0,70.0 110.0,70.0 54.6,16.0" fill="#FF00AA" fill-opacity="0.12" stroke="#FF00AA" stroke-width="2" stroke-linejoin="round"/>
+            <text x="30.3" y="47.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" font-style="italic" text-anchor="end">n</text>
+            <text x="92.3" y="47.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" font-style="italic" text-anchor="start">p</text>
+            <text x="68.0" y="87.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" font-style="italic" text-anchor="middle">m</text>
+            </svg><svg viewBox="0 0 160 108" width="160" height="108" xmlns="http://www.w3.org/2000/svg" class="tri-svg" role="img" aria-label="Triángulo de lados s, t y r">
+            <polygon points="26.0,86.0 134.0,86.0 62.7,16.0" fill="#FF00AA" fill-opacity="0.12" stroke="#FF00AA" stroke-width="2" stroke-linejoin="round"/>
+            <text x="34.4" y="55.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" font-style="italic" text-anchor="end">s</text>
+            <text x="108.4" y="55.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" font-style="italic" text-anchor="start">t</text>
+            <text x="80.0" y="103.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" font-style="italic" text-anchor="middle">r</text>
+            </svg></div>
+          </div>
+        </div>
+        <div class="mini-card">
+          <div class="mini-card-head">2</div>
+          <div class="mini-card-body">
+            <p class="enunciado">Calcula el valor de $x$</p><svg viewBox="0 0 164 146" width="164" height="146" xmlns="http://www.w3.org/2000/svg" class="tri-svg" role="img" aria-label="Triángulo rectángulo de altura 20 y base x, con una vertical interna 12">
+            <polygon points="28.0,102.0 138.0,102.0 28.0,14.0" fill="#FF00AA" fill-opacity="0.12" stroke="#FF00AA" stroke-width="2" stroke-linejoin="round"/>
+            <line x1="72.0" y1="102.0" x2="72.0" y2="49.2" stroke="#FF00AA" stroke-width="1.6"/>
+            <polyline points="28.0,94.0 36.0,94.0 36.0,102.0" fill="none" stroke="#7B5A50" stroke-width="1"/>
+            <text x="21.0" y="62.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="end">20</text>
+            <text x="78.0" y="79.6" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="start">12</text>
+            <text x="105.0" y="117.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="middle">15</text>
+            <line x1="28.0" y1="132.0" x2="138.0" y2="132.0" stroke="#7B5A50" stroke-width="1"/>
+            <line x1="28.0" y1="129.0" x2="28.0" y2="135.0" stroke="#7B5A50" stroke-width="1"/>
+            <line x1="138.0" y1="129.0" x2="138.0" y2="135.0" stroke="#7B5A50" stroke-width="1"/>
+            <text x="83.0" y="146.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" font-style="italic" text-anchor="middle">x</text>
+            </svg>
+          </div>
+        </div>
+        <div class="mini-card">
+          <div class="mini-card-head">3</div>
+          <div class="mini-card-body">
+            <p class="enunciado">Calcula la sombra de un árbol de $15$ m si un poste de $1.2$ m tiene sombra de $0.8$ m.</p>
+          </div>
+        </div>
+        <div class="mini-card">
+          <div class="mini-card-head">4</div>
+          <div class="mini-card-body">
+            <p class="enunciado">Calcula los valores de $x$ e $y$</p><div class="par-figs" style="gap:14px"><svg viewBox="0 0 110 73" width="110" height="73" xmlns="http://www.w3.org/2000/svg" class="tri-svg" role="img" aria-label="Triángulo rectángulo de cateto 3 y base 4">
+            <polygon points="28.0,51.0 80.0,51.0 28.0,12.0" fill="#FF00AA" fill-opacity="0.12" stroke="#FF00AA" stroke-width="2" stroke-linejoin="round"/>
+            <polyline points="28.0,43.0 36.0,43.0 36.0,51.0" fill="none" stroke="#7B5A50" stroke-width="1"/>
+            <text x="21.0" y="35.5" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="end">3</text>
+            <text x="54.0" y="67.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="middle">4</text>
+            <text x="67.0" y="28.5" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="start">5</text>
+            </svg><svg viewBox="0 0 136 92" width="136" height="92" xmlns="http://www.w3.org/2000/svg" class="tri-svg" role="img" aria-label="Triángulo rectángulo de cateto x y base y">
+            <polygon points="28.0,70.5 106.0,70.5 28.0,12.0" fill="#FF00AA" fill-opacity="0.12" stroke="#FF00AA" stroke-width="2" stroke-linejoin="round"/>
+            <polyline points="28.0,62.5 36.0,62.5 36.0,70.5" fill="none" stroke="#7B5A50" stroke-width="1"/>
+            <text x="21.0" y="45.2" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" font-style="italic" text-anchor="end">x</text>
+            <text x="67.0" y="86.5" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" font-style="italic" text-anchor="middle">y</text>
+            <text x="80.0" y="38.2" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="start">10</text>
+            </svg></div>
+          </div>
+        </div>
+        <div class="mini-card">
+          <div class="mini-card-head">5</div>
+          <div class="mini-card-body">
+            <p class="enunciado">Calcula el valor de $h$</p><svg viewBox="0 0 134 154" width="134" height="154" xmlns="http://www.w3.org/2000/svg" class="tri-svg" role="img" aria-label="Triángulo rectángulo de altura h y base 30, con una vertical interna 12">
+            <polygon points="28.0,110.0 108.0,110.0 28.0,14.0" fill="#FF00AA" fill-opacity="0.12" stroke="#FF00AA" stroke-width="2" stroke-linejoin="round"/>
+            <line x1="81.3" y1="110.0" x2="81.3" y2="78.0" stroke="#FF00AA" stroke-width="1.6"/>
+            <polyline points="28.0,102.0 36.0,102.0 36.0,110.0" fill="none" stroke="#7B5A50" stroke-width="1"/>
+            <text x="21.0" y="66.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" font-style="italic" text-anchor="end">h</text>
+            <text x="87.3" y="98.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="start">12</text>
+            <text x="94.7" y="125.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="middle">10</text>
+            <line x1="28.0" y1="140.0" x2="108.0" y2="140.0" stroke="#7B5A50" stroke-width="1"/>
+            <line x1="28.0" y1="137.0" x2="28.0" y2="143.0" stroke="#7B5A50" stroke-width="1"/>
+            <line x1="108.0" y1="137.0" x2="108.0" y2="143.0" stroke="#7B5A50" stroke-width="1"/>
+            <text x="68.0" y="154.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="middle">30</text>
+            </svg>
+          </div>
+        </div>
+        <div class="mini-card">
+          <div class="mini-card-head">6</div>
+          <div class="mini-card-body">
+            <p class="enunciado">Un edificio de $40$ m tiene una sombra de $25$ m. ¿Qué altura tiene un árbol con sombra de $5$ m?</p>
+          </div>
+        </div>
+        <div class="mini-card">
+          <div class="mini-card-head">7</div>
+          <div class="mini-card-body">
+            <p class="enunciado">Escribe seis proporciones</p><div class="par-figs" style="gap:14px"><svg viewBox="0 0 130 90" width="130" height="90" xmlns="http://www.w3.org/2000/svg" class="tri-svg" role="img" aria-label="Triángulo de lados a, b y c">
+            <polygon points="26.0,68.0 104.0,68.0 65.0,16.0" fill="#FF00AA" fill-opacity="0.12" stroke="#FF00AA" stroke-width="2" stroke-linejoin="round"/>
+            <text x="35.5" y="46.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" font-style="italic" text-anchor="end">a</text>
+            <text x="94.5" y="46.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" font-style="italic" text-anchor="start">b</text>
+            <text x="65.0" y="85.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" font-style="italic" text-anchor="middle">c</text>
+            </svg><svg viewBox="0 0 164 112" width="164" height="112" xmlns="http://www.w3.org/2000/svg" class="tri-svg" role="img" aria-label="Triángulo de lados 2a, 2b y 2c">
+            <polygon points="26.0,90.0 138.0,90.0 82.0,16.0" fill="#FF00AA" fill-opacity="0.12" stroke="#FF00AA" stroke-width="2" stroke-linejoin="round"/>
+            <text x="44.0" y="57.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" font-style="italic" text-anchor="end">2a</text>
+            <text x="120.0" y="57.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" font-style="italic" text-anchor="start">2b</text>
+            <text x="82.0" y="107.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" font-style="italic" text-anchor="middle">2c</text>
+            </svg></div>
+          </div>
+        </div>
+        <div class="mini-card">
+          <div class="mini-card-head">8</div>
+          <div class="mini-card-body">
+            <p class="enunciado">Calcula el valor de $x$</p><svg viewBox="0 0 83 168" width="83" height="168" xmlns="http://www.w3.org/2000/svg" class="tri-svg" role="img" aria-label="Triángulo rectángulo de altura 15 y base 4, con una vertical interna 10">
+            <polygon points="28.0,124.0 57.3,124.0 28.0,14.0" fill="#FF00AA" fill-opacity="0.12" stroke="#FF00AA" stroke-width="2" stroke-linejoin="round"/>
+            <line x1="37.8" y1="124.0" x2="37.8" y2="50.7" stroke="#FF00AA" stroke-width="1.6"/>
+            <polyline points="28.0,116.0 36.0,116.0 36.0,124.0" fill="none" stroke="#7B5A50" stroke-width="1"/>
+            <text x="21.0" y="73.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="end">15</text>
+            <text x="43.8" y="91.3" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="start">10</text>
+            <text x="47.6" y="139.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" font-style="italic" text-anchor="middle">x</text>
+            <line x1="28.0" y1="154.0" x2="57.3" y2="154.0" stroke="#7B5A50" stroke-width="1"/>
+            <line x1="28.0" y1="151.0" x2="28.0" y2="157.0" stroke="#7B5A50" stroke-width="1"/>
+            <line x1="57.3" y1="151.0" x2="57.3" y2="157.0" stroke="#7B5A50" stroke-width="1"/>
+            <text x="42.7" y="168.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="middle">4</text>
+            </svg>
+          </div>
+        </div>
+        <div class="mini-card">
+          <div class="mini-card-head">9</div>
+          <div class="mini-card-body">
+            <p class="enunciado">Una persona de $1.75$ m proyecta una sombra de $2.1$ m. Calcula la sombra de un edificio de $12$ m.</p>
+          </div>
+        </div>
+        <div class="mini-card">
+          <div class="mini-card-head">10</div>
+          <div class="mini-card-body">
+            <p class="enunciado">Calcula el valor de $x$</p><div class="par-figs" style="gap:14px"><svg viewBox="0 0 89 124" width="89" height="124" xmlns="http://www.w3.org/2000/svg" class="tri-svg" role="img" aria-label="Triángulo rectángulo de cateto x y base 8">
+            <polygon points="28.0,102.0 73.0,102.0 28.0,12.0" fill="#FF00AA" fill-opacity="0.12" stroke="#FF00AA" stroke-width="2" stroke-linejoin="round"/>
+            <polyline points="28.0,94.0 36.0,94.0 36.0,102.0" fill="none" stroke="#7B5A50" stroke-width="1"/>
+            <text x="21.0" y="61.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" font-style="italic" text-anchor="end">x</text>
+            <text x="50.5" y="118.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="middle">8</text>
+            </svg><svg viewBox="0 0 68 82" width="68" height="82" xmlns="http://www.w3.org/2000/svg" class="tri-svg" role="img" aria-label="Triángulo rectángulo de cateto 4 y base 2">
+            <polygon points="28.0,60.0 52.0,60.0 28.0,12.0" fill="#FF00AA" fill-opacity="0.12" stroke="#FF00AA" stroke-width="2" stroke-linejoin="round"/>
+            <polyline points="28.0,52.0 36.0,52.0 36.0,60.0" fill="none" stroke="#7B5A50" stroke-width="1"/>
+            <text x="21.0" y="40.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="end">4</text>
+            <text x="40.0" y="76.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="middle">2</text>
+            </svg></div>
+          </div>
+        </div>
+        <div class="mini-card">
+          <div class="mini-card-head">11</div>
+          <div class="mini-card-body">
+            <p class="enunciado">Calcula el valor de $y$</p><svg viewBox="0 0 130 160" width="130" height="160" xmlns="http://www.w3.org/2000/svg" class="tri-svg" role="img" aria-label="Triángulo rectángulo de altura 24 y base 18, con una vertical interna 16">
+            <polygon points="28.0,116.0 104.5,116.0 28.0,14.0" fill="#FF00AA" fill-opacity="0.12" stroke="#FF00AA" stroke-width="2" stroke-linejoin="round"/>
+            <line x1="53.5" y1="116.0" x2="53.5" y2="48.0" stroke="#FF00AA" stroke-width="1.6"/>
+            <polyline points="28.0,108.0 36.0,108.0 36.0,116.0" fill="none" stroke="#7B5A50" stroke-width="1"/>
+            <text x="21.0" y="69.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="end">24</text>
+            <text x="59.5" y="86.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="start">16</text>
+            <text x="79.0" y="131.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" font-style="italic" text-anchor="middle">y</text>
+            <line x1="28.0" y1="146.0" x2="104.5" y2="146.0" stroke="#7B5A50" stroke-width="1"/>
+            <line x1="28.0" y1="143.0" x2="28.0" y2="149.0" stroke="#7B5A50" stroke-width="1"/>
+            <line x1="104.5" y1="143.0" x2="104.5" y2="149.0" stroke="#7B5A50" stroke-width="1"/>
+            <text x="66.2" y="160.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="middle">18</text>
+            </svg>
+          </div>
+        </div>
+        <div class="mini-card">
+          <div class="mini-card-head">12</div>
+          <div class="mini-card-body">
+            <p class="enunciado">Un faro proyecta una sombra de $30$ m. Un poste de $2.5$ m proyecta una sombra de $1.8$ m. Calcula la altura del faro.</p>
+          </div>
+        </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ NAVEGACIÓN ══════════ -->
+    <div class="topic-nav-btns">
+      <a href="razones-trigonometricas.html" class="btn-anterior">← Razones trigonométricas</a>
+    </div>
+
+  </main>
+  <script src="../../nav.js"></script>
+  <script src="../../footer.js"></script>
+</body>
+</html>

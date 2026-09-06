@@ -5,6 +5,27 @@
 
 ---
 
+## 2026-09-05 (4) — Math 2: "Semejanza de triángulos" (tema 11)
+
+- **`math/matematicas-2/semejanza-triangulos.html`** (Tema 11) — apunte, cuatro ejemplos
+  (seis proporciones, dos triángulos anidados y un problema de sombras), 6 ejercicios en
+  dos bloques con sus resoluciones y 12 extras. Verifiqué las nueve resoluciones del
+  LaTeX: todas correctas.
+- **Tres figuras nuevas** (`tri3.py` en el scratchpad), porque el tema no es de triángulos
+  rectángulos sueltos:
+  - `oblicuo()` — triángulo con los tres lados etiquetados, para las proporciones. Los
+    pares se dibujan con el mismo ápice y distinto tamaño, así se *ven* semejantes.
+  - `anidado()` — el triángulo con la vertical interna. La base total va con línea de cota
+    abajo y el tramo derecho justo bajo la base: en el LaTeX esas dos etiquetas viven en
+    posiciones inconsistentes entre un ejercicio y otro, y sin la cota no se sabe cuál es
+    cuál. La altura interna no se pone a mano, sale de la semejanza.
+  - `recto()` — el par edificio/poste de los problemas de sombra.
+- Los ejemplos conservan el paso de Lety de **"separando los triángulos"**: debajo de la
+  figura anidada aparecen el grande y el pequeño por separado, que es donde se ve de dónde
+  sale la proporción.
+
+---
+
 ## 2026-09-05 (3) — Math 2: "Razones trigonométricas" (tema 10)
 
 - **`math/matematicas-2/razones-trigonometricas.html`** (Tema 10) — apunte con seno,
