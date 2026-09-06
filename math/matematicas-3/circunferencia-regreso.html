@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Regreso de la circunferencia — Matemáticas 3 — LetyMath</title>
+  <meta name="description" content="De la ecuación general al centro y el radio: completar los trinomios cuadrados perfectos y factorizar." />
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../../favicon.ico">
+  <link rel="stylesheet" href="../../style.css">
+  <link rel="stylesheet" href="../../assets/katex/katex.min.css" />
+  <script defer src="../../assets/katex/katex.min.js"></script>
+  <script defer src="../../assets/katex/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body, {
+      delimiters: [
+        {left:'$$', right:'$$', display:true},
+        {left:'$', right:'$', display:false}
+      ]
+    });"></script>
+
+  <style>
+    .topic-tag {
+      display: inline-flex; align-items: center; gap: .35rem;
+      padding: .22rem .75rem; border-radius: 99px;
+      background: var(--accent-light); color: var(--accent);
+      font-size: .78rem; font-weight: 700; letter-spacing: .03em;
+      margin-bottom: .55rem;
+    }
+    .topic-tag::before {
+      content: ''; width: 7px; height: 7px; border-radius: 50%;
+      background: var(--accent); display: inline-block;
+    }
+
+    .section-block { margin-bottom: 2.5rem; }
+    .section-block:last-child { margin-bottom: 0; }
+
+    .sec-head { display: flex; align-items: center; gap: .65rem; margin-bottom: 1.1rem; }
+    .sec-head h2 { margin: 0; font-size: 1.2rem; line-height: 1; }
+    .sec-icon {
+      width: 30px; height: 30px; border-radius: 8px;
+      display: grid; place-items: center; flex-shrink: 0;
+      background: var(--accent);
+    }
+    .sec-icon svg { width: 15px; height: 15px; stroke: #fff; fill: none; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+
+    .sec-toggle {
+      display: flex; align-items: center; gap: .65rem;
+      cursor: pointer; user-select: none;
+      padding: .8rem 0; margin: 0 0 .4rem;
+    }
+    .sec-toggle h2 { margin: 0; font-size: 1.2rem; line-height: 1; }
+    .sec-toggle .chev { margin-left: auto; font-size: .75rem; color: var(--text-3); transition: transform .25s; }
+    .sec-toggle.open .chev { transform: rotate(180deg); }
+    .collapsible { max-height: 0; overflow: hidden; transition: max-height .4s ease, padding .3s ease; padding: 0; }
+    .collapsible.show { max-height: 40000px; padding: .8rem 0; }
+
+    /* ── Video ── */
+    .video-single { max-width: 720px; margin: 0 auto; }
+    .video-wrapper {
+      position: relative; padding-bottom: 56.25%; height: 0;
+      overflow: hidden; border-radius: var(--r-md); background: #000;
+    }
+    .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+
+    /* ── Ejemplo ── */
+    .ejemplo-section { margin: 2rem 0 2.5rem; }
+    .ejemplo-head { display: flex; align-items: center; gap: .65rem; margin-bottom: 1rem; }
+    .ejemplo-head h3 {
+      margin: 0; font-family: var(--font-display);
+      font-size: 1.2rem; line-height: 1; color: var(--M); font-style: italic;
+    }
+    .ejemplo-block {
+      padding: 1.6rem 1.5rem; background: var(--bg-card);
+      border: 1.5px solid var(--border); border-radius: var(--r-md);
+      color: var(--text);
+    }
+    .paso-titulo { font-size: .8rem; font-weight: 700; color: var(--course-1); margin-bottom: .25rem; text-align: center; }
+    .paso-titulo.izq { color: #7B2CBF; }
+    .paso-titulo.der { color: var(--M); }
+    .sistema-mult { text-align: center; }
+
+    /* ── Pills ── */
+    .resultado-pill {
+      display: inline-block; background: #FFD0E5;
+      padding: .25rem .75rem; border-radius: 99px;
+      font-size: .9rem; font-weight: 700; color: var(--M);
+      margin: .25rem .2rem; border: 1.5px solid #FF8AC0;
+    }
+
+    /* ── Mini card (ejercicio) ── */
+    .mini-card {
+      background: var(--bg-card); border: 1.5px solid var(--border);
+      border-radius: var(--r-md); overflow: hidden;
+    }
+    .mini-card-head {
+      padding: .4rem .8rem; background: var(--course-1);
+      font-family: var(--font-display); font-size: .85rem; color: #fff; font-weight: 700;
+    }
+    .mini-card-body { padding: .8rem 1rem; font-size: .9rem; line-height: 1.6; color: var(--text); text-align: center; }
+    .mini-card-body .ej-line { padding: .55rem 0; border-bottom: 1px solid var(--border-s); }
+    .mini-card-body .ej-line:first-child { padding-top: .1rem; }
+    .mini-card-body .ej-line:last-child { border-bottom: none; padding-bottom: .1rem; }
+    .bloques-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2rem; }
+    @media (max-width: 700px) { .bloques-2 { grid-template-columns: 1fr; } }
+
+    /* ── Resoluciones ── */
+    .resol-grid { display: grid; grid-template-columns: 1fr; gap: 1.2rem; }
+    .resol-item {
+      background: var(--bg-card); border: 1.5px solid var(--border);
+      border-radius: var(--r-md); padding: .9rem 1.1rem;
+    }
+    .resol-num {
+      font-size: .75rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .06em; color: var(--course-1); margin-bottom: .1rem;
+    }
+
+    /* ── Doble columna del método ── */
+    .elim-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem;
+      margin-top: .6rem;
+    }
+    .elim-grid > div + div { border-left: 1px solid var(--border-s); padding-left: 1.2rem; }
+    @media (max-width: 700px) {
+      .elim-grid { grid-template-columns: 1fr; gap: .6rem; }
+      .elim-grid > div + div { border-left: none; padding-left: 0; border-top: 1px solid var(--border-s); padding-top: .8rem; }
+    }
+    .elim-col { text-align: center; }
+    .comprob { margin-top: 1rem; padding-top: .8rem; border-top: 1px solid var(--border-s); }
+    .comprob-titulo {
+      font-family: var(--font-display); font-size: .95rem; font-style: italic;
+      color: var(--M); margin: 0 0 .3rem; text-align: center;
+    }
+
+    .extras-titulo {
+      font-family: var(--font-display); font-size: 1rem; font-style: italic;
+      color: var(--M); margin: 1.4rem 0 .8rem;
+    }
+    .extras-titulo:first-child { margin-top: 0; }
+
+    /* ── Navegación ── */
+    .topic-nav-btns {
+      display: flex; justify-content: space-between; gap: 1rem;
+      margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border);
+    }
+    .btn-anterior, .btn-siguiente {
+      display: inline-flex; align-items: center; gap: .5rem;
+      padding: .65rem 1.4rem; border-radius: 99px;
+      font-weight: 700; font-size: .9rem; transition: background .2s, transform .18s;
+    }
+    .btn-anterior { background: transparent; color: var(--accent); border: 2px solid var(--accent); }
+    .btn-anterior:hover { background: var(--accent-light); transform: translateX(-3px); }
+    .btn-siguiente { background: var(--accent); color: #fff; }
+    .btn-siguiente:hover { background: var(--M); color: #fff; transform: translateX(3px); }
+    .despeje { text-align: center; }
+    .formula-pill {
+      display: inline-block; background: #FFF1A8;
+      padding: .25rem .75rem; border-radius: 99px;
+      font-size: .9rem; font-weight: 600; color: var(--text);
+      margin: .25rem .2rem; border: 1.5px solid #F5DC6A;
+    }
+    .formula-pill.salmon { background: #FFD9B8; border-color: #F5B584; }
+    .graf-wrap { display: flex; justify-content: center; margin: 1rem 0 .5rem; }
+    .graf-svg { max-width: 240px; max-height: 380px; height: auto; }
+    /* las pills con raíz o fracción necesitan más alto */
+    .resultado-pill { padding: .4rem .8rem; line-height: 1.5; }
+    .graf-svg { max-width: 260px; }
+    .mitad-box {
+      display: inline-grid; grid-template-columns: repeat(3, auto);
+      border: 1.5px solid var(--border); border-radius: var(--r-sm);
+      background: var(--bg); overflow: hidden; margin: .2rem .35rem .5rem;
+    }
+    .mitad-box > div { padding: .3rem .8rem; text-align: center; }
+    .mitad-box > div + div { border-left: 1px solid var(--border); }
+    .mitad-box span { display: block; font-size: .66rem; color: var(--text-3); line-height: 1.2; }
+    .dato-box {
+      display: inline-grid; grid-template-columns: repeat(2, auto);
+      border: 1.5px solid #FF8AC0; border-radius: var(--r-sm);
+      background: #FFD0E5; overflow: hidden; margin: .2rem 0 .6rem; color: var(--M); font-weight: 700;
+    }
+    .dato-box > div { padding: .3rem .9rem; text-align: center; }
+    .dato-box > div + div { border-left: 1px solid #FF8AC0; }
+  </style>
+</head>
+<body data-section="math">
+  <main class="topic-content">
+
+    <header class="topic-header">
+      <p class="breadcrumb">
+        <a href="../index.html">Inicio</a> ›
+        <a href="index.html">Matemáticas 3</a> ›
+        Regreso de la circunferencia
+      </p>
+      <div class="topic-tag">Matemáticas 3 · Tema 16</div>
+      <h1>Regreso de la circunferencia</h1>
+    </header>
+
+    <section class="section-block">
+      <div class="sec-head">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3" stroke-width="0" fill="white"/></svg>
+        </div>
+        <h2>Video</h2>
+      </div>
+      <div class="video-single">
+        <div class="video-wrapper">
+          <button type="button" class="yt-lite" data-yt="yXvKqLvCZwM" data-title="Regreso de la circunferencia" aria-label="Reproducir video: Regreso de la circunferencia"></button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-block ejemplo-section">
+      <div class="ejemplo-head">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        </div>
+        <h3>Ejemplo</h3>
+      </div>
+      <div class="ejemplo-block">
+        <p class="apunte-nota" style="text-align:center">A partir de la ecuación general se encuentran el centro y el radio <strong>completando los trinomios cuadrados perfectos</strong>.</p>
+        <div class="despeje">$$x^2 + y^2 + 2x - 4y - 20 = 0$$</div>
+        <div style="text-align:center"><div class="mitad-box"><div><span>b</span>$2$</div><div><span>mitad</span>$1$</div><div><span>mitad²</span>$1$</div></div><div class="mitad-box"><div><span>b</span>$-4$</div><div><span>mitad</span>$-2$</div><div><span>mitad²</span>$4$</div></div></div>
+        $$\begin{aligned} x^2 + 2x + y^2 - 4y &= 20 \\ x^2 + 2x + 1 + y^2 - 4y + 4 &= 20 + 1 + 4 \\ (x + 1)^2 + (y - 2)^2 &= 25 \\ (x + 1)^2 + (y - 2)^2 &= (5)^2 \\ (x - (-1))^2 + (y - (2))^2 &= (5)^2 \end{aligned}$$
+        <div style="text-align:center"><div class="dato-box"><div>$C = (-1, 2)$</div><div>$r = 5$</div></div></div>
+        <div class="graf-wrap"><svg class="graf-svg" viewBox="0 0 208 208" xmlns="http://www.w3.org/2000/svg" width="208" height="208" role="img" aria-label="Circunferencia con su centro y su radio"><line x1="14" y1="14" x2="14" y2="194" stroke="#E0C4BC" stroke-width="0.5"/><line x1="29" y1="14" x2="29" y2="194" stroke="#E0C4BC" stroke-width="0.5"/><line x1="44" y1="14" x2="44" y2="194" stroke="#E0C4BC" stroke-width="0.5"/><line x1="59" y1="14" x2="59" y2="194" stroke="#E0C4BC" stroke-width="0.5"/><line x1="74" y1="14" x2="74" y2="194" stroke="#E0C4BC" stroke-width="0.5"/><line x1="89" y1="14" x2="89" y2="194" stroke="#E0C4BC" stroke-width="0.5"/><line x1="104" y1="14" x2="104" y2="194" stroke="#E0C4BC" stroke-width="0.5"/><line x1="119" y1="14" x2="119" y2="194" stroke="#E0C4BC" stroke-width="0.5"/><line x1="134" y1="14" x2="134" y2="194" stroke="#E0C4BC" stroke-width="0.5"/><line x1="149" y1="14" x2="149" y2="194" stroke="#E0C4BC" stroke-width="0.5"/><line x1="164" y1="14" x2="164" y2="194" stroke="#E0C4BC" stroke-width="0.5"/><line x1="179" y1="14" x2="179" y2="194" stroke="#E0C4BC" stroke-width="0.5"/><line x1="194" y1="14" x2="194" y2="194" stroke="#E0C4BC" stroke-width="0.5"/><line x1="14" y1="194" x2="194" y2="194" stroke="#E0C4BC" stroke-width="0.5"/><line x1="14" y1="179" x2="194" y2="179" stroke="#E0C4BC" stroke-width="0.5"/><line x1="14" y1="164" x2="194" y2="164" stroke="#E0C4BC" stroke-width="0.5"/><line x1="14" y1="149" x2="194" y2="149" stroke="#E0C4BC" stroke-width="0.5"/><line x1="14" y1="134" x2="194" y2="134" stroke="#E0C4BC" stroke-width="0.5"/><line x1="14" y1="119" x2="194" y2="119" stroke="#E0C4BC" stroke-width="0.5"/><line x1="14" y1="104" x2="194" y2="104" stroke="#E0C4BC" stroke-width="0.5"/><line x1="14" y1="89" x2="194" y2="89" stroke="#E0C4BC" stroke-width="0.5"/><line x1="14" y1="74" x2="194" y2="74" stroke="#E0C4BC" stroke-width="0.5"/><line x1="14" y1="59" x2="194" y2="59" stroke="#E0C4BC" stroke-width="0.5"/><line x1="14" y1="44" x2="194" y2="44" stroke="#E0C4BC" stroke-width="0.5"/><line x1="14" y1="29" x2="194" y2="29" stroke="#E0C4BC" stroke-width="0.5"/><line x1="14" y1="14" x2="194" y2="14" stroke="#E0C4BC" stroke-width="0.5"/><line x1="14" y1="134" x2="194" y2="134" stroke="#7B5A50" stroke-width="1.2"/><line x1="119" y1="14" x2="119" y2="194" stroke="#7B5A50" stroke-width="1.2"/><circle cx="104" cy="104" r="75" fill="#FF00AA" fill-opacity="0.15" stroke="#FF00AA" stroke-width="2.2"/><line x1="29" y1="104" x2="179" y2="104" stroke="#FF00AA" stroke-width="1"/><line x1="104" y1="179" x2="104" y2="29" stroke="#FF00AA" stroke-width="1"/><circle cx="29" cy="104" r="2.6" fill="#1A0828"/><circle cx="179" cy="104" r="2.6" fill="#1A0828"/><circle cx="104" cy="179" r="2.6" fill="#1A0828"/><circle cx="104" cy="29" r="2.6" fill="#1A0828"/><circle cx="104" cy="104" r="3.4" fill="#4A0080"/><circle cx="29" cy="104" r="5.5" fill="none" stroke="#4A0080" stroke-width="1.6"/></svg></div>
+        <div class="comprob">
+          <p class="comprob-titulo">Comprobación</p>
+          $$\begin{aligned} (-6)^2 + (2)^2 + 2(-6) - 4(2) - 20 &= 0 \\ 36 + 4 - 12 - 8 - 20 &= 0 \\ 40 - 40 &= 0 \\ 0 &= 0 \end{aligned}$$
+        </div>
+      </div>
+    </section>
+
+    <section class="section-block">
+      <div class="sec-head">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+        </div>
+        <h2>Ejercicios</h2>
+      </div>
+      <div class="bloques-2">
+        <div class="mini-card">
+          <div class="mini-card-head">Ejercicio 1</div>
+          <div class="mini-card-body">$$x^2 + y^2 - 8x + 6y + 16 = 0$$</div>
+        </div>
+        <div class="mini-card">
+          <div class="mini-card-head">Ejercicio 2</div>
+          <div class="mini-card-body">$$x^2 + y^2 - 6x + 10y + 33 = 0$$</div>
+        </div>
+        <div class="mini-card">
+          <div class="mini-card-head">Ejercicio 3</div>
+          <div class="mini-card-body">$$x^2 + y^2 + 2x - 10y + 17 = 0$$</div>
+        </div>
+        <div class="mini-card">
+          <div class="mini-card-head">Ejercicio 4</div>
+          <div class="mini-card-body">$$x^2 + y^2 - 4x - 6y - 12 = 0$$</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-block">
+      <div class="sec-toggle" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('show');">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <h2>Respuestas</h2>
+        <span class="chev">▼</span>
+      </div>
+      <div class="collapsible">
+        <div class="resol-grid">
+
+          <div class="resol-item">
+            <div class="resol-num">Ejercicio 1</div>
+            <div class="despeje">$$x^2 + y^2 - 8x + 6y + 16 = 0$$</div>
+            <div style="text-align:center"><div class="mitad-box"><div><span>b</span>$-8$</div><div><span>mitad</span>$-4$</div><div><span>mitad²</span>$16$</div></div><div class="mitad-box"><div><span>b</span>$6$</div><div><span>mitad</span>$3$</div><div><span>mitad²</span>$9$</div></div></div>
+            $$\begin{aligned} x^2 - 8x + y^2 + 6y &= -16 \\ x^2 - 8x + 16 + y^2 + 6y + 9 &= -16 + 16 + 9 \\ (x - 4)^2 + (y + 3)^2 &= 9 \\ (x - 4)^2 + (y + 3)^2 &= (3)^2 \\ (x - (4))^2 + (y - (-3))^2 &= (3)^2 \end{aligned}$$
+            <div style="text-align:center"><div class="dato-box"><div>$C = (4, -3)$</div><div>$r = 3$</div></div></div>
+            <div class="graf-wrap"><svg class="graf-svg" viewBox="0 0 148 148" xmlns="http://www.w3.org/2000/svg" width="148" height="148" role="img" aria-label="Circunferencia con su centro y su radio"><line x1="14" y1="14" x2="14" y2="134" stroke="#E0C4BC" stroke-width="0.5"/><line x1="29" y1="14" x2="29" y2="134" stroke="#E0C4BC" stroke-width="0.5"/><line x1="44" y1="14" x2="44" y2="134" stroke="#E0C4BC" stroke-width="0.5"/><line x1="59" y1="14" x2="59" y2="134" stroke="#E0C4BC" stroke-width="0.5"/><line x1="74" y1="14" x2="74" y2="134" stroke="#E0C4BC" stroke-width="0.5"/><line x1="89" y1="14" x2="89" y2="134" stroke="#E0C4BC" stroke-width="0.5"/><line x1="104" y1="14" x2="104" y2="134" stroke="#E0C4BC" stroke-width="0.5"/><line x1="119" y1="14" x2="119" y2="134" stroke="#E0C4BC" stroke-width="0.5"/><line x1="134" y1="14" x2="134" y2="134" stroke="#E0C4BC" stroke-width="0.5"/><line x1="14" y1="134" x2="134" y2="134" stroke="#E0C4BC" stroke-width="0.5"/><line x1="14" y1="119" x2="134" y2="119" stroke="#E0C4BC" stroke-width="0.5"/><line x1="14" y1="104" x2="134" y2="104" stroke="#E0C4BC" stroke-width="0.5"/><line x1="14" y1="89" x2="134" y2="89" stroke="#E0C4BC" stroke-width="0.5"/><line x1="14" y1="74" x2="134" y2="74" stroke="#E0C4BC" stroke-width="0.5"/><line x1="14" y1="59" x2="134" y2="59" stroke="#E0C4BC" stroke-width="0.5"/><line x1="14" y1="44" x2="134" y2="44" stroke="#E0C4BC" stroke-width="0.5"/><line x1="14" y1="29" x2="134" y2="29" stroke="#E0C4BC" stroke-width="0.5"/><line x1="14" y1="14" x2="134" y2="14" stroke="#E0C4BC" stroke-width="0.5"/><line x1="14" y1="29" x2="134" y2="29" stroke="#7B5A50" stroke-width="1.2"/><line x1="14" y1="14" x2="14" y2="134" stroke="#7B5A50" stroke-width="1.2"/><circle cx="74" cy="74" r="45" fill="#FF00AA" fill-opacity="0.15" stroke="#FF00AA" stroke-width="2.2"/><line x1="29" y1="74" x2="119" y2="74" stroke="#FF00AA" stroke-width="1"/><line x1="74" y1="119" x2="74" y2="29" stroke="#FF00AA" stroke-width="1"/><circle cx="29" cy="74" r="2.6" fill="#1A0828"/><circle cx="119" cy="74" r="2.6" fill="#1A0828"/><circle cx="74" cy="119" r="2.6" fill="#1A0828"/><circle cx="74" cy="29" r="2.6" fill="#1A0828"/><circle cx="74" cy="74" r="3.4" fill="#4A0080"/><circle cx="74" cy="29" r="5.5" fill="none" stroke="#4A0080" stroke-width="1.6"/></svg></div>
+            <div class="comprob">
+              <p class="comprob-titulo">Comprobación</p>
+              $$\begin{aligned} (4)^2 + (0)^2 - 8(4) + 6(0) + 16 &= 0 \\ 16 + 0 - 32 + 0 + 16 &= 0 \\ 32 - 32 &= 0 \\ 0 &= 0 \end{aligned}$$
+            </div>
+          </div>
+
+          <div class="resol-item">
+            <div class="resol-num">Ejercicio 2</div>
+            <div class="despeje">$$x^2 + y^2 - 6x + 10y + 33 = 0$$</div>
+            <div style="text-align:center"><div class="mitad-box"><div><span>b</span>$-6$</div><div><span>mitad</span>$-3$</div><div><span>mitad²</span>$9$</div></div><div class="mitad-box"><div><span>b</span>$10$</div><div><span>mitad</span>$5$</div><div><span>mitad²</span>$25$</div></div></div>
+            $$\begin{aligned} x^2 - 6x + y^2 + 10y &= -33 \\ x^2 - 6x + 9 + y^2 + 10y + 25 &= -33 + 9 + 25 \\ (x - 3)^2 + (y + 5)^2 &= 1 \\ (x - 3)^2 + (y + 5)^2 &= (1)^2 \\ (x - (3))^2 + (y - (-5))^2 &= (1)^2 \end{aligned}$$
+            <div style="text-align:center"><div class="dato-box"><div>$C = (3, -5)$</div><div>$r = 1$</div></div></div>
+            <div class="graf-wrap"><svg class="graf-svg" viewBox="0 0 118 148" xmlns="http://www.w3.org/2000/svg" width="118" height="148" role="img" aria-label="Circunferencia con su centro y su radio"><line x1="14" y1="14" x2="14" y2="134" stroke="#E0C4BC" stroke-width="0.5"/><line x1="29" y1="14" x2="29" y2="134" stroke="#E0C4BC" stroke-width="0.5"/><line x1="44" y1="14" x2="44" y2="134" stroke="#E0C4BC" stroke-width="0.5"/><line x1="59" y1="14" x2="59" y2="134" stroke="#E0C4BC" stroke-width="0.5"/><line x1="74" y1="14" x2="74" y2="134" stroke="#E0C4BC" stroke-width="0.5"/><line x1="89" y1="14" x2="89" y2="134" stroke="#E0C4BC" stroke-width="0.5"/><line x1="104" y1="14" x2="104" y2="134" stroke="#E0C4BC" stroke-width="0.5"/><line x1="14" y1="134" x2="104" y2="134" stroke="#E0C4BC" stroke-width="0.5"/><line x1="14" y1="119" x2="104" y2="119" stroke="#E0C4BC" stroke-width="0.5"/><line x1="14" y1="104" x2="104" y2="104" stroke="#E0C4BC" stroke-width="0.5"/><line x1="14" y1="89" x2="104" y2="89" stroke="#E0C4BC" stroke-width="0.5"/><line x1="14" y1="74" x2="104" y2="74" stroke="#E0C4BC" stroke-width="0.5"/><line x1="14" y1="59" x2="104" y2="59" stroke="#E0C4BC" stroke-width="0.5"/><line x1="14" y1="44" x2="104" y2="44" stroke="#E0C4BC" stroke-width="0.5"/><line x1="14" y1="29" x2="104" y2="29" stroke="#E0C4BC" stroke-width="0.5"/><line x1="14" y1="14" x2="104" y2="14" stroke="#E0C4BC" stroke-width="0.5"/><line x1="14" y1="14" x2="104" y2="14" stroke="#7B5A50" stroke-width="1.2"/><line x1="14" y1="14" x2="14" y2="134" stroke="#7B5A50" stroke-width="1.2"/><circle cx="59" cy="89" r="15" fill="#FF00AA" fill-opacity="0.15" stroke="#FF00AA" stroke-width="2.2"/><line x1="44" y1="89" x2="74" y2="89" stroke="#FF00AA" stroke-width="1"/><line x1="59" y1="104" x2="59" y2="74" stroke="#FF00AA" stroke-width="1"/><circle cx="44" cy="89" r="2.6" fill="#1A0828"/><circle cx="74" cy="89" r="2.6" fill="#1A0828"/><circle cx="59" cy="104" r="2.6" fill="#1A0828"/><circle cx="59" cy="74" r="2.6" fill="#1A0828"/><circle cx="59" cy="89" r="3.4" fill="#4A0080"/><circle cx="74" cy="89" r="5.5" fill="none" stroke="#4A0080" stroke-width="1.6"/></svg></div>
+            <div class="comprob">
+              <p class="comprob-titulo">Comprobación</p>
+              $$\begin{aligned} (4)^2 + (-5)^2 - 6(4) + 10(-5) + 33 &= 0 \\ 16 + 25 - 24 - 50 + 33 &= 0 \\ 74 - 74 &= 0 \\ 0 &= 0 \end{aligned}$$
+            </div>
+          </div>
+
+          <div class="resol-item">
+            <div class="resol-num">Ejercicio 3</div>
+            <div class="despeje">$$x^2 + y^2 + 2x - 10y + 17 = 0$$</div>
+            <div style="text-align:center"><div class="mitad-box"><div><span>b</span>$2$</div><div><span>mitad</span>$1$</div><div><span>mitad²</span>$1$</div></div><div class="mitad-box"><div><span>b</span>$-10$</div><div><span>mitad</span>$-5$</div><div><span>mitad²</span>$25$</div></div></div>
+            $$\begin{aligned} x^2 + 2x + y^2 - 10y &= -17 \\ x^2 + 2x + 1 + y^2 - 10y + 25 &= -17 + 1 + 25 \\ (x + 1)^2 + (y - 5)^2 &= 9 \\ (x + 1)^2 + (y - 5)^2 &= (3)^2 \\ (x - (-1))^2 + (y - (5))^2 &= (3)^2 \end{aligned}$$
+            <div style="text-align:center"><div class="dato-box"><div>$C = (-1, 5)$</div><div>$r = 3$</div></div></div>
+            <div class="graf-wrap"><svg class="graf-svg" viewBox="0 0 148 148" xmlns="http://www.w3.org/2000/svg" width="148" height="148" role="img" aria-label="Circunferencia con su centro y su radio"><line x1="14" y1="14" x2="14" y2="134" stroke="#E0C4BC" stroke-width="0.5"/><line x1="29" y1="14" x2="29" y2="134" stroke="#E0C4BC" stroke-width="0.5"/><line x1="44" y1="14" x2="44" y2="134" stroke="#E0C4BC" stroke-width="0.5"/><line x1="59" y1="14" x2="59" y2="134" stroke="#E0C4BC" stroke-width="0.5"/><line x1="74" y1="14" x2="74" y2="134" stroke="#E0C4BC" stroke-width="0.5"/><line x1="89" y1="14" x2="89" y2="134" stroke="#E0C4BC" stroke-width="0.5"/><line x1="104" y1="14" x2="104" y2="134" stroke="#E0C4BC" stroke-width="0.5"/><line x1="119" y1="14" x2="119" y2="134" stroke="#E0C4BC" stroke-width="0.5"/><line x1="134" y1="14" x2="134" y2="134" stroke="#E0C4BC" stroke-width="0.5"/><line x1="14" y1="134" x2="134" y2="134" stroke="#E0C4BC" stroke-width="0.5"/><line x1="14" y1="119" x2="134" y2="119" stroke="#E0C4BC" stroke-width="0.5"/><line x1="14" y1="104" x2="134" y2="104" stroke="#E0C4BC" stroke-width="0.5"/><line x1="14" y1="89" x2="134" y2="89" stroke="#E0C4BC" stroke-width="0.5"/><line x1="14" y1="74" x2="134" y2="74" stroke="#E0C4BC" stroke-width="0.5"/><line x1="14" y1="59" x2="134" y2="59" stroke="#E0C4BC" stroke-width="0.5"/><line x1="14" y1="44" x2="134" y2="44" stroke="#E0C4BC" stroke-width="0.5"/><line x1="14" y1="29" x2="134" y2="29" stroke="#E0C4BC" stroke-width="0.5"/><line x1="14" y1="14" x2="134" y2="14" stroke="#E0C4BC" stroke-width="0.5"/><line x1="89" y1="14" x2="89" y2="134" stroke="#7B5A50" stroke-width="1.2"/><circle cx="74" cy="74" r="45" fill="#FF00AA" fill-opacity="0.15" stroke="#FF00AA" stroke-width="2.2"/><line x1="29" y1="74" x2="119" y2="74" stroke="#FF00AA" stroke-width="1"/><line x1="74" y1="119" x2="74" y2="29" stroke="#FF00AA" stroke-width="1"/><circle cx="29" cy="74" r="2.6" fill="#1A0828"/><circle cx="119" cy="74" r="2.6" fill="#1A0828"/><circle cx="74" cy="119" r="2.6" fill="#1A0828"/><circle cx="74" cy="29" r="2.6" fill="#1A0828"/><circle cx="74" cy="74" r="3.4" fill="#4A0080"/><circle cx="74" cy="119" r="5.5" fill="none" stroke="#4A0080" stroke-width="1.6"/></svg></div>
+            <div class="comprob">
+              <p class="comprob-titulo">Comprobación</p>
+              $$\begin{aligned} (-1)^2 + (2)^2 + 2(-1) - 10(2) + 17 &= 0 \\ 1 + 4 - 2 - 20 + 17 &= 0 \\ 22 - 22 &= 0 \\ 0 &= 0 \end{aligned}$$
+            </div>
+          </div>
+
+          <div class="resol-item">
+            <div class="resol-num">Ejercicio 4</div>
+            <div class="despeje">$$x^2 + y^2 - 4x - 6y - 12 = 0$$</div>
+            <div style="text-align:center"><div class="mitad-box"><div><span>b</span>$-4$</div><div><span>mitad</span>$-2$</div><div><span>mitad²</span>$4$</div></div><div class="mitad-box"><div><span>b</span>$-6$</div><div><span>mitad</span>$-3$</div><div><span>mitad²</span>$9$</div></div></div>
+            $$\begin{aligned} x^2 - 4x + y^2 - 6y &= 12 \\ x^2 - 4x + 4 + y^2 - 6y + 9 &= 12 + 4 + 9 \\ (x - 2)^2 + (y - 3)^2 &= 25 \\ (x - 2)^2 + (y - 3)^2 &= (5)^2 \\ (x - (2))^2 + (y - (3))^2 &= (5)^2 \end{aligned}$$
+            <div style="text-align:center"><div class="dato-box"><div>$C = (2, 3)$</div><div>$r = 5$</div></div></div>
+            <div class="graf-wrap"><svg class="graf-svg" viewBox="0 0 208 208" xmlns="http://www.w3.org/2000/svg" width="208" height="208" role="img" aria-label="Circunferencia con su centro y su radio"><line x1="14" y1="14" x2="14" y2="194" stroke="#E0C4BC" stroke-width="0.5"/><line x1="29" y1="14" x2="29" y2="194" stroke="#E0C4BC" stroke-width="0.5"/><line x1="44" y1="14" x2="44" y2="194" stroke="#E0C4BC" stroke-width="0.5"/><line x1="59" y1="14" x2="59" y2="194" stroke="#E0C4BC" stroke-width="0.5"/><line x1="74" y1="14" x2="74" y2="194" stroke="#E0C4BC" stroke-width="0.5"/><line x1="89" y1="14" x2="89" y2="194" stroke="#E0C4BC" stroke-width="0.5"/><line x1="104" y1="14" x2="104" y2="194" stroke="#E0C4BC" stroke-width="0.5"/><line x1="119" y1="14" x2="119" y2="194" stroke="#E0C4BC" stroke-width="0.5"/><line x1="134" y1="14" x2="134" y2="194" stroke="#E0C4BC" stroke-width="0.5"/><line x1="149" y1="14" x2="149" y2="194" stroke="#E0C4BC" stroke-width="0.5"/><line x1="164" y1="14" x2="164" y2="194" stroke="#E0C4BC" stroke-width="0.5"/><line x1="179" y1="14" x2="179" y2="194" stroke="#E0C4BC" stroke-width="0.5"/><line x1="194" y1="14" x2="194" y2="194" stroke="#E0C4BC" stroke-width="0.5"/><line x1="14" y1="194" x2="194" y2="194" stroke="#E0C4BC" stroke-width="0.5"/><line x1="14" y1="179" x2="194" y2="179" stroke="#E0C4BC" stroke-width="0.5"/><line x1="14" y1="164" x2="194" y2="164" stroke="#E0C4BC" stroke-width="0.5"/><line x1="14" y1="149" x2="194" y2="149" stroke="#E0C4BC" stroke-width="0.5"/><line x1="14" y1="134" x2="194" y2="134" stroke="#E0C4BC" stroke-width="0.5"/><line x1="14" y1="119" x2="194" y2="119" stroke="#E0C4BC" stroke-width="0.5"/><line x1="14" y1="104" x2="194" y2="104" stroke="#E0C4BC" stroke-width="0.5"/><line x1="14" y1="89" x2="194" y2="89" stroke="#E0C4BC" stroke-width="0.5"/><line x1="14" y1="74" x2="194" y2="74" stroke="#E0C4BC" stroke-width="0.5"/><line x1="14" y1="59" x2="194" y2="59" stroke="#E0C4BC" stroke-width="0.5"/><line x1="14" y1="44" x2="194" y2="44" stroke="#E0C4BC" stroke-width="0.5"/><line x1="14" y1="29" x2="194" y2="29" stroke="#E0C4BC" stroke-width="0.5"/><line x1="14" y1="14" x2="194" y2="14" stroke="#E0C4BC" stroke-width="0.5"/><line x1="14" y1="149" x2="194" y2="149" stroke="#7B5A50" stroke-width="1.2"/><line x1="74" y1="14" x2="74" y2="194" stroke="#7B5A50" stroke-width="1.2"/><circle cx="104" cy="104" r="75" fill="#FF00AA" fill-opacity="0.15" stroke="#FF00AA" stroke-width="2.2"/><line x1="29" y1="104" x2="179" y2="104" stroke="#FF00AA" stroke-width="1"/><line x1="104" y1="179" x2="104" y2="29" stroke="#FF00AA" stroke-width="1"/><circle cx="29" cy="104" r="2.6" fill="#1A0828"/><circle cx="179" cy="104" r="2.6" fill="#1A0828"/><circle cx="104" cy="179" r="2.6" fill="#1A0828"/><circle cx="104" cy="29" r="2.6" fill="#1A0828"/><circle cx="104" cy="104" r="3.4" fill="#4A0080"/><circle cx="104" cy="29" r="5.5" fill="none" stroke="#4A0080" stroke-width="1.6"/></svg></div>
+            <div class="comprob">
+              <p class="comprob-titulo">Comprobación</p>
+              $$\begin{aligned} (2)^2 + (8)^2 - 4(2) - 6(8) - 12 &= 0 \\ 4 + 64 - 8 - 48 - 12 &= 0 \\ 68 - 68 &= 0 \\ 0 &= 0 \end{aligned}$$
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="section-block">
+      <div class="sec-toggle" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('show');">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+        </div>
+        <h2>Ejercicios extra</h2>
+        <span class="chev">▼</span>
+      </div>
+      <div class="collapsible">
+        <div class="bloques-2">
+          <div class="mini-card">
+            <div class="mini-card-head">Bloque 1</div>
+            <div class="mini-card-body">
+              <div class="ej-line">$x^2 + y^2 - 2x - 8y + 8 = 0$</div>
+              <div class="ej-line">$x^2 + y^2 + 6x - 4y - 3 = 0$</div>
+              <div class="ej-line">$x^2 + y^2 - 10x + 4y - 7 = 0$</div>
+              <div class="ej-line">$x^2 + y^2 + 8x + 2y + 13 = 0$</div>
+              <div class="ej-line">$x^2 + y^2 - 6y - 16 = 0$</div>
+            </div>
+          </div>
+          <div class="mini-card">
+            <div class="mini-card-head">Bloque 2</div>
+            <div class="mini-card-body">
+              <div class="ej-line">$x^2 + y^2 - 4x - 12y + 24 = 0$</div>
+              <div class="ej-line">$x^2 + y^2 + 2x + 10y - 23 = 0$</div>
+              <div class="ej-line">$x^2 + y^2 - 12x - 2y + 12 = 0$</div>
+              <div class="ej-line">$x^2 + y^2 + 4x - 8y - 16 = 0$</div>
+              <div class="ej-line">$x^2 + y^2 - 6x + 8y + 21 = 0$</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ NAVEGACIÓN ══════════ -->
+    <div class="topic-nav-btns">
+      <a href="circunferencia-general.html" class="btn-anterior">← Ecuación de la circunferencia</a>
+      <a href="index.html" class="btn-siguiente">Índice del curso →</a>
+    </div>
+
+  </main>
+  <script src="../../nav.js"></script>
+  <script src="../../footer.js"></script>
+</body>
+</html>
