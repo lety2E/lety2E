@@ -135,8 +135,15 @@ Catetos identificados implícitamente del diagrama.
 
 Para rectas y triángulos: SVG inline (no TikZ, no libs externas — file:// compatible).
 
+Generadores listos en `Recursos lety2E/` (salieron de Math 3, sirven para Math 4):
+`triangulos-svg-math.py`, `rectas-svg-math.py` (dos rectas y su punto de corte),
+`parabolas-svg-math.py` (por vértice y por foco-directriz), `rectas-numericas-svg-math.py`
+(intervalos), `regiones-svg-math.py` (semiplano sombreado) y `circunferencias-svg-math.py`.
+
 ### Reglas
-- **1 cuadro = 1 unidad** en ambos ejes (viewBox proporcional al rango).
+- **1 cuadro = 1 unidad** en ambos ejes (viewBox proporcional al rango). Excepción: cuando el
+  rango en $y$ es muy grande (parábolas con vértice en −25, por ejemplo) el grid se marca cada
+  2, 4 o 5 unidades — es lo que hace Lety a mano en esos casos.
 - Grid `#E0C4BC` stroke 0.5, ejes `#7B5A50` stroke 1.2, recta `#FF00AA` stroke 2.2.
 - Triángulo: relleno magenta 15% opacity + contorno sólido.
 - Puntos: círculo `#1A0828` r=3.
@@ -266,6 +273,13 @@ CSS en el `<style>` del tema:
 ```
 
 **Por qué**: la media query global en `style.css` hace `body[data-section="math"] .mini-card-body { line-height: 2.2 }` en móvil. Eso es suficiente para `$$...$$` y filas simples, pero `\sqrt{\dfrac{}{}}` necesita aún más altura. Por eso `.ej-line`/`.sol` traen su propia `line-height: 2.4` radical-safe (declarada también globalmente para garantizarlo en todas las páginas).
+
+### Cuidado con las etiquetas dentro de cajitas
+
+Si un tema usa cajitas con etiqueta (`b | mitad | cuadrado de la mitad`, `vértice | p`, `C | r`),
+la regla de la etiqueta debe ser `.mitad-box > div > span:first-child`, **nunca** `.mitad-box span`:
+KaTeX arma cada fórmula con `<span>` anidados, y un `display: block` suelto los apila y desarma la
+ecuación letra por letra. Pasó en cuatro páginas de Math 3 el 6-sep-2026.
 
 **Antes de commit, verificar en viewport 390×844 (iPhone 12) y 360×800 (Android medio)**:
 - Las cards no se salen del contenedor

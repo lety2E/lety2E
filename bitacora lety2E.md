@@ -5,6 +5,34 @@
 
 ---
 
+## 2026-09-06 (3) — Matemáticas 3 completo: 18 temas armados desde las capturas
+
+Se migró el curso entero en una sesión, **sin LaTeX**: la única fuente fueron las capturas
+(`~/Desktop/capturas/matemáticas 3/`). Alcanzaron de sobra — las hojas de `resultados` traen
+el procedimiento completo y la comprobación de cada ejercicio.
+
+Los 18: sumas y restas, sustitución, gráfico, igualación, determinantes 2×2 y 3×3, cuadráticas
+incompletas, fórmula general, trinomio cuadrado perfecto, gráfica de la cuadrática, productos,
+factorización, desigualdades, regiones, y las cónicas de ida y vuelta (circunferencia y parábola).
+**10 de los 18 tienen video** del CSV; los otros ocho van sin esa sección.
+
+- **Un solo error en las capturas**: tema 7, Bloque 1, ejercicio 1 — la hoja da $x_2 = 5$ pero al
+  factorizar $5x(x-2)=0$ la solución es $x_2 = 2$. Se publicó corregido, con la nota al pie de la
+  página. Todo lo demás (unas 70 resoluciones) cuadró contra las capturas.
+- **Los ejercicios extra los generé yo**: las capturas de Math 3 no traen extras. Van **10 por tema**
+  (el mínimo que pide el banco de exámenes), verificados uno por uno con sympy o por determinante —
+  solución entera y única salvo donde el caso pide lo contrario.
+- **Cinco generadores de SVG nuevos**, guardados en `Recursos lety2E/`: rectas (dos en el mismo
+  plano, para el método gráfico), parábolas (por vértice y por foco-directriz), rectas numéricas
+  con intervalo, regiones (semiplano sombreado) y circunferencias. También quedó
+  `generador-paginas-math3.py`, el armador de páginas que produjo los 18 archivos.
+- **Bug de CSS que se repitió en cuatro páginas**: la regla que da formato a las etiquetas de las
+  cajitas (`b | mitad | cuadrado`) estaba escrita como `.mitad-box span`, y eso alcanzaba también a
+  los `<span>` internos que genera KaTeX: las fórmulas se desarmaban letra por letra. Va acotada a
+  `> div > span:first-child`. **Si se copia una cajita de éstas a otro tema, cuidado con eso.**
+- El índice del curso conserva el `.proximamente-nota`: **faltan 5 temas** (elipse, hipérbola e
+  historia), cuyas carpetas de capturas están vacías.
+
 ## 2026-09-06 (2) — Math 3 arranca: "Método de sumas y restas" (tema 1)
 
 **Math 3 no tiene LaTeX**: la única fuente son las capturas (`~/Desktop/capturas/matemáticas 3/`),

@@ -1,15 +1,16 @@
 # Pendientes — lety2E
 
-**Migrar Matemáticas 3 y 4** — **Math 3 ya arrancó** (6-sep-2026, tema 1 publicado). No hay
-LaTeX de ese curso: se está armando **desde las capturas** (`~/Desktop/capturas/matemáticas 3/`),
-que alcanzan bien — traen ejemplo, ejercicios y resultados con procedimiento y comprobación.
-Son 18 temas, igual que letymath.com. **Las carpetas 19–23 están vacías** (ecuación general de la
-elipse, regreso de la elipse, hipérbola general, regreso de la hipérbola, e historia): esos cinco
-no se pueden armar hasta que Lety suba capturas. Diez de los 18 tienen video en el CSV.
-Los extras de Math 3 no vienen en las capturas, se generan (10 por tema, ver abajo).
-**Math 4 sigue sin tocarse**; hay que ver si también tiene capturas o si Lety pasa el LaTeX.
-Para las cónicas de Math 3 y las funciones de Math 4 va a hacer falta un generador de SVG nuevo;
-el de triángulos (`Recursos lety2E/triangulos-svg-math.py`) sirve de molde.
+**Matemáticas 3: faltan 5 temas por capturas** — el curso se completó el 6-sep-2026 con **18 de 23**
+temas, todos desde las capturas (no hay LaTeX de este curso y no hace falta). Los cinco que faltan
+son **ecuación general de la elipse, regreso de la elipse, ecuación general de la hipérbola, regreso
+de la hipérbola** e **historia**: sus carpetas en `~/Desktop/capturas/matemáticas 3/` (19 a 23) están
+**vacías**. En cuanto Lety suba esas capturas se arman igual que los demás; para las cónicas ya están
+los generadores de SVG en `Recursos lety2E/` (circunferencias y parábolas sirven de molde para la
+elipse y la hipérbola). El índice del curso sigue con su `.proximamente-nota` hasta entonces.
+
+**Migrar Matemáticas 4** — es el único curso que queda. Hay que ver primero si tiene capturas
+(`~/Desktop/capturas/matemáticas 4/` existe) o si Lety pasa el LaTeX. El flujo de Math 3 —capturas →
+verificar aritmética → armar con `Recursos lety2E/generador-paginas-math3.py`— sirve tal cual.
 
 **Math 5 se queda como está** — letymath.com tiene un tema más, *"Dx. Con x en el
 denominador"*, que **no se va a migrar**: Lety lo dio por incorporado dentro de
