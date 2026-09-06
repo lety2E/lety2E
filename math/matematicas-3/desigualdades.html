@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Desigualdades — Matemáticas 3 — LetyMath</title>
+  <meta name="description" content="Resolver desigualdades lineales, escribir el intervalo solución y representarlo en la recta numérica." />
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../../favicon.ico">
+  <link rel="stylesheet" href="../../style.css">
+  <link rel="stylesheet" href="../../assets/katex/katex.min.css" />
+  <script defer src="../../assets/katex/katex.min.js"></script>
+  <script defer src="../../assets/katex/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body, {
+      delimiters: [
+        {left:'$$', right:'$$', display:true},
+        {left:'$', right:'$', display:false}
+      ]
+    });"></script>
+
+  <style>
+    .topic-tag {
+      display: inline-flex; align-items: center; gap: .35rem;
+      padding: .22rem .75rem; border-radius: 99px;
+      background: var(--accent-light); color: var(--accent);
+      font-size: .78rem; font-weight: 700; letter-spacing: .03em;
+      margin-bottom: .55rem;
+    }
+    .topic-tag::before {
+      content: ''; width: 7px; height: 7px; border-radius: 50%;
+      background: var(--accent); display: inline-block;
+    }
+
+    .section-block { margin-bottom: 2.5rem; }
+    .section-block:last-child { margin-bottom: 0; }
+
+    .sec-head { display: flex; align-items: center; gap: .65rem; margin-bottom: 1.1rem; }
+    .sec-head h2 { margin: 0; font-size: 1.2rem; line-height: 1; }
+    .sec-icon {
+      width: 30px; height: 30px; border-radius: 8px;
+      display: grid; place-items: center; flex-shrink: 0;
+      background: var(--accent);
+    }
+    .sec-icon svg { width: 15px; height: 15px; stroke: #fff; fill: none; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+
+    .sec-toggle {
+      display: flex; align-items: center; gap: .65rem;
+      cursor: pointer; user-select: none;
+      padding: .8rem 0; margin: 0 0 .4rem;
+    }
+    .sec-toggle h2 { margin: 0; font-size: 1.2rem; line-height: 1; }
+    .sec-toggle .chev { margin-left: auto; font-size: .75rem; color: var(--text-3); transition: transform .25s; }
+    .sec-toggle.open .chev { transform: rotate(180deg); }
+    .collapsible { max-height: 0; overflow: hidden; transition: max-height .4s ease, padding .3s ease; padding: 0; }
+    .collapsible.show { max-height: 40000px; padding: .8rem 0; }
+
+    /* ── Video ── */
+    .video-single { max-width: 720px; margin: 0 auto; }
+    .video-wrapper {
+      position: relative; padding-bottom: 56.25%; height: 0;
+      overflow: hidden; border-radius: var(--r-md); background: #000;
+    }
+    .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+
+    /* ── Ejemplo ── */
+    .ejemplo-section { margin: 2rem 0 2.5rem; }
+    .ejemplo-head { display: flex; align-items: center; gap: .65rem; margin-bottom: 1rem; }
+    .ejemplo-head h3 {
+      margin: 0; font-family: var(--font-display);
+      font-size: 1.2rem; line-height: 1; color: var(--M); font-style: italic;
+    }
+    .ejemplo-block {
+      padding: 1.6rem 1.5rem; background: var(--bg-card);
+      border: 1.5px solid var(--border); border-radius: var(--r-md);
+      color: var(--text);
+    }
+    .paso-titulo { font-size: .8rem; font-weight: 700; color: var(--course-1); margin-bottom: .25rem; text-align: center; }
+    .paso-titulo.izq { color: #7B2CBF; }
+    .paso-titulo.der { color: var(--M); }
+    .sistema-mult { text-align: center; }
+
+    /* ── Pills ── */
+    .resultado-pill {
+      display: inline-block; background: #FFD0E5;
+      padding: .25rem .75rem; border-radius: 99px;
+      font-size: .9rem; font-weight: 700; color: var(--M);
+      margin: .25rem .2rem; border: 1.5px solid #FF8AC0;
+    }
+
+    /* ── Mini card (ejercicio) ── */
+    .mini-card {
+      background: var(--bg-card); border: 1.5px solid var(--border);
+      border-radius: var(--r-md); overflow: hidden;
+    }
+    .mini-card-head {
+      padding: .4rem .8rem; background: var(--course-1);
+      font-family: var(--font-display); font-size: .85rem; color: #fff; font-weight: 700;
+    }
+    .mini-card-body { padding: .8rem 1rem; font-size: .9rem; line-height: 1.6; color: var(--text); text-align: center; }
+    .mini-card-body .ej-line { padding: .55rem 0; border-bottom: 1px solid var(--border-s); }
+    .mini-card-body .ej-line:first-child { padding-top: .1rem; }
+    .mini-card-body .ej-line:last-child { border-bottom: none; padding-bottom: .1rem; }
+    .bloques-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2rem; }
+    @media (max-width: 700px) { .bloques-2 { grid-template-columns: 1fr; } }
+
+    /* ── Resoluciones ── */
+    .resol-grid { display: grid; grid-template-columns: 1fr; gap: 1.2rem; }
+    .resol-item {
+      background: var(--bg-card); border: 1.5px solid var(--border);
+      border-radius: var(--r-md); padding: .9rem 1.1rem;
+    }
+    .resol-num {
+      font-size: .75rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .06em; color: var(--course-1); margin-bottom: .1rem;
+    }
+
+    /* ── Doble columna del método ── */
+    .elim-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem;
+      margin-top: .6rem;
+    }
+    .elim-grid > div + div { border-left: 1px solid var(--border-s); padding-left: 1.2rem; }
+    @media (max-width: 700px) {
+      .elim-grid { grid-template-columns: 1fr; gap: .6rem; }
+      .elim-grid > div + div { border-left: none; padding-left: 0; border-top: 1px solid var(--border-s); padding-top: .8rem; }
+    }
+    .elim-col { text-align: center; }
+    .comprob { margin-top: 1rem; padding-top: .8rem; border-top: 1px solid var(--border-s); }
+    .comprob-titulo {
+      font-family: var(--font-display); font-size: .95rem; font-style: italic;
+      color: var(--M); margin: 0 0 .3rem; text-align: center;
+    }
+
+    .extras-titulo {
+      font-family: var(--font-display); font-size: 1rem; font-style: italic;
+      color: var(--M); margin: 1.4rem 0 .8rem;
+    }
+    .extras-titulo:first-child { margin-top: 0; }
+
+    /* ── Navegación ── */
+    .topic-nav-btns {
+      display: flex; justify-content: space-between; gap: 1rem;
+      margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border);
+    }
+    .btn-anterior, .btn-siguiente {
+      display: inline-flex; align-items: center; gap: .5rem;
+      padding: .65rem 1.4rem; border-radius: 99px;
+      font-weight: 700; font-size: .9rem; transition: background .2s, transform .18s;
+    }
+    .btn-anterior { background: transparent; color: var(--accent); border: 2px solid var(--accent); }
+    .btn-anterior:hover { background: var(--accent-light); transform: translateX(-3px); }
+    .btn-siguiente { background: var(--accent); color: #fff; }
+    .btn-siguiente:hover { background: var(--M); color: #fff; transform: translateX(3px); }
+    .despeje { text-align: center; }
+    .formula-pill {
+      display: inline-block; background: #FFF1A8;
+      padding: .25rem .75rem; border-radius: 99px;
+      font-size: .9rem; font-weight: 600; color: var(--text);
+      margin: .25rem .2rem; border: 1.5px solid #F5DC6A;
+    }
+    .formula-pill.salmon { background: #FFD9B8; border-color: #F5B584; }
+    .graf-wrap { display: flex; justify-content: center; margin: 1rem 0 .5rem; }
+    .graf-svg { max-width: 240px; max-height: 380px; height: auto; }
+    /* las pills con raíz o fracción necesitan más alto */
+    .resultado-pill { padding: .4rem .8rem; line-height: 1.5; }
+    .sep-regla { border: none; border-top: 1px solid var(--border-s); margin: 1.2rem 0; }
+    .recta-svg { max-width: 100%; height: auto; display: block; margin: .3rem auto 0; }
+    .interv-tag { font-size: .8rem; color: var(--text-3); margin: .6rem 0 .1rem; text-align: center; }
+    .tres-casos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    @media (max-width: 700px) { .tres-casos { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body data-section="math">
+  <main class="topic-content">
+
+    <header class="topic-header">
+      <p class="breadcrumb">
+        <a href="../index.html">Inicio</a> ›
+        <a href="index.html">Matemáticas 3</a> ›
+        Desigualdades
+      </p>
+      <div class="topic-tag">Matemáticas 3 · Tema 13</div>
+      <h1>Desigualdades</h1>
+    </header>
+
+    <section class="section-block">
+      <div class="sec-head">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3" stroke-width="0" fill="white"/></svg>
+        </div>
+        <h2>Video</h2>
+      </div>
+      <div class="video-single">
+        <div class="video-wrapper">
+          <button type="button" class="yt-lite" data-yt="knszZ7qkCgw" data-title="Desigualdades" aria-label="Reproducir video: Desigualdades"></button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-block ejemplo-section">
+      <div class="ejemplo-head">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        </div>
+        <h3>Ejemplos</h3>
+      </div>
+      <div class="ejemplo-block">
+        <div class="elim-grid">
+          <div class="elim-col">
+            <div class="paso-titulo izq">Ejemplo 1</div>
+            <div class="despeje">$$-15x + 20 < -6x + 2$$</div>
+            $$\begin{aligned} -15x + 6x &< +2 - 20 \\ -9x &< -18 \\ x &> \dfrac{-18}{-9} \end{aligned}$$
+            <div style="text-align:center"><span class="resultado-pill">$x > 2$</span></div>
+            <p class="interv-tag">intervalo</p>
+            <div style="text-align:center"><span class="formula-pill">$(2, \infty)$</span></div>
+            <div class="graf-wrap"><svg class="recta-svg" viewBox="0 0 226 56" xmlns="http://www.w3.org/2000/svg" width="226" height="56" role="img" aria-label="Recta numérica con el intervalo solución"><line x1="152" y1="30" x2="222" y2="30" stroke="#FF00AA" stroke-width="3.2" stroke-linecap="round"/><path d="M222,30 l-7,-4.5 v9 z" fill="#FF00AA"/><line x1="14" y1="30" x2="212" y2="30" stroke="#7B5A50" stroke-width="1.2"/><line x1="22" y1="25" x2="22" y2="35" stroke="#7B5A50" stroke-width="1"/><text x="22" y="51" font-size="9.5" fill="#6E4F4F" text-anchor="middle" font-family="system-ui, sans-serif">-3</text><line x1="48" y1="25" x2="48" y2="35" stroke="#7B5A50" stroke-width="1"/><text x="48" y="51" font-size="9.5" fill="#6E4F4F" text-anchor="middle" font-family="system-ui, sans-serif">-2</text><line x1="74" y1="25" x2="74" y2="35" stroke="#7B5A50" stroke-width="1"/><text x="74" y="51" font-size="9.5" fill="#6E4F4F" text-anchor="middle" font-family="system-ui, sans-serif">-1</text><line x1="100" y1="21" x2="100" y2="39" stroke="#7B5A50" stroke-width="1.6"/><line x1="126" y1="25" x2="126" y2="35" stroke="#7B5A50" stroke-width="1"/><text x="126" y="51" font-size="9.5" fill="#6E4F4F" text-anchor="middle" font-family="system-ui, sans-serif">1</text><line x1="152" y1="25" x2="152" y2="35" stroke="#7B5A50" stroke-width="1"/><text x="152" y="51" font-size="9.5" fill="#6E4F4F" text-anchor="middle" font-family="system-ui, sans-serif">2</text><line x1="178" y1="25" x2="178" y2="35" stroke="#7B5A50" stroke-width="1"/><text x="178" y="51" font-size="9.5" fill="#6E4F4F" text-anchor="middle" font-family="system-ui, sans-serif">3</text><circle cx="152" cy="30" r="4.6" fill="#FBF2EF" stroke="#FF00AA" stroke-width="2.2"/></svg></div>
+          </div>
+          <div class="elim-col">
+            <div class="paso-titulo der">Ejemplo 2</div>
+            <div class="despeje">$$20x - 5 \leq 10x - 25$$</div>
+            $$\begin{aligned} 20x - 10x &\leq -25 + 5 \\ 10x &\leq -20 \\ x &\leq \dfrac{-20}{10} \end{aligned}$$
+            <div style="text-align:center"><span class="resultado-pill">$x \leq -2$</span></div>
+            <p class="interv-tag">intervalo</p>
+            <div style="text-align:center"><span class="formula-pill">$(-\infty, -2]$</span></div>
+            <div class="graf-wrap"><svg class="recta-svg" viewBox="0 0 226 56" xmlns="http://www.w3.org/2000/svg" width="226" height="56" role="img" aria-label="Recta numérica con el intervalo solución"><line x1="4" y1="30" x2="74" y2="30" stroke="#FF00AA" stroke-width="3.2" stroke-linecap="round"/><path d="M4,30 l7,-4.5 v9 z" fill="#FF00AA"/><line x1="14" y1="30" x2="212" y2="30" stroke="#7B5A50" stroke-width="1.2"/><line x1="48" y1="25" x2="48" y2="35" stroke="#7B5A50" stroke-width="1"/><text x="48" y="51" font-size="9.5" fill="#6E4F4F" text-anchor="middle" font-family="system-ui, sans-serif">-3</text><line x1="74" y1="25" x2="74" y2="35" stroke="#7B5A50" stroke-width="1"/><text x="74" y="51" font-size="9.5" fill="#6E4F4F" text-anchor="middle" font-family="system-ui, sans-serif">-2</text><line x1="100" y1="25" x2="100" y2="35" stroke="#7B5A50" stroke-width="1"/><text x="100" y="51" font-size="9.5" fill="#6E4F4F" text-anchor="middle" font-family="system-ui, sans-serif">-1</text><line x1="126" y1="21" x2="126" y2="39" stroke="#7B5A50" stroke-width="1.6"/><line x1="152" y1="25" x2="152" y2="35" stroke="#7B5A50" stroke-width="1"/><text x="152" y="51" font-size="9.5" fill="#6E4F4F" text-anchor="middle" font-family="system-ui, sans-serif">1</text><line x1="178" y1="25" x2="178" y2="35" stroke="#7B5A50" stroke-width="1"/><text x="178" y="51" font-size="9.5" fill="#6E4F4F" text-anchor="middle" font-family="system-ui, sans-serif">2</text><line x1="204" y1="25" x2="204" y2="35" stroke="#7B5A50" stroke-width="1"/><text x="204" y="51" font-size="9.5" fill="#6E4F4F" text-anchor="middle" font-family="system-ui, sans-serif">3</text><circle cx="74" cy="30" r="4.6" fill="#FF00AA"/></svg></div>
+          </div>
+        </div>
+        <p class="apunte-nota" style="text-align:center">Cuando se divide entre un número negativo, la desigualdad <strong>se invierte</strong>.</p>
+        <div class="comprob">
+          <p class="comprob-titulo">Otros tipos de intervalos</p>
+          <div class="tres-casos">
+            <div class="elim-col">
+              <div style="text-align:center"><span class="resultado-pill">$x \geq 2$</span></div>
+              <div style="text-align:center"><span class="formula-pill">$[2, \infty)$</span></div>
+              <div class="graf-wrap"><svg class="recta-svg" viewBox="0 0 174 56" xmlns="http://www.w3.org/2000/svg" width="174" height="56" role="img" aria-label="Recta numérica con el intervalo solución"><line x1="100" y1="30" x2="170" y2="30" stroke="#FF00AA" stroke-width="3.2" stroke-linecap="round"/><path d="M170,30 l-7,-4.5 v9 z" fill="#FF00AA"/><line x1="14" y1="30" x2="160" y2="30" stroke="#7B5A50" stroke-width="1.2"/><line x1="22" y1="25" x2="22" y2="35" stroke="#7B5A50" stroke-width="1"/><text x="22" y="51" font-size="9.5" fill="#6E4F4F" text-anchor="middle" font-family="system-ui, sans-serif">-1</text><line x1="48" y1="21" x2="48" y2="39" stroke="#7B5A50" stroke-width="1.6"/><line x1="74" y1="25" x2="74" y2="35" stroke="#7B5A50" stroke-width="1"/><text x="74" y="51" font-size="9.5" fill="#6E4F4F" text-anchor="middle" font-family="system-ui, sans-serif">1</text><line x1="100" y1="25" x2="100" y2="35" stroke="#7B5A50" stroke-width="1"/><text x="100" y="51" font-size="9.5" fill="#6E4F4F" text-anchor="middle" font-family="system-ui, sans-serif">2</text><line x1="126" y1="25" x2="126" y2="35" stroke="#7B5A50" stroke-width="1"/><text x="126" y="51" font-size="9.5" fill="#6E4F4F" text-anchor="middle" font-family="system-ui, sans-serif">3</text><circle cx="100" cy="30" r="4.6" fill="#FF00AA"/></svg></div>
+            </div>
+            <div class="elim-col">
+              <div style="text-align:center"><span class="resultado-pill">$x < 3$</span></div>
+              <div style="text-align:center"><span class="formula-pill">$(-\infty, 3)$</span></div>
+              <div class="graf-wrap"><svg class="recta-svg" viewBox="0 0 174 56" xmlns="http://www.w3.org/2000/svg" width="174" height="56" role="img" aria-label="Recta numérica con el intervalo solución"><line x1="4" y1="30" x2="126" y2="30" stroke="#FF00AA" stroke-width="3.2" stroke-linecap="round"/><path d="M4,30 l7,-4.5 v9 z" fill="#FF00AA"/><line x1="14" y1="30" x2="160" y2="30" stroke="#7B5A50" stroke-width="1.2"/><line x1="22" y1="25" x2="22" y2="35" stroke="#7B5A50" stroke-width="1"/><text x="22" y="51" font-size="9.5" fill="#6E4F4F" text-anchor="middle" font-family="system-ui, sans-serif">-1</text><line x1="48" y1="21" x2="48" y2="39" stroke="#7B5A50" stroke-width="1.6"/><line x1="74" y1="25" x2="74" y2="35" stroke="#7B5A50" stroke-width="1"/><text x="74" y="51" font-size="9.5" fill="#6E4F4F" text-anchor="middle" font-family="system-ui, sans-serif">1</text><line x1="100" y1="25" x2="100" y2="35" stroke="#7B5A50" stroke-width="1"/><text x="100" y="51" font-size="9.5" fill="#6E4F4F" text-anchor="middle" font-family="system-ui, sans-serif">2</text><line x1="126" y1="25" x2="126" y2="35" stroke="#7B5A50" stroke-width="1"/><text x="126" y="51" font-size="9.5" fill="#6E4F4F" text-anchor="middle" font-family="system-ui, sans-serif">3</text><circle cx="126" cy="30" r="4.6" fill="#FBF2EF" stroke="#FF00AA" stroke-width="2.2"/></svg></div>
+            </div>
+            <div class="elim-col">
+              <div style="text-align:center"><span class="resultado-pill">$1 < x \leq 4$</span></div>
+              <div style="text-align:center"><span class="formula-pill">$(1, 4]$</span></div>
+              <div class="graf-wrap"><svg class="recta-svg" viewBox="0 0 174 56" xmlns="http://www.w3.org/2000/svg" width="174" height="56" role="img" aria-label="Recta numérica con el intervalo solución"><line x1="48" y1="30" x2="126" y2="30" stroke="#FF00AA" stroke-width="3.2" stroke-linecap="round"/><line x1="14" y1="30" x2="160" y2="30" stroke="#7B5A50" stroke-width="1.2"/><line x1="22" y1="21" x2="22" y2="39" stroke="#7B5A50" stroke-width="1.6"/><line x1="48" y1="25" x2="48" y2="35" stroke="#7B5A50" stroke-width="1"/><text x="48" y="51" font-size="9.5" fill="#6E4F4F" text-anchor="middle" font-family="system-ui, sans-serif">1</text><line x1="74" y1="25" x2="74" y2="35" stroke="#7B5A50" stroke-width="1"/><text x="74" y="51" font-size="9.5" fill="#6E4F4F" text-anchor="middle" font-family="system-ui, sans-serif">2</text><line x1="100" y1="25" x2="100" y2="35" stroke="#7B5A50" stroke-width="1"/><text x="100" y="51" font-size="9.5" fill="#6E4F4F" text-anchor="middle" font-family="system-ui, sans-serif">3</text><line x1="126" y1="25" x2="126" y2="35" stroke="#7B5A50" stroke-width="1"/><text x="126" y="51" font-size="9.5" fill="#6E4F4F" text-anchor="middle" font-family="system-ui, sans-serif">4</text><circle cx="48" cy="30" r="4.6" fill="#FBF2EF" stroke="#FF00AA" stroke-width="2.2"/><circle cx="126" cy="30" r="4.6" fill="#FF00AA"/></svg></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-block">
+      <div class="sec-head">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+        </div>
+        <h2>Ejercicios</h2>
+      </div>
+      <div class="bloques-2">
+        <div class="mini-card">
+          <div class="mini-card-head">Bloque 1</div>
+          <div class="mini-card-body">
+<div class="ej-line">$4x - 3 \geq 2x - 9$</div>
+<div class="ej-line">$3x - 4 > 7x + 8$</div>
+</div>
+        </div>
+        <div class="mini-card">
+          <div class="mini-card-head">Bloque 2</div>
+          <div class="mini-card-body">
+<div class="ej-line">$-2x + 6 \leq -5x - 9$</div>
+<div class="ej-line">$5x + 2 < -x - 10$</div>
+</div>
+        </div>
+        <div class="mini-card">
+          <div class="mini-card-head">Bloque 3</div>
+          <div class="mini-card-body">
+<div class="ej-line">$x - 6 > -x + 4$</div>
+<div class="ej-line">$-5x - 3 \leq 2x + 11$</div>
+</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-block">
+      <div class="sec-toggle" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('show');">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <h2>Respuestas</h2>
+        <span class="chev">▼</span>
+      </div>
+      <div class="collapsible">
+        <p class="extras-titulo">Bloque 1</p>
+        <div class="resol-grid">
+          <div class="resol-item">
+            <div class="despeje">$$4x - 3 \geq 2x - 9$$</div>
+            $$\begin{aligned} 4x - 2x &\geq -9 + 3 \\ 2x &\geq -6 \\ x &\geq \dfrac{-6}{2} \end{aligned}$$
+            <div style="text-align:center"><span class="resultado-pill">$x \geq -3$</span></div>
+            <p class="interv-tag">intervalo</p>
+            <div style="text-align:center"><span class="formula-pill">$[-3, \infty)$</span></div>
+            <div class="graf-wrap"><svg class="recta-svg" viewBox="0 0 252 56" xmlns="http://www.w3.org/2000/svg" width="252" height="56" role="img" aria-label="Recta numérica con el intervalo solución"><line x1="48" y1="30" x2="248" y2="30" stroke="#FF00AA" stroke-width="3.2" stroke-linecap="round"/><path d="M248,30 l-7,-4.5 v9 z" fill="#FF00AA"/><line x1="14" y1="30" x2="238" y2="30" stroke="#7B5A50" stroke-width="1.2"/><line x1="48" y1="25" x2="48" y2="35" stroke="#7B5A50" stroke-width="1"/><text x="48" y="51" font-size="9.5" fill="#6E4F4F" text-anchor="middle" font-family="system-ui, sans-serif">-3</text><line x1="74" y1="25" x2="74" y2="35" stroke="#7B5A50" stroke-width="1"/><text x="74" y="51" font-size="9.5" fill="#6E4F4F" text-anchor="middle" font-family="system-ui, sans-serif">-2</text><line x1="100" y1="25" x2="100" y2="35" stroke="#7B5A50" stroke-width="1"/><text x="100" y="51" font-size="9.5" fill="#6E4F4F" text-anchor="middle" font-family="system-ui, sans-serif">-1</text><line x1="126" y1="21" x2="126" y2="39" stroke="#7B5A50" stroke-width="1.6"/><line x1="152" y1="25" x2="152" y2="35" stroke="#7B5A50" stroke-width="1"/><text x="152" y="51" font-size="9.5" fill="#6E4F4F" text-anchor="middle" font-family="system-ui, sans-serif">1</text><line x1="178" y1="25" x2="178" y2="35" stroke="#7B5A50" stroke-width="1"/><text x="178" y="51" font-size="9.5" fill="#6E4F4F" text-anchor="middle" font-family="system-ui, sans-serif">2</text><line x1="204" y1="25" x2="204" y2="35" stroke="#7B5A50" stroke-width="1"/><text x="204" y="51" font-size="9.5" fill="#6E4F4F" text-anchor="middle" font-family="system-ui, sans-serif">3</text><circle cx="48" cy="30" r="4.6" fill="#FF00AA"/></svg></div>
+          </div>
+          <div class="resol-item">
+            <div class="despeje">$$3x - 4 > 7x + 8$$</div>
+            $$\begin{aligned} 3x - 7x &> 8 + 4 \\ -4x &> 12 \\ x &< \dfrac{12}{-4} \end{aligned}$$
+            <div style="text-align:center"><span class="resultado-pill">$x < -3$</span></div>
+            <p class="interv-tag">intervalo</p>
+            <div style="text-align:center"><span class="formula-pill">$(-\infty, -3)$</span></div>
+            <div class="graf-wrap"><svg class="recta-svg" viewBox="0 0 226 56" xmlns="http://www.w3.org/2000/svg" width="226" height="56" role="img" aria-label="Recta numérica con el intervalo solución"><line x1="4" y1="30" x2="74" y2="30" stroke="#FF00AA" stroke-width="3.2" stroke-linecap="round"/><path d="M4,30 l7,-4.5 v9 z" fill="#FF00AA"/><line x1="14" y1="30" x2="212" y2="30" stroke="#7B5A50" stroke-width="1.2"/><line x1="48" y1="25" x2="48" y2="35" stroke="#7B5A50" stroke-width="1"/><text x="48" y="51" font-size="9.5" fill="#6E4F4F" text-anchor="middle" font-family="system-ui, sans-serif">-4</text><line x1="74" y1="25" x2="74" y2="35" stroke="#7B5A50" stroke-width="1"/><text x="74" y="51" font-size="9.5" fill="#6E4F4F" text-anchor="middle" font-family="system-ui, sans-serif">-3</text><line x1="100" y1="25" x2="100" y2="35" stroke="#7B5A50" stroke-width="1"/><text x="100" y="51" font-size="9.5" fill="#6E4F4F" text-anchor="middle" font-family="system-ui, sans-serif">-2</text><line x1="126" y1="25" x2="126" y2="35" stroke="#7B5A50" stroke-width="1"/><text x="126" y="51" font-size="9.5" fill="#6E4F4F" text-anchor="middle" font-family="system-ui, sans-serif">-1</text><line x1="152" y1="21" x2="152" y2="39" stroke="#7B5A50" stroke-width="1.6"/><line x1="178" y1="25" x2="178" y2="35" stroke="#7B5A50" stroke-width="1"/><text x="178" y="51" font-size="9.5" fill="#6E4F4F" text-anchor="middle" font-family="system-ui, sans-serif">1</text><circle cx="74" cy="30" r="4.6" fill="#FBF2EF" stroke="#FF00AA" stroke-width="2.2"/></svg></div>
+          </div>
+        </div>
+        <p class="extras-titulo">Bloque 2</p>
+        <div class="resol-grid">
+          <div class="resol-item">
+            <div class="despeje">$$-2x + 6 \leq -5x - 9$$</div>
+            $$\begin{aligned} -2x + 5x &\leq -9 - 6 \\ 3x &\leq -15 \\ x &\leq \dfrac{-15}{3} \end{aligned}$$
+            <div style="text-align:center"><span class="resultado-pill">$x \leq -5$</span></div>
+            <p class="interv-tag">intervalo</p>
+            <div style="text-align:center"><span class="formula-pill">$(-\infty, -5]$</span></div>
+            <div class="graf-wrap"><svg class="recta-svg" viewBox="0 0 252 56" xmlns="http://www.w3.org/2000/svg" width="252" height="56" role="img" aria-label="Recta numérica con el intervalo solución"><line x1="4" y1="30" x2="74" y2="30" stroke="#FF00AA" stroke-width="3.2" stroke-linecap="round"/><path d="M4,30 l7,-4.5 v9 z" fill="#FF00AA"/><line x1="14" y1="30" x2="238" y2="30" stroke="#7B5A50" stroke-width="1.2"/><line x1="48" y1="25" x2="48" y2="35" stroke="#7B5A50" stroke-width="1"/><text x="48" y="51" font-size="9.5" fill="#6E4F4F" text-anchor="middle" font-family="system-ui, sans-serif">-6</text><line x1="74" y1="25" x2="74" y2="35" stroke="#7B5A50" stroke-width="1"/><text x="74" y="51" font-size="9.5" fill="#6E4F4F" text-anchor="middle" font-family="system-ui, sans-serif">-5</text><line x1="100" y1="25" x2="100" y2="35" stroke="#7B5A50" stroke-width="1"/><text x="100" y="51" font-size="9.5" fill="#6E4F4F" text-anchor="middle" font-family="system-ui, sans-serif">-4</text><line x1="126" y1="25" x2="126" y2="35" stroke="#7B5A50" stroke-width="1"/><text x="126" y="51" font-size="9.5" fill="#6E4F4F" text-anchor="middle" font-family="system-ui, sans-serif">-3</text><line x1="152" y1="25" x2="152" y2="35" stroke="#7B5A50" stroke-width="1"/><text x="152" y="51" font-size="9.5" fill="#6E4F4F" text-anchor="middle" font-family="system-ui, sans-serif">-2</text><line x1="178" y1="25" x2="178" y2="35" stroke="#7B5A50" stroke-width="1"/><text x="178" y="51" font-size="9.5" fill="#6E4F4F" text-anchor="middle" font-family="system-ui, sans-serif">-1</text><line x1="204" y1="21" x2="204" y2="39" stroke="#7B5A50" stroke-width="1.6"/><circle cx="74" cy="30" r="4.6" fill="#FF00AA"/></svg></div>
+          </div>
+          <div class="resol-item">
+            <div class="despeje">$$5x + 2 < -x - 10$$</div>
+            $$\begin{aligned} 5x + x &< -10 - 2 \\ 6x &< -12 \\ x &< \dfrac{-12}{6} \end{aligned}$$
+            <div style="text-align:center"><span class="resultado-pill">$x < -2$</span></div>
+            <p class="interv-tag">intervalo</p>
+            <div style="text-align:center"><span class="formula-pill">$(-\infty, -2)$</span></div>
+            <div class="graf-wrap"><svg class="recta-svg" viewBox="0 0 200 56" xmlns="http://www.w3.org/2000/svg" width="200" height="56" role="img" aria-label="Recta numérica con el intervalo solución"><line x1="4" y1="30" x2="74" y2="30" stroke="#FF00AA" stroke-width="3.2" stroke-linecap="round"/><path d="M4,30 l7,-4.5 v9 z" fill="#FF00AA"/><line x1="14" y1="30" x2="186" y2="30" stroke="#7B5A50" stroke-width="1.2"/><line x1="48" y1="25" x2="48" y2="35" stroke="#7B5A50" stroke-width="1"/><text x="48" y="51" font-size="9.5" fill="#6E4F4F" text-anchor="middle" font-family="system-ui, sans-serif">-3</text><line x1="74" y1="25" x2="74" y2="35" stroke="#7B5A50" stroke-width="1"/><text x="74" y="51" font-size="9.5" fill="#6E4F4F" text-anchor="middle" font-family="system-ui, sans-serif">-2</text><line x1="100" y1="25" x2="100" y2="35" stroke="#7B5A50" stroke-width="1"/><text x="100" y="51" font-size="9.5" fill="#6E4F4F" text-anchor="middle" font-family="system-ui, sans-serif">-1</text><line x1="126" y1="21" x2="126" y2="39" stroke="#7B5A50" stroke-width="1.6"/><line x1="152" y1="25" x2="152" y2="35" stroke="#7B5A50" stroke-width="1"/><text x="152" y="51" font-size="9.5" fill="#6E4F4F" text-anchor="middle" font-family="system-ui, sans-serif">1</text><circle cx="74" cy="30" r="4.6" fill="#FBF2EF" stroke="#FF00AA" stroke-width="2.2"/></svg></div>
+          </div>
+        </div>
+        <p class="extras-titulo">Bloque 3</p>
+        <div class="resol-grid">
+          <div class="resol-item">
+            <div class="despeje">$$x - 6 > -x + 4$$</div>
+            $$\begin{aligned} x + x &> 4 + 6 \\ 2x &> 10 \\ x &> \dfrac{10}{2} \end{aligned}$$
+            <div style="text-align:center"><span class="resultado-pill">$x > 5$</span></div>
+            <p class="interv-tag">intervalo</p>
+            <div style="text-align:center"><span class="formula-pill">$(5, \infty)$</span></div>
+            <div class="graf-wrap"><svg class="recta-svg" viewBox="0 0 226 56" xmlns="http://www.w3.org/2000/svg" width="226" height="56" role="img" aria-label="Recta numérica con el intervalo solución"><line x1="152" y1="30" x2="222" y2="30" stroke="#FF00AA" stroke-width="3.2" stroke-linecap="round"/><path d="M222,30 l-7,-4.5 v9 z" fill="#FF00AA"/><line x1="14" y1="30" x2="212" y2="30" stroke="#7B5A50" stroke-width="1.2"/><line x1="48" y1="25" x2="48" y2="35" stroke="#7B5A50" stroke-width="1"/><text x="48" y="51" font-size="9.5" fill="#6E4F4F" text-anchor="middle" font-family="system-ui, sans-serif">1</text><line x1="74" y1="25" x2="74" y2="35" stroke="#7B5A50" stroke-width="1"/><text x="74" y="51" font-size="9.5" fill="#6E4F4F" text-anchor="middle" font-family="system-ui, sans-serif">2</text><line x1="100" y1="25" x2="100" y2="35" stroke="#7B5A50" stroke-width="1"/><text x="100" y="51" font-size="9.5" fill="#6E4F4F" text-anchor="middle" font-family="system-ui, sans-serif">3</text><line x1="126" y1="25" x2="126" y2="35" stroke="#7B5A50" stroke-width="1"/><text x="126" y="51" font-size="9.5" fill="#6E4F4F" text-anchor="middle" font-family="system-ui, sans-serif">4</text><line x1="152" y1="25" x2="152" y2="35" stroke="#7B5A50" stroke-width="1"/><text x="152" y="51" font-size="9.5" fill="#6E4F4F" text-anchor="middle" font-family="system-ui, sans-serif">5</text><line x1="178" y1="25" x2="178" y2="35" stroke="#7B5A50" stroke-width="1"/><text x="178" y="51" font-size="9.5" fill="#6E4F4F" text-anchor="middle" font-family="system-ui, sans-serif">6</text><circle cx="152" cy="30" r="4.6" fill="#FBF2EF" stroke="#FF00AA" stroke-width="2.2"/></svg></div>
+          </div>
+          <div class="resol-item">
+            <div class="despeje">$$-5x - 3 \leq 2x + 11$$</div>
+            $$\begin{aligned} -5x - 2x &\leq 11 + 3 \\ -7x &\leq 14 \\ x &\geq \dfrac{14}{-7} \end{aligned}$$
+            <div style="text-align:center"><span class="resultado-pill">$x \geq -2$</span></div>
+            <p class="interv-tag">intervalo</p>
+            <div style="text-align:center"><span class="formula-pill">$[-2, \infty)$</span></div>
+            <div class="graf-wrap"><svg class="recta-svg" viewBox="0 0 200 56" xmlns="http://www.w3.org/2000/svg" width="200" height="56" role="img" aria-label="Recta numérica con el intervalo solución"><line x1="48" y1="30" x2="196" y2="30" stroke="#FF00AA" stroke-width="3.2" stroke-linecap="round"/><path d="M196,30 l-7,-4.5 v9 z" fill="#FF00AA"/><line x1="14" y1="30" x2="186" y2="30" stroke="#7B5A50" stroke-width="1.2"/><line x1="48" y1="25" x2="48" y2="35" stroke="#7B5A50" stroke-width="1"/><text x="48" y="51" font-size="9.5" fill="#6E4F4F" text-anchor="middle" font-family="system-ui, sans-serif">-2</text><line x1="74" y1="25" x2="74" y2="35" stroke="#7B5A50" stroke-width="1"/><text x="74" y="51" font-size="9.5" fill="#6E4F4F" text-anchor="middle" font-family="system-ui, sans-serif">-1</text><line x1="100" y1="21" x2="100" y2="39" stroke="#7B5A50" stroke-width="1.6"/><line x1="126" y1="25" x2="126" y2="35" stroke="#7B5A50" stroke-width="1"/><text x="126" y="51" font-size="9.5" fill="#6E4F4F" text-anchor="middle" font-family="system-ui, sans-serif">1</text><line x1="152" y1="25" x2="152" y2="35" stroke="#7B5A50" stroke-width="1"/><text x="152" y="51" font-size="9.5" fill="#6E4F4F" text-anchor="middle" font-family="system-ui, sans-serif">2</text><circle cx="48" cy="30" r="4.6" fill="#FF00AA"/></svg></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-block">
+      <div class="sec-toggle" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('show');">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+        </div>
+        <h2>Ejercicios extra</h2>
+        <span class="chev">▼</span>
+      </div>
+      <div class="collapsible">
+        <div class="bloques-2">
+          <div class="mini-card">
+            <div class="mini-card-head">Bloque 1</div>
+            <div class="mini-card-body">
+              <div class="ej-line">$3x + 5 > x - 1$</div>
+              <div class="ej-line">$-4x + 7 \leq 2x - 5$</div>
+              <div class="ej-line">$5x - 8 < 2x + 4$</div>
+              <div class="ej-line">$-2x - 9 \geq 3x + 6$</div>
+              <div class="ej-line">$6x + 1 \leq 4x - 7$</div>
+            </div>
+          </div>
+          <div class="mini-card">
+            <div class="mini-card-head">Bloque 2</div>
+            <div class="mini-card-body">
+              <div class="ej-line">$-x + 10 > 4x - 5$</div>
+              <div class="ej-line">$7x - 3 \geq 5x + 9$</div>
+              <div class="ej-line">$-3x + 2 < -6x - 10$</div>
+              <div class="ej-line">$8x + 5 > 3x - 20$</div>
+              <div class="ej-line">$-5x - 4 \leq -2x + 8$</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ NAVEGACIÓN ══════════ -->
+    <div class="topic-nav-btns">
+      <a href="factorizacion.html" class="btn-anterior">← Factorización</a>
+      <a href="index.html" class="btn-siguiente">Índice del curso →</a>
+    </div>
+
+  </main>
+  <script src="../../nav.js"></script>
+  <script src="../../footer.js"></script>
+</body>
+</html>

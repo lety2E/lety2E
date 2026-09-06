@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Productos notables — Matemáticas 3 — LetyMath</title>
-  <meta name="description" content="Las cuatro reglas de producto: binomios con término común, binomio al cuadrado, al cubo y binomios conjugados." />
+  <title>Factorización — Matemáticas 3 — LetyMath</title>
+  <meta name="description" content="Los cuatro casos: factor común, diferencia de cuadrados, trinomio cuadrado perfecto y trinomio de la forma x²+bx+c." />
   <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
   <link rel="icon" href="../../favicon.ico">
   <link rel="stylesheet" href="../../style.css">
@@ -164,6 +164,11 @@
     /* las pills con raíz o fracción necesitan más alto */
     .resultado-pill { padding: .4rem .8rem; line-height: 1.5; }
     .sep-regla { border: none; border-top: 1px solid var(--border-s); margin: 1.2rem 0; }
+    .num-box {
+      display: inline-block; border: 1.5px solid var(--border); border-radius: var(--r-sm);
+      background: var(--bg); padding: .35rem .9rem; margin: .3rem 0 .2rem; font-size: .88rem;
+    }
+    .num-box div { line-height: 1.9; }
   </style>
 </head>
 <body data-section="math">
@@ -173,10 +178,10 @@
       <p class="breadcrumb">
         <a href="../index.html">Inicio</a> ›
         <a href="index.html">Matemáticas 3</a> ›
-        Productos notables
+        Factorización
       </p>
-      <div class="topic-tag">Matemáticas 3 · Tema 11</div>
-      <h1>Productos notables</h1>
+      <div class="topic-tag">Matemáticas 3 · Tema 12</div>
+      <h1>Factorización</h1>
     </header>
 
     <section class="section-block ejemplo-section">
@@ -187,21 +192,23 @@
         <h3>Ejemplos</h3>
       </div>
       <div class="ejemplo-block">
-        <div style="text-align:center"><span class="formula-pill">$(A + B)(C + D) = AC + AD + BC + BD$</span></div>
-        $$\begin{aligned} (5x - 2y)(6x - 3y) &= 30x^2 - 15xy - 12yx + 6y^2 \end{aligned}$$
-        <div style="text-align:center"><span class="resultado-pill">$30x^2 - 27xy + 6y^2$</span></div>
+        <div class="despeje">$$8x^2y^3 - 6y^3x^5 - 10y^3a^2x^4$$</div>
+        <p class="paso-titulo izq">Factor común</p>
+        <div style="text-align:center"><span class="resultado-pill">$(2x^2y^3)(4 - 3x^3 - 5x^2a^2)$</span></div>
         <hr class="sep-regla">
-        <div style="text-align:center"><span class="formula-pill">$(a + b)^2 = a^2 + 2ab + b^2$</span></div>
-        $$\begin{aligned} (3x^2 - yx^4)^2 &= (3x^2)^2 + 2(3x^2)(-yx^4) + (-yx^4)^2 \end{aligned}$$
-        <div style="text-align:center"><span class="resultado-pill">$9x^4 - 6x^6y + y^2x^8$</span></div>
+        <div class="despeje">$$25y^6a^4 - 16x^8$$</div>
+        <p class="paso-titulo izq">Diferencia de cuadrados</p>
+        <div style="text-align:center"><span class="resultado-pill">$(5y^3a^2 - 4x^4)(5y^3a^2 + 4x^4)$</span></div>
         <hr class="sep-regla">
-        <div style="text-align:center"><span class="formula-pill">$(a + b)^3 = a^3 + 3a^2b + 3ab^2 + b^3$</span></div>
-        $$\begin{aligned} (5x - 2)^3 &= (5x)^3 + 3(5x)^2(-2) + 3(5x)(-2)^2 + (-2)^3 \\ &= 125x^3 + 3(25x^2)(-2) + 3(5x)(4) - 8 \end{aligned}$$
-        <div style="text-align:center"><span class="resultado-pill">$125x^3 - 150x^2 + 60x - 8$</span></div>
+        <div class="despeje">$$x^2 - 10x + 25 = (x - 5)(x - 5)$$</div>
+        <p class="paso-titulo izq">Trinomio cuadrado perfecto</p>
+        <div style="text-align:center"><span class="resultado-pill">$(x - 5)^2$</span></div>
+        <div style="text-align:center"><div class="num-box"><div>$(-5)(-5) = 25$</div><div>$-5 - 5 = -10$</div></div></div>
         <hr class="sep-regla">
-        <div style="text-align:center"><span class="formula-pill">$(a + b)(a - b) = a^2 - b^2$</span></div>
-        $$\begin{aligned} (4x^3 - 5y)(4x^3 + 5y) &= (4x^3)^2 - (5y)^2 \end{aligned}$$
-        <div style="text-align:center"><span class="resultado-pill">$16x^6 - 25y^2$</span></div>
+        <div class="despeje">$$x^2 - 8x - 9$$</div>
+        <p class="paso-titulo izq">Trinomio</p>
+        <div style="text-align:center"><span class="resultado-pill">$(x + 1)(x - 9)$</span></div>
+        <div style="text-align:center"><div class="num-box"><div>$(1)(-9) = -9$</div><div>$1 - 9 = -8$</div></div></div>
       </div>
     </section>
 
@@ -216,19 +223,37 @@
         <div class="mini-card">
           <div class="mini-card-head">Bloque 1</div>
           <div class="mini-card-body">
-<div class="ej-line">$(3x - 2y)(5xy - 4xy)$</div>
-<div class="ej-line">$(4x^2 - 3yx)^2$</div>
-<div class="ej-line">$(4x - 1)^3$</div>
-<div class="ej-line">$(6x^2 - 2y)(6x^2 + 2y)$</div>
+<div class="ej-line">$10x^4y^2 - 5x^3y^3 - 20x^4 =$</div>
+<div class="ej-line">$36x^8a^4 - 100x^6 =$</div>
+<div class="ej-line">$x^2 + 6x + 9 =$</div>
+<div class="ej-line">$x^2 - 3x - 10 =$</div>
 </div>
         </div>
         <div class="mini-card">
           <div class="mini-card-head">Bloque 2</div>
           <div class="mini-card-body">
-<div class="ej-line">$(2x + 3y)(4xy - 6xy)$</div>
-<div class="ej-line">$(2x^2 + 5yx)^2$</div>
-<div class="ej-line">$(6x^2 - 3)^3$</div>
-<div class="ej-line">$(3x^2 + 5y)(3x^2 - 5y)$</div>
+<div class="ej-line">$12x^5y^3 - 4x^3y^2 - 20x^7 =$</div>
+<div class="ej-line">$25x^6a^2 - 49x^8 =$</div>
+<div class="ej-line">$x^2 - 8x + 16 =$</div>
+<div class="ej-line">$x^2 - 2x - 8 =$</div>
+</div>
+        </div>
+        <div class="mini-card">
+          <div class="mini-card-head">Bloque 3</div>
+          <div class="mini-card-body">
+<div class="ej-line">$14x^7y^2 - 7x^5y^3 + 14y^5 =$</div>
+<div class="ej-line">$25x^8a^4 - 36x^6 =$</div>
+<div class="ej-line">$x^2 - 2x + 1 =$</div>
+<div class="ej-line">$x^2 + x - 20 =$</div>
+</div>
+        </div>
+        <div class="mini-card">
+          <div class="mini-card-head">Bloque 4</div>
+          <div class="mini-card-body">
+<div class="ej-line">$20x^5y^3 - 4x^2y^4 + 8x^3 =$</div>
+<div class="ej-line">$100x^6a^2 - 25x^8 =$</div>
+<div class="ej-line">$x^2 - 12x + 36 =$</div>
+<div class="ej-line">$x^2 + 6x + 8 =$</div>
 </div>
         </div>
       </div>
@@ -246,47 +271,85 @@
         <p class="extras-titulo">Bloque 1</p>
         <div class="resol-grid">
           <div class="resol-item">
-            <div class="despeje">$$(3x - 2y)(5xy - 4xy)$$</div>
-            $$\begin{aligned} &= 15x^2y - 12x^2y - 10xy^2 + 8xy^2 \end{aligned}$$
-            <div style="text-align:center"><span class="resultado-pill">$3x^2y - 2xy^2$</span></div>
+            <div class="despeje">$$10x^4y^2 - 5x^3y^3 - 20x^4$$</div>
+            <div style="text-align:center"><span class="resultado-pill">$(5x^3)(2xy^2 - y^3 - 4x)$</span></div>
           </div>
           <div class="resol-item">
-            <div class="despeje">$$(4x^2 - 3yx)^2$$</div>
-            $$\begin{aligned} &= (4x^2)^2 + 2(4x^2)(-3yx) + (-3yx)^2 \end{aligned}$$
-            <div style="text-align:center"><span class="resultado-pill">$16x^4 - 24x^3y + 9y^2x^2$</span></div>
+            <div class="despeje">$$36x^8a^4 - 100x^6$$</div>
+            <div style="text-align:center"><span class="resultado-pill">$(6x^4a^2 - 10x^3)(6x^4a^2 + 10x^3)$</span></div>
           </div>
           <div class="resol-item">
-            <div class="despeje">$$(4x - 1)^3$$</div>
-            $$\begin{aligned} &= (4x)^3 + 3(4x)^2(-1) + 3(4x)(-1)^2 + (-1)^3 \\ &= 64x^3 + 3(16x^2)(-1) + 3(4x)(1) - 1 \end{aligned}$$
-            <div style="text-align:center"><span class="resultado-pill">$64x^3 - 48x^2 + 12x - 1$</span></div>
+            <div class="despeje">$$x^2 + 6x + 9 = (x + 3)(x + 3)$$</div>
+            <div style="text-align:center"><span class="resultado-pill">$(x + 3)^2$</span></div>
+            <div style="text-align:center"><div class="num-box"><div>$(3)(3) = 9$</div><div>$3 + 3 = 6$</div></div></div>
           </div>
           <div class="resol-item">
-            <div class="despeje">$$(6x^2 - 2y)(6x^2 + 2y)$$</div>
-            $$\begin{aligned} &= (6x^2)^2 - (2y)^2 \end{aligned}$$
-            <div style="text-align:center"><span class="resultado-pill">$36x^4 - 4y^2$</span></div>
+            <div class="despeje">$$x^2 - 3x - 10$$</div>
+            <div style="text-align:center"><span class="resultado-pill">$(x + 2)(x - 5)$</span></div>
+            <div style="text-align:center"><div class="num-box"><div>$(2)(-5) = -10$</div><div>$2 - 5 = -3$</div></div></div>
           </div>
         </div>
         <p class="extras-titulo">Bloque 2</p>
         <div class="resol-grid">
           <div class="resol-item">
-            <div class="despeje">$$(2x + 3y)(4xy - 6xy)$$</div>
-            $$\begin{aligned} &= 8x^2y - 12x^2y + 12xy^2 - 18xy^2 \end{aligned}$$
-            <div style="text-align:center"><span class="resultado-pill">$-4x^2y - 6xy^2$</span></div>
+            <div class="despeje">$$12x^5y^3 - 4x^3y^2 - 20x^7$$</div>
+            <div style="text-align:center"><span class="resultado-pill">$(4x^3)(3x^2y^3 - y^2 - 5x^4)$</span></div>
           </div>
           <div class="resol-item">
-            <div class="despeje">$$(2x^2 + 5yx)^2$$</div>
-            $$\begin{aligned} &= (2x^2)^2 + 2(2x^2)(5yx) + (5yx)^2 \end{aligned}$$
-            <div style="text-align:center"><span class="resultado-pill">$4x^4 + 20x^3y + 25y^2x^2$</span></div>
+            <div class="despeje">$$25x^6a^2 - 49x^8$$</div>
+            <div style="text-align:center"><span class="resultado-pill">$(5x^3a - 7x^4)(5x^3a + 7x^4)$</span></div>
           </div>
           <div class="resol-item">
-            <div class="despeje">$$(6x^2 - 3)^3$$</div>
-            $$\begin{aligned} &= (6x^2)^3 + 3(6x^2)^2(-3) + 3(6x^2)(-3)^2 + (-3)^3 \\ &= 216x^6 + 3(36x^4)(-3) + 3(6x^2)(9) - 27 \end{aligned}$$
-            <div style="text-align:center"><span class="resultado-pill">$216x^6 - 324x^4 + 162x^2 - 27$</span></div>
+            <div class="despeje">$$x^2 - 8x + 16 = (x - 4)(x - 4)$$</div>
+            <div style="text-align:center"><span class="resultado-pill">$(x - 4)^2$</span></div>
+            <div style="text-align:center"><div class="num-box"><div>$(-4)(-4) = 16$</div><div>$-4 - 4 = -8$</div></div></div>
           </div>
           <div class="resol-item">
-            <div class="despeje">$$(3x^2 + 5y)(3x^2 - 5y)$$</div>
-            $$\begin{aligned} &= (3x^2)^2 - (5y)^2 \end{aligned}$$
-            <div style="text-align:center"><span class="resultado-pill">$9x^4 - 25y^2$</span></div>
+            <div class="despeje">$$x^2 - 2x - 8$$</div>
+            <div style="text-align:center"><span class="resultado-pill">$(x + 2)(x - 4)$</span></div>
+            <div style="text-align:center"><div class="num-box"><div>$(2)(-4) = -8$</div><div>$2 - 4 = -2$</div></div></div>
+          </div>
+        </div>
+        <p class="extras-titulo">Bloque 3</p>
+        <div class="resol-grid">
+          <div class="resol-item">
+            <div class="despeje">$$14x^7y^2 - 7x^5y^3 + 14y^5$$</div>
+            <div style="text-align:center"><span class="resultado-pill">$(7y^2)(2x^7 - x^5y + 2y^3)$</span></div>
+          </div>
+          <div class="resol-item">
+            <div class="despeje">$$25x^8a^4 - 36x^6$$</div>
+            <div style="text-align:center"><span class="resultado-pill">$(5x^4a^2 - 6x^3)(5x^4a^2 + 6x^3)$</span></div>
+          </div>
+          <div class="resol-item">
+            <div class="despeje">$$x^2 - 2x + 1 = (x - 1)(x - 1)$$</div>
+            <div style="text-align:center"><span class="resultado-pill">$(x - 1)^2$</span></div>
+            <div style="text-align:center"><div class="num-box"><div>$(-1)(-1) = 1$</div><div>$-1 - 1 = -2$</div></div></div>
+          </div>
+          <div class="resol-item">
+            <div class="despeje">$$x^2 + x - 20$$</div>
+            <div style="text-align:center"><span class="resultado-pill">$(x + 5)(x - 4)$</span></div>
+            <div style="text-align:center"><div class="num-box"><div>$(5)(-4) = -20$</div><div>$5 - 4 = 1$</div></div></div>
+          </div>
+        </div>
+        <p class="extras-titulo">Bloque 4</p>
+        <div class="resol-grid">
+          <div class="resol-item">
+            <div class="despeje">$$20x^5y^3 - 4x^2y^4 + 8x^3$$</div>
+            <div style="text-align:center"><span class="resultado-pill">$(4x^2)(5x^3y^3 - y^4 + 2x)$</span></div>
+          </div>
+          <div class="resol-item">
+            <div class="despeje">$$100x^6a^2 - 25x^8$$</div>
+            <div style="text-align:center"><span class="resultado-pill">$(10x^3a - 5x^4)(10x^3a + 5x^4)$</span></div>
+          </div>
+          <div class="resol-item">
+            <div class="despeje">$$x^2 - 12x + 36 = (x - 6)(x - 6)$$</div>
+            <div style="text-align:center"><span class="resultado-pill">$(x - 6)^2$</span></div>
+            <div style="text-align:center"><div class="num-box"><div>$(-6)(-6) = 36$</div><div>$-6 - 6 = -12$</div></div></div>
+          </div>
+          <div class="resol-item">
+            <div class="despeje">$$x^2 + 6x + 8$$</div>
+            <div style="text-align:center"><span class="resultado-pill">$(x + 4)(x + 2)$</span></div>
+            <div style="text-align:center"><div class="num-box"><div>$(4)(2) = 8$</div><div>$4 + 2 = 6$</div></div></div>
           </div>
         </div>
       </div>
@@ -305,21 +368,21 @@
           <div class="mini-card">
             <div class="mini-card-head">Bloque 1</div>
             <div class="mini-card-body">
-              <div class="ej-line">$(2x + 5y)(3x - 4y)$</div>
-              <div class="ej-line">$(3x^2 - 2y)^2$</div>
-              <div class="ej-line">$(2x + 3)^3$</div>
-              <div class="ej-line">$(5x^2 - 4y)(5x^2 + 4y)$</div>
-              <div class="ej-line">$(4x - 7y)(2x + 3y)$</div>
+              <div class="ej-line">$18x^4y^2 - 12x^3y^3 + 6x^2y =$</div>
+              <div class="ej-line">$49x^6y^4 - 64x^2 =$</div>
+              <div class="ej-line">$x^2 + 10x + 25 =$</div>
+              <div class="ej-line">$x^2 - 5x - 14 =$</div>
+              <div class="ej-line">$15x^3y^5 - 25x^2y^4 - 5xy^3 =$</div>
             </div>
           </div>
           <div class="mini-card">
             <div class="mini-card-head">Bloque 2</div>
             <div class="mini-card-body">
-              <div class="ej-line">$(6x^3 + y^2)^2$</div>
-              <div class="ej-line">$(3x - 2)^3$</div>
-              <div class="ej-line">$(7x^2 + 2y^3)(7x^2 - 2y^3)$</div>
-              <div class="ej-line">$(x^2 - 5xy)^2$</div>
-              <div class="ej-line">$(2x^2 + y)(5x - 3y)$</div>
+              <div class="ej-line">$81x^4a^6 - 16y^8 =$</div>
+              <div class="ej-line">$x^2 - 14x + 49 =$</div>
+              <div class="ej-line">$x^2 + 3x - 18 =$</div>
+              <div class="ej-line">$24x^6y^2 - 8x^4y^3 + 16x^2y =$</div>
+              <div class="ej-line">$x^2 - 7x + 12 =$</div>
             </div>
           </div>
         </div>
@@ -328,8 +391,8 @@
 
     <!-- ══════════ NAVEGACIÓN ══════════ -->
     <div class="topic-nav-btns">
-      <a href="grafica-cuadratica.html" class="btn-anterior">← Gráfica de la cuadrática</a>
-      <a href="factorizacion.html" class="btn-siguiente">Factorización →</a>
+      <a href="productos-notables.html" class="btn-anterior">← Productos notables</a>
+      <a href="desigualdades.html" class="btn-siguiente">Desigualdades →</a>
     </div>
 
   </main>
