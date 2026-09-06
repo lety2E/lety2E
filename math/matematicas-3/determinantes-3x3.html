@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Determinantes 3×3 — Matemáticas 3 — LetyMath</title>
+  <meta name="description" content="Regla de Cramer con determinantes de 3×3 por el método de Sarrus: sistema de tres ecuaciones con tres incógnitas." />
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../../favicon.ico">
+  <link rel="stylesheet" href="../../style.css">
+  <link rel="stylesheet" href="../../assets/katex/katex.min.css" />
+  <script defer src="../../assets/katex/katex.min.js"></script>
+  <script defer src="../../assets/katex/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body, {
+      delimiters: [
+        {left:'$$', right:'$$', display:true},
+        {left:'$', right:'$', display:false}
+      ]
+    });"></script>
+
+  <style>
+    .topic-tag {
+      display: inline-flex; align-items: center; gap: .35rem;
+      padding: .22rem .75rem; border-radius: 99px;
+      background: var(--accent-light); color: var(--accent);
+      font-size: .78rem; font-weight: 700; letter-spacing: .03em;
+      margin-bottom: .55rem;
+    }
+    .topic-tag::before {
+      content: ''; width: 7px; height: 7px; border-radius: 50%;
+      background: var(--accent); display: inline-block;
+    }
+
+    .section-block { margin-bottom: 2.5rem; }
+    .section-block:last-child { margin-bottom: 0; }
+
+    .sec-head { display: flex; align-items: center; gap: .65rem; margin-bottom: 1.1rem; }
+    .sec-head h2 { margin: 0; font-size: 1.2rem; line-height: 1; }
+    .sec-icon {
+      width: 30px; height: 30px; border-radius: 8px;
+      display: grid; place-items: center; flex-shrink: 0;
+      background: var(--accent);
+    }
+    .sec-icon svg { width: 15px; height: 15px; stroke: #fff; fill: none; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+
+    .sec-toggle {
+      display: flex; align-items: center; gap: .65rem;
+      cursor: pointer; user-select: none;
+      padding: .8rem 0; margin: 0 0 .4rem;
+    }
+    .sec-toggle h2 { margin: 0; font-size: 1.2rem; line-height: 1; }
+    .sec-toggle .chev { margin-left: auto; font-size: .75rem; color: var(--text-3); transition: transform .25s; }
+    .sec-toggle.open .chev { transform: rotate(180deg); }
+    .collapsible { max-height: 0; overflow: hidden; transition: max-height .4s ease, padding .3s ease; padding: 0; }
+    .collapsible.show { max-height: 40000px; padding: .8rem 0; }
+
+    /* ── Video ── */
+    .video-single { max-width: 720px; margin: 0 auto; }
+    .video-wrapper {
+      position: relative; padding-bottom: 56.25%; height: 0;
+      overflow: hidden; border-radius: var(--r-md); background: #000;
+    }
+    .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+
+    /* ── Ejemplo ── */
+    .ejemplo-section { margin: 2rem 0 2.5rem; }
+    .ejemplo-head { display: flex; align-items: center; gap: .65rem; margin-bottom: 1rem; }
+    .ejemplo-head h3 {
+      margin: 0; font-family: var(--font-display);
+      font-size: 1.2rem; line-height: 1; color: var(--M); font-style: italic;
+    }
+    .ejemplo-block {
+      padding: 1.6rem 1.5rem; background: var(--bg-card);
+      border: 1.5px solid var(--border); border-radius: var(--r-md);
+      color: var(--text);
+    }
+    .paso-titulo { font-size: .8rem; font-weight: 700; color: var(--course-1); margin-bottom: .25rem; text-align: center; }
+    .paso-titulo.izq { color: #7B2CBF; }
+    .paso-titulo.der { color: var(--M); }
+    .sistema-mult { text-align: center; }
+    .despeje { text-align: center; }
+    .formula-pill {
+      display: inline-block; background: #FFF1A8;
+      padding: .25rem .75rem; border-radius: 99px;
+      font-size: .9rem; font-weight: 600; color: var(--text);
+      margin: .25rem .2rem; border: 1.5px solid #F5DC6A;
+    }
+    .formula-pill.salmon { background: #FFD9B8; border-color: #F5B584; }
+    .graf-wrap { display: flex; justify-content: center; margin: 1rem 0 .5rem; }
+    .graf-svg { max-width: 240px; max-height: 380px; height: auto; }
+    .elim-grid.tres { grid-template-columns: repeat(3, 1fr); }
+    @media (max-width: 760px) { .elim-grid.tres { grid-template-columns: 1fr; } }
+
+    /* ── Pills ── */
+    .resultado-pill {
+      display: inline-block; background: #FFD0E5;
+      padding: .25rem .75rem; border-radius: 99px;
+      font-size: .9rem; font-weight: 700; color: var(--M);
+      margin: .25rem .2rem; border: 1.5px solid #FF8AC0;
+    }
+
+    /* ── Mini card (ejercicio) ── */
+    .mini-card {
+      background: var(--bg-card); border: 1.5px solid var(--border);
+      border-radius: var(--r-md); overflow: hidden;
+    }
+    .mini-card-head {
+      padding: .4rem .8rem; background: var(--course-1);
+      font-family: var(--font-display); font-size: .85rem; color: #fff; font-weight: 700;
+    }
+    .mini-card-body { padding: .8rem 1rem; font-size: .9rem; line-height: 1.6; color: var(--text); text-align: center; }
+    .mini-card-body .ej-line { padding: .55rem 0; border-bottom: 1px solid var(--border-s); }
+    .mini-card-body .ej-line:first-child { padding-top: .1rem; }
+    .mini-card-body .ej-line:last-child { border-bottom: none; padding-bottom: .1rem; }
+    .bloques-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2rem; }
+    @media (max-width: 700px) { .bloques-2 { grid-template-columns: 1fr; } }
+
+    /* ── Resoluciones ── */
+    .resol-grid { display: grid; grid-template-columns: 1fr; gap: 1.2rem; }
+    .resol-item {
+      background: var(--bg-card); border: 1.5px solid var(--border);
+      border-radius: var(--r-md); padding: .9rem 1.1rem;
+    }
+    .resol-num {
+      font-size: .75rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .06em; color: var(--course-1); margin-bottom: .1rem;
+    }
+
+    /* ── Doble columna del método ── */
+    .elim-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem;
+      margin-top: .6rem;
+    }
+    .elim-grid > div + div { border-left: 1px solid var(--border-s); padding-left: 1.2rem; }
+    @media (max-width: 700px) {
+      .elim-grid { grid-template-columns: 1fr; gap: .6rem; }
+      .elim-grid > div + div { border-left: none; padding-left: 0; border-top: 1px solid var(--border-s); padding-top: .8rem; }
+    }
+    .elim-col { text-align: center; }
+    .comprob { margin-top: 1rem; padding-top: .8rem; border-top: 1px solid var(--border-s); }
+    .comprob-titulo {
+      font-family: var(--font-display); font-size: .95rem; font-style: italic;
+      color: var(--M); margin: 0 0 .3rem; text-align: center;
+    }
+
+    .extras-titulo {
+      font-family: var(--font-display); font-size: 1rem; font-style: italic;
+      color: var(--M); margin: 1.4rem 0 .8rem;
+    }
+    .extras-titulo:first-child { margin-top: 0; }
+
+    /* ── Navegación ── */
+    .topic-nav-btns {
+      display: flex; justify-content: space-between; gap: 1rem;
+      margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border);
+    }
+    .btn-anterior, .btn-siguiente {
+      display: inline-flex; align-items: center; gap: .5rem;
+      padding: .65rem 1.4rem; border-radius: 99px;
+      font-weight: 700; font-size: .9rem; transition: background .2s, transform .18s;
+    }
+    .btn-anterior { background: transparent; color: var(--accent); border: 2px solid var(--accent); }
+    .btn-anterior:hover { background: var(--accent-light); transform: translateX(-3px); }
+    .btn-siguiente { background: var(--accent); color: #fff; }
+    .btn-siguiente:hover { background: var(--M); color: #fff; transform: translateX(3px); }
+  </style>
+</head>
+<body data-section="math">
+  <main class="topic-content">
+
+    <header class="topic-header">
+      <p class="breadcrumb">
+        <a href="../index.html">Inicio</a> ›
+        <a href="index.html">Matemáticas 3</a> ›
+        Determinantes 3×3
+      </p>
+      <div class="topic-tag">Matemáticas 3 · Tema 6</div>
+      <h1>Determinantes 3×3</h1>
+    </header>
+
+    <section class="section-block">
+      <div class="sec-head">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3" stroke-width="0" fill="white"/></svg>
+        </div>
+        <h2>Video</h2>
+      </div>
+      <div class="video-single">
+        <div class="video-wrapper">
+          <button type="button" class="yt-lite" data-yt="X6uxVqp5sbE" data-title="Determinantes 3×3" aria-label="Reproducir video: Determinantes 3×3"></button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-block ejemplo-section">
+      <div class="ejemplo-head">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        </div>
+        <h3>Ejemplo</h3>
+      </div>
+      <div class="ejemplo-block">
+        <div class="despeje">$$\begin{cases} 3x - 2y + 4z = 2 \\ x + y - 5z = 7 \\ 2x - 5y - z = 5 \end{cases}$$</div>
+        <div class="paso-titulo izq">Calculamos $x$</div>
+        <div style="text-align:center">$$x = \dfrac{\begin{vmatrix} 2 & -2 & 4 \\ 7 & 1 & -5 \\ 5 & -5 & -1 \\ 2 & -2 & 4 \\ 7 & 1 & -5 \end{vmatrix}}{\begin{vmatrix} 3 & -2 & 4 \\ 1 & 1 & -5 \\ 2 & -5 & -1 \\ 3 & -2 & 4 \\ 1 & 1 & -5 \end{vmatrix}}$$</div>
+        <div style="text-align:center">$$= \dfrac{-2 - 140 + 50 - (14 + 50 + 20)}{-3 - 20 + 20 - (2 + 75 + 8)} = \dfrac{-92 - 84}{-3 - 85} = \dfrac{-176}{-88}$$</div>
+        <div style="text-align:center"><span class="resultado-pill">$x = 2$</span></div>
+        <div class="paso-titulo der">Calculamos $y$</div>
+        <div style="text-align:center">$$y = \dfrac{\begin{vmatrix} 3 & 2 & 4 \\ 1 & 7 & -5 \\ 2 & 5 & -1 \\ 3 & 2 & 4 \\ 1 & 7 & -5 \end{vmatrix}}{-88}$$</div>
+        <div style="text-align:center">$$= \dfrac{-21 + 20 - 20 - (-2 - 75 + 56)}{-88} = \dfrac{-21 + 21}{-88} = \dfrac{0}{-88}$$</div>
+        <div style="text-align:center"><span class="resultado-pill">$y = 0$</span></div>
+        <div class="paso-titulo ">Calculamos $z$</div>
+        <div style="text-align:center">$$z = \dfrac{\begin{vmatrix} 3 & -2 & 2 \\ 1 & 1 & 7 \\ 2 & -5 & 5 \\ 3 & -2 & 2 \\ 1 & 1 & 7 \end{vmatrix}}{-88}$$</div>
+        <div style="text-align:center">$$= \dfrac{15 - 10 - 28 - (-10 - 105 + 4)}{-88} = \dfrac{-23 + 111}{-88} = \dfrac{88}{-88}$$</div>
+        <div style="text-align:center"><span class="resultado-pill">$z = -1$</span></div>
+        <div class="comprob">
+          <p class="comprob-titulo">Comprobación</p>
+          <div class="elim-grid tres">
+            <div class="elim-col">
+              $$\begin{aligned} 3(2) - 2(0) + 4(-1) &= 2 \\ 6 - 0 - 4 &= 2 \\ 2 &= 2 \end{aligned}$$
+            </div>
+            <div class="elim-col">
+              $$\begin{aligned} (2) + (0) - 5(-1) &= 7 \\ 2 + 0 + 5 &= 7 \\ 7 &= 7 \end{aligned}$$
+            </div>
+            <div class="elim-col">
+              $$\begin{aligned} 2(2) - 5(0) - (-1) &= 5 \\ 4 - 0 + 1 &= 5 \\ 5 &= 5 \end{aligned}$$
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-block">
+      <div class="sec-head">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+        </div>
+        <h2>Ejercicios</h2>
+      </div>
+      <div class="bloques-2">
+        <div class="mini-card">
+          <div class="mini-card-head">Ejercicio 1</div>
+          <div class="mini-card-body">$$\begin{cases} -x + 2y + z = 5 \\ -x + 3y - 2z = 11 \\ 2x - y + z = -4 \end{cases}$$</div>
+        </div>
+        <div class="mini-card">
+          <div class="mini-card-head">Ejercicio 2</div>
+          <div class="mini-card-body">$$\begin{cases} 2x + 3y - z = 5 \\ x - y + z = 1 \\ 3x + y - z = 7 \end{cases}$$</div>
+        </div>
+        <div class="mini-card">
+          <div class="mini-card-head">Ejercicio 3</div>
+          <div class="mini-card-body">$$\begin{cases} x - 2y + 3z = 5 \\ -x + y - 2z = -3 \\ 2x - 3y - z = 8 \end{cases}$$</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-block">
+      <div class="sec-toggle" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('show');">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <h2>Respuestas</h2>
+        <span class="chev">▼</span>
+      </div>
+      <div class="collapsible">
+        <div class="resol-grid">
+
+          <div class="resol-item">
+            <div class="resol-num">Ejercicio 1</div>
+            <div class="despeje">$$\begin{cases} -x + 2y + z = 5 \\ -x + 3y - 2z = 11 \\ 2x - y + z = -4 \end{cases}$$</div>
+            <div class="paso-titulo izq">Calculamos $x$</div>
+            <div style="text-align:center">$$x = \dfrac{\begin{vmatrix} 5 & 2 & 1 \\ 11 & 3 & -2 \\ -4 & -1 & 1 \\ 5 & 2 & 1 \\ 11 & 3 & -2 \end{vmatrix}}{\begin{vmatrix} -1 & 2 & 1 \\ -1 & 3 & -2 \\ 2 & -1 & 1 \\ -1 & 2 & 1 \\ -1 & 3 & -2 \end{vmatrix}}$$</div>
+            <div style="text-align:center">$$= \dfrac{15 - 11 + 16 - (22 + 10 - 12)}{-3 + 1 - 8 - (-2 - 2 + 6)} = \dfrac{20 - 20}{-10 - 2} = \dfrac{0}{-12}$$</div>
+            <div style="text-align:center"><span class="resultado-pill">$x = 0$</span></div>
+            <div class="paso-titulo der">Calculamos $y$</div>
+            <div style="text-align:center">$$y = \dfrac{\begin{vmatrix} -1 & 5 & 1 \\ -1 & 11 & -2 \\ 2 & -4 & 1 \\ -1 & 5 & 1 \\ -1 & 11 & -2 \end{vmatrix}}{-12}$$</div>
+            <div style="text-align:center">$$= \dfrac{-11 + 4 - 20 - (-5 - 8 + 22)}{-12} = \dfrac{-27 - 9}{-12} = \dfrac{-36}{-12}$$</div>
+            <div style="text-align:center"><span class="resultado-pill">$y = 3$</span></div>
+            <div class="paso-titulo ">Calculamos $z$</div>
+            <div style="text-align:center">$$z = \dfrac{\begin{vmatrix} -1 & 2 & 5 \\ -1 & 3 & 11 \\ 2 & -1 & -4 \\ -1 & 2 & 5 \\ -1 & 3 & 11 \end{vmatrix}}{-12}$$</div>
+            <div style="text-align:center">$$= \dfrac{12 + 5 + 44 - (8 + 11 + 30)}{-12} = \dfrac{61 - 49}{-12} = \dfrac{12}{-12}$$</div>
+            <div style="text-align:center"><span class="resultado-pill">$z = -1$</span></div>
+            <div class="comprob">
+              <p class="comprob-titulo">Comprobación</p>
+              <div class="elim-grid tres">
+                <div class="elim-col">
+                  $$\begin{aligned} -(0) + 2(3) + (-1) &= 5 \\ -0 + 6 - 1 &= 5 \\ 5 &= 5 \end{aligned}$$
+                </div>
+                <div class="elim-col">
+                  $$\begin{aligned} -(0) + 3(3) - 2(-1) &= 11 \\ -0 + 9 + 2 &= 11 \\ 11 &= 11 \end{aligned}$$
+                </div>
+                <div class="elim-col">
+                  $$\begin{aligned} 2(0) - (3) + (-1) &= -4 \\ 0 - 3 - 1 &= -4 \\ -4 &= -4 \end{aligned}$$
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="resol-item">
+            <div class="resol-num">Ejercicio 2</div>
+            <div class="despeje">$$\begin{cases} 2x + 3y - z = 5 \\ x - y + z = 1 \\ 3x + y - z = 7 \end{cases}$$</div>
+            <div class="paso-titulo izq">Calculamos $x$</div>
+            <div style="text-align:center">$$x = \dfrac{\begin{vmatrix} 5 & 3 & -1 \\ 1 & -1 & 1 \\ 7 & 1 & -1 \\ 5 & 3 & -1 \\ 1 & -1 & 1 \end{vmatrix}}{\begin{vmatrix} 2 & 3 & -1 \\ 1 & -1 & 1 \\ 3 & 1 & -1 \\ 2 & 3 & -1 \\ 1 & -1 & 1 \end{vmatrix}}$$</div>
+            <div style="text-align:center">$$= \dfrac{5 - 1 + 21 - (-3 + 5 + 7)}{2 - 1 + 9 - (-3 + 2 + 3)} = \dfrac{25 - 9}{10 - 2} = \dfrac{16}{8}$$</div>
+            <div style="text-align:center"><span class="resultado-pill">$x = 2$</span></div>
+            <div class="paso-titulo der">Calculamos $y$</div>
+            <div style="text-align:center">$$y = \dfrac{\begin{vmatrix} 2 & 5 & -1 \\ 1 & 1 & 1 \\ 3 & 7 & -1 \\ 2 & 5 & -1 \\ 1 & 1 & 1 \end{vmatrix}}{8}$$</div>
+            <div style="text-align:center">$$= \dfrac{-2 - 7 + 15 - (-5 + 14 - 3)}{8} = \dfrac{6 - 6}{8} = \dfrac{0}{8}$$</div>
+            <div style="text-align:center"><span class="resultado-pill">$y = 0$</span></div>
+            <div class="paso-titulo ">Calculamos $z$</div>
+            <div style="text-align:center">$$z = \dfrac{\begin{vmatrix} 2 & 3 & 5 \\ 1 & -1 & 1 \\ 3 & 1 & 7 \\ 2 & 3 & 5 \\ 1 & -1 & 1 \end{vmatrix}}{8}$$</div>
+            <div style="text-align:center">$$= \dfrac{-14 + 5 + 9 - (21 + 2 - 15)}{8} = \dfrac{0 - 8}{8} = \dfrac{-8}{8}$$</div>
+            <div style="text-align:center"><span class="resultado-pill">$z = -1$</span></div>
+            <div class="comprob">
+              <p class="comprob-titulo">Comprobación</p>
+              <div class="elim-grid tres">
+                <div class="elim-col">
+                  $$\begin{aligned} 2(2) + 3(0) - (-1) &= 5 \\ 4 + 0 + 1 &= 5 \\ 5 &= 5 \end{aligned}$$
+                </div>
+                <div class="elim-col">
+                  $$\begin{aligned} (2) - (0) + (-1) &= 1 \\ 2 - 0 - 1 &= 1 \\ 1 &= 1 \end{aligned}$$
+                </div>
+                <div class="elim-col">
+                  $$\begin{aligned} 3(2) + (0) - (-1) &= 7 \\ 6 + 0 + 1 &= 7 \\ 7 &= 7 \end{aligned}$$
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="resol-item">
+            <div class="resol-num">Ejercicio 3</div>
+            <div class="despeje">$$\begin{cases} x - 2y + 3z = 5 \\ -x + y - 2z = -3 \\ 2x - 3y - z = 8 \end{cases}$$</div>
+            <div class="paso-titulo izq">Calculamos $x$</div>
+            <div style="text-align:center">$$x = \dfrac{\begin{vmatrix} 5 & -2 & 3 \\ -3 & 1 & -2 \\ 8 & -3 & -1 \\ 5 & -2 & 3 \\ -3 & 1 & -2 \end{vmatrix}}{\begin{vmatrix} 1 & -2 & 3 \\ -1 & 1 & -2 \\ 2 & -3 & -1 \\ 1 & -2 & 3 \\ -1 & 1 & -2 \end{vmatrix}}$$</div>
+            <div style="text-align:center">$$= \dfrac{-5 + 27 + 32 - (-6 + 30 + 24)}{-1 + 9 + 8 - (-2 + 6 + 6)} = \dfrac{54 - 48}{16 - 10} = \dfrac{6}{6}$$</div>
+            <div style="text-align:center"><span class="resultado-pill">$x = 1$</span></div>
+            <div class="paso-titulo der">Calculamos $y$</div>
+            <div style="text-align:center">$$y = \dfrac{\begin{vmatrix} 1 & 5 & 3 \\ -1 & -3 & -2 \\ 2 & 8 & -1 \\ 1 & 5 & 3 \\ -1 & -3 & -2 \end{vmatrix}}{6}$$</div>
+            <div style="text-align:center">$$= \dfrac{3 - 24 - 20 - (5 - 16 - 18)}{6} = \dfrac{-41 + 29}{6} = \dfrac{-12}{6}$$</div>
+            <div style="text-align:center"><span class="resultado-pill">$y = -2$</span></div>
+            <div class="paso-titulo ">Calculamos $z$</div>
+            <div style="text-align:center">$$z = \dfrac{\begin{vmatrix} 1 & -2 & 5 \\ -1 & 1 & -3 \\ 2 & -3 & 8 \\ 1 & -2 & 5 \\ -1 & 1 & -3 \end{vmatrix}}{6}$$</div>
+            <div style="text-align:center">$$= \dfrac{8 + 15 + 12 - (16 + 9 + 10)}{6} = \dfrac{35 - 35}{6} = \dfrac{0}{6}$$</div>
+            <div style="text-align:center"><span class="resultado-pill">$z = 0$</span></div>
+            <div class="comprob">
+              <p class="comprob-titulo">Comprobación</p>
+              <div class="elim-grid tres">
+                <div class="elim-col">
+                  $$\begin{aligned} (1) - 2(-2) + 3(0) &= 5 \\ 1 + 4 + 0 &= 5 \\ 5 &= 5 \end{aligned}$$
+                </div>
+                <div class="elim-col">
+                  $$\begin{aligned} -(1) + (-2) - 2(0) &= -3 \\ -1 - 2 - 0 &= -3 \\ -3 &= -3 \end{aligned}$$
+                </div>
+                <div class="elim-col">
+                  $$\begin{aligned} 2(1) - 3(-2) - (0) &= 8 \\ 2 + 6 - 0 &= 8 \\ 8 &= 8 \end{aligned}$$
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="section-block">
+      <div class="sec-toggle" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('show');">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+        </div>
+        <h2>Ejercicios extra</h2>
+        <span class="chev">▼</span>
+      </div>
+      <div class="collapsible">
+        <div class="bloques-2">
+          <div class="mini-card">
+            <div class="mini-card-head">Bloque 1</div>
+            <div class="mini-card-body">
+              <div class="ej-line">$\begin{cases} -x - 2y + z = 6 \\ 3x - 3y - 3z = 9 \\ 2x - 3y - z = 11 \end{cases}$</div>
+              <div class="ej-line">$\begin{cases} -2x - 3y - 3z = 1 \\ x + y - 3z = -8 \\ -2x - 3y + 2z = 11 \end{cases}$</div>
+              <div class="ej-line">$\begin{cases} x - y - z = -4 \\ -2x - 2y + 3z = 1 \\ -2x - 3y + 2z = -2 \end{cases}$</div>
+              <div class="ej-line">$\begin{cases} 2x - y - z = -2 \\ 3x - y + 2z = -8 \\ x + 2y + z = -10 \end{cases}$</div>
+              <div class="ej-line">$\begin{cases} -2x + 3y - 2z = 6 \\ x + y + z = 2 \\ -3x - 2y + z = -8 \end{cases}$</div>
+            </div>
+          </div>
+          <div class="mini-card">
+            <div class="mini-card-head">Bloque 2</div>
+            <div class="mini-card-body">
+              <div class="ej-line">$\begin{cases} -2x - 2y - 3z = 0 \\ -2x - 2y - 2z = -2 \\ 3x - 2y - 3z = 5 \end{cases}$</div>
+              <div class="ej-line">$\begin{cases} -x - y - 3z = -6 \\ -2x + y + 2z = 6 \\ -x + 2y + 2z = 3 \end{cases}$</div>
+              <div class="ej-line">$\begin{cases} -3x - 3y + 2z = 19 \\ -2x + 2y - 3z = -4 \\ -x + 2y - 3z = -7 \end{cases}$</div>
+              <div class="ej-line">$\begin{cases} x - 2y + 3z = -2 \\ -x - y + 2z = 4 \\ -x + y - 3z = 1 \end{cases}$</div>
+              <div class="ej-line">$\begin{cases} x + y - z = -3 \\ -3x - 2y - 3z = -8 \\ 3x - y + 3z = 5 \end{cases}$</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ NAVEGACIÓN ══════════ -->
+    <div class="topic-nav-btns">
+      <a href="determinantes-2x2.html" class="btn-anterior">← Determinantes 2×2</a>
+      <a href="index.html" class="btn-siguiente">Índice del curso →</a>
+    </div>
+
+  </main>
+  <script src="../../nav.js"></script>
+  <script src="../../footer.js"></script>
+</body>
+</html>
