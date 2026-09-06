@@ -4,7 +4,7 @@
 *próximamente*). En letymath.com cada una tiene **18 temas**. Math 1 y Math 2 ya quedaron
 completas el 5-sep-2026. Falta que Lety pase el LaTeX de esos dos cursos; el flujo que ya
 funcionó es: LaTeX por tema → verificar la aritmética → armar el HTML → card en el índice
-y botones prev/next.
+y botones prev/next. Los triángulos SVG salen de `Recursos lety2E/triangulos-svg-math.py`; para las cónicas de Math 3 y las funciones de Math 4 va a hacer falta un generador nuevo, ése sirve de molde.
 
 **Math 5 se queda como está** — letymath.com tiene un tema más, *"Dx. Con x en el
 denominador"*, que **no se va a migrar**: Lety lo dio por incorporado dentro de
