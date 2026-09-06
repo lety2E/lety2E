@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Método gráfico — Matemáticas 3 — LetyMath</title>
+  <meta name="description" content="Resolver un sistema graficando: despejar y en ambas ecuaciones, identificar ordenada y pendiente, y leer el punto de intersección." />
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../../favicon.ico">
+  <link rel="stylesheet" href="../../style.css">
+  <link rel="stylesheet" href="../../assets/katex/katex.min.css" />
+  <script defer src="../../assets/katex/katex.min.js"></script>
+  <script defer src="../../assets/katex/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body, {
+      delimiters: [
+        {left:'$$', right:'$$', display:true},
+        {left:'$', right:'$', display:false}
+      ]
+    });"></script>
+
+  <style>
+    .topic-tag {
+      display: inline-flex; align-items: center; gap: .35rem;
+      padding: .22rem .75rem; border-radius: 99px;
+      background: var(--accent-light); color: var(--accent);
+      font-size: .78rem; font-weight: 700; letter-spacing: .03em;
+      margin-bottom: .55rem;
+    }
+    .topic-tag::before {
+      content: ''; width: 7px; height: 7px; border-radius: 50%;
+      background: var(--accent); display: inline-block;
+    }
+
+    .section-block { margin-bottom: 2.5rem; }
+    .section-block:last-child { margin-bottom: 0; }
+
+    .sec-head { display: flex; align-items: center; gap: .65rem; margin-bottom: 1.1rem; }
+    .sec-head h2 { margin: 0; font-size: 1.2rem; line-height: 1; }
+    .sec-icon {
+      width: 30px; height: 30px; border-radius: 8px;
+      display: grid; place-items: center; flex-shrink: 0;
+      background: var(--accent);
+    }
+    .sec-icon svg { width: 15px; height: 15px; stroke: #fff; fill: none; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+
+    .sec-toggle {
+      display: flex; align-items: center; gap: .65rem;
+      cursor: pointer; user-select: none;
+      padding: .8rem 0; margin: 0 0 .4rem;
+    }
+    .sec-toggle h2 { margin: 0; font-size: 1.2rem; line-height: 1; }
+    .sec-toggle .chev { margin-left: auto; font-size: .75rem; color: var(--text-3); transition: transform .25s; }
+    .sec-toggle.open .chev { transform: rotate(180deg); }
+    .collapsible { max-height: 0; overflow: hidden; transition: max-height .4s ease, padding .3s ease; padding: 0; }
+    .collapsible.show { max-height: 40000px; padding: .8rem 0; }
+
+    /* ── Video ── */
+    .video-single { max-width: 720px; margin: 0 auto; }
+    .video-wrapper {
+      position: relative; padding-bottom: 56.25%; height: 0;
+      overflow: hidden; border-radius: var(--r-md); background: #000;
+    }
+    .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+
+    /* ── Ejemplo ── */
+    .ejemplo-section { margin: 2rem 0 2.5rem; }
+    .ejemplo-head { display: flex; align-items: center; gap: .65rem; margin-bottom: 1rem; }
+    .ejemplo-head h3 {
+      margin: 0; font-family: var(--font-display);
+      font-size: 1.2rem; line-height: 1; color: var(--M); font-style: italic;
+    }
+    .ejemplo-block {
+      padding: 1.6rem 1.5rem; background: var(--bg-card);
+      border: 1.5px solid var(--border); border-radius: var(--r-md);
+      color: var(--text);
+    }
+    .paso-titulo { font-size: .8rem; font-weight: 700; color: var(--course-1); margin-bottom: .25rem; text-align: center; }
+    .paso-titulo.izq { color: #7B2CBF; }
+    .paso-titulo.der { color: var(--M); }
+    .sistema-mult { text-align: center; }
+    .despeje { text-align: center; }
+    .formula-pill {
+      display: inline-block; background: #FFF1A8;
+      padding: .25rem .75rem; border-radius: 99px;
+      font-size: .9rem; font-weight: 600; color: var(--text);
+      margin: .25rem .2rem; border: 1.5px solid #F5DC6A;
+    }
+    .graf-wrap { display: flex; justify-content: center; margin: 1rem 0 .5rem; }
+    .graf-svg { max-width: 240px; max-height: 380px; height: auto; }
+
+    /* ── Pills ── */
+    .resultado-pill {
+      display: inline-block; background: #FFD0E5;
+      padding: .25rem .75rem; border-radius: 99px;
+      font-size: .9rem; font-weight: 700; color: var(--M);
+      margin: .25rem .2rem; border: 1.5px solid #FF8AC0;
+    }
+
+    /* ── Mini card (ejercicio) ── */
+    .mini-card {
+      background: var(--bg-card); border: 1.5px solid var(--border);
+      border-radius: var(--r-md); overflow: hidden;
+    }
+    .mini-card-head {
+      padding: .4rem .8rem; background: var(--course-1);
+      font-family: var(--font-display); font-size: .85rem; color: #fff; font-weight: 700;
+    }
+    .mini-card-body { padding: .8rem 1rem; font-size: .9rem; line-height: 1.6; color: var(--text); text-align: center; }
+    .mini-card-body .ej-line { padding: .55rem 0; border-bottom: 1px solid var(--border-s); }
+    .mini-card-body .ej-line:first-child { padding-top: .1rem; }
+    .mini-card-body .ej-line:last-child { border-bottom: none; padding-bottom: .1rem; }
+    .bloques-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2rem; }
+    @media (max-width: 700px) { .bloques-2 { grid-template-columns: 1fr; } }
+
+    /* ── Resoluciones ── */
+    .resol-grid { display: grid; grid-template-columns: 1fr; gap: 1.2rem; }
+    .resol-item {
+      background: var(--bg-card); border: 1.5px solid var(--border);
+      border-radius: var(--r-md); padding: .9rem 1.1rem;
+    }
+    .resol-num {
+      font-size: .75rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .06em; color: var(--course-1); margin-bottom: .1rem;
+    }
+
+    /* ── Doble columna del método ── */
+    .elim-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem;
+      margin-top: .6rem;
+    }
+    .elim-grid > div + div { border-left: 1px solid var(--border-s); padding-left: 1.2rem; }
+    @media (max-width: 700px) {
+      .elim-grid { grid-template-columns: 1fr; gap: .6rem; }
+      .elim-grid > div + div { border-left: none; padding-left: 0; border-top: 1px solid var(--border-s); padding-top: .8rem; }
+    }
+    .elim-col { text-align: center; }
+    .comprob { margin-top: 1rem; padding-top: .8rem; border-top: 1px solid var(--border-s); }
+    .comprob-titulo {
+      font-family: var(--font-display); font-size: .95rem; font-style: italic;
+      color: var(--M); margin: 0 0 .3rem; text-align: center;
+    }
+
+    .extras-titulo {
+      font-family: var(--font-display); font-size: 1rem; font-style: italic;
+      color: var(--M); margin: 1.4rem 0 .8rem;
+    }
+    .extras-titulo:first-child { margin-top: 0; }
+
+    /* ── Navegación ── */
+    .topic-nav-btns {
+      display: flex; justify-content: space-between; gap: 1rem;
+      margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border);
+    }
+    .btn-anterior, .btn-siguiente {
+      display: inline-flex; align-items: center; gap: .5rem;
+      padding: .65rem 1.4rem; border-radius: 99px;
+      font-weight: 700; font-size: .9rem; transition: background .2s, transform .18s;
+    }
+    .btn-anterior { background: transparent; color: var(--accent); border: 2px solid var(--accent); }
+    .btn-anterior:hover { background: var(--accent-light); transform: translateX(-3px); }
+    .btn-siguiente { background: var(--accent); color: #fff; }
+    .btn-siguiente:hover { background: var(--M); color: #fff; transform: translateX(3px); }
+  </style>
+</head>
+<body data-section="math">
+  <main class="topic-content">
+
+    <header class="topic-header">
+      <p class="breadcrumb">
+        <a href="../index.html">Inicio</a> ›
+        <a href="index.html">Matemáticas 3</a> ›
+        Método gráfico
+      </p>
+      <div class="topic-tag">Matemáticas 3 · Tema 3</div>
+      <h1>Método gráfico</h1>
+    </header>
+
+    <!-- ══════════ EJEMPLO ══════════ -->
+    <section class="section-block ejemplo-section">
+      <div class="ejemplo-head">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        </div>
+        <h3>Ejemplo</h3>
+      </div>
+      <div class="ejemplo-block">
+        <div class="despeje">$$\begin{cases} x + 2y = 4 \\ 4x + 2y = -2 \end{cases}$$</div>
+        <div class="elim-grid">
+              <div class="elim-col">
+                <div class="paso-titulo izq">Primera recta</div>
+                $$\begin{aligned} x + 2y &= 4 \\ 2y &= 4 - x \\ y &= \dfrac{4-x}{2} \end{aligned}$$
+                <span class="formula-pill">$y = 2 - \dfrac{1}{2}x$</span>
+                $$b = 2 \qquad m = \dfrac{\Delta y}{\Delta x} = -\dfrac{1}{2}$$
+              </div>
+              <div class="elim-col">
+                <div class="paso-titulo der">Segunda recta</div>
+                $$\begin{aligned} 4x + 2y &= -2 \\ 2y &= -2 - 4x \\ y &= \dfrac{-2-4x}{2} \end{aligned}$$
+                <span class="formula-pill">$y = -1 - \dfrac{4}{2}x$</span>
+                $$b = -1 \qquad m = \dfrac{\Delta y}{\Delta x} = -\dfrac{4}{2}$$
+              </div>
+        </div>
+        <div class="graf-wrap"><svg class="graf-svg" viewBox="0 0 240 196" xmlns="http://www.w3.org/2000/svg" width="240" height="196" role="img" aria-label="Rectas del sistema y su punto de corte"><line x1="10" y1="10" x2="10" y2="186" stroke="#E0C4BC" stroke-width="0.5"/><line x1="32" y1="10" x2="32" y2="186" stroke="#E0C4BC" stroke-width="0.5"/><line x1="54" y1="10" x2="54" y2="186" stroke="#E0C4BC" stroke-width="0.5"/><line x1="76" y1="10" x2="76" y2="186" stroke="#E0C4BC" stroke-width="0.5"/><line x1="98" y1="10" x2="98" y2="186" stroke="#E0C4BC" stroke-width="0.5"/><line x1="120" y1="10" x2="120" y2="186" stroke="#E0C4BC" stroke-width="0.5"/><line x1="142" y1="10" x2="142" y2="186" stroke="#E0C4BC" stroke-width="0.5"/><line x1="164" y1="10" x2="164" y2="186" stroke="#E0C4BC" stroke-width="0.5"/><line x1="186" y1="10" x2="186" y2="186" stroke="#E0C4BC" stroke-width="0.5"/><line x1="208" y1="10" x2="208" y2="186" stroke="#E0C4BC" stroke-width="0.5"/><line x1="230" y1="10" x2="230" y2="186" stroke="#E0C4BC" stroke-width="0.5"/><line x1="10" y1="186" x2="230" y2="186" stroke="#E0C4BC" stroke-width="0.5"/><line x1="10" y1="164" x2="230" y2="164" stroke="#E0C4BC" stroke-width="0.5"/><line x1="10" y1="142" x2="230" y2="142" stroke="#E0C4BC" stroke-width="0.5"/><line x1="10" y1="120" x2="230" y2="120" stroke="#E0C4BC" stroke-width="0.5"/><line x1="10" y1="98" x2="230" y2="98" stroke="#E0C4BC" stroke-width="0.5"/><line x1="10" y1="76" x2="230" y2="76" stroke="#E0C4BC" stroke-width="0.5"/><line x1="10" y1="54" x2="230" y2="54" stroke="#E0C4BC" stroke-width="0.5"/><line x1="10" y1="32" x2="230" y2="32" stroke="#E0C4BC" stroke-width="0.5"/><line x1="10" y1="10" x2="230" y2="10" stroke="#E0C4BC" stroke-width="0.5"/><line x1="10" y1="142" x2="230" y2="142" stroke="#7B5A50" stroke-width="1.2"/><line x1="142" y1="10" x2="142" y2="186" stroke="#7B5A50" stroke-width="1.2"/><line x1="10.0" y1="32.0" x2="230.0" y2="142.0" stroke="#7B2CBF" stroke-width="2.2" stroke-linecap="round"/><line x1="65.0" y1="10.0" x2="153.0" y2="186.0" stroke="#FF00AA" stroke-width="2.2" stroke-linecap="round"/><circle cx="98" cy="76" r="5.5" fill="none" stroke="#1A0828" stroke-width="1.2"/><circle cx="98" cy="76" r="3" fill="#1A0828"/></svg></div>
+        <div style="text-align:center"><span class="resultado-pill">$x = -2$</span><span class="resultado-pill">$y = 3$</span></div>
+            <div class="comprob">
+              <p class="comprob-titulo">Comprobación</p>
+              <div class="elim-grid">
+                <div class="elim-col">
+                  $$\begin{aligned} (-2) + 2(3) &= 4 \\ -2 + 6 &= 4 \\ 4 &= 4 \end{aligned}$$
+                </div>
+                <div class="elim-col">
+                  $$\begin{aligned} 4(-2) + 2(3) &= -2 \\ -8 + 6 &= -2 \\ -2 &= -2 \end{aligned}$$
+                </div>
+              </div>
+            </div>
+      </div>
+    </section>
+
+    <!-- ══════════ EJERCICIOS ══════════ -->
+    <section class="section-block">
+      <div class="sec-head">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+        </div>
+        <h2>Ejercicios</h2>
+      </div>
+      <div class="bloques-2">
+        <div class="mini-card">
+          <div class="mini-card-head">Ejercicio 1</div>
+          <div class="mini-card-body">$$\begin{cases} x + 2y = 8 \\ x - 2y = -4 \end{cases}$$</div>
+        </div>
+        <div class="mini-card">
+          <div class="mini-card-head">Ejercicio 2</div>
+          <div class="mini-card-body">$$\begin{cases} -x + 3y = 12 \\ 2x + 3y = 3 \end{cases}$$</div>
+        </div>
+        <div class="mini-card">
+          <div class="mini-card-head">Ejercicio 3</div>
+          <div class="mini-card-body">$$\begin{cases} -x + 3y = -6 \\ x - y = 4 \end{cases}$$</div>
+        </div>
+        <div class="mini-card">
+          <div class="mini-card-head">Ejercicio 4</div>
+          <div class="mini-card-body">$$\begin{cases} 2x + y = 3 \\ 3x - 2y = 8 \end{cases}$$</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ RESPUESTAS ══════════ -->
+    <section class="section-block">
+      <div class="sec-toggle" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('show');">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <h2>Respuestas</h2>
+        <span class="chev">▼</span>
+      </div>
+      <div class="collapsible">
+        <div class="resol-grid">
+
+          <div class="resol-item">
+            <div class="resol-num">Ejercicio 1</div>
+            <div class="despeje">$$\begin{cases} x + 2y = 8 \\ x - 2y = -4 \end{cases}$$</div>
+            <div class="elim-grid">
+              <div class="elim-col">
+                <div class="paso-titulo izq">Primera recta</div>
+                $$\begin{aligned} x + 2y &= 8 \\ 2y &= 8 - x \\ y &= \dfrac{8-x}{2} \end{aligned}$$
+                <span class="formula-pill">$y = 4 - \dfrac{1}{2}x$</span>
+                $$b = 4 \qquad m = \dfrac{\Delta y}{\Delta x} = -\dfrac{1}{2}$$
+              </div>
+              <div class="elim-col">
+                <div class="paso-titulo der">Segunda recta</div>
+                $$\begin{aligned} x - 2y &= -4 \\ -2y &= -4 - x \\ y &= \dfrac{-4-x}{-2} \end{aligned}$$
+                <span class="formula-pill">$y = 2 + \dfrac{1}{2}x$</span>
+                $$b = 2 \qquad m = \dfrac{\Delta y}{\Delta x} = \dfrac{1}{2}$$
+              </div>
+            </div>
+            <div class="graf-wrap"><svg class="graf-svg" viewBox="0 0 240 218" xmlns="http://www.w3.org/2000/svg" width="240" height="218" role="img" aria-label="Rectas del sistema y su punto de corte"><line x1="10" y1="10" x2="10" y2="208" stroke="#E0C4BC" stroke-width="0.5"/><line x1="32" y1="10" x2="32" y2="208" stroke="#E0C4BC" stroke-width="0.5"/><line x1="54" y1="10" x2="54" y2="208" stroke="#E0C4BC" stroke-width="0.5"/><line x1="76" y1="10" x2="76" y2="208" stroke="#E0C4BC" stroke-width="0.5"/><line x1="98" y1="10" x2="98" y2="208" stroke="#E0C4BC" stroke-width="0.5"/><line x1="120" y1="10" x2="120" y2="208" stroke="#E0C4BC" stroke-width="0.5"/><line x1="142" y1="10" x2="142" y2="208" stroke="#E0C4BC" stroke-width="0.5"/><line x1="164" y1="10" x2="164" y2="208" stroke="#E0C4BC" stroke-width="0.5"/><line x1="186" y1="10" x2="186" y2="208" stroke="#E0C4BC" stroke-width="0.5"/><line x1="208" y1="10" x2="208" y2="208" stroke="#E0C4BC" stroke-width="0.5"/><line x1="230" y1="10" x2="230" y2="208" stroke="#E0C4BC" stroke-width="0.5"/><line x1="10" y1="208" x2="230" y2="208" stroke="#E0C4BC" stroke-width="0.5"/><line x1="10" y1="186" x2="230" y2="186" stroke="#E0C4BC" stroke-width="0.5"/><line x1="10" y1="164" x2="230" y2="164" stroke="#E0C4BC" stroke-width="0.5"/><line x1="10" y1="142" x2="230" y2="142" stroke="#E0C4BC" stroke-width="0.5"/><line x1="10" y1="120" x2="230" y2="120" stroke="#E0C4BC" stroke-width="0.5"/><line x1="10" y1="98" x2="230" y2="98" stroke="#E0C4BC" stroke-width="0.5"/><line x1="10" y1="76" x2="230" y2="76" stroke="#E0C4BC" stroke-width="0.5"/><line x1="10" y1="54" x2="230" y2="54" stroke="#E0C4BC" stroke-width="0.5"/><line x1="10" y1="32" x2="230" y2="32" stroke="#E0C4BC" stroke-width="0.5"/><line x1="10" y1="10" x2="230" y2="10" stroke="#E0C4BC" stroke-width="0.5"/><line x1="10" y1="164" x2="230" y2="164" stroke="#7B5A50" stroke-width="1.2"/><line x1="98" y1="10" x2="98" y2="208" stroke="#7B5A50" stroke-width="1.2"/><line x1="10.0" y1="32.0" x2="230.0" y2="142.0" stroke="#7B2CBF" stroke-width="2.2" stroke-linecap="round"/><line x1="10.0" y1="164.0" x2="230.0" y2="54.0" stroke="#FF00AA" stroke-width="2.2" stroke-linecap="round"/><circle cx="142" cy="98" r="5.5" fill="none" stroke="#1A0828" stroke-width="1.2"/><circle cx="142" cy="98" r="3" fill="#1A0828"/></svg></div>
+            <div style="text-align:center"><span class="resultado-pill">$x = 2$</span><span class="resultado-pill">$y = 3$</span></div>
+            <div class="comprob">
+              <p class="comprob-titulo">Comprobación</p>
+              <div class="elim-grid">
+                <div class="elim-col">
+                  $$\begin{aligned} (2) + 2(3) &= 8 \\ 2 + 6 &= 8 \\ 8 &= 8 \end{aligned}$$
+                </div>
+                <div class="elim-col">
+                  $$\begin{aligned} (2) - 2(3) &= -4 \\ 2 - 6 &= -4 \\ -4 &= -4 \end{aligned}$$
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="resol-item">
+            <div class="resol-num">Ejercicio 2</div>
+            <div class="despeje">$$\begin{cases} -x + 3y = 12 \\ 2x + 3y = 3 \end{cases}$$</div>
+            <div class="elim-grid">
+              <div class="elim-col">
+                <div class="paso-titulo izq">Primera recta</div>
+                $$\begin{aligned} -x + 3y &= 12 \\ 3y &= 12 + x \\ y &= \dfrac{12+x}{3} \end{aligned}$$
+                <span class="formula-pill">$y = 4 + \dfrac{1}{3}x$</span>
+                $$b = 4 \qquad m = \dfrac{\Delta y}{\Delta x} = \dfrac{1}{3}$$
+              </div>
+              <div class="elim-col">
+                <div class="paso-titulo der">Segunda recta</div>
+                $$\begin{aligned} 2x + 3y &= 3 \\ 3y &= 3 - 2x \\ y &= \dfrac{3-2x}{3} \end{aligned}$$
+                <span class="formula-pill">$y = 1 - \dfrac{2}{3}x$</span>
+                $$b = 1 \qquad m = \dfrac{\Delta y}{\Delta x} = -\dfrac{2}{3}$$
+              </div>
+            </div>
+            <div class="graf-wrap"><svg class="graf-svg" viewBox="0 0 284 218" xmlns="http://www.w3.org/2000/svg" width="284" height="218" role="img" aria-label="Rectas del sistema y su punto de corte"><line x1="10" y1="10" x2="10" y2="208" stroke="#E0C4BC" stroke-width="0.5"/><line x1="32" y1="10" x2="32" y2="208" stroke="#E0C4BC" stroke-width="0.5"/><line x1="54" y1="10" x2="54" y2="208" stroke="#E0C4BC" stroke-width="0.5"/><line x1="76" y1="10" x2="76" y2="208" stroke="#E0C4BC" stroke-width="0.5"/><line x1="98" y1="10" x2="98" y2="208" stroke="#E0C4BC" stroke-width="0.5"/><line x1="120" y1="10" x2="120" y2="208" stroke="#E0C4BC" stroke-width="0.5"/><line x1="142" y1="10" x2="142" y2="208" stroke="#E0C4BC" stroke-width="0.5"/><line x1="164" y1="10" x2="164" y2="208" stroke="#E0C4BC" stroke-width="0.5"/><line x1="186" y1="10" x2="186" y2="208" stroke="#E0C4BC" stroke-width="0.5"/><line x1="208" y1="10" x2="208" y2="208" stroke="#E0C4BC" stroke-width="0.5"/><line x1="230" y1="10" x2="230" y2="208" stroke="#E0C4BC" stroke-width="0.5"/><line x1="252" y1="10" x2="252" y2="208" stroke="#E0C4BC" stroke-width="0.5"/><line x1="274" y1="10" x2="274" y2="208" stroke="#E0C4BC" stroke-width="0.5"/><line x1="10" y1="208" x2="274" y2="208" stroke="#E0C4BC" stroke-width="0.5"/><line x1="10" y1="186" x2="274" y2="186" stroke="#E0C4BC" stroke-width="0.5"/><line x1="10" y1="164" x2="274" y2="164" stroke="#E0C4BC" stroke-width="0.5"/><line x1="10" y1="142" x2="274" y2="142" stroke="#E0C4BC" stroke-width="0.5"/><line x1="10" y1="120" x2="274" y2="120" stroke="#E0C4BC" stroke-width="0.5"/><line x1="10" y1="98" x2="274" y2="98" stroke="#E0C4BC" stroke-width="0.5"/><line x1="10" y1="76" x2="274" y2="76" stroke="#E0C4BC" stroke-width="0.5"/><line x1="10" y1="54" x2="274" y2="54" stroke="#E0C4BC" stroke-width="0.5"/><line x1="10" y1="32" x2="274" y2="32" stroke="#E0C4BC" stroke-width="0.5"/><line x1="10" y1="10" x2="274" y2="10" stroke="#E0C4BC" stroke-width="0.5"/><line x1="10" y1="164" x2="274" y2="164" stroke="#7B5A50" stroke-width="1.2"/><line x1="186" y1="10" x2="186" y2="208" stroke="#7B5A50" stroke-width="1.2"/><line x1="10.0" y1="134.7" x2="274.0" y2="46.7" stroke="#7B2CBF" stroke-width="2.2" stroke-linecap="round"/><line x1="10.0" y1="24.7" x2="274.0" y2="200.7" stroke="#FF00AA" stroke-width="2.2" stroke-linecap="round"/><circle cx="120" cy="98" r="5.5" fill="none" stroke="#1A0828" stroke-width="1.2"/><circle cx="120" cy="98" r="3" fill="#1A0828"/></svg></div>
+            <div style="text-align:center"><span class="resultado-pill">$x = -3$</span><span class="resultado-pill">$y = 3$</span></div>
+            <div class="comprob">
+              <p class="comprob-titulo">Comprobación</p>
+              <div class="elim-grid">
+                <div class="elim-col">
+                  $$\begin{aligned} -(-3) + 3(3) &= 12 \\ 3 + 9 &= 12 \\ 12 &= 12 \end{aligned}$$
+                </div>
+                <div class="elim-col">
+                  $$\begin{aligned} 2(-3) + 3(3) &= 3 \\ -6 + 9 &= 3 \\ 3 &= 3 \end{aligned}$$
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="resol-item">
+            <div class="resol-num">Ejercicio 3</div>
+            <div class="despeje">$$\begin{cases} -x + 3y = -6 \\ x - y = 4 \end{cases}$$</div>
+            <div class="elim-grid">
+              <div class="elim-col">
+                <div class="paso-titulo izq">Primera recta</div>
+                $$\begin{aligned} -x + 3y &= -6 \\ 3y &= -6 + x \\ y &= \dfrac{-6+x}{3} \end{aligned}$$
+                <span class="formula-pill">$y = -2 + \dfrac{1}{3}x$</span>
+                $$b = -2 \qquad m = \dfrac{\Delta y}{\Delta x} = \dfrac{1}{3}$$
+              </div>
+              <div class="elim-col">
+                <div class="paso-titulo der">Segunda recta</div>
+                $$\begin{aligned} x - y &= 4 \\ -y &= 4 - x \\ y &= \dfrac{4-x}{-1} \end{aligned}$$
+                <span class="formula-pill">$y = -4 + \dfrac{1}{1}x$</span>
+                $$b = -4 \qquad m = \dfrac{\Delta y}{\Delta x} = \dfrac{1}{1}$$
+              </div>
+            </div>
+            <div class="graf-wrap"><svg class="graf-svg" viewBox="0 0 240 218" xmlns="http://www.w3.org/2000/svg" width="240" height="218" role="img" aria-label="Rectas del sistema y su punto de corte"><line x1="10" y1="10" x2="10" y2="208" stroke="#E0C4BC" stroke-width="0.5"/><line x1="32" y1="10" x2="32" y2="208" stroke="#E0C4BC" stroke-width="0.5"/><line x1="54" y1="10" x2="54" y2="208" stroke="#E0C4BC" stroke-width="0.5"/><line x1="76" y1="10" x2="76" y2="208" stroke="#E0C4BC" stroke-width="0.5"/><line x1="98" y1="10" x2="98" y2="208" stroke="#E0C4BC" stroke-width="0.5"/><line x1="120" y1="10" x2="120" y2="208" stroke="#E0C4BC" stroke-width="0.5"/><line x1="142" y1="10" x2="142" y2="208" stroke="#E0C4BC" stroke-width="0.5"/><line x1="164" y1="10" x2="164" y2="208" stroke="#E0C4BC" stroke-width="0.5"/><line x1="186" y1="10" x2="186" y2="208" stroke="#E0C4BC" stroke-width="0.5"/><line x1="208" y1="10" x2="208" y2="208" stroke="#E0C4BC" stroke-width="0.5"/><line x1="230" y1="10" x2="230" y2="208" stroke="#E0C4BC" stroke-width="0.5"/><line x1="10" y1="208" x2="230" y2="208" stroke="#E0C4BC" stroke-width="0.5"/><line x1="10" y1="186" x2="230" y2="186" stroke="#E0C4BC" stroke-width="0.5"/><line x1="10" y1="164" x2="230" y2="164" stroke="#E0C4BC" stroke-width="0.5"/><line x1="10" y1="142" x2="230" y2="142" stroke="#E0C4BC" stroke-width="0.5"/><line x1="10" y1="120" x2="230" y2="120" stroke="#E0C4BC" stroke-width="0.5"/><line x1="10" y1="98" x2="230" y2="98" stroke="#E0C4BC" stroke-width="0.5"/><line x1="10" y1="76" x2="230" y2="76" stroke="#E0C4BC" stroke-width="0.5"/><line x1="10" y1="54" x2="230" y2="54" stroke="#E0C4BC" stroke-width="0.5"/><line x1="10" y1="32" x2="230" y2="32" stroke="#E0C4BC" stroke-width="0.5"/><line x1="10" y1="10" x2="230" y2="10" stroke="#E0C4BC" stroke-width="0.5"/><line x1="10" y1="98" x2="230" y2="98" stroke="#7B5A50" stroke-width="1.2"/><line x1="76" y1="10" x2="76" y2="208" stroke="#7B5A50" stroke-width="1.2"/><line x1="10.0" y1="164.0" x2="230.0" y2="90.7" stroke="#7B2CBF" stroke-width="2.2" stroke-linecap="round"/><line x1="54.0" y1="208.0" x2="230.0" y2="32.0" stroke="#FF00AA" stroke-width="2.2" stroke-linecap="round"/><circle cx="142" cy="120" r="5.5" fill="none" stroke="#1A0828" stroke-width="1.2"/><circle cx="142" cy="120" r="3" fill="#1A0828"/></svg></div>
+            <div style="text-align:center"><span class="resultado-pill">$x = 3$</span><span class="resultado-pill">$y = -1$</span></div>
+            <div class="comprob">
+              <p class="comprob-titulo">Comprobación</p>
+              <div class="elim-grid">
+                <div class="elim-col">
+                  $$\begin{aligned} -(3) + 3(-1) &= -6 \\ -3 - 3 &= -6 \\ -6 &= -6 \end{aligned}$$
+                </div>
+                <div class="elim-col">
+                  $$\begin{aligned} (3) - (-1) &= 4 \\ 3 + 1 &= 4 \\ 4 &= 4 \end{aligned}$$
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="resol-item">
+            <div class="resol-num">Ejercicio 4</div>
+            <div class="despeje">$$\begin{cases} 2x + y = 3 \\ 3x - 2y = 8 \end{cases}$$</div>
+            <div class="elim-grid">
+              <div class="elim-col">
+                <div class="paso-titulo izq">Primera recta</div>
+                $$\begin{aligned} 2x + y &= 3 \\ y &= 3 - 2x \\ y &= \dfrac{3-2x}{1} \end{aligned}$$
+                <span class="formula-pill">$y = 3 - \dfrac{2}{1}x$</span>
+                $$b = 3 \qquad m = \dfrac{\Delta y}{\Delta x} = -\dfrac{2}{1}$$
+              </div>
+              <div class="elim-col">
+                <div class="paso-titulo der">Segunda recta</div>
+                $$\begin{aligned} 3x - 2y &= 8 \\ -2y &= 8 - 3x \\ y &= \dfrac{8-3x}{-2} \end{aligned}$$
+                <span class="formula-pill">$y = -4 + \dfrac{3}{2}x$</span>
+                $$b = -4 \qquad m = \dfrac{\Delta y}{\Delta x} = \dfrac{3}{2}$$
+              </div>
+            </div>
+            <div class="graf-wrap"><svg class="graf-svg" viewBox="0 0 240 284" xmlns="http://www.w3.org/2000/svg" width="240" height="284" role="img" aria-label="Rectas del sistema y su punto de corte"><line x1="10" y1="10" x2="10" y2="274" stroke="#E0C4BC" stroke-width="0.5"/><line x1="32" y1="10" x2="32" y2="274" stroke="#E0C4BC" stroke-width="0.5"/><line x1="54" y1="10" x2="54" y2="274" stroke="#E0C4BC" stroke-width="0.5"/><line x1="76" y1="10" x2="76" y2="274" stroke="#E0C4BC" stroke-width="0.5"/><line x1="98" y1="10" x2="98" y2="274" stroke="#E0C4BC" stroke-width="0.5"/><line x1="120" y1="10" x2="120" y2="274" stroke="#E0C4BC" stroke-width="0.5"/><line x1="142" y1="10" x2="142" y2="274" stroke="#E0C4BC" stroke-width="0.5"/><line x1="164" y1="10" x2="164" y2="274" stroke="#E0C4BC" stroke-width="0.5"/><line x1="186" y1="10" x2="186" y2="274" stroke="#E0C4BC" stroke-width="0.5"/><line x1="208" y1="10" x2="208" y2="274" stroke="#E0C4BC" stroke-width="0.5"/><line x1="230" y1="10" x2="230" y2="274" stroke="#E0C4BC" stroke-width="0.5"/><line x1="10" y1="274" x2="230" y2="274" stroke="#E0C4BC" stroke-width="0.5"/><line x1="10" y1="252" x2="230" y2="252" stroke="#E0C4BC" stroke-width="0.5"/><line x1="10" y1="230" x2="230" y2="230" stroke="#E0C4BC" stroke-width="0.5"/><line x1="10" y1="208" x2="230" y2="208" stroke="#E0C4BC" stroke-width="0.5"/><line x1="10" y1="186" x2="230" y2="186" stroke="#E0C4BC" stroke-width="0.5"/><line x1="10" y1="164" x2="230" y2="164" stroke="#E0C4BC" stroke-width="0.5"/><line x1="10" y1="142" x2="230" y2="142" stroke="#E0C4BC" stroke-width="0.5"/><line x1="10" y1="120" x2="230" y2="120" stroke="#E0C4BC" stroke-width="0.5"/><line x1="10" y1="98" x2="230" y2="98" stroke="#E0C4BC" stroke-width="0.5"/><line x1="10" y1="76" x2="230" y2="76" stroke="#E0C4BC" stroke-width="0.5"/><line x1="10" y1="54" x2="230" y2="54" stroke="#E0C4BC" stroke-width="0.5"/><line x1="10" y1="32" x2="230" y2="32" stroke="#E0C4BC" stroke-width="0.5"/><line x1="10" y1="10" x2="230" y2="10" stroke="#E0C4BC" stroke-width="0.5"/><line x1="10" y1="142" x2="230" y2="142" stroke="#7B5A50" stroke-width="1.2"/><line x1="76" y1="10" x2="76" y2="274" stroke="#7B5A50" stroke-width="1.2"/><line x1="43.0" y1="10.0" x2="175.0" y2="274.0" stroke="#7B2CBF" stroke-width="2.2" stroke-linecap="round"/><line x1="46.7" y1="274.0" x2="222.7" y2="10.0" stroke="#FF00AA" stroke-width="2.2" stroke-linecap="round"/><circle cx="120" cy="164" r="5.5" fill="none" stroke="#1A0828" stroke-width="1.2"/><circle cx="120" cy="164" r="3" fill="#1A0828"/></svg></div>
+            <div style="text-align:center"><span class="resultado-pill">$x = 2$</span><span class="resultado-pill">$y = -1$</span></div>
+            <div class="comprob">
+              <p class="comprob-titulo">Comprobación</p>
+              <div class="elim-grid">
+                <div class="elim-col">
+                  $$\begin{aligned} 2(2) + (-1) &= 3 \\ 4 - 1 &= 3 \\ 3 &= 3 \end{aligned}$$
+                </div>
+                <div class="elim-col">
+                  $$\begin{aligned} 3(2) - 2(-1) &= 8 \\ 6 + 2 &= 8 \\ 8 &= 8 \end{aligned}$$
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ EJERCICIOS EXTRA ══════════ -->
+    <section class="section-block">
+      <div class="sec-toggle" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('show');">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+        </div>
+        <h2>Ejercicios extra</h2>
+        <span class="chev">▼</span>
+      </div>
+      <div class="collapsible">
+        <div class="bloques-2">
+          <div class="mini-card">
+            <div class="mini-card-head">Bloque 1</div>
+            <div class="mini-card-body">
+              <div class="ej-line">$\begin{cases} x + y = 5 \\ x - y = 1 \end{cases}$</div>
+              <div class="ej-line">$\begin{cases} 2x + y = 4 \\ x - y = -1 \end{cases}$</div>
+              <div class="ej-line">$\begin{cases} x + 3y = 6 \\ x - y = -2 \end{cases}$</div>
+              <div class="ej-line">$\begin{cases} -x + 2y = 4 \\ x + y = 5 \end{cases}$</div>
+              <div class="ej-line">$\begin{cases} 2x - y = 3 \\ x + y = 3 \end{cases}$</div>
+            </div>
+          </div>
+          <div class="mini-card">
+            <div class="mini-card-head">Bloque 2</div>
+            <div class="mini-card-body">
+              <div class="ej-line">$\begin{cases} x + 2y = -2 \\ 3x - 2y = -6 \end{cases}$</div>
+              <div class="ej-line">$\begin{cases} -x + y = 4 \\ 2x + y = 1 \end{cases}$</div>
+              <div class="ej-line">$\begin{cases} x - 3y = 3 \\ 2x + 3y = -12 \end{cases}$</div>
+              <div class="ej-line">$\begin{cases} 3x + y = 6 \\ x - 2y = 2 \end{cases}$</div>
+              <div class="ej-line">$\begin{cases} x + y = -1 \\ 2x - y = -5 \end{cases}$</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ NAVEGACIÓN ══════════ -->
+    <div class="topic-nav-btns">
+      <a href="sustitucion.html" class="btn-anterior">← Método de sustitución</a>
+      <a href="index.html" class="btn-siguiente">Índice del curso →</a>
+    </div>
+
+  </main>
+  <script src="../../nav.js"></script>
+  <script src="../../footer.js"></script>
+</body>
+</html>
