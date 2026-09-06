@@ -5,6 +5,24 @@
 
 ---
 
+## 2026-09-05 (3) — Math 2: "Razones trigonométricas" (tema 10)
+
+- **`math/matematicas-2/razones-trigonometricas.html`** (Tema 10) — apunte con seno,
+  coseno y tangente, ejemplo resuelto (arranca con las dos preguntas de Lety: qué lado
+  conoces respecto al ángulo, y qué función usar), 4 ejercicios con resoluciones y 6 extras.
+- **Los triángulos ahora dibujan el ángulo.** El helper creció a `tri2()`: además de los
+  lados, marca con un arquito morado el ángulo del vértice superior o el del inferior
+  derecho, con su etiqueta ($35^\circ$, $\alpha$, $\beta$). Todo a escala real, calculada
+  con la trigonometría del propio ejercicio.
+- **Se corrigió una resolución del LaTeX.** En el ejercicio 1 venían intercambiados $x$ y
+  $y$: respecto al ángulo de $42^\circ$, $x$ es el cateto opuesto, así que
+  $x = 16\,Sen\,42^\circ = 10.70$ y $y = 16\,Cos\,42^\circ = 11.89$, no al revés. Es un
+  desliz aislado — el ejemplo del tema y el ejercicio 2, que son la misma figura, lo hacen
+  bien. Se publicó la correcta con una nota al pie de las respuestas (clase
+  `.nota-correccion`, primera vez que se usa).
+
+---
+
 ## 2026-09-05 (2) — Math 2: "Teorema de Pitágoras" (tema 9)
 
 Lety mandó el LaTeX de Matemáticas 2 y con eso arranca el tramo que faltaba del curso
