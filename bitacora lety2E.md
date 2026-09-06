@@ -5,6 +5,23 @@
 
 ---
 
+## 2026-09-05 (5) — Math 2: "Proporcionalidad y regla de tres" (tema 12)
+
+- **`math/matematicas-2/proporcionalidad.html`** (Tema 12) — apunte con la regla de tres
+  directa y la indirecta, 4 ejemplos, 16 ejercicios en cuatro bloques con todas sus
+  resoluciones y 16 extras. Verifiqué las 20 resoluciones del LaTeX: correctas. Lety
+  **trunca** a dos decimales en vez de redondear (10.93, 26.66, 23.07, 48.38…) y es
+  consistente en todas, así que se respetaron sus valores tal cual.
+- **Caja de regla de tres** (`.rt-box`): el `\fbox` del LaTeX con las dos filas
+  `A → B` / `C → X`. Aquí las flechas sí van: son la notación del método, no una
+  explicación de más.
+- **Los enunciados van sin KaTeX.** El signo de pesos suelto ("$250") haría que
+  auto-render tomara desde ahí hasta el siguiente `$` y se comiera medio párrafo. Van en
+  `<span class="peso">$</span>`, que aísla el nodo de texto; KaTeX queda sólo para las
+  resoluciones. De paso la página carga menos.
+
+---
+
 ## 2026-09-05 (4) — Math 2: "Semejanza de triángulos" (tema 11)
 
 - **`math/matematicas-2/semejanza-triangulos.html`** (Tema 11) — apunte, cuatro ejemplos
