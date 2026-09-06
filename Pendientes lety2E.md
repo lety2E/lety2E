@@ -38,3 +38,22 @@ viva lo usa desde el 5-ago-2026. **Dejarlo por si acaso**; Lety decide después 
 El prototipo está guardado en `Recursos lety2E/formato-apunte-zoom-N1-N5 (segunda-guerra-mundial).html`.
 
 Historia del Cálculo — idea: trabajos de historia de las matemáticas como cierre de cursos; no publicar cuestionario todavía
+
+**Los ejercicios extras del sitio son el banco de sus exámenes** (6-sep-2026) — Lety va a
+armar exámenes con **5 versiones por curso**; los exámenes se hacen y se guardan en el
+proyecto **IEMS** (`4 Materiales y evaluación/`, no se publican). Pero los reactivos salen de
+aquí: cada tema se evalúa con ~3 ejercicios, uno de los que **sí traen respuesta** y dos de
+los **extras** (la mezcla varía según el tema). De ahí que cada tema necesite **al menos 10
+ejercicios extra** para que las 5 versiones no se repitan.
+
+Es **a propósito** que esos ejercicios estén publicados: Lety quiere que los alumnos sepan de
+dónde va a salir el examen, a ver si así lo pasan más fácil. O sea que ampliar los extras no
+es solo para el examen, también es práctica para ellos.
+
+**No hay que adelantarse a crearlos**: ella los va pidiendo tema por tema conforme prepara
+cada examen ("necesito 6 extras más de mcm-mcd"). Del inventario del 6-sep-2026, los que ya se
+sabe que quedan cortos: `ecuaciones` (M1) **no tiene sección de extras**, `algebra-fracciones`
+(M2) tampoco, y `expresiones-algebraicas` y `mcm-mcd` (M1) traen solo 8. Los temas con figuras
+(area-perimetro, ecuaciones-angulos, pitagoras, semejanza-triangulos, razones-trigonometricas,
+proporcionalidad, representacion-fracciones) hay que contarlos a mano y son más laboriosos:
+cada ejercicio nuevo lleva su SVG.

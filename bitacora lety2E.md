@@ -5,6 +5,24 @@
 
 ---
 
+## 2026-09-06 — Los ejercicios extras quedan marcados como el banco de exámenes
+
+Lety va a armar exámenes con **5 versiones por curso**. Se decidió que **los exámenes se
+hacen y se guardan en el proyecto IEMS** (`4 Materiales y evaluación/`), no aquí: el repo
+del sitio es público y ese material no se publica. De este lado solo se leen los reactivos.
+
+Su criterio de evaluación: ~3 ejercicios por tema, uno de los que traen respuesta y dos de
+los **ejercicios extra**. Con 5 versiones sin repetir, cada tema necesita **10 extras como
+mínimo**. Conteo aproximado del banco actual: la mayoría alcanza (todo Math 5 trae 12+;
+`operaciones-fracciones` 40, `operaciones-basicas` 36, `reglas-exponentes` 28), pero
+`ecuaciones` (M1) **no tiene sección de extras**, `algebra-fracciones` (M2) tampoco, y
+`expresiones-algebraicas` y `mcm-mcd` (M1) traen solo 8. Los temas con figuras hay que
+contarlos a mano.
+
+Que los extras estén publicados es **a propósito**: Lety quiere que sus alumnos sepan de
+dónde sale el examen. Los extras nuevos se piden tema por tema, conforme prepare cada examen
+— no se adelantan. Todo el contexto quedó en `Pendientes lety2E.md`.
+
 ## 2026-09-05 (6) — Math 2 completa: temas 13 y 14
 
 Los dos que **no venían en el LaTeX** (su último documento trae dentro "Operaciones con
