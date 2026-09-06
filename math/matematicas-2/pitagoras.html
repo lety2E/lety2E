@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Teorema de Pitágoras — Matemáticas 2 — LetyMath</title>
+  <meta name="description" content="Resolución de triángulos rectángulos: teorema de Pitágoras y razones trigonométricas para encontrar lados y ángulos." />
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../../favicon.ico">
+  <link rel="stylesheet" href="../../style.css">
+  <link rel="stylesheet" href="../../assets/katex/katex.min.css" />
+  <script defer src="../../assets/katex/katex.min.js"></script>
+  <script defer src="../../assets/katex/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body, {
+      delimiters: [
+        {left:'$$', right:'$$', display:true},
+        {left:'$', right:'$', display:false}
+      ]
+    });"></script>
+
+  <style>
+    .topic-tag {
+      display: inline-flex; align-items: center; gap: .35rem;
+      padding: .22rem .75rem; border-radius: 99px;
+      background: var(--accent-light); color: var(--accent);
+      font-size: .78rem; font-weight: 700; letter-spacing: .03em;
+      margin-bottom: .55rem;
+    }
+    .topic-tag::before {
+      content: ''; width: 7px; height: 7px; border-radius: 50%;
+      background: var(--accent); display: inline-block;
+    }
+
+    .section-block { margin-bottom: 2.5rem; }
+    .section-block:last-child { margin-bottom: 0; }
+
+    .sec-head { display: flex; align-items: center; gap: .65rem; margin-bottom: 1.1rem; }
+    .sec-head h2 { margin: 0; font-size: 1.2rem; line-height: 1; }
+    .sec-icon {
+      width: 30px; height: 30px; border-radius: 8px;
+      display: grid; place-items: center; flex-shrink: 0;
+      background: var(--accent);
+    }
+    .sec-icon svg { width: 15px; height: 15px; stroke: #fff; fill: none; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+
+    .sec-toggle {
+      display: flex; align-items: center; gap: .65rem;
+      cursor: pointer; user-select: none;
+      padding: .8rem 0; margin: 0 0 .4rem;
+    }
+    .sec-toggle h2 { margin: 0; font-size: 1.2rem; line-height: 1; }
+    .sec-toggle .chev { margin-left: auto; font-size: .75rem; color: var(--text-3); transition: transform .25s; }
+    .sec-toggle.open .chev { transform: rotate(180deg); }
+    .collapsible { max-height: 0; overflow: hidden; transition: max-height .4s ease, padding .3s ease; padding: 0; }
+    .collapsible.show { max-height: 30000px; padding: .8rem 0; }
+
+    /* Apunte */
+    .apunte-box {
+      background: var(--bg-card); border: 1.5px solid var(--border);
+      border-radius: var(--r-md); padding: 1.4rem 1.5rem;
+    }
+    .apunte-intro { margin: 0 0 1.1rem; line-height: 1.75; color: var(--text-2); font-size: .95rem; }
+    .apunte-row {
+      display: grid; grid-template-columns: auto 1fr; gap: 1.5rem; align-items: center;
+    }
+    @media (max-width: 640px) { .apunte-row { grid-template-columns: 1fr; justify-items: center; } }
+    .apunte-card-title { font-weight: 700; font-size: .85rem; margin-bottom: .5rem; color: var(--course-1); }
+    .formula-line { margin: .35rem 0; }
+
+    /* Pills de formula */
+    .formula-pill {
+      display: inline-block; background: #FFF1A8;
+      padding: .25rem .75rem; border-radius: 99px;
+      font-size: .9rem; font-weight: 600; color: var(--text);
+      margin: .25rem .2rem; border: 1.5px solid #F5DC6A;
+    }
+    .formula-pill.salmon { background: #FFD9B8; border-color: #F5B584; }
+    .resultado-pill {
+      display: inline-block; background: #FFD0E5;
+      padding: .25rem .75rem; border-radius: 99px;
+      font-size: .9rem; font-weight: 700; color: var(--M);
+      margin: .25rem .2rem; border: 1.5px solid #FF8AC0;
+    }
+    .apunte-nota { margin: .6rem 0 0; font-size: .84rem; color: var(--text-3); line-height: 1.6; }
+
+    /* Ejemplo */
+    .ejemplo-section { margin: 2rem 0 2.5rem; }
+    .ejemplo-head { display: flex; align-items: center; gap: .65rem; margin-bottom: 1rem; }
+    .ejemplo-head h3 {
+      margin: 0; font-family: var(--font-display);
+      font-size: 1.2rem; line-height: 1; color: var(--M); font-style: italic;
+    }
+    .ejemplo-block {
+      padding: 1.6rem 1.5rem; background: var(--bg-card);
+      border: 1.5px solid var(--border); border-radius: var(--r-md);
+      color: var(--text);
+    }
+    .ejemplo-row { display: grid; grid-template-columns: auto 1fr; gap: 1.6rem; align-items: start; }
+    @media (max-width: 700px) { .ejemplo-row { grid-template-columns: 1fr; justify-items: center; } }
+    .paso { margin-bottom: 1.1rem; }
+    .paso:last-child { margin-bottom: 0; }
+    .paso-titulo { font-size: .8rem; font-weight: 700; color: var(--course-1); margin-bottom: .25rem; }
+
+    /* Triangulos */
+    .tri-svg { max-width: 100%; height: auto; display: block; }
+    .apunte-row > .tri-svg, .ejemplo-row .tri-wrap { flex-shrink: 0; }
+    .tri-body { display: flex; justify-content: center; align-items: center; padding: .9rem .6rem; }
+    .tri-wrap { display: flex; justify-content: center; }
+    .tri-wrap .tri-svg { max-width: 210px; }
+
+    /* Mini card (bloque) */
+    .mini-card {
+      background: var(--bg-card); border: 1.5px solid var(--border);
+      border-radius: var(--r-md); overflow: hidden;
+    }
+    .mini-card-head {
+      padding: .4rem .8rem; background: var(--course-1);
+      font-family: var(--font-display); font-size: .85rem; color: #fff; font-weight: 700;
+    }
+    .mini-card-body { padding: .8rem 1rem; font-size: .9rem; line-height: 1.6; color: var(--text); }
+
+    /* Grid de bloques */
+    .bloques-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2rem; }
+    @media (max-width: 700px) { .bloques-2 { grid-template-columns: 1fr; } }
+    .bloques-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
+    @media (max-width: 980px) { .bloques-3 { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 560px) { .bloques-3 { grid-template-columns: 1fr; } }
+
+    /* Resoluciones */
+    .resol-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2rem; }
+    @media (max-width: 760px) { .resol-grid { grid-template-columns: 1fr; } }
+    .resol-item {
+      background: var(--bg-card); border: 1.5px solid var(--border);
+      border-radius: var(--r-md); padding: .9rem 1.1rem;
+    }
+    .resol-num {
+      font-size: .75rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .06em; color: var(--course-1); margin-bottom: .1rem;
+    }
+    .extras-titulo {
+      font-family: var(--font-display); font-size: 1rem; font-style: italic;
+      color: var(--M); margin: 1.4rem 0 .8rem;
+    }
+    .extras-titulo:first-child { margin-top: 0; }
+
+    /* Navegacion */
+    .topic-nav-btns {
+      display: flex; justify-content: space-between; gap: 1rem;
+      margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border);
+    }
+    .btn-anterior, .btn-siguiente {
+      display: inline-flex; align-items: center; gap: .5rem;
+      padding: .65rem 1.4rem; border-radius: 99px;
+      font-weight: 700; font-size: .9rem; transition: background .2s, transform .18s;
+    }
+    .btn-anterior { background: transparent; color: var(--accent); border: 2px solid var(--accent); }
+    .btn-anterior:hover { background: var(--accent-light); transform: translateX(-3px); }
+    .btn-siguiente { background: var(--accent); color: #fff; }
+    .btn-siguiente:hover { background: var(--M); color: #fff; transform: translateX(3px); }
+  </style>
+</head>
+<body data-section="math">
+  <main class="topic-content">
+
+    <header class="topic-header">
+      <p class="breadcrumb">
+        <a href="../index.html">Inicio</a> ›
+        <a href="index.html">Matemáticas 2</a> ›
+        Teorema de Pitágoras
+      </p>
+      <div class="topic-tag">Matemáticas 2 · Tema 9</div>
+      <h1>Teorema de Pitágoras</h1>
+    </header>
+
+    <!-- ══════════ APUNTES ══════════ -->
+    <section class="section-block">
+      <div class="sec-head">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+        </div>
+        <h2>Apuntes</h2>
+      </div>
+      <div class="apunte-box">
+        <p class="apunte-intro">
+          En todo triángulo rectángulo, el cuadrado de la hipotenusa es igual a la suma de
+          los cuadrados de los catetos. Esta relación nos permite encontrar un lado
+          desconocido si conocemos los otros dos.
+        </p>
+        <div class="apunte-row">
+          <svg viewBox="0 0 140 110" width="140" height="110" xmlns="http://www.w3.org/2000/svg" class="tri-svg" style="max-width:150px" role="img" aria-label="Triángulo rectángulo con catetos a y b, hipotenusa c">
+            <polygon points="20,90 120,90 20,20" fill="#FF00AA" fill-opacity="0.12" stroke="#FF00AA" stroke-width="2" stroke-linejoin="round"/>
+            <polyline points="20,81 29,81 29,90" fill="none" stroke="#7B5A50" stroke-width="1"/>
+            <text x="13" y="59" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" font-style="italic" text-anchor="end">a</text>
+            <text x="70" y="105" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" font-style="italic" text-anchor="middle">b</text>
+            <text x="78" y="50" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" font-style="italic" text-anchor="middle">c</text>
+          </svg>
+          <div>
+            <div class="apunte-card-title">Teorema de Pitágoras</div>
+            <div class="formula-line"><span class="formula-pill">$c^2 = a^2 + b^2$</span></div>
+            <div class="formula-line">
+              <span class="formula-pill salmon">$c = \sqrt{a^2 + b^2}$</span>
+              <span class="formula-pill salmon">$a = \sqrt{c^2 - b^2}$</span>
+              <span class="formula-pill salmon">$b = \sqrt{c^2 - a^2}$</span>
+            </div>
+
+            <div class="apunte-card-title" style="margin-top:1rem">Razones trigonométricas</div>
+            <div class="formula-line">
+              <span class="formula-pill">$\sin\theta = \dfrac{Co}{hip}$</span>
+              <span class="formula-pill">$\cos\theta = \dfrac{Ca}{hip}$</span>
+              <span class="formula-pill">$\tan\theta = \dfrac{Co}{Ca}$</span>
+            </div>
+            <p class="apunte-nota">Estas razones las utilizaremos para encontrar el valor del ángulo.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ EJEMPLO ══════════ -->
+    <section class="section-block ejemplo-section">
+      <div class="ejemplo-head">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        </div>
+        <h3>Ejemplo</h3>
+      </div>
+      <div class="ejemplo-block">
+        <div class="ejemplo-row">
+          <div class="tri-wrap"><svg viewBox="0 0 209 166" width="209" height="166" xmlns="http://www.w3.org/2000/svg" class="tri-svg" role="img" aria-label="Triángulo rectángulo con cateto 10, base z e hipotenusa 15">
+<polygon points="30.0,142.0 175.3,142.0 30.0,12.0" fill="#FF00AA" fill-opacity="0.12" stroke="#FF00AA" stroke-width="2" stroke-linejoin="round"/>
+<polyline points="30.0,133.0 39.0,133.0 39.0,142.0" fill="none" stroke="#7B5A50" stroke-width="1"/>
+<text x="22.0" y="81.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="end">10</text>
+<text x="102.7" y="159.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" font-style="italic" text-anchor="middle">z</text>
+<text x="118.7" y="73.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="start">15</text>
+<text x="39.0" y="32.0" font-family="DM Sans, sans-serif" font-size="13" fill="#7B2CBF" text-anchor="middle">&#945;</text>
+<text x="159.3" y="135.0" font-family="DM Sans, sans-serif" font-size="13" fill="#7B2CBF" text-anchor="middle">&#946;</text>
+</svg></div>
+          <div>
+            <div class="paso">
+              <div class="paso-titulo">1 · Cálculo del lado $z$</div>
+              $$\begin{aligned}
+                z &= \sqrt{(15)^2 - (10)^2} \\
+                z &= \sqrt{225 - 100} \\
+                z &= \sqrt{125}
+              \end{aligned}$$
+              <div style="text-align:center"><span class="resultado-pill">$z \approx 11.18$</span></div>
+            </div>
+            <div class="paso">
+              <div class="paso-titulo">2 · Cálculo del ángulo $\alpha$</div>
+              $$\begin{aligned}
+                \cos\alpha &= \frac{Ca}{hip} = \frac{10}{15} \\
+                \cos\alpha &= 0.66
+              \end{aligned}$$
+              <p class="apunte-nota">Buscar en tablas o en la calculadora a qué ángulo corresponde $\cos\alpha = 0.66$.</p>
+              <div style="text-align:center"><span class="resultado-pill">$\alpha = 48^\circ$</span></div>
+            </div>
+            <div class="paso">
+              <div class="paso-titulo">3 · Cálculo del ángulo $\beta$</div>
+              $$\begin{aligned}
+                90 + 48 + \beta &= 180 \\
+                \beta &= 180 - 90 - 48
+              \end{aligned}$$
+              <div style="text-align:center"><span class="resultado-pill">$\beta = 42^\circ$</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ EJERCICIOS ══════════ -->
+    <section class="section-block">
+      <div class="sec-head">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+        </div>
+        <h2>Ejercicios</h2>
+      </div>
+      <p style="margin:0 0 1rem; line-height:1.75; color:var(--text-2); font-size:.95rem;">
+        Resuelve cada triángulo: encuentra el lado que falta y los dos ángulos agudos.
+      </p>
+      <div class="bloques-3">
+        <div class="mini-card">
+          <div class="mini-card-head">1</div>
+          <div class="mini-card-body tri-body">
+            <svg viewBox="0 0 214 123" width="214" height="123" xmlns="http://www.w3.org/2000/svg" class="tri-svg" role="img" aria-label="Triángulo rectángulo con cateto 8, base x e hipotenusa 16">
+            <polygon points="30.0,98.6 180.0,98.6 30.0,12.0" fill="#FF00AA" fill-opacity="0.12" stroke="#FF00AA" stroke-width="2" stroke-linejoin="round"/>
+            <polyline points="30.0,89.6 39.0,89.6 39.0,98.6" fill="none" stroke="#7B5A50" stroke-width="1"/>
+            <text x="22.0" y="59.3" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="end">8</text>
+            <text x="105.0" y="115.6" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" font-style="italic" text-anchor="middle">x</text>
+            <text x="121.0" y="51.3" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="start">16</text>
+            <text x="39.0" y="32.0" font-family="DM Sans, sans-serif" font-size="13" fill="#7B2CBF" text-anchor="middle">&#945;</text>
+            <text x="164.0" y="91.6" font-family="DM Sans, sans-serif" font-size="13" fill="#7B2CBF" text-anchor="middle">&#946;</text>
+            </svg>
+          </div>
+        </div>
+        <div class="mini-card">
+          <div class="mini-card-head">2</div>
+          <div class="mini-card-body tri-body">
+            <svg viewBox="0 0 214 111" width="214" height="111" xmlns="http://www.w3.org/2000/svg" class="tri-svg" role="img" aria-label="Triángulo rectángulo con cateto 4, base 8 e hipotenusa y">
+            <polygon points="30.0,87.0 180.0,87.0 30.0,12.0" fill="#FF00AA" fill-opacity="0.12" stroke="#FF00AA" stroke-width="2" stroke-linejoin="round"/>
+            <polyline points="30.0,78.0 39.0,78.0 39.0,87.0" fill="none" stroke="#7B5A50" stroke-width="1"/>
+            <text x="22.0" y="53.5" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="end">4</text>
+            <text x="105.0" y="104.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="middle">8</text>
+            <text x="121.0" y="45.5" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" font-style="italic" text-anchor="start">y</text>
+            <text x="39.0" y="32.0" font-family="DM Sans, sans-serif" font-size="13" fill="#7B2CBF" text-anchor="middle">&#945;</text>
+            <text x="164.0" y="80.0" font-family="DM Sans, sans-serif" font-size="13" fill="#7B2CBF" text-anchor="middle">&#946;</text>
+            </svg>
+          </div>
+        </div>
+        <div class="mini-card">
+          <div class="mini-card-head">3</div>
+          <div class="mini-card-body tri-body">
+            <svg viewBox="0 0 137 146" width="137" height="146" xmlns="http://www.w3.org/2000/svg" class="tri-svg" role="img" aria-label="Triángulo rectángulo con cateto a, base 5 e hipotenusa 9">
+            <polygon points="30.0,122.0 103.5,122.0 30.0,12.0" fill="#FF00AA" fill-opacity="0.12" stroke="#FF00AA" stroke-width="2" stroke-linejoin="round"/>
+            <polyline points="30.0,113.0 39.0,113.0 39.0,122.0" fill="none" stroke="#7B5A50" stroke-width="1"/>
+            <text x="22.0" y="71.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" font-style="italic" text-anchor="end">a</text>
+            <text x="66.7" y="139.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="middle">5</text>
+            <text x="82.7" y="63.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="start">9</text>
+            <text x="39.0" y="32.0" font-family="DM Sans, sans-serif" font-size="13" fill="#7B2CBF" text-anchor="middle">&#945;</text>
+            <text x="87.5" y="115.0" font-family="DM Sans, sans-serif" font-size="13" fill="#7B2CBF" text-anchor="middle">&#946;</text>
+            </svg>
+          </div>
+        </div>
+        <div class="mini-card">
+          <div class="mini-card-head">4</div>
+          <div class="mini-card-body tri-body">
+            <svg viewBox="0 0 101 146" width="101" height="146" xmlns="http://www.w3.org/2000/svg" class="tri-svg" role="img" aria-label="Triángulo rectángulo con cateto 12, base 4 e hipotenusa y">
+            <polygon points="30.0,122.0 66.7,122.0 30.0,12.0" fill="#FF00AA" fill-opacity="0.12" stroke="#FF00AA" stroke-width="2" stroke-linejoin="round"/>
+            <polyline points="30.0,113.0 39.0,113.0 39.0,122.0" fill="none" stroke="#7B5A50" stroke-width="1"/>
+            <text x="22.0" y="71.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="end">12</text>
+            <text x="48.3" y="139.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="middle">4</text>
+            <text x="64.3" y="63.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" font-style="italic" text-anchor="start">y</text>
+            <text x="39.0" y="32.0" font-family="DM Sans, sans-serif" font-size="13" fill="#7B2CBF" text-anchor="middle">&#945;</text>
+            <text x="50.7" y="115.0" font-family="DM Sans, sans-serif" font-size="13" fill="#7B2CBF" text-anchor="middle">&#946;</text>
+            </svg>
+          </div>
+        </div>
+        <div class="mini-card">
+          <div class="mini-card-head">5</div>
+          <div class="mini-card-body tri-body">
+            <svg viewBox="0 0 214 112" width="214" height="112" xmlns="http://www.w3.org/2000/svg" class="tri-svg" role="img" aria-label="Triángulo rectángulo con cateto 9, base x e hipotenusa 20">
+            <polygon points="30.0,87.6 180.0,87.6 30.0,12.0" fill="#FF00AA" fill-opacity="0.12" stroke="#FF00AA" stroke-width="2" stroke-linejoin="round"/>
+            <polyline points="30.0,78.6 39.0,78.6 39.0,87.6" fill="none" stroke="#7B5A50" stroke-width="1"/>
+            <text x="22.0" y="53.8" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="end">9</text>
+            <text x="105.0" y="104.6" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" font-style="italic" text-anchor="middle">x</text>
+            <text x="121.0" y="45.8" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="start">20</text>
+            <text x="39.0" y="32.0" font-family="DM Sans, sans-serif" font-size="13" fill="#7B2CBF" text-anchor="middle">&#945;</text>
+            <text x="164.0" y="80.6" font-family="DM Sans, sans-serif" font-size="13" fill="#7B2CBF" text-anchor="middle">&#946;</text>
+            </svg>
+          </div>
+        </div>
+        <div class="mini-card">
+          <div class="mini-card-head">6</div>
+          <div class="mini-card-body tri-body">
+            <svg viewBox="0 0 162 146" width="162" height="146" xmlns="http://www.w3.org/2000/svg" class="tri-svg" role="img" aria-label="Triángulo rectángulo con cateto y, base 6 e hipotenusa 9">
+            <polygon points="30.0,122.0 128.4,122.0 30.0,12.0" fill="#FF00AA" fill-opacity="0.12" stroke="#FF00AA" stroke-width="2" stroke-linejoin="round"/>
+            <polyline points="30.0,113.0 39.0,113.0 39.0,122.0" fill="none" stroke="#7B5A50" stroke-width="1"/>
+            <text x="22.0" y="71.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" font-style="italic" text-anchor="end">y</text>
+            <text x="79.2" y="139.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="middle">6</text>
+            <text x="95.2" y="63.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="start">9</text>
+            <text x="39.0" y="32.0" font-family="DM Sans, sans-serif" font-size="13" fill="#7B2CBF" text-anchor="middle">&#945;</text>
+            <text x="112.4" y="115.0" font-family="DM Sans, sans-serif" font-size="13" fill="#7B2CBF" text-anchor="middle">&#946;</text>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ RESPUESTAS ══════════ -->
+    <section class="section-block">
+      <div class="sec-toggle" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('show');">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <h2>Respuestas</h2>
+        <span class="chev">▼</span>
+      </div>
+      <div class="collapsible">
+        <div class="resol-grid">
+          <div class="resol-item">
+            <div class="resol-num">Ejercicio 1</div>
+            $$\begin{aligned}
+                x &= \sqrt{16^2 - 8^2} \\
+                x &= \sqrt{256 - 64} \\
+                x &= \sqrt{192} \\
+                x &\approx \mathbf{13.86} \\[.35em]
+                \cos\alpha &= \frac{8}{16} = 0.5 \\
+                \alpha &= \mathbf{60^\circ} \\[.35em]
+                \beta &= 180 - 90 - 60 \\
+                \beta &= \mathbf{30^\circ}
+            \end{aligned}$$
+          </div>
+          <div class="resol-item">
+            <div class="resol-num">Ejercicio 2</div>
+            $$\begin{aligned}
+                y &= \sqrt{4^2 + 8^2} \\
+                y &= \sqrt{16 + 64} \\
+                y &= \sqrt{80} \\
+                y &\approx \mathbf{8.94} \\[.35em]
+                \cos\alpha &= \frac{4}{8.94} = 0.447 \\
+                \alpha &\approx \mathbf{63.43^\circ} \\[.35em]
+                \beta &= 180 - 90 - 63.43 \\
+                \beta &\approx \mathbf{26.57^\circ}
+            \end{aligned}$$
+          </div>
+          <div class="resol-item">
+            <div class="resol-num">Ejercicio 3</div>
+            $$\begin{aligned}
+                a &= \sqrt{9^2 - 5^2} \\
+                a &= \sqrt{81 - 25} \\
+                a &= \sqrt{56} \\
+                a &\approx \mathbf{7.48} \\[.35em]
+                \cos\alpha &= \frac{7.48}{9} = 0.831 \\
+                \alpha &\approx \mathbf{33.79^\circ} \\[.35em]
+                \beta &= 180 - 90 - 33.79 \\
+                \beta &\approx \mathbf{56.21^\circ}
+            \end{aligned}$$
+          </div>
+          <div class="resol-item">
+            <div class="resol-num">Ejercicio 4</div>
+            $$\begin{aligned}
+                y &= \sqrt{12^2 + 4^2} \\
+                y &= \sqrt{144 + 16} \\
+                y &= \sqrt{160} \\
+                y &\approx \mathbf{12.65} \\[.35em]
+                \cos\alpha &= \frac{12}{12.65} = 0.948 \\
+                \alpha &\approx \mathbf{18.43^\circ} \\[.35em]
+                \beta &= 180 - 90 - 18.43 \\
+                \beta &\approx \mathbf{71.57^\circ}
+            \end{aligned}$$
+          </div>
+          <div class="resol-item">
+            <div class="resol-num">Ejercicio 5</div>
+            $$\begin{aligned}
+                x &= \sqrt{20^2 - 9^2} \\
+                x &= \sqrt{400 - 81} \\
+                x &= \sqrt{319} \\
+                x &\approx \mathbf{17.86} \\[.35em]
+                \cos\alpha &= \frac{9}{20} = 0.45 \\
+                \alpha &\approx \mathbf{63.26^\circ} \\[.35em]
+                \beta &= 180 - 90 - 63.26 \\
+                \beta &\approx \mathbf{26.74^\circ}
+            \end{aligned}$$
+          </div>
+          <div class="resol-item">
+            <div class="resol-num">Ejercicio 6</div>
+            $$\begin{aligned}
+                y &= \sqrt{9^2 - 6^2} \\
+                y &= \sqrt{81 - 36} \\
+                y &= \sqrt{45} \\
+                y &\approx \mathbf{6.71} \\[.35em]
+                \cos\beta &= \frac{6}{9} = 0.666 \\
+                \beta &\approx \mathbf{48.19^\circ} \\[.35em]
+                \alpha &= 180 - 90 - 48.19 \\
+                \alpha &\approx \mathbf{41.81^\circ}
+            \end{aligned}$$
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ EJERCICIOS EXTRA ══════════ -->
+    <section class="section-block">
+      <div class="sec-toggle" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('show');">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+        </div>
+        <h2>Ejercicios extra</h2>
+        <span class="chev">▼</span>
+      </div>
+      <div class="collapsible">
+        <p class="extras-titulo">Bloque 1</p>
+        <div class="bloques-3">
+        <div class="mini-card">
+          <div class="mini-card-head">1</div>
+          <div class="mini-card-body tri-body">
+            <svg viewBox="0 0 194 74" width="194" height="74" xmlns="http://www.w3.org/2000/svg" class="tri-svg" role="img" aria-label="Triángulo rectángulo con cateto 7, base x e hipotenusa 25">
+            <polygon points="30.0,49.9 160.0,49.9 30.0,12.0" fill="#FF00AA" fill-opacity="0.12" stroke="#FF00AA" stroke-width="2" stroke-linejoin="round"/>
+            <polyline points="30.0,40.9 39.0,40.9 39.0,49.9" fill="none" stroke="#7B5A50" stroke-width="1"/>
+            <text x="22.0" y="35.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="end">7</text>
+            <text x="95.0" y="66.9" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" font-style="italic" text-anchor="middle">x</text>
+            <text x="111.0" y="27.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="start">25</text>
+            <text x="39.0" y="32.0" font-family="DM Sans, sans-serif" font-size="13" fill="#7B2CBF" text-anchor="middle">&#945;</text>
+            </svg>
+          </div>
+        </div>
+        <div class="mini-card">
+          <div class="mini-card-head">2</div>
+          <div class="mini-card-body tri-body">
+            <svg viewBox="0 0 194 90" width="194" height="90" xmlns="http://www.w3.org/2000/svg" class="tri-svg" role="img" aria-label="Triángulo rectángulo con cateto 5, base 12 e hipotenusa y">
+            <polygon points="30.0,66.2 160.0,66.2 30.0,12.0" fill="#FF00AA" fill-opacity="0.12" stroke="#FF00AA" stroke-width="2" stroke-linejoin="round"/>
+            <polyline points="30.0,57.2 39.0,57.2 39.0,66.2" fill="none" stroke="#7B5A50" stroke-width="1"/>
+            <text x="22.0" y="43.1" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="end">5</text>
+            <text x="95.0" y="83.2" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="middle">12</text>
+            <text x="111.0" y="35.1" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" font-style="italic" text-anchor="start">y</text>
+            <text x="144.0" y="59.2" font-family="DM Sans, sans-serif" font-size="13" fill="#7B2CBF" text-anchor="middle">&#946;</text>
+            </svg>
+          </div>
+        </div>
+        <div class="mini-card">
+          <div class="mini-card-head">3</div>
+          <div class="mini-card-body tri-body">
+            <svg viewBox="0 0 194 90" width="194" height="90" xmlns="http://www.w3.org/2000/svg" class="tri-svg" role="img" aria-label="Triángulo rectángulo con cateto a, base 12 e hipotenusa 13">
+            <polygon points="30.0,66.2 160.0,66.2 30.0,12.0" fill="#FF00AA" fill-opacity="0.12" stroke="#FF00AA" stroke-width="2" stroke-linejoin="round"/>
+            <polyline points="30.0,57.2 39.0,57.2 39.0,66.2" fill="none" stroke="#7B5A50" stroke-width="1"/>
+            <text x="22.0" y="43.1" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" font-style="italic" text-anchor="end">a</text>
+            <text x="95.0" y="83.2" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="middle">12</text>
+            <text x="111.0" y="35.1" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="start">13</text>
+            </svg>
+          </div>
+        </div>
+        <div class="mini-card">
+          <div class="mini-card-head">4</div>
+          <div class="mini-card-body tri-body">
+            <svg viewBox="0 0 115 131" width="115" height="131" xmlns="http://www.w3.org/2000/svg" class="tri-svg" role="img" aria-label="Triángulo rectángulo con cateto 15, base x e hipotenusa 17">
+            <polygon points="30.0,107.0 80.7,107.0 30.0,12.0" fill="#FF00AA" fill-opacity="0.12" stroke="#FF00AA" stroke-width="2" stroke-linejoin="round"/>
+            <polyline points="30.0,98.0 39.0,98.0 39.0,107.0" fill="none" stroke="#7B5A50" stroke-width="1"/>
+            <text x="22.0" y="63.5" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="end">15</text>
+            <text x="55.3" y="124.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" font-style="italic" text-anchor="middle">x</text>
+            <text x="71.3" y="55.5" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="start">17</text>
+            </svg>
+          </div>
+        </div>
+        <div class="mini-card">
+          <div class="mini-card-head">5</div>
+          <div class="mini-card-body tri-body">
+            <svg viewBox="0 0 164 131" width="164" height="131" xmlns="http://www.w3.org/2000/svg" class="tri-svg" role="img" aria-label="Triángulo rectángulo con cateto 20, base 21 e hipotenusa h">
+            <polygon points="30.0,107.0 129.8,107.0 30.0,12.0" fill="#FF00AA" fill-opacity="0.12" stroke="#FF00AA" stroke-width="2" stroke-linejoin="round"/>
+            <polyline points="30.0,98.0 39.0,98.0 39.0,107.0" fill="none" stroke="#7B5A50" stroke-width="1"/>
+            <text x="22.0" y="63.5" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="end">20</text>
+            <text x="79.9" y="124.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="middle">21</text>
+            <text x="95.9" y="55.5" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" font-style="italic" text-anchor="start">h</text>
+            </svg>
+          </div>
+        </div>
+        <div class="mini-card">
+          <div class="mini-card-head">6</div>
+          <div class="mini-card-body tri-body">
+            <svg viewBox="0 0 191 131" width="191" height="131" xmlns="http://www.w3.org/2000/svg" class="tri-svg" role="img" aria-label="Triángulo rectángulo con cateto Ca, base 8 e hipotenusa 10">
+            <polygon points="30.0,107.0 156.7,107.0 30.0,12.0" fill="#FF00AA" fill-opacity="0.12" stroke="#FF00AA" stroke-width="2" stroke-linejoin="round"/>
+            <polyline points="30.0,98.0 39.0,98.0 39.0,107.0" fill="none" stroke="#7B5A50" stroke-width="1"/>
+            <text x="22.0" y="63.5" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" font-style="italic" text-anchor="end">Ca</text>
+            <text x="93.3" y="124.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="middle">8</text>
+            <text x="109.3" y="55.5" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="start">10</text>
+            <text x="39.0" y="32.0" font-family="DM Sans, sans-serif" font-size="13" fill="#7B2CBF" text-anchor="middle">&#945;</text>
+            </svg>
+          </div>
+        </div>
+        </div>
+        <p class="extras-titulo">Bloque 2</p>
+        <div class="bloques-3">
+        <div class="mini-card">
+          <div class="mini-card-head">7</div>
+          <div class="mini-card-body tri-body">
+            <svg viewBox="0 0 191 131" width="191" height="131" xmlns="http://www.w3.org/2000/svg" class="tri-svg" role="img" aria-label="Triángulo rectángulo con cateto 9, base z e hipotenusa 15">
+            <polygon points="30.0,107.0 156.7,107.0 30.0,12.0" fill="#FF00AA" fill-opacity="0.12" stroke="#FF00AA" stroke-width="2" stroke-linejoin="round"/>
+            <polyline points="30.0,98.0 39.0,98.0 39.0,107.0" fill="none" stroke="#7B5A50" stroke-width="1"/>
+            <text x="22.0" y="63.5" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="end">9</text>
+            <text x="93.3" y="124.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" font-style="italic" text-anchor="middle">z</text>
+            <text x="109.3" y="55.5" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="start">15</text>
+            </svg>
+          </div>
+        </div>
+        <div class="mini-card">
+          <div class="mini-card-head">8</div>
+          <div class="mini-card-body tri-body">
+            <svg viewBox="0 0 194 111" width="194" height="111" xmlns="http://www.w3.org/2000/svg" class="tri-svg" role="img" aria-label="Triángulo rectángulo con cateto 6, base Co e hipotenusa 12">
+            <polygon points="30.0,87.1 160.0,87.1 30.0,12.0" fill="#FF00AA" fill-opacity="0.12" stroke="#FF00AA" stroke-width="2" stroke-linejoin="round"/>
+            <polyline points="30.0,78.1 39.0,78.1 39.0,87.1" fill="none" stroke="#7B5A50" stroke-width="1"/>
+            <text x="22.0" y="53.5" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="end">6</text>
+            <text x="95.0" y="104.1" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" font-style="italic" text-anchor="middle">Co</text>
+            <text x="111.0" y="45.5" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="start">12</text>
+            <text x="144.0" y="80.1" font-family="DM Sans, sans-serif" font-size="13" fill="#7B2CBF" text-anchor="middle">&#946;</text>
+            </svg>
+          </div>
+        </div>
+        <div class="mini-card">
+          <div class="mini-card-head">9</div>
+          <div class="mini-card-body tri-body">
+            <svg viewBox="0 0 159 131" width="159" height="131" xmlns="http://www.w3.org/2000/svg" class="tri-svg" role="img" aria-label="Triángulo rectángulo con cateto 1, base 1 e hipotenusa x">
+            <polygon points="30.0,107.0 125.0,107.0 30.0,12.0" fill="#FF00AA" fill-opacity="0.12" stroke="#FF00AA" stroke-width="2" stroke-linejoin="round"/>
+            <polyline points="30.0,98.0 39.0,98.0 39.0,107.0" fill="none" stroke="#7B5A50" stroke-width="1"/>
+            <text x="22.0" y="63.5" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="end">1</text>
+            <text x="77.5" y="124.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="middle">1</text>
+            <text x="93.5" y="55.5" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" font-style="italic" text-anchor="start">x</text>
+            </svg>
+          </div>
+        </div>
+        <div class="mini-card">
+          <div class="mini-card-head">10</div>
+          <div class="mini-card-body tri-body">
+            <svg viewBox="0 0 191 131" width="191" height="131" xmlns="http://www.w3.org/2000/svg" class="tri-svg" role="img" aria-label="Triángulo rectángulo con cateto 6, base y e hipotenusa 10">
+            <polygon points="30.0,107.0 156.7,107.0 30.0,12.0" fill="#FF00AA" fill-opacity="0.12" stroke="#FF00AA" stroke-width="2" stroke-linejoin="round"/>
+            <polyline points="30.0,98.0 39.0,98.0 39.0,107.0" fill="none" stroke="#7B5A50" stroke-width="1"/>
+            <text x="22.0" y="63.5" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="end">6</text>
+            <text x="93.3" y="124.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" font-style="italic" text-anchor="middle">y</text>
+            <text x="109.3" y="55.5" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="start">10</text>
+            </svg>
+          </div>
+        </div>
+        <div class="mini-card">
+          <div class="mini-card-head">11</div>
+          <div class="mini-card-body tri-body">
+            <svg viewBox="0 0 194 60" width="194" height="60" xmlns="http://www.w3.org/2000/svg" class="tri-svg" role="img" aria-label="Triángulo rectángulo con cateto 11, base 60 e hipotenusa hip">
+            <polygon points="30.0,35.8 160.0,35.8 30.0,12.0" fill="#FF00AA" fill-opacity="0.12" stroke="#FF00AA" stroke-width="2" stroke-linejoin="round"/>
+            <polyline points="30.0,26.8 39.0,26.8 39.0,35.8" fill="none" stroke="#7B5A50" stroke-width="1"/>
+            <text x="22.0" y="27.9" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="end">11</text>
+            <text x="95.0" y="52.8" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="middle">60</text>
+            <text x="111.0" y="19.9" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" font-style="italic" text-anchor="start">hip</text>
+            </svg>
+          </div>
+        </div>
+        <div class="mini-card">
+          <div class="mini-card-head">12</div>
+          <div class="mini-card-body tri-body">
+            <svg viewBox="0 0 104 131" width="104" height="131" xmlns="http://www.w3.org/2000/svg" class="tri-svg" role="img" aria-label="Triángulo rectángulo con cateto Ca, base 5 e hipotenusa 13">
+            <polygon points="30.0,107.0 69.6,107.0 30.0,12.0" fill="#FF00AA" fill-opacity="0.12" stroke="#FF00AA" stroke-width="2" stroke-linejoin="round"/>
+            <polyline points="30.0,98.0 39.0,98.0 39.0,107.0" fill="none" stroke="#7B5A50" stroke-width="1"/>
+            <text x="22.0" y="63.5" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" font-style="italic" text-anchor="end">Ca</text>
+            <text x="49.8" y="124.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="middle">5</text>
+            <text x="65.8" y="55.5" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="start">13</text>
+            <text x="39.0" y="32.0" font-family="DM Sans, sans-serif" font-size="13" fill="#7B2CBF" text-anchor="middle">&#945;</text>
+            </svg>
+          </div>
+        </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ NAVEGACIÓN ══════════ -->
+    <div class="topic-nav-btns">
+      <a href="pendiente-ordenada.html" class="btn-anterior">← Pendiente y ordenada</a>
+    </div>
+
+  </main>
+  <script src="../../nav.js"></script>
+  <script src="../../footer.js"></script>
+</body>
+</html>

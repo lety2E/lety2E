@@ -5,6 +5,38 @@
 
 ---
 
+## 2026-09-05 (2) — Math 2: "Teorema de Pitágoras" (tema 9)
+
+Lety mandó el LaTeX de Matemáticas 2 y con eso arranca el tramo que faltaba del curso
+(temas 9 a 14). El primero ya está.
+
+- **`math/matematicas-2/pitagoras.html`** (Tema 9) — mini apunte con el teorema y las tres
+  razones trigonométricas, un ejemplo resuelto en tres pasos, 6 ejercicios, sus 6
+  resoluciones y 12 extras en dos bloques. Verifiqué la aritmética de las seis
+  resoluciones del LaTeX: correctas.
+- **Los 20 triángulos son SVG inline generados a escala real** con un helper de Python
+  (`tri.py` en el scratchpad de la sesión): ángulo recto abajo-izquierda, cateto vertical
+  a la izquierda, hipotenusa de arriba-izquierda a abajo-derecha — la misma convención que
+  las hojas de Lety. Relleno magenta 12 % y contorno sólido, como en `area-perimetro.html`.
+- **Ojo con esto:** la primera versión salió con los triángulos invisibles. Un `<svg>` sin
+  atributos `width`/`height` colapsa a 0×0 dentro de un grid o un flex — está advertido en
+  la guía, y aun así pasó. El helper ahora los escribe siempre.
+- **Las resoluciones van con un paso por renglón**, como en el LaTeX. La primera versión
+  juntaba varios pasos en una línea y en 375 px la ecuación se salía del viewport (con
+  `white-space: nowrap` no se parte). Un paso por renglón lo resuelve de raíz.
+
+**El LaTeX de Math 2 trae dos duplicados** (header que no corresponde al contenido):
+el documento del tema 1 tiene adentro el de jerarquía, y el último —encabezado
+"13 problemas con fracciones / 14 matematica griega"— trae "Operaciones con Fracciones".
+O sea que de ahí no salen los temas 13 ni 14. El 14 (historia griega) es texto puro y se
+puede tomar de letymath.com; el 13 sólo tiene la captura.
+
+Aparte: los ejercicios de Pitágoras en la captura eran 8, y dos estaban mal —el séptimo
+daba los tres lados (8, 15, 5) y además era imposible. El LaTeX trae sólo 6 y ésos son los
+que se publicaron.
+
+---
+
 ## 2026-09-05 — Math 1 completa: se sube "Sistemas de numeración"
 
 Lety pasó el doc LaTeX de Matemáticas 1 (temas 2 a 13) para ver si faltaba algo. Comparado
