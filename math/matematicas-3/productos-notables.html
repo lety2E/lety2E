@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Fórmula general — Matemáticas 3 — LetyMath</title>
-  <meta name="description" content="La fórmula general para resolver ecuaciones cuadráticas completas, con el caso en que el discriminante es negativo." />
+  <title>Productos notables — Matemáticas 3 — LetyMath</title>
+  <meta name="description" content="Las cuatro reglas de producto: binomios con término común, binomio al cuadrado, al cubo y binomios conjugados." />
   <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
   <link rel="icon" href="../../favicon.ico">
   <link rel="stylesheet" href="../../style.css">
@@ -163,6 +163,7 @@
     .graf-svg { max-width: 240px; max-height: 380px; height: auto; }
     /* las pills con raíz o fracción necesitan más alto */
     .resultado-pill { padding: .4rem .8rem; line-height: 1.5; }
+    .sep-regla { border: none; border-top: 1px solid var(--border-s); margin: 1.2rem 0; }
   </style>
 </head>
 <body data-section="math">
@@ -172,10 +173,10 @@
       <p class="breadcrumb">
         <a href="../index.html">Inicio</a> ›
         <a href="index.html">Matemáticas 3</a> ›
-        Fórmula general
+        Productos notables
       </p>
-      <div class="topic-tag">Matemáticas 3 · Tema 8</div>
-      <h1>Fórmula general</h1>
+      <div class="topic-tag">Matemáticas 3 · Tema 11</div>
+      <h1>Productos notables</h1>
     </header>
 
     <section class="section-block ejemplo-section">
@@ -183,22 +184,24 @@
         <div class="sec-icon">
           <svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
         </div>
-        <h3>Ejemplo</h3>
+        <h3>Ejemplos</h3>
       </div>
       <div class="ejemplo-block">
-        <div style="text-align:center"><span class="formula-pill">$x = \dfrac{-b \pm \sqrt{b^2 - 4ac}}{2a}$</span></div>
-        <div class="despeje">$$-5x^2 + 3x + 2 = 0$$</div>
-        $$\begin{aligned} x &= \dfrac{-(3) \pm \sqrt{(3)^2 - 4(-5)(2)}}{2(-5)} \\ x &= \dfrac{-3 \pm \sqrt{9 + 40}}{-10} \\ x &= \dfrac{-3 \pm \sqrt{49}}{-10} \\ x &= \dfrac{-3 \pm 7}{-10} \end{aligned}$$
-        <div class="elim-grid">
-          <div class="elim-col">
-            $$\begin{aligned} x_1 &= \dfrac{-3 + 7}{-10} \\ x_1 &= \dfrac{4}{-10} \end{aligned}$$
-            <span class="resultado-pill">$x_1 = -0.4$</span>
-          </div>
-          <div class="elim-col">
-            $$\begin{aligned} x_2 &= \dfrac{-3 - 7}{-10} \\ x_2 &= \dfrac{-10}{-10} \end{aligned}$$
-            <span class="resultado-pill">$x_2 = 1$</span>
-          </div>
-        </div>
+        <div style="text-align:center"><span class="formula-pill">$(A + B)(C + D) = AC + AD + BC + BD$</span></div>
+        $$\begin{aligned} (5x - 2y)(6x - 3y) &= 30x^2 - 15xy - 12yx + 6y^2 \end{aligned}$$
+        <div style="text-align:center"><span class="resultado-pill">$30x^2 - 27xy + 6y^2$</span></div>
+        <hr class="sep-regla">
+        <div style="text-align:center"><span class="formula-pill">$(a + b)^2 = a^2 + 2ab + b^2$</span></div>
+        $$\begin{aligned} (3x^2 - yx^4)^2 &= (3x^2)^2 + 2(3x^2)(-yx^4) + (-yx^4)^2 \end{aligned}$$
+        <div style="text-align:center"><span class="resultado-pill">$9x^4 - 6x^6y + y^2x^8$</span></div>
+        <hr class="sep-regla">
+        <div style="text-align:center"><span class="formula-pill">$(a + b)^3 = a^3 + 3a^2b + 3ab^2 + b^3$</span></div>
+        $$\begin{aligned} (5x - 2)^3 &= (5x)^3 + 3(5x)^2(-2) + 3(5x)(-2)^2 + (-2)^3 \\ &= 125x^3 + 3(25x^2)(-2) + 3(5x)(4) - 8 \end{aligned}$$
+        <div style="text-align:center"><span class="resultado-pill">$125x^3 - 150x^2 + 60x - 8$</span></div>
+        <hr class="sep-regla">
+        <div style="text-align:center"><span class="formula-pill">$(a + b)(a - b) = a^2 - b^2$</span></div>
+        $$\begin{aligned} (4x^3 - 5y)(4x^3 + 5y) &= (4x^3)^2 - (5y)^2 \end{aligned}$$
+        <div style="text-align:center"><span class="resultado-pill">$16x^6 - 25y^2$</span></div>
       </div>
     </section>
 
@@ -211,24 +214,22 @@
       </div>
       <div class="bloques-2">
         <div class="mini-card">
-          <div class="mini-card-head">Ejercicio 1</div>
-          <div class="mini-card-body">$$3x^2 - 4x - 1 = 0$$</div>
+          <div class="mini-card-head">Bloque 1</div>
+          <div class="mini-card-body">
+<div class="ej-line">$(3x - 2y)(5xy - 4xy)$</div>
+<div class="ej-line">$(4x^2 - 3yx)^2$</div>
+<div class="ej-line">$(4x - 1)^3$</div>
+<div class="ej-line">$(6x^2 - 2y)(6x^2 + 2y)$</div>
+</div>
         </div>
         <div class="mini-card">
-          <div class="mini-card-head">Ejercicio 2</div>
-          <div class="mini-card-body">$$-2x^2 + 3x - 5 = 0$$</div>
-        </div>
-        <div class="mini-card">
-          <div class="mini-card-head">Ejercicio 3</div>
-          <div class="mini-card-body">$$2x^2 + 6x - 3 = 0$$</div>
-        </div>
-        <div class="mini-card">
-          <div class="mini-card-head">Ejercicio 4</div>
-          <div class="mini-card-body">$$-5x^2 + 4x + 2 = 0$$</div>
-        </div>
-        <div class="mini-card">
-          <div class="mini-card-head">Ejercicio 5</div>
-          <div class="mini-card-body">$$3x^2 - 2x - 1 = 0$$</div>
+          <div class="mini-card-head">Bloque 2</div>
+          <div class="mini-card-body">
+<div class="ej-line">$(2x + 3y)(4xy - 6xy)$</div>
+<div class="ej-line">$(2x^2 + 5yx)^2$</div>
+<div class="ej-line">$(6x^2 - 3)^3$</div>
+<div class="ej-line">$(3x^2 + 5y)(3x^2 - 5y)$</div>
+</div>
         </div>
       </div>
     </section>
@@ -242,79 +243,51 @@
         <span class="chev">▼</span>
       </div>
       <div class="collapsible">
+        <p class="extras-titulo">Bloque 1</p>
         <div class="resol-grid">
-
           <div class="resol-item">
-            <div class="resol-num">Ejercicio 1</div>
-            <div class="despeje">$$3x^2 - 4x - 1 = 0$$</div>
-            $$\begin{aligned} x &= \dfrac{-(-4) \pm \sqrt{(-4)^2 - 4(3)(-1)}}{2(3)} \\ x &= \dfrac{4 \pm \sqrt{16 + 12}}{6} \\ x &= \dfrac{4 \pm \sqrt{28}}{6} \\ x &\approx \dfrac{4 \pm 5.3}{6} \end{aligned}$$
-            <div class="elim-grid">
-              <div class="elim-col">
-                $$\begin{aligned} x_1 &\approx \dfrac{4 + 5.3}{6} \\ x_1 &\approx \dfrac{9.3}{6} \end{aligned}$$
-                <span class="resultado-pill">$x_1 \approx 1.55$</span>
-              </div>
-              <div class="elim-col">
-                $$\begin{aligned} x_2 &\approx \dfrac{4 - 5.3}{6} \\ x_2 &\approx \dfrac{-1.3}{6} \end{aligned}$$
-                <span class="resultado-pill">$x_2 \approx -0.21$</span>
-              </div>
-            </div>
+            <div class="despeje">$$(3x - 2y)(5xy - 4xy)$$</div>
+            $$\begin{aligned} &= 15x^2y - 12x^2y - 10xy^2 + 8xy^2 \end{aligned}$$
+            <div style="text-align:center"><span class="resultado-pill">$3x^2y - 2xy^2$</span></div>
           </div>
-
           <div class="resol-item">
-            <div class="resol-num">Ejercicio 2</div>
-            <div class="despeje">$$-2x^2 + 3x - 5 = 0$$</div>
-            $$\begin{aligned} x &= \dfrac{-(3) \pm \sqrt{(3)^2 - 4(-2)(-5)}}{2(-2)} \\ x &= \dfrac{-3 \pm \sqrt{9 - 40}}{-4} \\ x &= \dfrac{-3 \pm \sqrt{-31}}{-4} \end{aligned}$$
-            <p class="apunte-nota" style="text-align:center">La raíz da negativo: <strong>no existe solución en $\mathbb{R}$</strong>.</p>
+            <div class="despeje">$$(4x^2 - 3yx)^2$$</div>
+            $$\begin{aligned} &= (4x^2)^2 + 2(4x^2)(-3yx) + (-3yx)^2 \end{aligned}$$
+            <div style="text-align:center"><span class="resultado-pill">$16x^4 - 24x^3y + 9y^2x^2$</span></div>
           </div>
-
           <div class="resol-item">
-            <div class="resol-num">Ejercicio 3</div>
-            <div class="despeje">$$2x^2 + 6x - 3 = 0$$</div>
-            $$\begin{aligned} x &= \dfrac{-(6) \pm \sqrt{(6)^2 - 4(2)(-3)}}{2(2)} \\ x &= \dfrac{-6 \pm \sqrt{36 + 24}}{4} \\ x &= \dfrac{-6 \pm \sqrt{60}}{4} \\ x &\approx \dfrac{-6 \pm 7.7}{4} \end{aligned}$$
-            <div class="elim-grid">
-              <div class="elim-col">
-                $$\begin{aligned} x_1 &\approx \dfrac{-6 + 7.7}{4} \\ x_1 &\approx \dfrac{1.7}{4} \end{aligned}$$
-                <span class="resultado-pill">$x_1 \approx 0.42$</span>
-              </div>
-              <div class="elim-col">
-                $$\begin{aligned} x_2 &\approx \dfrac{-6 - 7.7}{4} \\ x_2 &\approx \dfrac{-13.7}{4} \end{aligned}$$
-                <span class="resultado-pill">$x_2 \approx -3.42$</span>
-              </div>
-            </div>
+            <div class="despeje">$$(4x - 1)^3$$</div>
+            $$\begin{aligned} &= (4x)^3 + 3(4x)^2(-1) + 3(4x)(-1)^2 + (-1)^3 \\ &= 64x^3 + 3(16x^2)(-1) + 3(4x)(1) - 1 \end{aligned}$$
+            <div style="text-align:center"><span class="resultado-pill">$64x^3 - 48x^2 + 12x - 1$</span></div>
           </div>
-
           <div class="resol-item">
-            <div class="resol-num">Ejercicio 4</div>
-            <div class="despeje">$$-5x^2 + 4x + 2 = 0$$</div>
-            $$\begin{aligned} x &= \dfrac{-(4) \pm \sqrt{(4)^2 - 4(-5)(2)}}{2(-5)} \\ x &= \dfrac{-4 \pm \sqrt{16 + 40}}{-10} \\ x &= \dfrac{-4 \pm \sqrt{56}}{-10} \\ x &\approx \dfrac{-4 \pm 7.5}{-10} \end{aligned}$$
-            <div class="elim-grid">
-              <div class="elim-col">
-                $$\begin{aligned} x_1 &\approx \dfrac{-4 + 7.5}{-10} \\ x_1 &\approx \dfrac{3.5}{-10} \end{aligned}$$
-                <span class="resultado-pill">$x_1 \approx -0.35$</span>
-              </div>
-              <div class="elim-col">
-                $$\begin{aligned} x_2 &\approx \dfrac{-4 - 7.5}{-10} \\ x_2 &\approx \dfrac{-11.5}{-10} \end{aligned}$$
-                <span class="resultado-pill">$x_2 \approx 1.15$</span>
-              </div>
-            </div>
+            <div class="despeje">$$(6x^2 - 2y)(6x^2 + 2y)$$</div>
+            $$\begin{aligned} &= (6x^2)^2 - (2y)^2 \end{aligned}$$
+            <div style="text-align:center"><span class="resultado-pill">$36x^4 - 4y^2$</span></div>
           </div>
-
+        </div>
+        <p class="extras-titulo">Bloque 2</p>
+        <div class="resol-grid">
           <div class="resol-item">
-            <div class="resol-num">Ejercicio 5</div>
-            <div class="despeje">$$3x^2 - 2x - 1 = 0$$</div>
-            $$\begin{aligned} x &= \dfrac{-(-2) \pm \sqrt{(-2)^2 - 4(3)(-1)}}{2(3)} \\ x &= \dfrac{2 \pm \sqrt{4 + 12}}{6} \\ x &= \dfrac{2 \pm \sqrt{16}}{6} \\ x &= \dfrac{2 \pm 4}{6} \end{aligned}$$
-            <div class="elim-grid">
-              <div class="elim-col">
-                $$\begin{aligned} x_1 &= \dfrac{2 + 4}{6} \\ x_1 &= \dfrac{6}{6} \end{aligned}$$
-                <span class="resultado-pill">$x_1 = 1$</span>
-              </div>
-              <div class="elim-col">
-                $$\begin{aligned} x_2 &= \dfrac{2 - 4}{6} \\ x_2 &= \dfrac{-2}{6} \end{aligned}$$
-                <span class="resultado-pill">$x_2 \approx -0.3$</span>
-              </div>
-            </div>
+            <div class="despeje">$$(2x + 3y)(4xy - 6xy)$$</div>
+            $$\begin{aligned} &= 8x^2y - 12x^2y + 12xy^2 - 18xy^2 \end{aligned}$$
+            <div style="text-align:center"><span class="resultado-pill">$-4x^2y - 6xy^2$</span></div>
           </div>
-
+          <div class="resol-item">
+            <div class="despeje">$$(2x^2 + 5yx)^2$$</div>
+            $$\begin{aligned} &= (2x^2)^2 + 2(2x^2)(5yx) + (5yx)^2 \end{aligned}$$
+            <div style="text-align:center"><span class="resultado-pill">$4x^4 + 20x^3y + 25y^2x^2$</span></div>
+          </div>
+          <div class="resol-item">
+            <div class="despeje">$$(6x^2 - 3)^3$$</div>
+            $$\begin{aligned} &= (6x^2)^3 + 3(6x^2)^2(-3) + 3(6x^2)(-3)^2 + (-3)^3 \\ &= 216x^6 + 3(36x^4)(-3) + 3(6x^2)(9) - 27 \end{aligned}$$
+            <div style="text-align:center"><span class="resultado-pill">$216x^6 - 324x^4 + 162x^2 - 27$</span></div>
+          </div>
+          <div class="resol-item">
+            <div class="despeje">$$(3x^2 + 5y)(3x^2 - 5y)$$</div>
+            $$\begin{aligned} &= (3x^2)^2 - (5y)^2 \end{aligned}$$
+            <div style="text-align:center"><span class="resultado-pill">$9x^4 - 25y^2$</span></div>
+          </div>
         </div>
       </div>
     </section>
@@ -332,21 +305,21 @@
           <div class="mini-card">
             <div class="mini-card-head">Bloque 1</div>
             <div class="mini-card-body">
-              <div class="ej-line">$x^2 - 5x + 6 = 0$</div>
-              <div class="ej-line">$2x^2 + 3x - 2 = 0$</div>
-              <div class="ej-line">$x^2 + 2x - 8 = 0$</div>
-              <div class="ej-line">$3x^2 + 5x + 1 = 0$</div>
-              <div class="ej-line">$-x^2 + 4x + 3 = 0$</div>
+              <div class="ej-line">$(2x + 5y)(3x - 4y)$</div>
+              <div class="ej-line">$(3x^2 - 2y)^2$</div>
+              <div class="ej-line">$(2x + 3)^3$</div>
+              <div class="ej-line">$(5x^2 - 4y)(5x^2 + 4y)$</div>
+              <div class="ej-line">$(4x - 7y)(2x + 3y)$</div>
             </div>
           </div>
           <div class="mini-card">
             <div class="mini-card-head">Bloque 2</div>
             <div class="mini-card-body">
-              <div class="ej-line">$2x^2 - 7x + 3 = 0$</div>
-              <div class="ej-line">$4x^2 + 4x + 1 = 0$</div>
-              <div class="ej-line">$x^2 - 3x + 5 = 0$</div>
-              <div class="ej-line">$5x^2 - 2x - 4 = 0$</div>
-              <div class="ej-line">$-3x^2 + 6x + 2 = 0$</div>
+              <div class="ej-line">$(6x^3 + y^2)^2$</div>
+              <div class="ej-line">$(3x - 2)^3$</div>
+              <div class="ej-line">$(7x^2 + 2y^3)(7x^2 - 2y^3)$</div>
+              <div class="ej-line">$(x^2 - 5xy)^2$</div>
+              <div class="ej-line">$(2x^2 + y)(5x - 3y)$</div>
             </div>
           </div>
         </div>
@@ -355,8 +328,8 @@
 
     <!-- ══════════ NAVEGACIÓN ══════════ -->
     <div class="topic-nav-btns">
-      <a href="cuadraticas-incompletas.html" class="btn-anterior">← Cuadráticas incompletas</a>
-      <a href="trinomio-cuadrado-perfecto.html" class="btn-siguiente">Trinomio cuadrado perfecto →</a>
+      <a href="grafica-cuadratica.html" class="btn-anterior">← Gráfica de la cuadrática</a>
+      <a href="index.html" class="btn-siguiente">Índice del curso →</a>
     </div>
 
   </main>

@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Fórmula general — Matemáticas 3 — LetyMath</title>
-  <meta name="description" content="La fórmula general para resolver ecuaciones cuadráticas completas, con el caso en que el discriminante es negativo." />
+  <title>Completar el trinomio cuadrado perfecto — Matemáticas 3 — LetyMath</title>
+  <meta name="description" content="Resolver una cuadrática completando el cuadrado: la mitad del coeficiente, su cuadrado y la raíz del binomio." />
   <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
   <link rel="icon" href="../../favicon.ico">
   <link rel="stylesheet" href="../../style.css">
@@ -163,6 +163,14 @@
     .graf-svg { max-width: 240px; max-height: 380px; height: auto; }
     /* las pills con raíz o fracción necesitan más alto */
     .resultado-pill { padding: .4rem .8rem; line-height: 1.5; }
+    .mitad-box {
+      display: inline-grid; grid-template-columns: repeat(3, auto);
+      border: 1.5px solid var(--border); border-radius: var(--r-sm);
+      background: var(--bg); overflow: hidden; margin: .3rem 0 .6rem;
+    }
+    .mitad-box > div { padding: .35rem .9rem; text-align: center; }
+    .mitad-box > div + div { border-left: 1px solid var(--border); }
+    .mitad-box span { display: block; font-size: .68rem; color: var(--text-3); line-height: 1.2; }
   </style>
 </head>
 <body data-section="math">
@@ -172,11 +180,25 @@
       <p class="breadcrumb">
         <a href="../index.html">Inicio</a> ›
         <a href="index.html">Matemáticas 3</a> ›
-        Fórmula general
+        Completar el trinomio cuadrado perfecto
       </p>
-      <div class="topic-tag">Matemáticas 3 · Tema 8</div>
-      <h1>Fórmula general</h1>
+      <div class="topic-tag">Matemáticas 3 · Tema 9</div>
+      <h1>Completar el trinomio cuadrado perfecto</h1>
     </header>
+
+    <section class="section-block">
+      <div class="sec-head">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3" stroke-width="0" fill="white"/></svg>
+        </div>
+        <h2>Video</h2>
+      </div>
+      <div class="video-single">
+        <div class="video-wrapper">
+          <button type="button" class="yt-lite" data-yt="uFx0NLDm_5g" data-title="Completar el trinomio cuadrado perfecto" aria-label="Reproducir video: Completar el trinomio cuadrado perfecto"></button>
+        </div>
+      </div>
+    </section>
 
     <section class="section-block ejemplo-section">
       <div class="ejemplo-head">
@@ -186,16 +208,17 @@
         <h3>Ejemplo</h3>
       </div>
       <div class="ejemplo-block">
-        <div style="text-align:center"><span class="formula-pill">$x = \dfrac{-b \pm \sqrt{b^2 - 4ac}}{2a}$</span></div>
-        <div class="despeje">$$-5x^2 + 3x + 2 = 0$$</div>
-        $$\begin{aligned} x &= \dfrac{-(3) \pm \sqrt{(3)^2 - 4(-5)(2)}}{2(-5)} \\ x &= \dfrac{-3 \pm \sqrt{9 + 40}}{-10} \\ x &= \dfrac{-3 \pm \sqrt{49}}{-10} \\ x &= \dfrac{-3 \pm 7}{-10} \end{aligned}$$
+        <div class="despeje">$$2x^2 - 12x + 10 = 0$$</div>
+        $$\begin{aligned} \dfrac{2x^2 - 12x + 10}{2} &= \dfrac{0}{2} \\ x^2 - 6x + 5 &= 0 \\ x^2 - 6x &= -5 \end{aligned}$$
+        <div style="text-align:center"><div class="mitad-box"><div><span>b</span>$-6$</div><div><span>mitad</span>$-3$</div><div><span>cuadrado de la mitad</span>$9$</div></div></div>
+        $$\begin{aligned} x^2 - 6x + 9 &= -5 + 9 \\ (x - 3)(x - 3) &= 4 \\ (x - 3)^2 &= 4 \\ \sqrt{(x-3)^2} &= \sqrt{4} \\ x - 3 &= \pm 2 \end{aligned}$$
         <div class="elim-grid">
           <div class="elim-col">
-            $$\begin{aligned} x_1 &= \dfrac{-3 + 7}{-10} \\ x_1 &= \dfrac{4}{-10} \end{aligned}$$
-            <span class="resultado-pill">$x_1 = -0.4$</span>
+            $$\begin{aligned} x - 3 &= +2 \\ x &= 2 + 3 \end{aligned}$$
+            <span class="resultado-pill">$x_1 = 5$</span>
           </div>
           <div class="elim-col">
-            $$\begin{aligned} x_2 &= \dfrac{-3 - 7}{-10} \\ x_2 &= \dfrac{-10}{-10} \end{aligned}$$
+            $$\begin{aligned} x - 3 &= -2 \\ x &= -2 + 3 \end{aligned}$$
             <span class="resultado-pill">$x_2 = 1$</span>
           </div>
         </div>
@@ -212,23 +235,19 @@
       <div class="bloques-2">
         <div class="mini-card">
           <div class="mini-card-head">Ejercicio 1</div>
-          <div class="mini-card-body">$$3x^2 - 4x - 1 = 0$$</div>
+          <div class="mini-card-body">$$3x^2 - 30x + 27 = 0$$</div>
         </div>
         <div class="mini-card">
           <div class="mini-card-head">Ejercicio 2</div>
-          <div class="mini-card-body">$$-2x^2 + 3x - 5 = 0$$</div>
+          <div class="mini-card-body">$$3x^2 + 6x - 45 = 0$$</div>
         </div>
         <div class="mini-card">
           <div class="mini-card-head">Ejercicio 3</div>
-          <div class="mini-card-body">$$2x^2 + 6x - 3 = 0$$</div>
+          <div class="mini-card-body">$$2x^2 - 4x - 16 = 0$$</div>
         </div>
         <div class="mini-card">
           <div class="mini-card-head">Ejercicio 4</div>
-          <div class="mini-card-body">$$-5x^2 + 4x + 2 = 0$$</div>
-        </div>
-        <div class="mini-card">
-          <div class="mini-card-head">Ejercicio 5</div>
-          <div class="mini-card-body">$$3x^2 - 2x - 1 = 0$$</div>
+          <div class="mini-card-body">$$2x^2 - 12x - 32 = 0$$</div>
         </div>
       </div>
     </section>
@@ -246,71 +265,72 @@
 
           <div class="resol-item">
             <div class="resol-num">Ejercicio 1</div>
-            <div class="despeje">$$3x^2 - 4x - 1 = 0$$</div>
-            $$\begin{aligned} x &= \dfrac{-(-4) \pm \sqrt{(-4)^2 - 4(3)(-1)}}{2(3)} \\ x &= \dfrac{4 \pm \sqrt{16 + 12}}{6} \\ x &= \dfrac{4 \pm \sqrt{28}}{6} \\ x &\approx \dfrac{4 \pm 5.3}{6} \end{aligned}$$
+            <div class="despeje">$$3x^2 - 30x + 27 = 0$$</div>
+            $$\begin{aligned} \dfrac{3x^2 - 30x + 27}{3} &= \dfrac{0}{3} \\ x^2 - 10x + 9 &= 0 \\ x^2 - 10x &= -9 \end{aligned}$$
+            <div style="text-align:center"><div class="mitad-box"><div><span>b</span>$-10$</div><div><span>mitad</span>$-5$</div><div><span>cuadrado de la mitad</span>$25$</div></div></div>
+            $$\begin{aligned} x^2 - 10x + 25 &= -9 + 25 \\ (x - 5)(x - 5) &= 16 \\ (x - 5)^2 &= 16 \\ \sqrt{(x-5)^2} &= \sqrt{16} \\ x - 5 &= \pm 4 \end{aligned}$$
             <div class="elim-grid">
               <div class="elim-col">
-                $$\begin{aligned} x_1 &\approx \dfrac{4 + 5.3}{6} \\ x_1 &\approx \dfrac{9.3}{6} \end{aligned}$$
-                <span class="resultado-pill">$x_1 \approx 1.55$</span>
+                $$\begin{aligned} x - 5 &= +4 \\ x &= 4 + 5 \end{aligned}$$
+                <span class="resultado-pill">$x_1 = 9$</span>
               </div>
               <div class="elim-col">
-                $$\begin{aligned} x_2 &\approx \dfrac{4 - 5.3}{6} \\ x_2 &\approx \dfrac{-1.3}{6} \end{aligned}$$
-                <span class="resultado-pill">$x_2 \approx -0.21$</span>
+                $$\begin{aligned} x - 5 &= -4 \\ x &= -4 + 5 \end{aligned}$$
+                <span class="resultado-pill">$x_2 = 1$</span>
               </div>
             </div>
           </div>
 
           <div class="resol-item">
             <div class="resol-num">Ejercicio 2</div>
-            <div class="despeje">$$-2x^2 + 3x - 5 = 0$$</div>
-            $$\begin{aligned} x &= \dfrac{-(3) \pm \sqrt{(3)^2 - 4(-2)(-5)}}{2(-2)} \\ x &= \dfrac{-3 \pm \sqrt{9 - 40}}{-4} \\ x &= \dfrac{-3 \pm \sqrt{-31}}{-4} \end{aligned}$$
-            <p class="apunte-nota" style="text-align:center">La raíz da negativo: <strong>no existe solución en $\mathbb{R}$</strong>.</p>
+            <div class="despeje">$$3x^2 + 6x - 45 = 0$$</div>
+            $$\begin{aligned} \dfrac{3x^2 + 6x - 45}{3} &= \dfrac{0}{3} \\ x^2 + 2x - 15 &= 0 \\ x^2 + 2x &= +15 \end{aligned}$$
+            <div style="text-align:center"><div class="mitad-box"><div><span>b</span>$2$</div><div><span>mitad</span>$1$</div><div><span>cuadrado de la mitad</span>$1$</div></div></div>
+            $$\begin{aligned} x^2 + 2x + 1 &= 15 + 1 \\ (x + 1)(x + 1) &= 16 \\ (x + 1)^2 &= 16 \\ \sqrt{(x+1)^2} &= \sqrt{16} \\ x + 1 &= \pm 4 \end{aligned}$$
+            <div class="elim-grid">
+              <div class="elim-col">
+                $$\begin{aligned} x + 1 &= +4 \\ x &= 4 - 1 \end{aligned}$$
+                <span class="resultado-pill">$x_1 = 3$</span>
+              </div>
+              <div class="elim-col">
+                $$\begin{aligned} x + 1 &= -4 \\ x &= -4 - 1 \end{aligned}$$
+                <span class="resultado-pill">$x_2 = -5$</span>
+              </div>
+            </div>
           </div>
 
           <div class="resol-item">
             <div class="resol-num">Ejercicio 3</div>
-            <div class="despeje">$$2x^2 + 6x - 3 = 0$$</div>
-            $$\begin{aligned} x &= \dfrac{-(6) \pm \sqrt{(6)^2 - 4(2)(-3)}}{2(2)} \\ x &= \dfrac{-6 \pm \sqrt{36 + 24}}{4} \\ x &= \dfrac{-6 \pm \sqrt{60}}{4} \\ x &\approx \dfrac{-6 \pm 7.7}{4} \end{aligned}$$
+            <div class="despeje">$$2x^2 - 4x - 16 = 0$$</div>
+            $$\begin{aligned} \dfrac{2x^2 - 4x - 16}{2} &= \dfrac{0}{2} \\ x^2 - 2x - 8 &= 0 \\ x^2 - 2x &= +8 \end{aligned}$$
+            <div style="text-align:center"><div class="mitad-box"><div><span>b</span>$-2$</div><div><span>mitad</span>$-1$</div><div><span>cuadrado de la mitad</span>$1$</div></div></div>
+            $$\begin{aligned} x^2 - 2x + 1 &= 8 + 1 \\ (x - 1)(x - 1) &= 9 \\ (x - 1)^2 &= 9 \\ \sqrt{(x-1)^2} &= \sqrt{9} \\ x - 1 &= \pm 3 \end{aligned}$$
             <div class="elim-grid">
               <div class="elim-col">
-                $$\begin{aligned} x_1 &\approx \dfrac{-6 + 7.7}{4} \\ x_1 &\approx \dfrac{1.7}{4} \end{aligned}$$
-                <span class="resultado-pill">$x_1 \approx 0.42$</span>
+                $$\begin{aligned} x - 1 &= +3 \\ x &= 3 + 1 \end{aligned}$$
+                <span class="resultado-pill">$x_1 = 4$</span>
               </div>
               <div class="elim-col">
-                $$\begin{aligned} x_2 &\approx \dfrac{-6 - 7.7}{4} \\ x_2 &\approx \dfrac{-13.7}{4} \end{aligned}$$
-                <span class="resultado-pill">$x_2 \approx -3.42$</span>
+                $$\begin{aligned} x - 1 &= -3 \\ x &= -3 + 1 \end{aligned}$$
+                <span class="resultado-pill">$x_2 = -2$</span>
               </div>
             </div>
           </div>
 
           <div class="resol-item">
             <div class="resol-num">Ejercicio 4</div>
-            <div class="despeje">$$-5x^2 + 4x + 2 = 0$$</div>
-            $$\begin{aligned} x &= \dfrac{-(4) \pm \sqrt{(4)^2 - 4(-5)(2)}}{2(-5)} \\ x &= \dfrac{-4 \pm \sqrt{16 + 40}}{-10} \\ x &= \dfrac{-4 \pm \sqrt{56}}{-10} \\ x &\approx \dfrac{-4 \pm 7.5}{-10} \end{aligned}$$
+            <div class="despeje">$$2x^2 - 12x - 32 = 0$$</div>
+            $$\begin{aligned} \dfrac{2x^2 - 12x - 32}{2} &= \dfrac{0}{2} \\ x^2 - 6x - 16 &= 0 \\ x^2 - 6x &= +16 \end{aligned}$$
+            <div style="text-align:center"><div class="mitad-box"><div><span>b</span>$-6$</div><div><span>mitad</span>$-3$</div><div><span>cuadrado de la mitad</span>$9$</div></div></div>
+            $$\begin{aligned} x^2 - 6x + 9 &= 16 + 9 \\ (x - 3)(x - 3) &= 25 \\ (x - 3)^2 &= 25 \\ \sqrt{(x-3)^2} &= \sqrt{25} \\ x - 3 &= \pm 5 \end{aligned}$$
             <div class="elim-grid">
               <div class="elim-col">
-                $$\begin{aligned} x_1 &\approx \dfrac{-4 + 7.5}{-10} \\ x_1 &\approx \dfrac{3.5}{-10} \end{aligned}$$
-                <span class="resultado-pill">$x_1 \approx -0.35$</span>
+                $$\begin{aligned} x - 3 &= +5 \\ x &= 5 + 3 \end{aligned}$$
+                <span class="resultado-pill">$x_1 = 8$</span>
               </div>
               <div class="elim-col">
-                $$\begin{aligned} x_2 &\approx \dfrac{-4 - 7.5}{-10} \\ x_2 &\approx \dfrac{-11.5}{-10} \end{aligned}$$
-                <span class="resultado-pill">$x_2 \approx 1.15$</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="resol-item">
-            <div class="resol-num">Ejercicio 5</div>
-            <div class="despeje">$$3x^2 - 2x - 1 = 0$$</div>
-            $$\begin{aligned} x &= \dfrac{-(-2) \pm \sqrt{(-2)^2 - 4(3)(-1)}}{2(3)} \\ x &= \dfrac{2 \pm \sqrt{4 + 12}}{6} \\ x &= \dfrac{2 \pm \sqrt{16}}{6} \\ x &= \dfrac{2 \pm 4}{6} \end{aligned}$$
-            <div class="elim-grid">
-              <div class="elim-col">
-                $$\begin{aligned} x_1 &= \dfrac{2 + 4}{6} \\ x_1 &= \dfrac{6}{6} \end{aligned}$$
-                <span class="resultado-pill">$x_1 = 1$</span>
-              </div>
-              <div class="elim-col">
-                $$\begin{aligned} x_2 &= \dfrac{2 - 4}{6} \\ x_2 &= \dfrac{-2}{6} \end{aligned}$$
-                <span class="resultado-pill">$x_2 \approx -0.3$</span>
+                $$\begin{aligned} x - 3 &= -5 \\ x &= -5 + 3 \end{aligned}$$
+                <span class="resultado-pill">$x_2 = -2$</span>
               </div>
             </div>
           </div>
@@ -332,21 +352,21 @@
           <div class="mini-card">
             <div class="mini-card-head">Bloque 1</div>
             <div class="mini-card-body">
-              <div class="ej-line">$x^2 - 5x + 6 = 0$</div>
-              <div class="ej-line">$2x^2 + 3x - 2 = 0$</div>
-              <div class="ej-line">$x^2 + 2x - 8 = 0$</div>
-              <div class="ej-line">$3x^2 + 5x + 1 = 0$</div>
-              <div class="ej-line">$-x^2 + 4x + 3 = 0$</div>
+              <div class="ej-line">$2x^2 - 8x - 10 = 0$</div>
+              <div class="ej-line">$3x^2 + 12x - 15 = 0$</div>
+              <div class="ej-line">$x^2 - 8x + 7 = 0$</div>
+              <div class="ej-line">$2x^2 + 4x - 48 = 0$</div>
+              <div class="ej-line">$5x^2 - 20x - 60 = 0$</div>
             </div>
           </div>
           <div class="mini-card">
             <div class="mini-card-head">Bloque 2</div>
             <div class="mini-card-body">
-              <div class="ej-line">$2x^2 - 7x + 3 = 0$</div>
-              <div class="ej-line">$4x^2 + 4x + 1 = 0$</div>
-              <div class="ej-line">$x^2 - 3x + 5 = 0$</div>
-              <div class="ej-line">$5x^2 - 2x - 4 = 0$</div>
-              <div class="ej-line">$-3x^2 + 6x + 2 = 0$</div>
+              <div class="ej-line">$x^2 + 10x + 16 = 0$</div>
+              <div class="ej-line">$4x^2 - 8x - 60 = 0$</div>
+              <div class="ej-line">$3x^2 - 18x + 24 = 0$</div>
+              <div class="ej-line">$x^2 + 6x - 27 = 0$</div>
+              <div class="ej-line">$2x^2 + 20x + 42 = 0$</div>
             </div>
           </div>
         </div>
@@ -355,8 +375,8 @@
 
     <!-- ══════════ NAVEGACIÓN ══════════ -->
     <div class="topic-nav-btns">
-      <a href="cuadraticas-incompletas.html" class="btn-anterior">← Cuadráticas incompletas</a>
-      <a href="trinomio-cuadrado-perfecto.html" class="btn-siguiente">Trinomio cuadrado perfecto →</a>
+      <a href="formula-general.html" class="btn-anterior">← Fórmula general</a>
+      <a href="grafica-cuadratica.html" class="btn-siguiente">Gráfica de la cuadrática →</a>
     </div>
 
   </main>

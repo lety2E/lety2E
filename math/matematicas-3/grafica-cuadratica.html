@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gráfica de una ecuación cuadrática — Matemáticas 3 — LetyMath</title>
+  <meta name="description" content="Llevar la cuadrática a su forma de vértice completando el cuadrado, tabular alrededor del vértice y graficar la parábola." />
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../../favicon.ico">
+  <link rel="stylesheet" href="../../style.css">
+  <link rel="stylesheet" href="../../assets/katex/katex.min.css" />
+  <script defer src="../../assets/katex/katex.min.js"></script>
+  <script defer src="../../assets/katex/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body, {
+      delimiters: [
+        {left:'$$', right:'$$', display:true},
+        {left:'$', right:'$', display:false}
+      ]
+    });"></script>
+
+  <style>
+    .topic-tag {
+      display: inline-flex; align-items: center; gap: .35rem;
+      padding: .22rem .75rem; border-radius: 99px;
+      background: var(--accent-light); color: var(--accent);
+      font-size: .78rem; font-weight: 700; letter-spacing: .03em;
+      margin-bottom: .55rem;
+    }
+    .topic-tag::before {
+      content: ''; width: 7px; height: 7px; border-radius: 50%;
+      background: var(--accent); display: inline-block;
+    }
+
+    .section-block { margin-bottom: 2.5rem; }
+    .section-block:last-child { margin-bottom: 0; }
+
+    .sec-head { display: flex; align-items: center; gap: .65rem; margin-bottom: 1.1rem; }
+    .sec-head h2 { margin: 0; font-size: 1.2rem; line-height: 1; }
+    .sec-icon {
+      width: 30px; height: 30px; border-radius: 8px;
+      display: grid; place-items: center; flex-shrink: 0;
+      background: var(--accent);
+    }
+    .sec-icon svg { width: 15px; height: 15px; stroke: #fff; fill: none; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+
+    .sec-toggle {
+      display: flex; align-items: center; gap: .65rem;
+      cursor: pointer; user-select: none;
+      padding: .8rem 0; margin: 0 0 .4rem;
+    }
+    .sec-toggle h2 { margin: 0; font-size: 1.2rem; line-height: 1; }
+    .sec-toggle .chev { margin-left: auto; font-size: .75rem; color: var(--text-3); transition: transform .25s; }
+    .sec-toggle.open .chev { transform: rotate(180deg); }
+    .collapsible { max-height: 0; overflow: hidden; transition: max-height .4s ease, padding .3s ease; padding: 0; }
+    .collapsible.show { max-height: 40000px; padding: .8rem 0; }
+
+    /* ── Video ── */
+    .video-single { max-width: 720px; margin: 0 auto; }
+    .video-wrapper {
+      position: relative; padding-bottom: 56.25%; height: 0;
+      overflow: hidden; border-radius: var(--r-md); background: #000;
+    }
+    .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+
+    /* ── Ejemplo ── */
+    .ejemplo-section { margin: 2rem 0 2.5rem; }
+    .ejemplo-head { display: flex; align-items: center; gap: .65rem; margin-bottom: 1rem; }
+    .ejemplo-head h3 {
+      margin: 0; font-family: var(--font-display);
+      font-size: 1.2rem; line-height: 1; color: var(--M); font-style: italic;
+    }
+    .ejemplo-block {
+      padding: 1.6rem 1.5rem; background: var(--bg-card);
+      border: 1.5px solid var(--border); border-radius: var(--r-md);
+      color: var(--text);
+    }
+    .paso-titulo { font-size: .8rem; font-weight: 700; color: var(--course-1); margin-bottom: .25rem; text-align: center; }
+    .paso-titulo.izq { color: #7B2CBF; }
+    .paso-titulo.der { color: var(--M); }
+    .sistema-mult { text-align: center; }
+
+    /* ── Pills ── */
+    .resultado-pill {
+      display: inline-block; background: #FFD0E5;
+      padding: .25rem .75rem; border-radius: 99px;
+      font-size: .9rem; font-weight: 700; color: var(--M);
+      margin: .25rem .2rem; border: 1.5px solid #FF8AC0;
+    }
+
+    /* ── Mini card (ejercicio) ── */
+    .mini-card {
+      background: var(--bg-card); border: 1.5px solid var(--border);
+      border-radius: var(--r-md); overflow: hidden;
+    }
+    .mini-card-head {
+      padding: .4rem .8rem; background: var(--course-1);
+      font-family: var(--font-display); font-size: .85rem; color: #fff; font-weight: 700;
+    }
+    .mini-card-body { padding: .8rem 1rem; font-size: .9rem; line-height: 1.6; color: var(--text); text-align: center; }
+    .mini-card-body .ej-line { padding: .55rem 0; border-bottom: 1px solid var(--border-s); }
+    .mini-card-body .ej-line:first-child { padding-top: .1rem; }
+    .mini-card-body .ej-line:last-child { border-bottom: none; padding-bottom: .1rem; }
+    .bloques-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2rem; }
+    @media (max-width: 700px) { .bloques-2 { grid-template-columns: 1fr; } }
+
+    /* ── Resoluciones ── */
+    .resol-grid { display: grid; grid-template-columns: 1fr; gap: 1.2rem; }
+    .resol-item {
+      background: var(--bg-card); border: 1.5px solid var(--border);
+      border-radius: var(--r-md); padding: .9rem 1.1rem;
+    }
+    .resol-num {
+      font-size: .75rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .06em; color: var(--course-1); margin-bottom: .1rem;
+    }
+
+    /* ── Doble columna del método ── */
+    .elim-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem;
+      margin-top: .6rem;
+    }
+    .elim-grid > div + div { border-left: 1px solid var(--border-s); padding-left: 1.2rem; }
+    @media (max-width: 700px) {
+      .elim-grid { grid-template-columns: 1fr; gap: .6rem; }
+      .elim-grid > div + div { border-left: none; padding-left: 0; border-top: 1px solid var(--border-s); padding-top: .8rem; }
+    }
+    .elim-col { text-align: center; }
+    .comprob { margin-top: 1rem; padding-top: .8rem; border-top: 1px solid var(--border-s); }
+    .comprob-titulo {
+      font-family: var(--font-display); font-size: .95rem; font-style: italic;
+      color: var(--M); margin: 0 0 .3rem; text-align: center;
+    }
+
+    .extras-titulo {
+      font-family: var(--font-display); font-size: 1rem; font-style: italic;
+      color: var(--M); margin: 1.4rem 0 .8rem;
+    }
+    .extras-titulo:first-child { margin-top: 0; }
+
+    /* ── Navegación ── */
+    .topic-nav-btns {
+      display: flex; justify-content: space-between; gap: 1rem;
+      margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border);
+    }
+    .btn-anterior, .btn-siguiente {
+      display: inline-flex; align-items: center; gap: .5rem;
+      padding: .65rem 1.4rem; border-radius: 99px;
+      font-weight: 700; font-size: .9rem; transition: background .2s, transform .18s;
+    }
+    .btn-anterior { background: transparent; color: var(--accent); border: 2px solid var(--accent); }
+    .btn-anterior:hover { background: var(--accent-light); transform: translateX(-3px); }
+    .btn-siguiente { background: var(--accent); color: #fff; }
+    .btn-siguiente:hover { background: var(--M); color: #fff; transform: translateX(3px); }
+    .despeje { text-align: center; }
+    .formula-pill {
+      display: inline-block; background: #FFF1A8;
+      padding: .25rem .75rem; border-radius: 99px;
+      font-size: .9rem; font-weight: 600; color: var(--text);
+      margin: .25rem .2rem; border: 1.5px solid #F5DC6A;
+    }
+    .formula-pill.salmon { background: #FFD9B8; border-color: #F5B584; }
+    .graf-wrap { display: flex; justify-content: center; margin: 1rem 0 .5rem; }
+    .graf-svg { max-width: 240px; max-height: 380px; height: auto; }
+    /* las pills con raíz o fracción necesitan más alto */
+    .resultado-pill { padding: .4rem .8rem; line-height: 1.5; }
+    .mitad-box {
+      display: inline-grid; grid-template-columns: repeat(3, auto);
+      border: 1.5px solid var(--border); border-radius: var(--r-sm);
+      background: var(--bg); overflow: hidden; margin: .3rem 0 .6rem;
+    }
+    .mitad-box > div { padding: .35rem .9rem; text-align: center; }
+    .mitad-box > div + div { border-left: 1px solid var(--border); }
+    .mitad-box span { display: block; font-size: .68rem; color: var(--text-3); line-height: 1.2; }
+    .tabla-wrap { display: flex; justify-content: center; margin: .8rem 0; }
+    .tabla-val { border-collapse: collapse; font-size: .88rem; }
+    .tabla-val th, .tabla-val td { padding: .28rem .7rem; text-align: center; }
+    .tabla-val th { border-bottom: 1.5px solid var(--border); font-weight: 700; }
+    .tabla-val td:nth-child(2) { color: var(--M); }
+    .tabla-val tr.vert td { background: #FFF1A8; }
+    .tabla-val .cuenta { text-align: left; color: var(--text-2); }
+    @media (max-width: 620px) { .tabla-val .cuenta { display: none; } }
+  </style>
+</head>
+<body data-section="math">
+  <main class="topic-content">
+
+    <header class="topic-header">
+      <p class="breadcrumb">
+        <a href="../index.html">Inicio</a> ›
+        <a href="index.html">Matemáticas 3</a> ›
+        Gráfica de una ecuación cuadrática
+      </p>
+      <div class="topic-tag">Matemáticas 3 · Tema 10</div>
+      <h1>Gráfica de una ecuación cuadrática</h1>
+    </header>
+
+    <section class="section-block">
+      <div class="sec-head">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3" stroke-width="0" fill="white"/></svg>
+        </div>
+        <h2>Video</h2>
+      </div>
+      <div class="video-single">
+        <div class="video-wrapper">
+          <button type="button" class="yt-lite" data-yt="rfRcKnJty4E" data-title="Gráfica de una ecuación cuadrática" aria-label="Reproducir video: Gráfica de una ecuación cuadrática"></button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-block ejemplo-section">
+      <div class="ejemplo-head">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        </div>
+        <h3>Ejemplo</h3>
+      </div>
+      <div class="ejemplo-block">
+        <div class="despeje">$$f(x) = x^2 - 8x + 13$$</div>
+        $$\begin{aligned} f(x) &= x^2 - 8x + 16 - 16 + 13 \\ f(x) &= (x - 4)(x - 4) - 3 \\ f(x) &= (x - 4)^2 - 3 \end{aligned}$$
+        <div style="text-align:center"><div class="mitad-box"><div><span>b</span>$-8$</div><div><span>mitad</span>$-4$</div><div><span>cuadrado de la mitad</span>$16$</div></div></div>
+        <div style="text-align:center"><span class="resultado-pill">$V = (4,\, -3)$</span></div>
+        <div class="tabla-wrap"><table class="tabla-val">
+          <tr><th>$x$</th><th>$f(x)$</th><th class="cuenta">$(x)^2 - 8(x) + 13$</th></tr>
+          <tr><td>$2$</td><td>$\mathbf{1}$</td><td class="cuenta">$(2)^2 - 8(2) + 13 = 4 - 16 + 13 = \mathbf{1}$</td></tr>
+          <tr><td>$3$</td><td>$\mathbf{-2}$</td><td class="cuenta">$(3)^2 - 8(3) + 13 = 9 - 24 + 13 = \mathbf{-2}$</td></tr>
+          <tr class="vert"><td>$4$</td><td>$\mathbf{-3}$</td><td class="cuenta">$(4)^2 - 8(4) + 13 = 16 - 32 + 13 = \mathbf{-3}$</td></tr>
+          <tr><td>$5$</td><td>$\mathbf{-2}$</td><td class="cuenta">$(5)^2 - 8(5) + 13 = 25 - 40 + 13 = \mathbf{-2}$</td></tr>
+          <tr><td>$6$</td><td>$\mathbf{1}$</td><td class="cuenta">$(6)^2 - 8(6) + 13 = 36 - 48 + 13 = \mathbf{1}$</td></tr>
+        </table></div>
+        <div class="graf-wrap"><svg class="graf-svg" viewBox="0 0 274 249" xmlns="http://www.w3.org/2000/svg" width="274" height="249" role="img" aria-label="Parábola con su vértice y los puntos de la tabla"><line x1="12.0" y1="12" x2="12.0" y2="237.0" stroke="#E0C4BC" stroke-width="0.5"/><line x1="37.0" y1="12" x2="37.0" y2="237.0" stroke="#E0C4BC" stroke-width="0.5"/><line x1="62.0" y1="12" x2="62.0" y2="237.0" stroke="#E0C4BC" stroke-width="0.5"/><line x1="87.0" y1="12" x2="87.0" y2="237.0" stroke="#E0C4BC" stroke-width="0.5"/><line x1="112.0" y1="12" x2="112.0" y2="237.0" stroke="#E0C4BC" stroke-width="0.5"/><line x1="137.0" y1="12" x2="137.0" y2="237.0" stroke="#E0C4BC" stroke-width="0.5"/><line x1="162.0" y1="12" x2="162.0" y2="237.0" stroke="#E0C4BC" stroke-width="0.5"/><line x1="187.0" y1="12" x2="187.0" y2="237.0" stroke="#E0C4BC" stroke-width="0.5"/><line x1="212.0" y1="12" x2="212.0" y2="237.0" stroke="#E0C4BC" stroke-width="0.5"/><line x1="237.0" y1="12" x2="237.0" y2="237.0" stroke="#E0C4BC" stroke-width="0.5"/><line x1="262.0" y1="12" x2="262.0" y2="237.0" stroke="#E0C4BC" stroke-width="0.5"/><line x1="12" y1="237.0" x2="262.0" y2="237.0" stroke="#E0C4BC" stroke-width="0.5"/><line x1="12" y1="212.0" x2="262.0" y2="212.0" stroke="#E0C4BC" stroke-width="0.5"/><line x1="12" y1="187.0" x2="262.0" y2="187.0" stroke="#E0C4BC" stroke-width="0.5"/><line x1="12" y1="162.0" x2="262.0" y2="162.0" stroke="#E0C4BC" stroke-width="0.5"/><line x1="12" y1="137.0" x2="262.0" y2="137.0" stroke="#E0C4BC" stroke-width="0.5"/><line x1="12" y1="112.0" x2="262.0" y2="112.0" stroke="#E0C4BC" stroke-width="0.5"/><line x1="12" y1="87.0" x2="262.0" y2="87.0" stroke="#E0C4BC" stroke-width="0.5"/><line x1="12" y1="62.0" x2="262.0" y2="62.0" stroke="#E0C4BC" stroke-width="0.5"/><line x1="12" y1="37.0" x2="262.0" y2="37.0" stroke="#E0C4BC" stroke-width="0.5"/><line x1="12" y1="12.0" x2="262.0" y2="12.0" stroke="#E0C4BC" stroke-width="0.5"/><line x1="12" y1="137.0" x2="262.0" y2="137.0" stroke="#7B5A50" stroke-width="1.2"/><line x1="37.0" y1="12" x2="37.0" y2="237.0" stroke="#7B5A50" stroke-width="1.2"/><path d="M67.2,17.2 L68.2,22.9 L69.3,28.6 L70.3,34.2 L71.4,39.7 L72.4,45.2 L73.5,50.5 L74.5,55.8 L75.5,60.9 L76.6,66.0 L77.6,71.0 L78.7,75.9 L79.7,80.7 L80.8,85.4 L81.8,90.1 L82.8,94.6 L83.9,99.1 L84.9,103.5 L86.0,107.8 L87.0,112.0 L88.0,116.1 L89.1,120.2 L90.1,124.1 L91.2,128.0 L92.2,131.7 L93.2,135.4 L94.3,139.0 L95.3,142.6 L96.4,146.0 L97.4,149.3 L98.5,152.6 L99.5,155.8 L100.5,158.8 L101.6,161.8 L102.6,164.7 L103.7,167.6 L104.7,170.3 L105.8,172.9 L106.8,175.5 L107.8,178.0 L108.9,180.4 L109.9,182.7 L111.0,184.9 L112.0,187.0 L113.0,189.0 L114.1,191.0 L115.1,192.9 L116.2,194.6 L117.2,196.3 L118.2,197.9 L119.3,199.5 L120.3,200.9 L121.4,202.2 L122.4,203.5 L123.5,204.7 L124.5,205.8 L125.5,206.7 L126.6,207.7 L127.6,208.5 L128.7,209.2 L129.7,209.9 L130.8,210.4 L131.8,210.9 L132.8,211.3 L133.9,211.6 L134.9,211.8 L136.0,212.0 L137.0,212.0 L138.0,212.0 L139.1,211.8 L140.1,211.6 L141.2,211.3 L142.2,210.9 L143.2,210.4 L144.3,209.9 L145.3,209.2 L146.4,208.5 L147.4,207.7 L148.5,206.7 L149.5,205.8 L150.5,204.7 L151.6,203.5 L152.6,202.2 L153.7,200.9 L154.7,199.5 L155.8,197.9 L156.8,196.3 L157.8,194.6 L158.9,192.9 L159.9,191.0 L161.0,189.0 L162.0,187.0 L163.0,184.9 L164.1,182.7 L165.1,180.4 L166.2,178.0 L167.2,175.5 L168.2,172.9 L169.3,170.3 L170.3,167.6 L171.4,164.7 L172.4,161.8 L173.5,158.8 L174.5,155.8 L175.5,152.6 L176.6,149.3 L177.6,146.0 L178.7,142.6 L179.7,139.0 L180.8,135.4 L181.8,131.7 L182.8,128.0 L183.9,124.1 L184.9,120.2 L186.0,116.1 L187.0,112.0 L188.0,107.8 L189.1,103.5 L190.1,99.1 L191.2,94.6 L192.2,90.1 L193.2,85.4 L194.3,80.7 L195.3,75.9 L196.4,71.0 L197.4,66.0 L198.5,60.9 L199.5,55.8 L200.5,50.5 L201.6,45.2 L202.6,39.7 L203.7,34.2 L204.7,28.6 L205.8,22.9 L206.8,17.2" fill="none" stroke="#FF00AA" stroke-width="2.2" stroke-linecap="round"/><circle cx="87.0" cy="112.0" r="3" fill="#1A0828"/><circle cx="112.0" cy="187.0" r="3" fill="#1A0828"/><circle cx="137.0" cy="212.0" r="3" fill="#1A0828"/><circle cx="162.0" cy="187.0" r="3" fill="#1A0828"/><circle cx="187.0" cy="112.0" r="3" fill="#1A0828"/><circle cx="137.0" cy="212.0" r="5.5" fill="none" stroke="#1A0828" stroke-width="1.2"/></svg></div>
+      </div>
+    </section>
+
+    <section class="section-block">
+      <div class="sec-head">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+        </div>
+        <h2>Ejercicios</h2>
+      </div>
+      <div class="bloques-2">
+        <div class="mini-card">
+          <div class="mini-card-head">Ejercicio 1</div>
+          <div class="mini-card-body">$$f(x) = x^2 - 6x + 18$$</div>
+        </div>
+        <div class="mini-card">
+          <div class="mini-card-head">Ejercicio 2</div>
+          <div class="mini-card-body">$$f(x) = x^2 + 10x + 16$$</div>
+        </div>
+        <div class="mini-card">
+          <div class="mini-card-head">Ejercicio 3</div>
+          <div class="mini-card-body">$$f(x) = x^2 + 8x - 9$$</div>
+        </div>
+        <div class="mini-card">
+          <div class="mini-card-head">Ejercicio 4</div>
+          <div class="mini-card-body">$$f(x) = x^2 + 2x - 12$$</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-block">
+      <div class="sec-toggle" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('show');">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <h2>Respuestas</h2>
+        <span class="chev">▼</span>
+      </div>
+      <div class="collapsible">
+        <div class="resol-grid">
+
+          <div class="resol-item">
+            <div class="resol-num">Ejercicio 1</div>
+            <div class="despeje">$$f(x) = x^2 - 6x + 18$$</div>
+            $$\begin{aligned} f(x) &= x^2 - 6x + 9 - 9 + 18 \\ f(x) &= (x - 3)(x - 3) + 9 \\ f(x) &= (x - 3)^2 + 9 \end{aligned}$$
+            <div style="text-align:center"><div class="mitad-box"><div><span>b</span>$-6$</div><div><span>mitad</span>$-3$</div><div><span>cuadrado de la mitad</span>$9$</div></div></div>
+            <div style="text-align:center"><span class="resultado-pill">$V = (3,\, 9)$</span></div>
+            <div class="tabla-wrap"><table class="tabla-val">
+              <tr><th>$x$</th><th>$f(x)$</th><th class="cuenta">$(x)^2 - 6(x) + 18$</th></tr>
+              <tr><td>$1$</td><td>$\mathbf{13}$</td><td class="cuenta">$(1)^2 - 6(1) + 18 = 1 - 6 + 18 = \mathbf{13}$</td></tr>
+              <tr><td>$2$</td><td>$\mathbf{10}$</td><td class="cuenta">$(2)^2 - 6(2) + 18 = 4 - 12 + 18 = \mathbf{10}$</td></tr>
+              <tr class="vert"><td>$3$</td><td>$\mathbf{9}$</td><td class="cuenta">$(3)^2 - 6(3) + 18 = 9 - 18 + 18 = \mathbf{9}$</td></tr>
+              <tr><td>$4$</td><td>$\mathbf{10}$</td><td class="cuenta">$(4)^2 - 6(4) + 18 = 16 - 24 + 18 = \mathbf{10}$</td></tr>
+              <tr><td>$5$</td><td>$\mathbf{13}$</td><td class="cuenta">$(5)^2 - 6(5) + 18 = 25 - 30 + 18 = \mathbf{13}$</td></tr>
+            </table></div>
+            <div class="graf-wrap"><svg class="graf-svg" viewBox="0 0 232 384" xmlns="http://www.w3.org/2000/svg" width="232" height="384" role="img" aria-label="Parábola con su vértice y los puntos de la tabla"><line x1="12.0" y1="12" x2="12.0" y2="372.0" stroke="#E0C4BC" stroke-width="0.5"/><line x1="38.0" y1="12" x2="38.0" y2="372.0" stroke="#E0C4BC" stroke-width="0.5"/><line x1="64.0" y1="12" x2="64.0" y2="372.0" stroke="#E0C4BC" stroke-width="0.5"/><line x1="90.0" y1="12" x2="90.0" y2="372.0" stroke="#E0C4BC" stroke-width="0.5"/><line x1="116.0" y1="12" x2="116.0" y2="372.0" stroke="#E0C4BC" stroke-width="0.5"/><line x1="142.0" y1="12" x2="142.0" y2="372.0" stroke="#E0C4BC" stroke-width="0.5"/><line x1="168.0" y1="12" x2="168.0" y2="372.0" stroke="#E0C4BC" stroke-width="0.5"/><line x1="194.0" y1="12" x2="194.0" y2="372.0" stroke="#E0C4BC" stroke-width="0.5"/><line x1="220.0" y1="12" x2="220.0" y2="372.0" stroke="#E0C4BC" stroke-width="0.5"/><line x1="12" y1="372.0" x2="220.0" y2="372.0" stroke="#E0C4BC" stroke-width="0.5"/><line x1="12" y1="324.0" x2="220.0" y2="324.0" stroke="#E0C4BC" stroke-width="0.5"/><line x1="12" y1="276.0" x2="220.0" y2="276.0" stroke="#E0C4BC" stroke-width="0.5"/><line x1="12" y1="228.0" x2="220.0" y2="228.0" stroke="#E0C4BC" stroke-width="0.5"/><line x1="12" y1="180.0" x2="220.0" y2="180.0" stroke="#E0C4BC" stroke-width="0.5"/><line x1="12" y1="132.0" x2="220.0" y2="132.0" stroke="#E0C4BC" stroke-width="0.5"/><line x1="12" y1="84.0" x2="220.0" y2="84.0" stroke="#E0C4BC" stroke-width="0.5"/><line x1="12" y1="36.0" x2="220.0" y2="36.0" stroke="#E0C4BC" stroke-width="0.5"/><line x1="12" y1="372.0" x2="220.0" y2="372.0" stroke="#7B5A50" stroke-width="1.2"/><line x1="38.0" y1="12" x2="38.0" y2="372.0" stroke="#7B5A50" stroke-width="1.2"/><path d="M52.7,13.9 L53.6,17.8 L54.5,21.6 L55.3,25.3 L56.2,29.0 L57.1,32.7 L57.9,36.3 L58.8,39.8 L59.7,43.3 L60.5,46.8 L61.4,50.2 L62.3,53.5 L63.1,56.8 L64.0,60.0 L64.9,63.2 L65.7,66.3 L66.6,69.4 L67.5,72.4 L68.3,75.3 L69.2,78.2 L70.1,81.1 L70.9,83.9 L71.8,86.6 L72.7,89.3 L73.5,92.0 L74.4,94.6 L75.3,97.1 L76.1,99.6 L77.0,102.0 L77.9,104.4 L78.7,106.7 L79.6,109.0 L80.5,111.2 L81.3,113.3 L82.2,115.4 L83.1,117.5 L83.9,119.5 L84.8,121.4 L85.7,123.3 L86.5,125.2 L87.4,127.0 L88.3,128.7 L89.1,130.4 L90.0,132.0 L90.9,133.6 L91.7,135.1 L92.6,136.6 L93.5,138.0 L94.3,139.3 L95.2,140.6 L96.1,141.9 L96.9,143.1 L97.8,144.2 L98.7,145.3 L99.5,146.4 L100.4,147.4 L101.3,148.3 L102.1,149.2 L103.0,150.0 L103.9,150.8 L104.7,151.5 L105.6,152.2 L106.5,152.8 L107.3,153.3 L108.2,153.8 L109.1,154.3 L109.9,154.7 L110.8,155.0 L111.7,155.3 L112.5,155.6 L113.4,155.8 L114.3,155.9 L115.1,156.0 L116.0,156.0 L116.9,156.0 L117.7,155.9 L118.6,155.8 L119.5,155.6 L120.3,155.3 L121.2,155.0 L122.1,154.7 L122.9,154.3 L123.8,153.8 L124.7,153.3 L125.5,152.8 L126.4,152.2 L127.3,151.5 L128.1,150.8 L129.0,150.0 L129.9,149.2 L130.7,148.3 L131.6,147.4 L132.5,146.4 L133.3,145.3 L134.2,144.2 L135.1,143.1 L135.9,141.9 L136.8,140.6 L137.7,139.3 L138.5,138.0 L139.4,136.6 L140.3,135.1 L141.1,133.6 L142.0,132.0 L142.9,130.4 L143.7,128.7 L144.6,127.0 L145.5,125.2 L146.3,123.3 L147.2,121.4 L148.1,119.5 L148.9,117.5 L149.8,115.4 L150.7,113.3 L151.5,111.2 L152.4,109.0 L153.3,106.7 L154.1,104.4 L155.0,102.0 L155.9,99.6 L156.7,97.1 L157.6,94.6 L158.5,92.0 L159.3,89.3 L160.2,86.6 L161.1,83.9 L161.9,81.1 L162.8,78.2 L163.7,75.3 L164.5,72.4 L165.4,69.4 L166.3,66.3 L167.1,63.2 L168.0,60.0 L168.9,56.8 L169.7,53.5 L170.6,50.2 L171.5,46.8 L172.3,43.3 L173.2,39.8 L174.1,36.3 L174.9,32.7 L175.8,29.0 L176.7,25.3 L177.5,21.6 L178.4,17.8 L179.3,13.9" fill="none" stroke="#FF00AA" stroke-width="2.2" stroke-linecap="round"/><circle cx="64.0" cy="60.0" r="3" fill="#1A0828"/><circle cx="90.0" cy="132.0" r="3" fill="#1A0828"/><circle cx="116.0" cy="156.0" r="3" fill="#1A0828"/><circle cx="142.0" cy="132.0" r="3" fill="#1A0828"/><circle cx="168.0" cy="60.0" r="3" fill="#1A0828"/><circle cx="116.0" cy="156.0" r="5.5" fill="none" stroke="#1A0828" stroke-width="1.2"/></svg></div>
+          </div>
+
+          <div class="resol-item">
+            <div class="resol-num">Ejercicio 2</div>
+            <div class="despeje">$$f(x) = x^2 + 10x + 16$$</div>
+            $$\begin{aligned} f(x) &= x^2 + 10x + 25 - 25 + 16 \\ f(x) &= (x + 5)(x + 5) - 9 \\ f(x) &= (x + 5)^2 - 9 \end{aligned}$$
+            <div style="text-align:center"><div class="mitad-box"><div><span>b</span>$10$</div><div><span>mitad</span>$5$</div><div><span>cuadrado de la mitad</span>$25$</div></div></div>
+            <div style="text-align:center"><span class="resultado-pill">$V = (-5,\, -9)$</span></div>
+            <div class="tabla-wrap"><table class="tabla-val">
+              <tr><th>$x$</th><th>$f(x)$</th><th class="cuenta">$(x)^2 + 10(x) + 16$</th></tr>
+              <tr><td>$-3$</td><td>$\mathbf{-5}$</td><td class="cuenta">$(-3)^2 + 10(-3) + 16 = 9 - 30 + 16 = \mathbf{-5}$</td></tr>
+              <tr><td>$-4$</td><td>$\mathbf{-8}$</td><td class="cuenta">$(-4)^2 + 10(-4) + 16 = 16 - 40 + 16 = \mathbf{-8}$</td></tr>
+              <tr class="vert"><td>$-5$</td><td>$\mathbf{-9}$</td><td class="cuenta">$(-5)^2 + 10(-5) + 16 = 25 - 50 + 16 = \mathbf{-9}$</td></tr>
+              <tr><td>$-6$</td><td>$\mathbf{-8}$</td><td class="cuenta">$(-6)^2 + 10(-6) + 16 = 36 - 60 + 16 = \mathbf{-8}$</td></tr>
+              <tr><td>$-7$</td><td>$\mathbf{-5}$</td><td class="cuenta">$(-7)^2 + 10(-7) + 16 = 49 - 70 + 16 = \mathbf{-5}$</td></tr>
+            </table></div>
+            <div class="graf-wrap"><svg class="graf-svg" viewBox="0 0 274 299" xmlns="http://www.w3.org/2000/svg" width="274" height="299" role="img" aria-label="Parábola con su vértice y los puntos de la tabla"><line x1="12.0" y1="12" x2="12.0" y2="287.0" stroke="#E0C4BC" stroke-width="0.5"/><line x1="37.0" y1="12" x2="37.0" y2="287.0" stroke="#E0C4BC" stroke-width="0.5"/><line x1="62.0" y1="12" x2="62.0" y2="287.0" stroke="#E0C4BC" stroke-width="0.5"/><line x1="87.0" y1="12" x2="87.0" y2="287.0" stroke="#E0C4BC" stroke-width="0.5"/><line x1="112.0" y1="12" x2="112.0" y2="287.0" stroke="#E0C4BC" stroke-width="0.5"/><line x1="137.0" y1="12" x2="137.0" y2="287.0" stroke="#E0C4BC" stroke-width="0.5"/><line x1="162.0" y1="12" x2="162.0" y2="287.0" stroke="#E0C4BC" stroke-width="0.5"/><line x1="187.0" y1="12" x2="187.0" y2="287.0" stroke="#E0C4BC" stroke-width="0.5"/><line x1="212.0" y1="12" x2="212.0" y2="287.0" stroke="#E0C4BC" stroke-width="0.5"/><line x1="237.0" y1="12" x2="237.0" y2="287.0" stroke="#E0C4BC" stroke-width="0.5"/><line x1="262.0" y1="12" x2="262.0" y2="287.0" stroke="#E0C4BC" stroke-width="0.5"/><line x1="12" y1="287.0" x2="262.0" y2="287.0" stroke="#E0C4BC" stroke-width="0.5"/><line x1="12" y1="262.0" x2="262.0" y2="262.0" stroke="#E0C4BC" stroke-width="0.5"/><line x1="12" y1="237.0" x2="262.0" y2="237.0" stroke="#E0C4BC" stroke-width="0.5"/><line x1="12" y1="212.0" x2="262.0" y2="212.0" stroke="#E0C4BC" stroke-width="0.5"/><line x1="12" y1="187.0" x2="262.0" y2="187.0" stroke="#E0C4BC" stroke-width="0.5"/><line x1="12" y1="162.0" x2="262.0" y2="162.0" stroke="#E0C4BC" stroke-width="0.5"/><line x1="12" y1="137.0" x2="262.0" y2="137.0" stroke="#E0C4BC" stroke-width="0.5"/><line x1="12" y1="112.0" x2="262.0" y2="112.0" stroke="#E0C4BC" stroke-width="0.5"/><line x1="12" y1="87.0" x2="262.0" y2="87.0" stroke="#E0C4BC" stroke-width="0.5"/><line x1="12" y1="62.0" x2="262.0" y2="62.0" stroke="#E0C4BC" stroke-width="0.5"/><line x1="12" y1="37.0" x2="262.0" y2="37.0" stroke="#E0C4BC" stroke-width="0.5"/><line x1="12" y1="12.0" x2="262.0" y2="12.0" stroke="#E0C4BC" stroke-width="0.5"/><line x1="12" y1="37.0" x2="262.0" y2="37.0" stroke="#7B5A50" stroke-width="1.2"/><line x1="237.0" y1="12" x2="237.0" y2="287.0" stroke="#7B5A50" stroke-width="1.2"/><path d="M33.9,17.9 L34.9,24.3 L36.0,30.7 L37.0,37.0 L38.0,43.2 L39.1,49.3 L40.1,55.4 L41.2,61.3 L42.2,67.2 L43.2,72.9 L44.3,78.6 L45.3,84.2 L46.4,89.7 L47.4,95.2 L48.5,100.5 L49.5,105.8 L50.5,110.9 L51.6,116.0 L52.6,121.0 L53.7,125.9 L54.7,130.7 L55.8,135.4 L56.8,140.1 L57.8,144.6 L58.9,149.1 L59.9,153.5 L61.0,157.8 L62.0,162.0 L63.0,166.1 L64.1,170.2 L65.1,174.1 L66.2,178.0 L67.2,181.7 L68.2,185.4 L69.3,189.0 L70.3,192.6 L71.4,196.0 L72.4,199.3 L73.5,202.6 L74.5,205.8 L75.5,208.8 L76.6,211.8 L77.6,214.7 L78.7,217.6 L79.7,220.3 L80.8,222.9 L81.8,225.5 L82.8,228.0 L83.9,230.4 L84.9,232.7 L86.0,234.9 L87.0,237.0 L88.0,239.0 L89.1,241.0 L90.1,242.9 L91.2,244.6 L92.2,246.3 L93.2,247.9 L94.3,249.5 L95.3,250.9 L96.4,252.2 L97.4,253.5 L98.5,254.7 L99.5,255.8 L100.5,256.7 L101.6,257.7 L102.6,258.5 L103.7,259.2 L104.7,259.9 L105.8,260.4 L106.8,260.9 L107.8,261.3 L108.9,261.6 L109.9,261.8 L111.0,262.0 L112.0,262.0 L113.0,262.0 L114.1,261.8 L115.1,261.6 L116.2,261.3 L117.2,260.9 L118.2,260.4 L119.3,259.9 L120.3,259.2 L121.4,258.5 L122.4,257.7 L123.5,256.7 L124.5,255.8 L125.5,254.7 L126.6,253.5 L127.6,252.2 L128.7,250.9 L129.7,249.5 L130.8,247.9 L131.8,246.3 L132.8,244.6 L133.9,242.9 L134.9,241.0 L136.0,239.0 L137.0,237.0 L138.0,234.9 L139.1,232.7 L140.1,230.4 L141.2,228.0 L142.2,225.5 L143.2,222.9 L144.3,220.3 L145.3,217.6 L146.4,214.7 L147.4,211.8 L148.5,208.8 L149.5,205.8 L150.5,202.6 L151.6,199.3 L152.6,196.0 L153.7,192.6 L154.7,189.0 L155.8,185.4 L156.8,181.7 L157.8,178.0 L158.9,174.1 L159.9,170.2 L161.0,166.1 L162.0,162.0 L163.0,157.8 L164.1,153.5 L165.1,149.1 L166.2,144.6 L167.2,140.1 L168.2,135.4 L169.3,130.7 L170.3,125.9 L171.4,121.0 L172.4,116.0 L173.5,110.9 L174.5,105.8 L175.5,100.5 L176.6,95.2 L177.6,89.7 L178.7,84.2 L179.7,78.6 L180.8,72.9 L181.8,67.2 L182.8,61.3 L183.9,55.4 L184.9,49.3 L186.0,43.2 L187.0,37.0 L188.0,30.7 L189.1,24.3 L190.1,17.9" fill="none" stroke="#FF00AA" stroke-width="2.2" stroke-linecap="round"/><circle cx="162.0" cy="162.0" r="3" fill="#1A0828"/><circle cx="137.0" cy="237.0" r="3" fill="#1A0828"/><circle cx="112.0" cy="262.0" r="3" fill="#1A0828"/><circle cx="87.0" cy="237.0" r="3" fill="#1A0828"/><circle cx="62.0" cy="162.0" r="3" fill="#1A0828"/><circle cx="112.0" cy="262.0" r="5.5" fill="none" stroke="#1A0828" stroke-width="1.2"/></svg></div>
+          </div>
+
+          <div class="resol-item">
+            <div class="resol-num">Ejercicio 3</div>
+            <div class="despeje">$$f(x) = x^2 + 8x - 9$$</div>
+            $$\begin{aligned} f(x) &= x^2 + 8x + 16 - 16 - 9 \\ f(x) &= (x + 4)(x + 4) - 25 \\ f(x) &= (x + 4)^2 - 25 \end{aligned}$$
+            <div style="text-align:center"><div class="mitad-box"><div><span>b</span>$8$</div><div><span>mitad</span>$4$</div><div><span>cuadrado de la mitad</span>$16$</div></div></div>
+            <div style="text-align:center"><span class="resultado-pill">$V = (-4,\, -25)$</span></div>
+            <div class="tabla-wrap"><table class="tabla-val">
+              <tr><th>$x$</th><th>$f(x)$</th><th class="cuenta">$(x)^2 + 8(x) - 9$</th></tr>
+              <tr><td>$-2$</td><td>$\mathbf{-21}$</td><td class="cuenta">$(-2)^2 + 8(-2) - 9 = 4 - 16 - 9 = \mathbf{-21}$</td></tr>
+              <tr><td>$-3$</td><td>$\mathbf{-24}$</td><td class="cuenta">$(-3)^2 + 8(-3) - 9 = 9 - 24 - 9 = \mathbf{-24}$</td></tr>
+              <tr class="vert"><td>$-4$</td><td>$\mathbf{-25}$</td><td class="cuenta">$(-4)^2 + 8(-4) - 9 = 16 - 32 - 9 = \mathbf{-25}$</td></tr>
+              <tr><td>$-5$</td><td>$\mathbf{-24}$</td><td class="cuenta">$(-5)^2 + 8(-5) - 9 = 25 - 40 - 9 = \mathbf{-24}$</td></tr>
+              <tr><td>$-6$</td><td>$\mathbf{-21}$</td><td class="cuenta">$(-6)^2 + 8(-6) - 9 = 36 - 48 - 9 = \mathbf{-21}$</td></tr>
+            </table></div>
+            <div class="graf-wrap"><svg class="graf-svg" viewBox="0 0 232 384" xmlns="http://www.w3.org/2000/svg" width="232" height="384" role="img" aria-label="Parábola con su vértice y los puntos de la tabla"><line x1="12.0" y1="12" x2="12.0" y2="372.0" stroke="#E0C4BC" stroke-width="0.5"/><line x1="38.0" y1="12" x2="38.0" y2="372.0" stroke="#E0C4BC" stroke-width="0.5"/><line x1="64.0" y1="12" x2="64.0" y2="372.0" stroke="#E0C4BC" stroke-width="0.5"/><line x1="90.0" y1="12" x2="90.0" y2="372.0" stroke="#E0C4BC" stroke-width="0.5"/><line x1="116.0" y1="12" x2="116.0" y2="372.0" stroke="#E0C4BC" stroke-width="0.5"/><line x1="142.0" y1="12" x2="142.0" y2="372.0" stroke="#E0C4BC" stroke-width="0.5"/><line x1="168.0" y1="12" x2="168.0" y2="372.0" stroke="#E0C4BC" stroke-width="0.5"/><line x1="194.0" y1="12" x2="194.0" y2="372.0" stroke="#E0C4BC" stroke-width="0.5"/><line x1="220.0" y1="12" x2="220.0" y2="372.0" stroke="#E0C4BC" stroke-width="0.5"/><line x1="12" y1="372.0" x2="220.0" y2="372.0" stroke="#E0C4BC" stroke-width="0.5"/><line x1="12" y1="320.6" x2="220.0" y2="320.6" stroke="#E0C4BC" stroke-width="0.5"/><line x1="12" y1="269.1" x2="220.0" y2="269.1" stroke="#E0C4BC" stroke-width="0.5"/><line x1="12" y1="217.7" x2="220.0" y2="217.7" stroke="#E0C4BC" stroke-width="0.5"/><line x1="12" y1="166.3" x2="220.0" y2="166.3" stroke="#E0C4BC" stroke-width="0.5"/><line x1="12" y1="114.9" x2="220.0" y2="114.9" stroke="#E0C4BC" stroke-width="0.5"/><line x1="12" y1="63.4" x2="220.0" y2="63.4" stroke="#E0C4BC" stroke-width="0.5"/><line x1="12" y1="12.0" x2="220.0" y2="12.0" stroke="#E0C4BC" stroke-width="0.5"/><line x1="12" y1="12.0" x2="220.0" y2="12.0" stroke="#7B5A50" stroke-width="1.2"/><line x1="220.0" y1="12" x2="220.0" y2="372.0" stroke="#7B5A50" stroke-width="1.2"/><path d="M12.0,127.7 L12.9,131.1 L13.7,134.5 L14.6,137.9 L15.5,141.2 L16.3,144.5 L17.2,147.8 L18.1,151.0 L18.9,154.2 L19.8,157.4 L20.7,160.6 L21.5,163.7 L22.4,166.8 L23.3,169.9 L24.1,172.9 L25.0,175.9 L25.9,178.9 L26.7,181.9 L27.6,184.8 L28.5,187.7 L29.3,190.6 L30.2,193.4 L31.1,196.2 L31.9,199.0 L32.8,201.8 L33.7,204.5 L34.5,207.2 L35.4,209.9 L36.3,212.5 L37.1,215.1 L38.0,217.7 L38.9,220.3 L39.7,222.8 L40.6,225.3 L41.5,227.8 L42.3,230.2 L43.2,232.6 L44.1,235.0 L44.9,237.4 L45.8,239.7 L46.7,242.0 L47.5,244.3 L48.4,246.5 L49.3,248.7 L50.1,250.9 L51.0,253.1 L51.9,255.2 L52.7,257.3 L53.6,259.4 L54.5,261.4 L55.3,263.4 L56.2,265.4 L57.1,267.4 L57.9,269.3 L58.8,271.2 L59.7,273.1 L60.5,274.9 L61.4,276.7 L62.3,278.5 L63.1,280.3 L64.0,282.0 L64.9,283.7 L65.7,285.4 L66.6,287.0 L67.5,288.6 L68.3,290.2 L69.2,291.8 L70.1,293.3 L70.9,294.8 L71.8,296.3 L72.7,297.7 L73.5,299.1 L74.4,300.5 L75.3,301.9 L76.1,303.2 L77.0,304.5 L77.9,305.8 L78.7,307.0 L79.6,308.2 L80.5,309.4 L81.3,310.6 L82.2,311.7 L83.1,312.8 L83.9,313.9 L84.8,314.9 L85.7,315.9 L86.5,316.9 L87.4,317.9 L88.3,318.8 L89.1,319.7 L90.0,320.6 L90.9,321.4 L91.7,322.2 L92.6,323.0 L93.5,323.8 L94.3,324.5 L95.2,325.2 L96.1,325.9 L96.9,326.5 L97.8,327.1 L98.7,327.7 L99.5,328.3 L100.4,328.8 L101.3,329.3 L102.1,329.8 L103.0,330.2 L103.9,330.6 L104.7,331.0 L105.6,331.4 L106.5,331.7 L107.3,332.0 L108.2,332.3 L109.1,332.5 L109.9,332.7 L110.8,332.9 L111.7,333.1 L112.5,333.2 L113.4,333.3 L114.3,333.4 L115.1,333.4 L116.0,333.4 L116.9,333.4 L117.7,333.4 L118.6,333.3 L119.5,333.2 L120.3,333.1 L121.2,332.9 L122.1,332.7 L122.9,332.5 L123.8,332.3 L124.7,332.0 L125.5,331.7 L126.4,331.4 L127.3,331.0 L128.1,330.6 L129.0,330.2 L129.9,329.8 L130.7,329.3 L131.6,328.8 L132.5,328.3 L133.3,327.7 L134.2,327.1 L135.1,326.5 L135.9,325.9 L136.8,325.2 L137.7,324.5 L138.5,323.8 L139.4,323.0 L140.3,322.2 L141.1,321.4 L142.0,320.6 L142.9,319.7 L143.7,318.8 L144.6,317.9 L145.5,316.9 L146.3,315.9 L147.2,314.9 L148.1,313.9 L148.9,312.8 L149.8,311.7 L150.7,310.6 L151.5,309.4 L152.4,308.2 L153.3,307.0 L154.1,305.8 L155.0,304.5 L155.9,303.2 L156.7,301.9 L157.6,300.5 L158.5,299.1 L159.3,297.7 L160.2,296.3 L161.1,294.8 L161.9,293.3 L162.8,291.8 L163.7,290.2 L164.5,288.6 L165.4,287.0 L166.3,285.4 L167.1,283.7 L168.0,282.0 L168.9,280.3 L169.7,278.5 L170.6,276.7 L171.5,274.9 L172.3,273.1 L173.2,271.2 L174.1,269.3 L174.9,267.4 L175.8,265.4 L176.7,263.4 L177.5,261.4 L178.4,259.4 L179.3,257.3 L180.1,255.2 L181.0,253.1 L181.9,250.9 L182.7,248.7 L183.6,246.5 L184.5,244.3 L185.3,242.0 L186.2,239.7 L187.1,237.4 L187.9,235.0 L188.8,232.6 L189.7,230.2 L190.5,227.8 L191.4,225.3 L192.3,222.8 L193.1,220.3 L194.0,217.7 L194.9,215.1 L195.7,212.5 L196.6,209.9 L197.5,207.2 L198.3,204.5 L199.2,201.8 L200.1,199.0 L200.9,196.2 L201.8,193.4 L202.7,190.6 L203.5,187.7 L204.4,184.8 L205.3,181.9 L206.1,178.9 L207.0,175.9 L207.9,172.9 L208.7,169.9 L209.6,166.8 L210.5,163.7 L211.3,160.6 L212.2,157.4 L213.1,154.2 L213.9,151.0 L214.8,147.8 L215.7,144.5 L216.5,141.2 L217.4,137.9 L218.3,134.5 L219.1,131.1 L220.0,127.7" fill="none" stroke="#FF00AA" stroke-width="2.2" stroke-linecap="round"/><circle cx="168.0" cy="282.0" r="3" fill="#1A0828"/><circle cx="142.0" cy="320.6" r="3" fill="#1A0828"/><circle cx="116.0" cy="333.4" r="3" fill="#1A0828"/><circle cx="90.0" cy="320.6" r="3" fill="#1A0828"/><circle cx="64.0" cy="282.0" r="3" fill="#1A0828"/><circle cx="116.0" cy="333.4" r="5.5" fill="none" stroke="#1A0828" stroke-width="1.2"/></svg></div>
+          </div>
+
+          <div class="resol-item">
+            <div class="resol-num">Ejercicio 4</div>
+            <div class="despeje">$$f(x) = x^2 + 2x - 12$$</div>
+            $$\begin{aligned} f(x) &= x^2 + 2x + 1 - 1 - 12 \\ f(x) &= (x + 1)(x + 1) - 13 \\ f(x) &= (x + 1)^2 - 13 \end{aligned}$$
+            <div style="text-align:center"><div class="mitad-box"><div><span>b</span>$2$</div><div><span>mitad</span>$1$</div><div><span>cuadrado de la mitad</span>$1$</div></div></div>
+            <div style="text-align:center"><span class="resultado-pill">$V = (-1,\, -13)$</span></div>
+            <div class="tabla-wrap"><table class="tabla-val">
+              <tr><th>$x$</th><th>$f(x)$</th><th class="cuenta">$(x)^2 + 2(x) - 12$</th></tr>
+              <tr><td>$-3$</td><td>$\mathbf{-9}$</td><td class="cuenta">$(-3)^2 + 2(-3) - 12 = 9 - 6 - 12 = \mathbf{-9}$</td></tr>
+              <tr><td>$-2$</td><td>$\mathbf{-12}$</td><td class="cuenta">$(-2)^2 + 2(-2) - 12 = 4 - 4 - 12 = \mathbf{-12}$</td></tr>
+              <tr class="vert"><td>$-1$</td><td>$\mathbf{-13}$</td><td class="cuenta">$(-1)^2 + 2(-1) - 12 = 1 - 2 - 12 = \mathbf{-13}$</td></tr>
+              <tr><td>$0$</td><td>$\mathbf{-12}$</td><td class="cuenta">$(0)^2 + 2(0) - 12 = 0 + 0 - 12 = \mathbf{-12}$</td></tr>
+              <tr><td>$1$</td><td>$\mathbf{-9}$</td><td class="cuenta">$(1)^2 + 2(1) - 12 = 1 + 2 - 12 = \mathbf{-9}$</td></tr>
+            </table></div>
+            <div class="graf-wrap"><svg class="graf-svg" viewBox="0 0 232 384" xmlns="http://www.w3.org/2000/svg" width="232" height="384" role="img" aria-label="Parábola con su vértice y los puntos de la tabla"><line x1="12.0" y1="12" x2="12.0" y2="372.0" stroke="#E0C4BC" stroke-width="0.5"/><line x1="38.0" y1="12" x2="38.0" y2="372.0" stroke="#E0C4BC" stroke-width="0.5"/><line x1="64.0" y1="12" x2="64.0" y2="372.0" stroke="#E0C4BC" stroke-width="0.5"/><line x1="90.0" y1="12" x2="90.0" y2="372.0" stroke="#E0C4BC" stroke-width="0.5"/><line x1="116.0" y1="12" x2="116.0" y2="372.0" stroke="#E0C4BC" stroke-width="0.5"/><line x1="142.0" y1="12" x2="142.0" y2="372.0" stroke="#E0C4BC" stroke-width="0.5"/><line x1="168.0" y1="12" x2="168.0" y2="372.0" stroke="#E0C4BC" stroke-width="0.5"/><line x1="194.0" y1="12" x2="194.0" y2="372.0" stroke="#E0C4BC" stroke-width="0.5"/><line x1="220.0" y1="12" x2="220.0" y2="372.0" stroke="#E0C4BC" stroke-width="0.5"/><line x1="12" y1="372.0" x2="220.0" y2="372.0" stroke="#E0C4BC" stroke-width="0.5"/><line x1="12" y1="327.0" x2="220.0" y2="327.0" stroke="#E0C4BC" stroke-width="0.5"/><line x1="12" y1="282.0" x2="220.0" y2="282.0" stroke="#E0C4BC" stroke-width="0.5"/><line x1="12" y1="237.0" x2="220.0" y2="237.0" stroke="#E0C4BC" stroke-width="0.5"/><line x1="12" y1="192.0" x2="220.0" y2="192.0" stroke="#E0C4BC" stroke-width="0.5"/><line x1="12" y1="147.0" x2="220.0" y2="147.0" stroke="#E0C4BC" stroke-width="0.5"/><line x1="12" y1="102.0" x2="220.0" y2="102.0" stroke="#E0C4BC" stroke-width="0.5"/><line x1="12" y1="57.0" x2="220.0" y2="57.0" stroke="#E0C4BC" stroke-width="0.5"/><line x1="12" y1="12.0" x2="220.0" y2="12.0" stroke="#E0C4BC" stroke-width="0.5"/><line x1="12" y1="12.0" x2="220.0" y2="12.0" stroke="#7B5A50" stroke-width="1.2"/><line x1="142.0" y1="12" x2="142.0" y2="372.0" stroke="#7B5A50" stroke-width="1.2"/><path d="M22.4,12.9 L23.3,18.3 L24.1,23.6 L25.0,28.9 L25.9,34.1 L26.7,39.3 L27.6,44.4 L28.5,49.5 L29.3,54.5 L30.2,59.5 L31.1,64.4 L31.9,69.3 L32.8,74.1 L33.7,78.9 L34.5,83.6 L35.4,88.3 L36.3,92.9 L37.1,97.5 L38.0,102.0 L38.9,106.5 L39.7,110.9 L40.6,115.3 L41.5,119.6 L42.3,123.9 L43.2,128.1 L44.1,132.3 L44.9,136.4 L45.8,140.5 L46.7,144.5 L47.5,148.5 L48.4,152.4 L49.3,156.3 L50.1,160.1 L51.0,163.9 L51.9,167.6 L52.7,171.3 L53.6,174.9 L54.5,178.5 L55.3,182.0 L56.2,185.5 L57.1,188.9 L57.9,192.3 L58.8,195.6 L59.7,198.9 L60.5,202.1 L61.4,205.3 L62.3,208.4 L63.1,211.5 L64.0,214.5 L64.9,217.5 L65.7,220.4 L66.6,223.3 L67.5,226.1 L68.3,228.9 L69.2,231.6 L70.1,234.3 L70.9,236.9 L71.8,239.5 L72.7,242.0 L73.5,244.5 L74.4,246.9 L75.3,249.3 L76.1,251.6 L77.0,253.9 L77.9,256.1 L78.7,258.3 L79.6,260.4 L80.5,262.5 L81.3,264.5 L82.2,266.5 L83.1,268.4 L83.9,270.3 L84.8,272.1 L85.7,273.9 L86.5,275.6 L87.4,277.3 L88.3,278.9 L89.1,280.5 L90.0,282.0 L90.9,283.5 L91.7,284.9 L92.6,286.3 L93.5,287.6 L94.3,288.9 L95.2,290.1 L96.1,291.3 L96.9,292.4 L97.8,293.5 L98.7,294.5 L99.5,295.5 L100.4,296.4 L101.3,297.3 L102.1,298.1 L103.0,298.9 L103.9,299.6 L104.7,300.3 L105.6,300.9 L106.5,301.5 L107.3,302.0 L108.2,302.5 L109.1,302.9 L109.9,303.3 L110.8,303.6 L111.7,303.9 L112.5,304.1 L113.4,304.3 L114.3,304.4 L115.1,304.5 L116.0,304.5 L116.9,304.5 L117.7,304.4 L118.6,304.3 L119.5,304.1 L120.3,303.9 L121.2,303.6 L122.1,303.3 L122.9,302.9 L123.8,302.5 L124.7,302.0 L125.5,301.5 L126.4,300.9 L127.3,300.3 L128.1,299.6 L129.0,298.9 L129.9,298.1 L130.7,297.3 L131.6,296.4 L132.5,295.5 L133.3,294.5 L134.2,293.5 L135.1,292.4 L135.9,291.3 L136.8,290.1 L137.7,288.9 L138.5,287.6 L139.4,286.3 L140.3,284.9 L141.1,283.5 L142.0,282.0 L142.9,280.5 L143.7,278.9 L144.6,277.3 L145.5,275.6 L146.3,273.9 L147.2,272.1 L148.1,270.3 L148.9,268.4 L149.8,266.5 L150.7,264.5 L151.5,262.5 L152.4,260.4 L153.3,258.3 L154.1,256.1 L155.0,253.9 L155.9,251.6 L156.7,249.3 L157.6,246.9 L158.5,244.5 L159.3,242.0 L160.2,239.5 L161.1,236.9 L161.9,234.3 L162.8,231.6 L163.7,228.9 L164.5,226.1 L165.4,223.3 L166.3,220.4 L167.1,217.5 L168.0,214.5 L168.9,211.5 L169.7,208.4 L170.6,205.3 L171.5,202.1 L172.3,198.9 L173.2,195.6 L174.1,192.3 L174.9,188.9 L175.8,185.5 L176.7,182.0 L177.5,178.5 L178.4,174.9 L179.3,171.3 L180.1,167.6 L181.0,163.9 L181.9,160.1 L182.7,156.3 L183.6,152.4 L184.5,148.5 L185.3,144.5 L186.2,140.5 L187.1,136.4 L187.9,132.3 L188.8,128.1 L189.7,123.9 L190.5,119.6 L191.4,115.3 L192.3,110.9 L193.1,106.5 L194.0,102.0 L194.9,97.5 L195.7,92.9 L196.6,88.3 L197.5,83.6 L198.3,78.9 L199.2,74.1 L200.1,69.3 L200.9,64.4 L201.8,59.5 L202.7,54.5 L203.5,49.5 L204.4,44.4 L205.3,39.3 L206.1,34.1 L207.0,28.9 L207.9,23.6 L208.7,18.3 L209.6,12.9" fill="none" stroke="#FF00AA" stroke-width="2.2" stroke-linecap="round"/><circle cx="64.0" cy="214.5" r="3" fill="#1A0828"/><circle cx="90.0" cy="282.0" r="3" fill="#1A0828"/><circle cx="116.0" cy="304.5" r="3" fill="#1A0828"/><circle cx="142.0" cy="282.0" r="3" fill="#1A0828"/><circle cx="168.0" cy="214.5" r="3" fill="#1A0828"/><circle cx="116.0" cy="304.5" r="5.5" fill="none" stroke="#1A0828" stroke-width="1.2"/></svg></div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="section-block">
+      <div class="sec-toggle" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('show');">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+        </div>
+        <h2>Ejercicios extra</h2>
+        <span class="chev">▼</span>
+      </div>
+      <div class="collapsible">
+        <div class="bloques-2">
+          <div class="mini-card">
+            <div class="mini-card-head">Bloque 1</div>
+            <div class="mini-card-body">
+              <div class="ej-line">$f(x) = x^2 - 4x + 7$</div>
+              <div class="ej-line">$f(x) = x^2 + 6x + 5$</div>
+              <div class="ej-line">$f(x) = x^2 - 2x - 8$</div>
+              <div class="ej-line">$f(x) = x^2 + 4x - 5$</div>
+              <div class="ej-line">$f(x) = x^2 - 10x + 21$</div>
+            </div>
+          </div>
+          <div class="mini-card">
+            <div class="mini-card-head">Bloque 2</div>
+            <div class="mini-card-body">
+              <div class="ej-line">$f(x) = x^2 + 8x + 12$</div>
+              <div class="ej-line">$f(x) = x^2 - 6x - 7$</div>
+              <div class="ej-line">$f(x) = x^2 + 12x + 32$</div>
+              <div class="ej-line">$f(x) = x^2 - 8x + 20$</div>
+              <div class="ej-line">$f(x) = x^2 + 2x - 3$</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ NAVEGACIÓN ══════════ -->
+    <div class="topic-nav-btns">
+      <a href="trinomio-cuadrado-perfecto.html" class="btn-anterior">← Trinomio cuadrado perfecto</a>
+      <a href="productos-notables.html" class="btn-siguiente">Productos notables →</a>
+    </div>
+
+  </main>
+  <script src="../../nav.js"></script>
+  <script src="../../footer.js"></script>
+</body>
+</html>
