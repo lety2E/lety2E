@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sistemas de numeración — Matemáticas 1 — LetyMath</title>
+  <meta name="description" content="Investigación sobre los sistemas de numeración egipcio, babilónico, maya, romano y el hindú-arábigo." />
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../../favicon.ico">
+  <link rel="stylesheet" href="../../style.css">
+
+  <style>
+    .topic-tag {
+      display: inline-flex; align-items: center; gap: .35rem;
+      padding: .22rem .75rem; border-radius: 99px;
+      background: var(--accent-light); color: var(--accent);
+      font-size: .78rem; font-weight: 700; letter-spacing: .03em;
+      margin-bottom: .55rem;
+    }
+    .topic-tag::before {
+      content: ''; width: 7px; height: 7px; border-radius: 50%;
+      background: var(--accent); display: inline-block;
+    }
+
+    .section-block { margin-bottom: 2.5rem; }
+    .section-block:last-child { margin-bottom: 0; }
+
+    .sec-head {
+      display: flex; align-items: center; gap: .65rem;
+      margin-bottom: 1.1rem;
+    }
+    .sec-head h2 { margin: 0; font-size: 1.2rem; line-height: 1; }
+    .sec-icon {
+      width: 30px; height: 30px; border-radius: 8px;
+      display: grid; place-items: center; flex-shrink: 0;
+      background: var(--accent);
+    }
+    .sec-icon svg { width: 15px; height: 15px; stroke: #fff; fill: none; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+
+    /* Apuntes */
+    .regla-unica {
+      background: var(--bg-card); border: 1.5px solid var(--border);
+      border-radius: var(--r-md); padding: 1.4rem 1.5rem;
+      text-align: center; color: var(--text);
+    }
+    .regla-unica p { margin: 0 0 .4rem; line-height: 1.75; color: var(--text-2); font-size: .95rem; }
+    .regla-unica p:not(:first-child) { margin-top: .6rem; }
+
+    /* Mini card (bloque) */
+    .mini-card {
+      background: var(--bg-card); border: 1.5px solid var(--border);
+      border-radius: var(--r-md); overflow: hidden;
+    }
+    .mini-card-head {
+      padding: .4rem .8rem; background: var(--course-1);
+      font-family: var(--font-display); font-size: .85rem; color: #fff; font-weight: 700;
+    }
+    .mini-card-body {
+      padding: .8rem 1rem;
+      font-size: .9rem; line-height: 1.6; color: var(--text);
+    }
+    .mini-card-body .pregunta {
+      padding: .7rem 0;
+      border-bottom: 1px solid var(--border-s);
+      line-height: 1.65;
+      white-space: normal;
+      text-align: left;
+    }
+    .mini-card-body .pregunta:last-child { border-bottom: none; padding-bottom: .25rem; }
+    .mini-card-body .pregunta:first-child { padding-top: .25rem; }
+
+    /* Grid de bloques */
+    .bloques-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2rem; }
+    @media (max-width: 700px) { .bloques-2 { grid-template-columns: 1fr; } }
+
+    /* Navegacion */
+    .topic-nav-btns {
+      display: flex; justify-content: space-between; gap: 1rem;
+      margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border);
+    }
+    .btn-anterior, .btn-siguiente {
+      display: inline-flex; align-items: center; gap: .5rem;
+      padding: .65rem 1.4rem; border-radius: 99px;
+      font-weight: 700; font-size: .9rem; transition: background .2s, transform .18s;
+    }
+    .btn-anterior {
+      background: transparent; color: var(--accent);
+      border: 2px solid var(--accent);
+    }
+    .btn-anterior:hover { background: var(--accent-light); transform: translateX(-3px); }
+    .btn-siguiente { background: var(--accent); color: #fff; }
+    .btn-siguiente:hover { background: var(--M); color: #fff; transform: translateX(3px); }
+  </style>
+</head>
+<body data-section="math">
+  <main class="topic-content">
+
+    <header class="topic-header">
+      <p class="breadcrumb">
+        <a href="../index.html">Inicio</a> ›
+        <a href="index.html">Matemáticas 1</a> ›
+        Sistemas de numeración
+      </p>
+      <div class="topic-tag">Matemáticas 1 · Tema 14</div>
+      <h1>Sistemas de numeración</h1>
+    </header>
+
+    <!-- ══════════ APUNTES ══════════ -->
+    <section class="section-block">
+      <div class="sec-head">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+        </div>
+        <h2>De qué se trata</h2>
+      </div>
+      <div class="regla-unica">
+        <p>
+          Los sistemas de numeración antiguos son las distintas formas en las que la gente contaba
+          cosas. Hay algunos como el de los egipcios, que usaban dibujitos de animales y cosas para
+          representar números. Los romanos usaban letras y símbolos para contar, y seguro que has
+          visto algunos de estos números en tu clase de historia para nombrar cada siglo. Los
+          babilonios eran aún más raros, ¡contaban hasta 60! como la base de su numeración. Los
+          mayas eran súper interesantes, porque usaban puntos y barras para contar, en lugar de
+          números como los que usamos ahora. ¡Imagínate eso! ¡Es increíble cómo las culturas
+          antiguas encontraron formas diferentes e innovadoras de contar cosas!
+        </p>
+        <p>
+          Este tema no se resuelve con operaciones: es una <strong>investigación</strong>.
+          Por eso esta página no lleva sección de respuestas.
+        </p>
+      </div>
+    </section>
+
+    <!-- ══════════ PUNTOS DE INVESTIGACIÓN ══════════ -->
+    <section class="section-block">
+      <div class="sec-head">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+        </div>
+        <h2>Puntos de investigación</h2>
+      </div>
+      <div class="bloques-2">
+        <div class="mini-card">
+          <div class="mini-card-head">Los sistemas antiguos</div>
+          <div class="mini-card-body">
+            <div class="pregunta">Los sistemas de numeración egipcio, babilónico, maya y romano.</div>
+            <div class="pregunta">Una breve explicación de cada sistema de numeración.</div>
+            <div class="pregunta">Ejemplos de cómo se utilizaban en su época.</div>
+            <div class="pregunta">Las limitaciones y desventajas de cada sistema de numeración.</div>
+          </div>
+        </div>
+        <div class="mini-card">
+          <div class="mini-card-head">El sistema hindú-arábigo</div>
+          <div class="mini-card-body">
+            <div class="pregunta">Una explicación detallada del sistema de numeración hindú-arábigo.</div>
+            <div class="pregunta">Ejemplos de cómo se utiliza en la actualidad.</div>
+            <div class="pregunta">Las ventajas del sistema hindú-arábigo sobre los sistemas de numeración antiguos.</div>
+            <div class="pregunta">Reflexión sobre la importancia de conocer los sistemas de numeración en la vida cotidiana y por qué es útil tener un conocimiento básico de ellos.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ NAVEGACIÓN ══════════ -->
+    <div class="topic-nav-btns">
+      <a href="problemas-ecuaciones.html" class="btn-anterior">← Problemas de ecuaciones</a>
+    </div>
+
+  </main>
+  <script src="../../nav.js"></script>
+  <script src="../../footer.js"></script>
+</body>
+</html>

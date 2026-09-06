@@ -5,6 +5,34 @@
 
 ---
 
+## 2026-09-05 — Math 1 completa: se sube "Sistemas de numeración"
+
+Lety pasó el doc LaTeX de Matemáticas 1 (temas 2 a 13) para ver si faltaba algo. Comparado
+ejercicio por ejercicio contra el sitio: los 12 ya estaban publicados y coinciden, así que
+de ahí no salía ningún tema nuevo.
+
+La pista buena estuvo en **letymath.com**, el sitio viejo: su menú de Matemáticas 1 tiene
+14 temas y lety2E tenía 13. De los dos candidatos, "divisibilidad" resultó ser el mismo
+mcm/MCD que ya existe aquí (allá se llama distinto), y el faltante real era
+**Sistemas de numeración**, que cierra el curso.
+
+- **`math/matematicas-1/sistemas-de-numeracion.html`** (Tema 14). No es un tema de
+  ejercicios sino una **investigación**, así que sigue el patrón de `historia-calculo.html`
+  de Math 5: "De qué se trata" + dos bloques de puntos ("Los sistemas antiguos" /
+  "El sistema hindú-arábigo"), sin sección de respuestas. El texto es el de letymath.com
+  tal cual (sólo se acentuó "súper").
+- **Sin KaTeX.** La página no tiene una sola fórmula, así que no carga el CSS ni los dos
+  JS de KaTeX. Tres archivos menos por visita.
+- Botón *siguiente* en `problemas-ecuaciones.html` y card en el índice del curso
+  (🏛️, acento `#4A0080`, siguiendo la rotación).
+
+**Nota para después:** en `expresiones-algebraicas.html` los ejercicios de lety2E no son
+los del doc LaTeX ni los de letymath.com (allá son 5+5, aquí 4+4 y tres cambiados). Lety
+prefiere cómo quedó aquí, así que se deja como está — queda anotado sólo para que no
+sorprenda en una comparación futura.
+
+---
+
 ## 2026-09-02 (3) — "Primeros pasos": segunda ronda con Lety
 
 *(cierre del día)* Último recorte: en "Antes de empezar" se quitó el "síguelo y vas a ver
