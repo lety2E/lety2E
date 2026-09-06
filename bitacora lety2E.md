@@ -32,7 +32,10 @@ factorización, desigualdades, regiones, y las cónicas de ida y vuelta (circunf
   los `<span>` internos que genera KaTeX: las fórmulas se desarmaban letra por letra. Va acotada a
   `> div > span:first-child`. **Si se copia una cajita de éstas a otro tema, cuidado con eso.**
 - El índice del curso conserva el `.proximamente-nota`: **faltan 5 temas** (elipse, hipérbola e
-  historia), cuyas carpetas de capturas están vacías.
+  historia), cuyas carpetas de capturas están vacías. En cambio en `math/index.html` la card del
+  curso **ya perdió su `pronto-badge`**: con 18 temas publicados el curso cuenta como abierto,
+  aunque adentro siga la nota de los que faltan. También se corrigió ahí la descripción, que decía
+  "Trigonometría, exponenciales y logaritmos" y no es lo que trae el curso.
 
 ## 2026-09-06 (2) — Math 3 arranca: "Método de sumas y restas" (tema 1)
 
