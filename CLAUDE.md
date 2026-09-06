@@ -162,7 +162,7 @@ Generadores listos en `Recursos lety2E/` (salieron de Math 3, sirven para Math 4
 | Tema sin video en CSV | Omitir sección de Video (no es error) |
 | Tema sin respuestas | Sólo ejercicios + extras. Si hay que calcularlas, paso a paso |
 | Card sin destino real | Borrarla. Nunca dejar `href="#"` |
-| Respuesta en captura con error aritmético | Publicar la correcta + flag corto al final |
+| Respuesta en captura con error aritmético | Publicar la correcta, **sin nota en la página**; avisar a Lety en el chat |
 
 ---
 

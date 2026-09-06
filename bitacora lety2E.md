@@ -17,8 +17,9 @@ factorización, desigualdades, regiones, y las cónicas de ida y vuelta (circunf
 **10 de los 18 tienen video** del CSV; los otros ocho van sin esa sección.
 
 - **Un solo error en las capturas**: tema 7, Bloque 1, ejercicio 1 — la hoja da $x_2 = 5$ pero al
-  factorizar $5x(x-2)=0$ la solución es $x_2 = 2$. Se publicó corregido, con la nota al pie de la
-  página. Todo lo demás (unas 70 resoluciones) cuadró contra las capturas.
+  factorizar $5x(x-2)=0$ la solución es $x_2 = 2$. Se publicó **la respuesta correcta y sin nota al
+  pie**: Lety prefiere que la página quede limpia, la corrección no se anuncia. Todo lo demás (unas
+  70 resoluciones) cuadró contra las capturas.
 - **Los ejercicios extra los generé yo**: las capturas de Math 3 no traen extras. Van **10 por tema**
   (el mínimo que pide el banco de exámenes), verificados uno por uno con sympy o por determinante —
   solución entera y única salvo donde el caso pide lo contrario.
