@@ -5,6 +5,27 @@
 
 ---
 
+## 2026-09-05 (6) — Math 2 completa: temas 13 y 14
+
+Los dos que **no venían en el LaTeX** (su último documento trae dentro "Operaciones con
+Fracciones", no lo que dice su encabezado). Se armaron de otras fuentes.
+
+- **`math/matematicas-2/problemas-fracciones.html`** (Tema 13) — de la captura
+  (`13 problemas con fracciones/`). Once problemas más la pregunta de apertura de Lety
+  ("¿Cómo resolvemos un problema de fracciones?"), que se deja como está: es abierta y no
+  lleva respuesta.
+  **Las respuestas de este tema las calculé yo**, porque la captura no las trae: la guía
+  dice que en ese caso se resuelven paso a paso. Están verificadas una por una, pero
+  conviene que Lety les dé una pasada por si quiere otro camino de solución.
+- **`math/matematicas-2/historia-matematica-griega.html`** (Tema 14) — de letymath.com,
+  que lo tiene en texto (no hay captura; la carpeta `14 matematica griega/` está vacía).
+  Investigación con siete preguntas, mismo patrón que "Sistemas de numeración" de Math 1.
+  Sin KaTeX: no tiene una sola fórmula.
+- Se retiró el `.proximamente-nota` del índice de Matemáticas 2: **el curso ya está
+  completo, 14 de 14**.
+
+---
+
 ## 2026-09-05 (5) — Math 2: "Proporcionalidad y regla de tres" (tema 12)
 
 - **`math/matematicas-2/proporcionalidad.html`** (Tema 12) — apunte con la regla de tres
