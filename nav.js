@@ -51,7 +51,8 @@
       { text: 'Reglas de exponentes', href: 'reglas-exponentes.html' },
       { text: 'mcm y MCD', href: 'mcm-mcd.html' },
       { text: 'Lenguaje algebraico', href: 'lenguaje-algebraico.html' },
-      { text: 'Problemas de ecuaciones', href: 'problemas-ecuaciones.html' }
+      { text: 'Problemas de ecuaciones', href: 'problemas-ecuaciones.html' },
+      { text: 'Sistemas de numeración', href: 'sistemas-de-numeracion.html' }
     ]
   };
 
