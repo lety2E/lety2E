@@ -5,6 +5,28 @@
 
 ---
 
+## 2026-09-06 (2) — Math 3 arranca: "Método de sumas y restas" (tema 1)
+
+**Math 3 no tiene LaTeX**: la única fuente son las capturas (`~/Desktop/capturas/matemáticas 3/`),
+y son suficientes — traen `ejemplo`, `ejercicios` y `resultados`, y las de resultados vienen con
+el procedimiento completo y la comprobación. Son 18 carpetas con contenido (temas 1–18, igual que
+letymath.com); las carpetas 19–23 (elipse, hipérbola, historia) están **vacías**.
+
+- **`math/matematicas-3/sumas-restas.html`** (Tema 1) — video, ejemplo, 4 ejercicios con sus
+  resoluciones y 10 extras. Verifiqué la aritmética del ejemplo y de los 4 ejercicios: todo
+  correcto, no hubo nada que corregir.
+- **Los multiplicadores van como en su cuaderno**: sin `\times`, sólo el paréntesis — `(-5)` `(2)`
+  a la izquierda y `(3)` `(4)` a la derecha, **fuera de la llave**, con el sistema en medio.
+  Morado (#7B2CBF) los de la izquierda y magenta los de la derecha, amarrados por color con los
+  títulos *Eliminamos x* / *Eliminamos y*. Lety pidió explícitamente que la `×` no aparezca:
+  se confunde con la incógnita. **Aplica a todos sus cursos**, no sólo a este tema.
+- **Sin sección de Apuntes**: las capturas de este curso no traen texto de apuntes y no se inventa.
+- **Los 10 extras los generé yo** — las capturas de Math 3 no traen extras (a diferencia del LaTeX
+  de Math 1 y 2). Son sistemas con solución entera única, verificados por determinante. Van en dos
+  tarjetas de cinco, **sin numerar**: Lety rechazó el "Extra 1, Extra 2…" por ruidoso.
+- Se corrigió la descripción del índice de Math 3: decía "trigonometría, exponenciales, logaritmos"
+  y el curso es sistemas, cuadráticas, factorización, desigualdades y geometría analítica.
+
 ## 2026-09-06 — Los ejercicios extras quedan marcados como el banco de exámenes
 
 Lety va a armar exámenes con **5 versiones por curso**. Se decidió que **los exámenes se

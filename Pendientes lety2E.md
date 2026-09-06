@@ -1,10 +1,15 @@
 # Pendientes — lety2E
 
-**Migrar Matemáticas 3 y 4** — son las dos carpetas que siguen vacías (solo el índice con
-*próximamente*). En letymath.com cada una tiene **18 temas**. Math 1 y Math 2 ya quedaron
-completas el 5-sep-2026. Falta que Lety pase el LaTeX de esos dos cursos; el flujo que ya
-funcionó es: LaTeX por tema → verificar la aritmética → armar el HTML → card en el índice
-y botones prev/next. Los triángulos SVG salen de `Recursos lety2E/triangulos-svg-math.py`; para las cónicas de Math 3 y las funciones de Math 4 va a hacer falta un generador nuevo, ése sirve de molde.
+**Migrar Matemáticas 3 y 4** — **Math 3 ya arrancó** (6-sep-2026, tema 1 publicado). No hay
+LaTeX de ese curso: se está armando **desde las capturas** (`~/Desktop/capturas/matemáticas 3/`),
+que alcanzan bien — traen ejemplo, ejercicios y resultados con procedimiento y comprobación.
+Son 18 temas, igual que letymath.com. **Las carpetas 19–23 están vacías** (ecuación general de la
+elipse, regreso de la elipse, hipérbola general, regreso de la hipérbola, e historia): esos cinco
+no se pueden armar hasta que Lety suba capturas. Diez de los 18 tienen video en el CSV.
+Los extras de Math 3 no vienen en las capturas, se generan (10 por tema, ver abajo).
+**Math 4 sigue sin tocarse**; hay que ver si también tiene capturas o si Lety pasa el LaTeX.
+Para las cónicas de Math 3 y las funciones de Math 4 va a hacer falta un generador de SVG nuevo;
+el de triángulos (`Recursos lety2E/triangulos-svg-math.py`) sirve de molde.
 
 **Math 5 se queda como está** — letymath.com tiene un tema más, *"Dx. Con x en el
 denominador"*, que **no se va a migrar**: Lety lo dio por incorporado dentro de

@@ -108,6 +108,11 @@ Para temas con fórmulas (geometría, exponentes, mcm/MCD) usa estilo cuaderno c
 - Lados/distancias en triángulos: `m`, `n` (no `l_1`, `l_2`)
 - Distancia entre dos puntos: Pitagórica explícita `c = √(a² + b²)`
 - Resultado final con `=` directo, no `≈`
+- **Nunca el signo `×` para multiplicar** — se confunde con la incógnita. Los multiplicadores
+  van sólo entre paréntesis: `(-5)`, `(2)`. Vale para **todos** los cursos.
+- En sistemas de ecuaciones los multiplicadores van **fuera de la llave** (los de eliminar $x$ a
+  la izquierda, los de eliminar $y$ a la derecha) y **en color** para que no se lean como parte
+  del ejercicio: `#7B2CBF` izquierda, `--M` derecha, igual que el título de su columna.
 
 ### Pills coloridas (única excepción al palette)
 
@@ -378,6 +383,8 @@ Verificar en **incógnito**. Si el favicon no aparece: `lety2e.com/favicon.svg?v
 | Fórmula distancia | `c = √(a² + b²)` con "distancia entre dos puntos" |
 | Procedimiento | Desde catetos, no desde coordenadas |
 | Potencias | Expandidas en 3 pasos |
+| Multiplicación | Nunca `×`, sólo paréntesis: `(-5)`, `(2)` |
+| Ejercicios extra | Agrupados en tarjetas (Bloque 1, Bloque 2), **sin numerar** uno por uno |
 | Triángulos | Relleno magenta 15% + contorno sólido |
 | Contenido vacío | `próximamente` (nunca inventar) |
 | Tema duplicado en doc | Saltar y avisar |
