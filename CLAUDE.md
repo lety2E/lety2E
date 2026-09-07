@@ -279,6 +279,9 @@ CSS en el `<style>` del tema:
 
 **Por qué**: la media query global en `style.css` hace `body[data-section="math"] .mini-card-body { line-height: 2.2 }` en móvil. Eso es suficiente para `$$...$$` y filas simples, pero `\sqrt{\dfrac{}{}}` necesita aún más altura. Por eso `.ej-line`/`.sol` traen su propia `line-height: 2.4` radical-safe (declarada también globalmente para garantizarlo en todas las páginas).
 
+**Las etiquetas de las cajitas son texto plano, no LaTeX.** Van dentro de un `<span>` que KaTeX
+no procesa: si se escribe `b\ \text{de}\ x` se publica el LaTeX crudo. Escribir "b de x" y ya.
+
 ### Cuidado con las etiquetas dentro de cajitas
 
 Si un tema usa cajitas con etiqueta (`b | mitad | cuadrado de la mitad`, `vértice | p`, `C | r`),
