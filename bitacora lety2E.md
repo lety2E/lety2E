@@ -5,6 +5,47 @@
 
 ---
 
+## 2026-09-07 (2) — Se recortaron las tipografías: 104 → 78 KB por carga
+
+Quitado KaTeX, el rubro más pesado del sitio pasaron a ser **las tipografías: 105 KB**, más que
+todo lo demás junto. Herramienta nueva: `Recursos lety2E/subset-fuentes.py`.
+
+**Dónde estaba la grasa.** DM Sans es una fuente **variable** con dos ejes: `wght` 100–1000 y
+`opsz` (tamaño óptico) 9–40. El sitio sólo usa pesos **300–700**, así que medio eje era peso
+muerto: recortarlo bajó el archivo de 61 a 41 KB. Playfair es estática (peso 900); ahí sólo se
+recortaron caracteres.
+
+**Dos decisiones conservadoras**, ambas tomadas midiendo y no a ojo:
+
+1. **El eje `opsz` se conserva.** Fijarlo ahorraba 16 KB más, pero se midió que ensancha
+   **10.2%** los números a 40 px de las tarjetas de `math/index.html`. Con el eje vivo el render
+   es idéntico: la peor desviación en todo el sitio es **0.375 px en una línea de 568 px
+   (0.066%)**, y Playfair queda en **cero** exacto.
+2. **Se conserva el bloque Latin-1 completo (`À–ÿ`)** aunque hoy no se use entero. Cuesta ~8 KB
+   más que recortar a lo mínimo, pero evita que un nombre como *Gödel* o *François* salga con una
+   letra de otra fuente a media palabra cuando agregues contenido.
+
+Los archivos `*-latin-ext.woff2` **no se tocaron a propósito**: con contenido en español su
+`unicode-range` nunca coincide, así que jamás se descargan — no cuestan nada y quedan como red
+de seguridad si algún día aparece un carácter raro.
+
+| archivo | antes | ahora |
+|---|---|---|
+| `DMSans-normal-latin` | 61.1 KB | **41.1 KB** (−33%) |
+| `PlayfairDisplay-normal-latin` | 21.9 KB | **18.9 KB** (−14%) |
+| `PlayfairDisplay-italic-latin` | 21.3 KB | **18.5 KB** (−13%) |
+| **por carga de página** | **104.3 KB** | **78.5 KB (−25%)** |
+
+Verificado: **cero caracteres del sitio perdidos** en las tres fuentes, ningún elemento cae a
+fuente del sistema, y las 239 letras y símbolos que el sitio usa siguen cubiertos.
+
+- Los originales quedaron en `assets/fonts/originales/`. El script **siempre parte de ahí**, así
+  que se puede volver a correr sin degradar la fuente recortando sobre lo ya recortado.
+- **No hace falta correrlo al publicar un tema.** Sólo si cambian las fuentes o si aparece un
+  carácter nuevo que salga con la letra equivocada.
+
+---
+
 ## 2026-09-07 — Velocidad: se pre-renderizó KaTeX y las páginas bajaron 86%
 
 Los alumnos seguían reportando lentitud. Lo primero fue medir, y la red **no era el problema**:

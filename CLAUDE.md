@@ -376,6 +376,23 @@ Desde el **7-sep-2026 las fórmulas se convierten a HTML aquí**, con
   y siempre `width`/`height` para que no salte el layout.
 - En la Mac **`sips` no exporta WebP**; usar Pillow (sí está instalado).
 
+### Tipografías — recortadas, no volver a bajarlas completas
+
+Las de `assets/fonts/` están **recortadas** (7-sep-2026, `Recursos lety2E/subset-fuentes.py`):
+104 → 78 KB por carga. Los originales viven en `assets/fonts/originales/` y el script siempre
+parte de ahí, nunca de lo ya recortado.
+
+- **No hace falta correrlo al publicar un tema.** Sólo si se cambian las fuentes o si aparece un
+  carácter que salga con la letra equivocada (señal de que falta un glifo): correr el script y
+  listo, él relee todo el sitio y recalcula el juego de caracteres.
+- **DM Sans es variable** (ejes `wght` y `opsz`). Se recortó `wght` a 300–700 — los únicos que
+  usa el CSS — pero **el eje `opsz` se conserva**: fijarlo ahorra 16 KB más pero ensancha 10%
+  los números a 40 px de `math/index.html`. Si alguien lo "optimiza" fijando `opsz`, eso se rompe.
+- Se conserva el bloque **Latin-1 completo (`À–ÿ`)** aunque hoy no se use entero, para que un
+  nombre extranjero no salga con una letra de otra fuente a media palabra.
+- Los `*-latin-ext.woff2` **no se tocan**: nunca se descargan con contenido en español (su
+  `unicode-range` no coincide) y sirven de red de seguridad.
+
 ### Red
 
 - **Cero CDNs.** KaTeX y las tipografías están self-hosted en `assets/`. No volver a
