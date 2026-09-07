@@ -158,6 +158,13 @@ Decisiones que tomó ella y que valen para los tres que faltan:
 Generador nuevo: `Recursos lety2E/elipses-svg-math.py` — la elipse con centro, vértices y focos,
 la vista de sólo puntos con las cotas, y el dibujo del apunte con el triángulo.
 
+**Tema 20, "Regreso de la elipse"**, mismo día y misma estructura, de vuelta: ecuación general →
+agrupar y factorizar el coeficiente → completar los trinomios (ojo: lo que se suma del otro lado
+es **el coeficiente por la mitad al cuadrado**, no la mitad al cuadrado a secas) → dividir para
+llegar a la canónica → ahí $a^2$ es el denominador mayor y **su posición dice la orientación** →
+$a$, $b$ y $c$ → centro, vértices y focos → gráfica → comprobación con los dos vértices. Los cinco
+casos son **los mismos del tema 19 al revés**, igual que circunferencia y parábola.
+
 ## 2026-09-06 (3) — Matemáticas 3 completo: 18 temas armados desde las capturas
 
 Se migró el curso entero en una sesión, **sin LaTeX**: la única fuente fueron las capturas
