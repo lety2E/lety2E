@@ -5,6 +5,21 @@
 
 ---
 
+## 2026-09-07 (4) — Math 4, tema 2: "Representación de funciones"
+
+Las capturas de este tema **no traen hoja de resueltos**: son doce tablas de valores y ya. Las
+doce respuestas se calcularon aquí y se verificaron — las doce son lineales con pendiente y
+ordenada enteras, y cada respuesta comprueba los tres puntos de su tabla.
+
+- **`math/matematicas-4/representacion-funciones.html`** (Tema 2) — sin video (no está en el CSV,
+  no es error): apuntes, el ejemplo con las **seis representaciones** de la captura, las 12 tablas
+  con sus respuestas y **12 tablas extra** sin respuesta.
+- Cada respuesta trae parejas ordenadas, el despeje de la regla ($m$, luego $b$), dominio, rango,
+  comprobación y **su gráfica**.
+- **Generador nuevo**: `Recursos lety2E/puntos-recta-svg-math.py` — puntos sueltos con su recta
+  guía, y el diagrama sagital (dos óvalos con flechas). La recta va **punteada a propósito**:
+  cuando el dominio son sólo tres valores, la gráfica son los puntos, no la recta.
+
 ## 2026-09-07 (3) — Arranca Matemáticas 4: "Evaluación de funciones" (tema 1)
 
 Empieza la migración del cuarto curso. Como en Math 3, **no hay LaTeX**: la única fuente son las
