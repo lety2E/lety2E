@@ -5,6 +5,54 @@
 
 ---
 
+## 2026-09-07 — Velocidad: se pre-renderizó KaTeX y las páginas bajaron 86%
+
+Los alumnos seguían reportando lentitud. Lo primero fue medir, y la red **no era el problema**:
+GitHub Pages responde en ~200 ms, todo va comprimido, no quedó ningún CDN y los facades de
+YouTube del 2-sep funcionan. El peso era **JavaScript**.
+
+`katex.min.js` pesa **74 KB comprimidos y 271 KB al parsear**, y se cargaba en las 67 páginas
+con fórmulas — el 86% del peso de una página de tema. Además provocaba un parpadeo feo: el
+alumno veía los `$$y = x^2$$` en crudo hasta que el JS terminaba y todo brincaba de golpe.
+
+**La solución: pre-renderizar las fórmulas aquí, una sola vez.** Herramienta nueva en
+`Recursos lety2E/prerender-katex.js` (Node). Convierte los `$...$` a HTML de KaTeX y quita el
+`<script>`; se queda sólo `katex.min.css`, que sí hace falta. **63 páginas, 4157 fórmulas, cero
+errores.** El LaTeX original no se pierde: KaTeX lo guarda en cada fórmula
+(`<annotation encoding="application/x-tex">`), así que se puede recuperar y volver a correr.
+
+Los simuladores (UNAM y COMIPEMS) **no se pre-renderizan** — arman las preguntas con JS desde
+`data.js`, así que ahí no hay fórmulas en el HTML estático y quitarles KaTeX las rompería. El
+script las detecta solo y las salta. A cambio, ahí KaTeX pasó a **cargarse bajo demanda**: su
+`<main id="app">` arranca vacío, así que antes el alumno veía la pantalla en blanco hasta bajar
+~128 KB. La pantalla de inicio no tiene ni una fórmula, así que KaTeX ahora se adelanta en
+`requestIdleCallback` sin bloquear el primer pintado.
+
+**Resultado (KB comprimidos que descarga el alumno):**
+
+| | antes | ahora |
+|---|---|---|
+| página de tema típica | 86 KB | 16 KB |
+| la más pesada (`recta-tangente`, 305 fórmulas) | 85 KB | 24 KB |
+| simulador UNAM (antes de ver nada) | 128 KB | 52 KB |
+| **promedio de las 65 páginas** | **81 KB** | **12 KB (−86%)** |
+
+Dos cosas que se descartaron midiendo: el `nav.js` bloqueante **no cuesta nada** (baja en
+paralelo con `style.css`, que ya bloquea el pintado de todos modos), y el archivo de 370 KB del
+simulador offline es sólo un enlace de descarga — nadie lo abre como página.
+
+- **Ojo al agregar temas nuevos**: hay que correr el pre-render antes de publicar
+  (`node "Recursos lety2E/prerender-katex.js"`). Es idempotente, se puede correr sobre todo el
+  sitio sin miedo. Está anotado en `CLAUDE.md`.
+- Un detalle que costó encontrar: el escáner del script debe tratar `<` como etiqueta **sólo**
+  si le sigue letra, `/`, `!` o `?` — igual que el navegador. Sin eso, una fórmula como
+  `$x < 3$` se parte a la mitad y deja el `$` crudo en pantalla.
+- Los `$` de `proporcionalidad.html` son **signos de peso** ($100, $250), no fórmulas. Lety los
+  envolvió en `<span class="peso">$</span>` justo para que KaTeX no los emparejara; el
+  pre-render los respeta igual.
+
+---
+
 ## 2026-09-06 (3) — Matemáticas 3 completo: 18 temas armados desde las capturas
 
 Se migró el curso entero en una sesión, **sin LaTeX**: la única fuente fueron las capturas

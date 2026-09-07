@@ -192,9 +192,14 @@ Detalle procedimental completo en `.claude/skills/letymath-html/SKILL.md` (skill
 4. Crear `.html` siguiendo referencias canónicas (slug en kebab-case sin tildes).
 5. Botón siguiente en el tema previo, anterior en este.
 6. Agregar card al index del curso (color rotando `--M`/`--T`/`--P`).
-7. Commit + push a `main`.
+7. **Pre-renderizar KaTeX** (obligatorio antes de publicar, ver abajo):
+   `node "Recursos lety2E/prerender-katex.js"`
+8. Commit + push a `main`.
 
-KaTeX: ver template en cualquier tema existente — patrón estándar `katex@0.16.9` con `auto-render` y delimiters `$..$` / `$$..$$`.
+KaTeX: al escribir el tema se usa el patrón normal (`$..$` / `$$..$$` + los dos `<script>` de
+`assets/katex/`); el paso 7 los convierte a HTML y quita los `<script>`. Copiar el head de
+cualquier tema **anterior al 7-sep-2026**, o simplemente escribir las fórmulas con `$` y correr
+el script.
 
 ---
 
@@ -341,6 +346,28 @@ el alumno nunca los tocara. En su lugar va un *facade*:
 - Sin internet la miniatura no carga y queda la tarjeta oscura con el botón — no truena.
 - Es un `<button>` a propósito: se abre con Enter/Espacio y lo anuncia el lector de pantalla.
 
+### Fórmulas — pre-renderizadas, la página no carga KaTeX
+
+`katex.min.js` pesa **74 KB gzip y 271 KB al parsear**: era el 86% del peso de una página de
+tema, y hacía que el alumno viera los `$$y = x^2$$` en crudo hasta que el JS terminaba.
+
+Desde el **7-sep-2026 las fórmulas se convierten a HTML aquí**, con
+`node "Recursos lety2E/prerender-katex.js"`. Las páginas publicadas ya **no** traen
+`katex.min.js` ni `auto-render` — sólo `katex.min.css`, que sí hace falta.
+
+- **Correrlo siempre antes de publicar un tema nuevo o editado.** Es idempotente: salta lo que
+  ya está hecho y se puede correr sobre todo el sitio sin miedo. `--check` simula sin escribir.
+- Si una fórmula no compila, el script **no toca esa página** y avisa cuál falló.
+- El LaTeX original no se pierde: vive en `<annotation encoding="application/x-tex">` dentro de
+  cada fórmula, así que se puede recuperar para reeditar.
+- Consecuencia: los `.html` de Math pesan ~4x más en disco y sus diffs son ruidosos. Es a
+  propósito — lo que importa es lo que baja el alumno, y eso cayó 86%.
+- **No pre-renderizar los simuladores** (`apuntes/unam-simulador/`, `apuntes/comipems-simulador/`):
+  arman las preguntas con JS desde `data.js`, no tienen fórmulas en el HTML estático y quitarles
+  KaTeX las rompe. El script los detecta y los salta solo. Ahí KaTeX se carga **bajo demanda**
+  (`cargarKatex()` + `requestIdleCallback`), porque su `<main id="app">` arranca vacío y antes
+  la pantalla quedaba en blanco hasta bajarlo todo.
+
 ### Imágenes
 
 - Ancho máximo real **1600 px** (el sitio nunca muestra más de 1200). El hero de la
@@ -402,6 +429,7 @@ Verificar en **incógnito**. Si el favicon no aparece: `lety2e.com/favicon.svg?v
 | Triángulos | Relleno magenta 15% + contorno sólido |
 | Contenido vacío | `próximamente` (nunca inventar) |
 | Tema duplicado en doc | Saltar y avisar |
+| Fórmulas | Pre-renderizadas antes de publicar (las páginas no cargan KaTeX JS) |
 | Doc fuente | Drive `1hTzKA2zC98FwfSiR9nR21gExC2hT4nrea-BANrbkd4I` |
 | Videos | CSV en `~/Desktop/capturas/lista_videos_youtube.csv` |
 

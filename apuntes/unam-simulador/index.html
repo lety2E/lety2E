@@ -506,8 +506,6 @@
 <script src="data.js"></script>
 <script src="data_extra.js"></script>
 <script src="data_ai.js"></script>
-<script src="../../assets/katex/katex.min.js"></script>
-<script src="../../assets/katex/contrib/auto-render.min.js"></script>
 
 <script>
 // ───────────────────────────────────────────
@@ -581,8 +579,39 @@ function renderMath(el) {
       ],
       throwOnError: false,
     });
+    return;
   }
+  /* KaTeX todavía no llega: se pide ahora y se rendera al aterrizar. */
+  cargarKatex().then(function () { if (window.renderMathInElement) renderMath(el); });
 }
+
+/* ── KaTeX bajo demanda ────────────────────────────────────────────
+   KaTeX pesa 74 KB comprimidos (271 KB al parsear) y antes se cargaba
+   como <script> bloqueante. Como <main id="app"> arranca vacío, el
+   alumno veía la pantalla en blanco hasta que bajaba TODO. La pantalla
+   de inicio no tiene ni una fórmula: sólo el quiz y los resultados las
+   usan. Así que se carga aparte, sin bloquear el primer pintado, y se
+   adelanta en cuanto el navegador está ocioso — para cuando el alumno
+   elige modo, normalmente ya está listo. */
+var _katexPromesa = null;
+function cargarKatex() {
+  if (_katexPromesa) return _katexPromesa;
+  _katexPromesa = new Promise(function (listo) {
+    function pedir(src, luego) {
+      var s = document.createElement('script');
+      s.src = src;
+      s.onload = luego;
+      s.onerror = listo;          /* sin internet: se ven los $ crudos, no truena */
+      document.head.appendChild(s);
+    }
+    pedir('../../assets/katex/katex.min.js', function () {
+      pedir('../../assets/katex/contrib/auto-render.min.js', listo);
+    });
+  });
+  return _katexPromesa;
+}
+if (window.requestIdleCallback) requestIdleCallback(cargarKatex);
+else setTimeout(cargarKatex, 1200);
 
 // ───────────────────────────────────────────
 // LANDING
