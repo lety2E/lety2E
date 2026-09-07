@@ -133,7 +133,8 @@ def apunte_elipse(a=5, b=4, c=3, U2=26):
     s.append(f'<circle cx="{X(c)}" cy="{Y(0)}" r="3.8" fill="{FOCO}"/>')
     s.append(f'<circle cx="{X(-c)}" cy="{Y(0)}" r="3.8" fill="{FOCO}"/>')
     s.append(f'<circle cx="{X(0)}" cy="{Y(0)}" r="2.8" fill="none" stroke="{FOCO}" stroke-width="1.4"/>')
-    # rótulos de vértice y foco
+    # rótulos de centro, vértice y foco
+    s.append(T(X(0) - 26, Y(0) + 16, "C(h, k)", FOCO, sz=10.5, w=700))
     s.append(T(X(a), Y(0) + 34, "vértice", "#6E4F4F", sz=9.5, w=500))
     s.append(T(X(c), Y(0) + 34, "foco", FOCO, sz=9.5, w=600))
     s.append('</svg>')
