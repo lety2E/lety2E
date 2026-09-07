@@ -133,6 +133,31 @@ simulador offline es sólo un enlace de descarga — nadie lo abre como página.
 
 ---
 
+## 2026-09-07 — Math 3: "Ecuación general de la elipse" (tema 19), armado desde cero
+
+Las carpetas 19–23 de capturas siguen **vacías**, así que este tema **no viene de las hojas de
+Lety**: se construyó entre los dos en el chat, con el molde de circunferencia y parábola.
+Decisiones que tomó ella y que valen para los tres que faltan:
+
+- **Datos de partida**: centro, vértices y focos. De ahí se leen $a$ y $c$; $b$ sale de Pitágoras.
+- **Convención**: $a$ es siempre el semieje mayor, así que $a^2$ **cambia de lugar** según la
+  orientación. Por eso el apunte muestra **las dos formas** de la canónica, no sólo la horizontal.
+- **Horizontales y verticales mezcladas** en los ejercicios.
+- **Sección de Apuntes separada del Ejemplo**, con las fórmulas y un dibujo donde se ve el
+  **triángulo rectángulo** que forman $a$, $b$ y $c$ ($b$ y $c$ catetos, hipotenusa $a$).
+- **Orden de la solución, definido por Lety**: datos → localizar los puntos en el plano →
+  medir ahí $a$ y $c$ → calcular $b$ con Pitágoras → **ya con $b$** trazar la elipse → sustituir →
+  comprobar. La gráfica dejó de ser ilustración final: va donde de verdad se puede trazar.
+  Por eso cada resolución lleva **dos gráficas**.
+- **Las medidas van en cotas separadas del eje**, con ganchos en los extremos (Lety mandó el
+  croquis): puestas encima del eje se encimaban con los puntos.
+- Antes de sustituir, una pill dice **"La elipse es horizontal/vertical, así que $a^2 = 25$ va
+  debajo de $x$/$y$"**, y el $a^2$ va **resaltado en amarillo** dentro de la canónica.
+- La **comprobación es con los dos vértices**, escritos antes de las cuentas.
+
+Generador nuevo: `Recursos lety2E/elipses-svg-math.py` — la elipse con centro, vértices y focos,
+la vista de sólo puntos con las cotas, y el dibujo del apunte con el triángulo.
+
 ## 2026-09-06 (3) — Matemáticas 3 completo: 18 temas armados desde las capturas
 
 Se migró el curso entero en una sesión, **sin LaTeX**: la única fuente fueron las capturas
