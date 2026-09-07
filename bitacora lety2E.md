@@ -5,6 +5,30 @@
 
 ---
 
+## 2026-09-07 (3) — Arranca Matemáticas 4: "Evaluación de funciones" (tema 1)
+
+Empieza la migración del cuarto curso. Como en Math 3, **no hay LaTeX**: la única fuente son las
+capturas (`~/Desktop/capturas/matematicas 4/`), 20 carpetas de las que **17 tienen material**
+(13 transformación de funciones, 19 modelo matemático y 20 historia están vacías). Del CSV salen
+**9 videos para 7 temas**; escalonada y dominio máximo llevan dos cada uno.
+
+- **`math/matematicas-4/evaluacion-funciones.html`** (Tema 1) — video, apuntes, dos ejemplos,
+  los **6 bloques** de ejercicios de las capturas con sus 48 resoluciones, y **4 bloques de
+  extras** (32 evaluaciones nuevas, sin respuesta).
+- **Las 57 respuestas verificadas con sympy** — las 48 de los bloques más las de los dos
+  ejemplos. Las capturas de este tema salieron limpias: ni un error aritmético.
+- **Único detalle**: el Bloque 6 deja $m(5) = \frac{4}{72}$ sin simplificar, aunque en los demás
+  bloques sí se simplifica. Se publicó el paso completo hasta $\frac{1}{18}$, sin nota al pie.
+- **Sección de Apuntes**, que Math 3 no llevaba: aquí las capturas sí traen texto de Lety a mano
+  (qué es la regla de correspondencia y qué es la imagen) y se aprovechó tal cual.
+- Los extras se numeran **Bloque 7 a 10**, continuando la cuenta de los ejercicios: llamarlos
+  "Bloque 1 y 2" como en Math 3 chocaría con los bloques que ya trae la captura.
+- **Herramienta nueva**: `Recursos lety2E/generador-paginas-math4.py`, hermano del de Math 3, con
+  los ayudantes de este curso (tarjeta "dadas las funciones / encuentra", bloques de respuestas y
+  video doble). De ahí salen los temas que faltan.
+- El índice del curso dejó de ser una `.proximamente-card` y ya es rejilla con su primera card.
+  En `math/index.html` la insignia de *próximamente* sigue puesta hasta que el curso avance.
+
 ## 2026-09-07 (2) — Se recortaron las tipografías: 104 → 78 KB por carga
 
 Quitado KaTeX, el rubro más pesado del sitio pasaron a ser **las tipografías: 105 KB**, más que
