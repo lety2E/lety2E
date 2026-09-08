@@ -5,6 +5,32 @@
 
 ---
 
+## 2026-09-07 (8) — Un bloque por tipo, y material para seis versiones
+
+Idea de Lety, viendo cómo quedó Ecuaciones: en vez de bloques mezclados, **cada bloque reúne los
+ejercicios de un mismo tipo**, y el examen toma un renglón de cada bloque. Y se pasa a **seis
+versiones**, que es lo que dan de sí los seis bloques de Operaciones básicas.
+
+- **`math/matematicas-1/jerarquia.html`** — las cuatro secciones se reagruparon por tipo:
+  *Ejercicios* con Bloque 1 (6 expresiones con potencias) y Bloque 2 (6 corchetes anidados), y las
+  *Respuestas* en el mismo orden. **Un par nuevo, con su resolución**:
+  `7-3(2)(-4)+5(-6+2)-2(3)^2=` (da $-7$) y `-5[2(-6(4-9))]=` (da $-300$).
+  *Ejercicios extra 1* con seis de cada tipo, *extra 2* con los cuatro de cada tipo que sobran.
+- **`math/matematicas-1/expresiones-algebraicas.html`** — igual: Bloque 1 con los seis sin
+  cuadrado y Bloque 2 con los seis con cuadrado, y lo mismo en los extra. **Un par nuevo con su
+  resolución** (`4[(3x-2)(1-4x)+5x]-3=` y `3(-2x+5)^2+4(-3+2x)-8=`) y **un par nuevo de extras**.
+  Las doce resoluciones se reordenaron para seguir correspondiendo una a una con sus ejercicios.
+- Todo lo nuevo se verificó **numéricamente, paso por paso**: cada renglón de cada resolución da
+  el mismo valor que el ejercicio original.
+
+Cuidado para la próxima: la sección *Ejercicios resueltos* de Expresiones algebraicas **no usa
+`mini-card` sino `ejemplo-block` / `ejemplo-grid` / `ejemplo-item`**, con `<hr class="resueltos-sep">`
+entre pares. Un script que busque `bloques-2` ahí se salta la sección y va a dar a la siguiente.
+
+Revisado en local a 1000px y en móvil (375px).
+
+---
+
 ## 2026-09-07 (7) — Ecuaciones: le faltaban dos resoluciones y todos los extras
 
 Al armar el examen de IEMS salió que **este tema estaba incompleto**: seis ejercicios pero solo
