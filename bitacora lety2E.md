@@ -5,6 +5,31 @@
 
 ---
 
+## 2026-09-07 (7) — Ecuaciones: le faltaban dos resoluciones y todos los extras
+
+Al armar el examen de IEMS salió que **este tema estaba incompleto**: seis ejercicios pero solo
+cuatro resoluciones publicadas, y **ninguna sección de ejercicios extra**. Queda completo y con la
+estructura que pidió Lety.
+
+- **`math/matematicas-1/ecuaciones.html`**
+  - *Ejercicios*: los bloques 1 y 2 se unieron en **un solo bloque de 6**, a lo ancho.
+  - *Respuestas*: **se escribieron las dos que faltaban**, las de `-2+3(4+7x)=1-3(x-6)` (da
+    $x=\tfrac{3}{8}$) y `-3(-2x-8)+6=7x+5(4-2x)` (da $x=-\tfrac{10}{9}$), en el mismo formato de
+    seis pasos que las otras cuatro. Ahora las seis corresponden a sus seis ejercicios, en orden.
+  - *Ejercicios extra 1* (nueva): **dos bloques de 6**. De aquí sale el examen: toma uno de cada
+    bloque.
+  - *Ejercicios extra 2* (nueva): **un bloque de 6**, práctica que no entra al examen.
+- Los 18 ejercicios nuevos **se calcaron de los seis publicados**, molde por molde y en el mismo
+  orden: cada bloque recorre los mismos seis tipos de ecuación (paréntesis a los dos lados, con
+  las variantes de signo de cada uno). Se resolvieron todos para verificar que ninguno degenera
+  (que la $x$ no se cancele) y que las soluciones quedan en el mismo registro que las publicadas,
+  fracciones incluidas.
+- Se agregó `.bloques-1` al CSS de la página: no existía la rejilla de una sola columna.
+
+Revisado en local a 1000px y en móvil (375px): ningún bloque se desborda.
+
+---
+
 ## 2026-09-07 (6) — Los extras de Jerarquía, partidos en 1 y 2
 
 Idea de Lety, para que **el alumno sepa qué estudiar mirando la página, sin que se lo digan**:
