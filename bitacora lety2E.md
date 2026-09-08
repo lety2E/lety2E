@@ -5,6 +5,37 @@
 
 ---
 
+## 2026-09-07 (9) — Operaciones básicas tenía reactivos repetidos
+
+Al subir el examen a **seis versiones** se destapó que varios reactivos estaban duplicados entre
+bloques: a un alumno le habría tocado `\sqrt{49}` **dos veces en la misma hoja**. El bloque 12 era
+casi una copia de piezas de otros bloques (cinco de sus seis ejercicios ya existían).
+
+- **`math/matematicas-1/operaciones-basicas.html`** — nueve reactivos cambiados, **todos en
+  bloques de extras**, así que ninguna resolución publicada se tocó:
+
+  | Bloque | Antes | Ahora |
+  |---|---|---|
+  | 7 | `\sqrt{49}` | `\sqrt{225}` |
+  | 9 | `\sqrt{25}` | `\sqrt{100}` |
+  | 10 | `\sqrt{36}` | `\sqrt{169}` |
+  | 11 | `(-9)^3` | `(-3)^3` |
+  | 12 | `2(-3)(-6)`, `-3(-4-2)`, `\sqrt{49}`, `(-8)^3`, `5(-2)^2` | `4(-3)(-5)`, `-5(-2-6)`, `\sqrt{144}`, `(-5)^3`, `9(-2)^2` |
+
+  Cada reemplazo respeta el molde de su posición en el bloque, y se comprobó que ninguno de los
+  nuevos existiera ya en otro lado. Los 72 reactivos del tema son ahora distintos entre sí.
+
+- **`math/matematicas-1/expresiones-algebraicas.html`** — se repartió al estilo de Ecuaciones, que
+  es como quedó mejor: **cada bloque mezcla los dos tipos**, tres sin cuadrado y tres con cuadrado,
+  alternados. *Ejercicios* con Bloque 1 (del que sale el examen) y Bloque 2 (práctica resuelta que
+  no entra); *Ejercicios extra* con Bloque A y Bloque B. Las doce resoluciones se reordenaron otra
+  vez para seguir correspondiendo una a una.
+
+Nota: los dos desbordes que se ven en las Respuestas de Operaciones básicas (bloques 4 y 6) ya
+estaban y son el comportamiento buscado: mejor que la ecuación se salga a que se parta al medio.
+
+---
+
 ## 2026-09-07 (8) — Un bloque por tipo, y material para seis versiones
 
 Idea de Lety, viendo cómo quedó Ecuaciones: en vez de bloques mezclados, **cada bloque reúne los
