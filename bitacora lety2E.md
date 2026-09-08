@@ -5,6 +5,30 @@
 
 ---
 
+## 2026-09-07 (6) — Los extras de Jerarquía, partidos en 1 y 2
+
+Idea de Lety, para que **el alumno sepa qué estudiar mirando la página, sin que se lo digan**:
+los ejercicios extra se parten en dos secciones. De **"Ejercicios extra 1"** sale el examen; el
+**2** es práctica adicional y no entra. La separación lo insinúa sin declararlo.
+
+- **`math/matematicas-1/jerarquia.html`** — la sección de extras se dividió en dos, con sus cinco
+  bloques cada una: **extra 1** con los bloques A a E, **extra 2** con los F a J. Los veinte
+  ejercicios son los mismos de siempre; no se agregó ni se quitó ninguno.
+- El generador de exámenes de IEMS ya lee esta convención: si el tema tiene "Ejercicios extra 1"
+  toma de ahí y **nunca** del 2; si no la tiene, sigue usando "Ejercicios extra" como antes. Así
+  **la página es la fuente de verdad** y no hay dos listas que mantener sincronizadas.
+
+Solo se partió Jerarquía, que es donde de verdad sobra material (diez bloques y el examen usa
+cinco). En los temas donde los extras alcanzan justo —Expresiones algebraicas, Área y perímetro,
+Ecuaciones con ángulos— partirlos no diría nada. Operaciones básicas tiene seis bloques y el
+examen usa cinco: se dejaron los seis juntos a propósito, para que el alumno estudie los seis sin
+saber cuál se queda fuera.
+
+Revisado en local a 1000px y en móvil (375px): las dos secciones colapsables, ningún bloque se
+desborda.
+
+---
+
 ## 2026-09-07 (5) — Jerarquía: bloques de dos, para que sirvan de examen
 
 El cambio viene del proyecto IEMS: allá se están armando **5 versiones del examen de
