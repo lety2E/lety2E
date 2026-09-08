@@ -5,6 +5,35 @@
 
 ---
 
+## 2026-09-07 (5) — Jerarquía: bloques de dos, para que sirvan de examen
+
+El cambio viene del proyecto IEMS: allá se están armando **5 versiones del examen de
+Matemáticas 1**, y cada tema del examen toma un bloque de los ejercicios y otro de los extra.
+Con bloques de 4 y de 10 no salían las cinco versiones, y los tipos quedaban desbalanceados.
+
+Cada bloque de Jerarquía mezcla dos tipos: **expresión con potencias** (`4-2(-1)(-5)+...`) y
+**corchetes anidados** (`5[-3(4(-1-2))]`). Antes iban agrupados (los dos del primer tipo y luego
+los dos del otro); ahora cada bloque es **una pareja, uno de cada tipo**.
+
+- **`math/matematicas-1/jerarquia.html`**
+  - *Ejercicios*: de 2 bloques de 4 a **5 bloques de 2**. Los 8 publicados se reacomodaron en
+    pareja sin cambiar ninguno; el **Bloque 5 es nuevo**: `-3+4(-2)(6)-5(3-8)+2(-4)^2=` (da **6**)
+    y `6[-4(3(-5+2))]=` (da **216**), con su resolución paso a paso en el estilo de las demás.
+  - *Respuestas*: reordenadas en el mismo orden que sus ejercicios, más las dos nuevas.
+  - *Ejercicios extra*: de 2 bloques de 10 a **10 bloques de 2**. No se quitó ni se agregó
+    ninguno; los 20 ya publicados daban justo 10 parejas.
+- Cada ejercicio va ahora en su `.ej-line`, como en `operaciones-basicas` y en
+  `expresiones-algebraicas`. **Sin esto se pegaban dos en el mismo renglón**: los `<span>` de
+  KaTeX son inline, y con bloques de 4 nunca se notó porque siempre desbordaban.
+- Las fórmulas nuevas se renderizaron con el mismo KaTeX del sitio. Ojo para la próxima:
+  `prerender-katex.js` **salta las páginas que ya están pre-renderizadas**, así que no sirve para
+  agregarle fórmulas a un tema ya publicado; hay que renderizarlas aparte.
+
+Revisado en local a 1000px y en móvil (375px): una columna, ningún bloque se desborda, ningún
+ejercicio pegado a otro.
+
+---
+
 ## 2026-09-07 (4) — Math 4, tema 2: "Representación de funciones"
 
 Las capturas de este tema **no traen hoja de resueltos**: son doce tablas de valores y ya. Las
