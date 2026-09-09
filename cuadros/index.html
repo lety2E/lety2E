@@ -9,10 +9,14 @@
 <link rel="stylesheet" href="../style.css">
 <link rel="stylesheet" href="cuadros.css">
 <style>
+/* El examen se imprime y se fotocopia por decenas: va en NEGRO SOBRE BLANCO,
+   sin un solo color. Regla de Lety (8-sep-2026): gasta menos tinta y el
+   fotocopiado sale limpio. Los rosas del sitio (#3D2525, #E0C4BC) salían
+   grises y lavados al fotocopiar. */
 :root{
   --bg-card:#FFFFFF;
-  --text:#3D2525;
-  --border:#E0C4BC;
+  --text:#000000;
+  --border:#000000;
   --r-md:12px;
   --font-body:'DM Sans',system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
   --font-display:'Playfair Display',Georgia,serif;
@@ -37,7 +41,7 @@ body{margin:0;background:#fff;color:var(--text);font-family:var(--font-body);fon
 @media (max-width:640px){.fila{grid-template-columns:1fr !important}}
 
 .mini-card{
-  background:var(--bg-card);border:1.5px solid var(--border);
+  background:var(--bg-card);border:1px solid var(--border);
   border-radius:var(--r-md);overflow:hidden;
   break-inside:avoid;-webkit-column-break-inside:avoid;page-break-inside:avoid;
   width:100%;min-width:0;
@@ -61,6 +65,15 @@ body{margin:0;background:#fff;color:var(--text);font-family:var(--font-body);fon
 .mini-card-body .katex,.mini-card-body .katex-html{white-space:normal}
 .mini-card-body .katex{font-size:.95em}
 .figura svg{max-width:100%;height:auto;max-height:80px;display:block;margin:.2rem auto}
+/* Las figuras llegan del sitio con su tinta de color (magentas y morados). En
+   el examen van en escala de grises: la cuadricula clarita, los ejes gris
+   medio y todo lo demas en negro. El relleno conserva su fill-opacity, asi que
+   los triangulos quedan con un gris apenas visible. */
+.figura svg [stroke]{stroke:#000}
+.figura svg [stroke="#E0C4BC"]{stroke:#CCC}
+.figura svg [stroke="#7B5A50"]{stroke:#555}
+.figura svg [fill]:not([fill="none"]){fill:#000}
+.figura svg [fill="#FBF2EF"]{fill:#FFF}
 
 @page{size:letter;margin:.9cm}
 @media print{

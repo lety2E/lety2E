@@ -5,6 +5,31 @@
 
 ---
 
+## 2026-09-08 (3) — Exámenes: negro sobre blanco y una hoja carta por examen
+
+Tres decisiones de Lety para `cuadros/`, todas ya en el generador y en
+`Recursos lety2E/Reglas de mis exámenes.md`:
+
+- **Negro sobre blanco, ni un color.** La letra pasó de `#3D2525` a negro y el borde de
+  las tarjetas de `#E0C4BC` a negro de 1 px (el negro pesa más, por eso adelgazó). Las
+  figuras que vienen de `math/` se pasan a escala de grises con CSS —cuadrícula clarita,
+  ejes gris medio, lo demás negro—, sin tocar el origen. En las hojas resueltas el morado
+  de las resoluciones se vuelve negro **al imprimir** y se queda morado en pantalla.
+- **Cada versión cabe en una hoja carta**: puede sobrar espacio, no excederse. Se agregó
+  `cuadros/generador/medida.py`, que calcula la altura con las medidas reales del CSS
+  (calibradas contra el navegador: 723 px medidos, 723 estimados) y la reporta al generar.
+  Hoy el Examen 1 va al **73%** de la hoja y el Examen 2 al **36%**, así que hay aire.
+  Arriba del 92% avisa; arriba del 100% grita ¡NO CABE!
+- **Dos exámenes por semestre y, dentro de cada uno, el orden da igual.** Sólo importa el
+  reparto: la primera parte de los temas en el primero, la segunda en el segundo. Eso
+  **sustituye** la regla de "no me pongas un último tema en la primera hoja", que era para
+  cuando un examen se iba a dos hojas. `acomodo.py` ahora avisa si un tema se quedó fuera
+  de los dos exámenes.
+
+Regenerados los doce exámenes de IEMS y las doce versiones del sitio.
+
+---
+
 ## 2026-09-08 (2) — Math 3: se publican los dos temas de la elipse
 
 `math/matematicas-3/elipse-general.html` y `elipse-regreso.html` (temas 19 y 20) ya estaban

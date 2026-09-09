@@ -63,8 +63,13 @@ h1{font-family:var(--font-display);font-size:1.6rem;margin:0 0 .2rem}
   vertical-align:middle}
 .v.par{min-width:auto;padding:.45rem .6rem;font-weight:400;font-size:.82rem}
 
+/* Al imprimir, todo en negro sobre blanco: la hoja ya lo está (el CSS de
+   generar.py), aquí faltaban las resoluciones y su etiqueta, que en pantalla
+   van en morado. */
 @media print{
   .barra,.aviso{display:none}
   body{background:#fff}
   .papel{margin:0;border:0;border-radius:0;box-shadow:none;max-width:none}
+  .sol,.sol.falta{color:#000}
+  .marca{background:none;color:#000;padding:0}
 }

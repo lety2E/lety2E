@@ -24,8 +24,18 @@ propósito, para que los alumnos sepan de dónde va a salir el examen.
 - Arriba a la derecha, chiquito, **solo el identificador**: `Matemáticas 1a`.
 - **Sin pestañas de color** en las tarjetas: una barra sólida por tema gasta
   tinta de más al fotocopiar. El nombre del tema va en negritas y ya.
+- **Todo en negro sobre blanco. Ni un color** (8-sep-2026). El examen se imprime
+  y se fotocopia por decenas: el negro gasta menos tinta y sale limpio. Los
+  rosas del sitio —la letra `#3D2525` y el borde `#E0C4BC`— salían grises y
+  lavados al fotocopiar; ahora la letra y el borde son negros, y el borde bajó
+  de 1.5 a 1 px porque el negro pesa más que el rosa.
+- Las **figuras** llegan del sitio con su tinta de color y en el examen se pasan
+  a escala de grises: cuadrícula clarita, ejes gris medio, todo lo demás negro.
+  El relleno conserva su transparencia, así que un triángulo queda apenas gris.
+- **Cada versión cabe en UNA hoja carta**: puede sobrar espacio, pero no se
+  puede exceder (ver §8).
 - Se ve **igual que los ejercicios de su sitio**: mismas tarjetas, misma
-  tipografía, mismo KaTeX, mismo aire entre renglones.
+  tipografía, mismo KaTeX, mismo aire entre renglones — sólo que sin color.
 
 Corrección textual de Lety cuando el primer intento llevaba encabezado,
 instrucciones, numeración y puntaje: *"no has captado la esencia de mis
@@ -114,8 +124,8 @@ práctica resuelta.
 cada versión en dos secciones, una exentable y otra no. **El examen incluye
 todos los temas del corte**, porque es también para los alumnos que faltaron y
 no juntaron participaciones. Lo de "exentable" era, en realidad, la observación
-de que sus alumnos suelen exentar los últimos temas; de ahí quedó la regla del
-corte entre hojas (§6), no una partición del examen.
+de que sus alumnos suelen exentar los últimos temas; de ahí quedó el corte
+entre el primer examen y el segundo (§10), no una partición del examen.
 
 ## 7. Las resoluciones se escriben sobre la marcha
 
@@ -154,26 +164,40 @@ Los temas se **emparejan por altura** para que no queden huecos. En Matemáticas
 eso bajó el desperdicio de 182 a 66 píxeles.
 
 **Al cambiar los contenidos cambian las alturas**: el acomodo hay que volver a
-mirarlo cada vez. Si ya no cabe, la regla de Lety es **irse a dos hojas antes
-que apretar más**.
+mirarlo cada vez — de eso se encarga `medida.py`, aquí abajo.
 
-### Cuando son dos hojas, el corte respeta el orden de los temas
+### Una hoja por examen, y adentro el orden da igual
 
-**Decidido por Lety** (8 de septiembre de 2026). El emparejado por altura puede
-reacomodar los temas **dentro de una hoja**, pero **no a través del corte**: la
-primera hoja se lleva los primeros temas en el orden del sitio y la segunda los
-que siguen. En palabras suyas: *"no me pongas un último tema en la primera
-hoja."*
+**Decidido por Lety** (8 de septiembre de 2026): *"que quepan en hoja tamaño
+carta, aunque sobre espacio pero que no se exceda"*, y *"ya cómo se acomoden
+esos temas no importa que no estén ordenados, con que estén los
+correspondientes"*.
 
-Por qué importa: sus alumnos suelen exentar los últimos temas con
-participaciones, así que la segunda hoja es la que muchos ya traen ganada. Si un
-tema tardío se cuela arriba, la hoja deja de leerse como el avance del curso.
+O sea, dos reglas:
 
-**Ojo con el acomodo de hoy.** El Examen 1 de Matemáticas 1 todavía cabe en una
-hoja, así que no lo incumple, pero su primera fila empareja *Operaciones
-básicas* (tema 1) con *Ecuaciones con ángulos* (tema 9). El día que ese examen
-pase a dos hojas —y va para allá, conforme se cierren los temas pendientes— hay
-que **rehacer las filas** para que el corte quede limpio.
+- **Cada versión cabe en una hoja carta.** Que sobre espacio no importa; que se
+  pase, sí — la impresora suelta una segunda hoja con dos tarjetas huérfanas.
+- **Dentro del examen los temas van como convenga.** Lo único que se respeta es
+  el reparto entre los dos exámenes (§10): los primeros temas en el primero, los
+  que siguen en el segundo. Por eso las filas se emparejan por altura sin
+  cuidar el orden del sitio.
+
+Esto **sustituye** a la regla anterior (*"no me pongas un último tema en la
+primera hoja"*), que era para cuando un examen se iba a dos hojas. Ahora el
+corte que importa es el de los exámenes, no el de las hojas.
+
+**Cómo se sabe si cabe.** `medida.py` calcula la altura de cada versión con las
+medidas reales del CSS y lo dice al generar:
+
+    Examen 1 Matemáticas 1a: 19.1 de 26.1 cm de hoja (73%)
+
+Si pasa del 92% avisa que va al tope, y si pasa del 100% grita **¡NO CABE!**. Al
+8 de septiembre de 2026 el Examen 1 va al 73% y el Examen 2 al 36%, así que hay
+aire de sobra. Si algún día se pasa, las palancas son, en este orden: reacomodar
+las filas, bajar `--renglon` en `generar.py`, o mover un tema al otro examen.
+
+(La hoja **resuelta** sí puede irse a dos páginas, y no importa: es la copia de
+Lety para calificar, no la que se reparte.)
 
 ## 9. Las versiones
 
@@ -188,9 +212,10 @@ que **rehacer las filas** para que el corte quede limpio.
 
 ## 10. Cómo se parte el curso
 
-**Decidido por Lety.** Matemáticas 1 se evalúa en **dos exámenes**: el primero
-con los nueve primeros temas en el orden del sitio, el segundo con los cuatro
-restantes. El corte es por orden de la página y **no coincide con los cortes del
+**Decidido por Lety.** En general **son dos exámenes por semestre**: el primero
+se lleva la primera parte de los temas y el segundo los que siguen (8-sep-2026).
+Matemáticas 1 se evalúa así: el primero con los nueve primeros temas en el orden
+del sitio, el segundo con los cuatro restantes. El corte es por orden de la página y **no coincide con los cortes del
 PAP**, cosa decidida a propósito.
 
 ## 11. Lo que hay que cuidar en el sitio
@@ -236,7 +261,8 @@ Desde el 8 de septiembre de 2026 todo vive **dentro de este mismo proyecto**, `l
 
 - Generador: `cuadros/generador/` — `extraer.py` lee las páginas de `math/`, `banco.py` arma
   el banco y guarda la receta de cada tema, `seleccion.py` reparte las versiones,
-  `acomodo.py` decide qué lleva cada examen y cómo se acomoda la hoja, `resoluciones.py`
+  `acomodo.py` decide qué lleva cada examen y cómo se acomoda la hoja (y revisa que
+  ningún tema se quede fuera), `medida.py` calcula si cabe en la hoja, `resoluciones.py`
   arma el banco de resoluciones, `generar.py` escribe los exámenes autocontenidos y
   `sitio.py` escribe la sección `cuadros/`. Se corren desde esa carpeta.
 - El sitio de exámenes: `cuadros/`, servido en **lety2e.com/cuadros** (no enlazado desde el

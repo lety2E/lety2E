@@ -2,10 +2,27 @@
 # -*- coding: utf-8 -*-
 """Qué examen lleva qué temas, y cómo se acomodan en la hoja.
 
-El curso se parte en varios EXÁMENES, cada uno con sus temas y sus versiones.
-Las letras no se repiten entre exámenes (el primero va de la a a la f, el
-segundo de la g a la l), así que cada hoja que se reparte en el salón tiene un
-identificador único: "Matemáticas 1a", "Matemáticas 1g".
+El curso se parte en DOS EXÁMENES por semestre: el primero se lleva los primeros
+temas del sitio y el segundo los que siguen. Las letras no se repiten entre
+exámenes (el primero va de la a a la f, el segundo de la g a la l), así que cada
+hoja que se reparte en el salón tiene un identificador único: "Matemáticas 1a",
+"Matemáticas 1g".
+
+CADA VERSIÓN CABE EN UNA HOJA CARTA. Regla de Lety (8-sep-2026): puede sobrar
+espacio, pero no se puede exceder. `medida.py` calcula qué tanto llena la hoja y
+lo dice al generar; si un examen se pasa, la salida grita "¡NO CABE!". Las dos
+palancas para bajarlo son el acomodo de aquí y `--renglon` en `generar.py`; la
+tercera, si de plano ya no da, es mover un tema al otro examen.
+
+DENTRO DE UN EXAMEN LOS TEMAS VAN EN EL ORDEN QUE CONVENGA. Lo único que importa
+es que estén los que le tocan: los primeros temas en el primero, los siguientes
+en el segundo. Palabras de Lety (8-sep-2026): "ya cómo se acomoden esos temas no
+importa que no estén ordenados, con que estén los correspondientes". Por eso las
+filas se emparejan por altura, para que no queden huecos.
+
+(La regla anterior — "no me pongas un último tema en la primera hoja" — era para
+cuando un examen se iba a dos hojas. Ahora cada examen es una hoja, así que el
+corte que importa es el de los exámenes, no el de las hojas.)
 
 Dentro de cada examen, la hoja se arma por FILAS, como los minipages de LaTeX:
 en cada fila los temas se reparten el ancho según su peso.
@@ -15,18 +32,7 @@ en cada fila los temas se reparten el ancho según su peso.
   ('Tema', 1, 3)  además, sus ejercicios en 3 columnas dentro de la tarjeta
                   (útil cuando son muchos y cortos)
 
-Los temas se emparejan por altura para que no queden huecos. Al cambiar los
-contenidos cambian las alturas: hay que volver a mirar la hoja. Si ya no cabe,
-la decisión de Lety es irse a dos hojas antes que apretar más.
-
-CUANDO SON DOS HOJAS, EL CORTE RESPETA EL ORDEN DE LOS TEMAS. El emparejado por
-altura puede reacomodar dentro de una hoja, pero no a través del corte: la
-primera hoja se lleva los primeros temas del curso y la segunda los que siguen.
-Regla de Lety (8-sep-2026): "no me pongas un último tema en la primera hoja".
-
-Ojo con las filas del Examen 1 de Matemáticas 1: hoy caben en una hoja, pero la
-primera fila empareja Operaciones básicas (tema 1) con Ecuaciones con ángulos
-(tema 9). El día que pase a dos hojas hay que rehacerlas.
+Al cambiar los contenidos cambian las alturas: hay que volver a mirar la hoja.
 """
 
 EXAMENES = {
@@ -69,3 +75,26 @@ def temas_de(curso, nombre):
         if n == nombre:
             return [t for fila in filas for t, _, _ in fila]
     return []
+
+def revisar(curso, titulos):
+    """Que cada tema del banco esté en uno de los dos exámenes, y en uno solo.
+
+    Es lo único que el acomodo tiene que garantizar: el orden adentro da igual,
+    pero un tema que no aparece en ninguna fila desaparece del examen sin ruido.
+    Devuelve una lista de avisos; vacía si todo está en su lugar.
+    """
+    dondes = {}
+    for nombre, _, filas in examenes(curso):
+        for fila in filas:
+            for t, _, _ in fila:
+                dondes.setdefault(t, []).append(nombre)
+    avisos = []
+    for t in titulos:
+        if t not in dondes:
+            avisos.append('OJO: "%s" no está en ningún examen' % t)
+        elif len(dondes[t]) > 1:
+            avisos.append('OJO: "%s" está en %s' % (t, ' y '.join(dondes[t])))
+    for t in dondes:
+        if t not in titulos:
+            avisos.append('OJO: "%s" está en el acomodo pero no en el banco' % t)
+    return avisos

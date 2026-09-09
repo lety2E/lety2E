@@ -234,11 +234,25 @@ Se corre **desde esa carpeta**, en orden. Las rutas son relativas al repo.
 | 1 | `extraer.py` | Lee las páginas de `math/` y saca los ejercicios con su estructura de bloques. |
 | 2 | `banco.py` | Arma `banco.json` y guarda **la receta de cada tema** (qué modo usa y cuántos aporta). |
 | 3 | `seleccion.py` | Reparte las seis versiones en `seleccion.json`, **sin repetir ningún ejercicio**. |
-| 4 | `acomodo.py` | Qué lleva cada examen y cómo se acomoda la hoja, por filas y pesos. |
+| 4 | `acomodo.py` | Qué lleva cada examen y cómo se acomoda la hoja, por filas y pesos. Avisa si un tema se quedó fuera de los dos exámenes. |
+| — | `medida.py` | Calcula qué tanto llena la hoja cada versión. Lo usa `generar.py`. |
 | 5 | `resoluciones.py` | El banco de resoluciones: **cosecha** las que el sitio ya publica y suma las escritas a mano en `resoluciones-manuales.json`. Dice cuántas faltan por tema. |
 | 6 | `generar.py` | Escribe los exámenes **autocontenidos** que van a IEMS (`~/Desktop/IEMS/4 Materiales y evaluación/Exámenes/`), con KaTeX y tipografías incrustadas: se abren con doble clic y sin internet. |
 | 7 | `sitio.py` | Escribe esta sección: `cuadros/index.html`, la página de cada materia y **dos por versión** (`a.html` y `a-resuelta.html`). |
 | — | `propios.py` | Resto de un experimento descartado. No se usa. |
+
+### Cómo se ve el examen (lo decidido el 8-sep-2026)
+
+- **Negro sobre blanco, ni un color.** Se imprime y se fotocopia por decenas:
+  gasta menos tinta y sale limpio. Las figuras que vienen de `math/` se pasan a
+  escala de grises en el CSS de `generar.py`, no se tocan en el origen.
+- **Cada versión cabe en una hoja carta.** Puede sobrar espacio; excederse no.
+  `generar.py` lo dice al correr (`73% de la hoja`) y grita **¡NO CABE!** si se
+  pasa. Las palancas: reacomodar las filas, bajar `--renglon`, o mover un tema
+  al otro examen.
+- **Dos exámenes por semestre**, la primera parte de los temas y la segunda.
+  Dentro de cada examen **el orden da igual**: sólo importa que estén los temas
+  que le tocan.
 
 **Lo de aquí no lleva las fuentes incrustadas**: usa `assets/katex/`, `style.css` y las
 tipografías del sitio, como manda este manual (cero CDNs, nada duplicado). Lo que sí las

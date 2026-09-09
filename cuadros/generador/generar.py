@@ -3,7 +3,8 @@
 tarjetas de ejercicios del sitio lety2E. Minimalista: sin encabezado,
 sin instrucciones, sin numeracion y sin puntaje."""
 import json, os, html, re, base64, subprocess
-from acomodo import examenes
+from acomodo import examenes, revisar as acomodo_revisar
+import medida
 
 SITIO = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 SITIO_KATEX = os.path.join(SITIO, 'assets', 'katex')
@@ -43,10 +44,14 @@ def css_katex():
 # .mini-card-body) y de sus variables de :root.
 
 CSS = r'''
+/* El examen se imprime y se fotocopia por decenas: va en NEGRO SOBRE BLANCO,
+   sin un solo color. Regla de Lety (8-sep-2026): gasta menos tinta y el
+   fotocopiado sale limpio. Los rosas del sitio (#3D2525, #E0C4BC) salían
+   grises y lavados al fotocopiar. */
 :root{
   --bg-card:#FFFFFF;
-  --text:#3D2525;
-  --border:#E0C4BC;
+  --text:#000000;
+  --border:#000000;
   --r-md:12px;
   --font-body:'DM Sans',system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
   --font-display:'Playfair Display',Georgia,serif;
@@ -71,7 +76,7 @@ body{margin:0;background:#fff;color:var(--text);font-family:var(--font-body);fon
 @media (max-width:640px){.fila{grid-template-columns:1fr !important}}
 
 .mini-card{
-  background:var(--bg-card);border:1.5px solid var(--border);
+  background:var(--bg-card);border:1px solid var(--border);
   border-radius:var(--r-md);overflow:hidden;
   break-inside:avoid;-webkit-column-break-inside:avoid;page-break-inside:avoid;
   width:100%;min-width:0;
@@ -95,6 +100,15 @@ body{margin:0;background:#fff;color:var(--text);font-family:var(--font-body);fon
 .mini-card-body .katex,.mini-card-body .katex-html{white-space:normal}
 .mini-card-body .katex{font-size:.95em}
 .figura svg{max-width:100%;height:auto;max-height:80px;display:block;margin:.2rem auto}
+/* Las figuras llegan del sitio con su tinta de color (magentas y morados). En
+   el examen van en escala de grises: la cuadricula clarita, los ejes gris
+   medio y todo lo demas en negro. El relleno conserva su fill-opacity, asi que
+   los triangulos quedan con un gris apenas visible. */
+.figura svg [stroke]{stroke:#000}
+.figura svg [stroke="#E0C4BC"]{stroke:#CCC}
+.figura svg [stroke="#7B5A50"]{stroke:#555}
+.figura svg [fill]:not([fill="none"]){fill:#000}
+.figura svg [fill="#FBF2EF"]{fill:#FFF}
 
 @page{size:letter;margin:.9cm}
 @media print{
@@ -121,13 +135,20 @@ def enunciado(tex):
     return ''.join(rendidas[i//2] if i % 2 else html.escape(t)
                    for i, t in enumerate(trozos)).strip()
 
-def linea(item):
+SIN_TEX = re.compile(r'\\[a-zA-Z]+|[${}]')
+
+def partes_linea(item):
+    """(tipo, texto plano, html). El tipo lo usa medida.py para la altura."""
     if 'svg' in item:
-        return '<div class="ej-line libre figura">%s</div>' % item['svg']
+        return 'figura', '', '<div class="ej-line libre figura">%s</div>' % item['svg']
     cuerpo = enunciado(item['tex'])
     # las frases en lenguaje comun se acomodan en varios renglones
-    clase = 'ej-line' if 'katex' in cuerpo[:40] else 'ej-line libre'
-    return '<div class="%s">%s</div>' % (clase, cuerpo)
+    tipo = 'formula' if 'katex' in cuerpo[:40] else 'libre'
+    clase = 'ej-line' if tipo == 'formula' else 'ej-line libre'
+    return tipo, SIN_TEX.sub('', item['tex']), '<div class="%s">%s</div>' % (clase, cuerpo)
+
+def linea(item):
+    return partes_linea(item)[2]
 
 def tarjeta(tema, items, columnas):
     clase = 'mini-card-body en-columnas' if columnas > 1 else 'mini-card-body'
@@ -169,8 +190,19 @@ def hoja(sel, v, letra, plan):
 </html>
 '''
 
+def plan_medible(sel, v, plan):
+    """El mismo plan, con lo que medida.py necesita para calcular la altura."""
+    porTitulo = {t['titulo']: t['versiones'][v] for t in sel}
+    filas = []
+    for fila in plan:
+        celdas = [(p, c, [partes_linea(i)[:2] for i in porTitulo[t]])
+                  for t, p, c in fila if porTitulo.get(t)]
+        if celdas: filas.append(celdas)
+    return filas
+
 if __name__ == '__main__':
     sel = json.load(open('seleccion.json'))
+    for aviso in acomodo_revisar(CURSO, [t['titulo'] for t in sel]): print(aviso)
     os.makedirs(DESTINO, exist_ok=True)
     for nombre, letras, plan in examenes(CURSO):
         temas = {t for fila in plan for t, _, _ in fila}
@@ -180,4 +212,5 @@ if __name__ == '__main__':
         for v in range(len(recorte[0]['versiones'])):
             ruta = os.path.join(DESTINO, '%s %s%s.html' % (nombre, CURSO, letras[v]))
             open(ruta, 'w', encoding='utf-8').write(hoja(recorte, v, letras[v], plan))
-            print('escrito:', os.path.basename(ruta))
+            print(medida.informe(os.path.basename(ruta)[:-5],
+                                 plan_medible(recorte, v, plan)))

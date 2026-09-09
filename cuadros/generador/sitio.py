@@ -13,7 +13,7 @@ abren con doble clic y sin internet.
 Se corre desde esta carpeta:  python3 sitio.py
 """
 import json, os, html
-from acomodo import examenes
+from acomodo import examenes, revisar as acomodo_revisar
 from resoluciones import construir as construir_resoluciones, resolucion_de
 import generar
 
@@ -98,10 +98,15 @@ h1{font-family:var(--font-display);font-size:1.6rem;margin:0 0 .2rem}
   vertical-align:middle}
 .v.par{min-width:auto;padding:.45rem .6rem;font-weight:400;font-size:.82rem}
 
+/* Al imprimir, todo en negro sobre blanco: la hoja ya lo está (el CSS de
+   generar.py), aquí faltaban las resoluciones y su etiqueta, que en pantalla
+   van en morado. */
 @media print{
   .barra,.aviso{display:none}
   body{background:#fff}
   .papel{margin:0;border:0;border-radius:0;box-shadow:none;max-width:none}
+  .sol,.sol.falta{color:#000}
+  .marca{background:none;color:#000;padding:0}
 }
 '''
 
@@ -245,6 +250,7 @@ def pagina_indice(hechas):
 
 if __name__ == '__main__':
     sel = json.load(open('seleccion.json'))
+    for aviso in acomodo_revisar(CURSO, [t['titulo'] for t in sel]): print(aviso)
     banco = construir_resoluciones(CURSO)
     planes = examenes(CURSO)
     destino = os.path.join(RAIZ, CARPETA)
