@@ -1,6 +1,9 @@
 .DS_Store
 *.py
 !.claude/serve.py
+# El generador de exámenes sí va al repo: es la maquinaria de cuadros/
+# y su única copia estaría en la Mac (8-sep-2026).
+!cuadros/generador/*.py
 *.csv
 
 # Cowork / Claude Code: generados por sesión local, no van al repo
