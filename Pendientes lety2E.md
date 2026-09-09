@@ -1,10 +1,9 @@
 # Pendientes — lety2E
 
-**Matemáticas 3: faltan 5 temas por capturas** — el curso se completó el 6-sep-2026 con **18 de 23**
-temas, todos desde las capturas (no hay LaTeX de este curso y no hace falta). Los cinco que faltan
-son **ecuación general de la elipse, regreso de la elipse, ecuación general de la hipérbola, regreso
-de la hipérbola** e **historia**: sus carpetas en `~/Desktop/capturas/matemáticas 3/` (19 a 23) están
-**vacías**. En cuanto Lety suba esas capturas se arman igual que los demás; para las cónicas ya están
+**Matemáticas 3: faltan 3 temas** — el 8-sep-2026 se publicaron **la ecuación general de la elipse
+y su regreso**, así que el curso va en **20 de 23**. Faltan **ecuación general de la hipérbola**
+(escrita ya, sin publicar por decisión de Lety), **regreso de la hipérbola** e **historia**: las
+carpetas 21 a 23 de `~/Desktop/capturas/matemáticas 3/` están **vacías**. En cuanto Lety suba esas capturas se arman igual que los demás; para las cónicas ya están
 los generadores de SVG en `Recursos lety2E/` (circunferencias y parábolas sirven de molde para la
 elipse y la hipérbola). El índice del curso sigue con su `.proximamente-nota` hasta entonces.
 

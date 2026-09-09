@@ -5,6 +5,18 @@
 
 ---
 
+## 2026-09-08 (2) — Math 3: se publican los dos temas de la elipse
+
+`math/matematicas-3/elipse-general.html` y `elipse-regreso.html` (temas 19 y 20) ya estaban
+escritos y enlazados desde el índice del curso; se les corrió `prerender-katex.js` antes de
+publicar —141 y 169 fórmulas— y se subieron. Con eso Math 3 va en **20 de 23**.
+
+Quedaron **sin publicar a propósito**, por decisión de Lety: `math/matematicas-1/decimales.html`
+y `math/matematicas-3/hiperbola-general.html`. Están escritos y sin commitear, en el árbol de
+trabajo.
+
+---
+
 ## 2026-09-08 — Nace `cuadros/`: el sitio de exámenes se vuelve una sección de aquí
 
 El generador de exámenes venía armándose desde el 7-sep en el proyecto **IEMS**, y en la
