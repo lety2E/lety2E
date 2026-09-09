@@ -1,0 +1,1735 @@
+[
+ {
+  "archivo": "operaciones-basicas.html",
+  "titulo": "Operaciones básicas",
+  "receta": [
+   "bloques",
+   1,
+   1
+  ],
+  "con_respuesta": [
+   [
+    "Bloque 1",
+    [
+     {
+      "tex": "$-5+6-3+2-1=$"
+     },
+     {
+      "tex": "$3(-2)(-5)=$"
+     },
+     {
+      "tex": "$-2(-1-4)=$"
+     },
+     {
+      "tex": "$\\sqrt{36}=$"
+     },
+     {
+      "tex": "$(-4)^3=$"
+     },
+     {
+      "tex": "$5(-2)^2=$"
+     }
+    ]
+   ],
+   [
+    "Bloque 2",
+    [
+     {
+      "tex": "$8-6+2-1-2=$"
+     },
+     {
+      "tex": "$-4(-1)(-5)=$"
+     },
+     {
+      "tex": "$-4(8-3)=$"
+     },
+     {
+      "tex": "$\\sqrt{49}=$"
+     },
+     {
+      "tex": "$(5)^3=$"
+     },
+     {
+      "tex": "$2(-3)^3=$"
+     }
+    ]
+   ],
+   [
+    "Bloque 3",
+    [
+     {
+      "tex": "$-9+1+3-2-4=$"
+     },
+     {
+      "tex": "$7(-2)(6)=$"
+     },
+     {
+      "tex": "$-3(-1+9)=$"
+     },
+     {
+      "tex": "$\\sqrt{25}=$"
+     },
+     {
+      "tex": "$(-6)^2=$"
+     },
+     {
+      "tex": "$-4(1)^2=$"
+     }
+    ]
+   ],
+   [
+    "Bloque 4",
+    [
+     {
+      "tex": "$-7-5+3-2-9=$"
+     },
+     {
+      "tex": "$9(1)(5)=$"
+     },
+     {
+      "tex": "$5(4+8)=$"
+     },
+     {
+      "tex": "$\\sqrt{121}=$"
+     },
+     {
+      "tex": "$(-4)^4=$"
+     },
+     {
+      "tex": "$-6(5)^3=$"
+     }
+    ]
+   ],
+   [
+    "Bloque 5",
+    [
+     {
+      "tex": "$15+3-2+7-9=$"
+     },
+     {
+      "tex": "$8(3)(-2)=$"
+     },
+     {
+      "tex": "$-7(3-6)=$"
+     },
+     {
+      "tex": "$\\sqrt{-21}=$"
+     },
+     {
+      "tex": "$(-2)^2=$"
+     },
+     {
+      "tex": "$-3(6)^2=$"
+     }
+    ]
+   ],
+   [
+    "Bloque 6",
+    [
+     {
+      "tex": "$+3-5-2+7+6-8=$"
+     },
+     {
+      "tex": "$-2(5)(-7)=$"
+     },
+     {
+      "tex": "$-9(-1-6)=$"
+     },
+     {
+      "tex": "$\\sqrt[3]{27}=$"
+     },
+     {
+      "tex": "$(-2)^5=$"
+     },
+     {
+      "tex": "$4(-8)^2=$"
+     }
+    ]
+   ]
+  ],
+  "extras": [
+   [
+    "Bloque 7",
+    [
+     {
+      "tex": "$-9+6-5+3-1=$"
+     },
+     {
+      "tex": "$3(-5)(-2)=$"
+     },
+     {
+      "tex": "$-1(-7-5)=$"
+     },
+     {
+      "tex": "$\\sqrt{225}=$"
+     },
+     {
+      "tex": "$(-6)^3=$"
+     },
+     {
+      "tex": "$7(-2)^2=$"
+     }
+    ]
+   ],
+   [
+    "Bloque 8",
+    [
+     {
+      "tex": "$-6+7-4+3-1=$"
+     },
+     {
+      "tex": "$2(-3)(-6)=$"
+     },
+     {
+      "tex": "$-4(-5-3)=$"
+     },
+     {
+      "tex": "$\\sqrt{81}=$"
+     },
+     {
+      "tex": "$(-9)^3=$"
+     },
+     {
+      "tex": "$8(-3)^2=$"
+     }
+    ]
+   ],
+   [
+    "Bloque 9",
+    [
+     {
+      "tex": "$-8+4-3+6-2=$"
+     },
+     {
+      "tex": "$6(-4)(-3)=$"
+     },
+     {
+      "tex": "$-2(-5-4)=$"
+     },
+     {
+      "tex": "$\\sqrt{100}=$"
+     },
+     {
+      "tex": "$(-8)^3=$"
+     },
+     {
+      "tex": "$5(-1)^2=$"
+     }
+    ]
+   ],
+   [
+    "Bloque 10",
+    [
+     {
+      "tex": "$-7+6-5+4-1=$"
+     },
+     {
+      "tex": "$5(-3)(-2)=$"
+     },
+     {
+      "tex": "$-3(-4-2)=$"
+     },
+     {
+      "tex": "$\\sqrt{169}=$"
+     },
+     {
+      "tex": "$(-7)^3=$"
+     },
+     {
+      "tex": "$6(-4)^2=$"
+     }
+    ]
+   ],
+   [
+    "Bloque 11",
+    [
+     {
+      "tex": "$-9+5-3+2-1=$"
+     },
+     {
+      "tex": "$4(-2)(-5)=$"
+     },
+     {
+      "tex": "$-1(-5-3)=$"
+     },
+     {
+      "tex": "$\\sqrt{64}=$"
+     },
+     {
+      "tex": "$(-3)^3=$"
+     },
+     {
+      "tex": "$7(-3)^2=$"
+     }
+    ]
+   ],
+   [
+    "Bloque 12",
+    [
+     {
+      "tex": "$-8+6-4+2-1=$"
+     },
+     {
+      "tex": "$4(-3)(-5)=$"
+     },
+     {
+      "tex": "$-5(-2-6)=$"
+     },
+     {
+      "tex": "$\\sqrt{144}=$"
+     },
+     {
+      "tex": "$(-5)^3=$"
+     },
+     {
+      "tex": "$9(-2)^2=$"
+     }
+    ]
+   ]
+  ],
+  "fuente_extra": "Ejercicios extra",
+  "propios": 0
+ },
+ {
+  "archivo": "jerarquia.html",
+  "titulo": "Jerarquía de operaciones",
+  "receta": [
+   "por bloque",
+   1,
+   1
+  ],
+  "con_respuesta": [
+   [
+    "Bloque 1",
+    [
+     {
+      "tex": "$4-2(-1)(-5)+6(-1+4)-3(-5)^2=$"
+     },
+     {
+      "tex": "$5(-2)(3)+4(-1-5)-3+4(-1)^2=$"
+     },
+     {
+      "tex": "$8-6(3-4)-2(3)^2+2(6)(-1)=$"
+     },
+     {
+      "tex": "$3(-2)^4+6-3(-4)(-1)+7(-3+10)=$"
+     },
+     {
+      "tex": "$-3+4(-2)(6)-5(3-8)+2(-4)^2=$"
+     },
+     {
+      "tex": "$7-3(2)(-4)+5(-6+2)-2(3)^2=$"
+     }
+    ]
+   ],
+   [
+    "Bloque 2",
+    [
+     {
+      "tex": "$5[-3(4(-1-2))]=$"
+     },
+     {
+      "tex": "$-3[2(-5(-4+10))]=$"
+     },
+     {
+      "tex": "$4[-3(2(-10+4))]=$"
+     },
+     {
+      "tex": "$-6[5(-4(3+7))]=$"
+     },
+     {
+      "tex": "$6[-4(3(-5+2))]=$"
+     },
+     {
+      "tex": "$-5[2(-6(4-9))]=$"
+     }
+    ]
+   ]
+  ],
+  "extras": [
+   [
+    "Bloque A",
+    [
+     {
+      "tex": "$-4(-3)(-2)-3(-2+6)+5-4(-3)^2=$"
+     },
+     {
+      "tex": "$6(2)(-5)+7(8-4)-3+5(2)^3=$"
+     },
+     {
+      "tex": "$4-3(5)(-2)+6(-9+7)-7(-4)^2=$"
+     },
+     {
+      "tex": "$-5(4)(3)+6(2-9)-2+8(5)^3=$"
+     },
+     {
+      "tex": "$7+5(3)(-6)-4(8-5)+9(2)^2=$"
+     },
+     {
+      "tex": "$-6(5)(-4)+7(2-6)-8+3(4)^2=$"
+     }
+    ]
+   ],
+   [
+    "Bloque B",
+    [
+     {
+      "tex": "$-4[-5(-3(-2+8))]=$"
+     },
+     {
+      "tex": "$7[-3(4(5+1))]=$"
+     },
+     {
+      "tex": "$-6[5(-2(3-7))]=$"
+     },
+     {
+      "tex": "$8[-6(2(4+3))]=$"
+     },
+     {
+      "tex": "$-5[3(-7(6-2))]=$"
+     },
+     {
+      "tex": "$-7[-4(6(-2+9))]=$"
+     }
+    ]
+   ]
+  ],
+  "fuente_extra": "Ejercicios extra 1",
+  "propios": 0
+ },
+ {
+  "archivo": "ecuaciones.html",
+  "titulo": "Ecuaciones",
+  "receta": [
+   "por bloque",
+   1,
+   1
+  ],
+  "con_respuesta": [
+   [
+    "Bloque 1",
+    [
+     {
+      "tex": "$6-5(3x-1)=-9+5(4x+2)$"
+     },
+     {
+      "tex": "$6(x+2)-3=4x-2(4-5x)$"
+     },
+     {
+      "tex": "$-2+3(4+7x)=1-3(x-6)$"
+     },
+     {
+      "tex": "$2(-5x+7)+9=8x-4(1+6x)$"
+     },
+     {
+      "tex": "$3x-4(x-1)=5(2x+3)-10$"
+     },
+     {
+      "tex": "$-3(-2x-8)+6=7x+5(4-2x)$"
+     }
+    ]
+   ]
+  ],
+  "extras": [
+   [
+    "Bloque A",
+    [
+     {
+      "tex": "$8-4(2x-3)=-5+3(6x+1)$"
+     },
+     {
+      "tex": "$5(x+3)-7=2x-4(3-2x)$"
+     },
+     {
+      "tex": "$-4+2(5+3x)=6-5(x-2)$"
+     },
+     {
+      "tex": "$3(-4x+5)+8=9x-2(1+7x)$"
+     },
+     {
+      "tex": "$7x-3(x-2)=4(3x+1)-9$"
+     },
+     {
+      "tex": "$-2(-5x-4)+7=8x+3(6-4x)$"
+     }
+    ]
+   ],
+   [
+    "Bloque B",
+    [
+     {
+      "tex": "$9-2(4x-5)=-3+6(2x+3)$"
+     },
+     {
+      "tex": "$4(x+6)-5=7x-3(2-4x)$"
+     },
+     {
+      "tex": "$-6+5(2+4x)=8-2(x-7)$"
+     },
+     {
+      "tex": "$2(-3x+8)+4=5x-6(2+3x)$"
+     },
+     {
+      "tex": "$8x-5(x-3)=3(4x+2)-7$"
+     },
+     {
+      "tex": "$-4(-3x-2)+9=5x+2(7-6x)$"
+     }
+    ]
+   ]
+  ],
+  "fuente_extra": "Ejercicios extra 1",
+  "propios": 0
+ },
+ {
+  "archivo": "monomios.html",
+  "titulo": "Monomios",
+  "receta": [
+   "ejercicios",
+   1,
+   2
+  ],
+  "con_respuesta": [
+   [
+    "Bloque 1",
+    [
+     {
+      "tex": "$(-7x^4y^2)(-5x^6a^3)=$"
+     },
+     {
+      "tex": "$(3x^2y^4a^3)^2=$"
+     },
+     {
+      "tex": "$\\dfrac{-2x^7y^9a}{15x^2ya}=$"
+     },
+     {
+      "tex": "$\\sqrt{36x^{10}y^4a^2}=$"
+     },
+     {
+      "tex": "$-8x+6x-9x^2-2y^2-8+10-y=$"
+     }
+    ]
+   ],
+   [
+    "Bloque 2",
+    [
+     {
+      "tex": "$(5x^6y^5)(-2x^4a^2)=$"
+     },
+     {
+      "tex": "$(-5x^2y^6a)^2=$"
+     },
+     {
+      "tex": "$\\dfrac{-12x^3y^2a^7}{20x^9y^2a^3}=$"
+     },
+     {
+      "tex": "$\\sqrt{25x^8y^{12}b^6}=$"
+     },
+     {
+      "tex": "$-3x+2x^2-8+y^2+8x+6-x^2=$"
+     }
+    ]
+   ],
+   [
+    "Bloque 3",
+    [
+     {
+      "tex": "$(-6x^4y^3)(-2x^5y^2b)=$"
+     },
+     {
+      "tex": "$(-6x^4y^3b)^3=$"
+     },
+     {
+      "tex": "$\\dfrac{-4x^5ya}{12y^6x^2a}=$"
+     },
+     {
+      "tex": "$\\sqrt[3]{-8x^{12}y^9b^3}=$"
+     },
+     {
+      "tex": "$5x-4+2x^2-3x-7x^2+5-y=$"
+     }
+    ]
+   ],
+   [
+    "Bloque 4",
+    [
+     {
+      "tex": "$(4x^7y^2)(-3x^6y^2a)=$"
+     },
+     {
+      "tex": "$(-4x^3y^4a^2)^3=$"
+     },
+     {
+      "tex": "$\\dfrac{20x^4y^6a^3}{-50x^7a^6y^6}=$"
+     },
+     {
+      "tex": "$\\sqrt[3]{-125x^{24}y^6b^3}=$"
+     },
+     {
+      "tex": "$2x-3+6x^2-7x+2x^2+8=$"
+     }
+    ]
+   ]
+  ],
+  "extras": [
+   [
+    "Bloque 5",
+    [
+     {
+      "tex": "$(-10x^5y^3)(6x^4y^2b)=$"
+     },
+     {
+      "tex": "$(3x^4y^2a)^3=$"
+     },
+     {
+      "tex": "$\\dfrac{-8x^7y^6a^4}{24x^3y^2a^2}=$"
+     },
+     {
+      "tex": "$\\sqrt{81x^{10}y^8a^6}=$"
+     },
+     {
+      "tex": "$-6x+7x-4x^2+3y^2-8+9-2y=$"
+     }
+    ]
+   ],
+   [
+    "Bloque 6",
+    [
+     {
+      "tex": "$(7x^4y^6)(-9x^3b^2)=$"
+     },
+     {
+      "tex": "$(-2x^3y^5b)^3=$"
+     },
+     {
+      "tex": "$\\dfrac{-5x^6y^7b^8}{15x^2y^4b^3}=$"
+     },
+     {
+      "tex": "$\\sqrt{49x^6y^{12}b^4}=$"
+     },
+     {
+      "tex": "$8x-3x^2+5y^2-7x+10-2x^2-y=$"
+     }
+    ]
+   ],
+   [
+    "Bloque 7",
+    [
+     {
+      "tex": "$(-7x^3y^4)(4x^6y^3a)=$"
+     },
+     {
+      "tex": "$(-5x^2y^4b)^2=$"
+     },
+     {
+      "tex": "$\\dfrac{-12x^8ya^3}{36x^4a^2y^2}=$"
+     },
+     {
+      "tex": "$\\sqrt[3]{-27x^9y^6b^3}=$"
+     },
+     {
+      "tex": "$9x+3x^2-5x-6x^2+7+2y-3=$"
+     }
+    ]
+   ],
+   [
+    "Bloque 8",
+    [
+     {
+      "tex": "$(5x^5y^2)(-8x^4y^3a)=$"
+     },
+     {
+      "tex": "$(-4x^3y^2a^4)^2=$"
+     },
+     {
+      "tex": "$\\dfrac{18x^6y^7a^3}{54x^9a^6y^5}=$"
+     },
+     {
+      "tex": "$\\sqrt[3]{-64x^{12}y^9b^6}=$"
+     },
+     {
+      "tex": "$3x-2+5x^2-6x+4x^2+7=$"
+     }
+    ]
+   ]
+  ],
+  "fuente_extra": "Ejercicios extra",
+  "propios": 0
+ },
+ {
+  "archivo": "expresiones-algebraicas.html",
+  "titulo": "Expresiones algebraicas",
+  "receta": [
+   "por bloque",
+   1,
+   1,
+   1,
+   2
+  ],
+  "con_respuesta": [
+   [
+    "Bloque 1",
+    [
+     {
+      "tex": "$4[(-4x+5)(2-5x)+6x]-3=$"
+     },
+     {
+      "tex": "$4(-3x+2)^2+3(-1+5x)-6=$"
+     },
+     {
+      "tex": "$2[(-3x+2)(4-5x)+3x]-5=$"
+     },
+     {
+      "tex": "$5(2x-1)^2+4(-3+6x)-3=$"
+     },
+     {
+      "tex": "$3[(-2x+3)(5-4x)+2x]-5=$"
+     },
+     {
+      "tex": "$5(-4x+3)^2-2(3-2x)-4=$"
+     }
+    ]
+   ],
+   [
+    "Bloque 2",
+    [
+     {
+      "tex": "$5[(2x-3)(1-3x)+4x]-2=$"
+     },
+     {
+      "tex": "$2(-2x+4)^2+3(-5x+3)-1=$"
+     },
+     {
+      "tex": "$3[(-5x+2)(3-2x)+7x]-4=$"
+     },
+     {
+      "tex": "$4(3x-2)^2+2(-4+3x)-7=$"
+     },
+     {
+      "tex": "$4[(3x-2)(1-4x)+5x]-3=$"
+     },
+     {
+      "tex": "$3(-2x+5)^2+4(-3+2x)-8=$"
+     }
+    ]
+   ]
+  ],
+  "extras": [
+   [
+    "Bloque A",
+    [
+     {
+      "tex": "$3[(2x+3)(4-x)+5x]-2=$"
+     },
+     {
+      "tex": "$2(x-4)^2+3(2x+5)-7=$"
+     },
+     {
+      "tex": "$4[(-3x+1)(5-2x)+3x]+1=$"
+     },
+     {
+      "tex": "$4(3x-1)^2+2(2-5x)-5=$"
+     },
+     {
+      "tex": "$2[(x+5)(3-2x)+4x]-3=$"
+     },
+     {
+      "tex": "$3(2x+5)^2-4(3-x)+2=$"
+     }
+    ]
+   ],
+   [
+    "Bloque B",
+    [
+     {
+      "tex": "$5[(-x+3)(2-4x)+2x]-1=$"
+     },
+     {
+      "tex": "$4(-x+2)^2+5(-3+4x)-6=$"
+     },
+     {
+      "tex": "$2[(4x-1)(2-3x)+5x]-6=$"
+     },
+     {
+      "tex": "$5(-2x+3)^2+4(2x-5)-3=$"
+     },
+     {
+      "tex": "$5[(2x-4)(3-x)+2x]-1=$"
+     },
+     {
+      "tex": "$2(-4x+3)^2+5(2x-1)-7=$"
+     }
+    ]
+   ]
+  ],
+  "fuente_extra": "Ejercicios extra",
+  "propios": 0
+ },
+ {
+  "archivo": "grafica-tabulacion.html",
+  "titulo": "Gráfica con tabulación",
+  "receta": [
+   "ejercicios",
+   1,
+   2
+  ],
+  "con_respuesta": [
+   [
+    "",
+    [
+     {
+      "tex": "$6x+2y=10$"
+     },
+     {
+      "tex": "$10x+5y=20$"
+     },
+     {
+      "tex": "$12x+4y=8$"
+     },
+     {
+      "tex": "$15x+3y=9$"
+     }
+    ]
+   ]
+  ],
+  "extras": [
+   [
+    "Bloque 1",
+    [
+     {
+      "tex": "$4x+2y=6$"
+     },
+     {
+      "tex": "$6x-3y=12$"
+     },
+     {
+      "tex": "$-8x+4y=-16$"
+     },
+     {
+      "tex": "$10x+5y=20$"
+     },
+     {
+      "tex": "$-12x-3y=6$"
+     },
+     {
+      "tex": "$2x+y=4$"
+     },
+     {
+      "tex": "$-3x+y=-5$"
+     },
+     {
+      "tex": "$15x-5y=10$"
+     },
+     {
+      "tex": "$-4x+2y=8$"
+     },
+     {
+      "tex": "$6x+3y=-12$"
+     }
+    ]
+   ],
+   [
+    "Bloque 2",
+    [
+     {
+      "tex": "$4x-2y=10$"
+     },
+     {
+      "tex": "$-6x-2y=-14$"
+     },
+     {
+      "tex": "$3x+y=9$"
+     },
+     {
+      "tex": "$-10x+2y=-12$"
+     },
+     {
+      "tex": "$4x-y=8$"
+     },
+     {
+      "tex": "$8x+4y=24$"
+     },
+     {
+      "tex": "$-5x+2y=-10$"
+     },
+     {
+      "tex": "$9x-3y=18$"
+     },
+     {
+      "tex": "$-2x-y=-4$"
+     },
+     {
+      "tex": "$12x+6y=30$"
+     }
+    ]
+   ]
+  ],
+  "fuente_extra": "Ejercicios extra",
+  "propios": 0
+ },
+ {
+  "archivo": "pendiente-ordenada.html",
+  "titulo": "Pendiente y ordenada",
+  "receta": [
+   "ejercicios",
+   1,
+   2
+  ],
+  "con_respuesta": [
+   [
+    "",
+    [
+     {
+      "tex": "$3x+2y-8=0$"
+     },
+     {
+      "tex": "$-4x-3y+9=0$"
+     },
+     {
+      "tex": "$5x-2y+4=0$"
+     },
+     {
+      "tex": "$4x+3y-6=0$"
+     },
+     {
+      "tex": "$5x-4y+12=0$"
+     },
+     {
+      "tex": "$-2x-2y+8=0$"
+     }
+    ]
+   ]
+  ],
+  "extras": [
+   [
+    "Bloque A",
+    [
+     {
+      "tex": "$3x+2y+4=0$"
+     },
+     {
+      "tex": "$-5x+4y-8=0$"
+     },
+     {
+      "tex": "$7x-3y+9=0$"
+     },
+     {
+      "tex": "$2x-5y-10=0$"
+     },
+     {
+      "tex": "$-4x+6y+12=0$"
+     },
+     {
+      "tex": "$6x+5y-15=0$"
+     },
+     {
+      "tex": "$-3x+8y+16=0$"
+     },
+     {
+      "tex": "$4x-7y-21=0$"
+     },
+     {
+      "tex": "$5x+3y-9=0$"
+     },
+     {
+      "tex": "$-3x-4y+8=0$"
+     }
+    ]
+   ],
+   [
+    "Bloque B",
+    [
+     {
+      "tex": "$5x+3y-6=0$"
+     },
+     {
+      "tex": "$-2x+9y+18=0$"
+     },
+     {
+      "tex": "$5x-10y-20=0$"
+     },
+     {
+      "tex": "$3x-7y+14=0$"
+     },
+     {
+      "tex": "$-6x+5y+10=0$"
+     },
+     {
+      "tex": "$7x+6y-12=0$"
+     },
+     {
+      "tex": "$-8x+3y+9=0$"
+     },
+     {
+      "tex": "$10x-9y-27=0$"
+     },
+     {
+      "tex": "$-5x+4y+20=0$"
+     },
+     {
+      "tex": "$3x-2y-6=0$"
+     }
+    ]
+   ]
+  ],
+  "fuente_extra": "Ejercicios extra",
+  "propios": 0
+ },
+ {
+  "archivo": "area-perimetro.html",
+  "titulo": "Área y perímetro",
+  "receta": [
+   "ejercicios",
+   1,
+   2
+  ],
+  "con_respuesta": [
+   [
+    "",
+    [
+     {
+      "tex": "$(-1,2), (3,7), (6,2)$"
+     },
+     {
+      "tex": "$(-4,-1), (-1,5), (2,-1)$"
+     },
+     {
+      "tex": "$(-2,3), (0,5), (4,3)$"
+     },
+     {
+      "tex": "$(0,4), (2,-3), (7,4)$"
+     },
+     {
+      "tex": "$(-3,7), (0,4), (-3,-1)$"
+     }
+    ]
+   ]
+  ],
+  "extras": [
+   [
+    "",
+    [
+     {
+      "tex": "$(2,3), (8,3), (5,9)$"
+     },
+     {
+      "tex": "$(4,6), (4,1), (9,4)$"
+     },
+     {
+      "tex": "$(0,2), (7,2), (3,8)$"
+     },
+     {
+      "tex": "$(3,5), (3,-5), (8,0)$"
+     },
+     {
+      "tex": "$(-4,-2), (6,-2), (1,4)$"
+     },
+     {
+      "tex": "$(2,3), (2,9), (7,6)$"
+     },
+     {
+      "tex": "$(0,0), (11,0), (5,6)$"
+     },
+     {
+      "tex": "$(-3,4), (-3,-4), (5,0)$"
+     },
+     {
+      "tex": "$(1,-3), (10,-3), (6,2)$"
+     },
+     {
+      "tex": "$(7,5), (7,-5), (3,0)$"
+     }
+    ]
+   ]
+  ],
+  "fuente_extra": "Ejercicios extra",
+  "propios": 0
+ },
+ {
+  "archivo": "ecuaciones-angulos.html",
+  "titulo": "Ecuaciones con ángulos",
+  "receta": [
+   "ejercicios",
+   1,
+   1
+  ],
+  "con_respuesta": [
+   [
+    "",
+    [
+     {
+      "svg": "<svg viewbox=\"0 0 200 150\" xmlns=\"http://www.w3.org/2000/svg\" class=\"grafica-svg\" role=\"img\" aria-label=\"Triángulo 1: ángulos 2x, x, 3x-15\"><polygon points=\"20,130 180,130 95,25\" fill=\"none\" stroke=\"#1A0828\" stroke-width=\"2\" stroke-linejoin=\"round\"></polygon><text x=\"42\" y=\"122\" font-family=\"DM Sans, sans-serif\" font-size=\"13\" fill=\"#1A0828\" font-weight=\"600\">2x</text><text x=\"85\" y=\"55\" font-family=\"DM Sans, sans-serif\" font-size=\"13\" fill=\"#1A0828\" font-weight=\"600\">x</text><text x=\"112\" y=\"122\" font-family=\"DM Sans, sans-serif\" font-size=\"13\" fill=\"#1A0828\" font-weight=\"600\">3x−15</text></svg>"
+     },
+     {
+      "svg": "<svg viewbox=\"0 0 200 150\" xmlns=\"http://www.w3.org/2000/svg\" class=\"grafica-svg\" role=\"img\" aria-label=\"Triángulo 2 isósceles: ángulos x+30, 4x, 4x\"><polygon points=\"50,130 150,130 100,25\" fill=\"none\" stroke=\"#1A0828\" stroke-width=\"2\" stroke-linejoin=\"round\"></polygon><text x=\"78\" y=\"18\" font-family=\"DM Sans, sans-serif\" font-size=\"13\" fill=\"#1A0828\" font-weight=\"600\">x+30</text><text x=\"60\" y=\"122\" font-family=\"DM Sans, sans-serif\" font-size=\"13\" fill=\"#1A0828\" font-weight=\"600\">4x</text><text x=\"118\" y=\"122\" font-family=\"DM Sans, sans-serif\" font-size=\"13\" fill=\"#1A0828\" font-weight=\"600\">4x</text></svg>"
+     },
+     {
+      "svg": "<svg viewbox=\"0 0 200 150\" xmlns=\"http://www.w3.org/2000/svg\" class=\"grafica-svg\" role=\"img\" aria-label=\"Triángulo 3 rectángulo: ángulos x, 90°, 2x-10\"><polygon points=\"30,130 180,130 30,25\" fill=\"none\" stroke=\"#1A0828\" stroke-width=\"2\" stroke-linejoin=\"round\"></polygon><polyline points=\"30,118 42,118 42,130\" fill=\"none\" stroke=\"#1A0828\" stroke-width=\"1.5\"></polyline><text x=\"40\" y=\"48\" font-family=\"DM Sans, sans-serif\" font-size=\"13\" fill=\"#1A0828\" font-weight=\"600\">x</text><text x=\"112\" y=\"118\" font-family=\"DM Sans, sans-serif\" font-size=\"13\" fill=\"#1A0828\" font-weight=\"600\">2x−10</text></svg>"
+     },
+     {
+      "svg": "<svg viewbox=\"0 0 240 175\" xmlns=\"http://www.w3.org/2000/svg\" class=\"grafica-svg\" role=\"img\" aria-label=\"Triángulo 4 obtuso: ángulos x, 5x-20, 3x\"><polygon points=\"15,90 115,160 225,90\" fill=\"none\" stroke=\"#1A0828\" stroke-width=\"2\" stroke-linejoin=\"round\"></polygon><text x=\"40\" y=\"103\" font-family=\"DM Sans, sans-serif\" font-size=\"12\" fill=\"#1A0828\" font-weight=\"600\">x</text><text x=\"96\" y=\"145\" font-family=\"DM Sans, sans-serif\" font-size=\"11\" fill=\"#1A0828\" font-weight=\"600\">5x−20</text><text x=\"170\" y=\"108\" font-family=\"DM Sans, sans-serif\" font-size=\"12\" fill=\"#1A0828\" font-weight=\"600\">3x</text></svg>"
+     },
+     {
+      "svg": "<svg viewbox=\"0 0 200 130\" xmlns=\"http://www.w3.org/2000/svg\" class=\"grafica-svg\" role=\"img\" aria-label=\"Triángulo 5: ángulos x, 2x, 3x-20\"><polygon points=\"20,110 180,110 95,25\" fill=\"none\" stroke=\"#1A0828\" stroke-width=\"2\" stroke-linejoin=\"round\"></polygon><text x=\"38\" y=\"102\" font-family=\"DM Sans, sans-serif\" font-size=\"13\" fill=\"#1A0828\" font-weight=\"600\">x</text><text x=\"85\" y=\"58\" font-family=\"DM Sans, sans-serif\" font-size=\"13\" fill=\"#1A0828\" font-weight=\"600\">2x</text><text x=\"112\" y=\"102\" font-family=\"DM Sans, sans-serif\" font-size=\"13\" fill=\"#1A0828\" font-weight=\"600\">3x−20</text></svg>"
+     }
+    ]
+   ]
+  ],
+  "extras": [
+   [
+    "",
+    [
+     {
+      "svg": "<svg viewbox=\"0 0 210 150\" xmlns=\"http://www.w3.org/2000/svg\" class=\"grafica-svg\" role=\"img\" aria-label=\"Extra 1: ángulos 3x+5, x, 2x-5\"><polygon points=\"20,130 185,130 75,25\" fill=\"none\" stroke=\"#1A0828\" stroke-width=\"2\" stroke-linejoin=\"round\"></polygon><text x=\"35\" y=\"122\" font-family=\"DM Sans, sans-serif\" font-size=\"13\" fill=\"#1A0828\" font-weight=\"600\">3x+5</text><text x=\"62\" y=\"50\" font-family=\"DM Sans, sans-serif\" font-size=\"13\" fill=\"#1A0828\" font-weight=\"600\">x</text><text x=\"122\" y=\"122\" font-family=\"DM Sans, sans-serif\" font-size=\"13\" fill=\"#1A0828\" font-weight=\"600\">2x−5</text></svg>"
+     },
+     {
+      "svg": "<svg viewbox=\"0 0 200 150\" xmlns=\"http://www.w3.org/2000/svg\" class=\"grafica-svg\" role=\"img\" aria-label=\"Extra 2: ángulos 3x, 6x, 3x\"><polygon points=\"50,130 150,130 100,20\" fill=\"none\" stroke=\"#1A0828\" stroke-width=\"2\" stroke-linejoin=\"round\"></polygon><polyline points=\"93,28 93,35 100,35\" fill=\"none\" stroke=\"#1A0828\" stroke-width=\"1.5\"></polyline><text x=\"57\" y=\"122\" font-family=\"DM Sans, sans-serif\" font-size=\"13\" fill=\"#1A0828\" font-weight=\"600\">3x</text><text x=\"125\" y=\"122\" font-family=\"DM Sans, sans-serif\" font-size=\"13\" fill=\"#1A0828\" font-weight=\"600\">3x</text><text x=\"76\" y=\"16\" font-family=\"DM Sans, sans-serif\" font-size=\"13\" fill=\"#1A0828\" font-weight=\"600\">6x</text></svg>"
+     },
+     {
+      "svg": "<svg viewbox=\"0 0 200 150\" xmlns=\"http://www.w3.org/2000/svg\" class=\"grafica-svg\" role=\"img\" aria-label=\"Extra 3: ángulos 4x, 90°, 2x\"><polygon points=\"25,130 175,130 25,30\" fill=\"none\" stroke=\"#1A0828\" stroke-width=\"2\" stroke-linejoin=\"round\"></polygon><polyline points=\"25,118 37,118 37,130\" fill=\"none\" stroke=\"#1A0828\" stroke-width=\"1.5\"></polyline><text x=\"32\" y=\"52\" font-family=\"DM Sans, sans-serif\" font-size=\"13\" fill=\"#1A0828\" font-weight=\"600\">4x</text><text x=\"110\" y=\"122\" font-family=\"DM Sans, sans-serif\" font-size=\"13\" fill=\"#1A0828\" font-weight=\"600\">2x</text></svg>"
+     },
+     {
+      "svg": "<svg viewbox=\"0 0 230 150\" xmlns=\"http://www.w3.org/2000/svg\" class=\"grafica-svg\" role=\"img\" aria-label=\"Extra 4: ángulos 6x+5, x, 2x-5\"><polygon points=\"10,110 185,30 200,120\" fill=\"none\" stroke=\"#1A0828\" stroke-width=\"2\" stroke-linejoin=\"round\"></polygon><text x=\"14\" y=\"103\" font-family=\"DM Sans, sans-serif\" font-size=\"12\" fill=\"#1A0828\" font-weight=\"600\">6x+5</text><text x=\"175\" y=\"42\" font-family=\"DM Sans, sans-serif\" font-size=\"12\" fill=\"#1A0828\" font-weight=\"600\">x</text><text x=\"163\" y=\"118\" font-family=\"DM Sans, sans-serif\" font-size=\"11\" fill=\"#1A0828\" font-weight=\"600\">2x−5</text></svg>"
+     },
+     {
+      "svg": "<svg viewbox=\"0 0 220 145\" xmlns=\"http://www.w3.org/2000/svg\" class=\"grafica-svg\" role=\"img\" aria-label=\"Extra 5: ángulos 4x-30, 3x+10, 2x+20\"><polygon points=\"25,125 190,125 120,30\" fill=\"none\" stroke=\"#1A0828\" stroke-width=\"2\" stroke-linejoin=\"round\"></polygon><text x=\"34\" y=\"117\" font-family=\"DM Sans, sans-serif\" font-size=\"12\" fill=\"#1A0828\" font-weight=\"600\">4x−30</text><text x=\"107\" y=\"48\" font-family=\"DM Sans, sans-serif\" font-size=\"12\" fill=\"#1A0828\" font-weight=\"600\">3x+10</text><text x=\"132\" y=\"117\" font-family=\"DM Sans, sans-serif\" font-size=\"12\" fill=\"#1A0828\" font-weight=\"600\">2x+20</text></svg>"
+     }
+    ]
+   ]
+  ],
+  "fuente_extra": "Ejercicios extra",
+  "propios": 0
+ },
+ {
+  "archivo": "reglas-exponentes.html",
+  "titulo": "Reglas de exponentes",
+  "receta": [
+   "ejercicios",
+   1,
+   2
+  ],
+  "con_respuesta": [
+   [
+    "",
+    [
+     {
+      "tex": "$\\dfrac{10^4}{10^6} =$"
+     },
+     {
+      "tex": "$10^2 (10)^{-4} =$"
+     },
+     {
+      "tex": "$10^{-4} (10^7) =$"
+     },
+     {
+      "tex": "$10^{-4} =$"
+     },
+     {
+      "tex": "$10^{-4} / 10^7 =$"
+     },
+     {
+      "tex": "$\\dfrac{10^6}{10^1} =$"
+     },
+     {
+      "tex": "$(10^3)(10)^2 =$"
+     },
+     {
+      "tex": "$10^{+3} =$"
+     },
+     {
+      "tex": "$(10^5)(10^{-4}) =$"
+     },
+     {
+      "tex": "$10^5 =$"
+     },
+     {
+      "tex": "$\\dfrac{10^{10}}{10^3} =$"
+     },
+     {
+      "tex": "$10^{-7} (10^{21}) =$"
+     },
+     {
+      "tex": "$10^6 (10)^2 =$"
+     },
+     {
+      "tex": "$10^7 =$"
+     },
+     {
+      "tex": "$10^2 / 10^5 =$"
+     }
+    ]
+   ],
+   [
+    "",
+    [
+     {
+      "tex": "$72^0 =$"
+     },
+     {
+      "tex": "$(-1)^7 =$"
+     },
+     {
+      "tex": "$(3)^2 (3)^4 =$"
+     },
+     {
+      "tex": "$\\dfrac{2^4}{2} =$"
+     },
+     {
+      "tex": "$\\dfrac{(3)^4}{(5)^4} =$"
+     },
+     {
+      "tex": "$(-1)^4 =$"
+     },
+     {
+      "tex": "$4^{-3} =$"
+     },
+     {
+      "tex": "$(7)^{1/3} =$"
+     },
+     {
+      "tex": "$\\dfrac{(-3)^5}{(-3)^8} =$"
+     },
+     {
+      "tex": "$2^{3/5} =$"
+     },
+     {
+      "tex": "$43^0 =$"
+     },
+     {
+      "tex": "$(-1)^6 =$"
+     },
+     {
+      "tex": "$(4)^5 (4)^2 =$"
+     },
+     {
+      "tex": "$\\dfrac{3^4}{3^2} =$"
+     },
+     {
+      "tex": "$\\dfrac{5^3}{6^3} =$"
+     },
+     {
+      "tex": "$8^{4/7} =$"
+     },
+     {
+      "tex": "$(2^3)^4 =$"
+     }
+    ]
+   ]
+  ],
+  "extras": [
+   [
+    "",
+    [
+     {
+      "tex": "$\\dfrac{10^8}{10^{12}} =$"
+     },
+     {
+      "tex": "$10^{-3} (10)^{-2} =$"
+     },
+     {
+      "tex": "$10^{0} \\cdot 10^{5} =$"
+     },
+     {
+      "tex": "$(10^2)^{-3} =$"
+     },
+     {
+      "tex": "$10^9 / 10^{-2} =$"
+     },
+     {
+      "tex": "$10^{-5} =$"
+     },
+     {
+      "tex": "$10^6 \\cdot 10^{-6} =$"
+     },
+     {
+      "tex": "$\\dfrac{10^{-2}}{10^{-4}} =$"
+     },
+     {
+      "tex": "$(10^{-1})^{5} =$"
+     },
+     {
+      "tex": "$10^3 \\cdot 10^{-5} \\cdot 10^{2} =$"
+     },
+     {
+      "tex": "$\\dfrac{10^7 \\cdot 10^{-3}}{10^4} =$"
+     },
+     {
+      "tex": "$(10^{-2})^{-4} =$"
+     },
+     {
+      "tex": "$10^{-6} / 10^{-2} =$"
+     },
+     {
+      "tex": "$10^1 \\cdot 10^1 =$"
+     }
+    ]
+   ],
+   [
+    "",
+    [
+     {
+      "tex": "$150^0 =$"
+     },
+     {
+      "tex": "$(-1)^{100} =$"
+     },
+     {
+      "tex": "$(-2)^3 =$"
+     },
+     {
+      "tex": "$(1/2)^{-2} =$"
+     },
+     {
+      "tex": "$(x^2)^5 =$"
+     },
+     {
+      "tex": "$\\sqrt[4]{16} =$"
+     },
+     {
+      "tex": "$3^{2/3} =$"
+     },
+     {
+      "tex": "$\\sqrt{25^3} =$"
+     },
+     {
+      "tex": "$(2/3)^3 =$"
+     },
+     {
+      "tex": "$a^n \\cdot a^0 =$"
+     },
+     {
+      "tex": "$(4^2)^0 =$"
+     },
+     {
+      "tex": "$(-3)^4 =$"
+     },
+     {
+      "tex": "$\\dfrac{x^5}{x^2} =$"
+     },
+     {
+      "tex": "$9^{1/2} =$"
+     }
+    ]
+   ]
+  ],
+  "fuente_extra": "Ejercicios extra",
+  "propios": 0
+ },
+ {
+  "archivo": "mcm-mcd.html",
+  "titulo": "mcm y MCD",
+  "receta": [
+   "ejercicios",
+   1,
+   2
+  ],
+  "con_respuesta": [
+   [
+    "mcm",
+    [
+     {
+      "tex": "mcm $(40, 50, 15)$"
+     },
+     {
+      "tex": "mcm $(18, 45, 20)$"
+     },
+     {
+      "tex": "mcm $(40, 75, 9)$"
+     },
+     {
+      "tex": "mcm $(10, 14, 20)$"
+     }
+    ]
+   ],
+   [
+    "MCD",
+    [
+     {
+      "tex": "MCD $(300, 60, 40)$"
+     },
+     {
+      "tex": "MCD $(250, 100, 75)$"
+     },
+     {
+      "tex": "MCD $(180, 72, 60)$"
+     },
+     {
+      "tex": "MCD $(100, 150, 300)$"
+     }
+    ]
+   ]
+  ],
+  "extras": [
+   [
+    "mcm",
+    [
+     {
+      "tex": "mcm $(12, 15, 20)$"
+     },
+     {
+      "tex": "mcm $(6, 8, 10)$"
+     },
+     {
+      "tex": "mcm $(45, 54, 60)$"
+     },
+     {
+      "tex": "mcm $(24, 36, 48)$"
+     }
+    ]
+   ],
+   [
+    "MCD",
+    [
+     {
+      "tex": "MCD $(48, 72, 84)$"
+     },
+     {
+      "tex": "MCD $(105, 120, 150)$"
+     },
+     {
+      "tex": "MCD $(32, 64, 96)$"
+     },
+     {
+      "tex": "MCD $(200, 400, 600)$"
+     }
+    ]
+   ]
+  ],
+  "fuente_extra": "Ejercicios extra",
+  "propios": 0
+ },
+ {
+  "archivo": "lenguaje-algebraico.html",
+  "titulo": "Lenguaje algebraico",
+  "receta": [
+   "ejercicios",
+   1,
+   2
+  ],
+  "con_respuesta": [
+   [
+    "Bloque 1",
+    [
+     {
+      "tex": "La diferencia de dos números."
+     },
+     {
+      "tex": "El producto de dos números."
+     },
+     {
+      "tex": "El cociente de dos números."
+     },
+     {
+      "tex": "El cubo de un número."
+     },
+     {
+      "tex": "El doble de un número."
+     },
+     {
+      "tex": "La tercera parte de un número."
+     },
+     {
+      "tex": "Un número aumentado en cinco."
+     },
+     {
+      "tex": "La suma de los cuadrados de dos números."
+     },
+     {
+      "tex": "El cuadrado de la suma de dos números."
+     },
+     {
+      "tex": "El producto de tres números."
+     }
+    ]
+   ],
+   [
+    "Bloque 2",
+    [
+     {
+      "tex": "El doble de un número más el triple de otro."
+     },
+     {
+      "tex": "Un número par."
+     },
+     {
+      "tex": "Un número impar."
+     },
+     {
+      "tex": "Tres números consecutivos."
+     },
+     {
+      "tex": "El antecesor de un número."
+     },
+     {
+      "tex": "El cuadrado de un número par."
+     },
+     {
+      "tex": "La suma de tres números consecutivos."
+     },
+     {
+      "tex": "El producto de un número y su sucesor."
+     },
+     {
+      "tex": "La diferencia de los cubos de dos números."
+     },
+     {
+      "tex": "La cuarta parte de la suma de dos números."
+     }
+    ]
+   ]
+  ],
+  "extras": [
+   [
+    "Bloque A — Refuerzo",
+    [
+     {
+      "tex": "El quíntuplo de un número."
+     },
+     {
+      "tex": "El triple de un número disminuido en 10."
+     },
+     {
+      "tex": "Un número disminuido en su mitad."
+     },
+     {
+      "tex": "El doble del cuadrado de un número."
+     },
+     {
+      "tex": "El triple del sucesor de un número."
+     }
+    ]
+   ],
+   [
+    "Bloque B — Relaciones",
+    [
+     {
+      "tex": "El cociente de la suma entre la diferencia."
+     },
+     {
+      "tex": "La suma de un número y su inverso."
+     },
+     {
+      "tex": "El cuadrado de un número más el mismo número."
+     },
+     {
+      "tex": "La mitad de la diferencia de dos números."
+     },
+     {
+      "tex": "El doble de la suma de tres números."
+     }
+    ]
+   ],
+   [
+    "Bloque C — Potencias y raíces",
+    [
+     {
+      "tex": "El cuadrado de la diferencia de dos números."
+     },
+     {
+      "tex": "La raíz cuadrada de un número más 7."
+     },
+     {
+      "tex": "La suma de un número y su cuadrado."
+     },
+     {
+      "tex": "El cubo de la tercera parte de un número."
+     },
+     {
+      "tex": "La raíz cúbica del producto de dos números."
+     }
+    ]
+   ],
+   [
+    "Bloque D — Consecutivos y especiales",
+    [
+     {
+      "tex": "La suma de dos números pares consecutivos."
+     },
+     {
+      "tex": "El producto de dos números consecutivos."
+     },
+     {
+      "tex": "La diferencia entre un número y su antecesor."
+     },
+     {
+      "tex": "Tres números impares consecutivos."
+     },
+     {
+      "tex": "El cuadrado del sucesor de un número."
+     }
+    ]
+   ]
+  ],
+  "fuente_extra": "Ejercicios extra",
+  "propios": 0
+ },
+ {
+  "archivo": "problemas-ecuaciones.html",
+  "titulo": "Problemas de ecuaciones",
+  "receta": [
+   "ejercicios",
+   1,
+   2
+  ],
+  "con_respuesta": [
+   [
+    "Bloque 1",
+    [
+     {
+      "tex": "Un número más veinte es igual a cuarenta."
+     },
+     {
+      "tex": "Un número menos doce es igual a cinco."
+     },
+     {
+      "tex": "El triple de un número es igual a cuarenta y cinco."
+     },
+     {
+      "tex": "El doble de un número es igual a treinta y seis."
+     },
+     {
+      "tex": "El cuadrado de un número es igual a cien."
+     },
+     {
+      "tex": "La raíz cúbica de veintisiete es igual a un número."
+     },
+     {
+      "tex": "El doble de un número más cuatro es igual a catorce."
+     }
+    ]
+   ],
+   [
+    "Bloque 2",
+    [
+     {
+      "tex": "Dos más el triple de un número es igual a veintitrés."
+     },
+     {
+      "tex": "La mitad de un número más diez es igual a veinte."
+     },
+     {
+      "tex": "Un tercio de un número menos uno es igual a cinco."
+     },
+     {
+      "tex": "La suma de dos números consecutivos es igual a siete."
+     },
+     {
+      "tex": "El triple de un número menos ocho es igual a diez."
+     },
+     {
+      "tex": "El cuadrado de un número menos dos es igual a siete."
+     },
+     {
+      "tex": "La raíz cuadrada de un número más cinco es igual a doce."
+     }
+    ]
+   ]
+  ],
+  "extras": [
+   [
+    "Bloque 3",
+    [
+     {
+      "tex": "El quíntuple de un número menos diez es igual a quince."
+     },
+     {
+      "tex": "Siete veces un número más tres es igual a veinticuatro."
+     },
+     {
+      "tex": "El doble de la suma de un número más tres es igual a doce."
+     },
+     {
+      "tex": "Un número dividido entre cuatro más seis es igual a nueve."
+     }
+    ]
+   ],
+   [
+    "Bloque 4",
+    [
+     {
+      "tex": "La diferencia de un número y ocho por tres es igual a nueve."
+     },
+     {
+      "tex": "El cuádruple de un número es igual al mismo número más doce."
+     },
+     {
+      "tex": "La suma de tres números consecutivos es igual a quince."
+     },
+     {
+      "tex": "El doble de un número menos siete es igual a veintiuno."
+     }
+    ]
+   ],
+   [
+    "Bloque 5",
+    [
+     {
+      "tex": "Un número disminuido en siete es igual a ocho."
+     },
+     {
+      "tex": "El cuádruple de un número menos seis es igual a dieciocho."
+     },
+     {
+      "tex": "La mitad de un número aumentada en ocho es igual a doce."
+     },
+     {
+      "tex": "La suma de un número y su mitad es igual a quince."
+     }
+    ]
+   ],
+   [
+    "Bloque 6",
+    [
+     {
+      "tex": "Cinco veces la diferencia de un número y dos es igual a veinte."
+     },
+     {
+      "tex": "El cuadrado de un número aumentado en siete es igual a dieciséis."
+     },
+     {
+      "tex": "El triple de un número aumentado en su mitad es veinte."
+     },
+     {
+      "tex": "La raíz cuadrada de la suma de un número y cuatro es igual a tres."
+     }
+    ]
+   ],
+   [
+    "Bloque 7",
+    [
+     {
+      "tex": "El triple de la suma de un número y uno es igual a veintiuno."
+     },
+     {
+      "tex": "Un número más su tercera parte es igual a ocho."
+     },
+     {
+      "tex": "El doble de un número disminuido en cinco es igual a once."
+     },
+     {
+      "tex": "El quíntuple de un número aumentado en dos es igual a doce."
+     }
+    ]
+   ],
+   [
+    "Bloque 8",
+    [
+     {
+      "tex": "La raíz cúbica de un número más dos es igual a cinco."
+     },
+     {
+      "tex": "Un número menos su cuarta parte es igual a nueve."
+     },
+     {
+      "tex": "El triple de la diferencia de un número y cuatro es igual a quince."
+     },
+     {
+      "tex": "La suma de un número y su doble es igual a veinticuatro."
+     }
+    ]
+   ]
+  ],
+  "fuente_extra": "Ejercicios extra",
+  "propios": 0
+ }
+]

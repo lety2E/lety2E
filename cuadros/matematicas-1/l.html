@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Matemáticas 1l</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../style.css">
+<link rel="stylesheet" href="../cuadros.css">
+<style>
+:root{
+  --bg-card:#FFFFFF;
+  --text:#3D2525;
+  --border:#E0C4BC;
+  --r-md:12px;
+  --font-body:'DM Sans',system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
+  --font-display:'Playfair Display',Georgia,serif;
+  /* Aire entre renglones (el sitio usa 2.4). Es la palanca para que
+     el examen quepa en UNA hoja carta; la otra es el acomodo (ver acomodo.py).
+     Con 49 ejercicios el examen ocupa ~97%% de la hoja: 2.4 lo dejaba justo en el
+     borde y cualquier impresora lo pasaba a dos hojas. */
+  --renglon:2.3;
+}
+*{box-sizing:border-box}
+body{margin:0;background:#fff;color:var(--text);font-family:var(--font-body);font-size:10pt}
+.hoja{max-width:20.4cm;margin:0 auto;padding:.8cm}
+
+.titulo{font-family:var(--font-display);font-size:.95rem;font-weight:700;
+        margin:0 0 .5rem;letter-spacing:.01em;text-align:right}
+
+/* La hoja se arma por filas, como los minipages: en cada fila los temas se
+   reparten el ancho segun su peso (ver acomodo.py). */
+.rejilla{display:flex;flex-direction:column;gap:.6rem}
+.fila{display:grid;gap:.6rem;align-items:start;
+      break-inside:avoid;-webkit-column-break-inside:avoid;page-break-inside:avoid}
+@media (max-width:640px){.fila{grid-template-columns:1fr !important}}
+
+.mini-card{
+  background:var(--bg-card);border:1.5px solid var(--border);
+  border-radius:var(--r-md);overflow:hidden;
+  break-inside:avoid;-webkit-column-break-inside:avoid;page-break-inside:avoid;
+  width:100%;min-width:0;
+}
+/* tarjeta ancha con muchos ejercicios cortos: se parten en columnas adentro */
+.mini-card-body.en-columnas{column-gap:1.2rem}
+.mini-card-body.en-columnas .ej-line{break-inside:avoid}
+/* Titulo del tema: discreto y en negritas. Sin pestana de color: una barra
+   solida en cada tarjeta gasta tinta de mas al fotocopiar. */
+.mini-card-head{
+  padding:.35rem .6rem 0;
+  font-family:var(--font-display);font-size:.82rem;font-weight:700;
+  line-height:1.25;
+}
+.mini-card-body{padding:.35rem .6rem .5rem;font-size:.9rem;line-height:var(--renglon)}
+/* En el sitio los renglones son nowrap con scroll; en papel no hay scroll, asi
+   que aqui las formulas largas se parten solas en sus operadores. La sangria
+   francesa hace evidente que el renglon viene continuado. */
+.ej-line{white-space:normal;padding-left:1.1em;text-indent:-1.1em}
+.ej-line.libre{line-height:1.5;margin:.4rem 0;padding-left:0;text-indent:0}
+.mini-card-body .katex,.mini-card-body .katex-html{white-space:normal}
+.mini-card-body .katex{font-size:.95em}
+.figura svg{max-width:100%;height:auto;max-height:80px;display:block;margin:.2rem auto}
+
+@page{size:letter;margin:.9cm}
+@media print{
+  .hoja{padding:0;max-width:none}
+}
+</style>
+</head>
+<body><div class="barra"><div class="interior"><a class="grupo" href="index.html" style="text-decoration:none">← Matemáticas 1</a><span class="sep"></span><span class="grupo">Examen 1</span><a class="v" href="a.html">a</a><a class="v" href="b.html">b</a><a class="v" href="c.html">c</a><a class="v" href="d.html">d</a><a class="v" href="e.html">e</a><a class="v" href="f.html">f</a><span class="sep"></span><span class="grupo">Examen 2</span><a class="v" href="g.html">g</a><a class="v" href="h.html">h</a><a class="v" href="i.html">i</a><a class="v" href="j.html">j</a><a class="v" href="k.html">k</a><a class="v actual" href="l.html">l</a><span class="sep"></span><a class="v par" href="l-resuelta.html">ver resuelta</a><button class="imprimir" onclick="window.print()">Imprimir</button></div></div><div class="papel"><div class="hoja"><p class="titulo">Matemáticas 1l</p><div class="rejilla"><div class="fila" style="grid-template-columns:1fr 1fr"><div class="mini-card"><div class="mini-card-head">Reglas de exponentes</div><div class="mini-card-body"><div class="ej-line"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mo>−</mo><mn>1</mn><msup><mo stretchy="false">)</mo><mn>100</mn></msup><mo>=</mo></mrow><annotation encoding="application/x-tex">(-1)^{100} =</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.0641em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">−</span><span class="mord">1</span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">100</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span></span></span></span></div><div class="ej-line"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mroot><mn>16</mn><mn>4</mn></mroot><mo>=</mo></mrow><annotation encoding="application/x-tex">\sqrt[4]{16} =</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.04em;vertical-align:-0.1328em;"></span><span class="mord sqrt"><span class="root"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7869em;"><span style="top:-2.9647em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size6 size1 mtight"><span class="mord mtight"><span class="mord mtight">4</span></span></span></span></span></span></span></span><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9072em;"><span class="svg-align" style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord" style="padding-left:0.833em;"><span class="mord">16</span></span></span><span style="top:-2.8672em;"><span class="pstrut" style="height:3em;"></span><span class="hide-tail" style="min-width:0.853em;height:1.08em;"><svg xmlns="http://www.w3.org/2000/svg" width='400em' height='1.08em' viewBox='0 0 400000 1080' preserveAspectRatio='xMinYMin slice'><path d='M95,702
+c-2.7,0,-7.17,-2.7,-13.5,-8c-5.8,-5.3,-9.5,-10,-9.5,-14
+c0,-2,0.3,-3.3,1,-4c1.3,-2.7,23.83,-20.7,67.5,-54
+c44.2,-33.3,65.8,-50.3,66.5,-51c1.3,-1.3,3,-2,5,-2c4.7,0,8.7,3.3,12,10
+s173,378,173,378c0.7,0,35.3,-71,104,-213c68.7,-142,137.5,-285,206.5,-429
+c69,-144,104.5,-217.7,106.5,-221
+l0 -0
+c5.3,-9.3,12,-14,20,-14
+H400000v40H845.2724
+s-225.272,467,-225.272,467s-235,486,-235,486c-2.7,4.7,-9,7,-19,7
+c-6,0,-10,-1,-12,-3s-194,-422,-194,-422s-65,47,-65,47z
+M834 80h400000v40h-400000z'/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.1328em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span></span></span></span></div><div class="ej-line"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>4</mn><mrow><mo>−</mo><mn>3</mn></mrow></msup><mo>=</mo></mrow><annotation encoding="application/x-tex">4^{-3} =</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord">4</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">−</span><span class="mord mtight">3</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span></span></span></span></div></div></div><div class="mini-card"><div class="mini-card-head">mcm y MCD</div><div class="mini-card-body"><div class="ej-line">MCD <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mn>100</mn><mo separator="true">,</mo><mn>150</mn><mo separator="true">,</mo><mn>300</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(100, 150, 300)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">100</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">150</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">300</span><span class="mclose">)</span></span></span></span></div></div></div></div><div class="fila" style="grid-template-columns:1fr 1fr"><div class="mini-card"><div class="mini-card-head">Problemas de ecuaciones</div><div class="mini-card-body"><div class="ej-line libre">Cinco veces la diferencia de un número y dos es igual a veinte.</div><div class="ej-line libre">El cuadrado de un número aumentado en siete es igual a dieciséis.</div><div class="ej-line libre">El triple de un número menos ocho es igual a diez.</div></div></div><div class="mini-card"><div class="mini-card-head">Lenguaje algebraico</div><div class="mini-card-body"><div class="ej-line libre">La suma de dos números pares consecutivos.</div><div class="ej-line libre">El producto de dos números consecutivos.</div><div class="ej-line libre">La suma de tres números consecutivos.</div></div></div></div></div></div></div></body></html>

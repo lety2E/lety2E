@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Matemáticas 1g</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../style.css">
+<link rel="stylesheet" href="../cuadros.css">
+<style>
+:root{
+  --bg-card:#FFFFFF;
+  --text:#3D2525;
+  --border:#E0C4BC;
+  --r-md:12px;
+  --font-body:'DM Sans',system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
+  --font-display:'Playfair Display',Georgia,serif;
+  /* Aire entre renglones (el sitio usa 2.4). Es la palanca para que
+     el examen quepa en UNA hoja carta; la otra es el acomodo (ver acomodo.py).
+     Con 49 ejercicios el examen ocupa ~97%% de la hoja: 2.4 lo dejaba justo en el
+     borde y cualquier impresora lo pasaba a dos hojas. */
+  --renglon:2.3;
+}
+*{box-sizing:border-box}
+body{margin:0;background:#fff;color:var(--text);font-family:var(--font-body);font-size:10pt}
+.hoja{max-width:20.4cm;margin:0 auto;padding:.8cm}
+
+.titulo{font-family:var(--font-display);font-size:.95rem;font-weight:700;
+        margin:0 0 .5rem;letter-spacing:.01em;text-align:right}
+
+/* La hoja se arma por filas, como los minipages: en cada fila los temas se
+   reparten el ancho segun su peso (ver acomodo.py). */
+.rejilla{display:flex;flex-direction:column;gap:.6rem}
+.fila{display:grid;gap:.6rem;align-items:start;
+      break-inside:avoid;-webkit-column-break-inside:avoid;page-break-inside:avoid}
+@media (max-width:640px){.fila{grid-template-columns:1fr !important}}
+
+.mini-card{
+  background:var(--bg-card);border:1.5px solid var(--border);
+  border-radius:var(--r-md);overflow:hidden;
+  break-inside:avoid;-webkit-column-break-inside:avoid;page-break-inside:avoid;
+  width:100%;min-width:0;
+}
+/* tarjeta ancha con muchos ejercicios cortos: se parten en columnas adentro */
+.mini-card-body.en-columnas{column-gap:1.2rem}
+.mini-card-body.en-columnas .ej-line{break-inside:avoid}
+/* Titulo del tema: discreto y en negritas. Sin pestana de color: una barra
+   solida en cada tarjeta gasta tinta de mas al fotocopiar. */
+.mini-card-head{
+  padding:.35rem .6rem 0;
+  font-family:var(--font-display);font-size:.82rem;font-weight:700;
+  line-height:1.25;
+}
+.mini-card-body{padding:.35rem .6rem .5rem;font-size:.9rem;line-height:var(--renglon)}
+/* En el sitio los renglones son nowrap con scroll; en papel no hay scroll, asi
+   que aqui las formulas largas se parten solas en sus operadores. La sangria
+   francesa hace evidente que el renglon viene continuado. */
+.ej-line{white-space:normal;padding-left:1.1em;text-indent:-1.1em}
+.ej-line.libre{line-height:1.5;margin:.4rem 0;padding-left:0;text-indent:0}
+.mini-card-body .katex,.mini-card-body .katex-html{white-space:normal}
+.mini-card-body .katex{font-size:.95em}
+.figura svg{max-width:100%;height:auto;max-height:80px;display:block;margin:.2rem auto}
+
+@page{size:letter;margin:.9cm}
+@media print{
+  .hoja{padding:0;max-width:none}
+}
+</style>
+</head>
+<body><div class="barra"><div class="interior"><a class="grupo" href="index.html" style="text-decoration:none">← Matemáticas 1</a><span class="sep"></span><span class="grupo">Examen 1</span><a class="v" href="a.html">a</a><a class="v" href="b.html">b</a><a class="v" href="c.html">c</a><a class="v" href="d.html">d</a><a class="v" href="e.html">e</a><a class="v" href="f.html">f</a><span class="sep"></span><span class="grupo">Examen 2</span><a class="v actual" href="g.html">g</a><a class="v" href="h.html">h</a><a class="v" href="i.html">i</a><a class="v" href="j.html">j</a><a class="v" href="k.html">k</a><a class="v" href="l.html">l</a><span class="sep"></span><a class="v par" href="g-resuelta.html">ver resuelta</a><button class="imprimir" onclick="window.print()">Imprimir</button></div></div><div class="papel"><div class="hoja"><p class="titulo">Matemáticas 1g</p><div class="rejilla"><div class="fila" style="grid-template-columns:1fr 1fr"><div class="mini-card"><div class="mini-card-head">Reglas de exponentes</div><div class="mini-card-body"><div class="ej-line"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mstyle displaystyle="true" scriptlevel="0"><mfrac><mrow><mn>1</mn><msup><mn>0</mn><mn>4</mn></msup></mrow><mrow><mn>1</mn><msup><mn>0</mn><mn>6</mn></msup></mrow></mfrac></mstyle><mo>=</mo></mrow><annotation encoding="application/x-tex">\dfrac{10^4}{10^6} =</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:2.1771em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.4911em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7401em;"><span style="top:-2.989em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">6</span></span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">4</span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span></span></span></span></div><div class="ej-line"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><msup><mn>0</mn><mn>9</mn></msup><mi mathvariant="normal">/</mi><mn>1</mn><msup><mn>0</mn><mrow><mo>−</mo><mn>2</mn></mrow></msup><mo>=</mo></mrow><annotation encoding="application/x-tex">10^9 / 10^{-2} =</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.0641em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">9</span></span></span></span></span></span></span></span><span class="mord">/1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">−</span><span class="mord mtight">2</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span></span></span></span></div><div class="ej-line"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><msup><mn>0</mn><mn>3</mn></msup><mo>⋅</mo><mn>1</mn><msup><mn>0</mn><mrow><mo>−</mo><mn>5</mn></mrow></msup><mo>⋅</mo><mn>1</mn><msup><mn>0</mn><mn>2</mn></msup><mo>=</mo></mrow><annotation encoding="application/x-tex">10^3 \cdot 10^{-5} \cdot 10^{2} =</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">−</span><span class="mord mtight">5</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span></span></span></span></div></div></div><div class="mini-card"><div class="mini-card-head">mcm y MCD</div><div class="mini-card-body"><div class="ej-line">mcm <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mn>40</mn><mo separator="true">,</mo><mn>50</mn><mo separator="true">,</mo><mn>15</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(40, 50, 15)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">40</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">50</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">15</span><span class="mclose">)</span></span></span></span></div><div class="ej-line">mcm <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mn>18</mn><mo separator="true">,</mo><mn>45</mn><mo separator="true">,</mo><mn>20</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(18, 45, 20)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">18</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">45</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">20</span><span class="mclose">)</span></span></span></span></div><div class="ej-line">mcm <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mn>45</mn><mo separator="true">,</mo><mn>54</mn><mo separator="true">,</mo><mn>60</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(45, 54, 60)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">45</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">54</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">60</span><span class="mclose">)</span></span></span></span></div></div></div></div><div class="fila" style="grid-template-columns:1fr 1fr"><div class="mini-card"><div class="mini-card-head">Problemas de ecuaciones</div><div class="mini-card-body"><div class="ej-line libre">Un número más veinte es igual a cuarenta.</div><div class="ej-line libre">Siete veces un número más tres es igual a veinticuatro.</div><div class="ej-line libre">El doble de la suma de un número más tres es igual a doce.</div></div></div><div class="mini-card"><div class="mini-card-head">Lenguaje algebraico</div><div class="mini-card-body"><div class="ej-line libre">La diferencia de dos números.</div><div class="ej-line libre">El triple de un número disminuido en 10.</div><div class="ej-line libre">El doble del cuadrado de un número.</div></div></div></div></div></div></div></body></html>

@@ -45,21 +45,34 @@ El prototipo está guardado en `Recursos lety2E/formato-apunte-zoom-N1-N5 (segun
 
 Historia del Cálculo — idea: trabajos de historia de las matemáticas como cierre de cursos; no publicar cuestionario todavía
 
-**Los ejercicios extras del sitio son el banco de sus exámenes** (6-sep-2026) — Lety va a
-armar exámenes con **5 versiones por curso**; los exámenes se hacen y se guardan en el
-proyecto **IEMS** (`4 Materiales y evaluación/`, no se publican). Pero los reactivos salen de
-aquí: cada tema se evalúa con ~3 ejercicios, uno de los que **sí traen respuesta** y dos de
-los **extras** (la mezcla varía según el tema). De ahí que cada tema necesite **al menos 10
-ejercicios extra** para que las 5 versiones no se repitan.
+**Los exámenes viven en `cuadros/`** (8-sep-2026) — el sitio de exámenes se armó como
+sección de este proyecto, con su generador en `cuadros/generador/`. **Seis versiones** por
+examen, y el trato con los alumnos es el de siempre: los *Ejercicios* traen respuesta para
+practicar y los *Ejercicios extra* **no**, porque de ahí sale el examen. Cuando un tema se
+quede corto, Lety pide los extras **tema por tema** ("necesito 6 extras más de mcm-mcd"),
+nunca por adelantado, y los nuevos van **sin resolución**. Lo que decidió sobre cómo son sus
+exámenes está en `Recursos lety2E/Reglas de mis exámenes.md`.
 
-Es **a propósito** que esos ejercicios estén publicados: Lety quiere que los alumnos sepan de
-dónde va a salir el examen, a ver si así lo pasan más fácil. O sea que ampliar los extras no
-es solo para el examen, también es práctica para ellos.
+Lo que falta, en orden:
 
-**No hay que adelantarse a crearlos**: ella los va pidiendo tema por tema conforme prepara
-cada examen ("necesito 6 extras más de mcm-mcd"). Del inventario del 6-sep-2026, los que ya se
-sabe que quedan cortos: `ecuaciones` (M1) **no tiene sección de extras**, `algebra-fracciones`
-(M2) tampoco, y `expresiones-algebraicas` y `mcm-mcd` (M1) traen solo 8. Los temas con figuras
-(area-perimetro, ecuaciones-angulos, pitagoras, semejanza-triangulos, razones-trigonometricas,
-proporcionalidad, representacion-fracciones) hay que contarlos a mano y son más laboriosos:
-cada ejercicio nuevo lleva su SVG.
+- **Los nueve temas de Mate 1 que corren con reparto provisional** —Monomios, Gráfica con
+  tabulación, Pendiente y ordenada, Área y perímetro, Ecuaciones con ángulos, Reglas de
+  exponentes, mcm y MCD, Lenguaje algebraico y Problemas de ecuaciones—: los propuso el
+  asistente y Lety no los ha revisado. A **Área y perímetro** y **Ecuaciones con ángulos**
+  ya no les alcanzan los reactivos para la sexta versión, y **mcm y MCD** cae a uno solo;
+  se arregla publicando más extras aquí.
+- **Las resoluciones de Matemáticas 1.** La cosecha automática trae 90 de los 271
+  ejercicios del examen; los otros 181 son extras y se escriben a mano, sobre la marcha.
+  Falta decidir con qué tema empezar.
+- **Las secciones "Ejercicios resueltos" no se cosechan.** Tres temas (Expresiones
+  algebraicas, Pendiente y ordenada, mcm y MCD) traen la resolución *dentro* de la tarjeta
+  del ejercicio, no en una lista paralela como las secciones "Respuestas", así que
+  `resoluciones.py` no las empareja: son ~30 resoluciones **ya publicadas** que hoy se
+  cuentan como pendientes de escribir.
+- **Rehacer las filas del Examen 1 cuando pase a dos hojas.** Hoy cabe en una, pero su
+  primera fila empareja *Operaciones básicas* (tema 1) con *Ecuaciones con ángulos* (tema
+  9), y la regla es que el corte entre hojas respete el orden de los temas.
+- **Matemáticas 2 y 5**, completos en el sitio y sin tocar todavía. Mate 5 es además una de
+  las materias de este semestre.
+- **`cuadros/generador/propios.py`** quedó de un experimento descartado: borrarlo o dejarlo
+  como registro.

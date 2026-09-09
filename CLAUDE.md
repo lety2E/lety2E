@@ -203,6 +203,59 @@ el script.
 
 ---
 
+## 🧾 `cuadros/` — el sitio de exámenes (es de Lety, no de los alumnos)
+
+Alta el **8-sep-2026**, cuando el proyecto que había nacido aparte se disolvió aquí adentro.
+`cuadros/` guarda las **seis versiones** de cada examen: en blanco **para imprimir** y
+**resueltas para calificar**. **No se enlaza desde `nav.js` ni desde ningún índice** — se
+llega solo por la dirección, `lety2e.com/cuadros`.
+
+**Antes de tocar un examen, lee `Recursos lety2E/Reglas de mis exámenes.md`.** Ahí está
+cómo le gustan a Lety, qué decidió ella y qué solo propuso el asistente.
+
+### Los dos lados (es lo que sostiene el diseño)
+
+| Dónde | Quién | Qué hay |
+|---|---|---|
+| `math/` | los alumnos | *Ejercicios* **con respuesta** para practicar, y *Ejercicios extra* **sin respuesta** — de esos sale el examen |
+| `cuadros/` | Lety | las versiones en blanco y las resueltas |
+
+De ahí **la regla que no se rompe: los *Ejercicios extra* nunca llevan respuesta.** Si a un
+tema hay que agregarle reactivos, se agregan ahí **sin resolución**. A Lety no le preocupa
+que alguien descubra `cuadros/` ("se lo tendrán que aprender"), pero el trato de las dos
+secciones sí se respeta.
+
+### La maquinaria (`cuadros/generador/`)
+
+Se corre **desde esa carpeta**, en orden. Las rutas son relativas al repo.
+
+| Paso | Archivo | Qué hace |
+|---|---|---|
+| 1 | `extraer.py` | Lee las páginas de `math/` y saca los ejercicios con su estructura de bloques. |
+| 2 | `banco.py` | Arma `banco.json` y guarda **la receta de cada tema** (qué modo usa y cuántos aporta). |
+| 3 | `seleccion.py` | Reparte las seis versiones en `seleccion.json`, **sin repetir ningún ejercicio**. |
+| 4 | `acomodo.py` | Qué lleva cada examen y cómo se acomoda la hoja, por filas y pesos. |
+| 5 | `resoluciones.py` | El banco de resoluciones: **cosecha** las que el sitio ya publica y suma las escritas a mano en `resoluciones-manuales.json`. Dice cuántas faltan por tema. |
+| 6 | `generar.py` | Escribe los exámenes **autocontenidos** que van a IEMS (`~/Desktop/IEMS/4 Materiales y evaluación/Exámenes/`), con KaTeX y tipografías incrustadas: se abren con doble clic y sin internet. |
+| 7 | `sitio.py` | Escribe esta sección: `cuadros/index.html`, la página de cada materia y **dos por versión** (`a.html` y `a-resuelta.html`). |
+| — | `propios.py` | Resto de un experimento descartado. No se usa. |
+
+**Lo de aquí no lleva las fuentes incrustadas**: usa `assets/katex/`, `style.css` y las
+tipografías del sitio, como manda este manual (cero CDNs, nada duplicado). Lo que sí las
+lleva es lo que va a IEMS, porque eso se abre offline.
+
+**No hace falta pasar `cuadros/` por `prerender-katex.js`**: el generador ya escribe las
+fórmulas en HTML con el mismo KaTeX. El script las salta solas porque no hay `$…$` que
+convertir.
+
+### Al cambiar un tema de `math/`
+
+Agregar o reordenar ejercicios en un tema **cambia los exámenes**. Después de publicar el
+tema, correr `banco.py` → `seleccion.py` → `resoluciones.py` → `generar.py` → `sitio.py`.
+Y al reordenar ejercicios, **reordenar también sus resoluciones**, o dejan de corresponder.
+
+---
+
 ## ➕ Agregar contenido no-Math (resumen)
 
 - **Apunte nuevo:** archivo self-contained en `apuntes/`. El índice está **agrupado** por bloques (`<h2 class="apuntes-grupo">` + su `.apuntes-grid`); la card nueva va en el grupo que le toque, y un grupo nuevo se crea copiando ese par. Referencia viva: `apuntes/ingreso-licenciatura/` (subsección con índice propio y barra de regreso `.l2e-volver` en cada página). El patrón viejo de zoom N1–N5 está documentado en `apuntes/Templete-apuntes.md`; su prototipo se retiró del sitio el 5-ago-2026 y se guardó como recurso en `Recursos lety2E/formato-apunte-zoom-N1-N5 (segunda-guerra-mundial).html` (ya no se publica, pero sirve para copiar componentes).

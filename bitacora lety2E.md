@@ -5,6 +5,52 @@
 
 ---
 
+## 2026-09-08 — Nace `cuadros/`: el sitio de exámenes se vuelve una sección de aquí
+
+El generador de exámenes venía armándose desde el 7-sep en el proyecto **IEMS**, y en la
+mañana se sacó a un proyecto aparte del Escritorio. Al aterrizar el diseño, Lety decidió
+traerlo **aquí adentro**: una carpeta más de este repo, `cuadros/`, servida en
+**lety2e.com/cuadros**. El proyecto aparte se disolvió el mismo día.
+
+**Por qué aquí y no aparte.** Se valoró tenerlo en su propio repositorio (incluso en una
+organización propia, al estilo de GICAIA, para que nada lo ligara a este dominio), y lo que
+lo decidió fue que a Lety **no le preocupa que lo descubran**: *"me vale queso, de todas
+maneras se lo tendrán que aprender"*. Sin esa preocupación, el proyecto aparte solo agregaba
+fricción: dos carpetas, dos bitácoras, una regla de "solo lectura" y un brinco de sesión cada
+vez que agregar ejercicios a un tema implicaba regenerar los exámenes. Ahora es una sola
+carpeta, un solo `push`, y las rutas del generador son relativas al repo.
+
+**Qué hay.** `cuadros/index.html` con una tarjeta por materia (Mate 1 a 5 y la optativa; solo
+Mate 1 tiene contenido), `cuadros/matematicas-1/` con los dos exámenes y **dos páginas por
+versión** —`a.html` en blanco para imprimir y `a-resuelta.html` con la resolución debajo de
+cada ejercicio, para calificar—, y `cuadros/generador/` con la maquinaria. Se decidió página
+por versión y no una sola con doce pestañas: el cuerpo de una versión pesa ~60 KB y las doce
+juntas habrían hecho una página de ~720 KB. La barra de arriba hace de pestañas y cambia
+entre la hoja en blanco y la resuelta.
+
+**No pesa nada para el resto del sitio**: son ~1.5 MB en el repo y GitHub Pages sirve archivo
+por archivo, así que ninguna otra página baja un byte de más. Al contrario, `cuadros/` usa el
+`assets/katex/`, el `style.css` y las tipografías que ya están aquí, en vez de duplicarlos
+(los exámenes que van a **IEMS** sí llevan todo incrustado, porque se abren offline).
+**No hace falta pasarlo por `prerender-katex.js`**: el generador ya escribe las fórmulas en
+HTML.
+
+**Novedad de fondo, las hojas resueltas.** Salió que en `math/` solo la sección *Ejercicios*
+trae respuestas: los *Ejercicios extra* no tienen ninguna, **y así debe seguir**, porque son
+los que se evalúan. O sea que las resoluciones de `cuadros/` hay que escribirlas. Se armó
+`resoluciones.py`, que cosecha del sitio lo ya publicado —empareja *Ejercicios* con su
+sección de respuestas por posición— y suma lo escrito a mano en `resoluciones-manuales.json`,
+que no se pisa al recosechar. Hoy trae **90 de 271**; el resto se escribe sobre la marcha,
+tema por tema, verificando cada una. Lo que falta sale en gris como "pendiente" en la hoja
+resuelta.
+
+**Documentación:** las reglas de los exámenes quedaron en
+`Recursos lety2E/Reglas de mis exámenes.md` (léelo antes de tocar un examen), la sección
+técnica en `CLAUDE.md`, la parte para Lety en `Manual lety2E.md` y lo que falta en
+`Pendientes lety2E.md`.
+
+---
+
 ## 2026-09-07 (9) — Operaciones básicas tenía reactivos repetidos
 
 Al subir el examen a **seis versiones** se destapó que varios reactivos estaban duplicados entre

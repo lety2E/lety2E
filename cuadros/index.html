@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Exámenes</title>
+<link rel="stylesheet" href="../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="cuadros.css">
+<style>
+:root{
+  --bg-card:#FFFFFF;
+  --text:#3D2525;
+  --border:#E0C4BC;
+  --r-md:12px;
+  --font-body:'DM Sans',system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
+  --font-display:'Playfair Display',Georgia,serif;
+  /* Aire entre renglones (el sitio usa 2.4). Es la palanca para que
+     el examen quepa en UNA hoja carta; la otra es el acomodo (ver acomodo.py).
+     Con 49 ejercicios el examen ocupa ~97%% de la hoja: 2.4 lo dejaba justo en el
+     borde y cualquier impresora lo pasaba a dos hojas. */
+  --renglon:2.3;
+}
+*{box-sizing:border-box}
+body{margin:0;background:#fff;color:var(--text);font-family:var(--font-body);font-size:10pt}
+.hoja{max-width:20.4cm;margin:0 auto;padding:.8cm}
+
+.titulo{font-family:var(--font-display);font-size:.95rem;font-weight:700;
+        margin:0 0 .5rem;letter-spacing:.01em;text-align:right}
+
+/* La hoja se arma por filas, como los minipages: en cada fila los temas se
+   reparten el ancho segun su peso (ver acomodo.py). */
+.rejilla{display:flex;flex-direction:column;gap:.6rem}
+.fila{display:grid;gap:.6rem;align-items:start;
+      break-inside:avoid;-webkit-column-break-inside:avoid;page-break-inside:avoid}
+@media (max-width:640px){.fila{grid-template-columns:1fr !important}}
+
+.mini-card{
+  background:var(--bg-card);border:1.5px solid var(--border);
+  border-radius:var(--r-md);overflow:hidden;
+  break-inside:avoid;-webkit-column-break-inside:avoid;page-break-inside:avoid;
+  width:100%;min-width:0;
+}
+/* tarjeta ancha con muchos ejercicios cortos: se parten en columnas adentro */
+.mini-card-body.en-columnas{column-gap:1.2rem}
+.mini-card-body.en-columnas .ej-line{break-inside:avoid}
+/* Titulo del tema: discreto y en negritas. Sin pestana de color: una barra
+   solida en cada tarjeta gasta tinta de mas al fotocopiar. */
+.mini-card-head{
+  padding:.35rem .6rem 0;
+  font-family:var(--font-display);font-size:.82rem;font-weight:700;
+  line-height:1.25;
+}
+.mini-card-body{padding:.35rem .6rem .5rem;font-size:.9rem;line-height:var(--renglon)}
+/* En el sitio los renglones son nowrap con scroll; en papel no hay scroll, asi
+   que aqui las formulas largas se parten solas en sus operadores. La sangria
+   francesa hace evidente que el renglon viene continuado. */
+.ej-line{white-space:normal;padding-left:1.1em;text-indent:-1.1em}
+.ej-line.libre{line-height:1.5;margin:.4rem 0;padding-left:0;text-indent:0}
+.mini-card-body .katex,.mini-card-body .katex-html{white-space:normal}
+.mini-card-body .katex{font-size:.95em}
+.figura svg{max-width:100%;height:auto;max-height:80px;display:block;margin:.2rem auto}
+
+@page{size:letter;margin:.9cm}
+@media print{
+  .hoja{padding:0;max-width:none}
+}
+</style>
+</head>
+<body><div class="envoltura"><h1>Exámenes</h1><p class="sub">Las versiones de cada examen, por materia.</p><div class="tarjetas"><a class="materia" href="matematicas-1/"><h2>Matemáticas 1</h2><p>Primer semestre</p><p class="cuenta">12 versiones</p></a><span class="materia vacia"><h2>Matemáticas 2</h2><p>Segundo semestre</p><p class="cuenta">por armar</p></span><span class="materia vacia"><h2>Matemáticas 3</h2><p>Tercer semestre</p><p class="cuenta">por armar</p></span><span class="materia vacia"><h2>Matemáticas 4</h2><p>Cuarto semestre</p><p class="cuenta">por armar</p></span><span class="materia vacia"><h2>Matemáticas 5</h2><p>Quinto semestre</p><p class="cuenta">por armar</p></span><span class="materia vacia"><h2>Optativa</h2><p>Sexto semestre</p><p class="cuenta">por armar</p></span></div></div></body></html>

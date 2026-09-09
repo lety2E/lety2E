@@ -19,6 +19,13 @@ Además del sitio (HTML/CSS/JS), en la raíz conviven las piezas estándar del s
 - **`Manual lety2E.md`** — el manual para Lety (espejo humano).
 - **`Recursos lety2E/`** — material reutilizable (plantillas, snippets, prompts; nombres libres, sin índice).
 
+## La sección `cuadros/` (los exámenes de Lety)
+`cuadros/` no es contenido del curso: son las versiones de examen de Lety, en blanco y
+resueltas, con el generador que las arma en `cuadros/generador/`. **No se enlaza desde el
+nav.** Antes de tocarla, lee su sección en `CLAUDE.md` y
+`Recursos lety2E/Reglas de mis exámenes.md`. La regla corta: **los *Ejercicios extra* de
+`math/` nunca llevan respuesta** — son los que se evalúan.
+
 ## Cómo quiero que trabajes aquí
 - Lety no es muy técnica: explica en simple y guíala paso a paso.
 - Da primero la **idea central**, luego los detalles.

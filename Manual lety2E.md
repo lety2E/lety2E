@@ -60,6 +60,32 @@ como lista plana.
 
 ---
 
+## 🧾 Parte 3 — **Cuadros** (tus exámenes)
+
+`lety2e.com/cuadros` es **tuyo**, no de tus alumnos: ahí están las seis versiones de cada
+examen, **en blanco para imprimir** y **resueltas para calificar**. No está enlazada desde
+ningún menú; se llega tecleando la dirección.
+
+Cómo funciona el trato de las dos secciones: en `math/` tus alumnos tienen los *Ejercicios*
+**con respuesta** para practicar y los *Ejercicios extra* **sin respuesta** — de esos sale
+el examen. Por eso, **cuando pidas ejercicios nuevos para un tema, los extras van sin
+resolución**. Las resoluciones se escriben del lado de cuadros.
+
+Qué le puedes pedir al chat:
+
+- **«Arma las versiones de Matemáticas 2»** — corre el generador para una materia nueva.
+- **«Ya publiqué Monomios, vuelve a correr el generador»** — recoge lo nuevo del sitio.
+- **«Cierra el tema de Área y perímetro»** — pasa un tema del reparto provisional a uno
+  decidido por ti (bloque entero, un renglón de cada bloque, o sueltos).
+- **«Escribe las resoluciones de Jerarquía»** — las de los extras, que no existen en ningún
+  lado; se verifican resolviéndolas.
+
+Lo que decidiste sobre cómo son tus exámenes vive en
+**`Recursos lety2E/Reglas de mis exámenes.md`** — ése es el documento que manda. Los
+exámenes listos para imprimir se siguen guardando también en **IEMS**
+(`4 Materiales y evaluación/Exámenes/`), en archivos que se abren con doble clic y sin
+internet.
+
 ## 🎵 Lo que viene
 
 Con la misma lógica iremos construyendo **más artefactos, canciones, etc.** —
