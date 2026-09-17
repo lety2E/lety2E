@@ -30,6 +30,9 @@ from propios import PROPIOS
 #                         igual, pero usando solo los primeros bR bloques de
 #                         ejercicios y bE de extras. Los demás quedan en la
 #                         página como práctica y no entran al examen.
+#   ('cruzado', R, E)     los bloques son tipos (dos): R del bloque k de
+#                         resueltos + E del OTRO bloque de extras, alternando
+#                         k en cada version. Un tipo resuelto y el otro extra.
 #   ('ejercicios', R, E)  R ejercicios sueltos con respuesta + E extras.
 #                         Para temas cuyos "bloques" son listas largas o
 #                         repeticiones del mismo tipo.
@@ -50,7 +53,10 @@ CURSOS = {
     # (resuelto, sin cuadrado) + uno de A (sin) + uno de B (con). El Bloque 2
     # de resueltos queda de práctica.
     ('expresiones-algebraicas.html','Expresiones algebraicas',  ('por bloque', 1, 1, 1, 2)),
-    ('grafica-tabulacion.html',    'Gráfica con tabulación',    ('ejercicios', 1, 2)),
+    # bloques por tipo, en el mismo orden en los dos lados: Bloque 1 y Bloque A
+    # pendiente negativa, Bloque 2 y Bloque B positiva. Cada versión: 1 resuelto + 1 extra, uno de cada
+    # signo (Lety, 17-sep-2026). Los extras salen de "Ejercicios extra 1".
+    ('grafica-tabulacion.html',    'Gráfica con tabulación',    ('cruzado', 1, 1)),
     ('pendiente-ordenada.html',    'Pendiente y ordenada',      ('ejercicios', 1, 2)),
     ('area-perimetro.html',        'Área y perímetro',          ('ejercicios', 1, 2)),
     ('ecuaciones-angulos.html',    'Ecuaciones con ángulos',    ('ejercicios', 1, 1)),

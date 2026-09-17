@@ -920,9 +920,9 @@
   "titulo": "Gráfica con tabulación",
   "archivo": "grafica-tabulacion.html",
   "receta": [
-   "ejercicios",
+   "cruzado",
    1,
-   2
+   1
   ],
   "versiones": [
    [
@@ -931,21 +931,43 @@
      "origen": "respuesta"
     },
     {
-     "tex": "$15x-5y=10$",
-     "origen": "extra"
-    },
-    {
-     "tex": "$-10x+2y=-12$",
+     "tex": "$6x-3y=12$",
      "origen": "extra"
     }
    ],
    [
     {
-     "tex": "$4x+2y=6$",
-     "origen": "extra"
+     "tex": "$-6x+3y=9$",
+     "origen": "respuesta"
     },
     {
-     "tex": "$10x+5y=20$",
+     "tex": "$-12x-3y=6$",
+     "origen": "extra"
+    }
+   ],
+   [
+    {
+     "tex": "$12x+4y=8$",
+     "origen": "respuesta"
+    },
+    {
+     "tex": "$-3x+y=-5$",
+     "origen": "extra"
+    }
+   ],
+   [
+    {
+     "tex": "$8x-2y=4$",
+     "origen": "respuesta"
+    },
+    {
+     "tex": "$3x+y=9$",
+     "origen": "extra"
+    }
+   ],
+   [
+    {
+     "tex": "$15x+3y=9$",
      "origen": "respuesta"
     },
     {
@@ -955,68 +977,20 @@
    ],
    [
     {
-     "tex": "$6x-3y=12$",
-     "origen": "extra"
-    },
-    {
-     "tex": "$-4x+2y=8$",
-     "origen": "extra"
-    },
-    {
-     "tex": "$12x+4y=8$",
-     "origen": "respuesta"
-    }
-   ],
-   [
-    {
-     "tex": "$15x+3y=9$",
+     "tex": "$-5x+5y=15$",
      "origen": "respuesta"
     },
     {
-     "tex": "$6x+3y=-12$",
-     "origen": "extra"
-    },
-    {
-     "tex": "$8x+4y=24$",
-     "origen": "extra"
-    }
-   ],
-   [
-    {
-     "tex": "$-8x+4y=-16$",
-     "origen": "extra"
-    },
-    {
-     "tex": "$4x-2y=10$",
-     "origen": "extra"
-    },
-    {
-     "tex": "$-5x+2y=-10$",
-     "origen": "extra"
-    }
-   ],
-   [
-    {
-     "tex": "$-12x-3y=6$",
-     "origen": "extra"
-    },
-    {
-     "tex": "$-6x-2y=-14$",
-     "origen": "extra"
-    },
-    {
-     "tex": "$9x-3y=18$",
+     "tex": "$10x+5y=20$",
      "origen": "extra"
     }
    ]
   ],
   "info": {
-   "modo": "ejercicios",
-   "r_uso": 4,
-   "e_uso": 14,
+   "modo": "cruzado",
    "falta": 0,
-   "r_disp": 4,
-   "e_disp": 19
+   "r_disp": 6,
+   "e_disp": 6
   }
  },
  {

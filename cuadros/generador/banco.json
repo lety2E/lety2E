@@ -849,19 +849,16 @@
   "archivo": "grafica-tabulacion.html",
   "titulo": "Gráfica con tabulación",
   "receta": [
-   "ejercicios",
+   "cruzado",
    1,
-   2
+   1
   ],
   "con_respuesta": [
    [
-    "",
+    "Bloque 1",
     [
      {
       "tex": "$6x+2y=10$"
-     },
-     {
-      "tex": "$10x+5y=20$"
      },
      {
       "tex": "$12x+4y=8$"
@@ -870,81 +867,53 @@
       "tex": "$15x+3y=9$"
      }
     ]
-   ]
-  ],
-  "extras": [
-   [
-    "Bloque 1",
-    [
-     {
-      "tex": "$4x+2y=6$"
-     },
-     {
-      "tex": "$6x-3y=12$"
-     },
-     {
-      "tex": "$-8x+4y=-16$"
-     },
-     {
-      "tex": "$10x+5y=20$"
-     },
-     {
-      "tex": "$-12x-3y=6$"
-     },
-     {
-      "tex": "$2x+y=4$"
-     },
-     {
-      "tex": "$-3x+y=-5$"
-     },
-     {
-      "tex": "$15x-5y=10$"
-     },
-     {
-      "tex": "$-4x+2y=8$"
-     },
-     {
-      "tex": "$6x+3y=-12$"
-     }
-    ]
    ],
    [
     "Bloque 2",
     [
      {
-      "tex": "$4x-2y=10$"
+      "tex": "$-6x+3y=9$"
      },
      {
-      "tex": "$-6x-2y=-14$"
+      "tex": "$8x-2y=4$"
+     },
+     {
+      "tex": "$-5x+5y=15$"
+     }
+    ]
+   ]
+  ],
+  "extras": [
+   [
+    "Bloque A",
+    [
+     {
+      "tex": "$-12x-3y=6$"
      },
      {
       "tex": "$3x+y=9$"
      },
      {
-      "tex": "$-10x+2y=-12$"
+      "tex": "$10x+5y=20$"
+     }
+    ]
+   ],
+   [
+    "Bloque B",
+    [
+     {
+      "tex": "$6x-3y=12$"
+     },
+     {
+      "tex": "$-3x+y=-5$"
      },
      {
       "tex": "$4x-y=8$"
-     },
-     {
-      "tex": "$8x+4y=24$"
-     },
-     {
-      "tex": "$-5x+2y=-10$"
-     },
-     {
-      "tex": "$9x-3y=18$"
-     },
-     {
-      "tex": "$-2x-y=-4$"
-     },
-     {
-      "tex": "$12x+6y=30$"
      }
     ]
    ]
   ],
-  "fuente_extra": "Ejercicios extra",
+  "fuente_extra": "Ejercicios extra 1",
   "propios": 0
  },
  {

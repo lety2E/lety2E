@@ -148,11 +148,40 @@ def uno_por_bloque(tema, V):
                        'r_disp': sum(len(i) for _, i in tema['con_respuesta']),
                        'e_disp': sum(len(i) for _, i in tema['extras'])}
 
+def cruzado(tema, V):
+    """Los bloques son tipos (p.ej. pendiente positiva / negativa) y cada
+    version lleva un tipo resuelto y el OTRO tipo de extra, alternando: la
+    version a toma del bloque 1 de resueltos y del bloque B de extras, la b
+    del bloque 2 y del bloque A, y asi. Decidido por Lety el 17-sep-2026
+    para Grafica con tabulacion. Receta: ('cruzado', R, E)."""
+    _, nR, nE = tema['receta'][:3]
+    R, E = tema['con_respuesta'], tema['extras']
+    nb = min(len(R), len(E))
+    usoR, usoE = [0]*len(R), [0]*len(E)
+    versiones, falta = [], 0
+    for v in range(V):
+        fila = []
+        for bloques, uso, cuantos, origen, k in ((R, usoR, nR, 'respuesta', v % nb),
+                                                  (E, usoE, nE, 'extra', (v + 1) % nb)):
+            items = bloques[k][1]
+            for _ in range(cuantos):
+                if uso[k] >= len(items):
+                    falta += 1; continue
+                item = dict(items[uso[k]]); uso[k] += 1
+                item['origen'] = origen
+                fila.append(item)
+        versiones.append(fila)
+    return versiones, {'modo': 'cruzado', 'falta': falta,
+                       'r_disp': sum(len(i) for _, i in R),
+                       'e_disp': sum(len(i) for _, i in E)}
+
 def seleccionar(tema, V):
     if tema['receta'][0] == 'bloques':
         return por_bloques(tema, V)
     if tema['receta'][0] == 'por bloque':
         return uno_por_bloque(tema, V)
+    if tema['receta'][0] == 'cruzado':
+        return cruzado(tema, V)
     _, r_pv, e_pv = tema['receta']
     n = r_pv + e_pv
     R, E = tema['con_respuesta'], tema['extras']

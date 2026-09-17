@@ -26,7 +26,19 @@ Lety pidió verlo en los cuadros, así que **sí se regeneraron** las doce versi
 IEMS). Dos ajustes de paso: `seleccion.py` ahora arma **6 versiones por defecto** (armaba 5
 si no se le pasaba el número, y `sitio.py` tronaba), y en `acomodo.py` Monomios va en su
 fila **a dos columnas** con Área y perímetro al lado; Ecuaciones bajó a la fila de Gráfica y
-Pendiente. Examen 1 al 83% de la hoja. Sigue Gráfica con tabulación.
+Pendiente. Examen 1 al 83% de la hoja.
+
+- **Gráfica con tabulación**, definida por Lety: **6 resueltas = 3 con pendiente negativa
+  (Bloque 1) + 3 positiva (Bloque 2)**; antes había 4, todas negativas. Se quitó
+  $10x+5y=20$ (estaba repetida en los extras) y se escribieron tres nuevas con resolución
+  completa —despeje, tabla, procedimiento y gráfica SVG calcada del generador original—:
+  $-6x+3y=9$, $8x-2y=4$ (con la $y$ negativa, para que vean ese caso) y $-5x+5y=15$.
+  Los extras se partieron: **Ejercicios extra 1** (Bloque A negativa, Bloque B positiva,
+  3 y 3, de ahí sale el examen) y **Ejercicios extra 2** con los otros 13, de práctica;
+  $4x+2y=6$ se quitó por ser el del Ejemplo. Cada versión lleva **1 resuelta + 1 extra, una
+  de cada signo**: es el modo nuevo `cruzado` de `seleccion.py`.
+
+Sigue Pendiente y ordenada.
 
 ---
 
