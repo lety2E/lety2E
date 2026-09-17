@@ -5,6 +5,28 @@
 
 ---
 
+## 2026-09-17 — Cuadros: se definen Monomios y Expresiones algebraicas, tema por tema
+
+Lety retomó los exámenes yendo despacio, un tema a la vez y en el orden de la página.
+Regla que fijó hoy: **si a un tema no le alcanzan los resueltos o los extras para las seis
+versiones, se escriben** — el examen manda y el sitio se completa.
+
+- **Monomios** queda como Operaciones básicas: **1 bloque resuelto entero + 1 bloque extra
+  entero** (10 ejercicios por versión, los 5 tipos de cada bloque). Para llegar a seis
+  versiones se escribieron los **Bloques 5 y 6** resueltos (con respuesta, verificadas) y
+  los **Bloques 11 y 12** extra (sin respuesta); los extras viejos 5–8 pasaron a ser 7–10.
+- **Expresiones algebraicas** se reacomodó **por tipo**: Bloque 1 y Bloque A sin binomio al
+  cuadrado, Bloque 2 y Bloque B con él (las resoluciones siguen el mismo orden). Cada
+  versión lleva 1 resuelto sin cuadrado + 1 extra sin + 1 extra con; la receta del
+  generador no cambió, solo la página. Sustituye lo de "bloques mezclados" de las Reglas.
+- `prerender-katex.js` ahora **retoca páginas ya pre-renderizadas**: si les agregaron
+  fórmulas nuevas en `$…$`, convierte solo ésas. Antes las saltaba enteras.
+
+Los exámenes **no se regeneraron todavía**: se regeneran una sola vez cuando estén
+definidos todos los temas. Sigue Gráfica con tabulación.
+
+---
+
 ## 2026-09-08 (3) — Exámenes: negro sobre blanco y una hoja carta por examen
 
 Tres decisiones de Lety para `cuadros/`, todas ya en el generador y en

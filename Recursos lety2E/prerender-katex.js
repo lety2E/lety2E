@@ -13,7 +13,9 @@
      node "Recursos lety2E/prerender-katex.js"              (escribe)
      node "Recursos lety2E/prerender-katex.js" math/matematicas-4
 
-   Es idempotente: una página ya pre-renderizada se salta sola.
+   Es idempotente: una página ya pre-renderizada se salta sola — salvo
+   que le hayan agregado fórmulas nuevas en $...$ (más ejercicios a un
+   tema): entonces convierte sólo ésas y deja lo demás como está.
    El LaTeX original NO se pierde — KaTeX lo guarda dentro de cada
    fórmula en <annotation encoding="application/x-tex">, así que se
    puede recuperar y volver a correr.
@@ -88,8 +90,12 @@ function renderTexto(texto, estado) {
 function procesar(archivo) {
   const original = fs.readFileSync(archivo, 'utf8');
 
-  if (!/katex\.min\.js/.test(original)) return { estado: 'sin-katex' };
-  if (/class="katex(?:[ "])/.test(original)) return { estado: 'ya-hecho' };
+  /* Una página ya pre-renderizada se vuelve a abrir sólo si le agregaron
+     fórmulas nuevas en $...$ (p. ej. más ejercicios extra a un tema): se
+     convierten ésas y lo ya hecho no se toca. Si no trae ningún $, se salta. */
+  const yaHecha = /class="katex(?:[ "])/.test(original);
+  if (yaHecha && original.indexOf('$') === -1) return { estado: 'ya-hecho' };
+  if (!yaHecha && !/katex\.min\.js/.test(original)) return { estado: 'sin-katex' };
 
   const trozos = partirEnTrozos(original);
   const est = { ok: 0, errores: [] };

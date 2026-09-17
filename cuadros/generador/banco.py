@@ -41,9 +41,14 @@ CURSOS = {
     ('jerarquia.html',             'Jerarquía de operaciones',  ('por bloque', 1, 1)),
     # un ejercicio del bloque de resueltos y uno de cada bloque de extra 1
     ('ecuaciones.html',            'Ecuaciones',                ('por bloque', 1, 1)),
-    ('monomios.html',              'Monomios',                  ('ejercicios', 1, 2)),
-    # cada bloque mezcla los dos tipos: uno del primer bloque resuelto y uno
-    # de cada bloque de extras. El Bloque 2 de resueltos queda de práctica.
+    # como Operaciones básicas: 1 bloque resuelto entero + 1 bloque extra
+    # entero (5 tipos cada uno). Decidido por Lety el 17-sep-2026; para
+    # las seis versiones se escribieron los bloques 5-6 y 11-12.
+    ('monomios.html',              'Monomios',                  ('bloques', 1, 1)),
+    # un bloque por tipo (17-sep-2026): Bloque 1 y Bloque A sin binomio al
+    # cuadrado, Bloque 2 y Bloque B con él. Cada versión: uno del Bloque 1
+    # (resuelto, sin cuadrado) + uno de A (sin) + uno de B (con). El Bloque 2
+    # de resueltos queda de práctica.
     ('expresiones-algebraicas.html','Expresiones algebraicas',  ('por bloque', 1, 1, 1, 2)),
     ('grafica-tabulacion.html',    'Gráfica con tabulación',    ('ejercicios', 1, 2)),
     ('pendiente-ordenada.html',    'Pendiente y ordenada',      ('ejercicios', 1, 2)),
