@@ -222,7 +222,7 @@ def construir(banco, V):
     return salida
 
 if __name__ == '__main__':
-    V = int(sys.argv[1]) if len(sys.argv) > 1 else 5
+    V = int(sys.argv[1]) if len(sys.argv) > 1 else 6   # seis versiones, regla de Lety
     banco = json.load(open('banco.json'))
     salida = construir(banco, V)
 

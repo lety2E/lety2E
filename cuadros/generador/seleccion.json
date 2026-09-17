@@ -547,9 +547,9 @@
   "titulo": "Monomios",
   "archivo": "monomios.html",
   "receta": [
-   "ejercicios",
+   "bloques",
    1,
-   2
+   1
   ],
   "versiones": [
    [
@@ -558,29 +558,63 @@
      "origen": "respuesta"
     },
     {
-     "tex": "$(3x^4y^2a)^3=$",
-     "origen": "extra"
+     "tex": "$(3x^2y^4a^3)^2=$",
+     "origen": "respuesta"
     },
     {
-     "tex": "$\\sqrt{81x^{10}y^8a^6}=$",
-     "origen": "extra"
-    }
-   ],
-   [
+     "tex": "$\\dfrac{-2x^7y^9a}{15x^2ya}=$",
+     "origen": "respuesta"
+    },
+    {
+     "tex": "$\\sqrt{36x^{10}y^4a^2}=$",
+     "origen": "respuesta"
+    },
+    {
+     "tex": "$-8x+6x-9x^2-2y^2-8+10-y=$",
+     "origen": "respuesta"
+    },
     {
      "tex": "$(-10x^5y^3)(6x^4y^2b)=$",
      "origen": "extra"
     },
     {
-     "tex": "$(3x^2y^4a^3)^2=$",
-     "origen": "respuesta"
+     "tex": "$(3x^4y^2a)^3=$",
+     "origen": "extra"
     },
     {
-     "tex": "$\\sqrt{49x^6y^{12}b^4}=$",
+     "tex": "$\\dfrac{-8x^7y^6a^4}{24x^3y^2a^2}=$",
+     "origen": "extra"
+    },
+    {
+     "tex": "$\\sqrt{81x^{10}y^8a^6}=$",
+     "origen": "extra"
+    },
+    {
+     "tex": "$-6x+7x-4x^2+3y^2-8+9-2y=$",
      "origen": "extra"
     }
    ],
    [
+    {
+     "tex": "$(5x^6y^5)(-2x^4a^2)=$",
+     "origen": "respuesta"
+    },
+    {
+     "tex": "$(-5x^2y^6a)^2=$",
+     "origen": "respuesta"
+    },
+    {
+     "tex": "$\\dfrac{-12x^3y^2a^7}{20x^9y^2a^3}=$",
+     "origen": "respuesta"
+    },
+    {
+     "tex": "$\\sqrt{25x^8y^{12}b^6}=$",
+     "origen": "respuesta"
+    },
+    {
+     "tex": "$-3x+2x^2-8+y^2+8x+6-x^2=$",
+     "origen": "respuesta"
+    },
     {
      "tex": "$(7x^4y^6)(-9x^3b^2)=$",
      "origen": "extra"
@@ -590,39 +624,81 @@
      "origen": "extra"
     },
     {
-     "tex": "$\\sqrt{36x^{10}y^4a^2}=$",
-     "origen": "respuesta"
+     "tex": "$\\dfrac{-5x^6y^7b^8}{15x^2y^4b^3}=$",
+     "origen": "extra"
+    },
+    {
+     "tex": "$\\sqrt{49x^6y^{12}b^4}=$",
+     "origen": "extra"
+    },
+    {
+     "tex": "$8x-3x^2+5y^2-7x+10-2x^2-y=$",
+     "origen": "extra"
     }
    ],
    [
     {
-     "tex": "$(5x^6y^5)(-2x^4a^2)=$",
+     "tex": "$(-6x^4y^3)(-2x^5y^2b)=$",
      "origen": "respuesta"
+    },
+    {
+     "tex": "$(-6x^4y^3b)^3=$",
+     "origen": "respuesta"
+    },
+    {
+     "tex": "$\\dfrac{-4x^5ya}{12y^6x^2a}=$",
+     "origen": "respuesta"
+    },
+    {
+     "tex": "$\\sqrt[3]{-8x^{12}y^9b^3}=$",
+     "origen": "respuesta"
+    },
+    {
+     "tex": "$5x-4+2x^2-3x-7x^2+5-y=$",
+     "origen": "respuesta"
+    },
+    {
+     "tex": "$(-7x^3y^4)(4x^6y^3a)=$",
+     "origen": "extra"
     },
     {
      "tex": "$(-5x^2y^4b)^2=$",
      "origen": "extra"
     },
     {
+     "tex": "$\\dfrac{-12x^8ya^3}{36x^4a^2y^2}=$",
+     "origen": "extra"
+    },
+    {
      "tex": "$\\sqrt[3]{-27x^9y^6b^3}=$",
+     "origen": "extra"
+    },
+    {
+     "tex": "$9x+3x^2-5x-6x^2+7+2y-3=$",
      "origen": "extra"
     }
    ],
    [
     {
-     "tex": "$(-7x^3y^4)(4x^6y^3a)=$",
-     "origen": "extra"
-    },
-    {
-     "tex": "$(-5x^2y^6a)^2=$",
+     "tex": "$(4x^7y^2)(-3x^6y^2a)=$",
      "origen": "respuesta"
     },
     {
-     "tex": "$\\sqrt[3]{-64x^{12}y^9b^6}=$",
-     "origen": "extra"
-    }
-   ],
-   [
+     "tex": "$(-4x^3y^4a^2)^3=$",
+     "origen": "respuesta"
+    },
+    {
+     "tex": "$\\dfrac{20x^4y^6a^3}{-50x^7a^6y^6}=$",
+     "origen": "respuesta"
+    },
+    {
+     "tex": "$\\sqrt[3]{-125x^{24}y^6b^3}=$",
+     "origen": "respuesta"
+    },
+    {
+     "tex": "$2x-3+6x^2-7x+2x^2+8=$",
+     "origen": "respuesta"
+    },
     {
      "tex": "$(5x^5y^2)(-8x^4y^3a)=$",
      "origen": "extra"
@@ -632,18 +708,109 @@
      "origen": "extra"
     },
     {
-     "tex": "$\\sqrt{25x^8y^{12}b^6}=$",
+     "tex": "$\\dfrac{18x^6y^7a^3}{54x^9a^6y^5}=$",
+     "origen": "extra"
+    },
+    {
+     "tex": "$\\sqrt[3]{-64x^{12}y^9b^6}=$",
+     "origen": "extra"
+    },
+    {
+     "tex": "$3x-2+5x^2-6x+4x^2+7=$",
+     "origen": "extra"
+    }
+   ],
+   [
+    {
+     "tex": "$(-9x^3y^5)(-4x^2a^4)=$",
      "origen": "respuesta"
+    },
+    {
+     "tex": "$(2x^5y^3b^2)^3=$",
+     "origen": "respuesta"
+    },
+    {
+     "tex": "$\\dfrac{-6x^8y^4a^2}{18x^3y^4a^5}=$",
+     "origen": "respuesta"
+    },
+    {
+     "tex": "$\\sqrt{49x^6y^{14}a^4}=$",
+     "origen": "respuesta"
+    },
+    {
+     "tex": "$-7x+3x-5x^2+4y^2-6+9-3y=$",
+     "origen": "respuesta"
+    },
+    {
+     "tex": "$(-8x^6y^2)(5x^3y^4a^2)=$",
+     "origen": "extra"
+    },
+    {
+     "tex": "$(4x^2y^5b^3)^2=$",
+     "origen": "extra"
+    },
+    {
+     "tex": "$\\dfrac{-10x^9y^5b^3}{35x^4y^2b^7}=$",
+     "origen": "extra"
+    },
+    {
+     "tex": "$\\sqrt{64x^{12}y^6b^8}=$",
+     "origen": "extra"
+    },
+    {
+     "tex": "$-9x+4x-6x^2+2y^2-7+11-4y=$",
+     "origen": "extra"
+    }
+   ],
+   [
+    {
+     "tex": "$(6x^4y^7)(-7x^5y^2b^3)=$",
+     "origen": "respuesta"
+    },
+    {
+     "tex": "$(-3x^5y^2b^4)^3=$",
+     "origen": "respuesta"
+    },
+    {
+     "tex": "$\\dfrac{-15x^6y^3a^5}{25x^2y^8a}=$",
+     "origen": "respuesta"
+    },
+    {
+     "tex": "$\\sqrt[3]{-64x^9y^{15}a^6}=$",
+     "origen": "respuesta"
+    },
+    {
+     "tex": "$4x-5+3x^2-9x+6x^2+2=$",
+     "origen": "respuesta"
+    },
+    {
+     "tex": "$(3x^8y^3)(-6x^2y^6a)=$",
+     "origen": "extra"
+    },
+    {
+     "tex": "$(-2x^4y^3a^2)^3=$",
+     "origen": "extra"
+    },
+    {
+     "tex": "$\\dfrac{21x^5y^8a^2}{-28x^7y^3a^6}=$",
+     "origen": "extra"
+    },
+    {
+     "tex": "$\\sqrt[3]{-216x^6y^{12}a^9}=$",
+     "origen": "extra"
+    },
+    {
+     "tex": "$6x-8+4x^2-2x-9x^2+3=$",
+     "origen": "extra"
     }
    ]
   ],
   "info": {
-   "modo": "ejercicios",
-   "r_uso": 6,
-   "e_uso": 12,
+   "modo": "bloques",
    "falta": 0,
-   "r_disp": 20,
-   "e_disp": 20
+   "choques": 0,
+   "r_disp": 6,
+   "e_disp": 6
   }
  },
  {
@@ -663,25 +830,11 @@
      "origen": "respuesta"
     },
     {
-     "tex": "$4[(-3x+1)(5-2x)+3x]+1=$",
+     "tex": "$2[(x+5)(3-2x)+4x]-3=$",
      "origen": "extra"
     },
     {
-     "tex": "$5[(2x-4)(3-x)+2x]-1=$",
-     "origen": "extra"
-    }
-   ],
-   [
-    {
-     "tex": "$4(-3x+2)^2+3(-1+5x)-6=$",
-     "origen": "respuesta"
-    },
-    {
-     "tex": "$4(3x-1)^2+2(2-5x)-5=$",
-     "origen": "extra"
-    },
-    {
-     "tex": "$2(-4x+3)^2+5(2x-1)-7=$",
+     "tex": "$5(-2x+3)^2+4(2x-5)-3=$",
      "origen": "extra"
     }
    ],
@@ -691,25 +844,11 @@
      "origen": "respuesta"
     },
     {
-     "tex": "$2[(x+5)(3-2x)+4x]-3=$",
-     "origen": "extra"
-    },
-    {
      "tex": "$5[(-x+3)(2-4x)+2x]-1=$",
      "origen": "extra"
-    }
-   ],
-   [
-    {
-     "tex": "$5(2x-1)^2+4(-3+6x)-3=$",
-     "origen": "respuesta"
     },
     {
-     "tex": "$3(2x+5)^2-4(3-x)+2=$",
-     "origen": "extra"
-    },
-    {
-     "tex": "$4(-x+2)^2+5(-3+4x)-6=$",
+     "tex": "$2(-4x+3)^2+5(2x-1)-7=$",
      "origen": "extra"
     }
    ],
@@ -719,25 +858,53 @@
      "origen": "respuesta"
     },
     {
-     "tex": "$3[(2x+3)(4-x)+5x]-2=$",
+     "tex": "$2[(4x-1)(2-3x)+5x]-6=$",
      "origen": "extra"
     },
     {
-     "tex": "$2[(4x-1)(2-3x)+5x]-6=$",
+     "tex": "$2(x-4)^2+3(2x+5)-7=$",
      "origen": "extra"
     }
    ],
    [
     {
-     "tex": "$5(-4x+3)^2-2(3-2x)-4=$",
+     "tex": "$5[(2x-3)(1-3x)+4x]-2=$",
      "origen": "respuesta"
     },
     {
-     "tex": "$2(x-4)^2+3(2x+5)-7=$",
+     "tex": "$5[(2x-4)(3-x)+2x]-1=$",
      "origen": "extra"
     },
     {
-     "tex": "$5(-2x+3)^2+4(2x-5)-3=$",
+     "tex": "$4(3x-1)^2+2(2-5x)-5=$",
+     "origen": "extra"
+    }
+   ],
+   [
+    {
+     "tex": "$3[(-5x+2)(3-2x)+7x]-4=$",
+     "origen": "respuesta"
+    },
+    {
+     "tex": "$3[(2x+3)(4-x)+5x]-2=$",
+     "origen": "extra"
+    },
+    {
+     "tex": "$3(2x+5)^2-4(3-x)+2=$",
+     "origen": "extra"
+    }
+   ],
+   [
+    {
+     "tex": "$4[(3x-2)(1-4x)+5x]-3=$",
+     "origen": "respuesta"
+    },
+    {
+     "tex": "$4[(-3x+1)(5-2x)+3x]+1=$",
+     "origen": "extra"
+    },
+    {
+     "tex": "$4(-x+2)^2+5(-3+4x)-6=$",
      "origen": "extra"
     }
    ]

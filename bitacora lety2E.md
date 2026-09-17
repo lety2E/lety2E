@@ -22,8 +22,11 @@ versiones, se escriben** — el examen manda y el sitio se completa.
 - `prerender-katex.js` ahora **retoca páginas ya pre-renderizadas**: si les agregaron
   fórmulas nuevas en `$…$`, convierte solo ésas. Antes las saltaba enteras.
 
-Los exámenes **no se regeneraron todavía**: se regeneran una sola vez cuando estén
-definidos todos los temas. Sigue Gráfica con tabulación.
+Lety pidió verlo en los cuadros, así que **sí se regeneraron** las doce versiones (sitio e
+IEMS). Dos ajustes de paso: `seleccion.py` ahora arma **6 versiones por defecto** (armaba 5
+si no se le pasaba el número, y `sitio.py` tronaba), y en `acomodo.py` Monomios va en su
+fila **a dos columnas** con Área y perímetro al lado; Ecuaciones bajó a la fila de Gráfica y
+Pendiente. Examen 1 al 83% de la hoja. Sigue Gráfica con tabulación.
 
 ---
 

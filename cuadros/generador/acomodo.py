@@ -43,8 +43,8 @@ EXAMENES = {
      'filas': [
        [('Operaciones básicas', 2, 3), ('Ecuaciones con ángulos', 1)],
        ['Jerarquía de operaciones', 'Expresiones algebraicas'],
-       ['Ecuaciones', 'Monomios'],
-       ['Gráfica con tabulación', 'Pendiente y ordenada', 'Área y perímetro'],
+       [('Monomios', 3, 2), 'Área y perímetro'],   # 10 monomios en 2 columnas; las coordenadas caben en 1/4
+       ['Ecuaciones', 'Gráfica con tabulación', 'Pendiente y ordenada'],
      ],
    },
    {
