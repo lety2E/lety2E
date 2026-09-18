@@ -64,7 +64,9 @@ CURSOS = {
     # 1 resuelto + 1 de "Ejercicios extra 1" (Lety, 17-sep-2026). Se escribió
     # el sexto resuelto para que alcance a las seis versiones.
     ('area-perimetro.html',        'Área y perímetro',          ('por bloque', 1, 1)),
-    ('ecuaciones-angulos.html',    'Ecuaciones con ángulos',    ('ejercicios', 1, 1)),
+    # 1 resuelto + 1 de "Ejercicios extra 1" (Lety, 17-sep-2026). Se dibujaron
+    # el sexto triángulo resuelto y el sexto extra.
+    ('ecuaciones-angulos.html',    'Ecuaciones con ángulos',    ('por bloque', 1, 1)),
     ('reglas-exponentes.html',     'Reglas de exponentes',      ('ejercicios', 1, 2)),
     ('mcm-mcd.html',               'mcm y MCD',                 ('ejercicios', 1, 2)),
     ('lenguaje-algebraico.html',   'Lenguaje algebraico',       ('ejercicios', 1, 2)),

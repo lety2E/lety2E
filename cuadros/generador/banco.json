@@ -1066,7 +1066,7 @@
   "archivo": "ecuaciones-angulos.html",
   "titulo": "Ecuaciones con ángulos",
   "receta": [
-   "ejercicios",
+   "por bloque",
    1,
    1
   ],
@@ -1088,6 +1088,9 @@
      },
      {
       "svg": "<svg viewbox=\"0 0 200 130\" xmlns=\"http://www.w3.org/2000/svg\" class=\"grafica-svg\" role=\"img\" aria-label=\"Triángulo 5: ángulos x, 2x, 3x-20\"><polygon points=\"20,110 180,110 95,25\" fill=\"none\" stroke=\"#1A0828\" stroke-width=\"2\" stroke-linejoin=\"round\"></polygon><text x=\"38\" y=\"102\" font-family=\"DM Sans, sans-serif\" font-size=\"13\" fill=\"#1A0828\" font-weight=\"600\">x</text><text x=\"85\" y=\"58\" font-family=\"DM Sans, sans-serif\" font-size=\"13\" fill=\"#1A0828\" font-weight=\"600\">2x</text><text x=\"112\" y=\"102\" font-family=\"DM Sans, sans-serif\" font-size=\"13\" fill=\"#1A0828\" font-weight=\"600\">3x−20</text></svg>"
+     },
+     {
+      "svg": "<svg viewbox=\"0 0 200 150\" xmlns=\"http://www.w3.org/2000/svg\" class=\"grafica-svg\" role=\"img\" aria-label=\"Triángulo 6: ángulos 2x+10, 3x, 4x-10\"><polygon points=\"40,130 160,130 124,30\" fill=\"none\" stroke=\"#1A0828\" stroke-width=\"2\" stroke-linejoin=\"round\"></polygon><text x=\"54\" y=\"122\" font-family=\"DM Sans, sans-serif\" font-size=\"12\" fill=\"#1A0828\" font-weight=\"600\">2x+10</text><text x=\"112\" y=\"62\" font-family=\"DM Sans, sans-serif\" font-size=\"12\" fill=\"#1A0828\" font-weight=\"600\">3x</text><text x=\"102\" y=\"122\" font-family=\"DM Sans, sans-serif\" font-size=\"12\" fill=\"#1A0828\" font-weight=\"600\">4x−10</text></svg>"
      }
     ]
    ]
@@ -1110,11 +1113,14 @@
      },
      {
       "svg": "<svg viewbox=\"0 0 220 145\" xmlns=\"http://www.w3.org/2000/svg\" class=\"grafica-svg\" role=\"img\" aria-label=\"Extra 5: ángulos 4x-30, 3x+10, 2x+20\"><polygon points=\"25,125 190,125 120,30\" fill=\"none\" stroke=\"#1A0828\" stroke-width=\"2\" stroke-linejoin=\"round\"></polygon><text x=\"34\" y=\"117\" font-family=\"DM Sans, sans-serif\" font-size=\"12\" fill=\"#1A0828\" font-weight=\"600\">4x−30</text><text x=\"107\" y=\"48\" font-family=\"DM Sans, sans-serif\" font-size=\"12\" fill=\"#1A0828\" font-weight=\"600\">3x+10</text><text x=\"132\" y=\"117\" font-family=\"DM Sans, sans-serif\" font-size=\"12\" fill=\"#1A0828\" font-weight=\"600\">2x+20</text></svg>"
+     },
+     {
+      "svg": "<svg viewbox=\"0 0 200 150\" xmlns=\"http://www.w3.org/2000/svg\" class=\"grafica-svg\" role=\"img\" aria-label=\"Extra 6: ángulos x+10, 3x, 2x+20\"><polygon points=\"40,130 170,130 144,57\" fill=\"none\" stroke=\"#1A0828\" stroke-width=\"2\" stroke-linejoin=\"round\"></polygon><text x=\"58\" y=\"122\" font-family=\"DM Sans, sans-serif\" font-size=\"12\" fill=\"#1A0828\" font-weight=\"600\">x+10</text><text x=\"130\" y=\"88\" font-family=\"DM Sans, sans-serif\" font-size=\"12\" fill=\"#1A0828\" font-weight=\"600\">3x</text><text x=\"116\" y=\"122\" font-family=\"DM Sans, sans-serif\" font-size=\"12\" fill=\"#1A0828\" font-weight=\"600\">2x+20</text></svg>"
      }
     ]
    ]
   ],
-  "fuente_extra": "Ejercicios extra",
+  "fuente_extra": "Ejercicios extra 1",
   "propios": 0
  },
  {

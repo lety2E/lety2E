@@ -55,7 +55,13 @@ nombre a "Ejercicios extra 1" y no hay extra 2.
   con área, perímetro y triángulo SVG. Extra 1 = los primeros 6 (alternan horizontal y
   vertical); extra 2 = los otros 4. Ya llena la versión f.
 
-Sigue Ecuaciones con ángulos.
+- **Ecuaciones con ángulos**: 1 resuelto + 1 de extra 1. Se dibujaron el **sexto triángulo
+  resuelto** ($2x+10$, $3x$, $4x-10$ → $x=20°$: 50°, 60°, 70°, con su respuesta) y el **sexto
+  extra** ($x+10$, $3x$, $2x+20$). Los 6 extras entran, así que la sección es "Ejercicios
+  extra 1" sin extra 2. Con esto el Examen 1 ya llena las seis versiones completas (80% de la
+  hoja).
+
+Sigue Reglas de exponentes (Examen 2).
 
 ---
 
