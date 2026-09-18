@@ -46,8 +46,9 @@ Pendiente. Examen 1 al 83% de la hoja.
   Bloque B negativa (3 y 3); extra 2: los otros 14. Receta `cruzado`.
 
 Regla general que Lety fijó hoy: **los extras que entran al examen van en "Ejercicios
-extra 1"; los demás en "Ejercicios extra 2"**. Falta aplicarla a Operaciones básicas,
-Monomios y Expresiones. Sigue Área y perímetro.
+extra 1"; los demás en "Ejercicios extra 2"**. En Operaciones básicas, Monomios y
+Expresiones **todos** los extras entran al examen, así que ahí la sección solo cambió de
+nombre a "Ejercicios extra 1" y no hay extra 2. Sigue Área y perímetro.
 
 ---
 
