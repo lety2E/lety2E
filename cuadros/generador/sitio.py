@@ -121,19 +121,19 @@ def cabeza(titulo, prof=0):
 </head>
 <body>'''
 
-def cuerpo_hoja(curso, sel, v, letra, plan, banco=None):
+def cuerpo_hoja(curso, sel, v, letra, plan, banco=None, numeros=None):
     """El mismo .hoja de generar.py, sin el documento alrededor.
     Con `banco`, cada ejercicio lleva su resolución debajo."""
     porTitulo = {t['titulo']: t['versiones'][v] for t in sel}
     filas = []
-    n = 0                                  # los cuadros van numerados en el orden de la hoja
+    numeros = numeros or {}                # numero del tema en el curso (ver generar.numeros_de)
     for fila in plan:
         fila = [(t, p, c) for t, p, c in fila if porTitulo.get(t)]
         if not fila: continue
         anchos = ' '.join('%dfr' % p for _, p, _ in fila)
         celdas = ''
         for t, _, c in fila:
-            n += 1
+            n = numeros.get(t, 0)
             if banco is None:
                 celdas += generar.tarjeta(t, porTitulo[t], c, n)
             else:
@@ -187,17 +187,18 @@ def pagina_version(curso, sel, planes, nombre, letras, plan, v, destino, banco):
     letra = letras[v]
     temas = {t for fila in plan for t, _, _ in fila}
     recorte = [t for t in sel if t['titulo'] in temas]
+    numeros = generar.numeros_de(sel)
 
     doc = (cabeza('%s%s' % (curso, letra), prof=1)
            + barra(curso, planes, letra)
-           + '<div class="papel">' + cuerpo_hoja(curso, recorte, v, letra, plan) + '</div>'
+           + '<div class="papel">' + cuerpo_hoja(curso, recorte, v, letra, plan, numeros=numeros) + '</div>'
            + '</body></html>\n')
     open(os.path.join(destino, '%s.html' % letra), 'w', encoding='utf-8').write(doc)
 
     doc = (cabeza('%s%s resuelta' % (curso, letra), prof=1)
            + barra(curso, planes, letra, resuelta=True)
            + '<div class="papel resuelta">'
-           + cuerpo_hoja(curso, recorte, v, letra, plan, banco) + '</div>'
+           + cuerpo_hoja(curso, recorte, v, letra, plan, banco, numeros) + '</div>'
            + '</body></html>\n')
     open(os.path.join(destino, '%s-resuelta.html' % letra), 'w', encoding='utf-8').write(doc)
 

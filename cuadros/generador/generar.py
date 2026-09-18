@@ -160,9 +160,15 @@ def linea(item):
     return partes_linea(item)[2]
 
 def titulo_cuadro(tema, numero):
-    """'3. Monomios' — los CUADROS van numerados en el orden de la hoja, para
-    nombrarlos al calificar; los ejercicios nunca (Lety, 17-sep-2026)."""
+    """'4. Monomios' — los CUADROS van numerados con el numero del tema en el
+    curso (el orden del indice del sitio, no el de la hoja), para nombrarlos al
+    calificar; los ejercicios nunca (Lety, 17-sep-2026)."""
     return html.escape('%d. %s' % (numero, tema) if numero else tema)
+
+def numeros_de(sel):
+    """{titulo: numero del tema en el curso}. `sel` viene de seleccion.json, que
+    guarda los temas en el orden del sitio (el de CURSOS en banco.py)."""
+    return {t['titulo']: i + 1 for i, t in enumerate(sel)}
 
 def tarjeta(tema, items, columnas, numero=0):
     clase = 'mini-card-body en-columnas' if columnas > 1 else 'mini-card-body'
@@ -173,19 +179,16 @@ def tarjeta(tema, items, columnas, numero=0):
             '</div>' % (titulo_cuadro(tema, numero), clase, estilo,
                         ''.join(linea(i) for i in items)))
 
-def hoja(sel, v, letra, plan, curso):
+def hoja(sel, v, letra, plan, curso, numeros=None):
     titulo = '%s%s' % (curso, letra)
     porTitulo = {t['titulo']: t['versiones'][v] for t in sel}
+    numeros = numeros or {}
     tarjetas = []
-    n = 0
     for fila in plan:
         fila = [(t, p, c) for t, p, c in fila if porTitulo.get(t)]
         if not fila: continue
         anchos = ' '.join('%dfr' % p for _, p, _ in fila)
-        celdas = ''
-        for t, _, c in fila:
-            n += 1
-            celdas += tarjeta(t, porTitulo[t], c, n)
+        celdas = ''.join(tarjeta(t, porTitulo[t], c, numeros.get(t, 0)) for t, _, c in fila)
         tarjetas.append('<div class="fila" style="grid-template-columns:%s">%s</div>'
                         % (anchos, celdas))
     return f'''<!DOCTYPE html>
@@ -232,6 +235,6 @@ if __name__ == '__main__':
             print('%s: ningun tema, se salta' % nombre); continue
         for v in range(len(recorte[0]['versiones'])):
             ruta = os.path.join(carpeta, '%s %s%s.html' % (nombre, curso, letras[v]))
-            open(ruta, 'w', encoding='utf-8').write(hoja(recorte, v, letras[v], plan, curso))
+            open(ruta, 'w', encoding='utf-8').write(hoja(recorte, v, letras[v], plan, curso, numeros_de(sel)))
             print(medida.informe(os.path.basename(ruta)[:-5],
                                  plan_medible(recorte, v, plan)))

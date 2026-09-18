@@ -42,9 +42,13 @@ propósito, para que los alumnos sepan de dónde va a salir el examen.
   cuartilla"*. Se subió la letra, las figuras y el aire entre renglones
   (`--renglon` 2.5); las seis versiones siguen cabiendo en una hoja al 86 %.
 - **Los cuadros van numerados, los ejercicios nunca** (17-sep-2026): `1.
-  Operaciones básicas`, `2. Área y perímetro`… en el orden en que aparecen en
-  la hoja, para poder nombrarlos al calificar. *"Podríamos numerar los cuadros
-  (nunca los ejercicios), tal vez al lado del título."*
+  Operaciones básicas`, `4. Monomios`, `8. Área y perímetro`… El número es **el
+  del tema en el curso** (el orden del índice del sitio), no el lugar que ocupa
+  en la hoja: la hoja se acomoda como convenga (§8), pero la numeración
+  respeta el orden de los temas. El Examen 2 sigue con 10, 11, 12, 13.
+  *"Podríamos numerar los cuadros (nunca los ejercicios), tal vez al lado del
+  título"* y *"al menos en la numeración debería llevarse el orden de los
+  temas de la página"*.
 
 Corrección textual de Lety cuando el primer intento llevaba encabezado,
 instrucciones, numeración y puntaje: *"no has captado la esencia de mis

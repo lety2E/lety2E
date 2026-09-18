@@ -65,7 +65,9 @@ nombre a "Ejercicios extra 1" y no hay extra 2.
 ángulos se leyeran (a 80px casi no se veían) y aprovechar la cuartilla, que iba al 80 %.
 Además: **numerar los cuadros** (nunca los ejercicios), junto al título. Cambios en
 `generar.py`: letra **12pt** (era 10), figuras **110px** con etiquetas a 15px, `--renglon`
-2.5 (era 2.3), y `tarjeta()` numera en el orden de la hoja (también `sitio.py`). En
+2.5 (era 2.3), y `tarjeta()` numera cada cuadro **con el número del tema en el curso**
+(Lety corrigió: primero salió en el orden de la hoja; `numeros_de()` en `generar.py`,
+también lo usa `sitio.py`). En
 `acomodo.py` Operaciones básicas pasó a 3/4 de ancho y Ángulos se fue junto a Monomios.
 Las seis versiones siguen en una hoja (86 %, confirmado con Chrome). `medida.py` recuperó
 sus constantes originales: estaban en px de pantalla (16px) y 12pt son exactamente 16px,
