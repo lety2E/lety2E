@@ -61,7 +61,9 @@ CURSOS = {
     # Bloque B negativa; el Bloque 3 de resueltos es práctica. Cada versión:
     # 1 resuelto + 1 extra, uno de cada signo (Lety, 17-sep-2026).
     ('pendiente-ordenada.html',    'Pendiente y ordenada',      ('cruzado', 1, 1)),
-    ('area-perimetro.html',        'Área y perímetro',          ('ejercicios', 1, 2)),
+    # 1 resuelto + 1 de "Ejercicios extra 1" (Lety, 17-sep-2026). Se escribió
+    # el sexto resuelto para que alcance a las seis versiones.
+    ('area-perimetro.html',        'Área y perímetro',          ('por bloque', 1, 1)),
     ('ecuaciones-angulos.html',    'Ecuaciones con ángulos',    ('ejercicios', 1, 1)),
     ('reglas-exponentes.html',     'Reglas de exponentes',      ('ejercicios', 1, 2)),
     ('mcm-mcd.html',               'mcm y MCD',                 ('ejercicios', 1, 2)),

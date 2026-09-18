@@ -48,7 +48,14 @@ Pendiente. Examen 1 al 83% de la hoja.
 Regla general que Lety fijó hoy: **los extras que entran al examen van en "Ejercicios
 extra 1"; los demás en "Ejercicios extra 2"**. En Operaciones básicas, Monomios y
 Expresiones **todos** los extras entran al examen, así que ahí la sección solo cambió de
-nombre a "Ejercicios extra 1" y no hay extra 2. Sigue Área y perímetro.
+nombre a "Ejercicios extra 1" y no hay extra 2.
+
+- **Área y perímetro**: 1 resuelto + 1 de extra 1 por versión. Se escribió el **sexto
+  resuelto**, $(4,6), (-1,1), (4,-2)$, de base vertical (había 4 horizontales y 1 vertical),
+  con área, perímetro y triángulo SVG. Extra 1 = los primeros 6 (alternan horizontal y
+  vertical); extra 2 = los otros 4. Ya llena la versión f.
+
+Sigue Ecuaciones con ángulos.
 
 ---
 
