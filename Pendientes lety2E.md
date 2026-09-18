@@ -47,31 +47,30 @@ Historia del Cálculo — idea: trabajos de historia de las matemáticas como ci
 **Los exámenes viven en `cuadros/`** (8-sep-2026) — el sitio de exámenes se armó como
 sección de este proyecto, con su generador en `cuadros/generador/`. **Seis versiones** por
 examen, y el trato con los alumnos es el de siempre: los *Ejercicios* traen respuesta para
-practicar y los *Ejercicios extra* **no**, porque de ahí sale el examen. Cuando un tema se
-quede corto, Lety pide los extras **tema por tema** ("necesito 6 extras más de mcm-mcd"),
-nunca por adelantado, y los nuevos van **sin resolución**. Lo que decidió sobre cómo son sus
-exámenes está en `Recursos lety2E/Reglas de mis exámenes.md`.
+practicar y los *Ejercicios extra 1* **no**, porque de ahí sale el examen (*extra 2* es
+práctica y no entra). Lo que decidió Lety sobre cómo son sus exámenes está en
+`Recursos lety2E/Reglas de mis exámenes.md` — **leerlo antes de tocar un examen**, en
+especial §3 (mezcla de tipos y modo cruzado), §5 (extra 1 / extra 2) y §14 (cómo le gusta
+trabajar esto: un tema a la vez, mostrarle, que ella decida).
 
-Lo que falta, en orden:
+**Examen 1 de Matemáticas 1: cerrado el 17-sep-2026.** Nueve temas definidos por Lety, seis
+versiones completas, PDF en `~/Downloads` (`python3 pdf.py`). Lo que sigue, en orden:
 
-- **Los nueve temas de Mate 1 que corren con reparto provisional** —Monomios, Gráfica con
-  tabulación, Pendiente y ordenada, Área y perímetro, Ecuaciones con ángulos, Reglas de
-  exponentes, mcm y MCD, Lenguaje algebraico y Problemas de ecuaciones—: los propuso el
-  asistente y Lety no los ha revisado. A **Área y perímetro** y **Ecuaciones con ángulos**
-  ya no les alcanzan los reactivos para la sexta versión, y **mcm y MCD** cae a uno solo;
-  se arregla publicando más extras aquí.
-- **Las resoluciones de Matemáticas 1.** La cosecha automática trae 90 de los 271
-  ejercicios del examen; los otros 181 son extras y se escriben a mano, sobre la marcha.
-  Falta decidir con qué tema empezar.
-- **Las secciones "Ejercicios resueltos" no se cosechan.** Tres temas (Expresiones
-  algebraicas, Pendiente y ordenada, mcm y MCD) traen la resolución *dentro* de la tarjeta
-  del ejercicio, no en una lista paralela como las secciones "Respuestas", así que
-  `resoluciones.py` no las empareja: son ~30 resoluciones **ya publicadas** que hoy se
-  cuentan como pendientes de escribir.
-- **Rehacer las filas del Examen 1 cuando pase a dos hojas.** Hoy cabe en una, pero su
-  primera fila empareja *Operaciones básicas* (tema 1) con *Ecuaciones con ángulos* (tema
-  9), y la regla es que el corte entre hojas respete el orden de los temas.
-- **Matemáticas 2 y 5**, completos en el sitio y sin tocar todavía. Mate 5 es además una de
-  las materias de este semestre.
+- **Los cuadros de Matemáticas 5, primera parte** — es la materia de este semestre y Lety
+  quiere abrir un chat solo para eso. Mismo trato que Mate 1: un tema a la vez, en el orden
+  del índice del curso, ella decide el reparto y si falta material se escribe. **Ojo con el
+  generador**: `generar.py` tiene `CURSO` y `DESTINO` fijos en Matemáticas 1 (y `sitio.py`
+  igual); hay que parametrizarlos por curso, dar de alta el curso en `banco.py` y las filas
+  de sus exámenes en `acomodo.py`. Y hacerle su carpeta `cuadros/matematicas-5/` en el sitio.
+- **El Examen 2 de Matemáticas 1** — sus cuatro temas (Reglas de exponentes, mcm y MCD,
+  Lenguaje algebraico, Problemas de ecuaciones) siguen con reparto provisional; Lety decidió
+  dejarlos para cuando toque ese examen. Para Reglas de exponentes quedó propuesto, sin
+  revisar: 4 por versión, 1 resuelto + 1 extra de cada tipo (potencias de 10 / otras bases).
+  mcm y MCD todavía no llena la versión f.
+- **Las resoluciones de los extras del Examen 1** — la cosecha del sitio ya trae 134 de 298
+  (todos los resueltos); las 164 que faltan son extras y se escriben a mano en
+  `resoluciones-manuales.json`, tema por tema, verificándolas. Lety las vio en las hojas
+  resueltas ("otras ni tienen") y sabe que van sobre la marcha.
+- **Matemáticas 2**, completo en el sitio y sin tocar.
 - **`cuadros/generador/propios.py`** quedó de un experimento descartado: borrarlo o dejarlo
   como registro.

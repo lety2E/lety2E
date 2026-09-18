@@ -61,7 +61,20 @@ nombre a "Ejercicios extra 1" y no hay extra 2.
   extra 1" sin extra 2. Con esto el Examen 1 ya llena las seis versiones completas (80% de la
   hoja).
 
-Sigue Reglas de exponentes (Examen 2).
+**Cierre de la sesión.** Lety decidió quedarse con el Examen 1 y dejar los cuatro temas
+del Examen 2 para cuando toque; lo que sigue es **Matemáticas 5** en un chat aparte. De paso:
+
+- **`pdf.py`** (nuevo): junta las versiones de un examen en un PDF, una por hoja carta, en
+  `~/Downloads`. Salió `Examen 1 Matemáticas 1 (versiones a-f).pdf`.
+- **Las hojas resueltas se veían mal** (lo vio Lety): las páginas con una tarjeta por
+  resolución (Expresiones, Pendiente, Gráfica, Área, mcm) se cosechaban como un solo bloque
+  pegado bajo el primer ejercicio, y en Monomios y Operaciones el resultado en negritas se
+  perdía. `resoluciones.py` ahora cosecha tarjeta por tarjeta y `extraer.py` pega el
+  `<strong>` al renglón. La cosecha subió de 114 a **134 de 298**; lo que falta son extras,
+  que se escriben a mano.
+- `Recursos lety2E/Reglas de mis exámenes.md` actualizado con todo lo de hoy (§2, §3, §4, §5,
+  §12, §13 y un §14 nuevo: cómo le gusta a Lety trabajar esto). `CLAUDE.md` y los pendientes
+  también.
 
 ---
 

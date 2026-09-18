@@ -84,6 +84,11 @@ def items_of(body):
         elif 'katex' in k.cls() or k.tag in ('p','div'):
             t=clean(text(k))
             if t: out.append(t)
+        elif k.tag=='strong':
+            # el resultado en negritas ('= <strong>$35x^2$</strong>') va con
+            # el renglon anterior, no es otro reactivo
+            t=clean(text(k))
+            if t and out: out[-1]+=' '+t
     return out
 
 def parse_file(path):

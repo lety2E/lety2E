@@ -221,7 +221,9 @@ cómo le gustan a Lety, qué decidió ella y qué solo propuso el asistente.
 | `cuadros/` | Lety | las versiones en blanco y las resueltas |
 
 De ahí **la regla que no se rompe: los *Ejercicios extra* nunca llevan respuesta.** Si a un
-tema hay que agregarle reactivos, se agregan ahí **sin resolución**. A Lety no le preocupa
+tema hay que agregarle reactivos, se agregan ahí **sin resolución**. Y desde el 17-sep-2026
+la sección que entra al examen se llama **"Ejercicios extra 1"** en todos los temas cerrados;
+lo que sobra va en **"Ejercicios extra 2"** (práctica, nunca entra). El generador lee la 1. A Lety no le preocupa
 que alguien descubra `cuadros/` ("se lo tendrán que aprender"), pero el trato de las dos
 secciones sí se respeta.
 
@@ -239,6 +241,7 @@ Se corre **desde esa carpeta**, en orden. Las rutas son relativas al repo.
 | 5 | `resoluciones.py` | El banco de resoluciones: **cosecha** las que el sitio ya publica y suma las escritas a mano en `resoluciones-manuales.json`. Dice cuántas faltan por tema. |
 | 6 | `generar.py` | Escribe los exámenes **autocontenidos** que van a IEMS (`~/Desktop/IEMS/4 Materiales y evaluación/Exámenes/`), con KaTeX y tipografías incrustadas: se abren con doble clic y sin internet. |
 | 7 | `sitio.py` | Escribe esta sección: `cuadros/index.html`, la página de cada materia y **dos por versión** (`a.html` y `a-resuelta.html`). |
+| 8 | `pdf.py` | Junta las versiones de un examen en **un PDF, una por hoja carta**, en `~/Downloads` (Chrome sin ventana + pypdf). Es lo que Lety lleva a imprimir. |
 | — | `propios.py` | Resto de un experimento descartado. No se usa. |
 
 ### Cómo se ve el examen (lo decidido el 8-sep-2026)
@@ -265,8 +268,12 @@ convertir.
 ### Al cambiar un tema de `math/`
 
 Agregar o reordenar ejercicios en un tema **cambia los exámenes**. Después de publicar el
-tema, correr `banco.py` → `seleccion.py` → `resoluciones.py` → `generar.py` → `sitio.py`.
-Y al reordenar ejercicios, **reordenar también sus resoluciones**, o dejan de corresponder.
+tema, correr `banco.py` → `seleccion.py` → `resoluciones.py` → `generar.py` → `sitio.py`
+(y `pdf.py` si va a imprimir). Y al reordenar ejercicios, **reordenar también sus
+resoluciones**, o dejan de corresponder. Las páginas que traen cada resolución en su propia
+tarjeta (`.ejemplo-item`, `.po-block`, `.tabulacion-block`, `.tri-block`, `.factor-block`)
+las cosecha `resoluciones.py` tarjeta por tarjeta; si un tema nuevo usa otra clase, hay que
+darla de alta en `CONTENEDORES`.
 
 ---
 
@@ -427,6 +434,10 @@ Desde el **7-sep-2026 las fórmulas se convierten a HTML aquí**, con
 
 - **Correrlo siempre antes de publicar un tema nuevo o editado.** Es idempotente: salta lo que
   ya está hecho y se puede correr sobre todo el sitio sin miedo. `--check` simula sin escribir.
+- **Sirve también para retocar** (desde el 17-sep-2026): si a una página ya pre-renderizada le
+  agregas ejercicios nuevos en `$…$`, convierte sólo ésos y deja lo demás. Ojo: una fórmula
+  inline no puede tener saltos de línea; un `\begin{aligned}` de varias líneas va en `$$…$$`
+  o en un solo renglón.
 - Si una fórmula no compila, el script **no toca esa página** y avisa cuál falló.
 - El LaTeX original no se pierde: vive en `<annotation encoding="application/x-tex">` dentro de
   cada fórmula, así que se puede recuperar para reeditar.

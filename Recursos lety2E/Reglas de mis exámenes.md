@@ -60,6 +60,13 @@ exámenes"*.
 - Cuando a un tema le faltan reactivos, **se agregan en el sitio**, no en el
   examen. Los nuevos se calcan de los publicados, molde por molde, y se
   verifican resolviéndolos.
+- **El examen manda** (17-sep-2026): si a un tema no le alcanzan los resueltos
+  o los extras para las seis versiones, **se escriben** — resueltos con su
+  respuesta completa en *Ejercicios*, extras sin respuesta en *Ejercicios
+  extra 1*. Así se cerró Matemáticas 1: Monomios (dos bloques de cada lado),
+  Gráfica con tabulación (tres resueltas), Pendiente y ordenada (tres
+  resueltas), Área y perímetro (un resuelto) y Ecuaciones con ángulos (un
+  resuelto y un extra, con figura).
 
 ## 3. La unidad de selección es el bloque
 
@@ -74,7 +81,16 @@ Hay tres formas de tomar de un bloque, y **cada tema usa la suya**:
 |---|---|---|
 | **bloque entero** | el bloque completo entra al examen | Operaciones básicas: 1 bloque de ejercicios + 1 de extras = 12 ejercicios |
 | **por renglón** | se toma un renglón de cada bloque | Jerarquía: uno de cada bloque de ejercicios y uno de cada bloque de extras = 4 |
+| **cruzado** | los bloques son dos tipos; cada versión lleva un tipo resuelto y el *otro* tipo de extra, alternando | Gráfica con tabulación (pendiente ±), Pendiente y ordenada (ordenada ±) |
 | **ejercicios sueltos** | reparto plano | los temas que todavía no se definen |
+
+**Lety quiere mezcla de tipos** (17-sep-2026): que en cada versión al alumno le
+toquen tipos distintos, y que entre resueltos y extras se crucen. Cuando un
+tema tiene dos tipos claros (pendiente positiva/negativa, con/sin binomio al
+cuadrado, base 10/otras bases), los bloques se separan por tipo y el examen
+toma de los dos. **Los bloques van en el mismo orden en los dos lados**
+(Bloque 1 y Bloque A el mismo tipo, Bloque 2 y Bloque B el otro): el modo
+cruzado se apoya en eso.
 
 **La mezcla varía por tema y la decide Lety**: a veces uno resuelto y dos
 extras, a veces uno y uno, según lo pesado que sea el tema.
@@ -90,13 +106,13 @@ molde distinto (a un mismo alumno no le tocan tres veces la misma forma).
 - **Un bloque por tipo**: Bloque 1 con los seis del tipo A, Bloque 2 con los
   seis del tipo B. Se usa en Jerarquía de operaciones.
 - **Bloques mezclados**: cada bloque lleva mitad de cada tipo, alternados. Se
-  usa en Expresiones algebraicas (tres sin cuadrado y tres con cuadrado) y en
-  Ecuaciones.
+  usa en Ecuaciones.
 
-Cuando el sitio traía los bloques desordenados (todos los del tipo A y luego los
-del B), **se reordenaron en el sitio** para que alternen. Al reordenar
-ejercicios hay que **reordenar también sus resoluciones**, para que sigan
-correspondiendo.
+**Expresiones algebraicas cambió de bando el 17-sep-2026**: Lety pidió un
+bloque por tipo (Bloque 1 y A sin binomio al cuadrado, Bloque 2 y B con él) y
+que el examen tome un resuelto sin cuadrado + un extra sin + un extra con. Al
+reordenar ejercicios hay que **reordenar también sus resoluciones**, para que
+sigan correspondiendo.
 
 ## 5. Ejercicios extra 1 y extra 2
 
@@ -110,9 +126,12 @@ La página es la fuente de verdad: el generador lee de "extra 1" y jamás del 2.
 Si el tema no tiene la separación, usa "Ejercicios extra" como siempre. Así no
 hay dos listas que mantener sincronizadas.
 
-**Solo se parte donde sobra material.** Donde los extras alcanzan justo,
-partirlos no diría nada. Y en Operaciones básicas, que tiene seis bloques y el
-examen usa seis, se dejaron juntos a propósito.
+**Desde el 17-sep-2026 es regla general, decidida por Lety**: *"los extras
+que se usan para las versiones están como Ejercicios extra 1; los demás pueden
+ser extras 2"*. En todos los temas cerrados la sección que entra al examen se
+llama **"Ejercicios extra 1"**; donde sobran reactivos hay además un
+**"Ejercicios extra 2"** de práctica. Donde todos entran (Operaciones básicas,
+Monomios, Expresiones, Ecuaciones con ángulos) solo existe la 1.
 
 Lo mismo aplica a los ejercicios con resolución: en Expresiones algebraicas hay
 dos bloques resueltos y **solo el primero entra al examen**; el segundo queda de
@@ -234,26 +253,56 @@ Cosas que salieron al armar los exámenes y que conviene revisar en cada tema:
 
 ## 12. Lo que falta decidir
 
-- **Los temas que siguen con reparto provisional** (propuesta del asistente, sin
-  revisar): Monomios, Gráfica con tabulación, Pendiente y ordenada, Área y
-  perímetro, Ecuaciones con ángulos, Reglas de exponentes, mcm y MCD, Lenguaje
-  algebraico y Problemas de ecuaciones.
-- **Matemáticas 2 y 5**, que están completos en el sitio y todavía no se tocan.
+- **Los cuatro temas del Examen 2 de Matemáticas 1**, todavía con reparto
+  provisional: Reglas de exponentes, mcm y MCD, Lenguaje algebraico y
+  Problemas de ecuaciones. Lety decidió el 17-sep-2026 dejarlos para cuando
+  toque ese examen. Para Reglas de exponentes quedó sobre la mesa la propuesta
+  de 4 por versión (1 resuelto + 1 extra de cada tipo: base 10 y otras bases);
+  no la revisó.
+- **Matemáticas 5** es lo que sigue (es materia de este semestre): la primera
+  parte de sus cuadros, tema por tema, con el mismo trato.
+- **Matemáticas 2**, completo en el sitio y sin tocar.
 
-## 13. Estado al 8 de septiembre de 2026
+## 13. Estado al 17 de septiembre de 2026
 
-Cerrados y dando las seis versiones completas:
+**Examen 1 de Matemáticas 1: cerrado.** Los nueve temas definidos por Lety y
+las seis versiones completas, al 80 % de la hoja. El PDF para imprimir
+(`pdf.py`) va a `~/Downloads`.
 
-| Tema | Modo | Ejercicios por versión |
-|---|---|---|
-| Operaciones básicas | bloque entero | 12 |
-| Jerarquía de operaciones | por renglón, uno y uno | 4 |
-| Ecuaciones | uno resuelto y uno de cada bloque extra | 3 |
-| Expresiones algebraicas | igual que Ecuaciones | 3 |
+| Tema | Modo | Por versión | Qué se escribió el 17-sep |
+|---|---|---|---|
+| Operaciones básicas | bloque entero | 12 | — |
+| Jerarquía de operaciones | por renglón, uno y uno | 4 | — |
+| Ecuaciones | uno resuelto y uno de cada bloque extra | 3 | — |
+| Monomios | bloque entero (como Operaciones) | 10 | Bloques 5-6 resueltos y 11-12 extra |
+| Expresiones algebraicas | un bloque por tipo; 1 resuelto sin cuadrado + 1 extra sin + 1 con | 3 | — (reacomodo) |
+| Gráfica con tabulación | cruzado por signo de la pendiente | 2 | 3 resueltas con pendiente positiva |
+| Pendiente y ordenada | cruzado por signo de la ordenada | 2 | 3 resueltas con ordenada negativa |
+| Área y perímetro | 1 resuelto + 1 extra 1 | 2 | el sexto resuelto |
+| Ecuaciones con ángulos | 1 resuelto + 1 extra 1 | 2 | el sexto resuelto y el sexto extra |
 
-Sin definir, corriendo con reparto provisional: los nueve restantes. De esos,
-**Área y perímetro** y **Ecuaciones con ángulos** ya no alcanzan para la sexta
-versión, y **mcm y MCD** cae a un solo ejercicio.
+Examen 2 (los cuatro restantes): sin definir, con reparto provisional.
+
+## 14. Cómo le gusta a Lety trabajar esto
+
+Salió el 17-sep-2026, cuando retomó los cuadros diciendo *"ando algo perdida"*
+y *"me siento un poco saturada"*:
+
+- **Un tema a la vez, en el orden de la página del curso**, y no pasar al
+  siguiente hasta cerrar el anterior. Nada de tablas con los trece temas de
+  golpe.
+- **Mostrarle cómo está el tema** (qué bloques tiene, qué tipos, cuántos
+  ejercicios da hoy) y **dejar que ella decida** el reparto. Ella lo dice con
+  sus palabras ("uno resuelto y uno de extras 1", "tres y tres"); el asistente
+  lo traduce a receta.
+- **Enseñarle los ejercicios nuevos antes de meterlos**, y luego **mostrárselos
+  en el navegador** (preview local) antes de publicar.
+- **Publicar tema por tema** —página, generador, cuadros y bitácora en el mismo
+  commit— para que ella lo vea en el sitio de inmediato. Cuando pregunta *"¿ya
+  subiste los cambios?"* también quiere los cuadros regenerados.
+- Si el asistente pregunta algo técnico (p. ej. cómo escribir un despeje con
+  coeficiente negativo), **explicarlo con el ejemplo concreto y las dos
+  opciones**; ella escoge ("variado").
 
 ## Dónde está el material
 
@@ -263,8 +312,9 @@ Desde el 8 de septiembre de 2026 todo vive **dentro de este mismo proyecto**, `l
   el banco y guarda la receta de cada tema, `seleccion.py` reparte las versiones,
   `acomodo.py` decide qué lleva cada examen y cómo se acomoda la hoja (y revisa que
   ningún tema se quede fuera), `medida.py` calcula si cabe en la hoja, `resoluciones.py`
-  arma el banco de resoluciones, `generar.py` escribe los exámenes autocontenidos y
-  `sitio.py` escribe la sección `cuadros/`. Se corren desde esa carpeta.
+  arma el banco de resoluciones, `generar.py` escribe los exámenes autocontenidos,
+  `sitio.py` escribe la sección `cuadros/` y `pdf.py` junta las versiones de un examen en
+  un PDF (una por hoja) en `~/Downloads`. Se corren desde esa carpeta.
 - El sitio de exámenes: `cuadros/`, servido en **lety2e.com/cuadros** (no enlazado desde el
   nav). Cada versión, dos veces: en blanco para imprimir y resuelta para calificar.
 - Exámenes listos para imprimir, autocontenidos: `~/Desktop/IEMS/4 Materiales y
