@@ -194,6 +194,19 @@ eso bajó el desperdicio de 182 a 66 píxeles.
 **Al cambiar los contenidos cambian las alturas**: el acomodo hay que volver a
 mirarlo cada vez — de eso se encarga `medida.py`, aquí abajo.
 
+### Aprovechar la cuartilla, y que se lea
+
+**Decidido por Lety** (17-sep-2026, después de imprimir la primera hoja): el
+espacio que sobre en la hoja **no se deja en blanco, se usa para que el examen
+sea más legible**. En este orden: letra más grande, figuras más grandes,
+más aire entre renglones, y filas reacomodadas para que ninguna fórmula se
+parta. Todo sin pasar de la hoja. La meta es una hoja **llena y legible** —
+no una hoja apretada ni una hoja medio vacía con letra chica.
+
+Y la prueba de fuego es **imprimirla**: en pantalla todo se ve bien; fue en el
+papel donde los triángulos "casi no se notaban". Cada vez que cambie el formato
+o el acomodo, sacar el PDF (`pdf.py`) y mirarlo como hoja.
+
 ### Una hoja por examen, y adentro el orden da igual
 
 **Decidido por Lety** (8 de septiembre de 2026): *"que quepan en hoja tamaño

@@ -250,6 +250,9 @@ Se corre **desde esa carpeta**, en orden. Las rutas son relativas al repo.
   gasta menos tinta y sale limpio. Las figuras que vienen de `math/` se pasan a
   escala de grises en el CSS de `generar.py`, no se tocan en el origen.
 - **Cada versión cabe en una hoja carta.** Puede sobrar espacio; excederse no.
+  Pero el espacio que sobre **se usa para legibilidad** (17-sep-2026): letra 12pt,
+  figuras 110px, aire entre renglones, filas sin fórmulas partidas. Hoja llena y
+  legible, y la prueba es imprimirla (`pdf.py`).
   `generar.py` lo dice al correr (`73% de la hoja`) y grita **¡NO CABE!** si se
   pasa. Las palancas: reacomodar las filas, bajar `--renglon`, o mover un tema
   al otro examen.
