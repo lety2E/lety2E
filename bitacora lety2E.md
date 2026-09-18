@@ -61,6 +61,14 @@ nombre a "Ejercicios extra 1" y no hay extra 2.
   extra 1" sin extra 2. Con esto el Examen 1 ya llena las seis versiones completas (80% de la
   hoja).
 
+**Resoluciones de los extras del Examen 1.** Lety abrió las hojas resueltas, vio los
+*pendiente* y pidió resolverlos para poder calificar con ellas. Se escribieron en
+`resoluciones-manuales.json` **108 resoluciones, todas verificadas con sympy** y con el
+estilo de la página: Operaciones básicas 36, Monomios 30, Jerarquía 12, Ecuaciones 12,
+Expresiones 12, Gráfica 6. Faltan **Pendiente y ordenada (6), Área y perímetro (6) y los 6
+triángulos de Ecuaciones con ángulos** (van por figura; el generador aún no los empareja).
+Van solo a `cuadros/` y a los exámenes de IEMS, nunca a `math/`. Se cortó aquí por créditos.
+
 **Después de imprimir.** Lety imprimió la hoja y pidió dos cosas: que las figuras de
 ángulos se leyeran (a 80px casi no se veían) y aprovechar la cuartilla, que iba al 80 %.
 Además: **numerar los cuadros** (nunca los ejercicios), junto al título. Cambios en

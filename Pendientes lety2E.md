@@ -67,10 +67,12 @@ versiones completas, PDF en `~/Downloads` (`python3 pdf.py`). Lo que sigue, en o
   dejarlos para cuando toque ese examen. Para Reglas de exponentes quedó propuesto, sin
   revisar: 4 por versión, 1 resuelto + 1 extra de cada tipo (potencias de 10 / otras bases).
   mcm y MCD todavía no llena la versión f.
-- **Las resoluciones de los extras del Examen 1** — la cosecha del sitio ya trae 134 de 298
-  (todos los resueltos); las 164 que faltan son extras y se escriben a mano en
-  `resoluciones-manuales.json`, tema por tema, verificándolas. Lety las vio en las hojas
-  resueltas ("otras ni tienen") y sabe que van sobre la marcha.
+- **Terminar las resoluciones de los extras del Examen 1** — ya están 108 de 120 en
+  `resoluciones-manuales.json` (verificadas con sympy, 17-sep-2026). Faltan **Pendiente y
+  ordenada (6)** y **Área y perímetro (6)**, y los **6 triángulos de Ecuaciones con
+  ángulos**, que son figuras: hay que hacer que `sitio.py`/`resoluciones.py` los emparejen
+  por el `aria-label` del SVG (hoy los salta). El Examen 2 tiene sus propios extras sin
+  resolver. Van solo a `cuadros/` y a IEMS, nunca a `math/`.
 - **Matemáticas 2**, completo en el sitio y sin tocar.
 - **`cuadros/generador/propios.py`** quedó de un experimento descartado: borrarlo o dejarlo
   como registro.
