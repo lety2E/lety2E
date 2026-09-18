@@ -38,7 +38,16 @@ Pendiente. Examen 1 al 83% de la hoja.
   $4x+2y=6$ se quitó por ser el del Ejemplo. Cada versión lleva **1 resuelta + 1 extra, una
   de cada signo**: es el modo nuevo `cruzado` de `seleccion.py`.
 
-Sigue Pendiente y ordenada.
+- **Pendiente y ordenada**, misma lógica pero por **signo de la ordenada al origen**: las 6
+  resueltas eran todas positivas. Quedan Bloque 1 = 3 positivas (las tres primeras), Bloque 2
+  = 3 negativas nuevas con resolución completa (despeje, gráfica con tres puntos y
+  comprobación): $2x+3y+6=0$, $-5x+2y+8=0$ y $3x-4y-12=0$; las otras tres positivas se
+  quedan en un Bloque 3 de práctica, con sus resoluciones. Extra 1: Bloque A positiva,
+  Bloque B negativa (3 y 3); extra 2: los otros 14. Receta `cruzado`.
+
+Regla general que Lety fijó hoy: **los extras que entran al examen van en "Ejercicios
+extra 1"; los demás en "Ejercicios extra 2"**. Falta aplicarla a Operaciones básicas,
+Monomios y Expresiones. Sigue Área y perímetro.
 
 ---
 

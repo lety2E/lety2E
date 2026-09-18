@@ -57,7 +57,10 @@ CURSOS = {
     # pendiente negativa, Bloque 2 y Bloque B positiva. Cada versión: 1 resuelto + 1 extra, uno de cada
     # signo (Lety, 17-sep-2026). Los extras salen de "Ejercicios extra 1".
     ('grafica-tabulacion.html',    'Gráfica con tabulación',    ('cruzado', 1, 1)),
-    ('pendiente-ordenada.html',    'Pendiente y ordenada',      ('ejercicios', 1, 2)),
+    # bloques por tipo: Bloque 1 y Bloque A ordenada positiva, Bloque 2 y
+    # Bloque B negativa; el Bloque 3 de resueltos es práctica. Cada versión:
+    # 1 resuelto + 1 extra, uno de cada signo (Lety, 17-sep-2026).
+    ('pendiente-ordenada.html',    'Pendiente y ordenada',      ('cruzado', 1, 1)),
     ('area-perimetro.html',        'Área y perímetro',          ('ejercicios', 1, 2)),
     ('ecuaciones-angulos.html',    'Ecuaciones con ángulos',    ('ejercicios', 1, 1)),
     ('reglas-exponentes.html',     'Reglas de exponentes',      ('ejercicios', 1, 2)),
