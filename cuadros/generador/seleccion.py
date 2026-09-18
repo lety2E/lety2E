@@ -23,6 +23,7 @@ Cada tema trae su receta (ver banco.py). Dos modos:
 En los dos modos: ningun ejercicio se repite entre versiones.
 """
 import json, sys
+from cursos import elegir, archivo
 
 def matriz(bloques, n):
     """Bloques paralelos -> una pila por slot, con su tramo de columnas."""
@@ -251,9 +252,11 @@ def construir(banco, V):
     return salida
 
 if __name__ == '__main__':
-    V = int(sys.argv[1]) if len(sys.argv) > 1 else 6   # seis versiones, regla de Lety
-    banco = json.load(open('banco.json'))
+    curso, resto = elegir()
+    V = int(resto[0]) if resto else 6   # seis versiones, regla de Lety
+    banco = json.load(open(archivo('banco', curso)))
     salida = construir(banco, V)
+    print('%s (%s)' % (curso, archivo('banco', curso)))
 
     print('\n%-26s %-13s %-9s %s'
           % ('TEMA', 'modo', 'x version', 'ejercicios en cada version'))
@@ -283,4 +286,4 @@ if __name__ == '__main__':
             print('  !! %s: versiones incompletas %s' % (s['titulo'], incompletas)); problemas += 1
     print('\nEjercicios por version: %d' % sum(len(s['versiones'][0]) for s in salida))
     print('Revision: %s' % ('todo bien' if not problemas else '%d problema(s)' % problemas))
-    json.dump(salida, open('seleccion.json','w'), ensure_ascii=False, indent=1)
+    json.dump(salida, open(archivo('seleccion', curso),'w'), ensure_ascii=False, indent=1)

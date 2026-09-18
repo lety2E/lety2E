@@ -18,6 +18,7 @@ La llave de cada resolución es el propio enunciado (`tex`), que es lo que guard
 import json, os, re
 from extraer import parse_file
 from banco import CURSOS  # {curso: (ruta, [(archivo, titulo, receta), ...])}
+from cursos import elegir, archivo
 
 MANUALES = 'resoluciones-manuales.json'
 SALIDA = 'resoluciones.json'
@@ -171,11 +172,15 @@ def resolucion_de(banco, tema, tex):
             or t.get('cosechadas', {}).get(tex))
 
 if __name__ == '__main__':
-    curso = 'Matemáticas 1'
+    curso, _ = elegir()
     banco = construir(curso)
-    json.dump({curso: banco}, open(SALIDA, 'w'), ensure_ascii=False, indent=1)
+    # resoluciones.json guarda todos los cursos; aquí se reescribe solo el de hoy
+    todas = json.load(open(SALIDA)) if os.path.exists(SALIDA) else {}
+    todas[curso] = banco
+    json.dump(todas, open(SALIDA, 'w'), ensure_ascii=False, indent=1)
 
-    sel = json.load(open('seleccion.json'))
+    sel = json.load(open(archivo('seleccion', curso)))
+    print(curso)
     total = con = 0
     faltan = {}
     for tema in sel:

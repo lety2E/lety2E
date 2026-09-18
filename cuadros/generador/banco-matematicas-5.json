@@ -1,0 +1,1972 @@
+[
+ {
+  "archivo": "reglas-basicas.html",
+  "titulo": "Reglas básicas de derivación",
+  "receta": [
+   "ejercicios",
+   1,
+   2
+  ],
+  "con_respuesta": [
+   [
+    "Bloque 1",
+    [
+     {
+      "tex": "$f(x) = 5x^6 - 3x^4 + 2x^3 - 5x - 4$"
+     },
+     {
+      "tex": "$f(x) = -4x^8 - 6x^5 + 3x^4 - 2x^3 + x + 2$"
+     },
+     {
+      "tex": "$f(x) = 3x^5 + 2x^4 - 7x^3 + 5x^2 - 4x$"
+     },
+     {
+      "tex": "$f(x) = 6x^4 - 5x^3 + 4x^2 - 6x - 1$"
+     }
+    ]
+   ],
+   [
+    "Bloque 2",
+    [
+     {
+      "tex": "$f(x) = \\dfrac{5}{x^2} + \\dfrac{3}{x^4} - \\dfrac{2}{x^7}$"
+     },
+     {
+      "tex": "$f(x) = -\\dfrac{6}{x^4} - \\dfrac{3}{x^5} + \\dfrac{7}{x^2}$"
+     },
+     {
+      "tex": "$f(x) = -\\dfrac{1}{x^6} + \\dfrac{4}{x^3} - \\dfrac{2}{x^5}$"
+     },
+     {
+      "tex": "$f(x) = -\\dfrac{2}{x^8} - \\dfrac{3}{x^5} + \\dfrac{8}{x^4}$"
+     }
+    ]
+   ],
+   [
+    "Bloque 3",
+    [
+     {
+      "tex": "$f(x) = 3x^4 - 2x + \\dfrac{5}{x^2} - 7$"
+     },
+     {
+      "tex": "$f(x) = -x^5 + \\dfrac{1}{x^4} + 6x - 12$"
+     },
+     {
+      "tex": "$f(x) = \\dfrac{4}{x^3} - 2x^2 + 5x + 3$"
+     },
+     {
+      "tex": "$f(x) = 6x^6 - x + \\dfrac{2}{x^5} + 9$"
+     }
+    ]
+   ],
+   [
+    "Bloque 4",
+    [
+     {
+      "tex": "$f(x) = -\\dfrac{1}{x^8} + 5x^3 - 4x + 2$"
+     },
+     {
+      "tex": "$f(x) = 2x^7 - \\dfrac{3}{x^5} + x^2 - 10$"
+     },
+     {
+      "tex": "$f(x) = 4x^4 - 6x^2 + \\dfrac{8}{x} - 5$"
+     },
+     {
+      "tex": "$f(x) = -\\dfrac{2}{x^6} + 3x^5 - 7x + 1$"
+     }
+    ]
+   ]
+  ],
+  "extras": [
+   [
+    "Bloque 1",
+    [
+     {
+      "tex": "$f(x) = 8x^5 - 4x^3 + 2x^2 - 9$"
+     },
+     {
+      "tex": "$f(x) = -3x^4 + 5x^2 - 7x + 10$"
+     },
+     {
+      "tex": "$f(x) = 10x^3 - 7x^2 + 6x - 12$"
+     }
+    ]
+   ],
+   [
+    "Bloque 2",
+    [
+     {
+      "tex": "$f(x) = \\dfrac{7}{x^3} - \\dfrac{2}{x^6} + \\dfrac{4}{x}$"
+     },
+     {
+      "tex": "$f(x) = -\\dfrac{5}{x^7} + \\dfrac{3}{x^2} - \\dfrac{1}{x^5}$"
+     },
+     {
+      "tex": "$f(x) = \\dfrac{4}{x^4} - \\dfrac{3}{x^5} + \\dfrac{9}{x^2}$"
+     }
+    ]
+   ],
+   [
+    "Bloque 3",
+    [
+     {
+      "tex": "$f(x) = -x^9 + 4x^5 - 2x^3 + x - 5$"
+     },
+     {
+      "tex": "$f(x) = \\dfrac{1}{x^{10}} + \\dfrac{1}{x^2} - 6x^4$"
+     },
+     {
+      "tex": "$f(x) = 2x^7 - 3x^4 + \\dfrac{5}{x^3} + 12$"
+     }
+    ]
+   ],
+   [
+    "Bloque 4",
+    [
+     {
+      "tex": "$f(x) = -6x^2 + \\dfrac{9}{x^2} - \\dfrac{2}{x^8} + 3$"
+     },
+     {
+      "tex": "$f(x) = 5x^4 - 2x^3 + 7x^2 - 4x + 1$"
+     },
+     {
+      "tex": "$f(x) = -\\dfrac{3}{x^6} - 4x^3 + \\dfrac{2}{x^4} - 11$"
+     }
+    ]
+   ]
+  ],
+  "fuente_extra": "Ejercicios extra",
+  "propios": 0
+ },
+ {
+  "archivo": "velocidad-media.html",
+  "titulo": "Velocidad media e instantánea",
+  "receta": [
+   "ejercicios",
+   1,
+   2
+  ],
+  "con_respuesta": [
+   [
+    "Ejercicio 1",
+    [
+     {
+      "tex": "Una partícula se mueve a lo largo de una recta según la ecuación $x(t) = t^2 - 5t$"
+     },
+     {
+      "tex": "a) ¿cuál es la posición del móvil cuando $t=1$ , $t=3$ ?"
+     },
+     {
+      "tex": "b) ¿cuál es la velocidad media en el intervalo $(1, 3)$ ?"
+     },
+     {
+      "tex": "c) ¿cuál es la velocidad instantánea en $t=1.8$ ?"
+     }
+    ]
+   ],
+   [
+    "Ejercicio 2",
+    [
+     {
+      "tex": "Una partícula se mueve a lo largo de una recta según la ecuación $x(t) = t^2 + 4t$"
+     },
+     {
+      "tex": "a) ¿cuál es la posición del móvil cuando $t=2$ , $t=4$ ?"
+     },
+     {
+      "tex": "b) ¿cuál es la velocidad media en el intervalo $(2, 4)$ ?"
+     },
+     {
+      "tex": "c) ¿cuál es la velocidad instantánea en $t=2.5$ ?"
+     }
+    ]
+   ],
+   [
+    "Ejercicio 3",
+    [
+     {
+      "tex": "Una partícula se mueve a lo largo de una recta según la ecuación $x(t) = 3 - 2t^2$"
+     },
+     {
+      "tex": "a) ¿cuál es la posición del móvil cuando $t=1$ , $t=5$ ?"
+     },
+     {
+      "tex": "b) ¿cuál es la velocidad media en el intervalo $(1, 5)$ ?"
+     },
+     {
+      "tex": "c) ¿cuál es la velocidad instantánea en $t=3$ ?"
+     }
+    ]
+   ],
+   [
+    "Ejercicio 4",
+    [
+     {
+      "tex": "Una partícula se mueve a lo largo de una recta según la ecuación $x(t) = 5t - t^2$"
+     },
+     {
+      "tex": "a) ¿cuál es la posición del móvil cuando $t=2$ , $t=6$ ?"
+     },
+     {
+      "tex": "b) ¿cuál es la velocidad media en el intervalo $(2, 6)$ ?"
+     },
+     {
+      "tex": "c) ¿cuál es la velocidad instantánea en $t=3$ ?"
+     }
+    ]
+   ]
+  ],
+  "extras": [
+   [
+    "Bloque 1",
+    [
+     {
+      "tex": "Una partícula se mueve según $x(t) = 2t^2 - 8t$ a) ¿cuál es la posición del móvil cuando $t=0$ , $t=4$ ?b) ¿cuál es la velocidad media en el intervalo $(0, 4)$ ?c) ¿cuál es la velocidad instantánea en $t=2$ ?"
+     },
+     {
+      "tex": "Una partícula se mueve según $x(t) = 10 + 4t - t^2$ a) ¿cuál es la posición del móvil cuando $t=1$ , $t=5$ ?b) ¿cuál es la velocidad media en el intervalo $(1, 5)$ ?c) ¿cuál es la velocidad instantánea en $t=2.5$ ?"
+     },
+     {
+      "tex": "Una partícula se mueve según $x(t) = 6 - 3t^2$ a) ¿cuál es la posición del móvil cuando $t=2$ , $t=4$ ?b) ¿cuál es la velocidad media en el intervalo $(2, 4)$ ?c) ¿cuál es la velocidad instantánea en $t=3$ ?"
+     },
+     {
+      "tex": "Una partícula se mueve según $x(t) = t^2 - 10t$ a) ¿cuál es la posición del móvil cuando $t=3$ , $t=7$ ?b) ¿cuál es la velocidad media en el intervalo $(3, 7)$ ?c) ¿cuál es la velocidad instantánea en $t=5$ ?"
+     }
+    ]
+   ],
+   [
+    "Bloque 2",
+    [
+     {
+      "tex": "Una partícula se mueve según $x(t) = 20t - 5t^2$ a) ¿cuál es la posición del móvil cuando $t=0$ , $t=2$ ?b) ¿cuál es la velocidad media en el intervalo $(0, 2)$ ?c) ¿cuál es la velocidad instantánea en $t=1$ ?"
+     },
+     {
+      "tex": "Una partícula se mueve según $x(t) = 15 + t - t^2$ a) ¿cuál es la posición del móvil cuando $t=1$ , $t=3$ ?b) ¿cuál es la velocidad media en el intervalo $(1, 3)$ ?c) ¿cuál es la velocidad instantánea en $t=2$ ?"
+     },
+     {
+      "tex": "Una partícula se mueve según $x(t) = 3t^2 - 12t$ a) ¿cuál es la posición del móvil cuando $t=1$ , $t=4$ ?b) ¿cuál es la velocidad media en el intervalo $(1, 4)$ ?c) ¿cuál es la velocidad instantánea en $t=2.5$ ?"
+     },
+     {
+      "tex": "Una partícula se mueve según $x(t) = 5 - t^2$ a) ¿cuál es la posición del móvil cuando $t=1$ , $t=3$ ?b) ¿cuál es la velocidad media en el intervalo $(1, 3)$ ?c) ¿cuál es la velocidad instantánea en $t=2$ ?"
+     }
+    ]
+   ]
+  ],
+  "fuente_extra": "Ejercicios extra",
+  "propios": 0
+ },
+ {
+  "archivo": "senos-cosenos.html",
+  "titulo": "Derivadas de senos y cosenos",
+  "receta": [
+   "ejercicios",
+   1,
+   2
+  ],
+  "con_respuesta": [
+   [
+    "Bloque único",
+    [
+     {
+      "tex": "$f(x) = -5x - \\dfrac{4}{x^3} + 2 \\ln x + 7 \\cos x - 4 \\operatorname{sen} x + 7e^x - 2^x + 10$"
+     },
+     {
+      "tex": "$f(x) = 3 \\tan x - 7 + \\dfrac{8}{x^3} - 2x^4 + 8 \\operatorname{sen} x - 9 \\cos x - \\dfrac{6}{x} + 4^x - 3$"
+     },
+     {
+      "tex": "$f(x) = 8 \\operatorname{sen} x - \\ln x + 6x^4 - \\dfrac{3}{x^2} - 7^x + 2e^x + x - \\tan x$"
+     },
+     {
+      "tex": "$f(x) = -4 \\operatorname{sen} x + 6 \\tan x - 8 \\cos x - \\dfrac{4}{x^7} - 2x^3 + 7 - 9^x$"
+     },
+     {
+      "tex": "$f(x) = -9 \\cos x - 8 + \\dfrac{4}{x^6} + 4x^8 - 6 \\tan x - 4 \\operatorname{sen} x - \\dfrac{x}{2} + 8^x - 2$"
+     }
+    ]
+   ]
+  ],
+  "extras": [
+   [
+    "Bloque 1",
+    [
+     {
+      "tex": "$f(x) = 6 \\operatorname{sen} x - \\dfrac{2}{x^4} + 3e^x$"
+     },
+     {
+      "tex": "$f(x) = -4 \\cos x + \\ln x - 5x^2$"
+     },
+     {
+      "tex": "$f(x) = 7^x - 2 \\tan x + \\dfrac{5}{x}$"
+     }
+    ]
+   ],
+   [
+    "Bloque 2",
+    [
+     {
+      "tex": "$f(x) = \\dfrac{1}{x^2} + 8 \\cos x - 4^x$"
+     },
+     {
+      "tex": "$f(x) = 3e^x - 6 \\operatorname{sen} x + x^5$"
+     },
+     {
+      "tex": "$f(x) = 9 \\tan x + \\dfrac{3}{x^3} - \\ln x$"
+     }
+    ]
+   ],
+   [
+    "Bloque 3",
+    [
+     {
+      "tex": "$f(x) = -2x^6 + 5 \\ln x - \\operatorname{sen} x$"
+     },
+     {
+      "tex": "$f(x) = \\dfrac{7}{x^5} + 2^x - 3 \\cos x$"
+     },
+     {
+      "tex": "$f(x) = 4 \\tan x - e^x + \\dfrac{6}{x^2}$"
+     }
+    ]
+   ],
+   [
+    "Bloque 4",
+    [
+     {
+      "tex": "$f(x) = 10 \\cos x - \\dfrac{4}{x} + 9^x$"
+     },
+     {
+      "tex": "$f(x) = \\ln x + 7 \\operatorname{sen} x - 2x^4$"
+     },
+     {
+      "tex": "$f(x) = -3 \\tan x + \\dfrac{8}{x^6} + 5e^x$"
+     }
+    ]
+   ]
+  ],
+  "fuente_extra": "Ejercicios extra",
+  "propios": 0
+ },
+ {
+  "archivo": "raices.html",
+  "titulo": "Derivadas de raíces",
+  "receta": [
+   "ejercicios",
+   1,
+   2
+  ],
+  "con_respuesta": [
+   [
+    "Bloque 1",
+    [
+     {
+      "tex": "$f(x) = -4\\sqrt{x^5}$"
+     },
+     {
+      "tex": "$f(x) = -5\\sqrt{x^3}$"
+     },
+     {
+      "tex": "$f(x) = 7\\sqrt[4]{x}$"
+     },
+     {
+      "tex": "$f(x) = -9\\sqrt[5]{x^2}$"
+     },
+     {
+      "tex": "$f(x) = \\dfrac{-2}{6\\sqrt[3]{x^4}}$"
+     },
+     {
+      "tex": "$f(x) = \\dfrac{-6}{4\\sqrt[3]{x^2}}$"
+     }
+    ]
+   ],
+   [
+    "Bloque 2",
+    [
+     {
+      "tex": "$f(x) = 8\\sqrt[3]{x^2}$"
+     },
+     {
+      "tex": "$f(x) = -2\\sqrt[5]{x^3}$"
+     },
+     {
+      "tex": "$f(x) = 6\\sqrt{x}$"
+     },
+     {
+      "tex": "$f(x) = -4\\sqrt[4]{x^5}$"
+     },
+     {
+      "tex": "$f(x) = \\dfrac{-3}{9\\sqrt{x^3}}$"
+     },
+     {
+      "tex": "$f(x) = \\dfrac{-10}{5\\sqrt[4]{x}}$"
+     }
+    ]
+   ]
+  ],
+  "extras": [
+   [
+    "Bloque 1",
+    [
+     {
+      "tex": "$f(x) = -3\\sqrt[5]{x^4}$"
+     },
+     {
+      "tex": "$f(x) = 10\\sqrt{x^7}$"
+     },
+     {
+      "tex": "$f(x) = \\dfrac{-1}{5\\sqrt[3]{x^2}}$"
+     },
+     {
+      "tex": "$f(x) = 12\\sqrt[6]{x^5}$"
+     },
+     {
+      "tex": "$f(x) = \\dfrac{-8}{2\\sqrt{x^3}}$"
+     },
+     {
+      "tex": "$f(x) = -6\\sqrt[4]{x^9}$"
+     }
+    ]
+   ],
+   [
+    "Bloque 2",
+    [
+     {
+      "tex": "$f(x) = 4\\sqrt[3]{x}$"
+     },
+     {
+      "tex": "$f(x) = -7\\sqrt{x^3}$"
+     },
+     {
+      "tex": "$f(x) = \\dfrac{5}{10\\sqrt[4]{x^3}}$"
+     },
+     {
+      "tex": "$f(x) = -9\\sqrt[5]{x^8}$"
+     },
+     {
+      "tex": "$f(x) = \\dfrac{-3}{6\\sqrt[3]{x^5}}$"
+     },
+     {
+      "tex": "$f(x) = 2\\sqrt[3]{x^2}$"
+     }
+    ]
+   ]
+  ],
+  "fuente_extra": "Ejercicios extra",
+  "propios": 0
+ },
+ {
+  "archivo": "regla-producto-p1.html",
+  "titulo": "Regla del producto (P1)",
+  "receta": [
+   "ejercicios",
+   1,
+   2
+  ],
+  "con_respuesta": [
+   [
+    "Bloque 1",
+    [
+     {
+      "tex": "$f(x) = (8x^2 - 2x)(6x^2 + x)$"
+     },
+     {
+      "tex": "$f(x) = (10x^3 - 4x^2)(5x - 3x^2)$"
+     },
+     {
+      "tex": "$f(x) = (5x + 7x^2)(4x + 2x^2)$"
+     }
+    ]
+   ],
+   [
+    "Bloque 2",
+    [
+     {
+      "tex": "$f(x) = (8x - 9x^2)(x + 2x^3)$"
+     },
+     {
+      "tex": "$f(x) = (3x^2 - 5x)(2x - 6x^2)$"
+     },
+     {
+      "tex": "$f(x) = (5x^3 + 4x)(6x^2 - 8)$"
+     }
+    ]
+   ]
+  ],
+  "extras": [
+   [
+    "Bloque 1",
+    [
+     {
+      "tex": "$f(x) = (2x^2 + 3x)(x^2 - 5)$"
+     },
+     {
+      "tex": "$f(x) = (4x^3 - x)(2x^2 + 6x)$"
+     },
+     {
+      "tex": "$f(x) = (x - 7x^2)(3x^2 + 4)$"
+     },
+     {
+      "tex": "$f(x) = (6x^2 - 2x)(4x - 1)$"
+     },
+     {
+      "tex": "$f(x) = (3x^3 + 5x^2)(x^2 - 2x)$"
+     },
+     {
+      "tex": "$f(x) = (9x + 2x^2)(5x^2 - x)$"
+     }
+    ]
+   ],
+   [
+    "Bloque 2",
+    [
+     {
+      "tex": "$f(x) = (x^3 - 4x)(2x^2 + 3x)$"
+     },
+     {
+      "tex": "$f(x) = (5x^2 + 2x)(7x - x^2)$"
+     },
+     {
+      "tex": "$f(x) = (8x^2 - 3)(x^3 + x)$"
+     },
+     {
+      "tex": "$f(x) = (12x - 4x^2)(x^2 + 5)$"
+     },
+     {
+      "tex": "$f(x) = (2x^3 - 6x)(3x^2 - 2)$"
+     },
+     {
+      "tex": "$f(x) = (4x^2 + 1)(x^2 - 9x)$"
+     }
+    ]
+   ]
+  ],
+  "fuente_extra": "Ejercicios extra",
+  "propios": 0
+ },
+ {
+  "archivo": "regla-producto-p2.html",
+  "titulo": "Regla del producto (P2)",
+  "receta": [
+   "ejercicios",
+   1,
+   2
+  ],
+  "con_respuesta": [
+   [
+    "Bloque 1",
+    [
+     {
+      "tex": "$f(x) = -4x^2 \\operatorname{sen} x$"
+     },
+     {
+      "tex": "$f(x) = 5x^4 \\cos x$"
+     },
+     {
+      "tex": "$f(x) = 6x^2 \\tan x$"
+     },
+     {
+      "tex": "$f(x) = 8 \\operatorname{sen} x \\tan x$"
+     },
+     {
+      "tex": "$f(x) = -4 \\operatorname{sen} x \\cos x$"
+     }
+    ]
+   ],
+   [
+    "Bloque 2",
+    [
+     {
+      "tex": "$f(x) = 6 \\cos x \\operatorname{sen} x$"
+     },
+     {
+      "tex": "$f(x) = \\sqrt{x} \\ln x$"
+     },
+     {
+      "tex": "$f(x) = \\sqrt[3]{x^4} \\ln x$"
+     },
+     {
+      "tex": "$f(x) = \\sqrt[3]{x^4} e^x$"
+     },
+     {
+      "tex": "$f(x) = \\sqrt[3]{x^5} \\, 6^x$"
+     }
+    ]
+   ]
+  ],
+  "extras": [
+   [
+    "Bloque 1",
+    [
+     {
+      "tex": "$f(x) = -3x^2 \\cos x$"
+     },
+     {
+      "tex": "$f(x) = 5 \\operatorname{sen} x \\ln x$"
+     },
+     {
+      "tex": "$f(x) = \\sqrt{x} \\, e^x$"
+     },
+     {
+      "tex": "$f(x) = 4x^3 \\tan x$"
+     },
+     {
+      "tex": "$f(x) = \\sqrt[3]{x^2} \\operatorname{sen} x$"
+     },
+     {
+      "tex": "$f(x) = 2^x \\cos x$"
+     }
+    ]
+   ],
+   [
+    "Bloque 2",
+    [
+     {
+      "tex": "$f(x) = -2x^5 \\ln x$"
+     },
+     {
+      "tex": "$f(x) = 3 \\operatorname{sen} x \\, 4^x$"
+     },
+     {
+      "tex": "$f(x) = \\sqrt[5]{x^3} \\tan x$"
+     },
+     {
+      "tex": "$f(x) = 7x^2 e^x$"
+     },
+     {
+      "tex": "$f(x) = \\cos x \\ln x$"
+     },
+     {
+      "tex": "$f(x) = \\sqrt{x} \\operatorname{sen} x$"
+     }
+    ]
+   ]
+  ],
+  "fuente_extra": "Ejercicios extra",
+  "propios": 0
+ },
+ {
+  "archivo": "regla-cociente-p1.html",
+  "titulo": "Regla del cociente (P1)",
+  "receta": [
+   "ejercicios",
+   1,
+   2
+  ],
+  "con_respuesta": [
+   [
+    "Bloque 1",
+    [
+     {
+      "tex": "$f(x) = \\dfrac{4x^2 - 5x}{6x^2 + 3}$"
+     },
+     {
+      "tex": "$f(x) = \\dfrac{5x^4 - 2x}{3x^2 + 8}$"
+     },
+     {
+      "tex": "$f(x) = \\dfrac{2x^3 + 4x}{5x^3 - 1}$"
+     }
+    ]
+   ],
+   [
+    "Bloque 2",
+    [
+     {
+      "tex": "$f(x) = \\dfrac{x^5 - 6x^2}{2x^3 + 4x}$"
+     },
+     {
+      "tex": "$f(x) = \\dfrac{3x^4 - 5x}{4x^3 - 2x}$"
+     },
+     {
+      "tex": "$f(x) = \\dfrac{4x^2 - 7x}{5x^4 + 3x^2}$"
+     }
+    ]
+   ]
+  ],
+  "extras": [
+   [
+    "Bloque 1",
+    [
+     {
+      "tex": "$f(x) = \\dfrac{7x^2 - 4x}{5x + 2}$"
+     },
+     {
+      "tex": "$g(x) = \\dfrac{-8x^2 - 3x}{x - 2x^3}$"
+     },
+     {
+      "tex": "$h(x) = \\dfrac{4x^2 - 5}{7x + 2x^3}$"
+     },
+     {
+      "tex": "$h(x) = \\dfrac{3x^2 - 5}{8x + 5x^2}$"
+     },
+     {
+      "tex": "$g(x) = \\dfrac{7x^2 - 5x}{6x + 10x^3}$"
+     },
+     {
+      "tex": "$h(x) = \\dfrac{4 - 8x^2}{7x + x^2}$"
+     }
+    ]
+   ],
+   [
+    "Bloque 2",
+    [
+     {
+      "tex": "$f(x) = \\dfrac{6x^3 - 2x}{4x^2 + 5}$"
+     },
+     {
+      "tex": "$g(x) = \\dfrac{x^4 - 8x}{3x^3 - 2x}$"
+     },
+     {
+      "tex": "$h(x) = \\dfrac{5x^2 - 9}{2x^4 + x}$"
+     },
+     {
+      "tex": "$f(x) = \\dfrac{2x^5 - 4x^2}{5x^3 + 6}$"
+     },
+     {
+      "tex": "$g(x) = \\dfrac{7x^2 - 3x}{x^4 - 5x}$"
+     },
+     {
+      "tex": "$h(x) = \\dfrac{3x^4 - 1}{8x^2 + 4x}$"
+     }
+    ]
+   ],
+   [
+    "Bloque 3",
+    [
+     {
+      "tex": "$f(x) = \\dfrac{4x^3 + 2x}{6x^2 - 7}$"
+     },
+     {
+      "tex": "$g(x) = \\dfrac{-5x^2 - x}{2x^3 + 3}$"
+     },
+     {
+      "tex": "$h(x) = \\dfrac{x^6 - 2x^2}{4x^3 - x}$"
+     },
+     {
+      "tex": "$f(x) = \\dfrac{8x^2 - 5x}{3x^4 + 2}$"
+     },
+     {
+      "tex": "$g(x) = \\dfrac{2x^4 - 6x}{5x^2 - 3x}$"
+     },
+     {
+      "tex": "$h(x) = \\dfrac{9x^3 - 4}{x^5 + 7x}$"
+     }
+    ]
+   ]
+  ],
+  "fuente_extra": "Ejercicios extra",
+  "propios": 0
+ },
+ {
+  "archivo": "regla-cociente-p2.html",
+  "titulo": "Regla del cociente (P2)",
+  "receta": [
+   "ejercicios",
+   1,
+   2
+  ],
+  "con_respuesta": [
+   [
+    "Bloque 1",
+    [
+     {
+      "tex": "$f(x) = \\dfrac{4x^2}{5\\cos x}$"
+     },
+     {
+      "tex": "$g(x) = \\dfrac{7x^3}{6\\operatorname{sen} x}$"
+     },
+     {
+      "tex": "$h(x) = \\dfrac{2\\tan x}{8x^2}$"
+     },
+     {
+      "tex": "$f(x) = \\dfrac{-4\\cos x}{6x^2}$"
+     }
+    ]
+   ],
+   [
+    "Bloque 2",
+    [
+     {
+      "tex": "$f(x) = \\dfrac{5x^2 - 3\\operatorname{sen} x}{2\\cos x}$"
+     },
+     {
+      "tex": "$g(x) = \\dfrac{7\\cos x}{2x^2 - 4\\operatorname{sen} x}$"
+     },
+     {
+      "tex": "$h(x) = \\dfrac{3x^2 - 2\\operatorname{sen} x}{4\\cos x}$"
+     },
+     {
+      "tex": "$f(x) = \\dfrac{4x^3 + 2\\cos x}{\\operatorname{sen} x}$"
+     }
+    ]
+   ],
+   [
+    "Bloque 3",
+    [
+     {
+      "tex": "$f(x) = \\dfrac{2x^4}{3\\cos x}$"
+     },
+     {
+      "tex": "$g(x) = \\dfrac{-5\\tan x}{2x^3}$"
+     },
+     {
+      "tex": "$h(x) = \\dfrac{5x^3}{2\\cos x}$"
+     },
+     {
+      "tex": "$f(x) = \\dfrac{2\\cos x}{3x^2 - 5\\operatorname{sen} x}$"
+     },
+     {
+      "tex": "$g(x) = \\dfrac{4x^2 - 2\\cos x}{\\operatorname{sen} x}$"
+     },
+     {
+      "tex": "$h(x) = \\dfrac{6\\cos x}{3x^2 - 2\\operatorname{sen} x}$"
+     }
+    ]
+   ]
+  ],
+  "extras": [
+   [
+    "Bloque 1",
+    [
+     {
+      "tex": "$f(x) = \\dfrac{3x^4}{4\\cos x}$"
+     },
+     {
+      "tex": "$g(x) = \\dfrac{-2\\tan x}{5x^3}$"
+     },
+     {
+      "tex": "$h(x) = \\dfrac{6x^2}{5\\cos x}$"
+     },
+     {
+      "tex": "$f(x) = \\dfrac{4\\cos x}{2x^3 - 3\\operatorname{sen} x}$"
+     },
+     {
+      "tex": "$g(x) = \\dfrac{5x^2 - 3\\cos x}{\\operatorname{sen} x}$"
+     },
+     {
+      "tex": "$h(x) = \\dfrac{4\\cos x}{2x^2 - 5\\operatorname{sen} x}$"
+     }
+    ]
+   ],
+   [
+    "Bloque 2",
+    [
+     {
+      "tex": "$f(x) = \\dfrac{6x^3}{2\\cos x}$"
+     },
+     {
+      "tex": "$g(x) = \\dfrac{4\\tan x}{3x^4}$"
+     },
+     {
+      "tex": "$h(x) = \\dfrac{-3x^2}{4\\cos x}$"
+     },
+     {
+      "tex": "$f(x) = \\dfrac{3\\cos x}{4x^2 - 2\\operatorname{sen} x}$"
+     },
+     {
+      "tex": "$g(x) = \\dfrac{2x^2 - 4\\cos x}{\\operatorname{sen} x}$"
+     },
+     {
+      "tex": "$h(x) = \\dfrac{8\\cos x}{5x^2 - 3\\operatorname{sen} x}$"
+     }
+    ]
+   ]
+  ],
+  "fuente_extra": "Ejercicios extra",
+  "propios": 0
+ },
+ {
+  "archivo": "regla-cadena-p1.html",
+  "titulo": "Regla de la cadena (P1)",
+  "receta": [
+   "ejercicios",
+   1,
+   2
+  ],
+  "con_respuesta": [
+   [
+    "Bloque único",
+    [
+     {
+      "tex": "$h(x) = 8(3 - 4x^2)^3$"
+     },
+     {
+      "tex": "$g(x) = 4(5x^2 - 2)^3$"
+     },
+     {
+      "tex": "$h(x) = 4(5x - 2x^2)^2$"
+     },
+     {
+      "tex": "$g(x) = -5(2x^3 - 6x)^2$"
+     },
+     {
+      "tex": "$h(x) = \\sqrt[5]{3x^2 - 4}$"
+     },
+     {
+      "tex": "$g(x) = \\sqrt[3]{6 - 7x^2}$"
+     }
+    ]
+   ]
+  ],
+  "extras": [
+   [
+    "Bloque 1",
+    [
+     {
+      "tex": "$h(x) = -4(3 - 2x^2)^3$"
+     },
+     {
+      "tex": "$g(x) = 6(x^3 - 4x)^2$"
+     },
+     {
+      "tex": "$h(x) = \\sqrt[4]{2x^2 - 5}$"
+     },
+     {
+      "tex": "$g(x) = 3(4x^2 + 1)^3$"
+     },
+     {
+      "tex": "$h(x) = -2(x^3 - x)^2$"
+     },
+     {
+      "tex": "$g(x) = \\sqrt[3]{5x^2 - 2}$"
+     }
+    ]
+   ],
+   [
+    "Bloque 2",
+    [
+     {
+      "tex": "$h(x) = 5(1 - x^2)^3$"
+     },
+     {
+      "tex": "$g(x) = -3(2x^3 + 5x)^2$"
+     },
+     {
+      "tex": "$h(x) = \\sqrt[6]{3x^2 + 4}$"
+     },
+     {
+      "tex": "$g(x) = 7(2x^2 - 3)^3$"
+     },
+     {
+      "tex": "$h(x) = 4(3x^3 - 2x)^2$"
+     },
+     {
+      "tex": "$g(x) = \\sqrt[5]{x^2 - 6}$"
+     }
+    ]
+   ],
+   [
+    "Bloque 3",
+    [
+     {
+      "tex": "$h(x) = -2(5 - 3x^2)^3$"
+     },
+     {
+      "tex": "$g(x) = 5(2x^3 - 7x)^2$"
+     },
+     {
+      "tex": "$h(x) = \\sqrt[3]{4x^2 - 1}$"
+     },
+     {
+      "tex": "$g(x) = 2(6x^2 - 5)^3$"
+     },
+     {
+      "tex": "$h(x) = -6(x^3 + 4x)^2$"
+     },
+     {
+      "tex": "$g(x) = \\sqrt[4]{7x^2 + 2}$"
+     }
+    ]
+   ],
+   [
+    "Bloque 4",
+    [
+     {
+      "tex": "$h(x) = 9(2 - x^2)^3$"
+     },
+     {
+      "tex": "$g(x) = 4(3x^3 + 2x)^2$"
+     },
+     {
+      "tex": "$h(x) = \\sqrt[5]{6x^2 - 3}$"
+     },
+     {
+      "tex": "$g(x) = -4(x^2 + 8)^3$"
+     },
+     {
+      "tex": "$h(x) = 3(5x^3 - 4x)^2$"
+     },
+     {
+      "tex": "$g(x) = \\sqrt[3]{9 - 2x^2}$"
+     }
+    ]
+   ]
+  ],
+  "fuente_extra": "Ejercicios extra",
+  "propios": 0
+ },
+ {
+  "archivo": "regla-cadena-p2.html",
+  "titulo": "Regla de la cadena (P2)",
+  "receta": [
+   "ejercicios",
+   1,
+   2
+  ],
+  "con_respuesta": [
+   [
+    "Bloque 1",
+    [
+     {
+      "tex": "$f = \\sqrt[3]{\\cos^7 x}$"
+     },
+     {
+      "tex": "$f = \\cos(7x - 5x^2)$"
+     },
+     {
+      "tex": "$f = \\ln(3x^2 - 4)$"
+     },
+     {
+      "tex": "$f = -5\\operatorname{sen}^5 x$"
+     }
+    ]
+   ],
+   [
+    "Bloque 2",
+    [
+     {
+      "tex": "$f = \\sqrt{\\operatorname{sen}^3 x}$"
+     },
+     {
+      "tex": "$f = \\operatorname{sen}(6x - 4x^2)$"
+     },
+     {
+      "tex": "$f = \\ln(2x^2 - 5x)$"
+     },
+     {
+      "tex": "$f = 4\\cos^3 x$"
+     }
+    ]
+   ]
+  ],
+  "extras": [
+   [
+    "Bloque 1",
+    [
+     {
+      "tex": "$y = \\sqrt[4]{\\cos^3 x}$"
+     },
+     {
+      "tex": "$y = \\sqrt[3]{\\operatorname{sen}^2 x}$"
+     },
+     {
+      "tex": "$y = \\cos(8x - 3x^2)$"
+     },
+     {
+      "tex": "$y = \\operatorname{sen}(5x^3 - 2x^2)$"
+     },
+     {
+      "tex": "$y = \\ln(5x^2 - 2x)$"
+     },
+     {
+      "tex": "$y = \\ln(3x^3 - 6x)$"
+     },
+     {
+      "tex": "$y = -3\\operatorname{sen}^4 x$"
+     },
+     {
+      "tex": "$y = 6\\cos^4 x$"
+     }
+    ]
+   ],
+   [
+    "Bloque 2",
+    [
+     {
+      "tex": "$y = \\sqrt[5]{\\operatorname{sen}^4 x}$"
+     },
+     {
+      "tex": "$y = \\sqrt{\\cos^5 x}$"
+     },
+     {
+      "tex": "$y = \\cos(4x^2 - 9x)$"
+     },
+     {
+      "tex": "$y = \\operatorname{sen}(7x - 2x^3)$"
+     },
+     {
+      "tex": "$y = \\ln(6x^2 - 3)$"
+     },
+     {
+      "tex": "$y = \\ln(x^3 - 4x)$"
+     },
+     {
+      "tex": "$y = -2\\cos^5 x$"
+     },
+     {
+      "tex": "$y = 7\\operatorname{sen}^3 x$"
+     }
+    ]
+   ]
+  ],
+  "fuente_extra": "Ejercicios extra",
+  "propios": 0
+ },
+ {
+  "archivo": "recta-tangente.html",
+  "titulo": "Recta tangente",
+  "receta": [
+   "ejercicios",
+   1,
+   2
+  ],
+  "con_respuesta": [
+   [
+    "Bloque único",
+    [
+     {
+      "tex": "$f(x) = (x+2)^2 - 5$ en el punto $(-3,\\,-4)$"
+     },
+     {
+      "tex": "$f(x) = (x-5)^2 + 2$ en el punto $(6,\\,3)$"
+     },
+     {
+      "tex": "$f(x) = (x-1)^2 + 3$ en el punto $(2,\\,4)$"
+     },
+     {
+      "tex": "$f(x) = -(x-1)^2 + 1$ en el punto $(2,\\,0)$"
+     },
+     {
+      "tex": "$f(x) = -(x-4)^2 + 3$ en el punto $(5,\\,2)$"
+     }
+    ]
+   ]
+  ],
+  "extras": [
+   [
+    "Bloque 1",
+    [
+     {
+      "tex": "$f(x) = (x+3)^2 - 4$ en $(-2,\\,-3)$"
+     },
+     {
+      "tex": "$f(x) = -(x-2)^2 + 5$ en $(1,\\,4)$"
+     },
+     {
+      "tex": "$f(x) = (x-3)^2 + 1$ en $(4,\\,2)$"
+     }
+    ]
+   ],
+   [
+    "Bloque 2",
+    [
+     {
+      "tex": "$f(x) = -(x+1)^2 + 6$ en $(0,\\,5)$"
+     },
+     {
+      "tex": "$f(x) = (x+4)^2 - 2$ en $(-3,\\,-1)$"
+     },
+     {
+      "tex": "$f(x) = -(x-5)^2 + 3$ en $(4,\\,2)$"
+     }
+    ]
+   ],
+   [
+    "Bloque 3",
+    [
+     {
+      "tex": "$f(x) = (x-2)^2 - 1$ en $(3,\\,0)$"
+     },
+     {
+      "tex": "$f(x) = -(x+3)^2 + 4$ en $(-4,\\,3)$"
+     },
+     {
+      "tex": "$f(x) = (x+1)^2 + 2$ en $(-2,\\,3)$"
+     }
+    ]
+   ],
+   [
+    "Bloque 4",
+    [
+     {
+      "tex": "$f(x) = -(x-3)^2 + 2$ en $(2,\\,1)$"
+     },
+     {
+      "tex": "$f(x) = (x-4)^2 - 3$ en $(5,\\,-2)$"
+     },
+     {
+      "tex": "$f(x) = -(x+2)^2 + 1$ en $(-1,\\,0)$"
+     }
+    ]
+   ]
+  ],
+  "fuente_extra": "Ejercicios extra",
+  "propios": 0
+ },
+ {
+  "archivo": "puntos-criticos.html",
+  "titulo": "Puntos críticos",
+  "receta": [
+   "ejercicios",
+   1,
+   2
+  ],
+  "con_respuesta": [
+   [
+    "Bloque 1",
+    [
+     {
+      "tex": "$f(x) = -5x^3 + 10x^2$"
+     },
+     {
+      "tex": "$f(x) = 3x^3 - 5x^2$"
+     }
+    ]
+   ],
+   [
+    "Bloque 2",
+    [
+     {
+      "tex": "$f(x) = 4x^2 - 12x^3$"
+     },
+     {
+      "tex": "$f(x) = 5x^3 - 4x^2$"
+     }
+    ]
+   ]
+  ],
+  "extras": [
+   [
+    "Bloque 1",
+    [
+     {
+      "tex": "$f(x) = 2x^3 - 3x^2$"
+     },
+     {
+      "tex": "$f(x) = -x^3 + 3x^2$"
+     },
+     {
+      "tex": "$f(x) = 6x^2 - 2x^3$"
+     }
+    ]
+   ],
+   [
+    "Bloque 2",
+    [
+     {
+      "tex": "$f(x) = 4x^3 - 6x^2$"
+     },
+     {
+      "tex": "$f(x) = -3x^3 + 9x^2$"
+     },
+     {
+      "tex": "$f(x) = 12x^2 - 4x^3$"
+     }
+    ]
+   ],
+   [
+    "Bloque 3",
+    [
+     {
+      "tex": "$f(x) = 3x^3 - 9x^2$"
+     },
+     {
+      "tex": "$f(x) = -2x^3 + 6x^2$"
+     },
+     {
+      "tex": "$f(x) = 15x^2 - 5x^3$"
+     }
+    ]
+   ],
+   [
+    "Bloque 4",
+    [
+     {
+      "tex": "$f(x) = x^3 - 6x^2$"
+     },
+     {
+      "tex": "$f(x) = -4x^3 + 88x^2$"
+     },
+     {
+      "tex": "$f(x) = 18x^2 - 6x^3$"
+     }
+    ]
+   ]
+  ],
+  "fuente_extra": "Ejercicios extra",
+  "propios": 0
+ },
+ {
+  "archivo": "optimizacion-areas.html",
+  "titulo": "Optimización de áreas",
+  "receta": [
+   "ejercicios",
+   1,
+   2
+  ],
+  "con_respuesta": [
+   [
+    "Bloque 1",
+    [
+     {
+      "tex": "$P = 24$"
+     },
+     {
+      "tex": "$P = 12$"
+     }
+    ]
+   ],
+   [
+    "Bloque 2",
+    [
+     {
+      "tex": "$P = 16$"
+     },
+     {
+      "tex": "$P = 28$"
+     }
+    ]
+   ]
+  ],
+  "extras": [
+   [
+    "Bloque 1",
+    [
+     {
+      "tex": "altura $x+5$ , $P = 30$"
+     },
+     {
+      "tex": "altura $x+2$ , $P = 16$"
+     },
+     {
+      "tex": "altura $x+4$ , $P = 20$"
+     }
+    ]
+   ],
+   [
+    "Bloque 2",
+    [
+     {
+      "tex": "altura $x+1$ , $P = 10$"
+     },
+     {
+      "tex": "altura $x+3$ , $P = 24$"
+     },
+     {
+      "tex": "altura $x+6$ , $P = 28$"
+     }
+    ]
+   ],
+   [
+    "Bloque 3",
+    [
+     {
+      "tex": "altura $x+2$ , $P = 20$"
+     },
+     {
+      "tex": "altura $x+4$ , $P = 12$"
+     },
+     {
+      "tex": "altura $x+1$ , $P = 18$"
+     }
+    ]
+   ],
+   [
+    "Bloque 4",
+    [
+     {
+      "tex": "altura $x+5$ , $P = 24$"
+     },
+     {
+      "tex": "altura $x+3$ , $P = 14$"
+     },
+     {
+      "tex": "altura $x+7$ , $P = 36$"
+     }
+    ]
+   ]
+  ],
+  "fuente_extra": "Ejercicios extra",
+  "propios": 0
+ },
+ {
+  "archivo": "integrales-indefinidas.html",
+  "titulo": "Integrales indefinidas",
+  "receta": [
+   "ejercicios",
+   1,
+   2
+  ],
+  "con_respuesta": [
+   [
+    "Bloque 1",
+    [
+     {
+      "tex": "$\\displaystyle \\int \\left( 4\\sec^2 x - 8x + 6 - 3\\operatorname{sen} x + 4e^x - 6x^4 \\right) dx$"
+     },
+     {
+      "tex": "$\\displaystyle \\int \\left( -4\\cos x - 5 + \\frac{3}{x} - 2^x \\ln 2 - 8x^3 + 4e^x \\right) dx$"
+     },
+     {
+      "tex": "$\\displaystyle \\int \\left( 5\\operatorname{sen} x - 4 - 7x^4 - \\frac{5}{x} + 7\\sec^2 x - 5x \\right) dx$"
+     }
+    ]
+   ],
+   [
+    "Bloque 2",
+    [
+     {
+      "tex": "$\\displaystyle \\int \\left( 6 - 7x^2 - \\frac{8}{x} + 4\\cos x - 7^x \\ln 7 - e^x \\right) dx$"
+     },
+     {
+      "tex": "$\\displaystyle \\int \\left( 2\\operatorname{sen} x - 9x^2 + 6x^3 - \\frac{3}{x} + 2e^x - 4\\cos x \\right) dx$"
+     },
+     {
+      "tex": "$\\displaystyle \\int \\left( 7x^2 - 4x + \\frac{3}{x} - 2 + 4e^x - 5\\operatorname{sen} x - \\sec^2 x \\right) dx$"
+     }
+    ]
+   ]
+  ],
+  "extras": [
+   [
+    "Bloque 1",
+    [
+     {
+      "tex": "$\\displaystyle \\int \\left( 3\\sec^2 x - 5x + 2 - 4\\operatorname{sen} x + 6e^x - 10x^3 \\right) dx$"
+     },
+     {
+      "tex": "$\\displaystyle \\int \\left( -6\\cos x - 2 + \\frac{4}{x} - 3^x \\ln 3 - 5x^4 + 2e^x \\right) dx$"
+     },
+     {
+      "tex": "$\\displaystyle \\int \\left( 8\\operatorname{sen} x - 7 - 3x^2 - \\frac{2}{x} + 5\\sec^2 x - 4x \\right) dx$"
+     }
+    ]
+   ],
+   [
+    "Bloque 2",
+    [
+     {
+      "tex": "$\\displaystyle \\int \\left( 5 - 4x^3 - \\frac{7}{x} + 2\\cos x - 5^x \\ln 5 - e^x \\right) dx$"
+     },
+     {
+      "tex": "$\\displaystyle \\int \\left( 3\\operatorname{sen} x - 6x^2 + 8x^3 - \\frac{2}{x} + 5e^x - 2\\cos x \\right) dx$"
+     },
+     {
+      "tex": "$\\displaystyle \\int \\left( 5x^2 - 6x + \\frac{2}{x} - 1 + 3e^x - 4\\operatorname{sen} x - \\sec^2 x \\right) dx$"
+     }
+    ]
+   ],
+   [
+    "Bloque 3",
+    [
+     {
+      "tex": "$\\displaystyle \\int \\left( 2\\sec^2 x - 9x^2 + 5 - 2\\operatorname{sen} x + 3e^x - 7x^4 \\right) dx$"
+     },
+     {
+      "tex": "$\\displaystyle \\int \\left( -3\\cos x - 4 + \\frac{6}{x} - 4^x \\ln 4 - 9x^2 + 5e^x \\right) dx$"
+     },
+     {
+      "tex": "$\\displaystyle \\int \\left( 6\\operatorname{sen} x - 1 - 2x^4 - \\frac{3}{x} + 4\\sec^2 x - 2x \\right) dx$"
+     }
+    ]
+   ],
+   [
+    "Bloque 4",
+    [
+     {
+      "tex": "$\\displaystyle \\int \\left( 9 - 3x^2 - \\frac{4}{x} + 5\\cos x - 6^x \\ln 6 - 2e^x \\right) dx$"
+     },
+     {
+      "tex": "$\\displaystyle \\int \\left( 4\\operatorname{sen} x - 12x^2 + 10x^3 - \\frac{5}{x} + 6e^x - 3\\cos x \\right) dx$"
+     },
+     {
+      "tex": "$\\displaystyle \\int \\left( 8x^2 - 2x + \\frac{4}{x} - 3 + 2e^x - 3\\operatorname{sen} x - 2\\sec^2 x \\right) dx$"
+     }
+    ]
+   ]
+  ],
+  "fuente_extra": "Ejercicios extra",
+  "propios": 0
+ },
+ {
+  "archivo": "integrales-definidas.html",
+  "titulo": "Integrales definidas",
+  "receta": [
+   "ejercicios",
+   1,
+   2
+  ],
+  "con_respuesta": [
+   [
+    "Bloque 1",
+    [
+     {
+      "tex": "$\\displaystyle \\int_{-2}^{4} (5x^2 + 6x) \\, dx$"
+     },
+     {
+      "tex": "$\\displaystyle \\int_{1}^{5} (4 - 5x^2) \\, dx$"
+     },
+     {
+      "tex": "$\\displaystyle \\int_{-2}^{3} (-4x^2 + x) \\, dx$"
+     }
+    ]
+   ],
+   [
+    "Bloque 2",
+    [
+     {
+      "tex": "$\\displaystyle \\int_{3}^{4} (-2x^2 - 7) \\, dx$"
+     },
+     {
+      "tex": "$\\displaystyle \\int_{-1}^{5} (-8 + 3x) \\, dx$"
+     },
+     {
+      "tex": "$\\displaystyle \\int_{4}^{6} (5x^2 - 4x) \\, dx$"
+     }
+    ]
+   ]
+  ],
+  "extras": [
+   [
+    "Bloque 1",
+    [
+     {
+      "tex": "$\\displaystyle \\int_{1}^{3} (2x^2 + 5x) \\, dx$"
+     },
+     {
+      "tex": "$\\displaystyle \\int_{-2}^{2} (6 - 3x^2) \\, dx$"
+     },
+     {
+      "tex": "$\\displaystyle \\int_{0}^{4} (-x^2 + 4x) \\, dx$"
+     }
+    ]
+   ],
+   [
+    "Bloque 2",
+    [
+     {
+      "tex": "$\\displaystyle \\int_{-1}^{3} (3x^2 - 2x) \\, dx$"
+     },
+     {
+      "tex": "$\\displaystyle \\int_{2}^{5} (-5x^2 + 8) \\, dx$"
+     },
+     {
+      "tex": "$\\displaystyle \\int_{-3}^{1} (4 - 6x) \\, dx$"
+     }
+    ]
+   ],
+   [
+    "Bloque 3",
+    [
+     {
+      "tex": "$\\displaystyle \\int_{0}^{2} (5x^2 - 3x) \\, dx$"
+     },
+     {
+      "tex": "$\\displaystyle \\int_{-2}^{4} (2 - x^2) \\, dx$"
+     },
+     {
+      "tex": "$\\displaystyle \\int_{1}^{4} (-3x^2 + 2x) \\, dx$"
+     }
+    ]
+   ],
+   [
+    "Bloque 4",
+    [
+     {
+      "tex": "$\\displaystyle \\int_{-1}^{2} (6x^2 + 4x) \\, dx$"
+     },
+     {
+      "tex": "$\\displaystyle \\int_{3}^{6} (8 - 2x^2) \\, dx$"
+     },
+     {
+      "tex": "$\\displaystyle \\int_{-3}^{0} (-4x^2 - 5) \\, dx$"
+     }
+    ]
+   ]
+  ],
+  "fuente_extra": "Ejercicios extra",
+  "propios": 0
+ },
+ {
+  "archivo": "area-bajo-curva-p1.html",
+  "titulo": "Área bajo la curva (P1)",
+  "receta": [
+   "ejercicios",
+   1,
+   2
+  ],
+  "con_respuesta": [
+   [
+    "Bloque 1",
+    [
+     {
+      "tex": "$f(x) = x + 4$ en $[3,\\,5]$"
+     },
+     {
+      "tex": "$f(x) = -x + 3$ en $[2,\\,4]$"
+     },
+     {
+      "tex": "$f(x) = x + 6$ en $[2,\\,4]$"
+     }
+    ]
+   ],
+   [
+    "Bloque 2",
+    [
+     {
+      "tex": "$f(x) = x + 2$ en $[1,\\,4]$"
+     },
+     {
+      "tex": "$f(x) = -x + 5$ en $[3,\\,6]$"
+     }
+    ]
+   ]
+  ],
+  "extras": [
+   [
+    "Bloque 1",
+    [
+     {
+      "tex": "$f(x) = x + 3$ en $[1,\\,5]$"
+     },
+     {
+      "tex": "$f(x) = -x + 4$ en $[1,\\,3]$"
+     },
+     {
+      "tex": "$f(x) = x + 1$ en $[2,\\,6]$"
+     }
+    ]
+   ],
+   [
+    "Bloque 2",
+    [
+     {
+      "tex": "$f(x) = -x + 6$ en $[2,\\,5]$"
+     },
+     {
+      "tex": "$f(x) = x + 7$ en $[0,\\,3]$"
+     },
+     {
+      "tex": "$f(x) = -x + 2$ en $[-1,\\,1]$"
+     }
+    ]
+   ],
+   [
+    "Bloque 3",
+    [
+     {
+      "tex": "$f(x) = x + 8$ en $[1,\\,4]$"
+     },
+     {
+      "tex": "$f(x) = -x + 7$ en $[3,\\,5]$"
+     },
+     {
+      "tex": "$f(x) = x + 3$ en $[2,\\,5]$"
+     }
+    ]
+   ],
+   [
+    "Bloque 4",
+    [
+     {
+      "tex": "$f(x) = -x + 8$ en $[2,\\,6]$"
+     },
+     {
+      "tex": "$f(x) = x + 5$ en $[1,\\,4]$"
+     },
+     {
+      "tex": "$f(x) = -x + 9$ en $[4,\\,7]$"
+     }
+    ]
+   ]
+  ],
+  "fuente_extra": "Ejercicios extra",
+  "propios": 0
+ },
+ {
+  "archivo": "area-bajo-curva-p2.html",
+  "titulo": "Área bajo la curva (P2)",
+  "receta": [
+   "ejercicios",
+   1,
+   2
+  ],
+  "con_respuesta": [
+   [
+    "Bloque 1",
+    [
+     {
+      "tex": "$f(x) = x^2 - 4x + 8$ en $[1,\\,3]$"
+     },
+     {
+      "tex": "$f(x) = -x^2 + 8x - 11$ en $[3,\\,5]$"
+     },
+     {
+      "tex": "$f(x) = x^2 + 6x + 11$ en $[-2,\\,0]$"
+     }
+    ]
+   ],
+   [
+    "Bloque 2",
+    [
+     {
+      "tex": "$f(x) = x^2 - 12x + 39$ en $[5,\\,9]$"
+     },
+     {
+      "tex": "$f(x) = -x^2 - 8x - 14$ en $[-4,\\,-3]$"
+     }
+    ]
+   ]
+  ],
+  "extras": [
+   [
+    "Bloque 1",
+    [
+     {
+      "tex": "$f(x) = x^2 - 2x + 4$ en $[0,\\,3]$"
+     },
+     {
+      "tex": "$f(x) = -x^2 + 6x - 4$ en $[1,\\,5]$"
+     },
+     {
+      "tex": "$f(x) = x^2 + 4x + 5$ en $[-2,\\,1]$"
+     }
+    ]
+   ],
+   [
+    "Bloque 2",
+    [
+     {
+      "tex": "$f(x) = x^2 - 8x + 17$ en $[3,\\,6]$"
+     },
+     {
+      "tex": "$f(x) = -x^2 + 2x + 4$ en $[-1,\\,2]$"
+     },
+     {
+      "tex": "$f(x) = x^2 + 10x + 26$ en $[-5,\\,-3]$"
+     }
+    ]
+   ],
+   [
+    "Bloque 3",
+    [
+     {
+      "tex": "$f(x) = x^2 - 4x + 6$ en $[1,\\,4]$"
+     },
+     {
+      "tex": "$f(x) = -x^2 + 4x - 2$ en $[1,\\,3]$"
+     },
+     {
+      "tex": "$f(x) = x^2 + 2x + 3$ en $[-1,\\,2]$"
+     }
+    ]
+   ],
+   [
+    "Bloque 4",
+    [
+     {
+      "tex": "$f(x) = x^2 - 6x + 12$ en $[2,\\,4]$"
+     },
+     {
+      "tex": "$f(x) = -x^2 + 8x - 13$ en $[3,\\,5]$"
+     },
+     {
+      "tex": "$f(x) = x^2 + 8x + 18$ en $[-4,\\,-2]$"
+     }
+    ]
+   ]
+  ],
+  "fuente_extra": "Ejercicios extra",
+  "propios": 0
+ },
+ {
+  "archivo": "derivada-definicion.html",
+  "titulo": "Derivada por definición",
+  "receta": [
+   "ejercicios",
+   1,
+   2
+  ],
+  "con_respuesta": [
+   [
+    "Bloque 1",
+    [
+     {
+      "tex": "$f(x) = 4x + 2$"
+     },
+     {
+      "tex": "$f(x) = 6x - 5$"
+     },
+     {
+      "tex": "$f(x) = 3x^2$"
+     }
+    ]
+   ],
+   [
+    "Bloque 2",
+    [
+     {
+      "tex": "$f(x) = -5x^2$"
+     },
+     {
+      "tex": "$f(x) = x^2 - 3x - 2$"
+     },
+     {
+      "tex": "$f(x) = x^2 - x + 5$"
+     }
+    ]
+   ]
+  ],
+  "extras": [
+   [
+    "Bloque 1",
+    [
+     {
+      "tex": "$f(x) = 3x + 7$"
+     },
+     {
+      "tex": "$f(x) = 2x^2$"
+     },
+     {
+      "tex": "$f(x) = x^2 - 5x + 4$"
+     }
+    ]
+   ],
+   [
+    "Bloque 2",
+    [
+     {
+      "tex": "$f(x) = -2x + 9$"
+     },
+     {
+      "tex": "$f(x) = -4x^2$"
+     },
+     {
+      "tex": "$f(x) = 2x^2 + 3x - 1$"
+     }
+    ]
+   ],
+   [
+    "Bloque 3",
+    [
+     {
+      "tex": "$f(x) = 5x - 4$"
+     },
+     {
+      "tex": "$f(x) = 6x^2$"
+     },
+     {
+      "tex": "$f(x) = -x^2 + 4x + 6$"
+     }
+    ]
+   ],
+   [
+    "Bloque 4",
+    [
+     {
+      "tex": "$f(x) = -7x - 2$"
+     },
+     {
+      "tex": "$f(x) = -3x^2$"
+     },
+     {
+      "tex": "$f(x) = 3x^2 - 2x + 5$"
+     }
+    ]
+   ]
+  ],
+  "fuente_extra": "Ejercicios extra",
+  "propios": 0
+ },
+ {
+  "archivo": "suma-riemann.html",
+  "titulo": "Suma de Riemann",
+  "receta": [
+   "ejercicios",
+   1,
+   2
+  ],
+  "con_respuesta": [
+   [
+    "Bloque 1",
+    [
+     {
+      "tex": "$\\displaystyle \\int_{-1}^{4} (x^2 + 5) \\, dx$"
+     },
+     {
+      "tex": "$\\displaystyle \\int_{2}^{6} (3 - x^2) \\, dx$"
+     }
+    ]
+   ],
+   [
+    "Bloque 2",
+    [
+     {
+      "tex": "$\\displaystyle \\int_{5}^{8} (4 + 3x^2) \\, dx$"
+     },
+     {
+      "tex": "$\\displaystyle \\int_{-2}^{5} (x^2 - 6) \\, dx$"
+     }
+    ]
+   ]
+  ],
+  "extras": [
+   [
+    "Bloque 1",
+    [
+     {
+      "tex": "$\\displaystyle \\int_{1}^{3} (x^2 + 2) \\, dx$"
+     },
+     {
+      "tex": "$\\displaystyle \\int_{-1}^{2} (4 - x^2) \\, dx$"
+     },
+     {
+      "tex": "$\\displaystyle \\int_{0}^{4} (2x^2 + 1) \\, dx$"
+     }
+    ]
+   ],
+   [
+    "Bloque 2",
+    [
+     {
+      "tex": "$\\displaystyle \\int_{-2}^{2} (3x^2 - 5) \\, dx$"
+     },
+     {
+      "tex": "$\\displaystyle \\int_{1}^{5} (10 - 2x^2) \\, dx$"
+     },
+     {
+      "tex": "$\\displaystyle \\int_{-3}^{1} (x^2 + 3) \\, dx$"
+     }
+    ]
+   ],
+   [
+    "Bloque 3",
+    [
+     {
+      "tex": "$\\displaystyle \\int_{2}^{5} (5 + 2x^2) \\, dx$"
+     },
+     {
+      "tex": "$\\displaystyle \\int_{-1}^{3} (x^2 - 4) \\, dx$"
+     },
+     {
+      "tex": "$\\displaystyle \\int_{0}^{3} (6 - 3x^2) \\, dx$"
+     }
+    ]
+   ],
+   [
+    "Bloque 4",
+    [
+     {
+      "tex": "$\\displaystyle \\int_{-4}^{0} (2x^2 + 3) \\, dx$"
+     },
+     {
+      "tex": "$\\displaystyle \\int_{3}^{6} (x^2 - 1) \\, dx$"
+     },
+     {
+      "tex": "$\\displaystyle \\int_{-2}^{1} (8 - x^2) \\, dx$"
+     }
+    ]
+   ]
+  ],
+  "fuente_extra": "Ejercicios extra",
+  "propios": 0
+ }
+]

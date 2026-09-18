@@ -41,9 +41,11 @@ EXAMENES = {
      'nombre': 'Examen 1',
      'letras': 'abcdef',
      'filas': [
-       [('Operaciones básicas', 2, 3), ('Ecuaciones con ángulos', 1)],
+       [('Operaciones básicas', 3, 3), 'Área y perímetro'],   # 3/4 para que no se parta ninguna suma larga
        ['Jerarquía de operaciones', 'Expresiones algebraicas'],
-       [('Monomios', 3, 2), 'Área y perímetro'],   # 10 monomios en 2 columnas; las coordenadas caben en 1/4
+       # Monomios es la tarjeta alta (5 renglones en 2 columnas): a su lado van
+       # los dos triangulos de angulos, que a 110px de alto ocupan lo mismo
+       [('Monomios', 3, 2), ('Ecuaciones con ángulos', 1)],
        ['Ecuaciones', 'Gráfica con tabulación', 'Pendiente y ordenada'],
      ],
    },
@@ -53,6 +55,32 @@ EXAMENES = {
      'filas': [
        ['Reglas de exponentes', 'mcm y MCD'],
        ['Problemas de ecuaciones', 'Lenguaje algebraico'],
+     ],
+   },
+ ],
+ # Matemáticas 5 (desde el 17-sep-2026). Corte provisional: las derivadas
+ # hasta la regla de la cadena en el Examen 1, lo demás en el Examen 2. Las
+ # filas se van acomodando conforme Lety cierra cada tema.
+ 'Matemáticas 5': [
+   {
+     'nombre': 'Examen 1',
+     'letras': 'abcdef',
+     'filas': [
+       ['Reglas básicas de derivación', 'Velocidad media e instantánea'],
+       ['Derivadas de senos y cosenos', 'Derivadas de raíces'],
+       ['Regla del producto (P1)', 'Regla del producto (P2)'],
+       ['Regla del cociente (P1)', 'Regla del cociente (P2)'],
+       ['Regla de la cadena (P1)', 'Regla de la cadena (P2)'],
+     ],
+   },
+   {
+     'nombre': 'Examen 2',
+     'letras': 'ghijkl',
+     'filas': [
+       ['Recta tangente', 'Puntos críticos', 'Optimización de áreas'],
+       ['Integrales indefinidas', 'Integrales definidas'],
+       ['Área bajo la curva (P1)', 'Área bajo la curva (P2)'],
+       ['Derivada por definición', 'Suma de Riemann'],
      ],
    },
  ],

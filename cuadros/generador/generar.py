@@ -4,13 +4,17 @@ tarjetas de ejercicios del sitio lety2E. Minimalista: sin encabezado,
 sin instrucciones, sin numeracion y sin puntaje."""
 import json, os, html, re, base64, subprocess
 from acomodo import examenes, revisar as acomodo_revisar
+from cursos import elegir, archivo
 import medida
 
 SITIO = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 SITIO_KATEX = os.path.join(SITIO, 'assets', 'katex')
-DESTINO = os.path.expanduser('~/Desktop/IEMS/4 Materiales y evaluación/Exámenes/Matemáticas 1')
-CURSO = 'Matemáticas 1'
+EXAMENES_IEMS = os.path.expanduser('~/Desktop/IEMS/4 Materiales y evaluación/Exámenes')
 _cache = {}
+
+def destino(curso):
+    """Dónde quedan los exámenes autocontenidos de un curso (una carpeta por curso)."""
+    return os.path.join(EXAMENES_IEMS, curso)
 
 # ─────────────────────────── KaTeX ───────────────────────────
 
@@ -59,10 +63,12 @@ CSS = r'''
      el examen quepa en UNA hoja carta; la otra es el acomodo (ver acomodo.py).
      Con 49 ejercicios el examen ocupa ~97%% de la hoja: 2.4 lo dejaba justo en el
      borde y cualquier impresora lo pasaba a dos hojas. */
-  --renglon:2.3;
+  --renglon:2.5;
 }
 *{box-sizing:border-box}
-body{margin:0;background:#fff;color:var(--text);font-family:var(--font-body);font-size:10pt}
+/* 12pt desde el 17-sep-2026: Lety imprimió la hoja a 10pt y la vio chica; con el
+   Examen 1 al 80%% habia aire para crecer. A 12pt las seis versiones siguen en una hoja. */
+body{margin:0;background:#fff;color:var(--text);font-family:var(--font-body);font-size:12pt}
 .hoja{max-width:20.4cm;margin:0 auto;padding:.8cm}
 
 .titulo{font-family:var(--font-display);font-size:.95rem;font-weight:700;
@@ -99,7 +105,10 @@ body{margin:0;background:#fff;color:var(--text);font-family:var(--font-body);fon
 .ej-line.libre{line-height:1.5;margin:.4rem 0;padding-left:0;text-indent:0}
 .mini-card-body .katex,.mini-card-body .katex-html{white-space:normal}
 .mini-card-body .katex{font-size:.95em}
-.figura svg{max-width:100%;height:auto;max-height:80px;display:block;margin:.2rem auto}
+/* Figuras a 110px (eran 80): impresas a 80 los angulos casi no se leian. Y las
+   etiquetas de los triangulos crecen en sus propias unidades (font-size del svg). */
+.figura svg{max-width:100%;height:auto;max-height:110px;display:block;margin:.2rem auto}
+.figura svg text{font-size:15px;font-weight:700}
 /* Las figuras llegan del sitio con su tinta de color (magentas y morados). En
    el examen van en escala de grises: la cuadricula clarita, los ejes gris
    medio y todo lo demas en negro. El relleno conserva su fill-opacity, asi que
@@ -150,24 +159,33 @@ def partes_linea(item):
 def linea(item):
     return partes_linea(item)[2]
 
-def tarjeta(tema, items, columnas):
+def titulo_cuadro(tema, numero):
+    """'3. Monomios' — los CUADROS van numerados en el orden de la hoja, para
+    nombrarlos al calificar; los ejercicios nunca (Lety, 17-sep-2026)."""
+    return html.escape('%d. %s' % (numero, tema) if numero else tema)
+
+def tarjeta(tema, items, columnas, numero=0):
     clase = 'mini-card-body en-columnas' if columnas > 1 else 'mini-card-body'
     estilo = ' style="column-count:%d"' % columnas if columnas > 1 else ''
     return ('<div class="mini-card">'
             '<div class="mini-card-head">%s</div>'
             '<div class="%s"%s>%s</div>'
-            '</div>' % (html.escape(tema), clase, estilo,
+            '</div>' % (titulo_cuadro(tema, numero), clase, estilo,
                         ''.join(linea(i) for i in items)))
 
-def hoja(sel, v, letra, plan):
-    titulo = '%s%s' % (CURSO, letra)
+def hoja(sel, v, letra, plan, curso):
+    titulo = '%s%s' % (curso, letra)
     porTitulo = {t['titulo']: t['versiones'][v] for t in sel}
     tarjetas = []
+    n = 0
     for fila in plan:
         fila = [(t, p, c) for t, p, c in fila if porTitulo.get(t)]
         if not fila: continue
         anchos = ' '.join('%dfr' % p for _, p, _ in fila)
-        celdas = ''.join(tarjeta(t, porTitulo[t], c) for t, _, c in fila)
+        celdas = ''
+        for t, _, c in fila:
+            n += 1
+            celdas += tarjeta(t, porTitulo[t], c, n)
         tarjetas.append('<div class="fila" style="grid-template-columns:%s">%s</div>'
                         % (anchos, celdas))
     return f'''<!DOCTYPE html>
@@ -201,16 +219,19 @@ def plan_medible(sel, v, plan):
     return filas
 
 if __name__ == '__main__':
-    sel = json.load(open('seleccion.json'))
-    for aviso in acomodo_revisar(CURSO, [t['titulo'] for t in sel]): print(aviso)
-    os.makedirs(DESTINO, exist_ok=True)
-    for nombre, letras, plan in examenes(CURSO):
+    curso, _ = elegir()
+    sel = json.load(open(archivo('seleccion', curso)))
+    for aviso in acomodo_revisar(curso, [t['titulo'] for t in sel]): print(aviso)
+    carpeta = destino(curso)
+    os.makedirs(carpeta, exist_ok=True)
+    print('%s -> %s' % (curso, carpeta))
+    for nombre, letras, plan in examenes(curso):
         temas = {t for fila in plan for t, _, _ in fila}
         recorte = [t for t in sel if t['titulo'] in temas]
         if not recorte:
             print('%s: ningun tema, se salta' % nombre); continue
         for v in range(len(recorte[0]['versiones'])):
-            ruta = os.path.join(DESTINO, '%s %s%s.html' % (nombre, CURSO, letras[v]))
-            open(ruta, 'w', encoding='utf-8').write(hoja(recorte, v, letras[v], plan))
+            ruta = os.path.join(carpeta, '%s %s%s.html' % (nombre, curso, letras[v]))
+            open(ruta, 'w', encoding='utf-8').write(hoja(recorte, v, letras[v], plan, curso))
             print(medida.informe(os.path.basename(ruta)[:-5],
                                  plan_medible(recorte, v, plan)))

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Matemáticas 5</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../style.css">
+<link rel="stylesheet" href="../cuadros.css">
+<style>
+/* El examen se imprime y se fotocopia por decenas: va en NEGRO SOBRE BLANCO,
+   sin un solo color. Regla de Lety (8-sep-2026): gasta menos tinta y el
+   fotocopiado sale limpio. Los rosas del sitio (#3D2525, #E0C4BC) salían
+   grises y lavados al fotocopiar. */
+:root{
+  --bg-card:#FFFFFF;
+  --text:#000000;
+  --border:#000000;
+  --r-md:12px;
+  --font-body:'DM Sans',system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
+  --font-display:'Playfair Display',Georgia,serif;
+  /* Aire entre renglones (el sitio usa 2.4). Es la palanca para que
+     el examen quepa en UNA hoja carta; la otra es el acomodo (ver acomodo.py).
+     Con 49 ejercicios el examen ocupa ~97%% de la hoja: 2.4 lo dejaba justo en el
+     borde y cualquier impresora lo pasaba a dos hojas. */
+  --renglon:2.3;
+}
+*{box-sizing:border-box}
+/* 11pt desde el 17-sep-2026: Lety imprimió la hoja a 10pt y la vio chica; con el
+   Examen 1 al 80%% habia aire para crecer. */
+body{margin:0;background:#fff;color:var(--text);font-family:var(--font-body);font-size:11pt}
+.hoja{max-width:20.4cm;margin:0 auto;padding:.8cm}
+
+.titulo{font-family:var(--font-display);font-size:.95rem;font-weight:700;
+        margin:0 0 .5rem;letter-spacing:.01em;text-align:right}
+
+/* La hoja se arma por filas, como los minipages: en cada fila los temas se
+   reparten el ancho segun su peso (ver acomodo.py). */
+.rejilla{display:flex;flex-direction:column;gap:.6rem}
+.fila{display:grid;gap:.6rem;align-items:start;
+      break-inside:avoid;-webkit-column-break-inside:avoid;page-break-inside:avoid}
+@media (max-width:640px){.fila{grid-template-columns:1fr !important}}
+
+.mini-card{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:var(--r-md);overflow:hidden;
+  break-inside:avoid;-webkit-column-break-inside:avoid;page-break-inside:avoid;
+  width:100%;min-width:0;
+}
+/* tarjeta ancha con muchos ejercicios cortos: se parten en columnas adentro */
+.mini-card-body.en-columnas{column-gap:1.2rem}
+.mini-card-body.en-columnas .ej-line{break-inside:avoid}
+/* Titulo del tema: discreto y en negritas. Sin pestana de color: una barra
+   solida en cada tarjeta gasta tinta de mas al fotocopiar. */
+.mini-card-head{
+  padding:.35rem .6rem 0;
+  font-family:var(--font-display);font-size:.82rem;font-weight:700;
+  line-height:1.25;
+}
+.mini-card-body{padding:.35rem .6rem .5rem;font-size:.9rem;line-height:var(--renglon)}
+/* En el sitio los renglones son nowrap con scroll; en papel no hay scroll, asi
+   que aqui las formulas largas se parten solas en sus operadores. La sangria
+   francesa hace evidente que el renglon viene continuado. */
+.ej-line{white-space:normal;padding-left:1.1em;text-indent:-1.1em}
+.ej-line.libre{line-height:1.5;margin:.4rem 0;padding-left:0;text-indent:0}
+.mini-card-body .katex,.mini-card-body .katex-html{white-space:normal}
+.mini-card-body .katex{font-size:.95em}
+/* Figuras a 110px (eran 80): impresas a 80 los angulos casi no se leian. Y las
+   etiquetas de los triangulos crecen en sus propias unidades (font-size del svg). */
+.figura svg{max-width:100%;height:auto;max-height:110px;display:block;margin:.2rem auto}
+.figura svg text{font-size:15px;font-weight:700}
+/* Las figuras llegan del sitio con su tinta de color (magentas y morados). En
+   el examen van en escala de grises: la cuadricula clarita, los ejes gris
+   medio y todo lo demas en negro. El relleno conserva su fill-opacity, asi que
+   los triangulos quedan con un gris apenas visible. */
+.figura svg [stroke]{stroke:#000}
+.figura svg [stroke="#E0C4BC"]{stroke:#CCC}
+.figura svg [stroke="#7B5A50"]{stroke:#555}
+.figura svg [fill]:not([fill="none"]){fill:#000}
+.figura svg [fill="#FBF2EF"]{fill:#FFF}
+
+@page{size:letter;margin:.9cm}
+@media print{
+  .hoja{padding:0;max-width:none}
+}
+</style>
+</head>
+<body><div class="envoltura"><p class="migaja"><a href="../">Exámenes</a> / Matemáticas 5</p><h1>Matemáticas 5</h1><p class="sub">Seis versiones por examen. Los ejercicios salen de las páginas de temas del curso.</p><div class="examen"><h2>Examen 1</h2><p class="temas">Reglas básicas de derivación · Velocidad media e instantánea · Derivadas de senos y cosenos · Derivadas de raíces · Regla del producto (P1) · Regla del producto (P2) · Regla del cociente (P1) · Regla del cociente (P2) · Regla de la cadena (P1) · Regla de la cadena (P2)</p><p class="etiqueta">Para imprimir</p><div class="versiones"><a class="v" href="a.html">a</a><a class="v" href="b.html">b</a><a class="v" href="c.html">c</a><a class="v" href="d.html">d</a><a class="v" href="e.html">e</a><a class="v" href="f.html">f</a></div><p class="etiqueta">Resueltas, para calificar</p><div class="versiones"><a class="v" href="a-resuelta.html">a</a><a class="v" href="b-resuelta.html">b</a><a class="v" href="c-resuelta.html">c</a><a class="v" href="d-resuelta.html">d</a><a class="v" href="e-resuelta.html">e</a><a class="v" href="f-resuelta.html">f</a></div></div><div class="examen"><h2>Examen 2</h2><p class="temas">Recta tangente · Puntos críticos · Optimización de áreas · Integrales indefinidas · Integrales definidas · Área bajo la curva (P1) · Área bajo la curva (P2) · Derivada por definición · Suma de Riemann</p><p class="etiqueta">Para imprimir</p><div class="versiones"><a class="v" href="g.html">g</a><a class="v" href="h.html">h</a><a class="v" href="i.html">i</a><a class="v" href="j.html">j</a><a class="v" href="k.html">k</a><a class="v" href="l.html">l</a></div><p class="etiqueta">Resueltas, para calificar</p><div class="versiones"><a class="v" href="g-resuelta.html">g</a><a class="v" href="h-resuelta.html">h</a><a class="v" href="i-resuelta.html">i</a><a class="v" href="j-resuelta.html">j</a><a class="v" href="k-resuelta.html">k</a><a class="v" href="l-resuelta.html">l</a></div></div></div></body></html>

@@ -8,6 +8,7 @@ los bloques tal como estan en el sitio.
 import os, json
 from extraer import P, walk, text, clean, items_of
 from propios import PROPIOS
+from cursos import elegir, archivo
 
 # curso -> (carpeta del sitio, temas)
 # Cada tema: (archivo, titulo del examen, receta).
@@ -71,6 +72,30 @@ CURSOS = {
     ('mcm-mcd.html',               'mcm y MCD',                 ('ejercicios', 1, 2)),
     ('lenguaje-algebraico.html',   'Lenguaje algebraico',       ('ejercicios', 1, 2)),
     ('problemas-ecuaciones.html',  'Problemas de ecuaciones',   ('ejercicios', 1, 2)),
+ ]),
+ # Matemáticas 5 (desde el 17-sep-2026): se va definiendo tema por tema, en el
+ # orden del índice del curso. Lo que no dice "Lety" es reparto provisional.
+ 'Matemáticas 5': ('../../math/matematicas-5', [
+    ('reglas-basicas.html',        'Reglas básicas de derivación',    ('ejercicios', 1, 2)),
+    ('velocidad-media.html',       'Velocidad media e instantánea',   ('ejercicios', 1, 2)),
+    ('senos-cosenos.html',         'Derivadas de senos y cosenos',    ('ejercicios', 1, 2)),
+    ('raices.html',                'Derivadas de raíces',             ('ejercicios', 1, 2)),
+    ('regla-producto-p1.html',     'Regla del producto (P1)',         ('ejercicios', 1, 2)),
+    ('regla-producto-p2.html',     'Regla del producto (P2)',         ('ejercicios', 1, 2)),
+    ('regla-cociente-p1.html',     'Regla del cociente (P1)',         ('ejercicios', 1, 2)),
+    ('regla-cociente-p2.html',     'Regla del cociente (P2)',         ('ejercicios', 1, 2)),
+    ('regla-cadena-p1.html',       'Regla de la cadena (P1)',         ('ejercicios', 1, 2)),
+    ('regla-cadena-p2.html',       'Regla de la cadena (P2)',         ('ejercicios', 1, 2)),
+    ('recta-tangente.html',        'Recta tangente',                  ('ejercicios', 1, 2)),
+    ('puntos-criticos.html',       'Puntos críticos',                 ('ejercicios', 1, 2)),
+    ('optimizacion-areas.html',    'Optimización de áreas',           ('ejercicios', 1, 2)),
+    ('integrales-indefinidas.html','Integrales indefinidas',          ('ejercicios', 1, 2)),
+    ('integrales-definidas.html',  'Integrales definidas',            ('ejercicios', 1, 2)),
+    ('area-bajo-curva-p1.html',    'Área bajo la curva (P1)',         ('ejercicios', 1, 2)),
+    ('area-bajo-curva-p2.html',    'Área bajo la curva (P2)',         ('ejercicios', 1, 2)),
+    ('derivada-definicion.html',   'Derivada por definición',         ('ejercicios', 1, 2)),
+    ('suma-riemann.html',          'Suma de Riemann',                 ('ejercicios', 1, 2)),
+    # historia-calculo.html no tiene ejercicios: no entra al examen.
  ]),
 }
 
@@ -157,10 +182,10 @@ def construir(curso):
     return banco
 
 if __name__ == '__main__':
-    import sys
-    curso = sys.argv[1] if len(sys.argv) > 1 else 'Matemáticas 1'
+    curso, _ = elegir()
     banco = construir(curso)
-    json.dump(banco, open('banco.json','w'), ensure_ascii=False, indent=1)
+    json.dump(banco, open(archivo('banco', curso),'w'), ensure_ascii=False, indent=1)
+    print('%s -> %s' % (curso, archivo('banco', curso)))
     for t in banco:
         lc = [len(b[1]) for b in t['con_respuesta']]
         le = [len(b[1]) for b in t['extras']]

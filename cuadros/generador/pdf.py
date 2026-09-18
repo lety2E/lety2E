@@ -7,12 +7,14 @@ IEMS; los imprime con Google Chrome sin ventana (--headless) y los pega con
 pypdf. Lety lo pidió el 17-sep-2026 para llevar el examen a la copiadora.
 
 Uso (desde esta carpeta, después de generar.py):
-    python3 pdf.py                       -> Examen 1 de cada curso
+    python3 pdf.py                       -> Examen 1 del curso ACTUAL (ver cursos.py)
+    python3 pdf.py 2                     -> Examen 2 del curso ACTUAL
     python3 pdf.py "Matemáticas 1" 2     -> Examen 2 de Matemáticas 1
 """
 import os, sys, subprocess, tempfile
 from acomodo import examenes
-from generar import DESTINO as CARPETA_IEMS, CURSO   # donde generar.py deja los .html
+from cursos import elegir
+import generar   # generar.destino(curso): donde deja los .html
 
 CHROME = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
 DESTINO = os.path.expanduser('~/Downloads')
@@ -20,7 +22,7 @@ DESTINO = os.path.expanduser('~/Downloads')
 def pdf_de(curso, numero):
     import pypdf
     nombre, letras, _ = examenes(curso)[numero - 1]
-    carpeta = CARPETA_IEMS          # generar.py hoy escribe un solo curso (CURSO)
+    carpeta = generar.destino(curso)
     salida = os.path.join(DESTINO, '%s %s (versiones %s-%s).pdf'
                           % (nombre, curso, letras[0], letras[-1]))
     w = pypdf.PdfWriter()
@@ -39,9 +41,5 @@ def pdf_de(curso, numero):
     print('PDF: %s  (%d hojas)' % (salida, len(letras)))
 
 if __name__ == '__main__':
-    if len(sys.argv) > 1:
-        pdf_de(sys.argv[1], int(sys.argv[2]) if len(sys.argv) > 2 else 1)
-    else:
-        from banco import CURSOS
-        for curso in CURSOS:
-            pdf_de(curso, 1)
+    curso, resto = elegir()
+    pdf_de(curso, int(resto[0]) if resto else 1)

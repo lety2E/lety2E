@@ -10,26 +10,18 @@ Las páginas usan el KaTeX, las tipografías y el `style.css` del propio sitio
 exámenes que `generar.py` deja en IEMS sí llevan todo incrustado, porque ésos se
 abren con doble clic y sin internet.
 
-Se corre desde esta carpeta:  python3 sitio.py
+Se corre desde esta carpeta:  python3 sitio.py  (o con el curso: python3 sitio.py "Matemáticas 1")
+Escribe la carpeta de ese curso y rehace el índice general contando lo que
+haya en las carpetas de todos los cursos.
 """
-import json, os, html
+import json, os, html, re
 from acomodo import examenes, revisar as acomodo_revisar
 from resoluciones import construir as construir_resoluciones, resolucion_de
+from cursos import elegir, archivo, carpeta as carpeta_de, MATERIAS
 import generar
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))   # cuadros/
 SITIO = os.path.dirname(RAIZ)                                        # la raíz de lety2E
-CURSO = 'Matemáticas 1'
-CARPETA = 'matematicas-1'
-
-MATERIAS = [
-    ('Matemáticas 1', 'matematicas-1', 'Primer semestre'),
-    ('Matemáticas 2', 'matematicas-2', 'Segundo semestre'),
-    ('Matemáticas 3', 'matematicas-3', 'Tercer semestre'),
-    ('Matemáticas 4', 'matematicas-4', 'Cuarto semestre'),
-    ('Matemáticas 5', 'matematicas-5', 'Quinto semestre'),
-    ('Optativa',      'optativa',      'Sexto semestre'),
-]
 
 # ─────────────────────────── Estilo del sitio ───────────────────────────
 
@@ -129,26 +121,30 @@ def cabeza(titulo, prof=0):
 </head>
 <body>'''
 
-def cuerpo_hoja(sel, v, letra, plan, banco=None):
+def cuerpo_hoja(curso, sel, v, letra, plan, banco=None):
     """El mismo .hoja de generar.py, sin el documento alrededor.
     Con `banco`, cada ejercicio lleva su resolución debajo."""
     porTitulo = {t['titulo']: t['versiones'][v] for t in sel}
     filas = []
+    n = 0                                  # los cuadros van numerados en el orden de la hoja
     for fila in plan:
         fila = [(t, p, c) for t, p, c in fila if porTitulo.get(t)]
         if not fila: continue
         anchos = ' '.join('%dfr' % p for _, p, _ in fila)
-        if banco is None:
-            celdas = ''.join(generar.tarjeta(t, porTitulo[t], c) for t, _, c in fila)
-        else:
-            celdas = ''.join(tarjeta_resuelta(banco, t, porTitulo[t], c) for t, _, c in fila)
+        celdas = ''
+        for t, _, c in fila:
+            n += 1
+            if banco is None:
+                celdas += generar.tarjeta(t, porTitulo[t], c, n)
+            else:
+                celdas += tarjeta_resuelta(banco, t, porTitulo[t], c, n)
         filas.append('<div class="fila" style="grid-template-columns:%s">%s</div>'
                      % (anchos, celdas))
     marca = '<span class="marca">resuelta</span>' if banco is not None else ''
     return ('<div class="hoja"><p class="titulo">%s%s%s</p><div class="rejilla">%s</div></div>'
-            % (html.escape(CURSO), letra, marca, ''.join(filas)))
+            % (html.escape(curso), letra, marca, ''.join(filas)))
 
-def tarjeta_resuelta(banco, tema, items, columnas):
+def tarjeta_resuelta(banco, tema, items, columnas, numero=0):
     """La misma tarjeta, pero cada ejercicio con su resolución debajo."""
     trozos = []
     for item in items:
@@ -164,10 +160,10 @@ def tarjeta_resuelta(banco, tema, items, columnas):
     estilo = ' style="column-count:%d"' % columnas if columnas > 1 else ''
     return ('<div class="mini-card"><div class="mini-card-head">%s</div>'
             '<div class="%s"%s>%s</div></div>'
-            % (html.escape(tema), clase, estilo, ''.join(trozos)))
+            % (generar.titulo_cuadro(tema, numero), clase, estilo, ''.join(trozos)))
 
 
-def barra(planes, letra_actual, resuelta=False):
+def barra(curso, planes, letra_actual, resuelta=False):
     """Las pestañas: los dos exámenes con sus seis versiones."""
     trozos = []
     for i, (nombre, letras, _) in enumerate(planes):
@@ -183,29 +179,29 @@ def barra(planes, letra_actual, resuelta=False):
             '<a class="grupo" href="index.html" style="text-decoration:none">← %s</a>'
             '<span class="sep"></span>%s<span class="sep"></span>%s'
             '<button class="imprimir" onclick="window.print()">Imprimir</button>'
-            '</div></div>' % (html.escape(CURSO), ''.join(trozos), par))
+            '</div></div>' % (html.escape(curso), ''.join(trozos), par))
 
 # ─────────────────────────── Páginas ───────────────────────────
 
-def pagina_version(sel, planes, nombre, letras, plan, v, destino, banco):
+def pagina_version(curso, sel, planes, nombre, letras, plan, v, destino, banco):
     letra = letras[v]
     temas = {t for fila in plan for t, _, _ in fila}
     recorte = [t for t in sel if t['titulo'] in temas]
 
-    doc = (cabeza('%s%s' % (CURSO, letra), prof=1)
-           + barra(planes, letra)
-           + '<div class="papel">' + cuerpo_hoja(recorte, v, letra, plan) + '</div>'
+    doc = (cabeza('%s%s' % (curso, letra), prof=1)
+           + barra(curso, planes, letra)
+           + '<div class="papel">' + cuerpo_hoja(curso, recorte, v, letra, plan) + '</div>'
            + '</body></html>\n')
     open(os.path.join(destino, '%s.html' % letra), 'w', encoding='utf-8').write(doc)
 
-    doc = (cabeza('%s%s resuelta' % (CURSO, letra), prof=1)
-           + barra(planes, letra, resuelta=True)
+    doc = (cabeza('%s%s resuelta' % (curso, letra), prof=1)
+           + barra(curso, planes, letra, resuelta=True)
            + '<div class="papel resuelta">'
-           + cuerpo_hoja(recorte, v, letra, plan, banco) + '</div>'
+           + cuerpo_hoja(curso, recorte, v, letra, plan, banco) + '</div>'
            + '</body></html>\n')
     open(os.path.join(destino, '%s-resuelta.html' % letra), 'w', encoding='utf-8').write(doc)
 
-def pagina_materia(sel, planes, destino):
+def pagina_materia(curso, sel, planes, destino):
     orden = [t['titulo'] for t in sel]   # el orden del sitio, no el del acomodo
     bloques = []
     for nombre, letras, plan in planes:
@@ -220,19 +216,27 @@ def pagina_materia(sel, planes, destino):
                        '<p class="etiqueta">Resueltas, para calificar</p>'
                        '<div class="versiones">%s</div></div>'
                        % (html.escape(nombre), html.escape(' · '.join(temas)), vs, rs))
-    doc = (cabeza(CURSO, prof=1)
+    doc = (cabeza(curso, prof=1)
            + '<div class="envoltura">'
-           + '<p class="migaja"><a href="../">Exámenes</a> / %s</p>' % html.escape(CURSO)
-           + '<h1>%s</h1>' % html.escape(CURSO)
+           + '<p class="migaja"><a href="../">Exámenes</a> / %s</p>' % html.escape(curso)
+           + '<h1>%s</h1>' % html.escape(curso)
            + '<p class="sub">Seis versiones por examen. Los ejercicios salen de las '
              'páginas de temas del curso.</p>'
            + ''.join(bloques) + '</div></body></html>\n')
     open(os.path.join(destino, 'index.html'), 'w', encoding='utf-8').write(doc)
 
-def pagina_indice(hechas):
+def versiones_hechas(carpeta):
+    """Cuántas versiones hay ya escritas en cuadros/<carpeta>/ (a.html, b.html…)."""
+    ruta = os.path.join(RAIZ, carpeta)
+    if not os.path.isdir(ruta): return 0
+    return sum(1 for f in os.listdir(ruta) if re.fullmatch(r'[a-z]\.html', f))
+
+def pagina_indice():
+    """El índice general: cuenta lo que hay en la carpeta de cada curso, así
+    el de hoy no borra a los demás."""
     tarjetas = []
     for titulo, carpeta, semestre in MATERIAS:
-        n = hechas.get(carpeta, 0)
+        n = versiones_hechas(carpeta)
         if n:
             cuenta = '%d versiones' % n
             tarjetas.append('<a class="materia" href="%s/"><h2>%s</h2><p>%s</p>'
@@ -249,19 +253,20 @@ def pagina_indice(hechas):
     open(os.path.join(RAIZ, 'index.html'), 'w', encoding='utf-8').write(doc)
 
 if __name__ == '__main__':
-    sel = json.load(open('seleccion.json'))
-    for aviso in acomodo_revisar(CURSO, [t['titulo'] for t in sel]): print(aviso)
-    banco = construir_resoluciones(CURSO)
-    planes = examenes(CURSO)
-    destino = os.path.join(RAIZ, CARPETA)
+    curso, _ = elegir()
+    sel = json.load(open(archivo('seleccion', curso)))
+    for aviso in acomodo_revisar(curso, [t['titulo'] for t in sel]): print(aviso)
+    banco = construir_resoluciones(curso)
+    planes = examenes(curso)
+    destino = os.path.join(RAIZ, carpeta_de(curso))
     os.makedirs(destino, exist_ok=True)
     open(os.path.join(RAIZ, 'cuadros.css'), 'w', encoding='utf-8').write(SITIO_CSS)
 
     total = 0
     for nombre, letras, plan in planes:
         for v in range(len(letras)):
-            pagina_version(sel, planes, nombre, letras, plan, v, destino, banco)
+            pagina_version(curso, sel, planes, nombre, letras, plan, v, destino, banco)
             total += 1
-    pagina_materia(sel, planes, destino)
-    pagina_indice({CARPETA: total})
-    print('sitio escrito: %d versiones en %s/' % (total, CARPETA))
+    pagina_materia(curso, sel, planes, destino)
+    pagina_indice()
+    print('sitio escrito: %d versiones en %s/' % (total, carpeta_de(curso)))

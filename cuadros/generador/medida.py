@@ -9,6 +9,10 @@ impresora suelta una segunda hoja con dos tarjetas huérfanas.
 Aquí no hay navegador, así que la altura se calcula con las medidas reales del
 CSS de `generar.py`, tomadas del navegador el 8-sep-2026 y verificadas contra
 las doce versiones de Matemáticas 1 (Examen 1: 723 px medidos, 723 estimados).
+Las constantes son píxeles CSS con la letra a 16px. Desde el 17-sep-2026 la hoja se
+imprime a 12pt, que son exactamente 16px, así que pantalla e impresión coinciden y el
+estimado es el real. La última palabra la tiene Chrome al imprimir: `pdf.py` avisa si
+una versión sale en dos hojas.
 Si se cambian `--renglon`, los paddings o las tipografías, hay que volver a
 tomar las medidas.
 
@@ -30,9 +34,9 @@ CHROME   = 37.7                    # borde + paddings + encabezado de la tarjeta
 INTERIOR = 22.2                    # lo que la tarjeta le quita a su contenido
 COLUMNA  = 19.2                    # column-gap (1.2rem)
 
-ALTO_FORMULA = 33.1                # .9rem x --renglon 2.3
+ALTO_FORMULA = 36.0                # .9rem x --renglon 2.5 (17-sep-2026; era 2.3)
 ALTO_LIBRE   = 21.6                # .9rem x 1.5
-ALTO_FIGURA  = 80.0                # svg max-height
+ALTO_FIGURA  = 110.0               # svg max-height (110 desde el 17-sep-2026)
 MARGEN_LIBRE = 6.4                 # .4rem arriba y abajo, que se colapsan
 
 # Caracteres que caben en un renglón, por píxel de ancho. Calibrado con los

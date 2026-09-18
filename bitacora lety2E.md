@@ -61,6 +61,16 @@ nombre a "Ejercicios extra 1" y no hay extra 2.
   extra 1" sin extra 2. Con esto el Examen 1 ya llena las seis versiones completas (80% de la
   hoja).
 
+**Después de imprimir.** Lety imprimió la hoja y pidió dos cosas: que las figuras de
+ángulos se leyeran (a 80px casi no se veían) y aprovechar la cuartilla, que iba al 80 %.
+Además: **numerar los cuadros** (nunca los ejercicios), junto al título. Cambios en
+`generar.py`: letra **12pt** (era 10), figuras **110px** con etiquetas a 15px, `--renglon`
+2.5 (era 2.3), y `tarjeta()` numera en el orden de la hoja (también `sitio.py`). En
+`acomodo.py` Operaciones básicas pasó a 3/4 de ancho y Ángulos se fue junto a Monomios.
+Las seis versiones siguen en una hoja (86 %, confirmado con Chrome). `medida.py` recuperó
+sus constantes originales: estaban en px de pantalla (16px) y 12pt son exactamente 16px,
+así que ahora el estimado coincide con la impresión.
+
 **Cierre de la sesión.** Lety decidió quedarse con el Examen 1 y dejar los cuatro temas
 del Examen 2 para cuando toque; lo que sigue es **Matemáticas 5** en un chat aparte. De paso:
 
