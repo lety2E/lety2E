@@ -91,7 +91,10 @@ cuántos extras lleva cada versión, según lo elaborado del tema.
 **Producto P2**, decidido por Lety con su método: tres tipos (monomio, trascendente o raíz por
 trascendente), 1 resuelto + 2 extras por versión, uno de cada tipo (`rotado` 1+2). Bloques
 1-3 de resueltos con 2 cada uno, Bloque 4 de práctica con los 4 que sobraban, extra 1 A-C con
-4 cada uno. No hubo que escribir nada.
+4 cada uno. No hubo que escribir nada. Y Lety sumó al método que **siempre haya extra 2**:
+donde no había, se escribe una tanda por tipo. Hecho en Raíces y Producto P2 (tres tandas de
+4 cada uno, sin respuesta); faltan Cociente P2 e Integrales indefinidas y definidas, que se
+harán al revisarlos.
 
 Verificado: las 19 páginas a 390×844 sin cards desbordadas ni errores de KaTeX; las 12
 versiones en el navegador y en PDF. **Ojo** para Lety: el extra $-4x^3 + 88x^2$ de Puntos

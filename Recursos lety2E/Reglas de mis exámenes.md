@@ -32,9 +32,13 @@ O sea, por tema:
    hay **6 bloques** y cada versión toma un bloque entero (Operaciones básicas en Mate 1).
 5. **Si hay tipos, se mezclan**: bloques por tipo en el mismo orden en los dos lados (1 ↔ A) y
    a cada versión le tocan tipos distintos (modos `cruzado` y `rotado`, §3).
+6. **Siempre hay extra 2**: *"de pasada se podría hacer los extras 2 cuando no hay, hacer
+   algunas tandas de ejercicios"*. Si un tema no tiene repaso, se escribe **una tanda por tipo**
+   (de 4, sin respuesta) al revisarlo. Raíces y Producto P2 ya la tienen (22-sep-2026).
 
-Para arrancar un tema nuevo basta preguntarle a Lety **si tiene tipos** y **cuántos resueltos
-y cuántos extras por versión**; el asistente arma los bloques, escribe lo que falte y cuida
+Lety lo resumió así: *"sólo sabiendo cuántos tipos de ejercicios considero yo, y cuántos de
+resueltas y cuántos de extras 1"*. Para arrancar un tema nuevo basta preguntarle **si tiene
+tipos** y **cuántos resueltos y cuántos extras por versión**; el asistente arma los bloques, escribe lo que falte y cuida
 que la hoja quepa (§8), que es lo único que no sale solo. La tabla de §13b tiene los números
 de cada tema de Mate 5.
 
