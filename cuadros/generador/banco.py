@@ -83,8 +83,11 @@ CURSOS = {
  # tangente 1, Puntos críticos 2, Optimización 2, Área bajo la curva 1 y 1,
  # Riemann 2), verificados con sympy. Qué bloque es qué tipo, en la página.
  'Matemáticas 5': ('../../math/matematicas-5', [
-    # B1 polinomios, B2 fracciones, B3 mixto (B4, mixto, queda de práctica)
-    ('reglas-basicas.html',        'Reglas básicas de derivación',    ('cruzado', 1, 2)),
+    # Lety (21-sep-2026): 4 por versión, 2 de cada tipo — uno de cada bloque
+    # resuelto (B1 polinomios, B2 con x en el denominador) y uno de cada bloque
+    # de extra 1 (A polinomios, B mixtos), seis por bloque. El B3 de resueltos
+    # (sólo x en el denominador + 2 mixtos) es práctica, como el extra 2.
+    ('reglas-basicas.html',        'Reglas básicas de derivación',    ('por bloque', 1, 1, 2, 2)),
     # B1 parábola hacia arriba (t^2 positivo), B2 hacia abajo
     ('velocidad-media.html',       'Velocidad media e instantánea',   ('cruzado', 1, 1)),
     # sumas largas; los extras son sumas cortas

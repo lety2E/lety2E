@@ -344,7 +344,7 @@ Matemáticas 5 (versiones g-l).pdf` en `~/Downloads`, una versión por hoja.
 
 | Tema | Tipos (Bloque 1 ↔ A, 2 ↔ B, 3 ↔ C) | Por versión | Escrito el 21-sep |
 |---|---|---|---|
-| 1 Reglas básicas | polinomios · fracciones · mixtos (B4 mixto, práctica) | 1+2 | 3 extras |
+| 1 Reglas básicas | polinomios · con $x$ en el denominador (B3 y extra 2: práctica) | **2+2, decidido por Lety** | 2 resueltos, 12 extras |
 | 2 Velocidad media | parábola hacia arriba · hacia abajo | 1+1 | 2 resueltos |
 | 3 Senos y cosenos | (sumas largas; extras cortos) | 1+1 | 1 resuelto |
 | 4 Raíces | raíz simple · fracción con raíz | 1+2 | 3 extras |
@@ -364,16 +364,27 @@ Matemáticas 5 (versiones g-l).pdf` en `~/Downloads`, una versión por hoja.
 | 18 Derivada por definición | lineales · cuadráticas puras · completas | 1+1 | — |
 | 19 Suma de Riemann | $x^2$ positivo · negativo | 1+1 | 2 resueltos |
 
+**Reglas básicas lo decidió Lety** (21-sep-2026, por la noche, con dos fotos): *"quiero
+que tenga 4 ejercicios, 2 de cada tipo… 2 bloques de ejercicios resueltos con seis
+ejercicios, de ahí saldrían dos… igual dos de 6 en extras… en ejercicios extra 2 los de
+que sólo hay $x$ en el denominador y otros bloques de cada tipo para repaso"*. Quedó:
+Ejercicios B1 = 6 polinomios y B2 = 6 con $x$ en el denominador (B3 = práctica resuelta:
+los 4 de sólo $x$ en el denominador + 2 mixtos); extra 1 A = 6 polinomios y B = 6 mixtos;
+extra 2 C = sólo $x$ en el denominador, D y E = repaso de cada tipo. Cada versión: uno de
+cada bloque, receta `('por bloque', 1, 1, 2, 2)`. Examen 1 sube al 86 % de la hoja.
+
 Los ejercicios nuevos, por si Lety quiere cambiar alguno: Velocidad $x(t) = 2t^2
 - 6t$ y $x(t) = 12t - 3t^2$; Senos $f(x) = 6\tan x - \frac{2}{x^5} + 5\,\mathrm{sen}\,x -
 3x^4 + \ln x - 5^x + 4e^x - 9\cos x + 3$; Recta tangente $f(x) = -(x+2)^2 + 4$ en
 $(-1, 3)$; Puntos críticos $2x^3 - 9x^2$ y $6x^2 - 4x^3$ (y los extras $5x^3 -
 3x^2$, $x^3 - 3x^2$); Optimización altura $x+5$ con $P = 32$ y altura $x+1$ con
 $P = 20$; Área P1 $-x + 10$ en $[1, 3]$; Área P2 $-x^2 + 4x + 1$ en $[0, 3]$;
-Riemann $\int_0^3 (9 - x^2)\,dx$ y $\int_1^4 (5 - 2x^2)\,dx$; extras de Reglas
-básicas $-\frac{8}{x^3} + \frac{5}{x^6} - \frac{2}{x^2}$, $-6x^7 + 3x^4 - 8x^2 +
-5x - 2$, $7x^5 - \frac{4}{x^3} + 2x - 9$; extras de Raíces $\frac{-4}{8\sqrt[5]{x^2}}$,
-$\frac{6}{9\sqrt{x^5}}$, $-8\sqrt[3]{x^7}$.
+Riemann $\int_0^3 (9 - x^2)\,dx$ y $\int_1^4 (5 - 2x^2)\,dx$; extras de Raíces
+$\frac{-4}{8\sqrt[5]{x^2}}$, $\frac{6}{9\sqrt{x^5}}$, $-8\sqrt[3]{x^7}$. En Reglas
+básicas, con el reparto de Lety: resueltos $-2x^7 + 4x^5 - 3x^2 + 8x - 6$ y $7x^4 - x^3 +
+5x^2 - 9x + 3$; extras que entran $-6x^7 + 3x^4 - 8x^2 + 5x - 2$, $7x^5 - \frac{4}{x^3} +
+2x - 9$ y $-5x^4 + \frac{6}{x^3} - 3x + 8$; de repaso (extra 2) $-\frac{8}{x^3} +
+\frac{5}{x^6} - \frac{2}{x^2}$ y ocho más (cuatro polinomios, cuatro mixtos).
 
 **Ojo:** el extra de Puntos críticos $f(x) = -4x^3 + 88x^2$ (viene así del
 doc) da el punto crítico $x = 44/3$; se dejó en *extra 2* (no entra al examen)

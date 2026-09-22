@@ -52,6 +52,13 @@ selección y 86 % de hoja quedaron idénticos):
 - `sitio.py`: la hoja **resuelta** va un tema por renglón, a lo ancho, y los `aligned`
   largos ya no se montan sobre el enunciado.
 
+**Por la noche Lety decidió Reglas básicas** (con dos fotos del examen): 4 por versión, 2 de
+cada tipo. La página quedó con Ejercicios B1 = 6 polinomios, B2 = 6 con $x$ en el
+denominador y B3 de práctica resuelta (los 4 de sólo $x$ en el denominador + 2 mixtos);
+extra 1 con A = 6 polinomios y B = 6 mixtos; extra 2 con C = sólo $x$ en el denominador y D,
+E de repaso (4 y 4, nuevos). Se escribieron 2 resueltos y 9 extras; receta `('por bloque',
+1, 1, 2, 2)` = uno de cada bloque. Examen 1 al 86 %; resueltas 300 de 300.
+
 Verificado: las 19 páginas a 390×844 sin cards desbordadas ni errores de KaTeX; las 12
 versiones en el navegador y en PDF. **Ojo** para Lety: el extra $-4x^3 + 88x^2$ de Puntos
 críticos (así viene del doc) quedó en extra 2 por si es errata de $8x^2$.

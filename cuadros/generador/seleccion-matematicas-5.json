@@ -3,8 +3,10 @@
   "titulo": "Reglas básicas de derivación",
   "archivo": "reglas-basicas.html",
   "receta": [
-   "cruzado",
+   "por bloque",
    1,
+   1,
+   2,
    2
   ],
   "versiones": [
@@ -14,7 +16,11 @@
      "origen": "respuesta"
     },
     {
-     "tex": "$f(x) = \\dfrac{7}{x^3} - \\dfrac{2}{x^6} + \\dfrac{4}{x}$",
+     "tex": "$f(x) = \\dfrac{4}{x^3} - 2x^2 + 5x + 3$",
+     "origen": "respuesta"
+    },
+    {
+     "tex": "$f(x) = 5x^4 - 2x^3 + 7x^2 - 4x + 1$",
      "origen": "extra"
     },
     {
@@ -24,39 +30,33 @@
    ],
    [
     {
-     "tex": "$f(x) = \\dfrac{5}{x^2} + \\dfrac{3}{x^4} - \\dfrac{2}{x^7}$",
-     "origen": "respuesta"
-    },
-    {
-     "tex": "$f(x) = 2x^7 - 3x^4 + \\dfrac{5}{x^3} + 12$",
-     "origen": "extra"
-    },
-    {
-     "tex": "$f(x) = 8x^5 - 4x^3 + 2x^2 - 9$",
-     "origen": "extra"
-    }
-   ],
-   [
-    {
-     "tex": "$f(x) = 3x^4 - 2x + \\dfrac{5}{x^2} - 7$",
-     "origen": "respuesta"
-    },
-    {
-     "tex": "$f(x) = -3x^4 + 5x^2 - 7x + 10$",
-     "origen": "extra"
-    },
-    {
-     "tex": "$f(x) = -\\dfrac{5}{x^7} + \\dfrac{3}{x^2} - \\dfrac{1}{x^5}$",
-     "origen": "extra"
-    }
-   ],
-   [
-    {
      "tex": "$f(x) = -4x^8 - 6x^5 + 3x^4 - 2x^3 + x + 2$",
      "origen": "respuesta"
     },
     {
-     "tex": "$f(x) = \\dfrac{4}{x^4} - \\dfrac{3}{x^5} + \\dfrac{9}{x^2}$",
+     "tex": "$f(x) = 6x^6 - x + \\dfrac{2}{x^5} + 9$",
+     "origen": "respuesta"
+    },
+    {
+     "tex": "$f(x) = -6x^7 + 3x^4 - 8x^2 + 5x - 2$",
+     "origen": "extra"
+    },
+    {
+     "tex": "$f(x) = 2x^7 - 3x^4 + \\dfrac{5}{x^3} + 12$",
+     "origen": "extra"
+    }
+   ],
+   [
+    {
+     "tex": "$f(x) = 3x^5 + 2x^4 - 7x^3 + 5x^2 - 4x$",
+     "origen": "respuesta"
+    },
+    {
+     "tex": "$f(x) = -\\dfrac{1}{x^8} + 5x^3 - 4x + 2$",
+     "origen": "respuesta"
+    },
+    {
+     "tex": "$f(x) = 8x^5 - 4x^3 + 2x^2 - 9$",
      "origen": "extra"
     },
     {
@@ -66,19 +66,45 @@
    ],
    [
     {
-     "tex": "$f(x) = -\\dfrac{6}{x^4} - \\dfrac{3}{x^5} + \\dfrac{7}{x^2}$",
+     "tex": "$f(x) = 6x^4 - 5x^3 + 4x^2 - 6x - 1$",
      "origen": "respuesta"
+    },
+    {
+     "tex": "$f(x) = 2x^7 - \\dfrac{3}{x^5} + x^2 - 10$",
+     "origen": "respuesta"
+    },
+    {
+     "tex": "$f(x) = -3x^4 + 5x^2 - 7x + 10$",
+     "origen": "extra"
     },
     {
      "tex": "$f(x) = -\\dfrac{3}{x^6} - 4x^3 + \\dfrac{2}{x^4} - 11$",
      "origen": "extra"
+    }
+   ],
+   [
+    {
+     "tex": "$f(x) = -2x^7 + 4x^5 - 3x^2 + 8x - 6$",
+     "origen": "respuesta"
+    },
+    {
+     "tex": "$f(x) = 3x^4 - 2x + \\dfrac{5}{x^2} - 7$",
+     "origen": "respuesta"
     },
     {
      "tex": "$f(x) = 10x^3 - 7x^2 + 6x - 12$",
      "origen": "extra"
+    },
+    {
+     "tex": "$f(x) = 7x^5 - \\dfrac{4}{x^3} + 2x - 9$",
+     "origen": "extra"
     }
    ],
    [
+    {
+     "tex": "$f(x) = 7x^4 - x^3 + 5x^2 - 9x + 3$",
+     "origen": "respuesta"
+    },
     {
      "tex": "$f(x) = -x^5 + \\dfrac{1}{x^4} + 6x - 12$",
      "origen": "respuesta"
@@ -88,15 +114,15 @@
      "origen": "extra"
     },
     {
-     "tex": "$f(x) = -\\dfrac{8}{x^3} + \\dfrac{5}{x^6} - \\dfrac{2}{x^2}$",
+     "tex": "$f(x) = -5x^4 + \\dfrac{6}{x^3} - 3x + 8$",
      "origen": "extra"
     }
    ]
   ],
   "info": {
-   "modo": "cruzado",
+   "modo": "por bloque",
    "falta": 0,
-   "r_disp": 16,
+   "r_disp": 18,
    "e_disp": 12
   }
  },

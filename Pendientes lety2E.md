@@ -63,7 +63,8 @@ exámenes.md` §13b. Queda para Lety:
 
 - **Revisar el reparto y los ejercicios nuevos** (§13b) y decir si algún tema sube o baja
   de 1+2 a 1+1: es cambiar su receta en `banco.py` y correr `seleccion.py` →
-  `resoluciones.py` → `generar.py` → `sitio.py` (→ `pdf.py`).
+  `resoluciones.py` → `generar.py` → `sitio.py` (→ `pdf.py`). Reglas básicas ya lo decidió
+  ella (2+2, la noche del 21-sep); faltan los otros 18.
 - **Imprimir una hoja de cada examen** y mirarla en papel, como con Mate 1.
 - **El extra $-4x^3 + 88x^2$ de Puntos críticos** (así viene del doc) da $x = 44/3$; quedó
   en extra 2. Si es errata de $8x^2$, corregirlo en la página.
