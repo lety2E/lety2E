@@ -308,9 +308,9 @@
   "titulo": "Derivadas de raíces",
   "archivo": "raices.html",
   "receta": [
-   "cruzado",
+   "por bloque",
    1,
-   2
+   1
   ],
   "versiones": [
    [
@@ -319,25 +319,23 @@
      "origen": "respuesta"
     },
     {
-     "tex": "$f(x) = \\dfrac{-1}{5\\sqrt[3]{x^2}}$",
-     "origen": "extra"
-    },
-    {
-     "tex": "$f(x) = \\dfrac{-8}{2\\sqrt{x^3}}$",
-     "origen": "extra"
-    }
-   ],
-   [
-    {
-     "tex": "$f(x) = \\dfrac{-2}{6\\sqrt[3]{x^4}}$",
+     "tex": "$f(x) = 8\\sqrt[3]{x^2}$",
      "origen": "respuesta"
     },
     {
-     "tex": "$f(x) = -3\\sqrt[5]{x^4}$",
-     "origen": "extra"
+     "tex": "$f(x) = \\dfrac{-4}{6\\sqrt[5]{x^3}}$",
+     "origen": "respuesta"
     },
     {
      "tex": "$f(x) = 10\\sqrt{x^7}$",
+     "origen": "extra"
+    },
+    {
+     "tex": "$f(x) = 4\\sqrt[3]{x}$",
+     "origen": "extra"
+    },
+    {
+     "tex": "$f(x) = \\dfrac{-4}{8\\sqrt[5]{x^2}}$",
      "origen": "extra"
     }
    ],
@@ -347,35 +345,19 @@
      "origen": "respuesta"
     },
     {
-     "tex": "$f(x) = \\dfrac{5}{10\\sqrt[4]{x^3}}$",
-     "origen": "extra"
-    },
-    {
-     "tex": "$f(x) = \\dfrac{-3}{6\\sqrt[3]{x^5}}$",
-     "origen": "extra"
-    }
-   ],
-   [
-    {
-     "tex": "$f(x) = \\dfrac{-6}{4\\sqrt[3]{x^2}}$",
+     "tex": "$f(x) = -2\\sqrt[5]{x^3}$",
      "origen": "respuesta"
     },
     {
-     "tex": "$f(x) = 12\\sqrt[6]{x^5}$",
-     "origen": "extra"
+     "tex": "$f(x) = \\dfrac{8}{12\\sqrt{x}}$",
+     "origen": "respuesta"
     },
     {
      "tex": "$f(x) = -6\\sqrt[4]{x^9}$",
      "origen": "extra"
-    }
-   ],
-   [
-    {
-     "tex": "$f(x) = 7\\sqrt[4]{x}$",
-     "origen": "respuesta"
     },
     {
-     "tex": "$f(x) = \\dfrac{-4}{8\\sqrt[5]{x^2}}$",
+     "tex": "$f(x) = 2\\sqrt[3]{x^2}$",
      "origen": "extra"
     },
     {
@@ -385,24 +367,114 @@
    ],
    [
     {
+     "tex": "$f(x) = -4\\sqrt[4]{x^5}$",
+     "origen": "respuesta"
+    },
+    {
+     "tex": "$f(x) = 6\\sqrt{x}$",
+     "origen": "respuesta"
+    },
+    {
+     "tex": "$f(x) = \\dfrac{-2}{6\\sqrt[3]{x^4}}$",
+     "origen": "respuesta"
+    },
+    {
+     "tex": "$f(x) = -7\\sqrt{x^3}$",
+     "origen": "extra"
+    },
+    {
+     "tex": "$f(x) = -5\\sqrt[6]{x}$",
+     "origen": "extra"
+    },
+    {
+     "tex": "$f(x) = \\dfrac{-1}{5\\sqrt[3]{x^2}}$",
+     "origen": "extra"
+    }
+   ],
+   [
+    {
+     "tex": "$f(x) = 3\\sqrt[3]{x^5}$",
+     "origen": "respuesta"
+    },
+    {
+     "tex": "$f(x) = -6\\sqrt[4]{x^3}$",
+     "origen": "respuesta"
+    },
+    {
+     "tex": "$f(x) = \\dfrac{-6}{4\\sqrt[3]{x^2}}$",
+     "origen": "respuesta"
+    },
+    {
+     "tex": "$f(x) = -9\\sqrt[5]{x^8}$",
+     "origen": "extra"
+    },
+    {
+     "tex": "$f(x) = 10\\sqrt[5]{x}$",
+     "origen": "extra"
+    },
+    {
+     "tex": "$f(x) = \\dfrac{-8}{2\\sqrt{x^3}}$",
+     "origen": "extra"
+    }
+   ],
+   [
+    {
+     "tex": "$f(x) = -2\\sqrt[5]{x^7}$",
+     "origen": "respuesta"
+    },
+    {
+     "tex": "$f(x) = 7\\sqrt[4]{x}$",
+     "origen": "respuesta"
+    },
+    {
      "tex": "$f(x) = \\dfrac{-3}{9\\sqrt{x^3}}$",
      "origen": "respuesta"
     },
     {
-     "tex": "$f(x) = 4\\sqrt[3]{x}$",
+     "tex": "$f(x) = -8\\sqrt[3]{x^7}$",
      "origen": "extra"
     },
     {
-     "tex": "$f(x) = -7\\sqrt{x^3}$",
+     "tex": "$f(x) = -3\\sqrt[5]{x^4}$",
+     "origen": "extra"
+    },
+    {
+     "tex": "$f(x) = \\dfrac{5}{10\\sqrt[4]{x^3}}$",
+     "origen": "extra"
+    }
+   ],
+   [
+    {
+     "tex": "$f(x) = 8\\sqrt[4]{x^7}$",
+     "origen": "respuesta"
+    },
+    {
+     "tex": "$f(x) = -9\\sqrt[5]{x^2}$",
+     "origen": "respuesta"
+    },
+    {
+     "tex": "$f(x) = \\dfrac{-10}{5\\sqrt[4]{x}}$",
+     "origen": "respuesta"
+    },
+    {
+     "tex": "$f(x) = -3\\sqrt[6]{x^7}$",
+     "origen": "extra"
+    },
+    {
+     "tex": "$f(x) = 12\\sqrt[6]{x^5}$",
+     "origen": "extra"
+    },
+    {
+     "tex": "$f(x) = \\dfrac{-3}{6\\sqrt[3]{x^5}}$",
      "origen": "extra"
     }
    ]
   ],
   "info": {
-   "modo": "cruzado",
+   "modo": "por bloque",
    "falta": 0,
-   "r_disp": 12,
-   "e_disp": 12
+   "r_disp": 18,
+   "e_disp": 18
   }
  },
  {

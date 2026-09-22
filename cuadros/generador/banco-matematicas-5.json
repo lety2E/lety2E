@@ -290,9 +290,9 @@
   "archivo": "raices.html",
   "titulo": "Derivadas de raíces",
   "receta": [
-   "cruzado",
+   "por bloque",
    1,
-   2
+   1
   ],
   "con_respuesta": [
    [
@@ -304,6 +304,23 @@
      {
       "tex": "$f(x) = -5\\sqrt{x^3}$"
      },
+     {
+      "tex": "$f(x) = -4\\sqrt[4]{x^5}$"
+     },
+     {
+      "tex": "$f(x) = 3\\sqrt[3]{x^5}$"
+     },
+     {
+      "tex": "$f(x) = -2\\sqrt[5]{x^7}$"
+     },
+     {
+      "tex": "$f(x) = 8\\sqrt[4]{x^7}$"
+     }
+    ]
+   ],
+   [
+    "Bloque 2",
+    [
      {
       "tex": "$f(x) = 7\\sqrt[4]{x}$"
      },
@@ -320,12 +337,12 @@
       "tex": "$f(x) = 6\\sqrt{x}$"
      },
      {
-      "tex": "$f(x) = -4\\sqrt[4]{x^5}$"
+      "tex": "$f(x) = -6\\sqrt[4]{x^3}$"
      }
     ]
    ],
    [
-    "Bloque 2",
+    "Bloque 3",
     [
      {
       "tex": "$f(x) = \\dfrac{-2}{6\\sqrt[3]{x^4}}$"
@@ -338,6 +355,12 @@
      },
      {
       "tex": "$f(x) = \\dfrac{-10}{5\\sqrt[4]{x}}$"
+     },
+     {
+      "tex": "$f(x) = \\dfrac{-4}{6\\sqrt[5]{x^3}}$"
+     },
+     {
+      "tex": "$f(x) = \\dfrac{8}{12\\sqrt{x}}$"
      }
     ]
    ]
@@ -347,27 +370,50 @@
     "Bloque A",
     [
      {
-      "tex": "$f(x) = -3\\sqrt[5]{x^4}$"
-     },
-     {
       "tex": "$f(x) = 10\\sqrt{x^7}$"
-     },
-     {
-      "tex": "$f(x) = 12\\sqrt[6]{x^5}$"
      },
      {
       "tex": "$f(x) = -6\\sqrt[4]{x^9}$"
      },
      {
-      "tex": "$f(x) = 4\\sqrt[3]{x}$"
+      "tex": "$f(x) = -7\\sqrt{x^3}$"
      },
      {
-      "tex": "$f(x) = -7\\sqrt{x^3}$"
+      "tex": "$f(x) = -9\\sqrt[5]{x^8}$"
+     },
+     {
+      "tex": "$f(x) = -8\\sqrt[3]{x^7}$"
+     },
+     {
+      "tex": "$f(x) = -3\\sqrt[6]{x^7}$"
      }
     ]
    ],
    [
     "Bloque B",
+    [
+     {
+      "tex": "$f(x) = -3\\sqrt[5]{x^4}$"
+     },
+     {
+      "tex": "$f(x) = 12\\sqrt[6]{x^5}$"
+     },
+     {
+      "tex": "$f(x) = 4\\sqrt[3]{x}$"
+     },
+     {
+      "tex": "$f(x) = 2\\sqrt[3]{x^2}$"
+     },
+     {
+      "tex": "$f(x) = -5\\sqrt[6]{x}$"
+     },
+     {
+      "tex": "$f(x) = 10\\sqrt[5]{x}$"
+     }
+    ]
+   ],
+   [
+    "Bloque C",
     [
      {
       "tex": "$f(x) = \\dfrac{-1}{5\\sqrt[3]{x^2}}$"

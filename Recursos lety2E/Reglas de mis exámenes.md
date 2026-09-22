@@ -345,9 +345,9 @@ Matemáticas 5 (versiones g-l).pdf` en `~/Downloads`, una versión por hoja.
 | Tema | Tipos (Bloque 1 ↔ A, 2 ↔ B, 3 ↔ C) | Por versión | Escrito el 21-sep |
 |---|---|---|---|
 | 1 Reglas básicas | polinomios · con $x$ en el denominador (B3 y extra 2: práctica) | **2+2, decidido por Lety** | 2 resueltos, 12 extras |
-| 2 Velocidad media | parábola hacia arriba · hacia abajo | 1+1 | 2 resueltos |
+| 2 Velocidad media | parábola hacia arriba · hacia abajo | 1+1, **visto por Lety: se queda** | 2 resueltos |
 | 3 Senos y cosenos | un bloque de 6 resueltos; extra 1 con dos bloques de 6 **igual de largos** | **1+2, decidido por Lety** | 1 resuelto, 12 extras |
-| 4 Raíces | raíz simple · fracción con raíz | 1+2 | 3 extras |
+| 4 Raíces | exponente mayor que el índice · menor · fracción con raíz abajo (un bloque de 6 por tipo, en los dos lados) | **3+3, decidido por Lety** | 6 resueltos, 6 extras |
 | 5 Producto P1 | — | 1+2 | — |
 | 6 Producto P2 | — | 1+2 | — |
 | 7 Cociente P1 | — | 1+2 | — |
@@ -389,6 +389,19 @@ escribieron **12 extras largos** (la misma forma que los resueltos: trigonométr
 polinomio, $\ln$, $e^x$, $a^x$, $ax$ y constante) repartidos en **Bloque A y Bloque B** de 6;
 los 12 cortos que había pasaron a extra 2 (repaso). Receta `('por bloque', 1, 1)`: uno del
 bloque resuelto y uno de cada bloque de extras. Examen 1 sube al 90 % de la hoja.
+
+**Raíces lo decidió Lety** (22-sep-2026): *"podría haber 3 bloques de 6 en los ejercicios
+resueltos de los tres tipos y la misma cantidad de extras"*. Los tres tipos, en el orden de
+los Ejemplos de la página: **1** exponente mayor que el índice ($-6\sqrt[3]{x^4}$), **2**
+menor ($5\sqrt[4]{x}$), **3** fracción con la raíz en el denominador
+($\frac{-5}{6\sqrt[3]{x^2}}$). Ejercicios B1, B2, B3 y extra 1 A, B, C, seis cada uno;
+*extra 2* desapareció porque los 18 extras entran. Se escribieron 6 resueltos ($3\sqrt[3]{x^5}$,
+$-2\sqrt[5]{x^7}$, $8\sqrt[4]{x^7}$, $-6\sqrt[4]{x^3}$, $\frac{-4}{6\sqrt[5]{x^3}}$,
+$\frac{8}{12\sqrt{x}}$) y 3 extras ($-3\sqrt[6]{x^7}$, $-5\sqrt[6]{x}$, $10\sqrt[5]{x}$).
+El conteo por versión no lo dijo; siguiendo su patrón (un bloque de 6 = uno por versión)
+cada versión lleva **uno de cada bloque: 3 resueltos + 3 extras**, receta `('por bloque', 1,
+1)`. En la hoja va a dos columnas y queda alineado por tipo: a la izquierda los resueltos y
+a la derecha los extras. Examen 1 sigue al 90 %.
 
 Los ejercicios nuevos, por si Lety quiere cambiar alguno: Velocidad $x(t) = 2t^2
 - 6t$ y $x(t) = 12t - 3t^2$; Senos $f(x) = 6\tan x - \frac{2}{x^5} + 5\,\mathrm{sen}\,x -

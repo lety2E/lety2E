@@ -72,7 +72,8 @@ EXAMENES = {
        ['Derivadas de senos y cosenos'],
        [('Reglas básicas de derivación', 2), 'Regla del producto (P1)'],
        ['Regla del cociente (P1)', 'Regla del cociente (P2)', 'Regla del producto (P2)'],
-       ['Regla de la cadena (P1)', 'Regla de la cadena (P2)', 'Derivadas de raíces'],
+       # Raíces lleva 6 cortos: a dos columnas dentro de su tarjeta
+       ['Regla de la cadena (P1)', 'Regla de la cadena (P2)', ('Derivadas de raíces', 1, 2)],
      ],
    },
    {

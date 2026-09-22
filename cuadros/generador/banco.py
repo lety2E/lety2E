@@ -93,8 +93,10 @@ CURSOS = {
     # Lety (22-sep-2026): los 6 resueltos en un bloque y dos bloques de 6 extras
     # igual de largos. Cada versión: 1 resuelto + 1 de cada bloque de extra 1 = 3.
     ('senos-cosenos.html',         'Derivadas de senos y cosenos',    ('por bloque', 1, 1)),
-    # B1 raíz simple, B2 fracción con raíz en el denominador
-    ('raices.html',                'Derivadas de raíces',             ('cruzado', 1, 2)),
+    # Lety (22-sep-2026): tres tipos, un bloque de 6 por tipo en los dos lados
+    # (1 exponente mayor que el índice, 2 menor, 3 fracción con la raíz abajo).
+    # Cada versión: uno de cada bloque = 3 resueltos + 3 extras.
+    ('raices.html',                'Derivadas de raíces',             ('por bloque', 1, 1)),
     ('regla-producto-p1.html',     'Regla del producto (P1)',         ('cruzado', 1, 2)),
     ('regla-producto-p2.html',     'Regla del producto (P2)',         ('cruzado', 1, 2)),
     ('regla-cociente-p1.html',     'Regla del cociente (P1)',         ('cruzado', 1, 2)),

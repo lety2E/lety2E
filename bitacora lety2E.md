@@ -69,6 +69,12 @@ y verificadas con sympy—; los 12 cortos que había bajaron a extra 2. El exame
 resuelto + 2 extras**, uno de cada bloque (`('por bloque', 1, 1)`). Examen 1 al 90 % de la
 hoja; resueltas 306 de 306.
 
+**Velocidad media la vio y se queda.** **Raíces** (tema 4), decidido por Lety: tres bloques de
+6 por lado, uno por tipo (exponente mayor que el índice, menor, fracción con la raíz abajo,
+el orden de sus Ejemplos). Se escribieron 6 resueltos con su resolución en el formato de la
+página y 3 extras; los 18 extras entran, así que *extra 2* se quitó. Cada versión lleva uno de
+cada bloque (3 + 3), en dos columnas alineadas por tipo. Resueltas 324 de 324.
+
 Verificado: las 19 páginas a 390×844 sin cards desbordadas ni errores de KaTeX; las 12
 versiones en el navegador y en PDF. **Ojo** para Lety: el extra $-4x^3 + 88x^2$ de Puntos
 críticos (así viene del doc) quedó en extra 2 por si es errata de $8x^2$.
