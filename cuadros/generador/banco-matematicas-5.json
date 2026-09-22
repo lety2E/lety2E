@@ -605,13 +605,13 @@
   "archivo": "regla-cociente-p1.html",
   "titulo": "Regla del cociente (P1)",
   "receta": [
-   "por bloque",
+   "cruzado",
    1,
    1
   ],
   "con_respuesta": [
    [
-    "Bloque único",
+    "Bloque 1",
     [
      {
       "tex": "$f(x) = \\dfrac{4x^2 - 5x}{6x^2 + 3}$"
@@ -621,7 +621,12 @@
      },
      {
       "tex": "$f(x) = \\dfrac{2x^3 + 4x}{5x^3 - 1}$"
-     },
+     }
+    ]
+   ],
+   [
+    "Bloque 2",
+    [
      {
       "tex": "$f(x) = \\dfrac{x^5 - 6x^2}{2x^3 + 4x}$"
      },
@@ -642,6 +647,17 @@
       "tex": "$f(x) = \\dfrac{7x^2 - 4x}{5x + 2}$"
      },
      {
+      "tex": "$f(x) = \\dfrac{6x^3 - 2x}{4x^2 + 5}$"
+     },
+     {
+      "tex": "$f(x) = \\dfrac{2x^5 - 4x^2}{5x^3 + 6}$"
+     }
+    ]
+   ],
+   [
+    "Bloque B",
+    [
+     {
       "tex": "$g(x) = \\dfrac{-8x^2 - 3x}{x - 2x^3}$"
      },
      {
@@ -649,12 +665,6 @@
      },
      {
       "tex": "$h(x) = \\dfrac{3x^2 - 5}{8x + 5x^2}$"
-     },
-     {
-      "tex": "$g(x) = \\dfrac{7x^2 - 5x}{6x + 10x^3}$"
-     },
-     {
-      "tex": "$h(x) = \\dfrac{4 - 8x^2}{7x + x^2}$"
      }
     ]
    ]

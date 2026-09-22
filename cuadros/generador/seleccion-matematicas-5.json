@@ -659,7 +659,7 @@
   "titulo": "Regla del cociente (P1)",
   "archivo": "regla-cociente-p1.html",
   "receta": [
-   "por bloque",
+   "cruzado",
    1,
    1
   ],
@@ -670,27 +670,7 @@
      "origen": "respuesta"
     },
     {
-     "tex": "$h(x) = \\dfrac{4x^2 - 5}{7x + 2x^3}$",
-     "origen": "extra"
-    }
-   ],
-   [
-    {
-     "tex": "$f(x) = \\dfrac{5x^4 - 2x}{3x^2 + 8}$",
-     "origen": "respuesta"
-    },
-    {
-     "tex": "$h(x) = \\dfrac{3x^2 - 5}{8x + 5x^2}$",
-     "origen": "extra"
-    }
-   ],
-   [
-    {
-     "tex": "$f(x) = \\dfrac{2x^3 + 4x}{5x^3 - 1}$",
-     "origen": "respuesta"
-    },
-    {
-     "tex": "$g(x) = \\dfrac{7x^2 - 5x}{6x + 10x^3}$",
+     "tex": "$g(x) = \\dfrac{-8x^2 - 3x}{x - 2x^3}$",
      "origen": "extra"
     }
    ],
@@ -700,7 +680,17 @@
      "origen": "respuesta"
     },
     {
-     "tex": "$h(x) = \\dfrac{4 - 8x^2}{7x + x^2}$",
+     "tex": "$f(x) = \\dfrac{7x^2 - 4x}{5x + 2}$",
+     "origen": "extra"
+    }
+   ],
+   [
+    {
+     "tex": "$f(x) = \\dfrac{5x^4 - 2x}{3x^2 + 8}$",
+     "origen": "respuesta"
+    },
+    {
+     "tex": "$h(x) = \\dfrac{4x^2 - 5}{7x + 2x^3}$",
      "origen": "extra"
     }
    ],
@@ -710,7 +700,17 @@
      "origen": "respuesta"
     },
     {
-     "tex": "$f(x) = \\dfrac{7x^2 - 4x}{5x + 2}$",
+     "tex": "$f(x) = \\dfrac{6x^3 - 2x}{4x^2 + 5}$",
+     "origen": "extra"
+    }
+   ],
+   [
+    {
+     "tex": "$f(x) = \\dfrac{2x^3 + 4x}{5x^3 - 1}$",
+     "origen": "respuesta"
+    },
+    {
+     "tex": "$h(x) = \\dfrac{3x^2 - 5}{8x + 5x^2}$",
      "origen": "extra"
     }
    ],
@@ -720,13 +720,13 @@
      "origen": "respuesta"
     },
     {
-     "tex": "$g(x) = \\dfrac{-8x^2 - 3x}{x - 2x^3}$",
+     "tex": "$f(x) = \\dfrac{2x^5 - 4x^2}{5x^3 + 6}$",
      "origen": "extra"
     }
    ]
   ],
   "info": {
-   "modo": "por bloque",
+   "modo": "cruzado",
    "falta": 0,
    "r_disp": 6,
    "e_disp": 6

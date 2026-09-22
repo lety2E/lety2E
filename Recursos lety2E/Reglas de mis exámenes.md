@@ -350,7 +350,7 @@ Matemáticas 5 (versiones g-l).pdf` en `~/Downloads`, una versión por hoja.
 | 4 Raíces | exponente mayor que el índice · menor · fracción con raíz abajo (un bloque de 6 por tipo, en los dos lados) | **3+3, decidido por Lety** | 6 resueltos, 6 extras |
 | 5 Producto P1 | un bloque de 6 resueltos · un bloque de 6 en extra 1 (el otro, a extra 2) | **1+1, decidido por Lety** | — |
 | 6 Producto P2 | — | 1+2 | — |
-| 7 Cociente P1 | como Producto P1 (extra 2 con los otros dos bloques) | **1+1, decidido por Lety** | — |
+| 7 Cociente P1 | denominador con número suelto · sin él (Bloque 1 ↔ A, 2 ↔ B, 3 y 3) | **1+1 cruzado, decidido por Lety** | — |
 | 8 Cociente P2 | cociente simple · con sumas (B3 práctica) | 1+2 | — |
 | 9 Cadena P1 | cubos · cuadrados · raíces | 1+2 (Lety lo está pensando) | — |
 | 10 Cadena P2 | raíz de potencia trig y trig de polinomio · ln y potencia de trig | 1+2 | — |
@@ -410,6 +410,14 @@ examen, y los otros a extras 2"*. Así quedaron los dos: Ejercicios en un **Bloq
 6, extra 1 con **un bloque de 6** y el resto en extra 2; receta `('por bloque', 1, 1)` = 2 por
 versión. Primero dijo *"igual para regla de cociente y de la cadena parte 1"* y enseguida
 *"espérame para la cadena P1"*: Cadena P1 se quedó como estaba hasta que decida.
+**Cociente P1 se afinó**: Lety notó que tiene **dos tipos** —el denominador **con número
+suelto** ($\frac{4x^2-5x}{6x^2+3}$) o **sin él** ($\frac{x^5-6x^2}{2x^3+4x}$)— y pidió *"dos
+bloques, bloque 1 de 3 ejercicios resueltos, bloque 2 de 3, y bloques extras A y B igual, y
+en el examen tomar del bloque 1 y B, que son de diferente tipo, y del bloque 2 y A, para que
+se mezclen"*. Es el **cruzado** de Mate 1: receta `('cruzado', 1, 1)`, las versiones a, c, e
+llevan 1 + B y las b, d, f llevan 2 + A. Extra 2 quedó por tipo: C (con número suelto) y D, E,
+F (sin él), 3 cada uno. Las respuestas de la página van a todo lo ancho: en dos columnas el
+sitio encogía la letra de las más largas.
 
 Los ejercicios nuevos, por si Lety quiere cambiar alguno: Velocidad $x(t) = 2t^2
 - 6t$ y $x(t) = 12t - 3t^2$; Senos $f(x) = 6\tan x - \frac{2}{x^5} + 5\,\mathrm{sen}\,x -

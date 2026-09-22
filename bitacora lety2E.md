@@ -78,7 +78,9 @@ cada bloque (3 + 3), en dos columnas alineadas por tipo. Resueltas 324 de 324.
 **Producto P1 y Cociente P1**, decididos por Lety (*"es más proceso"*): 2 por versión, 1
 resuelto + 1 extra. Ejercicios en un Bloque único de 6, extra 1 con un bloque de 6 y lo demás
 a extra 2 (se movió lo que había, no se escribió nada). Cadena P1 quedó como estaba: Lety la
-está pensando. Resueltas 312 de 312.
+está pensando. Resueltas 312 de 312. Luego **Cociente P1 se partió por tipo** (denominador
+con número suelto o sin él): Bloque 1/2 y A/B de 3, y el examen cruza 1 con B y 2 con A, como
+Gráfica con tabulación en Mate 1; sus respuestas van a todo lo ancho.
 
 Verificado: las 19 páginas a 390×844 sin cards desbordadas ni errores de KaTeX; las 12
 versiones en el navegador y en PDF. **Ojo** para Lety: el extra $-4x^3 + 88x^2$ de Puntos
