@@ -55,29 +55,6 @@
       "tex": "$f(x) = 2x^7 - 10 + \\dfrac{8}{x^3} + 4x - \\dfrac{3}{x^5}$"
      }
     ]
-   ],
-   [
-    "Bloque 3",
-    [
-     {
-      "tex": "$f(x) = \\dfrac{5}{x^2} + \\dfrac{3}{x^4} - \\dfrac{2}{x^7}$"
-     },
-     {
-      "tex": "$f(x) = -\\dfrac{6}{x^4} - \\dfrac{3}{x^5} + \\dfrac{7}{x^2}$"
-     },
-     {
-      "tex": "$f(x) = -\\dfrac{1}{x^6} + \\dfrac{4}{x^3} - \\dfrac{2}{x^5}$"
-     },
-     {
-      "tex": "$f(x) = -\\dfrac{2}{x^8} - \\dfrac{3}{x^5} + \\dfrac{8}{x^4}$"
-     },
-     {
-      "tex": "$f(x) = \\dfrac{8}{x} - 5 + 4x^4 - \\dfrac{2}{x^4} - 6x$"
-     },
-     {
-      "tex": "$f(x) = 3x^5 - 7x + 1 - \\dfrac{2}{x^6} + \\dfrac{5}{x^3}$"
-     }
-    ]
    ]
   ],
   "extras": [
@@ -571,7 +548,7 @@
       "tex": "$f(x) = 2^x \\cos x$"
      },
      {
-      "tex": "$f(x) = 3 \\operatorname{sen} x \\, 4^x$"
+      "tex": "$f(x) = 4^x \\operatorname{sen} x$"
      },
      {
       "tex": "$f(x) = \\cos x \\ln x$"

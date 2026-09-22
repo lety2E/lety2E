@@ -97,7 +97,9 @@ donde no había, se escribe una tanda por tipo. Hecho en Raíces y Producto P2 (
 harán al revisarlos. Dos ajustes más de Lety: en **Senos** el término lineal va sólo como $ax$
 con $a$ entero (el $-\frac{x}{2}$ de un resuelto, el único del curso, quedó $-3x$ con su
 respuesta), y el **Bloque 4** de práctica de Producto P2 **bajó a extra 2** por tipo, porque el
-banco es resueltos + extra 1.
+banco es resueltos + extra 1. Lo mismo el **Bloque 3 de Reglas básicas** (sus 6 bajaron a extra 2
+por tipo). Y en Producto P2 la función trascendente va al final: $4^x\,\mathrm{sen}\,x$ en vez de
+$3\,\mathrm{sen}\,x\,4^x$ (con su resolución) y $7e^x\,\mathrm{sen}\,x$.
 
 Verificado: las 19 páginas a 390×844 sin cards desbordadas ni errores de KaTeX; las 12
 versiones en el navegador y en PDF. **Ojo** para Lety: el extra $-4x^3 + 88x^2$ de Puntos

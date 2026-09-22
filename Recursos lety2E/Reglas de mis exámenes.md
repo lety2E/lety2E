@@ -379,7 +379,7 @@ Matemáticas 5 (versiones g-l).pdf` en `~/Downloads`, una versión por hoja.
 
 | Tema | Tipos (Bloque 1 ↔ A, 2 ↔ B, 3 ↔ C) | Por versión | Escrito el 21-sep |
 |---|---|---|---|
-| 1 Reglas básicas | polinomios · con $x$ en el denominador (B3 y extra 2: práctica) | **2+2, decidido por Lety** | 2 resueltos, 12 extras |
+| 1 Reglas básicas | polinomios · con $x$ en el denominador (los de sólo $x$ en el denominador, en extra 2) | **2+2, decidido por Lety** | 2 resueltos, 12 extras |
 | 2 Velocidad media | parábola hacia arriba · hacia abajo | 1+1, **visto por Lety: se queda** | 2 resueltos |
 | 3 Senos y cosenos | un bloque de 6 resueltos; extra 1 con dos bloques de 6 **igual de largos**; el término lineal sólo $ax$ con $a$ entero | **1+2, decidido por Lety** | 1 resuelto, 12 extras |
 | 4 Raíces | exponente mayor que el índice · menor · fracción con raíz abajo (un bloque de 6 por tipo, en los dos lados) | **3+3, decidido por Lety** | 6 resueltos, 6 extras |
@@ -474,7 +474,13 @@ extras por tipo** (Bloque 1/A, 2/B, 3/C) y receta `('rotado', 1, 2)` — cada ve
 resuelto de un tipo y los dos extras de los otros dos. No se escribió nada: los extras ya eran
 4 por tipo; de resueltos había 3, 3 y 4. Los 4 que sobraban primero quedaron en un Bloque 4
 de práctica resuelta, y Lety lo corrigió con su regla: el banco es resueltos + extra 1, así que
-**bajaron a extra 2**, cada uno en el bloque de su tipo y sin respuesta.
+**bajaron a extra 2**, cada uno en el bloque de su tipo y sin respuesta. Con la misma regla, el
+**Bloque 3 de práctica resuelta de Reglas básicas** también bajó a extra 2: los 4 de sólo $x$
+en el denominador al Bloque C y los 2 mixtos al Bloque E. Y en Producto P2 **la función
+trascendente va al final**, como en los Ejemplos de Lety ($5x^3\cos x$): $3\,\mathrm{sen}\,x\,4^x$
+se leía como si el $4^x$ fuera del argumento del seno y quedó $4^x\,\mathrm{sen}\,x$ (como
+$2^x\cos x$), y $7\,\mathrm{sen}\,x\,e^x$ quedó $7e^x\,\mathrm{sen}\,x$. Lety: *"con esos
+cambios se ve más el patrón"*.
 
 Los ejercicios nuevos, por si Lety quiere cambiar alguno: Velocidad $x(t) = 2t^2
 - 6t$ y $x(t) = 12t - 3t^2$; Senos $f(x) = 6\tan x - \frac{2}{x^5} + 5\,\mathrm{sen}\,x -
