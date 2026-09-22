@@ -372,6 +372,12 @@ Ejercicios B1 = 6 polinomios y B2 = 6 con $x$ en el denominador (B3 = práctica 
 los 4 de sólo $x$ en el denominador + 2 mixtos); extra 1 A = 6 polinomios y B = 6 mixtos;
 extra 2 C = sólo $x$ en el denominador, D y E = repaso de cada tipo. Cada versión: uno de
 cada bloque, receta `('por bloque', 1, 1, 2, 2)`. Examen 1 sube al 86 % de la hoja.
+**Y la forma de los mixtos** (22-sep-2026): *"en las que tienen x en el denominador, que
+tenga al menos una de $ax^n$, $ax^{-n}$, $ax$ y $a$"* — cada ejercicio con $x$ en el
+denominador trae un término de cada forma. Se ajustaron los siete que no cumplían (un
+resuelto que entra, uno de práctica, cuatro extras que entran y uno de repaso), con su
+resolución. Los de *sólo* $x$ en el denominador (B3 y extra 2 C) son otro tipo y no
+llevan la regla.
 
 Los ejercicios nuevos, por si Lety quiere cambiar alguno: Velocidad $x(t) = 2t^2
 - 6t$ y $x(t) = 12t - 3t^2$; Senos $f(x) = 6\tan x - \frac{2}{x^5} + 5\,\mathrm{sen}\,x -
