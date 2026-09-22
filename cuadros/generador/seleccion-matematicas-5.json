@@ -3,7 +3,7 @@
   "titulo": "Reglas básicas de derivación",
   "archivo": "reglas-basicas.html",
   "receta": [
-   "ejercicios",
+   "cruzado",
    1,
    2
   ],
@@ -14,7 +14,63 @@
      "origen": "respuesta"
     },
     {
+     "tex": "$f(x) = \\dfrac{7}{x^3} - \\dfrac{2}{x^6} + \\dfrac{4}{x}$",
+     "origen": "extra"
+    },
+    {
+     "tex": "$f(x) = \\dfrac{1}{x^{10}} + \\dfrac{1}{x^2} - 6x^4$",
+     "origen": "extra"
+    }
+   ],
+   [
+    {
+     "tex": "$f(x) = \\dfrac{5}{x^2} + \\dfrac{3}{x^4} - \\dfrac{2}{x^7}$",
+     "origen": "respuesta"
+    },
+    {
+     "tex": "$f(x) = 2x^7 - 3x^4 + \\dfrac{5}{x^3} + 12$",
+     "origen": "extra"
+    },
+    {
+     "tex": "$f(x) = 8x^5 - 4x^3 + 2x^2 - 9$",
+     "origen": "extra"
+    }
+   ],
+   [
+    {
+     "tex": "$f(x) = 3x^4 - 2x + \\dfrac{5}{x^2} - 7$",
+     "origen": "respuesta"
+    },
+    {
      "tex": "$f(x) = -3x^4 + 5x^2 - 7x + 10$",
+     "origen": "extra"
+    },
+    {
+     "tex": "$f(x) = -\\dfrac{5}{x^7} + \\dfrac{3}{x^2} - \\dfrac{1}{x^5}$",
+     "origen": "extra"
+    }
+   ],
+   [
+    {
+     "tex": "$f(x) = -4x^8 - 6x^5 + 3x^4 - 2x^3 + x + 2$",
+     "origen": "respuesta"
+    },
+    {
+     "tex": "$f(x) = \\dfrac{4}{x^4} - \\dfrac{3}{x^5} + \\dfrac{9}{x^2}$",
+     "origen": "extra"
+    },
+    {
+     "tex": "$f(x) = -6x^2 + \\dfrac{9}{x^2} - \\dfrac{2}{x^8} + 3$",
+     "origen": "extra"
+    }
+   ],
+   [
+    {
+     "tex": "$f(x) = -\\dfrac{6}{x^4} - \\dfrac{3}{x^5} + \\dfrac{7}{x^2}$",
+     "origen": "respuesta"
+    },
+    {
+     "tex": "$f(x) = -\\dfrac{3}{x^6} - 4x^3 + \\dfrac{2}{x^4} - 11$",
      "origen": "extra"
     },
     {
@@ -24,79 +80,21 @@
    ],
    [
     {
-     "tex": "$f(x) = 8x^5 - 4x^3 + 2x^2 - 9$",
-     "origen": "extra"
-    },
-    {
-     "tex": "$f(x) = -4x^8 - 6x^5 + 3x^4 - 2x^3 + x + 2$",
+     "tex": "$f(x) = -x^5 + \\dfrac{1}{x^4} + 6x - 12$",
      "origen": "respuesta"
     },
-    {
-     "tex": "$f(x) = \\dfrac{4}{x^4} - \\dfrac{3}{x^5} + \\dfrac{9}{x^2}$",
-     "origen": "extra"
-    }
-   ],
-   [
-    {
-     "tex": "$f(x) = \\dfrac{7}{x^3} - \\dfrac{2}{x^6} + \\dfrac{4}{x}$",
-     "origen": "extra"
-    },
-    {
-     "tex": "$f(x) = -\\dfrac{5}{x^7} + \\dfrac{3}{x^2} - \\dfrac{1}{x^5}$",
-     "origen": "extra"
-    },
-    {
-     "tex": "$f(x) = 3x^5 + 2x^4 - 7x^3 + 5x^2 - 4x$",
-     "origen": "respuesta"
-    }
-   ],
-   [
-    {
-     "tex": "$f(x) = \\dfrac{5}{x^2} + \\dfrac{3}{x^4} - \\dfrac{2}{x^7}$",
-     "origen": "respuesta"
-    },
-    {
-     "tex": "$f(x) = \\dfrac{1}{x^{10}} + \\dfrac{1}{x^2} - 6x^4$",
-     "origen": "extra"
-    },
-    {
-     "tex": "$f(x) = 2x^7 - 3x^4 + \\dfrac{5}{x^3} + 12$",
-     "origen": "extra"
-    }
-   ],
-   [
     {
      "tex": "$f(x) = -x^9 + 4x^5 - 2x^3 + x - 5$",
      "origen": "extra"
     },
     {
-     "tex": "$f(x) = -\\dfrac{6}{x^4} - \\dfrac{3}{x^5} + \\dfrac{7}{x^2}$",
-     "origen": "respuesta"
-    },
-    {
-     "tex": "$f(x) = -\\dfrac{3}{x^6} - 4x^3 + \\dfrac{2}{x^4} - 11$",
+     "tex": "$f(x) = -\\dfrac{8}{x^3} + \\dfrac{5}{x^6} - \\dfrac{2}{x^2}$",
      "origen": "extra"
-    }
-   ],
-   [
-    {
-     "tex": "$f(x) = -6x^2 + \\dfrac{9}{x^2} - \\dfrac{2}{x^8} + 3$",
-     "origen": "extra"
-    },
-    {
-     "tex": "$f(x) = 5x^4 - 2x^3 + 7x^2 - 4x + 1$",
-     "origen": "extra"
-    },
-    {
-     "tex": "$f(x) = -\\dfrac{1}{x^6} + \\dfrac{4}{x^3} - \\dfrac{2}{x^5}$",
-     "origen": "respuesta"
     }
    ]
   ],
   "info": {
-   "modo": "ejercicios",
-   "r_uso": 6,
-   "e_uso": 12,
+   "modo": "cruzado",
    "falta": 0,
    "r_disp": 16,
    "e_disp": 12
@@ -106,18 +104,34 @@
   "titulo": "Velocidad media e instantánea",
   "archivo": "velocidad-media.html",
   "receta": [
-   "ejercicios",
+   "cruzado",
    1,
-   2
+   1
   ],
   "versiones": [
    [
     {
-     "tex": "Una partícula se mueve a lo largo de una recta según la ecuación $x(t) = t^2 - 5t$",
+     "tex": "Una partícula se mueve a lo largo de una recta según la ecuación $x(t) = t^2 - 5t$ a) ¿cuál es la posición del móvil cuando $t=1$ , $t=3$ ?b) ¿cuál es la velocidad media en el intervalo $(1, 3)$ ?c) ¿cuál es la velocidad instantánea en $t=1.8$ ?",
      "origen": "respuesta"
     },
     {
-     "tex": "a) ¿cuál es la posición del móvil cuando $t=1$ , $t=3$ ?",
+     "tex": "Una partícula se mueve según $x(t) = 10 + 4t - t^2$ a) ¿cuál es la posición del móvil cuando $t=1$ , $t=5$ ?b) ¿cuál es la velocidad media en el intervalo $(1, 5)$ ?c) ¿cuál es la velocidad instantánea en $t=2.5$ ?",
+     "origen": "extra"
+    }
+   ],
+   [
+    {
+     "tex": "Una partícula se mueve a lo largo de una recta según la ecuación $x(t) = 3 - 2t^2$ a) ¿cuál es la posición del móvil cuando $t=1$ , $t=5$ ?b) ¿cuál es la velocidad media en el intervalo $(1, 5)$ ?c) ¿cuál es la velocidad instantánea en $t=3$ ?",
+     "origen": "respuesta"
+    },
+    {
+     "tex": "Una partícula se mueve según $x(t) = 2t^2 - 8t$ a) ¿cuál es la posición del móvil cuando $t=0$ , $t=4$ ?b) ¿cuál es la velocidad media en el intervalo $(0, 4)$ ?c) ¿cuál es la velocidad instantánea en $t=2$ ?",
+     "origen": "extra"
+    }
+   ],
+   [
+    {
+     "tex": "Una partícula se mueve a lo largo de una recta según la ecuación $x(t) = t^2 + 4t$ a) ¿cuál es la posición del móvil cuando $t=2$ , $t=4$ ?b) ¿cuál es la velocidad media en el intervalo $(2, 4)$ ?c) ¿cuál es la velocidad instantánea en $t=2.5$ ?",
      "origen": "respuesta"
     },
     {
@@ -127,53 +141,7 @@
    ],
    [
     {
-     "tex": "Una partícula se mueve según $x(t) = 2t^2 - 8t$ a) ¿cuál es la posición del móvil cuando $t=0$ , $t=4$ ?b) ¿cuál es la velocidad media en el intervalo $(0, 4)$ ?c) ¿cuál es la velocidad instantánea en $t=2$ ?",
-     "origen": "extra"
-    },
-    {
-     "tex": "a) ¿cuál es la posición del móvil cuando $t=2$ , $t=4$ ?",
-     "origen": "respuesta"
-    },
-    {
-     "tex": "b) ¿cuál es la velocidad media en el intervalo $(1, 3)$ ?",
-     "origen": "respuesta"
-    }
-   ],
-   [
-    {
-     "tex": "Una partícula se mueve a lo largo de una recta según la ecuación $x(t) = t^2 + 4t$",
-     "origen": "respuesta"
-    },
-    {
-     "tex": "Una partícula se mueve según $x(t) = 10 + 4t - t^2$ a) ¿cuál es la posición del móvil cuando $t=1$ , $t=5$ ?b) ¿cuál es la velocidad media en el intervalo $(1, 5)$ ?c) ¿cuál es la velocidad instantánea en $t=2.5$ ?",
-     "origen": "extra"
-    },
-    {
-     "tex": "b) ¿cuál es la velocidad media en el intervalo $(2, 4)$ ?",
-     "origen": "respuesta"
-    }
-   ],
-   [
-    {
-     "tex": "Una partícula se mueve a lo largo de una recta según la ecuación $x(t) = 3 - 2t^2$",
-     "origen": "respuesta"
-    },
-    {
-     "tex": "a) ¿cuál es la posición del móvil cuando $t=1$ , $t=5$ ?",
-     "origen": "respuesta"
-    },
-    {
-     "tex": "Una partícula se mueve según $x(t) = 3t^2 - 12t$ a) ¿cuál es la posición del móvil cuando $t=1$ , $t=4$ ?b) ¿cuál es la velocidad media en el intervalo $(1, 4)$ ?c) ¿cuál es la velocidad instantánea en $t=2.5$ ?",
-     "origen": "extra"
-    }
-   ],
-   [
-    {
-     "tex": "Una partícula se mueve según $x(t) = 20t - 5t^2$ a) ¿cuál es la posición del móvil cuando $t=0$ , $t=2$ ?b) ¿cuál es la velocidad media en el intervalo $(0, 2)$ ?c) ¿cuál es la velocidad instantánea en $t=1$ ?",
-     "origen": "extra"
-    },
-    {
-     "tex": "a) ¿cuál es la posición del móvil cuando $t=2$ , $t=6$ ?",
+     "tex": "Una partícula se mueve a lo largo de una recta según la ecuación $x(t) = 5t - t^2$ a) ¿cuál es la posición del móvil cuando $t=2$ , $t=6$ ?b) ¿cuál es la velocidad media en el intervalo $(2, 6)$ ?c) ¿cuál es la velocidad instantánea en $t=3$ ?",
      "origen": "respuesta"
     },
     {
@@ -183,35 +151,39 @@
    ],
    [
     {
-     "tex": "Una partícula se mueve según $x(t) = 15 + t - t^2$ a) ¿cuál es la posición del móvil cuando $t=1$ , $t=3$ ?b) ¿cuál es la velocidad media en el intervalo $(1, 3)$ ?c) ¿cuál es la velocidad instantánea en $t=2$ ?",
-     "origen": "extra"
-    },
-    {
-     "tex": "Una partícula se mueve según $x(t) = 5 - t^2$ a) ¿cuál es la posición del móvil cuando $t=1$ , $t=3$ ?b) ¿cuál es la velocidad media en el intervalo $(1, 3)$ ?c) ¿cuál es la velocidad instantánea en $t=2$ ?",
-     "origen": "extra"
-    },
-    {
-     "tex": "b) ¿cuál es la velocidad media en el intervalo $(1, 5)$ ?",
+     "tex": "Una partícula se mueve a lo largo de una recta según la ecuación $x(t) = 2t^2 - 6t$ a) ¿cuál es la posición del móvil cuando $t=1$ , $t=4$ ?b) ¿cuál es la velocidad media en el intervalo $(1, 4)$ ?c) ¿cuál es la velocidad instantánea en $t=3$ ?",
      "origen": "respuesta"
+    },
+    {
+     "tex": "Una partícula se mueve según $x(t) = 20t - 5t^2$ a) ¿cuál es la posición del móvil cuando $t=0$ , $t=2$ ?b) ¿cuál es la velocidad media en el intervalo $(0, 2)$ ?c) ¿cuál es la velocidad instantánea en $t=1$ ?",
+     "origen": "extra"
+    }
+   ],
+   [
+    {
+     "tex": "Una partícula se mueve a lo largo de una recta según la ecuación $x(t) = 12t - 3t^2$ a) ¿cuál es la posición del móvil cuando $t=0$ , $t=3$ ?b) ¿cuál es la velocidad media en el intervalo $(0, 3)$ ?c) ¿cuál es la velocidad instantánea en $t=0.5$ ?",
+     "origen": "respuesta"
+    },
+    {
+     "tex": "Una partícula se mueve según $x(t) = 3t^2 - 12t$ a) ¿cuál es la posición del móvil cuando $t=1$ , $t=4$ ?b) ¿cuál es la velocidad media en el intervalo $(1, 4)$ ?c) ¿cuál es la velocidad instantánea en $t=2.5$ ?",
+     "origen": "extra"
     }
    ]
   ],
   "info": {
-   "modo": "ejercicios",
-   "r_uso": 10,
-   "e_uso": 8,
+   "modo": "cruzado",
    "falta": 0,
-   "r_disp": 16,
-   "e_disp": 8
+   "r_disp": 6,
+   "e_disp": 6
   }
  },
  {
   "titulo": "Derivadas de senos y cosenos",
   "archivo": "senos-cosenos.html",
   "receta": [
-   "ejercicios",
+   "cruzado",
    1,
-   2
+   1
   ],
   "versiones": [
    [
@@ -220,21 +192,43 @@
      "origen": "respuesta"
     },
     {
-     "tex": "$f(x) = -4 \\cos x + \\ln x - 5x^2$",
-     "origen": "extra"
-    },
-    {
-     "tex": "$f(x) = 7^x - 2 \\tan x + \\dfrac{5}{x}$",
+     "tex": "$f(x) = \\dfrac{1}{x^2} + 8 \\cos x - 4^x$",
      "origen": "extra"
     }
    ],
    [
     {
-     "tex": "$f(x) = 6 \\operatorname{sen} x - \\dfrac{2}{x^4} + 3e^x$",
-     "origen": "extra"
+     "tex": "$f(x) = -4 \\operatorname{sen} x + 6 \\tan x - 8 \\cos x - \\dfrac{4}{x^7} - 2x^3 + 7 - 9^x$",
+     "origen": "respuesta"
     },
     {
+     "tex": "$f(x) = 6 \\operatorname{sen} x - \\dfrac{2}{x^4} + 3e^x$",
+     "origen": "extra"
+    }
+   ],
+   [
+    {
      "tex": "$f(x) = 3 \\tan x - 7 + \\dfrac{8}{x^3} - 2x^4 + 8 \\operatorname{sen} x - 9 \\cos x - \\dfrac{6}{x} + 4^x - 3$",
+     "origen": "respuesta"
+    },
+    {
+     "tex": "$f(x) = 3e^x - 6 \\operatorname{sen} x + x^5$",
+     "origen": "extra"
+    }
+   ],
+   [
+    {
+     "tex": "$f(x) = -9 \\cos x - 8 + \\dfrac{4}{x^6} + 4x^8 - 6 \\tan x - 4 \\operatorname{sen} x - \\dfrac{x}{2} + 8^x - 2$",
+     "origen": "respuesta"
+    },
+    {
+     "tex": "$f(x) = -4 \\cos x + \\ln x - 5x^2$",
+     "origen": "extra"
+    }
+   ],
+   [
+    {
+     "tex": "$f(x) = 8 \\operatorname{sen} x - \\ln x + 6x^4 - \\dfrac{3}{x^2} - 7^x + 2e^x + x - \\tan x$",
      "origen": "respuesta"
     },
     {
@@ -244,71 +238,27 @@
    ],
    [
     {
-     "tex": "$f(x) = \\dfrac{1}{x^2} + 8 \\cos x - 4^x$",
-     "origen": "extra"
-    },
-    {
-     "tex": "$f(x) = 3e^x - 6 \\operatorname{sen} x + x^5$",
-     "origen": "extra"
-    },
-    {
-     "tex": "$f(x) = 8 \\operatorname{sen} x - \\ln x + 6x^4 - \\dfrac{3}{x^2} - 7^x + 2e^x + x - \\tan x$",
-     "origen": "respuesta"
-    }
-   ],
-   [
-    {
-     "tex": "$f(x) = -4 \\operatorname{sen} x + 6 \\tan x - 8 \\cos x - \\dfrac{4}{x^7} - 2x^3 + 7 - 9^x$",
+     "tex": "$f(x) = 6 \\tan x - \\dfrac{2}{x^5} + 5 \\operatorname{sen} x - 3x^4 + \\ln x - 5^x + 4e^x - 9 \\cos x + 3$",
      "origen": "respuesta"
     },
     {
-     "tex": "$f(x) = \\dfrac{7}{x^5} + 2^x - 3 \\cos x$",
-     "origen": "extra"
-    },
-    {
-     "tex": "$f(x) = 4 \\tan x - e^x + \\dfrac{6}{x^2}$",
-     "origen": "extra"
-    }
-   ],
-   [
-    {
-     "tex": "$f(x) = -2x^6 + 5 \\ln x - \\operatorname{sen} x$",
-     "origen": "extra"
-    },
-    {
-     "tex": "$f(x) = -9 \\cos x - 8 + \\dfrac{4}{x^6} + 4x^8 - 6 \\tan x - 4 \\operatorname{sen} x - \\dfrac{x}{2} + 8^x - 2$",
-     "origen": "respuesta"
-    },
-    {
-     "tex": "$f(x) = -3 \\tan x + \\dfrac{8}{x^6} + 5e^x$",
-     "origen": "extra"
-    }
-   ],
-   [
-    {
-     "tex": "$f(x) = 10 \\cos x - \\dfrac{4}{x} + 9^x$",
-     "origen": "extra"
-    },
-    {
-     "tex": "$f(x) = \\ln x + 7 \\operatorname{sen} x - 2x^4$",
+     "tex": "$f(x) = 7^x - 2 \\tan x + \\dfrac{5}{x}$",
      "origen": "extra"
     }
    ]
   ],
   "info": {
-   "modo": "ejercicios",
-   "r_uso": 5,
-   "e_uso": 12,
-   "falta": 1,
-   "r_disp": 5,
-   "e_disp": 12
+   "modo": "cruzado",
+   "falta": 0,
+   "r_disp": 6,
+   "e_disp": 6
   }
  },
  {
   "titulo": "Derivadas de raíces",
   "archivo": "raices.html",
   "receta": [
-   "ejercicios",
+   "cruzado",
    1,
    2
   ],
@@ -329,12 +279,26 @@
    ],
    [
     {
+     "tex": "$f(x) = \\dfrac{-2}{6\\sqrt[3]{x^4}}$",
+     "origen": "respuesta"
+    },
+    {
      "tex": "$f(x) = -3\\sqrt[5]{x^4}$",
      "origen": "extra"
     },
     {
-     "tex": "$f(x) = 7\\sqrt[4]{x}$",
+     "tex": "$f(x) = 10\\sqrt{x^7}$",
+     "origen": "extra"
+    }
+   ],
+   [
+    {
+     "tex": "$f(x) = -5\\sqrt{x^3}$",
      "origen": "respuesta"
+    },
+    {
+     "tex": "$f(x) = \\dfrac{5}{10\\sqrt[4]{x^3}}$",
+     "origen": "extra"
     },
     {
      "tex": "$f(x) = \\dfrac{-3}{6\\sqrt[3]{x^5}}$",
@@ -343,21 +307,7 @@
    ],
    [
     {
-     "tex": "$f(x) = 4\\sqrt[3]{x}$",
-     "origen": "extra"
-    },
-    {
-     "tex": "$f(x) = \\dfrac{5}{10\\sqrt[4]{x^3}}$",
-     "origen": "extra"
-    },
-    {
-     "tex": "$f(x) = \\dfrac{-2}{6\\sqrt[3]{x^4}}$",
-     "origen": "respuesta"
-    }
-   ],
-   [
-    {
-     "tex": "$f(x) = 8\\sqrt[3]{x^2}$",
+     "tex": "$f(x) = \\dfrac{-6}{4\\sqrt[3]{x^2}}$",
      "origen": "respuesta"
     },
     {
@@ -371,37 +321,35 @@
    ],
    [
     {
-     "tex": "$f(x) = 10\\sqrt{x^7}$",
-     "origen": "extra"
-    },
-    {
-     "tex": "$f(x) = 6\\sqrt{x}$",
+     "tex": "$f(x) = 7\\sqrt[4]{x}$",
      "origen": "respuesta"
     },
     {
-     "tex": "$f(x) = 2\\sqrt[3]{x^2}$",
+     "tex": "$f(x) = \\dfrac{-4}{8\\sqrt[5]{x^2}}$",
+     "origen": "extra"
+    },
+    {
+     "tex": "$f(x) = \\dfrac{6}{9\\sqrt{x^5}}$",
      "origen": "extra"
     }
    ],
    [
     {
-     "tex": "$f(x) = -7\\sqrt{x^3}$",
-     "origen": "extra"
-    },
-    {
-     "tex": "$f(x) = -9\\sqrt[5]{x^8}$",
-     "origen": "extra"
-    },
-    {
      "tex": "$f(x) = \\dfrac{-3}{9\\sqrt{x^3}}$",
      "origen": "respuesta"
+    },
+    {
+     "tex": "$f(x) = 4\\sqrt[3]{x}$",
+     "origen": "extra"
+    },
+    {
+     "tex": "$f(x) = -7\\sqrt{x^3}$",
+     "origen": "extra"
     }
    ]
   ],
   "info": {
-   "modo": "ejercicios",
-   "r_uso": 6,
-   "e_uso": 12,
+   "modo": "cruzado",
    "falta": 0,
    "r_disp": 12,
    "e_disp": 12
@@ -411,7 +359,7 @@
   "titulo": "Regla del producto (P1)",
   "archivo": "regla-producto-p1.html",
   "receta": [
-   "ejercicios",
+   "cruzado",
    1,
    2
   ],
@@ -422,40 +370,12 @@
      "origen": "respuesta"
     },
     {
-     "tex": "$f(x) = (x - 7x^2)(3x^2 + 4)$",
-     "origen": "extra"
-    },
-    {
-     "tex": "$f(x) = (3x^3 + 5x^2)(x^2 - 2x)$",
-     "origen": "extra"
-    }
-   ],
-   [
-    {
-     "tex": "$f(x) = (2x^2 + 3x)(x^2 - 5)$",
-     "origen": "extra"
-    },
-    {
-     "tex": "$f(x) = (10x^3 - 4x^2)(5x - 3x^2)$",
-     "origen": "respuesta"
-    },
-    {
-     "tex": "$f(x) = (2x^3 - 6x)(3x^2 - 2)$",
-     "origen": "extra"
-    }
-   ],
-   [
-    {
      "tex": "$f(x) = (x^3 - 4x)(2x^2 + 3x)$",
      "origen": "extra"
     },
     {
-     "tex": "$f(x) = (8x^2 - 3)(x^3 + x)$",
+     "tex": "$f(x) = (5x^2 + 2x)(7x - x^2)$",
      "origen": "extra"
-    },
-    {
-     "tex": "$f(x) = (5x + 7x^2)(4x + 2x^2)$",
-     "origen": "respuesta"
     }
    ],
    [
@@ -464,22 +384,50 @@
      "origen": "respuesta"
     },
     {
-     "tex": "$f(x) = (6x^2 - 2x)(4x - 1)$",
+     "tex": "$f(x) = (2x^2 + 3x)(x^2 - 5)$",
      "origen": "extra"
     },
     {
-     "tex": "$f(x) = (9x + 2x^2)(5x^2 - x)$",
+     "tex": "$f(x) = (4x^3 - x)(2x^2 + 6x)$",
      "origen": "extra"
     }
    ],
    [
     {
-     "tex": "$f(x) = (4x^3 - x)(2x^2 + 6x)$",
+     "tex": "$f(x) = (10x^3 - 4x^2)(5x - 3x^2)$",
+     "origen": "respuesta"
+    },
+    {
+     "tex": "$f(x) = (8x^2 - 3)(x^3 + x)$",
      "origen": "extra"
     },
     {
+     "tex": "$f(x) = (12x - 4x^2)(x^2 + 5)$",
+     "origen": "extra"
+    }
+   ],
+   [
+    {
      "tex": "$f(x) = (3x^2 - 5x)(2x - 6x^2)$",
      "origen": "respuesta"
+    },
+    {
+     "tex": "$f(x) = (x - 7x^2)(3x^2 + 4)$",
+     "origen": "extra"
+    },
+    {
+     "tex": "$f(x) = (6x^2 - 2x)(4x - 1)$",
+     "origen": "extra"
+    }
+   ],
+   [
+    {
+     "tex": "$f(x) = (5x + 7x^2)(4x + 2x^2)$",
+     "origen": "respuesta"
+    },
+    {
+     "tex": "$f(x) = (2x^3 - 6x)(3x^2 - 2)$",
+     "origen": "extra"
     },
     {
      "tex": "$f(x) = (4x^2 + 1)(x^2 - 9x)$",
@@ -488,23 +436,21 @@
    ],
    [
     {
-     "tex": "$f(x) = (5x^2 + 2x)(7x - x^2)$",
-     "origen": "extra"
-    },
-    {
-     "tex": "$f(x) = (12x - 4x^2)(x^2 + 5)$",
-     "origen": "extra"
-    },
-    {
      "tex": "$f(x) = (5x^3 + 4x)(6x^2 - 8)$",
      "origen": "respuesta"
+    },
+    {
+     "tex": "$f(x) = (3x^3 + 5x^2)(x^2 - 2x)$",
+     "origen": "extra"
+    },
+    {
+     "tex": "$f(x) = (9x + 2x^2)(5x^2 - x)$",
+     "origen": "extra"
     }
    ]
   ],
   "info": {
-   "modo": "ejercicios",
-   "r_uso": 6,
-   "e_uso": 12,
+   "modo": "cruzado",
    "falta": 0,
    "r_disp": 6,
    "e_disp": 12
@@ -514,7 +460,7 @@
   "titulo": "Regla del producto (P2)",
   "archivo": "regla-producto-p2.html",
   "receta": [
-   "ejercicios",
+   "cruzado",
    1,
    2
   ],
@@ -525,40 +471,12 @@
      "origen": "respuesta"
     },
     {
-     "tex": "$f(x) = \\sqrt{x} \\, e^x$",
-     "origen": "extra"
-    },
-    {
-     "tex": "$f(x) = \\sqrt[3]{x^2} \\operatorname{sen} x$",
-     "origen": "extra"
-    }
-   ],
-   [
-    {
-     "tex": "$f(x) = -3x^2 \\cos x$",
-     "origen": "extra"
-    },
-    {
-     "tex": "$f(x) = 5x^4 \\cos x$",
-     "origen": "respuesta"
-    },
-    {
-     "tex": "$f(x) = \\cos x \\ln x$",
-     "origen": "extra"
-    }
-   ],
-   [
-    {
      "tex": "$f(x) = -2x^5 \\ln x$",
      "origen": "extra"
     },
     {
-     "tex": "$f(x) = \\sqrt[5]{x^3} \\tan x$",
+     "tex": "$f(x) = 3 \\operatorname{sen} x \\, 4^x$",
      "origen": "extra"
-    },
-    {
-     "tex": "$f(x) = 8 \\operatorname{sen} x \\tan x$",
-     "origen": "respuesta"
     }
    ],
    [
@@ -567,22 +485,50 @@
      "origen": "respuesta"
     },
     {
-     "tex": "$f(x) = 4x^3 \\tan x$",
+     "tex": "$f(x) = -3x^2 \\cos x$",
      "origen": "extra"
     },
     {
-     "tex": "$f(x) = 2^x \\cos x$",
+     "tex": "$f(x) = 5 \\operatorname{sen} x \\ln x$",
      "origen": "extra"
     }
    ],
    [
     {
-     "tex": "$f(x) = 5 \\operatorname{sen} x \\ln x$",
+     "tex": "$f(x) = 5x^4 \\cos x$",
+     "origen": "respuesta"
+    },
+    {
+     "tex": "$f(x) = \\sqrt[5]{x^3} \\tan x$",
      "origen": "extra"
     },
     {
+     "tex": "$f(x) = 7x^2 e^x$",
+     "origen": "extra"
+    }
+   ],
+   [
+    {
      "tex": "$f(x) = \\sqrt{x} \\ln x$",
      "origen": "respuesta"
+    },
+    {
+     "tex": "$f(x) = \\sqrt{x} \\, e^x$",
+     "origen": "extra"
+    },
+    {
+     "tex": "$f(x) = 4x^3 \\tan x$",
+     "origen": "extra"
+    }
+   ],
+   [
+    {
+     "tex": "$f(x) = 6x^2 \\tan x$",
+     "origen": "respuesta"
+    },
+    {
+     "tex": "$f(x) = \\cos x \\ln x$",
+     "origen": "extra"
     },
     {
      "tex": "$f(x) = \\sqrt{x} \\operatorname{sen} x$",
@@ -591,23 +537,21 @@
    ],
    [
     {
-     "tex": "$f(x) = 3 \\operatorname{sen} x \\, 4^x$",
-     "origen": "extra"
-    },
-    {
-     "tex": "$f(x) = 7x^2 e^x$",
-     "origen": "extra"
-    },
-    {
-     "tex": "$f(x) = \\sqrt[3]{x^4} e^x$",
+     "tex": "$f(x) = \\sqrt[3]{x^4} \\ln x$",
      "origen": "respuesta"
+    },
+    {
+     "tex": "$f(x) = \\sqrt[3]{x^2} \\operatorname{sen} x$",
+     "origen": "extra"
+    },
+    {
+     "tex": "$f(x) = 2^x \\cos x$",
+     "origen": "extra"
     }
    ]
   ],
   "info": {
-   "modo": "ejercicios",
-   "r_uso": 6,
-   "e_uso": 12,
+   "modo": "cruzado",
    "falta": 0,
    "r_disp": 10,
    "e_disp": 12
@@ -617,7 +561,7 @@
   "titulo": "Regla del cociente (P1)",
   "archivo": "regla-cociente-p1.html",
   "receta": [
-   "ejercicios",
+   "cruzado",
    1,
    2
   ],
@@ -628,40 +572,12 @@
      "origen": "respuesta"
     },
     {
-     "tex": "$h(x) = \\dfrac{4x^2 - 5}{7x + 2x^3}$",
-     "origen": "extra"
-    },
-    {
-     "tex": "$g(x) = \\dfrac{7x^2 - 5x}{6x + 10x^3}$",
-     "origen": "extra"
-    }
-   ],
-   [
-    {
-     "tex": "$f(x) = \\dfrac{7x^2 - 4x}{5x + 2}$",
-     "origen": "extra"
-    },
-    {
-     "tex": "$f(x) = \\dfrac{5x^4 - 2x}{3x^2 + 8}$",
-     "origen": "respuesta"
-    },
-    {
-     "tex": "$g(x) = \\dfrac{7x^2 - 3x}{x^4 - 5x}$",
-     "origen": "extra"
-    }
-   ],
-   [
-    {
      "tex": "$f(x) = \\dfrac{6x^3 - 2x}{4x^2 + 5}$",
      "origen": "extra"
     },
     {
-     "tex": "$h(x) = \\dfrac{5x^2 - 9}{2x^4 + x}$",
+     "tex": "$g(x) = \\dfrac{x^4 - 8x}{3x^3 - 2x}$",
      "origen": "extra"
-    },
-    {
-     "tex": "$f(x) = \\dfrac{2x^3 + 4x}{5x^3 - 1}$",
-     "origen": "respuesta"
     }
    ],
    [
@@ -670,57 +586,83 @@
      "origen": "respuesta"
     },
     {
-     "tex": "$h(x) = \\dfrac{x^6 - 2x^2}{4x^3 - x}$",
+     "tex": "$f(x) = \\dfrac{7x^2 - 4x}{5x + 2}$",
      "origen": "extra"
     },
     {
-     "tex": "$g(x) = \\dfrac{2x^4 - 6x}{5x^2 - 3x}$",
+     "tex": "$g(x) = \\dfrac{-8x^2 - 3x}{x - 2x^3}$",
      "origen": "extra"
     }
    ],
    [
     {
-     "tex": "$f(x) = \\dfrac{4x^3 + 2x}{6x^2 - 7}$",
+     "tex": "$f(x) = \\dfrac{5x^4 - 2x}{3x^2 + 8}$",
+     "origen": "respuesta"
+    },
+    {
+     "tex": "$h(x) = \\dfrac{5x^2 - 9}{2x^4 + x}$",
      "origen": "extra"
     },
+    {
+     "tex": "$f(x) = \\dfrac{2x^5 - 4x^2}{5x^3 + 6}$",
+     "origen": "extra"
+    }
+   ],
+   [
     {
      "tex": "$f(x) = \\dfrac{3x^4 - 5x}{4x^3 - 2x}$",
      "origen": "respuesta"
     },
     {
-     "tex": "$h(x) = \\dfrac{4 - 8x^2}{7x + x^2}$",
-     "origen": "extra"
-    }
-   ],
-   [
-    {
-     "tex": "$g(x) = \\dfrac{-8x^2 - 3x}{x - 2x^3}$",
+     "tex": "$h(x) = \\dfrac{4x^2 - 5}{7x + 2x^3}$",
      "origen": "extra"
     },
     {
      "tex": "$h(x) = \\dfrac{3x^2 - 5}{8x + 5x^2}$",
      "origen": "extra"
+    }
+   ],
+   [
+    {
+     "tex": "$f(x) = \\dfrac{2x^3 + 4x}{5x^3 - 1}$",
+     "origen": "respuesta"
     },
+    {
+     "tex": "$g(x) = \\dfrac{7x^2 - 3x}{x^4 - 5x}$",
+     "origen": "extra"
+    },
+    {
+     "tex": "$h(x) = \\dfrac{3x^4 - 1}{8x^2 + 4x}$",
+     "origen": "extra"
+    }
+   ],
+   [
     {
      "tex": "$f(x) = \\dfrac{4x^2 - 7x}{5x^4 + 3x^2}$",
      "origen": "respuesta"
+    },
+    {
+     "tex": "$g(x) = \\dfrac{7x^2 - 5x}{6x + 10x^3}$",
+     "origen": "extra"
+    },
+    {
+     "tex": "$h(x) = \\dfrac{4 - 8x^2}{7x + x^2}$",
+     "origen": "extra"
     }
    ]
   ],
   "info": {
-   "modo": "ejercicios",
-   "r_uso": 6,
-   "e_uso": 12,
+   "modo": "cruzado",
    "falta": 0,
    "r_disp": 6,
-   "e_disp": 18
+   "e_disp": 12
   }
  },
  {
   "titulo": "Regla del cociente (P2)",
   "archivo": "regla-cociente-p2.html",
   "receta": [
-   "ejercicios",
+   "cruzado",
    1,
    2
   ],
@@ -731,7 +673,7 @@
      "origen": "respuesta"
     },
     {
-     "tex": "$h(x) = \\dfrac{6x^2}{5\\cos x}$",
+     "tex": "$f(x) = \\dfrac{4\\cos x}{2x^3 - 3\\operatorname{sen} x}$",
      "origen": "extra"
     },
     {
@@ -741,30 +683,16 @@
    ],
    [
     {
-     "tex": "$f(x) = \\dfrac{3x^4}{4\\cos x}$",
-     "origen": "extra"
-    },
-    {
      "tex": "$f(x) = \\dfrac{5x^2 - 3\\operatorname{sen} x}{2\\cos x}$",
      "origen": "respuesta"
     },
     {
-     "tex": "$g(x) = \\dfrac{2x^2 - 4\\cos x}{\\operatorname{sen} x}$",
-     "origen": "extra"
-    }
-   ],
-   [
-    {
-     "tex": "$f(x) = \\dfrac{6x^3}{2\\cos x}$",
+     "tex": "$f(x) = \\dfrac{3x^4}{4\\cos x}$",
      "origen": "extra"
     },
     {
-     "tex": "$h(x) = \\dfrac{-3x^2}{4\\cos x}$",
+     "tex": "$g(x) = \\dfrac{-2\\tan x}{5x^3}$",
      "origen": "extra"
-    },
-    {
-     "tex": "$f(x) = \\dfrac{2x^4}{3\\cos x}$",
-     "origen": "respuesta"
     }
    ],
    [
@@ -773,22 +701,36 @@
      "origen": "respuesta"
     },
     {
-     "tex": "$f(x) = \\dfrac{4\\cos x}{2x^3 - 3\\operatorname{sen} x}$",
+     "tex": "$h(x) = \\dfrac{4\\cos x}{2x^2 - 5\\operatorname{sen} x}$",
      "origen": "extra"
     },
     {
-     "tex": "$h(x) = \\dfrac{4\\cos x}{2x^2 - 5\\operatorname{sen} x}$",
+     "tex": "$f(x) = \\dfrac{3\\cos x}{4x^2 - 2\\operatorname{sen} x}$",
      "origen": "extra"
     }
    ],
    [
     {
-     "tex": "$g(x) = \\dfrac{-2\\tan x}{5x^3}$",
+     "tex": "$g(x) = \\dfrac{7\\cos x}{2x^2 - 4\\operatorname{sen} x}$",
+     "origen": "respuesta"
+    },
+    {
+     "tex": "$h(x) = \\dfrac{6x^2}{5\\cos x}$",
      "origen": "extra"
     },
     {
-     "tex": "$g(x) = \\dfrac{7\\cos x}{2x^2 - 4\\operatorname{sen} x}$",
+     "tex": "$f(x) = \\dfrac{6x^3}{2\\cos x}$",
+     "origen": "extra"
+    }
+   ],
+   [
+    {
+     "tex": "$h(x) = \\dfrac{2\\tan x}{8x^2}$",
      "origen": "respuesta"
+    },
+    {
+     "tex": "$g(x) = \\dfrac{2x^2 - 4\\cos x}{\\operatorname{sen} x}$",
+     "origen": "extra"
     },
     {
      "tex": "$h(x) = \\dfrac{8\\cos x}{5x^2 - 3\\operatorname{sen} x}$",
@@ -797,23 +739,21 @@
    ],
    [
     {
+     "tex": "$h(x) = \\dfrac{3x^2 - 2\\operatorname{sen} x}{4\\cos x}$",
+     "origen": "respuesta"
+    },
+    {
      "tex": "$g(x) = \\dfrac{4\\tan x}{3x^4}$",
      "origen": "extra"
     },
     {
-     "tex": "$f(x) = \\dfrac{3\\cos x}{4x^2 - 2\\operatorname{sen} x}$",
+     "tex": "$h(x) = \\dfrac{-3x^2}{4\\cos x}$",
      "origen": "extra"
-    },
-    {
-     "tex": "$g(x) = \\dfrac{-5\\tan x}{2x^3}$",
-     "origen": "respuesta"
     }
    ]
   ],
   "info": {
-   "modo": "ejercicios",
-   "r_uso": 6,
-   "e_uso": 12,
+   "modo": "cruzado",
    "falta": 0,
    "r_disp": 14,
    "e_disp": 12
@@ -823,7 +763,7 @@
   "titulo": "Regla de la cadena (P1)",
   "archivo": "regla-cadena-p1.html",
   "receta": [
-   "ejercicios",
+   "cruzado",
    1,
    2
   ],
@@ -834,7 +774,35 @@
      "origen": "respuesta"
     },
     {
+     "tex": "$g(x) = 6(x^3 - 4x)^2$",
+     "origen": "extra"
+    },
+    {
      "tex": "$h(x) = \\sqrt[4]{2x^2 - 5}$",
+     "origen": "extra"
+    }
+   ],
+   [
+    {
+     "tex": "$h(x) = 4(5x - 2x^2)^2$",
+     "origen": "respuesta"
+    },
+    {
+     "tex": "$g(x) = \\sqrt[3]{5x^2 - 2}$",
+     "origen": "extra"
+    },
+    {
+     "tex": "$h(x) = -4(3 - 2x^2)^3$",
+     "origen": "extra"
+    }
+   ],
+   [
+    {
+     "tex": "$h(x) = \\sqrt[5]{3x^2 - 4}$",
+     "origen": "respuesta"
+    },
+    {
+     "tex": "$g(x) = 3(4x^2 + 1)^3$",
      "origen": "extra"
     },
     {
@@ -844,89 +812,59 @@
    ],
    [
     {
-     "tex": "$h(x) = -4(3 - 2x^2)^3$",
-     "origen": "extra"
-    },
-    {
-     "tex": "$h(x) = 4(5x - 2x^2)^2$",
+     "tex": "$g(x) = 4(5x^2 - 2)^3$",
      "origen": "respuesta"
     },
     {
-     "tex": "$h(x) = 4(3x^3 - 2x)^2$",
-     "origen": "extra"
-    }
-   ],
-   [
-    {
-     "tex": "$h(x) = 5(1 - x^2)^3$",
+     "tex": "$g(x) = -3(2x^3 + 5x)^2$",
      "origen": "extra"
     },
     {
      "tex": "$h(x) = \\sqrt[6]{3x^2 + 4}$",
      "origen": "extra"
-    },
-    {
-     "tex": "$h(x) = \\sqrt[5]{3x^2 - 4}$",
-     "origen": "respuesta"
     }
    ],
    [
-    {
-     "tex": "$g(x) = 4(5x^2 - 2)^3$",
-     "origen": "respuesta"
-    },
-    {
-     "tex": "$h(x) = \\sqrt[3]{4x^2 - 1}$",
-     "origen": "extra"
-    },
-    {
-     "tex": "$h(x) = -6(x^3 + 4x)^2$",
-     "origen": "extra"
-    }
-   ],
-   [
-    {
-     "tex": "$h(x) = -2(5 - 3x^2)^3$",
-     "origen": "extra"
-    },
     {
      "tex": "$g(x) = -5(2x^3 - 6x)^2$",
      "origen": "respuesta"
     },
     {
-     "tex": "$h(x) = 3(5x^3 - 4x)^2$",
+     "tex": "$g(x) = \\sqrt[5]{x^2 - 6}$",
+     "origen": "extra"
+    },
+    {
+     "tex": "$h(x) = 5(1 - x^2)^3$",
      "origen": "extra"
     }
    ],
    [
     {
-     "tex": "$h(x) = 9(2 - x^2)^3$",
-     "origen": "extra"
-    },
-    {
-     "tex": "$h(x) = \\sqrt[5]{6x^2 - 3}$",
-     "origen": "extra"
-    },
-    {
      "tex": "$g(x) = \\sqrt[3]{6 - 7x^2}$",
      "origen": "respuesta"
+    },
+    {
+     "tex": "$g(x) = 7(2x^2 - 3)^3$",
+     "origen": "extra"
+    },
+    {
+     "tex": "$h(x) = 4(3x^3 - 2x)^2$",
+     "origen": "extra"
     }
    ]
   ],
   "info": {
-   "modo": "ejercicios",
-   "r_uso": 6,
-   "e_uso": 12,
+   "modo": "cruzado",
    "falta": 0,
    "r_disp": 6,
-   "e_disp": 24
+   "e_disp": 12
   }
  },
  {
   "titulo": "Regla de la cadena (P2)",
   "archivo": "regla-cadena-p2.html",
   "receta": [
-   "ejercicios",
+   "cruzado",
    1,
    2
   ],
@@ -937,49 +875,7 @@
      "origen": "respuesta"
     },
     {
-     "tex": "$y = \\cos(8x - 3x^2)$",
-     "origen": "extra"
-    },
-    {
-     "tex": "$y = \\ln(3x^3 - 6x)$",
-     "origen": "extra"
-    }
-   ],
-   [
-    {
-     "tex": "$y = \\sqrt[4]{\\cos^3 x}$",
-     "origen": "extra"
-    },
-    {
-     "tex": "$f = \\cos(7x - 5x^2)$",
-     "origen": "respuesta"
-    },
-    {
-     "tex": "$y = \\ln(x^3 - 4x)$",
-     "origen": "extra"
-    }
-   ],
-   [
-    {
-     "tex": "$y = \\sqrt[5]{\\operatorname{sen}^4 x}$",
-     "origen": "extra"
-    },
-    {
-     "tex": "$y = \\cos(4x^2 - 9x)$",
-     "origen": "extra"
-    },
-    {
-     "tex": "$f = \\ln(3x^2 - 4)$",
-     "origen": "respuesta"
-    }
-   ],
-   [
-    {
-     "tex": "$f = \\sqrt{\\operatorname{sen}^3 x}$",
-     "origen": "respuesta"
-    },
-    {
-     "tex": "$y = \\operatorname{sen}(5x^3 - 2x^2)$",
+     "tex": "$y = \\ln(5x^2 - 2x)$",
      "origen": "extra"
     },
     {
@@ -989,12 +885,54 @@
    ],
    [
     {
-     "tex": "$y = \\sqrt[3]{\\operatorname{sen}^2 x}$",
+     "tex": "$f = \\ln(3x^2 - 4)$",
+     "origen": "respuesta"
+    },
+    {
+     "tex": "$y = \\sqrt[4]{\\cos^3 x}$",
      "origen": "extra"
     },
     {
-     "tex": "$f = \\operatorname{sen}(6x - 4x^2)$",
+     "tex": "$y = \\cos(8x - 3x^2)$",
+     "origen": "extra"
+    }
+   ],
+   [
+    {
+     "tex": "$f = \\cos(7x - 5x^2)$",
      "origen": "respuesta"
+    },
+    {
+     "tex": "$y = \\ln(x^3 - 4x)$",
+     "origen": "extra"
+    },
+    {
+     "tex": "$y = 7\\operatorname{sen}^3 x$",
+     "origen": "extra"
+    }
+   ],
+   [
+    {
+     "tex": "$f = -5\\operatorname{sen}^5 x$",
+     "origen": "respuesta"
+    },
+    {
+     "tex": "$y = \\sqrt{\\cos^5 x}$",
+     "origen": "extra"
+    },
+    {
+     "tex": "$y = \\operatorname{sen}(7x - 2x^3)$",
+     "origen": "extra"
+    }
+   ],
+   [
+    {
+     "tex": "$f = \\sqrt{\\operatorname{sen}^3 x}$",
+     "origen": "respuesta"
+    },
+    {
+     "tex": "$y = \\ln(3x^3 - 6x)$",
+     "origen": "extra"
     },
     {
      "tex": "$y = -2\\cos^5 x$",
@@ -1003,35 +941,33 @@
    ],
    [
     {
-     "tex": "$y = \\sqrt{\\cos^5 x}$",
-     "origen": "extra"
-    },
-    {
-     "tex": "$y = \\operatorname{sen}(7x - 2x^3)$",
-     "origen": "extra"
-    },
-    {
      "tex": "$f = \\ln(2x^2 - 5x)$",
      "origen": "respuesta"
+    },
+    {
+     "tex": "$y = \\sqrt[3]{\\operatorname{sen}^2 x}$",
+     "origen": "extra"
+    },
+    {
+     "tex": "$y = \\cos(4x^2 - 9x)$",
+     "origen": "extra"
     }
    ]
   ],
   "info": {
-   "modo": "ejercicios",
-   "r_uso": 6,
-   "e_uso": 12,
+   "modo": "cruzado",
    "falta": 0,
    "r_disp": 8,
-   "e_disp": 16
+   "e_disp": 12
   }
  },
  {
   "titulo": "Recta tangente",
   "archivo": "recta-tangente.html",
   "receta": [
-   "ejercicios",
+   "cruzado",
    1,
-   2
+   1
   ],
   "versiones": [
    [
@@ -1042,6 +978,32 @@
     {
      "tex": "$f(x) = -(x-2)^2 + 5$ en $(1,\\,4)$",
      "origen": "extra"
+    }
+   ],
+   [
+    {
+     "tex": "$f(x) = -(x-1)^2 + 1$ en el punto $(2,\\,0)$",
+     "origen": "respuesta"
+    },
+    {
+     "tex": "$f(x) = (x+3)^2 - 4$ en $(-2,\\,-3)$",
+     "origen": "extra"
+    }
+   ],
+   [
+    {
+     "tex": "$f(x) = (x-5)^2 + 2$ en el punto $(6,\\,3)$",
+     "origen": "respuesta"
+    },
+    {
+     "tex": "$f(x) = -(x+1)^2 + 6$ en $(0,\\,5)$",
+     "origen": "extra"
+    }
+   ],
+   [
+    {
+     "tex": "$f(x) = -(x-4)^2 + 3$ en el punto $(5,\\,2)$",
+     "origen": "respuesta"
     },
     {
      "tex": "$f(x) = (x-3)^2 + 1$ en $(4,\\,2)$",
@@ -1050,11 +1012,7 @@
    ],
    [
     {
-     "tex": "$f(x) = (x+3)^2 - 4$ en $(-2,\\,-3)$",
-     "origen": "extra"
-    },
-    {
-     "tex": "$f(x) = (x-5)^2 + 2$ en el punto $(6,\\,3)$",
+     "tex": "$f(x) = (x-1)^2 + 3$ en el punto $(2,\\,4)$",
      "origen": "respuesta"
     },
     {
@@ -1064,78 +1022,34 @@
    ],
    [
     {
-     "tex": "$f(x) = -(x+1)^2 + 6$ en $(0,\\,5)$",
-     "origen": "extra"
+     "tex": "$f(x) = -(x + 2)^2 + 4$ en el punto $(-1,\\,3)$",
+     "origen": "respuesta"
     },
     {
      "tex": "$f(x) = (x+4)^2 - 2$ en $(-3,\\,-1)$",
-     "origen": "extra"
-    },
-    {
-     "tex": "$f(x) = (x-1)^2 + 3$ en el punto $(2,\\,4)$",
-     "origen": "respuesta"
-    }
-   ],
-   [
-    {
-     "tex": "$f(x) = -(x-1)^2 + 1$ en el punto $(2,\\,0)$",
-     "origen": "respuesta"
-    },
-    {
-     "tex": "$f(x) = -(x+3)^2 + 4$ en $(-4,\\,3)$",
-     "origen": "extra"
-    },
-    {
-     "tex": "$f(x) = (x+1)^2 + 2$ en $(-2,\\,3)$",
-     "origen": "extra"
-    }
-   ],
-   [
-    {
-     "tex": "$f(x) = (x-2)^2 - 1$ en $(3,\\,0)$",
-     "origen": "extra"
-    },
-    {
-     "tex": "$f(x) = -(x-4)^2 + 3$ en el punto $(5,\\,2)$",
-     "origen": "respuesta"
-    },
-    {
-     "tex": "$f(x) = -(x+2)^2 + 1$ en $(-1,\\,0)$",
-     "origen": "extra"
-    }
-   ],
-   [
-    {
-     "tex": "$f(x) = -(x-3)^2 + 2$ en $(2,\\,1)$",
-     "origen": "extra"
-    },
-    {
-     "tex": "$f(x) = (x-4)^2 - 3$ en $(5,\\,-2)$",
      "origen": "extra"
     }
    ]
   ],
   "info": {
-   "modo": "ejercicios",
-   "r_uso": 5,
-   "e_uso": 12,
-   "falta": 1,
-   "r_disp": 5,
-   "e_disp": 12
+   "modo": "cruzado",
+   "falta": 0,
+   "r_disp": 6,
+   "e_disp": 6
   }
  },
  {
   "titulo": "Puntos críticos",
   "archivo": "puntos-criticos.html",
   "receta": [
-   "ejercicios",
+   "cruzado",
    1,
    2
   ],
   "versiones": [
    [
     {
-     "tex": "$f(x) = -5x^3 + 10x^2$",
+     "tex": "$f(x) = 3x^3 - 5x^2$",
      "origen": "respuesta"
     },
     {
@@ -1149,12 +1063,26 @@
    ],
    [
     {
+     "tex": "$f(x) = -5x^3 + 10x^2$",
+     "origen": "respuesta"
+    },
+    {
      "tex": "$f(x) = 2x^3 - 3x^2$",
      "origen": "extra"
     },
     {
-     "tex": "$f(x) = 3x^3 - 5x^2$",
+     "tex": "$f(x) = 4x^3 - 6x^2$",
+     "origen": "extra"
+    }
+   ],
+   [
+    {
+     "tex": "$f(x) = 5x^3 - 4x^2$",
      "origen": "respuesta"
+    },
+    {
+     "tex": "$f(x) = -3x^3 + 9x^2$",
+     "origen": "extra"
     },
     {
      "tex": "$f(x) = 12x^2 - 4x^3$",
@@ -1163,21 +1091,21 @@
    ],
    [
     {
-     "tex": "$f(x) = 4x^3 - 6x^2$",
-     "origen": "extra"
-    },
-    {
-     "tex": "$f(x) = -3x^3 + 9x^2$",
-     "origen": "extra"
-    },
-    {
      "tex": "$f(x) = 4x^2 - 12x^3$",
      "origen": "respuesta"
+    },
+    {
+     "tex": "$f(x) = 3x^3 - 9x^2$",
+     "origen": "extra"
+    },
+    {
+     "tex": "$f(x) = x^3 - 6x^2$",
+     "origen": "extra"
     }
    ],
    [
     {
-     "tex": "$f(x) = 5x^3 - 4x^2$",
+     "tex": "$f(x) = 2x^3 - 9x^2$",
      "origen": "respuesta"
     },
     {
@@ -1191,31 +1119,23 @@
    ],
    [
     {
-     "tex": "$f(x) = 3x^3 - 9x^2$",
+     "tex": "$f(x) = 6x^2 - 4x^3$",
+     "origen": "respuesta"
+    },
+    {
+     "tex": "$f(x) = 5x^3 - 3x^2$",
      "origen": "extra"
     },
     {
-     "tex": "$f(x) = -4x^3 + 88x^2$",
-     "origen": "extra"
-    },
-    {
-     "tex": "$f(x) = 18x^2 - 6x^3$",
-     "origen": "extra"
-    }
-   ],
-   [
-    {
-     "tex": "$f(x) = x^3 - 6x^2$",
+     "tex": "$f(x) = x^3 - 3x^2$",
      "origen": "extra"
     }
    ]
   ],
   "info": {
-   "modo": "ejercicios",
-   "r_uso": 4,
-   "e_uso": 12,
-   "falta": 2,
-   "r_disp": 4,
+   "modo": "cruzado",
+   "falta": 0,
+   "r_disp": 6,
    "e_disp": 12
   }
  },
@@ -1223,32 +1143,59 @@
   "titulo": "Optimización de áreas",
   "archivo": "optimizacion-areas.html",
   "receta": [
-   "ejercicios",
+   "cruzado",
    1,
-   2
+   1
   ],
   "versiones": [
    [
     {
      "tex": "$P = 24$",
+     "svg": "<svg viewbox=\"0 0 180 96\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" class=\"figura-rect\"><rect x=\"12\" y=\"12\" width=\"112\" height=\"52\" fill=\"#FF00AA\" fill-opacity=\"0.15\" stroke=\"#7B5A50\" stroke-width=\"1.6\" rx=\"2\"></rect><text x=\"68\" y=\"82\" font-size=\"14\" font-style=\"italic\" font-family=\"Georgia, serif\" fill=\"#1A0828\" text-anchor=\"middle\">y</text><text x=\"132\" y=\"43\" font-size=\"14\" font-style=\"italic\" font-family=\"Georgia, serif\" fill=\"#1A0828\" text-anchor=\"start\">x + 4</text></svg>",
      "origen": "respuesta"
     },
     {
-     "tex": "altura $x+2$ , $P = 16$",
-     "origen": "extra"
-    },
-    {
-     "tex": "altura $x+4$ , $P = 20$",
+     "tex": "altura $x+1$ , $P = 10$",
      "origen": "extra"
     }
    ],
    [
     {
-     "tex": "altura $x+5$ , $P = 30$",
-     "origen": "extra"
+     "tex": "$P = 16$",
+     "svg": "<svg viewbox=\"0 0 180 96\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" class=\"figura-rect\"><rect x=\"12\" y=\"12\" width=\"112\" height=\"52\" fill=\"#FF00AA\" fill-opacity=\"0.15\" stroke=\"#7B5A50\" stroke-width=\"1.6\" rx=\"2\"></rect><text x=\"68\" y=\"82\" font-size=\"14\" font-style=\"italic\" font-family=\"Georgia, serif\" fill=\"#1A0828\" text-anchor=\"middle\">y</text><text x=\"132\" y=\"43\" font-size=\"14\" font-style=\"italic\" font-family=\"Georgia, serif\" fill=\"#1A0828\" text-anchor=\"start\">x + 3</text></svg>",
+     "origen": "respuesta"
     },
     {
+     "tex": "altura $x+5$ , $P = 30$",
+     "origen": "extra"
+    }
+   ],
+   [
+    {
      "tex": "$P = 12$",
+     "svg": "<svg viewbox=\"0 0 180 96\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" class=\"figura-rect\"><rect x=\"12\" y=\"12\" width=\"112\" height=\"52\" fill=\"#FF00AA\" fill-opacity=\"0.15\" stroke=\"#7B5A50\" stroke-width=\"1.6\" rx=\"2\"></rect><text x=\"68\" y=\"82\" font-size=\"14\" font-style=\"italic\" font-family=\"Georgia, serif\" fill=\"#1A0828\" text-anchor=\"middle\">y</text><text x=\"132\" y=\"43\" font-size=\"14\" font-style=\"italic\" font-family=\"Georgia, serif\" fill=\"#1A0828\" text-anchor=\"start\">x + 1</text></svg>",
+     "origen": "respuesta"
+    },
+    {
+     "tex": "altura $x+3$ , $P = 24$",
+     "origen": "extra"
+    }
+   ],
+   [
+    {
+     "tex": "$P = 28$",
+     "svg": "<svg viewbox=\"0 0 180 96\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" class=\"figura-rect\"><rect x=\"12\" y=\"12\" width=\"112\" height=\"52\" fill=\"#FF00AA\" fill-opacity=\"0.15\" stroke=\"#7B5A50\" stroke-width=\"1.6\" rx=\"2\"></rect><text x=\"68\" y=\"82\" font-size=\"14\" font-style=\"italic\" font-family=\"Georgia, serif\" fill=\"#1A0828\" text-anchor=\"middle\">y</text><text x=\"132\" y=\"43\" font-size=\"14\" font-style=\"italic\" font-family=\"Georgia, serif\" fill=\"#1A0828\" text-anchor=\"start\">x + 2</text></svg>",
+     "origen": "respuesta"
+    },
+    {
+     "tex": "altura $x+2$ , $P = 16$",
+     "origen": "extra"
+    }
+   ],
+   [
+    {
+     "tex": "$P = 32$",
+     "svg": "<svg viewbox=\"0 0 180 96\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" class=\"figura-rect\"><rect x=\"12\" y=\"12\" width=\"112\" height=\"52\" fill=\"#FF00AA\" fill-opacity=\"0.15\" stroke=\"#7B5A50\" stroke-width=\"1.6\" rx=\"2\"></rect><text x=\"68\" y=\"82\" font-size=\"14\" font-style=\"italic\" font-family=\"Georgia, serif\" fill=\"#1A0828\" text-anchor=\"middle\">y</text><text x=\"132\" y=\"43\" font-size=\"14\" font-style=\"italic\" font-family=\"Georgia, serif\" fill=\"#1A0828\" text-anchor=\"start\">x + 5</text></svg>",
      "origen": "respuesta"
     },
     {
@@ -1258,67 +1205,28 @@
    ],
    [
     {
-     "tex": "altura $x+1$ , $P = 10$",
-     "origen": "extra"
-    },
-    {
-     "tex": "altura $x+3$ , $P = 24$",
-     "origen": "extra"
-    },
-    {
-     "tex": "$P = 16$",
-     "origen": "respuesta"
-    }
-   ],
-   [
-    {
-     "tex": "$P = 28$",
+     "tex": "$P = 20$",
+     "svg": "<svg viewbox=\"0 0 180 96\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" class=\"figura-rect\"><rect x=\"12\" y=\"12\" width=\"112\" height=\"52\" fill=\"#FF00AA\" fill-opacity=\"0.15\" stroke=\"#7B5A50\" stroke-width=\"1.6\" rx=\"2\"></rect><text x=\"68\" y=\"82\" font-size=\"14\" font-style=\"italic\" font-family=\"Georgia, serif\" fill=\"#1A0828\" text-anchor=\"middle\">y</text><text x=\"132\" y=\"43\" font-size=\"14\" font-style=\"italic\" font-family=\"Georgia, serif\" fill=\"#1A0828\" text-anchor=\"start\">x + 1</text></svg>",
      "origen": "respuesta"
     },
     {
-     "tex": "altura $x+4$ , $P = 12$",
-     "origen": "extra"
-    },
-    {
-     "tex": "altura $x+1$ , $P = 18$",
-     "origen": "extra"
-    }
-   ],
-   [
-    {
-     "tex": "altura $x+2$ , $P = 20$",
-     "origen": "extra"
-    },
-    {
-     "tex": "altura $x+3$ , $P = 14$",
-     "origen": "extra"
-    },
-    {
-     "tex": "altura $x+7$ , $P = 36$",
-     "origen": "extra"
-    }
-   ],
-   [
-    {
-     "tex": "altura $x+5$ , $P = 24$",
+     "tex": "altura $x+4$ , $P = 20$",
      "origen": "extra"
     }
    ]
   ],
   "info": {
-   "modo": "ejercicios",
-   "r_uso": 4,
-   "e_uso": 12,
-   "falta": 2,
-   "r_disp": 4,
-   "e_disp": 12
+   "modo": "cruzado",
+   "falta": 0,
+   "r_disp": 6,
+   "e_disp": 6
   }
  },
  {
   "titulo": "Integrales indefinidas",
   "archivo": "integrales-indefinidas.html",
   "receta": [
-   "ejercicios",
+   "cruzado",
    1,
    2
   ],
@@ -1329,40 +1237,12 @@
      "origen": "respuesta"
     },
     {
-     "tex": "$\\displaystyle \\int \\left( -6\\cos x - 2 + \\frac{4}{x} - 3^x \\ln 3 - 5x^4 + 2e^x \\right) dx$",
+     "tex": "$\\displaystyle \\int \\left( 2\\sec^2 x - 9x^2 + 5 - 2\\operatorname{sen} x + 3e^x - 7x^4 \\right) dx$",
      "origen": "extra"
     },
     {
-     "tex": "$\\displaystyle \\int \\left( 8\\operatorname{sen} x - 7 - 3x^2 - \\frac{2}{x} + 5\\sec^2 x - 4x \\right) dx$",
+     "tex": "$\\displaystyle \\int \\left( -3\\cos x - 4 + \\frac{6}{x} - 4^x \\ln 4 - 9x^2 + 5e^x \\right) dx$",
      "origen": "extra"
-    }
-   ],
-   [
-    {
-     "tex": "$\\displaystyle \\int \\left( 3\\sec^2 x - 5x + 2 - 4\\operatorname{sen} x + 6e^x - 10x^3 \\right) dx$",
-     "origen": "extra"
-    },
-    {
-     "tex": "$\\displaystyle \\int \\left( -4\\cos x - 5 + \\frac{3}{x} - 2^x \\ln 2 - 8x^3 + 4e^x \\right) dx$",
-     "origen": "respuesta"
-    },
-    {
-     "tex": "$\\displaystyle \\int \\left( 5x^2 - 6x + \\frac{2}{x} - 1 + 3e^x - 4\\operatorname{sen} x - \\sec^2 x \\right) dx$",
-     "origen": "extra"
-    }
-   ],
-   [
-    {
-     "tex": "$\\displaystyle \\int \\left( 5 - 4x^3 - \\frac{7}{x} + 2\\cos x - 5^x \\ln 5 - e^x \\right) dx$",
-     "origen": "extra"
-    },
-    {
-     "tex": "$\\displaystyle \\int \\left( 3\\operatorname{sen} x - 6x^2 + 8x^3 - \\frac{2}{x} + 5e^x - 2\\cos x \\right) dx$",
-     "origen": "extra"
-    },
-    {
-     "tex": "$\\displaystyle \\int \\left( 5\\operatorname{sen} x - 4 - 7x^4 - \\frac{5}{x} + 7\\sec^2 x - 5x \\right) dx$",
-     "origen": "respuesta"
     }
    ],
    [
@@ -1371,22 +1251,50 @@
      "origen": "respuesta"
     },
     {
-     "tex": "$\\displaystyle \\int \\left( -3\\cos x - 4 + \\frac{6}{x} - 4^x \\ln 4 - 9x^2 + 5e^x \\right) dx$",
+     "tex": "$\\displaystyle \\int \\left( 3\\sec^2 x - 5x + 2 - 4\\operatorname{sen} x + 6e^x - 10x^3 \\right) dx$",
      "origen": "extra"
     },
     {
-     "tex": "$\\displaystyle \\int \\left( 6\\operatorname{sen} x - 1 - 2x^4 - \\frac{3}{x} + 4\\sec^2 x - 2x \\right) dx$",
+     "tex": "$\\displaystyle \\int \\left( -6\\cos x - 2 + \\frac{4}{x} - 3^x \\ln 3 - 5x^4 + 2e^x \\right) dx$",
      "origen": "extra"
     }
    ],
    [
     {
-     "tex": "$\\displaystyle \\int \\left( 2\\sec^2 x - 9x^2 + 5 - 2\\operatorname{sen} x + 3e^x - 7x^4 \\right) dx$",
+     "tex": "$\\displaystyle \\int \\left( -4\\cos x - 5 + \\frac{3}{x} - 2^x \\ln 2 - 8x^3 + 4e^x \\right) dx$",
+     "origen": "respuesta"
+    },
+    {
+     "tex": "$\\displaystyle \\int \\left( 6\\operatorname{sen} x - 1 - 2x^4 - \\frac{3}{x} + 4\\sec^2 x - 2x \\right) dx$",
      "origen": "extra"
     },
     {
+     "tex": "$\\displaystyle \\int \\left( 9 - 3x^2 - \\frac{4}{x} + 5\\cos x - 6^x \\ln 6 - 2e^x \\right) dx$",
+     "origen": "extra"
+    }
+   ],
+   [
+    {
      "tex": "$\\displaystyle \\int \\left( 2\\operatorname{sen} x - 9x^2 + 6x^3 - \\frac{3}{x} + 2e^x - 4\\cos x \\right) dx$",
      "origen": "respuesta"
+    },
+    {
+     "tex": "$\\displaystyle \\int \\left( 8\\operatorname{sen} x - 7 - 3x^2 - \\frac{2}{x} + 5\\sec^2 x - 4x \\right) dx$",
+     "origen": "extra"
+    },
+    {
+     "tex": "$\\displaystyle \\int \\left( 5 - 4x^3 - \\frac{7}{x} + 2\\cos x - 5^x \\ln 5 - e^x \\right) dx$",
+     "origen": "extra"
+    }
+   ],
+   [
+    {
+     "tex": "$\\displaystyle \\int \\left( 5\\operatorname{sen} x - 4 - 7x^4 - \\frac{5}{x} + 7\\sec^2 x - 5x \\right) dx$",
+     "origen": "respuesta"
+    },
+    {
+     "tex": "$\\displaystyle \\int \\left( 4\\operatorname{sen} x - 12x^2 + 10x^3 - \\frac{5}{x} + 6e^x - 3\\cos x \\right) dx$",
+     "origen": "extra"
     },
     {
      "tex": "$\\displaystyle \\int \\left( 8x^2 - 2x + \\frac{4}{x} - 3 + 2e^x - 3\\operatorname{sen} x - 2\\sec^2 x \\right) dx$",
@@ -1395,23 +1303,21 @@
    ],
    [
     {
-     "tex": "$\\displaystyle \\int \\left( 9 - 3x^2 - \\frac{4}{x} + 5\\cos x - 6^x \\ln 6 - 2e^x \\right) dx$",
-     "origen": "extra"
-    },
-    {
-     "tex": "$\\displaystyle \\int \\left( 4\\operatorname{sen} x - 12x^2 + 10x^3 - \\frac{5}{x} + 6e^x - 3\\cos x \\right) dx$",
-     "origen": "extra"
-    },
-    {
      "tex": "$\\displaystyle \\int \\left( 7x^2 - 4x + \\frac{3}{x} - 2 + 4e^x - 5\\operatorname{sen} x - \\sec^2 x \\right) dx$",
      "origen": "respuesta"
+    },
+    {
+     "tex": "$\\displaystyle \\int \\left( 3\\operatorname{sen} x - 6x^2 + 8x^3 - \\frac{2}{x} + 5e^x - 2\\cos x \\right) dx$",
+     "origen": "extra"
+    },
+    {
+     "tex": "$\\displaystyle \\int \\left( 5x^2 - 6x + \\frac{2}{x} - 1 + 3e^x - 4\\operatorname{sen} x - \\sec^2 x \\right) dx$",
+     "origen": "extra"
     }
    ]
   ],
   "info": {
-   "modo": "ejercicios",
-   "r_uso": 6,
-   "e_uso": 12,
+   "modo": "cruzado",
    "falta": 0,
    "r_disp": 6,
    "e_disp": 12
@@ -1421,7 +1327,7 @@
   "titulo": "Integrales definidas",
   "archivo": "integrales-definidas.html",
   "receta": [
-   "ejercicios",
+   "cruzado",
    1,
    2
   ],
@@ -1432,40 +1338,12 @@
      "origen": "respuesta"
     },
     {
-     "tex": "$\\displaystyle \\int_{-2}^{2} (6 - 3x^2) \\, dx$",
+     "tex": "$\\displaystyle \\int_{0}^{2} (5x^2 - 3x) \\, dx$",
      "origen": "extra"
     },
     {
-     "tex": "$\\displaystyle \\int_{0}^{4} (-x^2 + 4x) \\, dx$",
+     "tex": "$\\displaystyle \\int_{-2}^{4} (2 - x^2) \\, dx$",
      "origen": "extra"
-    }
-   ],
-   [
-    {
-     "tex": "$\\displaystyle \\int_{1}^{3} (2x^2 + 5x) \\, dx$",
-     "origen": "extra"
-    },
-    {
-     "tex": "$\\displaystyle \\int_{1}^{5} (4 - 5x^2) \\, dx$",
-     "origen": "respuesta"
-    },
-    {
-     "tex": "$\\displaystyle \\int_{-3}^{1} (4 - 6x) \\, dx$",
-     "origen": "extra"
-    }
-   ],
-   [
-    {
-     "tex": "$\\displaystyle \\int_{-1}^{3} (3x^2 - 2x) \\, dx$",
-     "origen": "extra"
-    },
-    {
-     "tex": "$\\displaystyle \\int_{2}^{5} (-5x^2 + 8) \\, dx$",
-     "origen": "extra"
-    },
-    {
-     "tex": "$\\displaystyle \\int_{-2}^{3} (-4x^2 + x) \\, dx$",
-     "origen": "respuesta"
     }
    ],
    [
@@ -1474,22 +1352,50 @@
      "origen": "respuesta"
     },
     {
-     "tex": "$\\displaystyle \\int_{-2}^{4} (2 - x^2) \\, dx$",
+     "tex": "$\\displaystyle \\int_{1}^{3} (2x^2 + 5x) \\, dx$",
      "origen": "extra"
     },
     {
-     "tex": "$\\displaystyle \\int_{1}^{4} (-3x^2 + 2x) \\, dx$",
+     "tex": "$\\displaystyle \\int_{-2}^{2} (6 - 3x^2) \\, dx$",
      "origen": "extra"
     }
    ],
    [
     {
-     "tex": "$\\displaystyle \\int_{0}^{2} (5x^2 - 3x) \\, dx$",
+     "tex": "$\\displaystyle \\int_{1}^{5} (4 - 5x^2) \\, dx$",
+     "origen": "respuesta"
+    },
+    {
+     "tex": "$\\displaystyle \\int_{1}^{4} (-3x^2 + 2x) \\, dx$",
      "origen": "extra"
     },
     {
+     "tex": "$\\displaystyle \\int_{-1}^{2} (6x^2 + 4x) \\, dx$",
+     "origen": "extra"
+    }
+   ],
+   [
+    {
      "tex": "$\\displaystyle \\int_{-1}^{5} (-8 + 3x) \\, dx$",
      "origen": "respuesta"
+    },
+    {
+     "tex": "$\\displaystyle \\int_{0}^{4} (-x^2 + 4x) \\, dx$",
+     "origen": "extra"
+    },
+    {
+     "tex": "$\\displaystyle \\int_{-1}^{3} (3x^2 - 2x) \\, dx$",
+     "origen": "extra"
+    }
+   ],
+   [
+    {
+     "tex": "$\\displaystyle \\int_{-2}^{3} (-4x^2 + x) \\, dx$",
+     "origen": "respuesta"
+    },
+    {
+     "tex": "$\\displaystyle \\int_{3}^{6} (8 - 2x^2) \\, dx$",
+     "origen": "extra"
     },
     {
      "tex": "$\\displaystyle \\int_{-3}^{0} (-4x^2 - 5) \\, dx$",
@@ -1498,23 +1404,21 @@
    ],
    [
     {
-     "tex": "$\\displaystyle \\int_{-1}^{2} (6x^2 + 4x) \\, dx$",
-     "origen": "extra"
-    },
-    {
-     "tex": "$\\displaystyle \\int_{3}^{6} (8 - 2x^2) \\, dx$",
-     "origen": "extra"
-    },
-    {
      "tex": "$\\displaystyle \\int_{4}^{6} (5x^2 - 4x) \\, dx$",
      "origen": "respuesta"
+    },
+    {
+     "tex": "$\\displaystyle \\int_{2}^{5} (-5x^2 + 8) \\, dx$",
+     "origen": "extra"
+    },
+    {
+     "tex": "$\\displaystyle \\int_{-3}^{1} (4 - 6x) \\, dx$",
+     "origen": "extra"
     }
    ]
   ],
   "info": {
-   "modo": "ejercicios",
-   "r_uso": 6,
-   "e_uso": 12,
+   "modo": "cruzado",
    "falta": 0,
    "r_disp": 6,
    "e_disp": 12
@@ -1524,9 +1428,9 @@
   "titulo": "Área bajo la curva (P1)",
   "archivo": "area-bajo-curva-p1.html",
   "receta": [
-   "ejercicios",
+   "cruzado",
    1,
-   2
+   1
   ],
   "versiones": [
    [
@@ -1537,6 +1441,32 @@
     {
      "tex": "$f(x) = -x + 4$ en $[1,\\,3]$",
      "origen": "extra"
+    }
+   ],
+   [
+    {
+     "tex": "$f(x) = -x + 3$ en $[2,\\,4]$",
+     "origen": "respuesta"
+    },
+    {
+     "tex": "$f(x) = x + 3$ en $[1,\\,5]$",
+     "origen": "extra"
+    }
+   ],
+   [
+    {
+     "tex": "$f(x) = x + 6$ en $[2,\\,4]$",
+     "origen": "respuesta"
+    },
+    {
+     "tex": "$f(x) = -x + 6$ en $[2,\\,5]$",
+     "origen": "extra"
+    }
+   ],
+   [
+    {
+     "tex": "$f(x) = -x + 5$ en $[3,\\,6]$",
+     "origen": "respuesta"
     },
     {
      "tex": "$f(x) = x + 1$ en $[2,\\,6]$",
@@ -1545,11 +1475,7 @@
    ],
    [
     {
-     "tex": "$f(x) = x + 3$ en $[1,\\,5]$",
-     "origen": "extra"
-    },
-    {
-     "tex": "$f(x) = -x + 3$ en $[2,\\,4]$",
+     "tex": "$f(x) = x + 2$ en $[1,\\,4]$",
      "origen": "respuesta"
     },
     {
@@ -1559,73 +1485,29 @@
    ],
    [
     {
-     "tex": "$f(x) = -x + 6$ en $[2,\\,5]$",
-     "origen": "extra"
+     "tex": "$f(x) = -x + 10$ en $[1,\\,3]$",
+     "origen": "respuesta"
     },
     {
      "tex": "$f(x) = x + 7$ en $[0,\\,3]$",
-     "origen": "extra"
-    },
-    {
-     "tex": "$f(x) = x + 6$ en $[2,\\,4]$",
-     "origen": "respuesta"
-    }
-   ],
-   [
-    {
-     "tex": "$f(x) = x + 2$ en $[1,\\,4]$",
-     "origen": "respuesta"
-    },
-    {
-     "tex": "$f(x) = -x + 7$ en $[3,\\,5]$",
-     "origen": "extra"
-    },
-    {
-     "tex": "$f(x) = x + 3$ en $[2,\\,5]$",
-     "origen": "extra"
-    }
-   ],
-   [
-    {
-     "tex": "$f(x) = x + 8$ en $[1,\\,4]$",
-     "origen": "extra"
-    },
-    {
-     "tex": "$f(x) = -x + 5$ en $[3,\\,6]$",
-     "origen": "respuesta"
-    },
-    {
-     "tex": "$f(x) = -x + 9$ en $[4,\\,7]$",
-     "origen": "extra"
-    }
-   ],
-   [
-    {
-     "tex": "$f(x) = -x + 8$ en $[2,\\,6]$",
-     "origen": "extra"
-    },
-    {
-     "tex": "$f(x) = x + 5$ en $[1,\\,4]$",
      "origen": "extra"
     }
    ]
   ],
   "info": {
-   "modo": "ejercicios",
-   "r_uso": 5,
-   "e_uso": 12,
-   "falta": 1,
-   "r_disp": 5,
-   "e_disp": 12
+   "modo": "cruzado",
+   "falta": 0,
+   "r_disp": 6,
+   "e_disp": 6
   }
  },
  {
   "titulo": "Área bajo la curva (P2)",
   "archivo": "area-bajo-curva-p2.html",
   "receta": [
-   "ejercicios",
+   "cruzado",
    1,
-   2
+   1
   ],
   "versiones": [
    [
@@ -1636,38 +1518,36 @@
     {
      "tex": "$f(x) = -x^2 + 6x - 4$ en $[1,\\,5]$",
      "origen": "extra"
-    },
-    {
-     "tex": "$f(x) = x^2 + 4x + 5$ en $[-2,\\,1]$",
-     "origen": "extra"
     }
    ],
    [
-    {
-     "tex": "$f(x) = x^2 - 2x + 4$ en $[0,\\,3]$",
-     "origen": "extra"
-    },
     {
      "tex": "$f(x) = -x^2 + 8x - 11$ en $[3,\\,5]$",
      "origen": "respuesta"
     },
     {
-     "tex": "$f(x) = x^2 + 10x + 26$ en $[-5,\\,-3]$",
+     "tex": "$f(x) = x^2 - 2x + 4$ en $[0,\\,3]$",
      "origen": "extra"
     }
    ],
    [
     {
-     "tex": "$f(x) = x^2 - 8x + 17$ en $[3,\\,6]$",
-     "origen": "extra"
+     "tex": "$f(x) = x^2 + 6x + 11$ en $[-2,\\,0]$",
+     "origen": "respuesta"
     },
     {
      "tex": "$f(x) = -x^2 + 2x + 4$ en $[-1,\\,2]$",
      "origen": "extra"
+    }
+   ],
+   [
+    {
+     "tex": "$f(x) = -x^2 - 8x - 14$ en $[-4,\\,-3]$",
+     "origen": "respuesta"
     },
     {
-     "tex": "$f(x) = x^2 + 6x + 11$ en $[-2,\\,0]$",
-     "origen": "respuesta"
+     "tex": "$f(x) = x^2 - 8x + 17$ en $[3,\\,6]$",
+     "origen": "extra"
     }
    ],
    [
@@ -1678,53 +1558,33 @@
     {
      "tex": "$f(x) = -x^2 + 4x - 2$ en $[1,\\,3]$",
      "origen": "extra"
-    },
-    {
-     "tex": "$f(x) = x^2 + 2x + 3$ en $[-1,\\,2]$",
-     "origen": "extra"
     }
    ],
    [
     {
-     "tex": "$f(x) = x^2 - 4x + 6$ en $[1,\\,4]$",
-     "origen": "extra"
-    },
-    {
-     "tex": "$f(x) = -x^2 - 8x - 14$ en $[-4,\\,-3]$",
+     "tex": "$f(x) = -x^2 + 4x + 1$ en $[0,\\,3]$",
      "origen": "respuesta"
     },
     {
-     "tex": "$f(x) = x^2 + 8x + 18$ en $[-4,\\,-2]$",
-     "origen": "extra"
-    }
-   ],
-   [
-    {
-     "tex": "$f(x) = x^2 - 6x + 12$ en $[2,\\,4]$",
-     "origen": "extra"
-    },
-    {
-     "tex": "$f(x) = -x^2 + 8x - 13$ en $[3,\\,5]$",
+     "tex": "$f(x) = x^2 - 4x + 6$ en $[1,\\,4]$",
      "origen": "extra"
     }
    ]
   ],
   "info": {
-   "modo": "ejercicios",
-   "r_uso": 5,
-   "e_uso": 12,
-   "falta": 1,
-   "r_disp": 5,
-   "e_disp": 12
+   "modo": "cruzado",
+   "falta": 0,
+   "r_disp": 6,
+   "e_disp": 6
   }
  },
  {
   "titulo": "Derivada por definición",
   "archivo": "derivada-definicion.html",
   "receta": [
-   "ejercicios",
+   "cruzado",
    1,
-   2
+   1
   ],
   "versiones": [
    [
@@ -1735,6 +1595,12 @@
     {
      "tex": "$f(x) = 2x^2$",
      "origen": "extra"
+    }
+   ],
+   [
+    {
+     "tex": "$f(x) = 3x^2$",
+     "origen": "respuesta"
     },
     {
      "tex": "$f(x) = x^2 - 5x + 4$",
@@ -1743,11 +1609,27 @@
    ],
    [
     {
-     "tex": "$f(x) = 3x + 7$",
-     "origen": "extra"
+     "tex": "$f(x) = x^2 - 3x - 2$",
+     "origen": "respuesta"
     },
     {
+     "tex": "$f(x) = 3x + 7$",
+     "origen": "extra"
+    }
+   ],
+   [
+    {
      "tex": "$f(x) = 6x - 5$",
+     "origen": "respuesta"
+    },
+    {
+     "tex": "$f(x) = -4x^2$",
+     "origen": "extra"
+    }
+   ],
+   [
+    {
+     "tex": "$f(x) = -5x^2$",
      "origen": "respuesta"
     },
     {
@@ -1757,77 +1639,29 @@
    ],
    [
     {
-     "tex": "$f(x) = -2x + 9$",
-     "origen": "extra"
-    },
-    {
-     "tex": "$f(x) = -4x^2$",
-     "origen": "extra"
-    },
-    {
-     "tex": "$f(x) = 3x^2$",
-     "origen": "respuesta"
-    }
-   ],
-   [
-    {
-     "tex": "$f(x) = -5x^2$",
-     "origen": "respuesta"
-    },
-    {
-     "tex": "$f(x) = 6x^2$",
-     "origen": "extra"
-    },
-    {
-     "tex": "$f(x) = -x^2 + 4x + 6$",
-     "origen": "extra"
-    }
-   ],
-   [
-    {
-     "tex": "$f(x) = 5x - 4$",
-     "origen": "extra"
-    },
-    {
-     "tex": "$f(x) = x^2 - 3x - 2$",
-     "origen": "respuesta"
-    },
-    {
-     "tex": "$f(x) = 3x^2 - 2x + 5$",
-     "origen": "extra"
-    }
-   ],
-   [
-    {
-     "tex": "$f(x) = -7x - 2$",
-     "origen": "extra"
-    },
-    {
-     "tex": "$f(x) = -3x^2$",
-     "origen": "extra"
-    },
-    {
      "tex": "$f(x) = x^2 - x + 5$",
      "origen": "respuesta"
+    },
+    {
+     "tex": "$f(x) = -2x + 9$",
+     "origen": "extra"
     }
    ]
   ],
   "info": {
-   "modo": "ejercicios",
-   "r_uso": 6,
-   "e_uso": 12,
+   "modo": "cruzado",
    "falta": 0,
    "r_disp": 6,
-   "e_disp": 12
+   "e_disp": 6
   }
  },
  {
   "titulo": "Suma de Riemann",
   "archivo": "suma-riemann.html",
   "receta": [
-   "ejercicios",
+   "cruzado",
    1,
-   2
+   1
   ],
   "versiones": [
    [
@@ -1838,6 +1672,32 @@
     {
      "tex": "$\\displaystyle \\int_{-1}^{2} (4 - x^2) \\, dx$",
      "origen": "extra"
+    }
+   ],
+   [
+    {
+     "tex": "$\\displaystyle \\int_{2}^{6} (3 - x^2) \\, dx$",
+     "origen": "respuesta"
+    },
+    {
+     "tex": "$\\displaystyle \\int_{1}^{3} (x^2 + 2) \\, dx$",
+     "origen": "extra"
+    }
+   ],
+   [
+    {
+     "tex": "$\\displaystyle \\int_{5}^{8} (4 + 3x^2) \\, dx$",
+     "origen": "respuesta"
+    },
+    {
+     "tex": "$\\displaystyle \\int_{1}^{5} (10 - 2x^2) \\, dx$",
+     "origen": "extra"
+    }
+   ],
+   [
+    {
+     "tex": "$\\displaystyle \\int_{0}^{3} (9 - x^2) \\, dx$",
+     "origen": "respuesta"
     },
     {
      "tex": "$\\displaystyle \\int_{0}^{4} (2x^2 + 1) \\, dx$",
@@ -1846,40 +1706,8 @@
    ],
    [
     {
-     "tex": "$\\displaystyle \\int_{1}^{3} (x^2 + 2) \\, dx$",
-     "origen": "extra"
-    },
-    {
-     "tex": "$\\displaystyle \\int_{2}^{6} (3 - x^2) \\, dx$",
-     "origen": "respuesta"
-    },
-    {
-     "tex": "$\\displaystyle \\int_{-3}^{1} (x^2 + 3) \\, dx$",
-     "origen": "extra"
-    }
-   ],
-   [
-    {
-     "tex": "$\\displaystyle \\int_{-2}^{2} (3x^2 - 5) \\, dx$",
-     "origen": "extra"
-    },
-    {
-     "tex": "$\\displaystyle \\int_{1}^{5} (10 - 2x^2) \\, dx$",
-     "origen": "extra"
-    },
-    {
-     "tex": "$\\displaystyle \\int_{5}^{8} (4 + 3x^2) \\, dx$",
-     "origen": "respuesta"
-    }
-   ],
-   [
-    {
      "tex": "$\\displaystyle \\int_{-2}^{5} (x^2 - 6) \\, dx$",
      "origen": "respuesta"
-    },
-    {
-     "tex": "$\\displaystyle \\int_{-1}^{3} (x^2 - 4) \\, dx$",
-     "origen": "extra"
     },
     {
      "tex": "$\\displaystyle \\int_{0}^{3} (6 - 3x^2) \\, dx$",
@@ -1888,32 +1716,20 @@
    ],
    [
     {
-     "tex": "$\\displaystyle \\int_{2}^{5} (5 + 2x^2) \\, dx$",
-     "origen": "extra"
+     "tex": "$\\displaystyle \\int_{1}^{4} (5 - 2x^2) \\, dx$",
+     "origen": "respuesta"
     },
     {
-     "tex": "$\\displaystyle \\int_{3}^{6} (x^2 - 1) \\, dx$",
-     "origen": "extra"
-    },
-    {
-     "tex": "$\\displaystyle \\int_{-2}^{1} (8 - x^2) \\, dx$",
-     "origen": "extra"
-    }
-   ],
-   [
-    {
-     "tex": "$\\displaystyle \\int_{-4}^{0} (2x^2 + 3) \\, dx$",
+     "tex": "$\\displaystyle \\int_{-2}^{2} (3x^2 - 5) \\, dx$",
      "origen": "extra"
     }
    ]
   ],
   "info": {
-   "modo": "ejercicios",
-   "r_uso": 4,
-   "e_uso": 12,
-   "falta": 2,
-   "r_disp": 4,
-   "e_disp": 12
+   "modo": "cruzado",
+   "falta": 0,
+   "r_disp": 6,
+   "e_disp": 6
   }
  }
 ]

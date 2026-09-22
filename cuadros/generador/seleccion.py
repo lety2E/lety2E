@@ -162,15 +162,19 @@ def cruzado(tema, V):
     versiones, falta = [], 0
     for v in range(V):
         fila = []
-        for bloques, uso, cuantos, origen, k in ((R, usoR, nR, 'respuesta', v % nb),
-                                                  (E, usoE, nE, 'extra', (v + 1) % nb)):
+        # los extras salen de los OTROS tipos, repartidos: con tres tipos y dos
+        # extras, uno de cada tipo que no es el del resuelto (Mate 5, 21-sep-2026);
+        # con dos tipos, los dos extras son del otro tipo.
+        otros = [(v + 1 + j) % nb for j in range(nb - 1)] or [0]
+        tomas = [(R, usoR, v % nb, 'respuesta')] * nR
+        tomas += [(E, usoE, otros[j % len(otros)], 'extra') for j in range(nE)]
+        for bloques, uso, k, origen in tomas:
             items = bloques[k][1]
-            for _ in range(cuantos):
-                if uso[k] >= len(items):
-                    falta += 1; continue
-                item = dict(items[uso[k]]); uso[k] += 1
-                item['origen'] = origen
-                fila.append(item)
+            if uso[k] >= len(items):
+                falta += 1; continue
+            item = dict(items[uso[k]]); uso[k] += 1
+            item['origen'] = origen
+            fila.append(item)
         versiones.append(fila)
     return versiones, {'modo': 'cruzado', 'falta': falta,
                        'r_disp': sum(len(i) for _, i in R),

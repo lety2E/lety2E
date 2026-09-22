@@ -73,28 +73,48 @@ CURSOS = {
     ('lenguaje-algebraico.html',   'Lenguaje algebraico',       ('ejercicios', 1, 2)),
     ('problemas-ecuaciones.html',  'Problemas de ecuaciones',   ('ejercicios', 1, 2)),
  ]),
- # Matemáticas 5 (desde el 17-sep-2026): se va definiendo tema por tema, en el
- # orden del índice del curso. Lo que no dice "Lety" es reparto provisional.
+ # Matemáticas 5 (21-sep-2026). Lety pidió reproducir los patrones de Mate 1 en
+ # los 19 temas de una vez: bloques por tipo en el mismo orden en los dos lados
+ # (Bloque 1 <-> Bloque A), cada versión 1 resuelto + extras de "Ejercicios
+ # extra 1" de tipo distinto (modo cruzado): 1+2 en los temas mecánicos (reglas
+ # de derivación e integrales), 1+1 en los pesados (problemas, gráficas, Riemann).
+ # "Ejercicios extra 2" es práctica. Donde
+ # no alcanzaban los resueltos se escribieron (Velocidad 2, Senos 1, Recta
+ # tangente 1, Puntos críticos 2, Optimización 2, Área bajo la curva 1 y 1,
+ # Riemann 2), verificados con sympy. Qué bloque es qué tipo, en la página.
  'Matemáticas 5': ('../../math/matematicas-5', [
-    ('reglas-basicas.html',        'Reglas básicas de derivación',    ('ejercicios', 1, 2)),
-    ('velocidad-media.html',       'Velocidad media e instantánea',   ('ejercicios', 1, 2)),
-    ('senos-cosenos.html',         'Derivadas de senos y cosenos',    ('ejercicios', 1, 2)),
-    ('raices.html',                'Derivadas de raíces',             ('ejercicios', 1, 2)),
-    ('regla-producto-p1.html',     'Regla del producto (P1)',         ('ejercicios', 1, 2)),
-    ('regla-producto-p2.html',     'Regla del producto (P2)',         ('ejercicios', 1, 2)),
-    ('regla-cociente-p1.html',     'Regla del cociente (P1)',         ('ejercicios', 1, 2)),
-    ('regla-cociente-p2.html',     'Regla del cociente (P2)',         ('ejercicios', 1, 2)),
-    ('regla-cadena-p1.html',       'Regla de la cadena (P1)',         ('ejercicios', 1, 2)),
-    ('regla-cadena-p2.html',       'Regla de la cadena (P2)',         ('ejercicios', 1, 2)),
-    ('recta-tangente.html',        'Recta tangente',                  ('ejercicios', 1, 2)),
-    ('puntos-criticos.html',       'Puntos críticos',                 ('ejercicios', 1, 2)),
-    ('optimizacion-areas.html',    'Optimización de áreas',           ('ejercicios', 1, 2)),
-    ('integrales-indefinidas.html','Integrales indefinidas',          ('ejercicios', 1, 2)),
-    ('integrales-definidas.html',  'Integrales definidas',            ('ejercicios', 1, 2)),
-    ('area-bajo-curva-p1.html',    'Área bajo la curva (P1)',         ('ejercicios', 1, 2)),
-    ('area-bajo-curva-p2.html',    'Área bajo la curva (P2)',         ('ejercicios', 1, 2)),
-    ('derivada-definicion.html',   'Derivada por definición',         ('ejercicios', 1, 2)),
-    ('suma-riemann.html',          'Suma de Riemann',                 ('ejercicios', 1, 2)),
+    # B1 polinomios, B2 fracciones, B3 mixto (B4, mixto, queda de práctica)
+    ('reglas-basicas.html',        'Reglas básicas de derivación',    ('cruzado', 1, 2)),
+    # B1 parábola hacia arriba (t^2 positivo), B2 hacia abajo
+    ('velocidad-media.html',       'Velocidad media e instantánea',   ('cruzado', 1, 1)),
+    # sumas largas; los extras son sumas cortas
+    ('senos-cosenos.html',         'Derivadas de senos y cosenos',    ('cruzado', 1, 1)),
+    # B1 raíz simple, B2 fracción con raíz en el denominador
+    ('raices.html',                'Derivadas de raíces',             ('cruzado', 1, 2)),
+    ('regla-producto-p1.html',     'Regla del producto (P1)',         ('cruzado', 1, 2)),
+    ('regla-producto-p2.html',     'Regla del producto (P2)',         ('cruzado', 1, 2)),
+    ('regla-cociente-p1.html',     'Regla del cociente (P1)',         ('cruzado', 1, 2)),
+    # B1 cociente simple, B2 con sumas (B3 mixto queda de práctica)
+    ('regla-cociente-p2.html',     'Regla del cociente (P2)',         ('cruzado', 1, 2)),
+    # B1 cubos, B2 cuadrados, B3 raíces
+    ('regla-cadena-p1.html',       'Regla de la cadena (P1)',         ('cruzado', 1, 2)),
+    # B1 raíz de potencia trig y trig de polinomio, B2 ln y potencia de trig
+    ('regla-cadena-p2.html',       'Regla de la cadena (P2)',         ('cruzado', 1, 2)),
+    # B1 parábola hacia arriba, B2 hacia abajo
+    ('recta-tangente.html',        'Recta tangente',                  ('cruzado', 1, 1)),
+    # B1 cúbico positivo, B2 negativo
+    ('puntos-criticos.html',       'Puntos críticos',                 ('cruzado', 1, 2)),
+    ('optimizacion-areas.html',    'Optimización de áreas',           ('cruzado', 1, 1)),
+    ('integrales-indefinidas.html','Integrales indefinidas',          ('cruzado', 1, 2)),
+    ('integrales-definidas.html',  'Integrales definidas',            ('cruzado', 1, 2)),
+    # B1 pendiente positiva, B2 negativa
+    ('area-bajo-curva-p1.html',    'Área bajo la curva (P1)',         ('cruzado', 1, 1)),
+    # B1 parábola hacia arriba, B2 hacia abajo
+    ('area-bajo-curva-p2.html',    'Área bajo la curva (P2)',         ('cruzado', 1, 1)),
+    # B1 lineales, B2 cuadráticas puras, B3 cuadráticas completas
+    ('derivada-definicion.html',   'Derivada por definición',         ('cruzado', 1, 1)),
+    # B1 x^2 positivo, B2 negativo
+    ('suma-riemann.html',          'Suma de Riemann',                 ('cruzado', 1, 1)),
     # historia-calculo.html no tiene ejercicios: no entra al examen.
  ]),
 }
@@ -127,6 +147,26 @@ def seccion_extra(secs):
         if nombre in secs: return secs[nombre], nombre
     return None, None
 
+def figura_de(n):
+    """El <svg> de figura dentro de un nodo, saltando los que KaTeX mete en las
+    raíces (van dentro de un span.katex)."""
+    if isinstance(n, str): return None
+    if n.tag == 'svg': return raw(n)
+    if 'katex' in n.cls(): return None
+    for k in n.kids:
+        r = figura_de(k)
+        if r: return r
+    return None
+
+def figuras_de(body):
+    """Por cada .ej-line del cuerpo, su <svg> de figura o None."""
+    out = []
+    for x in walk(body):
+        if isinstance(x, str) or 'ej-line' not in x.cls(): continue
+        if not clean(text(x)): continue
+        out.append(figura_de(x))
+    return out
+
 def reactivos(sec):
     """[(bloque, [reactivo,...]),...]  reactivo = {'tex':..} o {'svg':..}"""
     bloques = []
@@ -138,6 +178,12 @@ def reactivos(sec):
             body = next((x for x in walk(c)
                          if not isinstance(x,str) and 'mini-card-body' in x.cls()), None)
             it = [{'tex': i} for i in items_of(body)] if body is not None else []
+            # un .ej-line con figura adentro (Optimización: el rectángulo y su
+            # perímetro) lleva las dos cosas: el svg se imprime y el tex es la llave
+            figs = figuras_de(body) if body is not None else []
+            if figs and len(figs) == len(it):
+                for r, svg in zip(it, figs):
+                    if svg: r['svg'] = svg
             if it: bloques.append((head, it))
         return bloques
     figs = [x for x in walk(sec) if not isinstance(x,str) and 'ejer-card-body' in x.cls()]

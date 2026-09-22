@@ -92,7 +92,10 @@ def items_of(body):
     return out
 
 def parse_file(path):
-    p=P(); p.feed(open(path,encoding='utf-8').read())
+    return parse_html(open(path,encoding='utf-8').read())
+
+def parse_html(html):
+    p=P(); p.feed(html)
     out=[]
     for sec in walk(p.root):
         if isinstance(sec,str) or 'section-block' not in sec.cls(): continue

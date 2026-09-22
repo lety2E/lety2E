@@ -16,7 +16,7 @@ La llave de cada resolución es el propio enunciado (`tex`), que es lo que guard
 `seleccion.json`. Se corre desde esta carpeta:  python3 resoluciones.py
 """
 import json, os, re
-from extraer import parse_file
+from extraer import parse_html
 from banco import CURSOS  # {curso: (ruta, [(archivo, titulo, receta), ...])}
 from cursos import elegir, archivo
 
@@ -127,13 +127,37 @@ def cosechar_tarjetas(html):
             if r: out[norm(r[0])] = r[1]
     return out
 
+RE_DIV = re.compile(r'<div\b|</div>')
+
+def _quitar_divs(html, clase):
+    """Quita los <div class="clase"...>...</div> completos (con lo que traigan dentro)."""
+    pat = re.compile(r'<div class="%s[" ]' % re.escape(clase))
+    while True:
+        m = pat.search(html)
+        if not m: return html
+        prof = 0
+        for t in RE_DIV.finditer(html, m.start()):
+            prof += -1 if t.group() == '</div>' else 1
+            if prof == 0:
+                html = html[:m.start()] + html[t.end():]
+                break
+        else:
+            return html
+
+# Lo que sobra en la hoja resuelta: el rótulo "Ejercicio N — ..." repite el
+# enunciado, y las tablas de valores y gráficas de Recta tangente no se pueden
+# leer como texto corrido.
+SIN_COSECHAR = ('sol-rotulo', 'graficas-row')
+
 def cosechar(ruta_html):
     """{clave normalizada del ejercicio: respuesta publicada}."""
     html = open(ruta_html, encoding='utf-8').read()
     por_tarjeta = cosechar_tarjetas(html)
     if por_tarjeta:
         return por_tarjeta
-    pagina = parse_file(ruta_html)                  # listas paralelas: por posición
+    for clase in SIN_COSECHAR:
+        html = _quitar_divs(html, clase)
+    pagina = parse_html(html)                       # listas paralelas: por posición
     ejercicios = secciones(pagina, NOMBRES_EJERCICIOS)
     respuestas = secciones(pagina, NOMBRES_RESPUESTAS)
     if not ejercicios or not respuestas:

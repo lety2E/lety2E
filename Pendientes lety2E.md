@@ -54,22 +54,30 @@ especial §3 (mezcla de tipos y modo cruzado), §5 (extra 1 / extra 2) y §14 (c
 trabajar esto: un tema a la vez, mostrarle, que ella decida).
 
 **Examen 1 de Matemáticas 1: cerrado el 17-sep-2026.** Nueve temas definidos por Lety, seis
-versiones completas, PDF en `~/Downloads` (`python3 pdf.py`). Lo que sigue, en orden:
+versiones completas, PDF en `~/Downloads` (`python3 pdf.py`).
 
-- **Los cuadros de Matemáticas 5, primera parte** — es la materia de este semestre y Lety
-  quiere abrir un chat solo para eso. Mismo trato que Mate 1: un tema a la vez, en el orden
-  del índice del curso, ella decide el reparto y si falta material se escribe. **Ojo con el
-  generador**: `generar.py` tiene `CURSO` y `DESTINO` fijos en Matemáticas 1 (y `sitio.py`
-  igual); hay que parametrizarlos por curso, dar de alta el curso en `banco.py` y las filas
-  de sus exámenes en `acomodo.py`. Y hacerle su carpeta `cuadros/matematicas-5/` en el sitio.
+**Matemáticas 5: los dos exámenes armados el 21-sep-2026**, seis versiones cada uno, en
+blanco y resueltas al 100 %, PDF en `~/Downloads`. El reparto lo calcó el asistente de Mate 1
+(Lety pidió todo de una vez); la tabla y los ejercicios nuevos están en `Reglas de mis
+exámenes.md` §13b. Queda para Lety:
+
+- **Revisar el reparto y los ejercicios nuevos** (§13b) y decir si algún tema sube o baja
+  de 1+2 a 1+1: es cambiar su receta en `banco.py` y correr `seleccion.py` →
+  `resoluciones.py` → `generar.py` → `sitio.py` (→ `pdf.py`).
+- **Imprimir una hoja de cada examen** y mirarla en papel, como con Mate 1.
+- **El extra $-4x^3 + 88x^2$ de Puntos críticos** (así viene del doc) da $x = 44/3$; quedó
+  en extra 2. Si es errata de $8x^2$, corregirlo en la página.
+
+Lo que sigue, en orden:
+
 - **El Examen 2 de Matemáticas 1** — sus cuatro temas (Reglas de exponentes, mcm y MCD,
   Lenguaje algebraico, Problemas de ecuaciones) siguen con reparto provisional; Lety decidió
   dejarlos para cuando toque ese examen. Para Reglas de exponentes quedó propuesto, sin
   revisar: 4 por versión, 1 resuelto + 1 extra de cada tipo (potencias de 10 / otras bases).
   mcm y MCD todavía no llena la versión f.
-- **Terminar las resoluciones de los extras del Examen 1** — ya están 108 de 120 en
-  `resoluciones-manuales.json` (verificadas con sympy, 17-sep-2026). Faltan **Pendiente y
-  ordenada (6)** y **Área y perímetro (6)**, y los **6 triángulos de Ecuaciones con
+- **Terminar las resoluciones de los extras del Examen 1 de Mate 1** — ya están 108 de 120
+  en `resoluciones-manuales.json` (verificadas con sympy, 17-sep-2026). Faltan **Pendiente
+  y ordenada (6)** y **Área y perímetro (6)**, y los **6 triángulos de Ecuaciones con
   ángulos**, que son figuras: hay que hacer que `sitio.py`/`resoluciones.py` los emparejen
   por el `aria-label` del SVG (hoy los salta). El Examen 2 tiene sus propios extras sin
   resolver. Van solo a `cuadros/` y a IEMS, nunca a `math/`.

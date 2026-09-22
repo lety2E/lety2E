@@ -5,6 +5,59 @@
 
 ---
 
+## 2026-09-21 — Cuadros de Matemáticas 5: los dos exámenes, las seis versiones, resueltas
+
+Lety pidió *"reproducir lo mismo"* que en Mate 1 para Mate 5, *"todos los temas de una vez,
+y las 6 versiones"*. Se calcaron los patrones de Mate 1 en los 19 temas (el reparto lo
+decidió el asistente; tabla en `Reglas de mis exámenes.md` §13b):
+
+- **Las 19 páginas de `math/matematicas-5/` se reacomodaron por tipo**: bloques de
+  resueltos y de extras en el mismo orden (Bloque 1 ↔ Bloque A), la sección que entra al
+  examen se llama **Ejercicios extra 1** y trae exactamente lo que usan las seis versiones,
+  y lo que sobra quedó en **Ejercicios extra 2** de práctica. Las resoluciones se movieron
+  con sus ejercicios (se emparejan por posición) y los rótulos "Ejercicio N" se renumeraron.
+- **Se escribieron 12 resueltos y 8 extras** donde no alcanzaba (Velocidad 2, Senos 1, Recta
+  tangente 1 con su gráfica y tablas, Puntos críticos 2 + 2 extras, Optimización 2 con
+  figura, Área bajo la curva 1 y 1, Riemann 2, Reglas básicas 3 extras, Raíces 3 extras),
+  calcados del molde de cada página y verificados con sympy. La lista está en §13b.
+- **Velocidad media** cambió de forma: cada problema es ahora UN `.ej-line` (con sus incisos
+  adentro, como los extras) y UNA resolución con rótulo; antes eran cuatro renglones y tres
+  resoluciones y el generador los leía como cuatro reactivos.
+- **Receta general**: modo `cruzado`, **1 resuelto + 2 extras en los temas mecánicos**
+  (reglas de derivación, integrales, puntos críticos) y **1 + 1 en los pesados**
+  (velocidad, senos, recta tangente, optimización, área bajo la curva, derivada por
+  definición, Riemann). Con dos extras y tres tipos, uno de cada tipo que no es el del
+  resuelto (`seleccion.py`).
+- **Corte**: Examen 1 = temas 1 a 10 (derivadas), letras a–f, al 82 % de la hoja; Examen 2 =
+  temas 11 a 19, letras g–l, al 70 %. Las 12 versiones imprimen en una hoja cada una
+  (`pdf.py`, PDF en `~/Downloads`). Historia del cálculo no entra.
+- **Resueltas al 100 %**: 294 de 294. Las 180 de los extras las escribió un generador con
+  sympy en el estilo de cada página (verificadas dos veces, la segunda contra el resultado
+  final independiente) y están en `resoluciones-manuales.json`. El generador vivía en el
+  scratchpad de la sesión y se perdió al cerrarla; las resoluciones no.
+
+Cambios en el generador (`cuadros/generador/`), todos sin efecto en Mate 1 (su banco,
+selección y 86 % de hoja quedaron idénticos):
+
+- `banco.py`: un `.ej-line` con figura adentro (Optimización) entrega el svg junto con su
+  texto; `generar.py` los imprime juntos, la figura al lado del renglón (`.con-figura`).
+- `generar.py`: los enunciados con incisos van con cada inciso en su renglón, sin aire
+  antes de `,` y `?`, y el signo que sigue a una fórmula ya no se va solo al siguiente
+  renglón (`.pegado`).
+- `medida.py` + `ancho.py` (nuevo): **las fórmulas se miden por tokens**, calibrado contra 45
+  fórmulas medidas en el navegador (±8 %). El conteo por caracteres daba *¡NO CABE!* en hojas
+  de Mate 5 que cabían al 80 %.
+- `resoluciones.py`: al cosechar salta los rótulos y las tablas/gráficas de Recta tangente
+  (`.sol-rotulo`, `.graficas-row`); `extraer.py` gana `parse_html()`.
+- `sitio.py`: la hoja **resuelta** va un tema por renglón, a lo ancho, y los `aligned`
+  largos ya no se montan sobre el enunciado.
+
+Verificado: las 19 páginas a 390×844 sin cards desbordadas ni errores de KaTeX; las 12
+versiones en el navegador y en PDF. **Ojo** para Lety: el extra $-4x^3 + 88x^2$ de Puntos
+críticos (así viene del doc) quedó en extra 2 por si es errata de $8x^2$.
+
+---
+
 ## 2026-09-17 — Cuadros: se definen Monomios y Expresiones algebraicas, tema por tema
 
 Lety retomó los exámenes yendo despacio, un tema a la vez y en el orden de la página.

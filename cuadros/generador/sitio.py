@@ -83,6 +83,11 @@ h1{font-family:var(--font-display);font-size:1.6rem;margin:0 0 .2rem}
 /* La hoja resuelta: cada ejercicio con su resolución debajo */
 .sol{display:block;margin:-.35rem 0 .5rem 1.1em;font-size:.82rem;color:var(--accent);
   line-height:1.5}
+/* Un aligned largo (las resoluciones de Mate 5) en línea se centra en el renglón y se
+   monta sobre el enunciado: va como bloque, con su aire. */
+.sol .katex{display:inline-block;vertical-align:top;margin:.15rem 0}
+.papel.resuelta .mini-card-body .ej-line:not(.libre){line-height:2.2}
+.papel.resuelta .sol{margin-top:.15rem}
 .sol.falta{color:var(--text-3);font-style:italic}
 .papel.resuelta .mini-card-body{line-height:1.6}
 .marca{display:inline-block;margin-left:.5rem;padding:.1rem .45rem;border-radius:var(--r-sm);
@@ -195,10 +200,14 @@ def pagina_version(curso, sel, planes, nombre, letras, plan, v, destino, banco):
            + '</body></html>\n')
     open(os.path.join(destino, '%s.html' % letra), 'w', encoding='utf-8').write(doc)
 
+    # La hoja resuelta es para calificar en pantalla, no para imprimir: cada tema
+    # va a lo ancho, en el orden del curso, para que las resoluciones largas (los
+    # aligned de Mate 5) no se corten en una tarjeta angosta.
+    plan_resuelto = [[(t['titulo'], 1, 1)] for t in recorte]
     doc = (cabeza('%s%s resuelta' % (curso, letra), prof=1)
            + barra(curso, planes, letra, resuelta=True)
            + '<div class="papel resuelta">'
-           + cuerpo_hoja(curso, recorte, v, letra, plan, banco, numeros) + '</div>'
+           + cuerpo_hoja(curso, recorte, v, letra, plan_resuelto, banco, numeros) + '</div>'
            + '</body></html>\n')
     open(os.path.join(destino, '%s-resuelta.html' % letra), 'w', encoding='utf-8').write(doc)
 

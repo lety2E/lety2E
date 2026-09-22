@@ -21,6 +21,7 @@ un renglón largo se parte en dos. Se calcula por ancho de columna y número de
 caracteres, y se redondea hacia arriba. Por eso la alarma salta al 92%.
 """
 import math, re
+import ancho
 
 CM = 96 / 2.54                     # px por cm, a 96 dpi
 
@@ -39,17 +40,22 @@ ALTO_LIBRE   = 21.6                # .9rem x 1.5
 ALTO_FIGURA  = 110.0               # svg max-height (110 desde el 17-sep-2026)
 MARGEN_LIBRE = 6.4                 # .4rem arriba y abajo, que se colapsan
 
-# Caracteres que caben en un renglón, por píxel de ancho. Calibrado con los
-# enunciados de Lenguaje algebraico y Problemas de ecuaciones.
-CHARS_LIBRE   = 0.135
-CHARS_FORMULA = 0.111              # la fórmula ya renderizada es más ancha
+# Caracteres de texto corrido que caben en un renglón, por píxel de ancho.
+# Calibrado con los enunciados de Lenguaje algebraico y Problemas de ecuaciones.
+CHARS_LIBRE = 0.135
+# Las fórmulas se miden por tokens (ancho.py), con el em de KaTeX dentro de la
+# tarjeta: .9rem x .95 x 1.21 (katex.min.css) a 16px.
+EM_FORMULA = 16 * 0.9 * 0.95 * 1.21   # 16.55 px
 
 
-def _visuales(tipo, texto, ancho):
+def _visuales(tipo, texto, ancho_px):
     if tipo == 'figura':
         return 1
-    densidad = CHARS_LIBRE if tipo == 'libre' else CHARS_FORMULA
-    return max(1, math.ceil(len(texto) / max(1, ancho * densidad)))
+    if tipo == 'formula':
+        return max(1, math.ceil(ancho.ancho_em(texto) * EM_FORMULA / max(1, ancho_px)))
+    # un enunciado con incisos trae saltos de linea: cada tramo se mide aparte
+    return sum(max(1, math.ceil(len(t) / max(1, ancho_px * CHARS_LIBRE)))
+               for t in texto.split('\n'))
 
 
 def alto_tarjeta(lineas, ancho, columnas=1):

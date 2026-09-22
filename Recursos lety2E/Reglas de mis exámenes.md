@@ -112,6 +112,11 @@ Regla que se sigue en todos los modos: **ningún ejercicio se repite entre
 versiones**, y cuando un tema aporta varios ejercicios, cada uno viene de un
 molde distinto (a un mismo alumno no le tocan tres veces la misma forma).
 
+**Cruzado con dos extras** (Mate 5, 21-sep-2026): cuando el tema tiene tres
+tipos (Reglas básicas: polinomios, fracciones, mixtos; Cadena P1: cubos,
+cuadrados, raíces), la versión lleva el resuelto de un tipo y **un extra de cada
+uno de los otros dos**. Con dos tipos, los dos extras son del otro tipo.
+
 ## 4. Los bloques se agrupan por tipo
 
 **Decidido por Lety.** Dos maneras, según el tema:
@@ -242,7 +247,14 @@ aire de sobra. Si algún día se pasa, las palancas son, en este orden: reacomod
 las filas, bajar `--renglon` en `generar.py`, o mover un tema al otro examen.
 
 (La hoja **resuelta** sí puede irse a dos páginas, y no importa: es la copia de
-Lety para calificar, no la que se reparte.)
+Lety para calificar, no la que se reparte. Desde el 21-sep-2026 va **un tema por
+renglón, a lo ancho**, para que las resoluciones largas de Mate 5 no se corten.)
+
+**Cómo mide las fórmulas** (21-sep-2026): por tokens (`ancho.py`), no por número
+de caracteres. Con las fórmulas compactas de Mate 5 —exponentes, fracciones— el
+conteo por caracteres gritaba *¡NO CABE!* en hojas que cabían al 80 %. Se
+calibró contra 45 fórmulas medidas en el navegador y queda dentro de ±8 %. La
+última palabra sigue siendo el PDF.
 
 ## 9. Las versiones
 
@@ -285,8 +297,10 @@ Cosas que salieron al armar los exámenes y que conviene revisar en cada tema:
   toque ese examen. Para Reglas de exponentes quedó sobre la mesa la propuesta
   de 4 por versión (1 resuelto + 1 extra de cada tipo: base 10 y otras bases);
   no la revisó.
-- **Matemáticas 5** es lo que sigue (es materia de este semestre): la primera
-  parte de sus cuadros, tema por tema, con el mismo trato.
+- **Matemáticas 5**: los dos exámenes quedaron armados el 21-sep-2026 (§13b)
+  con el reparto decidido por el asistente calcando Mate 1; Lety no lo revisó
+  tema por tema. Cualquier tema se puede subir o bajar de 1+1 a 1+2 (o al
+  revés) cambiando su receta en `banco.py`.
 - **Matemáticas 2**, completo en el sitio y sin tocar.
 
 ## 13. Estado al 17 de septiembre de 2026
@@ -309,6 +323,62 @@ las seis versiones completas, al 80 % de la hoja. El PDF para imprimir
 
 Examen 2 (los cuatro restantes): sin definir, con reparto provisional.
 
+## 13b. Matemáticas 5 al 21 de septiembre de 2026
+
+**Los dos exámenes de Matemáticas 5 están armados**, las seis versiones de cada
+uno, en blanco y resueltas (294 de 294 resoluciones, verificadas con sympy dos
+veces: al escribirlas y con una segunda pasada independiente del resultado).
+Lety pidió *"reproducir lo mismo"* que en Mate 1 y *"todos los temas de una vez,
+y las 6 versiones"*, así que el reparto lo decidió el asistente calcando Mate 1:
+**bloques por tipo en el mismo orden en los dos lados, cada versión 1 resuelto +
+extras de tipo distinto (modo cruzado), 1+2 en los temas mecánicos y 1+1 en los
+pesados, "Ejercicios extra 1" con exactamente lo que usan las seis versiones y
+"Ejercicios extra 2" de práctica.** Donde no alcanzaban los resueltos se
+escribieron, calcados del molde de la página y verificados.
+
+Corte: **Examen 1 = temas 1 a 10** (las reglas de derivación, letras a–f, ~82 %
+de la hoja); **Examen 2 = temas 11 a 19** (recta tangente, máximos y mínimos,
+integrales; letras g–l, ~70 %). Historia del cálculo no entra: no tiene
+ejercicios. Los PDF: `Examen 1 Matemáticas 5 (versiones a-f).pdf` y `Examen 2
+Matemáticas 5 (versiones g-l).pdf` en `~/Downloads`, una versión por hoja.
+
+| Tema | Tipos (Bloque 1 ↔ A, 2 ↔ B, 3 ↔ C) | Por versión | Escrito el 21-sep |
+|---|---|---|---|
+| 1 Reglas básicas | polinomios · fracciones · mixtos (B4 mixto, práctica) | 1+2 | 3 extras |
+| 2 Velocidad media | parábola hacia arriba · hacia abajo | 1+1 | 2 resueltos |
+| 3 Senos y cosenos | (sumas largas; extras cortos) | 1+1 | 1 resuelto |
+| 4 Raíces | raíz simple · fracción con raíz | 1+2 | 3 extras |
+| 5 Producto P1 | — | 1+2 | — |
+| 6 Producto P2 | — | 1+2 | — |
+| 7 Cociente P1 | — | 1+2 | — |
+| 8 Cociente P2 | cociente simple · con sumas (B3 práctica) | 1+2 | — |
+| 9 Cadena P1 | cubos · cuadrados · raíces | 1+2 | — |
+| 10 Cadena P2 | raíz de potencia trig y trig de polinomio · ln y potencia de trig | 1+2 | — |
+| 11 Recta tangente | parábola hacia arriba · hacia abajo | 1+1 | 1 resuelto (con gráfica) |
+| 12 Puntos críticos | cúbico positivo · negativo | 1+2 | 2 resueltos, 2 extras |
+| 13 Optimización | — | 1+1 | 2 resueltos (con figura) |
+| 14 Integrales indefinidas | — | 1+2 | — |
+| 15 Integrales definidas | — | 1+2 | — |
+| 16 Área bajo la curva P1 | pendiente positiva · negativa | 1+1 | 1 resuelto |
+| 17 Área bajo la curva P2 | parábola hacia arriba · hacia abajo | 1+1 | 1 resuelto |
+| 18 Derivada por definición | lineales · cuadráticas puras · completas | 1+1 | — |
+| 19 Suma de Riemann | $x^2$ positivo · negativo | 1+1 | 2 resueltos |
+
+Los ejercicios nuevos, por si Lety quiere cambiar alguno: Velocidad $x(t) = 2t^2
+- 6t$ y $x(t) = 12t - 3t^2$; Senos $f(x) = 6\tan x - \frac{2}{x^5} + 5\,\mathrm{sen}\,x -
+3x^4 + \ln x - 5^x + 4e^x - 9\cos x + 3$; Recta tangente $f(x) = -(x+2)^2 + 4$ en
+$(-1, 3)$; Puntos críticos $2x^3 - 9x^2$ y $6x^2 - 4x^3$ (y los extras $5x^3 -
+3x^2$, $x^3 - 3x^2$); Optimización altura $x+5$ con $P = 32$ y altura $x+1$ con
+$P = 20$; Área P1 $-x + 10$ en $[1, 3]$; Área P2 $-x^2 + 4x + 1$ en $[0, 3]$;
+Riemann $\int_0^3 (9 - x^2)\,dx$ y $\int_1^4 (5 - 2x^2)\,dx$; extras de Reglas
+básicas $-\frac{8}{x^3} + \frac{5}{x^6} - \frac{2}{x^2}$, $-6x^7 + 3x^4 - 8x^2 +
+5x - 2$, $7x^5 - \frac{4}{x^3} + 2x - 9$; extras de Raíces $\frac{-4}{8\sqrt[5]{x^2}}$,
+$\frac{6}{9\sqrt{x^5}}$, $-8\sqrt[3]{x^7}$.
+
+**Ojo:** el extra de Puntos críticos $f(x) = -4x^3 + 88x^2$ (viene así del
+doc) da el punto crítico $x = 44/3$; se dejó en *extra 2* (no entra al examen)
+por si es una errata de $8x^2$.
+
 ## 14. Cómo le gusta a Lety trabajar esto
 
 Salió el 17-sep-2026, cuando retomó los cuadros diciendo *"ando algo perdida"*
@@ -316,7 +386,9 @@ y *"me siento un poco saturada"*:
 
 - **Un tema a la vez, en el orden de la página del curso**, y no pasar al
   siguiente hasta cerrar el anterior. Nada de tablas con los trece temas de
-  golpe.
+  golpe. *Matiz del 21-sep-2026:* para Mate 5 pidió lo contrario —*"todos los
+  temas de una vez, y las 6 versiones"*, reproduciendo los patrones de Mate 1—
+  y delegó el reparto. Preguntarle qué ritmo quiere al arrancar cada materia.
 - **Mostrarle cómo está el tema** (qué bloques tiene, qué tipos, cuántos
   ejercicios da hoy) y **dejar que ella decida** el reparto. Ella lo dice con
   sus palabras ("uno resuelto y uno de extras 1", "tres y tres"); el asistente
@@ -344,7 +416,13 @@ Desde el 8 de septiembre de 2026 todo vive **dentro de este mismo proyecto**, `l
 - El sitio de exámenes: `cuadros/`, servido en **lety2e.com/cuadros** (no enlazado desde el
   nav). Cada versión, dos veces: en blanco para imprimir y resuelta para calificar.
 - Exámenes listos para imprimir, autocontenidos: `~/Desktop/IEMS/4 Materiales y
-  evaluación/Exámenes/Matemáticas 1/`, y ahí los sigue escribiendo `generar.py`.
+  evaluación/Exámenes/Matemáticas 1/` y `…/Matemáticas 5/`, y ahí los sigue
+  escribiendo `generar.py` (una carpeta por curso).
+- Las 180 resoluciones de los extras de Mate 5 están en
+  `cuadros/generador/resoluciones-manuales.json` ("Matemáticas 5"), escritas por
+  un generador con sympy en el estilo de cada página y verificadas dos veces. El
+  generador vivía en el scratchpad de la sesión del 21-sep-2026 y se perdió con
+  él; si un extra cambia, su resolución se escribe a mano ahí, como en Mate 1.
 - Los temas de donde salen los reactivos: `math/matematicas-1/` — **aquí mismo**, así que ya
   no hay regla de "solo lectura": agregar los extras que falten y regenerar es un solo
   trabajo, en una sola sesión. Al hacerlo, respeta el manual del sitio (`CLAUDE.md`).

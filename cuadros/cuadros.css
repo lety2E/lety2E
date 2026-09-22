@@ -56,6 +56,11 @@ h1{font-family:var(--font-display);font-size:1.6rem;margin:0 0 .2rem}
 /* La hoja resuelta: cada ejercicio con su resolución debajo */
 .sol{display:block;margin:-.35rem 0 .5rem 1.1em;font-size:.82rem;color:var(--accent);
   line-height:1.5}
+/* Un aligned largo (las resoluciones de Mate 5) en línea se centra en el renglón y se
+   monta sobre el enunciado: va como bloque, con su aire. */
+.sol .katex{display:inline-block;vertical-align:top;margin:.15rem 0}
+.papel.resuelta .mini-card-body .ej-line:not(.libre){line-height:2.2}
+.papel.resuelta .sol{margin-top:.15rem}
 .sol.falta{color:var(--text-3);font-style:italic}
 .papel.resuelta .mini-card-body{line-height:1.6}
 .marca{display:inline-block;margin-left:.5rem;padding:.1rem .45rem;border-radius:var(--r-sm);

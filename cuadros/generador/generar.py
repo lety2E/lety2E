@@ -108,6 +108,11 @@ body{margin:0;background:#fff;color:var(--text);font-family:var(--font-body);fon
 /* Figuras a 110px (eran 80): impresas a 80 los angulos casi no se leian. Y las
    etiquetas de los triangulos crecen en sus propias unidades (font-size del svg). */
 .figura svg{max-width:100%;height:auto;max-height:110px;display:block;margin:.2rem auto}
+.con-figura{display:flex;align-items:center;gap:.8rem;break-inside:avoid;-webkit-column-break-inside:avoid;page-break-inside:avoid}
+.con-figura .figura{flex:0 0 auto;padding-left:0;text-indent:0}
+/* en flex el svg sin medidas colapsa a 0x0: se le fija la altura y el ancho sale del viewBox */
+.con-figura .figura svg{margin:.2rem 0;height:110px;width:auto;max-width:none}
+.pegado,.pegado .katex,.pegado .katex-html{white-space:nowrap}
 .figura svg text{font-size:15px;font-weight:700}
 /* Las figuras llegan del sitio con su tinta de color (magentas y morados). En
    el examen van en escala de grises: la cuadricula clarita, los ejes gris
@@ -138,26 +143,60 @@ def separar_tuplas(texto):
         return ', '.join('$%s$' % p for p in re.findall(r'\([^()]*\)', f))
     return PARTE.sub(sust, texto)
 
+# Problemas con incisos ("... a) ... b) ... c) ..."): cada inciso en su renglon.
+INCISOS = re.compile(r'(?<=[?$.])\s*(?=[a-d]\)\s)')
+
+def con_incisos(tex):
+    """Marca con un salto de linea el arranque de cada inciso."""
+    return INCISOS.sub('\n', tex)
+
+def texto_plano(t):
+    """Limpia el aire que deja el extractor alrededor de las formulas ('$t=1$ , $t=3$ ?')."""
+    t = html.escape(t)
+    t = re.sub(r'\s+([,;:?.!])', r'\1', t)
+    return t.replace('\n', '<br>')
+
 def enunciado(tex):
-    trozos = PARTE.split(separar_tuplas(tex))   # [texto, formula, texto, ...]
+    trozos = PARTE.split(separar_tuplas(con_incisos(tex)))   # [texto, formula, texto, ...]
     rendidas = render_tex(trozos[1::2]) if len(trozos) > 1 else []
-    return ''.join(rendidas[i//2] if i % 2 else html.escape(t)
-                   for i, t in enumerate(trozos)).strip()
+    partes = [rendidas[i//2] if i % 2 else texto_plano(t) for i, t in enumerate(trozos)]
+    # el signo que sigue a una formula ("$(1, 3)$?") se queda pegado a ella: el
+    # navegador puede partir el renglon entre la formula y el signo
+    for i in range(2, len(partes), 2):
+        m = re.match(r'([?!,;.:]+)', partes[i])
+        if m:
+            partes[i-1] = '<span class="pegado">%s\u2060%s</span>' % (partes[i-1], m.group(1))
+            partes[i] = partes[i][m.end():]
+    return ''.join(partes).strip()
 
 SIN_TEX = re.compile(r'\\[a-zA-Z]+|[${}]')
 
 def partes_linea(item):
-    """(tipo, texto plano, html). El tipo lo usa medida.py para la altura."""
-    if 'svg' in item:
+    """(tipo, texto plano, html). El tipo lo usa medida.py para la altura.
+    Un reactivo con figura Y texto (Optimizacion: el rectangulo y su perimetro)
+    devuelve dos partes; por eso partes() es lo que se usa desde afuera."""
+    if 'svg' in item and 'tex' not in item:
         return 'figura', '', '<div class="ej-line libre figura">%s</div>' % item['svg']
     cuerpo = enunciado(item['tex'])
     # las frases en lenguaje comun se acomodan en varios renglones
     tipo = 'formula' if 'katex' in cuerpo[:40] else 'libre'
     clase = 'ej-line' if tipo == 'formula' else 'ej-line libre'
-    return tipo, SIN_TEX.sub('', item['tex']), '<div class="%s">%s</div>' % (clase, cuerpo)
+    # medida.py mide las formulas por tokens (con su LaTeX) y el texto por caracteres
+    medible = item['tex'].strip('$ ') if tipo == 'formula' else SIN_TEX.sub('', con_incisos(item['tex']))
+    return tipo, medible, '<div class="%s">%s</div>' % (clase, cuerpo)
+
+def partes(item):
+    """[(tipo, texto, html), ...] de un reactivo: la figura primero, si trae."""
+    out = []
+    if 'svg' in item and 'tex' in item:
+        out.append(('figura', '', '<div class="ej-line libre figura">%s</div>' % item['svg']))
+    out.append(partes_linea(item))
+    return out
 
 def linea(item):
-    return partes_linea(item)[2]
+    html_ = ''.join(p[2] for p in partes(item))
+    # figura y renglon juntos, para que las columnas no los separen
+    return '<div class="con-figura">%s</div>' % html_ if 'svg' in item and 'tex' in item else html_
 
 def titulo_cuadro(tema, numero):
     """'4. Monomios' — los CUADROS van numerados con el numero del tema en el
@@ -216,7 +255,7 @@ def plan_medible(sel, v, plan):
     porTitulo = {t['titulo']: t['versiones'][v] for t in sel}
     filas = []
     for fila in plan:
-        celdas = [(p, c, [partes_linea(i)[:2] for i in porTitulo[t]])
+        celdas = [(p, c, [q[:2] for i in porTitulo[t] for q in partes(i)])
                   for t, p, c in fila if porTitulo.get(t)]
         if celdas: filas.append(celdas)
     return filas

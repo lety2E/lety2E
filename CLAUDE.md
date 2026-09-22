@@ -268,6 +268,20 @@ lleva es lo que va a IEMS, porque eso se abre offline.
 fórmulas en HTML con el mismo KaTeX. El script las salta solas porque no hay `$…$` que
 convertir.
 
+**Lo que el generador ya sabe hacer (21-sep-2026, al armar Mate 5):**
+- Un `.ej-line` con figura adentro (Optimización: el rectángulo y su `P = 24`) entra al
+  examen con las dos cosas; la figura va al lado del renglón. Un enunciado con incisos
+  (Velocidad: a), b), c)) se imprime con cada inciso en su renglón, siempre que en la página
+  sea **un solo `.ej-line`** con los incisos en `<div>` adentro — si cada inciso es su
+  propio `.ej-line`, el extractor los lee como reactivos sueltos.
+- `medida.py` mide las fórmulas por tokens (`ancho.py`, calibrado a ±8 %); el aviso
+  *¡NO CABE!* vuelve a ser confiable con fracciones y exponentes. La prueba final sigue
+  siendo `pdf.py`.
+- La hoja **resuelta** de `cuadros/` va un tema por renglón, a lo ancho. Al cosechar
+  resoluciones salta `.sol-rotulo` y `.graficas-row` (los rótulos y las tablas/gráficas de
+  Recta tangente).
+- Modo `cruzado` con dos extras y tres tipos: uno de cada tipo que no es el del resuelto.
+
 ### Al cambiar un tema de `math/`
 
 Agregar o reordenar ejercicios en un tema **cambia los exámenes**. Después de publicar el

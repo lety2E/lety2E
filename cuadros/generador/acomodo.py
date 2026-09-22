@@ -58,29 +58,31 @@ EXAMENES = {
      ],
    },
  ],
- # Matemáticas 5 (desde el 17-sep-2026). Corte provisional: las derivadas
- # hasta la regla de la cadena en el Examen 1, lo demás en el Examen 2. Las
- # filas se van acomodando conforme Lety cierra cada tema.
+ # Matemáticas 5 (21-sep-2026). Corte: las reglas de derivación (temas 1 a 10)
+ # en el Examen 1; recta tangente, máximos y mínimos e integrales (11 a 19) en el
+ # Examen 2. Cada tema aporta 2 ejercicios (1 resuelto + 1 extra). Las filas se
+ # emparejan por altura y sin partir fórmulas: Velocidad (dos problemas con
+ # incisos) va sola a dos columnas y Senos (sumas largas) sola a lo ancho.
  'Matemáticas 5': [
    {
      'nombre': 'Examen 1',
      'letras': 'abcdef',
      'filas': [
-       ['Reglas básicas de derivación', 'Velocidad media e instantánea'],
-       ['Derivadas de senos y cosenos', 'Derivadas de raíces'],
-       ['Regla del producto (P1)', 'Regla del producto (P2)'],
-       ['Regla del cociente (P1)', 'Regla del cociente (P2)'],
-       ['Regla de la cadena (P1)', 'Regla de la cadena (P2)'],
+       [('Velocidad media e instantánea', 1, 2)],
+       ['Derivadas de senos y cosenos'],
+       [('Reglas básicas de derivación', 2), 'Regla del producto (P1)'],
+       ['Regla del cociente (P1)', 'Regla del cociente (P2)', 'Regla del producto (P2)'],
+       ['Regla de la cadena (P1)', 'Regla de la cadena (P2)', 'Derivadas de raíces'],
      ],
    },
    {
      'nombre': 'Examen 2',
      'letras': 'ghijkl',
      'filas': [
-       ['Recta tangente', 'Puntos críticos', 'Optimización de áreas'],
-       ['Integrales indefinidas', 'Integrales definidas'],
-       ['Área bajo la curva (P1)', 'Área bajo la curva (P2)'],
-       ['Derivada por definición', 'Suma de Riemann'],
+       [('Integrales indefinidas', 2), 'Integrales definidas'],
+       ['Optimización de áreas', 'Suma de Riemann'],
+       [('Recta tangente', 2), 'Puntos críticos'],
+       ['Área bajo la curva (P1)', 'Área bajo la curva (P2)', 'Derivada por definición'],
      ],
    },
  ],
