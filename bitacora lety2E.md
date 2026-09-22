@@ -85,6 +85,9 @@ decidida por Lety: 6 por tipo = 4 resueltos + 2 extras (cubos, cuadrados, raíce
 cada versión lleva 2 resueltos + 1 extra, uno de cada tipo (modo nuevo `rotado` en
 `seleccion.py`). Se escribieron 6 resueltos con su resolución, verificados con sympy; los
 extras que sobran bajaron a extra 2. Con esto quedan decididas las tres "parte 1".
+Y Lety formuló **el método** general, que quedó al principio de `Reglas de mis exámenes.md`:
+la página (resueltos + extra 1) es el banco, y por tema sólo se deciden cuántos resueltos y
+cuántos extras lleva cada versión, según lo elaborado del tema.
 
 Verificado: las 19 páginas a 390×844 sin cards desbordadas ni errores de KaTeX; las 12
 versiones en el navegador y en PDF. **Ojo** para Lety: el extra $-4x^3 + 88x^2$ de Puntos

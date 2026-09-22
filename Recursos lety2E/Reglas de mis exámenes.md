@@ -12,6 +12,32 @@ nombre del tema en negritas y sus ejercicios debajo. Nada más. Y los ejercicios
 **no se inventan**: salen de las páginas de temas de su sitio, que es público a
 propósito, para que los alumnos sepan de dónde va a salir el examen.
 
+## El método (22-sep-2026)
+
+**Decidido por Lety**, al revisar Mate 5 tema por tema: *"aunque es variable, en general los
+ejercicios resueltos y los extras 1 me dan el banco de las preguntas, y dependiendo de los
+ejercicios, si son más elaborados o no, sobre la marcha voy decidiendo cuántos ejercicios
+tendrá la versión y de esos cuántos de resueltos y cuántos de los extras"*.
+
+O sea, por tema:
+
+1. **El banco es la página**: *Ejercicios* (resueltos) + *Ejercicios extra 1*. Todo lo que
+   está ahí entra y cada ejercicio sale en una sola versión. *Extra 2* es repaso: nunca entra.
+2. **Se deciden dos números**: cuántos resueltos y cuántos extras lleva cada versión. Los pone
+   Lety según lo elaborado del tema — cortos y mecánicos, más (Raíces 3 + 3); de mucho
+   proceso, menos (Producto P1 1 + 1).
+3. **La cuenta sale sola**: con seis versiones, la página necesita 6 × cada número. Si faltan,
+   se escriben en el molde de la página y se verifican (§2).
+4. **El 6 manda**: o hay **bloques de 6** y cada versión toma uno de cada bloque (Mate 5), o
+   hay **6 bloques** y cada versión toma un bloque entero (Operaciones básicas en Mate 1).
+5. **Si hay tipos, se mezclan**: bloques por tipo en el mismo orden en los dos lados (1 ↔ A) y
+   a cada versión le tocan tipos distintos (modos `cruzado` y `rotado`, §3).
+
+Para arrancar un tema nuevo basta preguntarle a Lety **si tiene tipos** y **cuántos resueltos
+y cuántos extras por versión**; el asistente arma los bloques, escribe lo que falte y cuida
+que la hoja quepa (§8), que es lo único que no sale solo. La tabla de §13b tiene los números
+de cada tema de Mate 5.
+
 ## 1. El formato de la hoja
 
 **Decidido por Lety.**
