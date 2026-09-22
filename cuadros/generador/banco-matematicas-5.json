@@ -849,8 +849,8 @@
   "archivo": "regla-cadena-p2.html",
   "titulo": "Regla de la cadena (P2)",
   "receta": [
-   "cruzado",
-   1,
+   "rotado",
+   2,
    2
   ],
   "con_respuesta": [
@@ -861,13 +861,10 @@
       "tex": "$f = \\sqrt[3]{\\cos^7 x}$"
      },
      {
-      "tex": "$f = \\cos(7x - 5x^2)$"
-     },
-     {
       "tex": "$f = \\sqrt{\\operatorname{sen}^3 x}$"
      },
      {
-      "tex": "$f = \\operatorname{sen}(6x - 4x^2)$"
+      "tex": "$f = \\sqrt[4]{\\operatorname{sen}^5 x}$"
      }
     ]
    ],
@@ -875,16 +872,41 @@
     "Bloque 2",
     [
      {
-      "tex": "$f = \\ln(3x^2 - 4)$"
+      "tex": "$f = \\cos(7x - 5x^2)$"
      },
      {
-      "tex": "$f = -5\\operatorname{sen}^5 x$"
+      "tex": "$f = \\operatorname{sen}(6x - 4x^2)$"
+     },
+     {
+      "tex": "$f = \\cos(2x^3 - 9x)$"
+     }
+    ]
+   ],
+   [
+    "Bloque 3",
+    [
+     {
+      "tex": "$f = \\ln(3x^2 - 4)$"
      },
      {
       "tex": "$f = \\ln(2x^2 - 5x)$"
      },
      {
+      "tex": "$f = \\ln(4x^3 + 7x)$"
+     }
+    ]
+   ],
+   [
+    "Bloque 4",
+    [
+     {
+      "tex": "$f = -5\\operatorname{sen}^5 x$"
+     },
+     {
       "tex": "$f = 4\\cos^3 x$"
+     },
+     {
+      "tex": "$f = 3\\cos^6 x$"
      }
     ]
    ]
@@ -897,19 +919,10 @@
       "tex": "$y = \\sqrt[4]{\\cos^3 x}$"
      },
      {
-      "tex": "$y = \\cos(8x - 3x^2)$"
-     },
-     {
       "tex": "$y = \\sqrt{\\cos^5 x}$"
      },
      {
-      "tex": "$y = \\operatorname{sen}(7x - 2x^3)$"
-     },
-     {
       "tex": "$y = \\sqrt[3]{\\operatorname{sen}^2 x}$"
-     },
-     {
-      "tex": "$y = \\cos(4x^2 - 9x)$"
      }
     ]
    ],
@@ -917,19 +930,38 @@
     "Bloque B",
     [
      {
-      "tex": "$y = \\ln(5x^2 - 2x)$"
+      "tex": "$y = \\cos(8x - 3x^2)$"
      },
      {
-      "tex": "$y = -3\\operatorname{sen}^4 x$"
+      "tex": "$y = \\operatorname{sen}(7x - 2x^3)$"
+     },
+     {
+      "tex": "$y = \\cos(4x^2 - 9x)$"
+     }
+    ]
+   ],
+   [
+    "Bloque C",
+    [
+     {
+      "tex": "$y = \\ln(5x^2 - 2x)$"
      },
      {
       "tex": "$y = \\ln(x^3 - 4x)$"
      },
      {
-      "tex": "$y = 7\\operatorname{sen}^3 x$"
+      "tex": "$y = \\ln(3x^3 - 6x)$"
+     }
+    ]
+   ],
+   [
+    "Bloque D",
+    [
+     {
+      "tex": "$y = -3\\operatorname{sen}^4 x$"
      },
      {
-      "tex": "$y = \\ln(3x^3 - 6x)$"
+      "tex": "$y = 7\\operatorname{sen}^3 x$"
      },
      {
       "tex": "$y = -2\\cos^5 x$"

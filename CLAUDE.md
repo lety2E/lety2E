@@ -283,6 +283,8 @@ convertir.
 - Modo `cruzado` con dos extras y tres tipos: uno de cada tipo que no es el del resuelto.
 - Modo `rotado` (22-sep-2026, Cadena P1): con bloques por tipo en los dos lados, cada versión
   lleva uno de cada tipo —los primeros resueltos y el último extra— rotando cuál va de extra.
+  Si las 6 versiones no son múltiplo de los tipos (4 tipos, Cadena P2), usa cada combinación
+  de tipos una vez para que quede parejo.
 
 ### Al cambiar un tema de `math/`
 

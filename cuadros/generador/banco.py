@@ -116,8 +116,11 @@ CURSOS = {
     # Lety (22-sep-2026): 6 por tipo = 4 resueltos + 2 extras (B1/A cubos, B2/B
     # cuadrados, B3/C raíces). Cada versión 2 resueltos + 1 extra, uno de cada tipo.
     ('regla-cadena-p1.html',       'Regla de la cadena (P1)',         ('rotado', 2, 1)),
-    # B1 raíz de potencia trig y trig de polinomio, B2 ln y potencia de trig
-    ('regla-cadena-p2.html',       'Regla de la cadena (P2)',         ('cruzado', 1, 2)),
+    # Lety (22-sep-2026): cuatro tipos —raíz de una potencia trigonométrica,
+    # trigonométrica de un polinomio, logaritmo, potencia de una trigonométrica—
+    # (B1/A … B4/D), 3 resueltos + 3 extras por tipo. Cada versión 2 resueltos +
+    # 2 extras, los cuatro tipos: las 6 parejas posibles de tipos, una por versión.
+    ('regla-cadena-p2.html',       'Regla de la cadena (P2)',         ('rotado', 2, 2)),
     # B1 parábola hacia arriba, B2 hacia abajo
     ('recta-tangente.html',        'Recta tangente',                  ('cruzado', 1, 1)),
     # B1 cúbico positivo, B2 negativo

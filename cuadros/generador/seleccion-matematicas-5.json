@@ -938,14 +938,18 @@
   "titulo": "Regla de la cadena (P2)",
   "archivo": "regla-cadena-p2.html",
   "receta": [
-   "cruzado",
-   1,
+   "rotado",
+   2,
    2
   ],
   "versiones": [
    [
     {
      "tex": "$f = \\sqrt[3]{\\cos^7 x}$",
+     "origen": "respuesta"
+    },
+    {
+     "tex": "$f = \\cos(7x - 5x^2)$",
      "origen": "respuesta"
     },
     {
@@ -963,6 +967,10 @@
      "origen": "respuesta"
     },
     {
+     "tex": "$f = -5\\operatorname{sen}^5 x$",
+     "origen": "respuesta"
+    },
+    {
      "tex": "$y = \\sqrt[4]{\\cos^3 x}$",
      "origen": "extra"
     },
@@ -973,11 +981,15 @@
    ],
    [
     {
-     "tex": "$f = \\cos(7x - 5x^2)$",
+     "tex": "$f = \\sqrt{\\operatorname{sen}^3 x}$",
      "origen": "respuesta"
     },
     {
-     "tex": "$y = \\ln(x^3 - 4x)$",
+     "tex": "$f = \\ln(2x^2 - 5x)$",
+     "origen": "respuesta"
+    },
+    {
+     "tex": "$y = \\operatorname{sen}(7x - 2x^3)$",
      "origen": "extra"
     },
     {
@@ -987,7 +999,11 @@
    ],
    [
     {
-     "tex": "$f = -5\\operatorname{sen}^5 x$",
+     "tex": "$f = \\operatorname{sen}(6x - 4x^2)$",
+     "origen": "respuesta"
+    },
+    {
+     "tex": "$f = 4\\cos^3 x$",
      "origen": "respuesta"
     },
     {
@@ -995,27 +1011,35 @@
      "origen": "extra"
     },
     {
-     "tex": "$y = \\operatorname{sen}(7x - 2x^3)$",
+     "tex": "$y = \\ln(x^3 - 4x)$",
      "origen": "extra"
     }
    ],
    [
     {
-     "tex": "$f = \\sqrt{\\operatorname{sen}^3 x}$",
+     "tex": "$f = \\sqrt[4]{\\operatorname{sen}^5 x}$",
      "origen": "respuesta"
+    },
+    {
+     "tex": "$f = 3\\cos^6 x$",
+     "origen": "respuesta"
+    },
+    {
+     "tex": "$y = \\cos(4x^2 - 9x)$",
+     "origen": "extra"
     },
     {
      "tex": "$y = \\ln(3x^3 - 6x)$",
      "origen": "extra"
-    },
-    {
-     "tex": "$y = -2\\cos^5 x$",
-     "origen": "extra"
     }
    ],
    [
     {
-     "tex": "$f = \\ln(2x^2 - 5x)$",
+     "tex": "$f = \\cos(2x^3 - 9x)$",
+     "origen": "respuesta"
+    },
+    {
+     "tex": "$f = \\ln(4x^3 + 7x)$",
      "origen": "respuesta"
     },
     {
@@ -1023,15 +1047,15 @@
      "origen": "extra"
     },
     {
-     "tex": "$y = \\cos(4x^2 - 9x)$",
+     "tex": "$y = -2\\cos^5 x$",
      "origen": "extra"
     }
    ]
   ],
   "info": {
-   "modo": "cruzado",
+   "modo": "rotado",
    "falta": 0,
-   "r_disp": 8,
+   "r_disp": 12,
    "e_disp": 12
   }
  },

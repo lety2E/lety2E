@@ -627,13 +627,17 @@
   "Regla de la cadena (P2)": {
    "cosechadas": {
     "f=\\sqrt[3]{\\cos^7x}": "$\\begin{aligned} f &= \\sqrt[3]{\\cos^7 x} \\\\ f &= (\\cos x)^{7/3} \\\\ f' &= \\frac{7}{3}(\\cos x)^{\\frac{7}{3} - \\frac{3}{3}}(-\\operatorname{sen} x) \\\\ f' &= \\frac{7}{3}(\\cos x)^{4/3}(-\\operatorname{sen} x) \\\\ \\mathbf{f'} &= \\mathbf{-\\frac{7\\operatorname{sen} x \\cdot \\sqrt[3]{\\cos^4 x}}{3}} \\end{aligned}$",
-    "f=\\cos(7x-5x^2)": "$\\begin{aligned} f &= \\cos(7x - 5x^2) \\\\ f' &= -\\operatorname{sen}(7x - 5x^2)[7 - 10x] \\\\ \\mathbf{f'} &= \\mathbf{-7\\operatorname{sen}(7x - 5x^2) + 10x\\operatorname{sen}(7x - 5x^2)} \\end{aligned}$",
     "f=\\sqrt{\\operatorname{sen}^3x}": "$\\begin{aligned} f &= \\sqrt{\\operatorname{sen}^3 x} \\\\ f &= (\\operatorname{sen} x)^{3/2} \\\\ f' &= \\frac{3}{2}(\\operatorname{sen} x)^{\\frac{3}{2} - \\frac{2}{2}}(\\cos x) \\\\ f' &= \\frac{3}{2}(\\operatorname{sen} x)^{1/2}(\\cos x) \\\\ \\mathbf{f'} &= \\mathbf{\\frac{3\\cos x \\sqrt{\\operatorname{sen} x}}{2}} \\end{aligned}$",
+    "f=\\sqrt[4]{\\operatorname{sen}^5x}": "$\\begin{aligned} f &= \\sqrt[4]{\\operatorname{sen}^5 x} \\\\ f &= (\\operatorname{sen} x)^{5/4} \\\\ f' &= \\frac{5}{4}(\\operatorname{sen} x)^{\\frac{5}{4} - \\frac{4}{4}}(\\cos x) \\\\ f' &= \\frac{5}{4}(\\operatorname{sen} x)^{1/4}(\\cos x) \\\\ \\mathbf{f'} &= \\mathbf{\\frac{5\\cos x \\sqrt[4]{\\operatorname{sen} x}}{4}} \\end{aligned}$",
+    "f=\\cos(7x-5x^2)": "$\\begin{aligned} f &= \\cos(7x - 5x^2) \\\\ f' &= -\\operatorname{sen}(7x - 5x^2)[7 - 10x] \\\\ \\mathbf{f'} &= \\mathbf{-7\\operatorname{sen}(7x - 5x^2) + 10x\\operatorname{sen}(7x - 5x^2)} \\end{aligned}$",
     "f=\\operatorname{sen}(6x-4x^2)": "$\\begin{aligned} f &= \\operatorname{sen}(6x - 4x^2) \\\\ f' &= \\cos(6x - 4x^2)[6 - 8x] \\\\ \\mathbf{f'} &= \\mathbf{6\\cos(6x - 4x^2) - 8x\\cos(6x - 4x^2)} \\end{aligned}$",
+    "f=\\cos(2x^3-9x)": "$\\begin{aligned} f &= \\cos(2x^3 - 9x) \\\\ f' &= -\\operatorname{sen}(2x^3 - 9x)[6x^2 - 9] \\\\ \\mathbf{f'} &= \\mathbf{-6x^2\\operatorname{sen}(2x^3 - 9x) + 9\\operatorname{sen}(2x^3 - 9x)} \\end{aligned}$",
     "f=\\ln(3x^2-4)": "$\\begin{aligned} f &= \\ln(3x^2 - 4) \\\\ f' &= \\left[\\frac{1}{3x^2 - 4}\\right](6x) \\\\ \\mathbf{f'} &= \\mathbf{\\frac{6x}{3x^2 - 4}} \\end{aligned}$",
-    "f=-5\\operatorname{sen}^5x": "$\\begin{aligned} f &= -5\\operatorname{sen}^5 x \\\\ f &= -5(\\operatorname{sen} x)^5 \\\\ f' &= -25(\\operatorname{sen} x)^4 \\cdot \\cos x \\\\ \\mathbf{f'} &= \\mathbf{-25\\operatorname{sen}^4 x \\cdot \\cos x} \\end{aligned}$",
     "f=\\ln(2x^2-5x)": "$\\begin{aligned} f &= \\ln(2x^2 - 5x) \\\\ f' &= \\left[\\frac{1}{2x^2 - 5x}\\right](4x - 5) \\\\ \\mathbf{f'} &= \\mathbf{\\frac{4x - 5}{2x^2 - 5x}} \\end{aligned}$",
-    "f=4\\cos^3x": "$\\begin{aligned} f &= 4\\cos^3 x \\\\ f &= 4(\\cos x)^3 \\\\ f' &= 12(\\cos x)^2(-\\operatorname{sen} x) \\\\ \\mathbf{f'} &= \\mathbf{-12\\cos^2 x \\cdot \\operatorname{sen} x} \\end{aligned}$"
+    "f=\\ln(4x^3+7x)": "$\\begin{aligned} f &= \\ln(4x^3 + 7x) \\\\ f' &= \\left[\\frac{1}{4x^3 + 7x}\\right](12x^2 + 7) \\\\ \\mathbf{f'} &= \\mathbf{\\frac{12x^2 + 7}{4x^3 + 7x}} \\end{aligned}$",
+    "f=-5\\operatorname{sen}^5x": "$\\begin{aligned} f &= -5\\operatorname{sen}^5 x \\\\ f &= -5(\\operatorname{sen} x)^5 \\\\ f' &= -25(\\operatorname{sen} x)^4 \\cdot \\cos x \\\\ \\mathbf{f'} &= \\mathbf{-25\\operatorname{sen}^4 x \\cdot \\cos x} \\end{aligned}$",
+    "f=4\\cos^3x": "$\\begin{aligned} f &= 4\\cos^3 x \\\\ f &= 4(\\cos x)^3 \\\\ f' &= 12(\\cos x)^2(-\\operatorname{sen} x) \\\\ \\mathbf{f'} &= \\mathbf{-12\\cos^2 x \\cdot \\operatorname{sen} x} \\end{aligned}$",
+    "f=3\\cos^6x": "$\\begin{aligned} f &= 3\\cos^6 x \\\\ f &= 3(\\cos x)^6 \\\\ f' &= 18(\\cos x)^5(-\\operatorname{sen} x) \\\\ \\mathbf{f'} &= \\mathbf{-18\\cos^5 x \\cdot \\operatorname{sen} x} \\end{aligned}$"
    },
    "manuales": {
     "$y = \\ln(5x^2 - 2x)$": "$\\begin{aligned} y &= \\ln(5x^2 - 2x) \\\\ y' &= \\left[\\frac{1}{5x^2 - 2x}\\right](10x - 2) \\\\ \\mathbf{y'} &= \\mathbf{\\frac{10x - 2}{5x^2 - 2x}} \\end{aligned}$",

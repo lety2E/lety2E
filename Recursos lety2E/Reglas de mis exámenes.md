@@ -388,7 +388,7 @@ Matemáticas 5 (versiones g-l).pdf` en `~/Downloads`, una versión por hoja.
 | 7 Cociente P1 | denominador con número suelto · sin él (Bloque 1 ↔ A, 2 ↔ B, 3 y 3) | **1+1 cruzado, decidido por Lety** | — |
 | 8 Cociente P2 | términos simples · binomio arriba · binomio abajo: 2 resueltos + 4 extras por tipo | **1+2 rotado, decidido por Lety** (como Producto P2) | 2 extras; extra 2 nuevo |
 | 9 Cadena P1 | cubos · cuadrados · raíces: 4 resueltos + 2 extras por tipo (B1/A, B2/B, B3/C) | **2+1 rotado, decidido por Lety** | 6 resueltos |
-| 10 Cadena P2 | raíz de potencia trig y trig de polinomio · ln y potencia de trig | 1+2 | — |
+| 10 Cadena P2 | raíz de una potencia trig · trig de un polinomio · logaritmo · potencia de una trig: 3 resueltos + 3 extras por tipo | **2+2, decidido por Lety**, los cuatro tipos por versión | 4 resueltos |
 | 11 Recta tangente | parábola hacia arriba · hacia abajo | 1+1 | 1 resuelto (con gráfica) |
 | 12 Puntos críticos | cúbico positivo · negativo | 1+2 | 2 resueltos, 2 extras |
 | 13 Optimización | — | 1+1 | 2 resueltos (con figura) |
@@ -489,6 +489,17 @@ extras: los que sobraban bajaron a extra 2 por tipo (los resueltos, sin su respu
 escribieron **2 extras de binomio arriba** con su resolución ($\frac{6x^3 - 5\,\mathrm{sen}\,x}{3\cos x}$,
 $\frac{3x^2 + 4\cos x}{2\,\mathrm{sen}\,x}$). El tema no tenía extra 2: ahora tiene D (7), E (4) y
 F (4), con 5 de repaso nuevos.
+**Cadena P2, decidido por Lety** (22-sep-2026): *"son 4 tipos, 2 resueltos y 2 extras"* —raíz
+de una potencia trigonométrica ($\sqrt[3]{\cos^7 x}$), trigonométrica de un polinomio
+($\cos(7x-5x^2)$), logaritmo de un polinomio ($\ln(3x^2-4)$) y potencia de una trigonométrica
+($-5\,\mathrm{sen}^5 x$)—. Con 4 por versión cada una lleva **los cuatro tipos**: dos resueltos y
+dos extras. Como 4 tipos no dividen a 6 versiones, girar de uno en uno no queda parejo; se usan
+**las 6 parejas posibles de tipos, una por versión** (el modo `rotado` lo hace solo cuando las
+versiones no son múltiplo de los tipos), y cada tipo sale 3 veces resuelto y 3 extra. Banco: 3
+resueltos + 3 extras por tipo; se escribieron 4 resueltos con su resolución
+($\sqrt[4]{\mathrm{sen}^5 x}$, $\cos(2x^3-9x)$, $\ln(4x^3+7x)$, $3\cos^6 x$); los extras ya eran 3
+por tipo. En la hoja Cadena P2 va junto a Reglas básicas (las dos llevan 4) y Producto P1 bajó
+junto a Cadena P1; el Examen 1 sigue al 90 %.
 
 Los ejercicios nuevos, por si Lety quiere cambiar alguno: Velocidad $x(t) = 2t^2
 - 6t$ y $x(t) = 12t - 3t^2$; Senos $f(x) = 6\tan x - \frac{2}{x^5} + 5\,\mathrm{sen}\,x -

@@ -180,6 +180,25 @@ def cruzado(tema, V):
                        'r_disp': sum(len(i) for _, i in R),
                        'e_disp': sum(len(i) for _, i in E)}
 
+def tipos_por_version(nb, nR, nE, V):
+    """[(tipos resueltos, tipos extra)] de cada versión.
+    Si las versiones son múltiplo de los tipos (3 tipos en 6 versiones) se gira de uno en uno.
+    Si no (4 tipos en 6 versiones, Cadena P2), girar deja tipos de más y de menos; ahí se usa
+    cada combinación de tipos UNA vez, que sí queda pareja: con 2 de 4 son las 6 parejas
+    posibles, y cada tipo sale 3 veces resuelto y 3 extra (Lety, 22-sep-2026)."""
+    girar = [([(v + j) % nb for j in range(nR)], [(v + nR + j) % nb for j in range(nE)]) for v in range(V)]
+    if V % nb == 0 or nR + nE != nb:
+        return girar
+    from itertools import combinations
+    orden, vistos = [], set()
+    for c in combinations(range(nb), nR):            # cada pareja seguida de su complemento
+        for grupo in (c, tuple(t for t in range(nb) if t not in c)):
+            if grupo not in vistos and len(grupo) == nR:
+                orden.append(grupo); vistos.add(grupo)
+    if len(orden) != V:
+        return girar
+    return [(list(c), [t for t in range(nb) if t not in c]) for c in orden]
+
 def rotado(tema, V):
     """Bloques por tipo (los mismos tipos en los dos lados) y cada versión lleva UNO DE
     CADA TIPO: los primeros R tipos resueltos y los siguientes E de extras, rotando cuál
@@ -191,11 +210,10 @@ def rotado(tema, V):
     nb = min(len(R), len(E))
     usoR, usoE = [0]*len(R), [0]*len(E)
     versiones, falta = [], 0
-    for v in range(V):
+    for v, (tipos_r, tipos_e) in enumerate(tipos_por_version(nb, nR, nE, V)):
         fila = []
-        for j in range(nR + nE):
-            k = (v + j) % nb
-            bloques, uso, origen = (R, usoR, 'respuesta') if j < nR else (E, usoE, 'extra')
+        for k, (bloques, uso, origen) in ([(k, (R, usoR, 'respuesta')) for k in tipos_r] +
+                                          [(k, (E, usoE, 'extra')) for k in tipos_e]):
             items = bloques[k][1]
             if uso[k] >= len(items):
                 falta += 1; continue

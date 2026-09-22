@@ -70,10 +70,11 @@ EXAMENES = {
      'filas': [
        [('Velocidad media e instantánea', 1, 2)],
        ['Derivadas de senos y cosenos'],
-       [('Reglas básicas de derivación', 2), 'Regla del producto (P1)'],
+       # Cadena P2 lleva 4 (dos de cada lado, los cuatro tipos): junto a Reglas, que lleva 4
+       [('Reglas básicas de derivación', 2), 'Regla de la cadena (P2)'],
        ['Regla del cociente (P1)', 'Regla del cociente (P2)', 'Regla del producto (P2)'],
        # Raíces lleva 6 cortos: a dos columnas dentro de su tarjeta
-       ['Regla de la cadena (P1)', 'Regla de la cadena (P2)', ('Derivadas de raíces', 1, 2)],
+       ['Regla de la cadena (P1)', 'Regla del producto (P1)', ('Derivadas de raíces', 1, 2)],
      ],
    },
    {
