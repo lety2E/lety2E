@@ -23,6 +23,10 @@ O sea, por tema:
 
 1. **El banco es la página**: *Ejercicios* (resueltos) + *Ejercicios extra 1*. Todo lo que
    está ahí entra y cada ejercicio sale en una sola versión. *Extra 2* es repaso: nunca entra.
+   Por eso **si sobran resueltos, bajan a extra 2** en el bloque de su tipo, sin respuesta
+   (Lety, 22-sep-2026, por el Bloque 4 de Producto P2: *"la regla dice que los ejercicios
+   resueltos más los extras 1 es el banco de preguntas; ese bloque puede llevarse a los
+   extras 2 donde le corresponda"*).
 2. **Se deciden dos números**: cuántos resueltos y cuántos extras lleva cada versión. Los pone
    Lety según lo elaborado del tema — cortos y mecánicos, más (Raíces 3 + 3); de mucho
    proceso, menos (Producto P1 1 + 1).
@@ -377,7 +381,7 @@ Matemáticas 5 (versiones g-l).pdf` en `~/Downloads`, una versión por hoja.
 |---|---|---|---|
 | 1 Reglas básicas | polinomios · con $x$ en el denominador (B3 y extra 2: práctica) | **2+2, decidido por Lety** | 2 resueltos, 12 extras |
 | 2 Velocidad media | parábola hacia arriba · hacia abajo | 1+1, **visto por Lety: se queda** | 2 resueltos |
-| 3 Senos y cosenos | un bloque de 6 resueltos; extra 1 con dos bloques de 6 **igual de largos** | **1+2, decidido por Lety** | 1 resuelto, 12 extras |
+| 3 Senos y cosenos | un bloque de 6 resueltos; extra 1 con dos bloques de 6 **igual de largos**; el término lineal sólo $ax$ con $a$ entero | **1+2, decidido por Lety** | 1 resuelto, 12 extras |
 | 4 Raíces | exponente mayor que el índice · menor · fracción con raíz abajo (un bloque de 6 por tipo, en los dos lados) | **3+3, decidido por Lety** | 6 resueltos, 6 extras |
 | 5 Producto P1 | un bloque de 6 resueltos · un bloque de 6 en extra 1 (el otro, a extra 2) | **1+1, decidido por Lety** | — |
 | 6 Producto P2 | monomio × trascendente · trascendente × trascendente · raíz × trascendente: 2 resueltos + 4 extras por tipo (B4 de práctica) | **1+2 rotado, decidido por Lety** | — |
@@ -420,6 +424,10 @@ escribieron **12 extras largos** (la misma forma que los resueltos: trigonométr
 polinomio, $\ln$, $e^x$, $a^x$, $ax$ y constante) repartidos en **Bloque A y Bloque B** de 6;
 los 12 cortos que había pasaron a extra 2 (repaso). Receta `('por bloque', 1, 1)`: uno del
 bloque resuelto y uno de cada bloque de extras. Examen 1 sube al 90 % de la hoja.
+**El término lineal, sólo $ax$ con $a$ entero** (Lety, 22-sep-2026): *"este término
+[$-\frac{x}{2}$] les confunde derivar; mejor no lo pongas en los resueltos ni extras, sólo de
+la forma $ax$, $a$ entero"*. Era el único de todo el curso (un resuelto de Senos); quedó $-3x$,
+con su respuesta.
 
 **Raíces lo decidió Lety** (22-sep-2026): *"podría haber 3 bloques de 6 en los ejercicios
 resueltos de los tres tipos y la misma cantidad de extras"*. Los tres tipos, en el orden de
@@ -464,8 +472,9 @@ trascendente con trascendente, raíz con trascendente; si quisiera que uno fuera
 vinieran de extras, ¿cómo hacemos los bloques?"*. Es Cadena P1 al revés: **2 resueltos + 4
 extras por tipo** (Bloque 1/A, 2/B, 3/C) y receta `('rotado', 1, 2)` — cada versión lleva el
 resuelto de un tipo y los dos extras de los otros dos. No se escribió nada: los extras ya eran
-4 por tipo; de resueltos había 3, 3 y 4, y los 4 que sobran quedaron en un **Bloque 4 de
-práctica** (con respuesta, no entra), como el Bloque 3 de Reglas básicas.
+4 por tipo; de resueltos había 3, 3 y 4. Los 4 que sobraban primero quedaron en un Bloque 4
+de práctica resuelta, y Lety lo corrigió con su regla: el banco es resueltos + extra 1, así que
+**bajaron a extra 2**, cada uno en el bloque de su tipo y sin respuesta.
 
 Los ejercicios nuevos, por si Lety quiere cambiar alguno: Velocidad $x(t) = 2t^2
 - 6t$ y $x(t) = 12t - 3t^2$; Senos $f(x) = 6\tan x - \frac{2}{x^5} + 5\,\mathrm{sen}\,x -

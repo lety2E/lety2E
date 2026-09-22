@@ -94,7 +94,10 @@ trascendente), 1 resuelto + 2 extras por versión, uno de cada tipo (`rotado` 1+
 4 cada uno. No hubo que escribir nada. Y Lety sumó al método que **siempre haya extra 2**:
 donde no había, se escribe una tanda por tipo. Hecho en Raíces y Producto P2 (tres tandas de
 4 cada uno, sin respuesta); faltan Cociente P2 e Integrales indefinidas y definidas, que se
-harán al revisarlos.
+harán al revisarlos. Dos ajustes más de Lety: en **Senos** el término lineal va sólo como $ax$
+con $a$ entero (el $-\frac{x}{2}$ de un resuelto, el único del curso, quedó $-3x$ con su
+respuesta), y el **Bloque 4** de práctica de Producto P2 **bajó a extra 2** por tipo, porque el
+banco es resueltos + extra 1.
 
 Verificado: las 19 páginas a 390×844 sin cards desbordadas ni errores de KaTeX; las 12
 versiones en el navegador y en PDF. **Ojo** para Lety: el extra $-4x^3 + 88x^2$ de Puntos

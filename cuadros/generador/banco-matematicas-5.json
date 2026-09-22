@@ -227,7 +227,7 @@
       "tex": "$f(x) = -4 \\operatorname{sen} x + 6 \\tan x - 8 \\cos x - \\dfrac{4}{x^7} - 2x^3 + 7 - 9^x$"
      },
      {
-      "tex": "$f(x) = -9 \\cos x - 8 + \\dfrac{4}{x^6} + 4x^8 - 6 \\tan x - 4 \\operatorname{sen} x - \\dfrac{x}{2} + 8^x - 2$"
+      "tex": "$f(x) = -9 \\cos x - 8 + \\dfrac{4}{x^6} + 4x^8 - 6 \\tan x - 4 \\operatorname{sen} x - 3x + 8^x - 2$"
      },
      {
       "tex": "$f(x) = 6 \\tan x - \\dfrac{2}{x^5} + 5 \\operatorname{sen} x - 3x^4 + \\ln x - 5^x + 4e^x - 9 \\cos x + 3$"
@@ -539,23 +539,6 @@
      },
      {
       "tex": "$f(x) = \\sqrt[3]{x^5} \\, 6^x$"
-     }
-    ]
-   ],
-   [
-    "Bloque 4",
-    [
-     {
-      "tex": "$f(x) = 6x^2 \\tan x$"
-     },
-     {
-      "tex": "$f(x) = 6 \\cos x \\operatorname{sen} x$"
-     },
-     {
-      "tex": "$f(x) = \\sqrt[3]{x^4} \\ln x$"
-     },
-     {
-      "tex": "$f(x) = \\sqrt[3]{x^4} e^x$"
      }
     ]
    ]

@@ -270,7 +270,7 @@
    ],
    [
     {
-     "tex": "$f(x) = -9 \\cos x - 8 + \\dfrac{4}{x^6} + 4x^8 - 6 \\tan x - 4 \\operatorname{sen} x - \\dfrac{x}{2} + 8^x - 2$",
+     "tex": "$f(x) = -9 \\cos x - 8 + \\dfrac{4}{x^6} + 4x^8 - 6 \\tan x - 4 \\operatorname{sen} x - 3x + 8^x - 2$",
      "origen": "respuesta"
     },
     {
@@ -651,7 +651,7 @@
   "info": {
    "modo": "rotado",
    "falta": 0,
-   "r_disp": 10,
+   "r_disp": 6,
    "e_disp": 12
   }
  },
