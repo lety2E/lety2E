@@ -346,7 +346,7 @@ Matemáticas 5 (versiones g-l).pdf` en `~/Downloads`, una versión por hoja.
 |---|---|---|---|
 | 1 Reglas básicas | polinomios · con $x$ en el denominador (B3 y extra 2: práctica) | **2+2, decidido por Lety** | 2 resueltos, 12 extras |
 | 2 Velocidad media | parábola hacia arriba · hacia abajo | 1+1 | 2 resueltos |
-| 3 Senos y cosenos | (sumas largas; extras cortos) | 1+1 | 1 resuelto |
+| 3 Senos y cosenos | un bloque de 6 resueltos; extra 1 con dos bloques de 6 **igual de largos** | **1+2, decidido por Lety** | 1 resuelto, 12 extras |
 | 4 Raíces | raíz simple · fracción con raíz | 1+2 | 3 extras |
 | 5 Producto P1 | — | 1+2 | — |
 | 6 Producto P2 | — | 1+2 | — |
@@ -382,9 +382,18 @@ constante, en posiciones variadas** — la constante y el $ax$ aparecen al princ
 o al final. Las resoluciones siguen el orden escrito. Los de *sólo* $x$ en el denominador
 (B3 y extra 2 C) son otro tipo y no llevan la regla.
 
+**Senos y cosenos lo decidió Lety** (22-sep-2026): *"podían estar todos en un bloque y hacer
+dos bloques de 6 en los extras 1, de la misma longitud, y en el examen poner uno de los
+resueltos y dos de los extras 1"*. Los 6 resueltos quedaron en un **Bloque único**; se
+escribieron **12 extras largos** (la misma forma que los resueltos: trigonométrica, fracción,
+polinomio, $\ln$, $e^x$, $a^x$, $ax$ y constante) repartidos en **Bloque A y Bloque B** de 6;
+los 12 cortos que había pasaron a extra 2 (repaso). Receta `('por bloque', 1, 1)`: uno del
+bloque resuelto y uno de cada bloque de extras. Examen 1 sube al 90 % de la hoja.
+
 Los ejercicios nuevos, por si Lety quiere cambiar alguno: Velocidad $x(t) = 2t^2
 - 6t$ y $x(t) = 12t - 3t^2$; Senos $f(x) = 6\tan x - \frac{2}{x^5} + 5\,\mathrm{sen}\,x -
-3x^4 + \ln x - 5^x + 4e^x - 9\cos x + 3$; Recta tangente $f(x) = -(x+2)^2 + 4$ en
+3x^4 + \ln x - 5^x + 4e^x - 9\cos x + 3$ (resuelto) y los 12 extras largos de los bloques A
+y B (todos nuevos, verificados con sympy); Recta tangente $f(x) = -(x+2)^2 + 4$ en
 $(-1, 3)$; Puntos críticos $2x^3 - 9x^2$ y $6x^2 - 4x^3$ (y los extras $5x^3 -
 3x^2$, $x^3 - 3x^2$); Optimización altura $x+5$ con $P = 32$ y altura $x+1$ con
 $P = 20$; Área P1 $-x + 10$ en $[1, 3]$; Área P2 $-x^2 + 4x + 1$ en $[0, 3]$;

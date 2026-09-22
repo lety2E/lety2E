@@ -90,8 +90,9 @@ CURSOS = {
     ('reglas-basicas.html',        'Reglas básicas de derivación',    ('por bloque', 1, 1, 2, 2)),
     # B1 parábola hacia arriba (t^2 positivo), B2 hacia abajo
     ('velocidad-media.html',       'Velocidad media e instantánea',   ('cruzado', 1, 1)),
-    # sumas largas; los extras son sumas cortas
-    ('senos-cosenos.html',         'Derivadas de senos y cosenos',    ('cruzado', 1, 1)),
+    # Lety (22-sep-2026): los 6 resueltos en un bloque y dos bloques de 6 extras
+    # igual de largos. Cada versión: 1 resuelto + 1 de cada bloque de extra 1 = 3.
+    ('senos-cosenos.html',         'Derivadas de senos y cosenos',    ('por bloque', 1, 1)),
     # B1 raíz simple, B2 fracción con raíz en el denominador
     ('raices.html',                'Derivadas de raíces',             ('cruzado', 1, 2)),
     ('regla-producto-p1.html',     'Regla del producto (P1)',         ('cruzado', 1, 2)),

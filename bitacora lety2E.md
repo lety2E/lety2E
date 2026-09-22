@@ -63,6 +63,12 @@ varios) **más $ax^n$, $ax$ y $a$, en posiciones variadas** (la constante y el $
 final): se reescribieron los 18 mixtos con sus resoluciones (generadas y verificadas con
 sympy).
 
+**Y decidió Senos y cosenos** (22-sep-2026): los 6 resueltos en un **Bloque único** y el
+extra 1 con **dos bloques de 6 sumas largas** —de la misma forma que las resueltas, escritas
+y verificadas con sympy—; los 12 cortos que había bajaron a extra 2. El examen lleva **1
+resuelto + 2 extras**, uno de cada bloque (`('por bloque', 1, 1)`). Examen 1 al 90 % de la
+hoja; resueltas 306 de 306.
+
 Verificado: las 19 páginas a 390×844 sin cards desbordadas ni errores de KaTeX; las 12
 versiones en el navegador y en PDF. **Ojo** para Lety: el extra $-4x^3 + 88x^2$ de Puntos
 críticos (así viene del doc) quedó en extra 2 por si es errata de $8x^2$.
