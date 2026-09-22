@@ -443,13 +443,13 @@
   "archivo": "regla-producto-p1.html",
   "titulo": "Regla del producto (P1)",
   "receta": [
-   "cruzado",
+   "por bloque",
    1,
-   2
+   1
   ],
   "con_respuesta": [
    [
-    "Bloque 1",
+    "Bloque único",
     [
      {
       "tex": "$f(x) = (8x^2 - 2x)(6x^2 + x)$"
@@ -459,12 +459,7 @@
      },
      {
       "tex": "$f(x) = (5x + 7x^2)(4x + 2x^2)$"
-     }
-    ]
-   ],
-   [
-    "Bloque 2",
-    [
+     },
      {
       "tex": "$f(x) = (8x - 9x^2)(x + 2x^3)$"
      },
@@ -498,29 +493,6 @@
      },
      {
       "tex": "$f(x) = (9x + 2x^2)(5x^2 - x)$"
-     }
-    ]
-   ],
-   [
-    "Bloque B",
-    [
-     {
-      "tex": "$f(x) = (x^3 - 4x)(2x^2 + 3x)$"
-     },
-     {
-      "tex": "$f(x) = (5x^2 + 2x)(7x - x^2)$"
-     },
-     {
-      "tex": "$f(x) = (8x^2 - 3)(x^3 + x)$"
-     },
-     {
-      "tex": "$f(x) = (12x - 4x^2)(x^2 + 5)$"
-     },
-     {
-      "tex": "$f(x) = (2x^3 - 6x)(3x^2 - 2)$"
-     },
-     {
-      "tex": "$f(x) = (4x^2 + 1)(x^2 - 9x)$"
      }
     ]
    ]
@@ -633,13 +605,13 @@
   "archivo": "regla-cociente-p1.html",
   "titulo": "Regla del cociente (P1)",
   "receta": [
-   "cruzado",
+   "por bloque",
    1,
-   2
+   1
   ],
   "con_respuesta": [
    [
-    "Bloque 1",
+    "Bloque único",
     [
      {
       "tex": "$f(x) = \\dfrac{4x^2 - 5x}{6x^2 + 3}$"
@@ -649,12 +621,7 @@
      },
      {
       "tex": "$f(x) = \\dfrac{2x^3 + 4x}{5x^3 - 1}$"
-     }
-    ]
-   ],
-   [
-    "Bloque 2",
-    [
+     },
      {
       "tex": "$f(x) = \\dfrac{x^5 - 6x^2}{2x^3 + 4x}$"
      },
@@ -688,29 +655,6 @@
      },
      {
       "tex": "$h(x) = \\dfrac{4 - 8x^2}{7x + x^2}$"
-     }
-    ]
-   ],
-   [
-    "Bloque B",
-    [
-     {
-      "tex": "$f(x) = \\dfrac{6x^3 - 2x}{4x^2 + 5}$"
-     },
-     {
-      "tex": "$g(x) = \\dfrac{x^4 - 8x}{3x^3 - 2x}$"
-     },
-     {
-      "tex": "$h(x) = \\dfrac{5x^2 - 9}{2x^4 + x}$"
-     },
-     {
-      "tex": "$f(x) = \\dfrac{2x^5 - 4x^2}{5x^3 + 6}$"
-     },
-     {
-      "tex": "$g(x) = \\dfrac{7x^2 - 3x}{x^4 - 5x}$"
-     },
-     {
-      "tex": "$h(x) = \\dfrac{3x^4 - 1}{8x^2 + 4x}$"
      }
     ]
    ]

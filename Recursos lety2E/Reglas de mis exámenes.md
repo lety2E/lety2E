@@ -348,11 +348,11 @@ Matemáticas 5 (versiones g-l).pdf` en `~/Downloads`, una versión por hoja.
 | 2 Velocidad media | parábola hacia arriba · hacia abajo | 1+1, **visto por Lety: se queda** | 2 resueltos |
 | 3 Senos y cosenos | un bloque de 6 resueltos; extra 1 con dos bloques de 6 **igual de largos** | **1+2, decidido por Lety** | 1 resuelto, 12 extras |
 | 4 Raíces | exponente mayor que el índice · menor · fracción con raíz abajo (un bloque de 6 por tipo, en los dos lados) | **3+3, decidido por Lety** | 6 resueltos, 6 extras |
-| 5 Producto P1 | — | 1+2 | — |
+| 5 Producto P1 | un bloque de 6 resueltos · un bloque de 6 en extra 1 (el otro, a extra 2) | **1+1, decidido por Lety** | — |
 | 6 Producto P2 | — | 1+2 | — |
-| 7 Cociente P1 | — | 1+2 | — |
+| 7 Cociente P1 | como Producto P1 (extra 2 con los otros dos bloques) | **1+1, decidido por Lety** | — |
 | 8 Cociente P2 | cociente simple · con sumas (B3 práctica) | 1+2 | — |
-| 9 Cadena P1 | cubos · cuadrados · raíces | 1+2 | — |
+| 9 Cadena P1 | cubos · cuadrados · raíces | 1+2 (Lety lo está pensando) | — |
 | 10 Cadena P2 | raíz de potencia trig y trig de polinomio · ln y potencia de trig | 1+2 | — |
 | 11 Recta tangente | parábola hacia arriba · hacia abajo | 1+1 | 1 resuelto (con gráfica) |
 | 12 Puntos críticos | cúbico positivo · negativo | 1+2 | 2 resueltos, 2 extras |
@@ -402,6 +402,14 @@ El conteo por versión no lo dijo; siguiendo su patrón (un bloque de 6 = uno po
 cada versión lleva **uno de cada bloque: 3 resueltos + 3 extras**, receta `('por bloque', 1,
 1)`. En la hoja va a dos columnas y queda alineado por tipo: a la izquierda los resueltos y
 a la derecha los extras. Examen 1 sigue al 90 %.
+
+**Producto P1 y Cociente P1 los decidió Lety** (22-sep-2026): *"como siento que es más
+proceso (solo dos ejercicios para examen), podría ser 1 bloque de 6 ejercicios resueltos que
+nos da un ejercicio para examen, y un bloque igual de extras 1 que me da un ejercicio para
+examen, y los otros a extras 2"*. Así quedaron los dos: Ejercicios en un **Bloque único** de
+6, extra 1 con **un bloque de 6** y el resto en extra 2; receta `('por bloque', 1, 1)` = 2 por
+versión. Primero dijo *"igual para regla de cociente y de la cadena parte 1"* y enseguida
+*"espérame para la cadena P1"*: Cadena P1 se quedó como estaba hasta que decida.
 
 Los ejercicios nuevos, por si Lety quiere cambiar alguno: Velocidad $x(t) = 2t^2
 - 6t$ y $x(t) = 12t - 3t^2$; Senos $f(x) = 6\tan x - \frac{2}{x^5} + 5\,\mathrm{sen}\,x -

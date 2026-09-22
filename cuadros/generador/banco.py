@@ -97,9 +97,12 @@ CURSOS = {
     # (1 exponente mayor que el índice, 2 menor, 3 fracción con la raíz abajo).
     # Cada versión: uno de cada bloque = 3 resueltos + 3 extras.
     ('raices.html',                'Derivadas de raíces',             ('por bloque', 1, 1)),
-    ('regla-producto-p1.html',     'Regla del producto (P1)',         ('cruzado', 1, 2)),
+    # Lety (22-sep-2026): "es más proceso", sólo dos al examen. Un bloque de 6
+    # resueltos y uno de 6 en extra 1: uno de cada uno. Lo demás es extra 2.
+    ('regla-producto-p1.html',     'Regla del producto (P1)',         ('por bloque', 1, 1)),
     ('regla-producto-p2.html',     'Regla del producto (P2)',         ('cruzado', 1, 2)),
-    ('regla-cociente-p1.html',     'Regla del cociente (P1)',         ('cruzado', 1, 2)),
+    # Lety (22-sep-2026): como Producto P1, 1 resuelto + 1 extra.
+    ('regla-cociente-p1.html',     'Regla del cociente (P1)',         ('por bloque', 1, 1)),
     # B1 cociente simple, B2 con sumas (B3 mixto queda de práctica)
     ('regla-cociente-p2.html',     'Regla del cociente (P2)',         ('cruzado', 1, 2)),
     # B1 cubos, B2 cuadrados, B3 raíces

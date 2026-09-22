@@ -75,6 +75,11 @@ el orden de sus Ejemplos). Se escribieron 6 resueltos con su resolución en el f
 página y 3 extras; los 18 extras entran, así que *extra 2* se quitó. Cada versión lleva uno de
 cada bloque (3 + 3), en dos columnas alineadas por tipo. Resueltas 324 de 324.
 
+**Producto P1 y Cociente P1**, decididos por Lety (*"es más proceso"*): 2 por versión, 1
+resuelto + 1 extra. Ejercicios en un Bloque único de 6, extra 1 con un bloque de 6 y lo demás
+a extra 2 (se movió lo que había, no se escribió nada). Cadena P1 quedó como estaba: Lety la
+está pensando. Resueltas 312 de 312.
+
 Verificado: las 19 páginas a 390×844 sin cards desbordadas ni errores de KaTeX; las 12
 versiones en el navegador y en PDF. **Ojo** para Lety: el extra $-4x^3 + 88x^2$ de Puntos
 críticos (así viene del doc) quedó en extra 2 por si es errata de $8x^2$.
