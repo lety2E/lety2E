@@ -651,7 +651,7 @@
   "archivo": "regla-cociente-p2.html",
   "titulo": "Regla del cociente (P2)",
   "receta": [
-   "cruzado",
+   "rotado",
    1,
    2
   ],
@@ -663,13 +663,7 @@
       "tex": "$f(x) = \\dfrac{4x^2}{5\\cos x}$"
      },
      {
-      "tex": "$g(x) = \\dfrac{7x^3}{6\\operatorname{sen} x}$"
-     },
-     {
       "tex": "$h(x) = \\dfrac{2\\tan x}{8x^2}$"
-     },
-     {
-      "tex": "$f(x) = \\dfrac{-4\\cos x}{6x^2}$"
      }
     ]
    ],
@@ -680,12 +674,6 @@
       "tex": "$f(x) = \\dfrac{5x^2 - 3\\operatorname{sen} x}{2\\cos x}$"
      },
      {
-      "tex": "$g(x) = \\dfrac{7\\cos x}{2x^2 - 4\\operatorname{sen} x}$"
-     },
-     {
-      "tex": "$h(x) = \\dfrac{3x^2 - 2\\operatorname{sen} x}{4\\cos x}$"
-     },
-     {
       "tex": "$f(x) = \\dfrac{4x^3 + 2\\cos x}{\\operatorname{sen} x}$"
      }
     ]
@@ -694,22 +682,10 @@
     "Bloque 3",
     [
      {
-      "tex": "$f(x) = \\dfrac{2x^4}{3\\cos x}$"
-     },
-     {
-      "tex": "$g(x) = \\dfrac{-5\\tan x}{2x^3}$"
-     },
-     {
-      "tex": "$h(x) = \\dfrac{5x^3}{2\\cos x}$"
+      "tex": "$g(x) = \\dfrac{7\\cos x}{2x^2 - 4\\operatorname{sen} x}$"
      },
      {
       "tex": "$f(x) = \\dfrac{2\\cos x}{3x^2 - 5\\operatorname{sen} x}$"
-     },
-     {
-      "tex": "$g(x) = \\dfrac{4x^2 - 2\\cos x}{\\operatorname{sen} x}$"
-     },
-     {
-      "tex": "$h(x) = \\dfrac{6\\cos x}{3x^2 - 2\\operatorname{sen} x}$"
      }
     ]
    ]
@@ -728,13 +704,7 @@
       "tex": "$h(x) = \\dfrac{6x^2}{5\\cos x}$"
      },
      {
-      "tex": "$f(x) = \\dfrac{6x^3}{2\\cos x}$"
-     },
-     {
       "tex": "$g(x) = \\dfrac{4\\tan x}{3x^4}$"
-     },
-     {
-      "tex": "$h(x) = \\dfrac{-3x^2}{4\\cos x}$"
      }
     ]
    ],
@@ -742,19 +712,30 @@
     "Bloque B",
     [
      {
-      "tex": "$f(x) = \\dfrac{4\\cos x}{2x^3 - 3\\operatorname{sen} x}$"
+      "tex": "$g(x) = \\dfrac{5x^2 - 3\\cos x}{\\operatorname{sen} x}$"
      },
      {
-      "tex": "$g(x) = \\dfrac{5x^2 - 3\\cos x}{\\operatorname{sen} x}$"
+      "tex": "$g(x) = \\dfrac{2x^2 - 4\\cos x}{\\operatorname{sen} x}$"
+     },
+     {
+      "tex": "$f(x) = \\dfrac{6x^3 - 5\\operatorname{sen} x}{3\\cos x}$"
+     },
+     {
+      "tex": "$h(x) = \\dfrac{3x^2 + 4\\cos x}{2\\operatorname{sen} x}$"
+     }
+    ]
+   ],
+   [
+    "Bloque C",
+    [
+     {
+      "tex": "$f(x) = \\dfrac{4\\cos x}{2x^3 - 3\\operatorname{sen} x}$"
      },
      {
       "tex": "$h(x) = \\dfrac{4\\cos x}{2x^2 - 5\\operatorname{sen} x}$"
      },
      {
       "tex": "$f(x) = \\dfrac{3\\cos x}{4x^2 - 2\\operatorname{sen} x}$"
-     },
-     {
-      "tex": "$g(x) = \\dfrac{2x^2 - 4\\cos x}{\\operatorname{sen} x}$"
      },
      {
       "tex": "$h(x) = \\dfrac{8\\cos x}{5x^2 - 3\\operatorname{sen} x}$"

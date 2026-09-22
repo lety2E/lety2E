@@ -38,7 +38,7 @@ O sea, por tema:
    a cada versión le tocan tipos distintos (modos `cruzado` y `rotado`, §3).
 6. **Siempre hay extra 2**: *"de pasada se podría hacer los extras 2 cuando no hay, hacer
    algunas tandas de ejercicios"*. Si un tema no tiene repaso, se escribe **una tanda por tipo**
-   (de 4, sin respuesta) al revisarlo. Raíces y Producto P2 ya la tienen (22-sep-2026).
+   (de 4, sin respuesta) al revisarlo. Raíces, Producto P2 y Cociente P2 ya la tienen.
 
 Lety lo resumió así: *"sólo sabiendo cuántos tipos de ejercicios considero yo, y cuántos de
 resueltas y cuántos de extras 1"*. Para arrancar un tema nuevo basta preguntarle **si tiene
@@ -386,7 +386,7 @@ Matemáticas 5 (versiones g-l).pdf` en `~/Downloads`, una versión por hoja.
 | 5 Producto P1 | un bloque de 6 resueltos · un bloque de 6 en extra 1 (el otro, a extra 2) | **1+1, decidido por Lety** | — |
 | 6 Producto P2 | monomio × trascendente · trascendente × trascendente · raíz × trascendente: 2 resueltos + 4 extras por tipo (B4 de práctica) | **1+2 rotado, decidido por Lety** | — |
 | 7 Cociente P1 | denominador con número suelto · sin él (Bloque 1 ↔ A, 2 ↔ B, 3 y 3) | **1+1 cruzado, decidido por Lety** | — |
-| 8 Cociente P2 | cociente simple · con sumas (B3 práctica) | 1+2 | — |
+| 8 Cociente P2 | términos simples · binomio arriba · binomio abajo: 2 resueltos + 4 extras por tipo | **1+2 rotado, decidido por Lety** (como Producto P2) | 2 extras; extra 2 nuevo |
 | 9 Cadena P1 | cubos · cuadrados · raíces: 4 resueltos + 2 extras por tipo (B1/A, B2/B, B3/C) | **2+1 rotado, decidido por Lety** | 6 resueltos |
 | 10 Cadena P2 | raíz de potencia trig y trig de polinomio · ln y potencia de trig | 1+2 | — |
 | 11 Recta tangente | parábola hacia arriba · hacia abajo | 1+1 | 1 resuelto (con gráfica) |
@@ -481,6 +481,14 @@ trascendente va al final**, como en los Ejemplos de Lety ($5x^3\cos x$): $3\,\ma
 se leía como si el $4^x$ fuera del argumento del seno y quedó $4^x\,\mathrm{sen}\,x$ (como
 $2^x\cos x$), y $7\,\mathrm{sen}\,x\,e^x$ quedó $7e^x\,\mathrm{sen}\,x$. Lety: *"con esos
 cambios se ve más el patrón"*.
+**Cociente P2, decidido por Lety** (22-sep-2026): tres tipos —**términos simples**
+($\frac{4x^2}{5\cos x}$), **binomio arriba** ($\frac{5x^2 - 3\,\mathrm{sen}\,x}{2\cos x}$) y **binomio
+abajo** ($\frac{7\cos x}{2x^2 - 4\,\mathrm{sen}\,x}$)— *"con la misma lógica de producto P2"*:
+2 resueltos + 4 extras por tipo, `('rotado', 1, 2)`. Había 7, 4 y 3 resueltos y 6, 2 y 4
+extras: los que sobraban bajaron a extra 2 por tipo (los resueltos, sin su respuesta), y se
+escribieron **2 extras de binomio arriba** con su resolución ($\frac{6x^3 - 5\,\mathrm{sen}\,x}{3\cos x}$,
+$\frac{3x^2 + 4\cos x}{2\,\mathrm{sen}\,x}$). El tema no tenía extra 2: ahora tiene D (7), E (4) y
+F (4), con 5 de repaso nuevos.
 
 Los ejercicios nuevos, por si Lety quiere cambiar alguno: Velocidad $x(t) = 2t^2
 - 6t$ y $x(t) = 12t - 3t^2$; Senos $f(x) = 6\tan x - \frac{2}{x^5} + 5\,\mathrm{sen}\,x -

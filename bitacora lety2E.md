@@ -99,7 +99,10 @@ con $a$ entero (el $-\frac{x}{2}$ de un resuelto, el único del curso, quedó $-
 respuesta), y el **Bloque 4** de práctica de Producto P2 **bajó a extra 2** por tipo, porque el
 banco es resueltos + extra 1. Lo mismo el **Bloque 3 de Reglas básicas** (sus 6 bajaron a extra 2
 por tipo). Y en Producto P2 la función trascendente va al final: $4^x\,\mathrm{sen}\,x$ en vez de
-$3\,\mathrm{sen}\,x\,4^x$ (con su resolución) y $7e^x\,\mathrm{sen}\,x$.
+$3\,\mathrm{sen}\,x\,4^x$ (con su resolución) y $7e^x\,\mathrm{sen}\,x$. **Cociente P2** con la
+lógica de Producto P2 (tres tipos: términos simples, binomio arriba, binomio abajo; 1 + 2
+rotando): 2 extras nuevos de binomio arriba con su resolución, lo sobrante a extra 2 por tipo
+y 5 de repaso nuevos; el tema no tenía extra 2.
 
 Verificado: las 19 páginas a 390×844 sin cards desbordadas ni errores de KaTeX; las 12
 versiones en el navegador y en PDF. **Ojo** para Lety: el extra $-4x^3 + 88x^2$ de Puntos

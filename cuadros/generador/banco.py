@@ -109,8 +109,10 @@ CURSOS = {
     # con número suelto en el denominador, Bloque 2 y B sin él: la versión a
     # lleva 1 y B, la b lleva 2 y A, y así alternando.
     ('regla-cociente-p1.html',     'Regla del cociente (P1)',         ('cruzado', 1, 1)),
-    # B1 cociente simple, B2 con sumas (B3 mixto queda de práctica)
-    ('regla-cociente-p2.html',     'Regla del cociente (P2)',         ('cruzado', 1, 2)),
+    # Lety (22-sep-2026), con la lógica de Producto P2: tres tipos —términos
+    # simples, binomio arriba, binomio abajo—, 2 resueltos y 4 extras por tipo
+    # (B1/A, B2/B, B3/C). Cada versión 1 resuelto + 2 extras, uno de cada tipo.
+    ('regla-cociente-p2.html',     'Regla del cociente (P2)',         ('rotado', 1, 2)),
     # Lety (22-sep-2026): 6 por tipo = 4 resueltos + 2 extras (B1/A cubos, B2/B
     # cuadrados, B3/C raíces). Cada versión 2 resueltos + 1 extra, uno de cada tipo.
     ('regla-cadena-p1.html',       'Regla de la cadena (P1)',         ('rotado', 2, 1)),

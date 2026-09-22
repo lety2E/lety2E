@@ -736,7 +736,7 @@
   "titulo": "Regla del cociente (P2)",
   "archivo": "regla-cociente-p2.html",
   "receta": [
-   "cruzado",
+   "rotado",
    1,
    2
   ],
@@ -747,11 +747,11 @@
      "origen": "respuesta"
     },
     {
-     "tex": "$f(x) = \\dfrac{4\\cos x}{2x^3 - 3\\operatorname{sen} x}$",
+     "tex": "$g(x) = \\dfrac{5x^2 - 3\\cos x}{\\operatorname{sen} x}$",
      "origen": "extra"
     },
     {
-     "tex": "$g(x) = \\dfrac{5x^2 - 3\\cos x}{\\operatorname{sen} x}$",
+     "tex": "$f(x) = \\dfrac{4\\cos x}{2x^3 - 3\\operatorname{sen} x}$",
      "origen": "extra"
     }
    ],
@@ -761,25 +761,11 @@
      "origen": "respuesta"
     },
     {
-     "tex": "$f(x) = \\dfrac{3x^4}{4\\cos x}$",
-     "origen": "extra"
-    },
-    {
-     "tex": "$g(x) = \\dfrac{-2\\tan x}{5x^3}$",
-     "origen": "extra"
-    }
-   ],
-   [
-    {
-     "tex": "$g(x) = \\dfrac{7x^3}{6\\operatorname{sen} x}$",
-     "origen": "respuesta"
-    },
-    {
      "tex": "$h(x) = \\dfrac{4\\cos x}{2x^2 - 5\\operatorname{sen} x}$",
      "origen": "extra"
     },
     {
-     "tex": "$f(x) = \\dfrac{3\\cos x}{4x^2 - 2\\operatorname{sen} x}$",
+     "tex": "$f(x) = \\dfrac{3x^4}{4\\cos x}$",
      "origen": "extra"
     }
    ],
@@ -789,11 +775,11 @@
      "origen": "respuesta"
     },
     {
-     "tex": "$h(x) = \\dfrac{6x^2}{5\\cos x}$",
+     "tex": "$g(x) = \\dfrac{-2\\tan x}{5x^3}$",
      "origen": "extra"
     },
     {
-     "tex": "$f(x) = \\dfrac{6x^3}{2\\cos x}$",
+     "tex": "$g(x) = \\dfrac{2x^2 - 4\\cos x}{\\operatorname{sen} x}$",
      "origen": "extra"
     }
    ],
@@ -803,17 +789,31 @@
      "origen": "respuesta"
     },
     {
-     "tex": "$g(x) = \\dfrac{2x^2 - 4\\cos x}{\\operatorname{sen} x}$",
+     "tex": "$f(x) = \\dfrac{6x^3 - 5\\operatorname{sen} x}{3\\cos x}$",
      "origen": "extra"
     },
     {
-     "tex": "$h(x) = \\dfrac{8\\cos x}{5x^2 - 3\\operatorname{sen} x}$",
+     "tex": "$f(x) = \\dfrac{3\\cos x}{4x^2 - 2\\operatorname{sen} x}$",
      "origen": "extra"
     }
    ],
    [
     {
-     "tex": "$h(x) = \\dfrac{3x^2 - 2\\operatorname{sen} x}{4\\cos x}$",
+     "tex": "$f(x) = \\dfrac{4x^3 + 2\\cos x}{\\operatorname{sen} x}$",
+     "origen": "respuesta"
+    },
+    {
+     "tex": "$h(x) = \\dfrac{8\\cos x}{5x^2 - 3\\operatorname{sen} x}$",
+     "origen": "extra"
+    },
+    {
+     "tex": "$h(x) = \\dfrac{6x^2}{5\\cos x}$",
+     "origen": "extra"
+    }
+   ],
+   [
+    {
+     "tex": "$f(x) = \\dfrac{2\\cos x}{3x^2 - 5\\operatorname{sen} x}$",
      "origen": "respuesta"
     },
     {
@@ -821,15 +821,15 @@
      "origen": "extra"
     },
     {
-     "tex": "$h(x) = \\dfrac{-3x^2}{4\\cos x}$",
+     "tex": "$h(x) = \\dfrac{3x^2 + 4\\cos x}{2\\operatorname{sen} x}$",
      "origen": "extra"
     }
    ]
   ],
   "info": {
-   "modo": "cruzado",
+   "modo": "rotado",
    "falta": 0,
-   "r_disp": 14,
+   "r_disp": 6,
    "e_disp": 12
   }
  },
