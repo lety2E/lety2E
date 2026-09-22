@@ -16,7 +16,7 @@
      "origen": "respuesta"
     },
     {
-     "tex": "$f(x) = \\dfrac{4}{x^3} - 2x^2 + 5x + 3$",
+     "tex": "$f(x) = 5x + \\dfrac{4}{x^3} - 2x^2 + 3 + \\dfrac{6}{x^5}$",
      "origen": "respuesta"
     },
     {
@@ -24,7 +24,7 @@
      "origen": "extra"
     },
     {
-     "tex": "$f(x) = \\dfrac{1}{x^{10}} - 6x^4 + 3x - 2$",
+     "tex": "$f(x) = 3x - 6x^4 + \\dfrac{1}{x^{10}} - 2 + \\dfrac{4}{x^2}$",
      "origen": "extra"
     }
    ],
@@ -34,7 +34,7 @@
      "origen": "respuesta"
     },
     {
-     "tex": "$f(x) = 6x^6 - x + \\dfrac{2}{x^5} + 9$",
+     "tex": "$f(x) = 9 - x + 6x^6 - \\dfrac{7}{x^2} + \\dfrac{2}{x^5}$",
      "origen": "respuesta"
     },
     {
@@ -42,7 +42,7 @@
      "origen": "extra"
     },
     {
-     "tex": "$f(x) = 2x^7 - 3x + \\dfrac{5}{x^3} + 12$",
+     "tex": "$f(x) = 12 + 2x^7 - \\dfrac{6}{x^7} - 3x + \\dfrac{5}{x^3}$",
      "origen": "extra"
     }
    ],
@@ -52,7 +52,7 @@
      "origen": "respuesta"
     },
     {
-     "tex": "$f(x) = -\\dfrac{1}{x^8} + 5x^3 - 4x + 2$",
+     "tex": "$f(x) = -\\dfrac{1}{x^8} + 5x^3 + \\dfrac{3}{x} + 2 - 4x$",
      "origen": "respuesta"
     },
     {
@@ -60,7 +60,7 @@
      "origen": "extra"
     },
     {
-     "tex": "$f(x) = -6x^2 + \\dfrac{9}{x^2} - 2x + 3$",
+     "tex": "$f(x) = -6x^2 - 2x + \\dfrac{9}{x^2} + 3 - \\dfrac{2}{x}$",
      "origen": "extra"
     }
    ],
@@ -70,7 +70,7 @@
      "origen": "respuesta"
     },
     {
-     "tex": "$f(x) = 2x^7 - \\dfrac{3}{x^5} + 4x - 10$",
+     "tex": "$f(x) = 2x^7 - 10 + \\dfrac{8}{x^3} + 4x - \\dfrac{3}{x^5}$",
      "origen": "respuesta"
     },
     {
@@ -78,7 +78,7 @@
      "origen": "extra"
     },
     {
-     "tex": "$f(x) = -\\dfrac{3}{x^6} - 4x^3 + 2x - 11$",
+     "tex": "$f(x) = \\dfrac{2}{x^4} - 11 - 4x^3 + 2x - \\dfrac{3}{x^6}$",
      "origen": "extra"
     }
    ],
@@ -88,7 +88,7 @@
      "origen": "respuesta"
     },
     {
-     "tex": "$f(x) = 3x^4 - 2x + \\dfrac{5}{x^2} - 7$",
+     "tex": "$f(x) = 3x^4 - 7 - 2x + \\dfrac{5}{x^2} - \\dfrac{4}{x^3}$",
      "origen": "respuesta"
     },
     {
@@ -96,7 +96,7 @@
      "origen": "extra"
     },
     {
-     "tex": "$f(x) = 7x^5 - \\dfrac{4}{x^3} + 2x - 9$",
+     "tex": "$f(x) = 7x^5 + \\dfrac{6}{x} - 9 + 2x - \\dfrac{4}{x^3}$",
      "origen": "extra"
     }
    ],
@@ -106,7 +106,7 @@
      "origen": "respuesta"
     },
     {
-     "tex": "$f(x) = -x^5 + \\dfrac{1}{x^4} + 6x - 12$",
+     "tex": "$f(x) = \\dfrac{1}{x^4} - x^5 + 6x - 12 - \\dfrac{3}{x}$",
      "origen": "respuesta"
     },
     {
@@ -114,7 +114,7 @@
      "origen": "extra"
     },
     {
-     "tex": "$f(x) = -5x^4 + \\dfrac{6}{x^3} - 3x + 8$",
+     "tex": "$f(x) = -3x + \\dfrac{6}{x^3} + 8 - 5x^4 - \\dfrac{2}{x^5}$",
      "origen": "extra"
     }
    ]

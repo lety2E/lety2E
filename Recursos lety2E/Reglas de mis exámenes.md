@@ -373,11 +373,14 @@ los 4 de sólo $x$ en el denominador + 2 mixtos); extra 1 A = 6 polinomios y B =
 extra 2 C = sólo $x$ en el denominador, D y E = repaso de cada tipo. Cada versión: uno de
 cada bloque, receta `('por bloque', 1, 1, 2, 2)`. Examen 1 sube al 86 % de la hoja.
 **Y la forma de los mixtos** (22-sep-2026): *"en las que tienen x en el denominador, que
-tenga al menos una de $ax^n$, $ax^{-n}$, $ax$ y $a$"* — cada ejercicio con $x$ en el
-denominador trae un término de cada forma. Se ajustaron los siete que no cumplían (un
-resuelto que entra, uno de práctica, cuatro extras que entran y uno de repaso), con su
-resolución. Los de *sólo* $x$ en el denominador (B3 y extra 2 C) son otro tipo y no
-llevan la regla.
+tenga al menos una de $ax^n$, $ax^{-n}$, $ax$ y $a$"*, y enseguida: *"mejor pon 2 términos
+con $ax^{-n}$ además de los otros"*, *"no siempre pongas $a$ al último, varía su posición"*,
+*"lo mismo con el término $ax$, y usa también el $ax^{-1}$"*. Así que cada mixto (los 18:
+6 resueltos que entran, 2 de práctica, 6 extras que entran, 4 de repaso) trae **cinco
+términos: dos $ax^{-n}$ (uno de ellos, en varios, $\frac{a}{x}$), un $ax^n$, un $ax$ y una
+constante, en posiciones variadas** — la constante y el $ax$ aparecen al principio, en medio
+o al final. Las resoluciones siguen el orden escrito. Los de *sólo* $x$ en el denominador
+(B3 y extra 2 C) son otro tipo y no llevan la regla.
 
 Los ejercicios nuevos, por si Lety quiere cambiar alguno: Velocidad $x(t) = 2t^2
 - 6t$ y $x(t) = 12t - 3t^2$; Senos $f(x) = 6\tan x - \frac{2}{x^5} + 5\,\mathrm{sen}\,x -

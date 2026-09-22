@@ -58,8 +58,10 @@ denominador y B3 de práctica resuelta (los 4 de sólo $x$ en el denominador + 2
 extra 1 con A = 6 polinomios y B = 6 mixtos; extra 2 con C = sólo $x$ en el denominador y D,
 E de repaso (4 y 4, nuevos). Se escribieron 2 resueltos y 9 extras; receta `('por bloque',
 1, 1, 2, 2)` = uno de cada bloque. Examen 1 al 86 %; resueltas 300 de 300. Al día
-siguiente pidió que cada mixto traiga **un término de cada forma** ($ax^n$, $ax^{-n}$, $ax$,
-$a$): se ajustaron siete ejercicios con sus resoluciones.
+siguiente pidió que cada mixto traiga **dos términos $ax^{-n}$** (con $\frac{a}{x}$ en
+varios) **más $ax^n$, $ax$ y $a$, en posiciones variadas** (la constante y el $ax$ no siempre al
+final): se reescribieron los 18 mixtos con sus resoluciones (generadas y verificadas con
+sympy).
 
 Verificado: las 19 páginas a 390×844 sin cards desbordadas ni errores de KaTeX; las 12
 versiones en el navegador y en PDF. **Ojo** para Lety: el extra $-4x^3 + 88x^2$ de Puntos
