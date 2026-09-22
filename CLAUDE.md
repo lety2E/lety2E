@@ -281,6 +281,8 @@ convertir.
   resoluciones salta `.sol-rotulo` y `.graficas-row` (los rótulos y las tablas/gráficas de
   Recta tangente).
 - Modo `cruzado` con dos extras y tres tipos: uno de cada tipo que no es el del resuelto.
+- Modo `rotado` (22-sep-2026, Cadena P1): con bloques por tipo en los dos lados, cada versión
+  lleva uno de cada tipo —los primeros resueltos y el último extra— rotando cuál va de extra.
 
 ### Al cambiar un tema de `math/`
 

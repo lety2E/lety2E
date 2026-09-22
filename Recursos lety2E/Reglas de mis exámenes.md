@@ -96,6 +96,7 @@ Hay tres formas de tomar de un bloque, y **cada tema usa la suya**:
 | **por renglón** | se toma un renglón de cada bloque | Jerarquía: uno de cada bloque de ejercicios y uno de cada bloque de extras = 4 |
 | **cruzado** | los bloques son dos tipos; cada versión lleva un tipo resuelto y el *otro* tipo de extra, alternando | Gráfica con tabulación (pendiente ±), Pendiente y ordenada (ordenada ±) |
 | **ejercicios sueltos** | reparto plano | los temas que todavía no se definen |
+| **rotado** | tres tipos o más en bloques paralelos; cada versión lleva uno de cada tipo, unos resueltos y otros extra, rotando cuál va de extra | Cadena P1 de Mate 5: 2 resueltos + 1 extra, cubo, cuadrado y raíz |
 
 **Lety quiere mezcla de tipos** (17-sep-2026): que en cada versión al alumno le
 toquen tipos distintos, y que entre resueltos y extras se crucen. Cuando un
@@ -352,7 +353,7 @@ Matemáticas 5 (versiones g-l).pdf` en `~/Downloads`, una versión por hoja.
 | 6 Producto P2 | — | 1+2 | — |
 | 7 Cociente P1 | denominador con número suelto · sin él (Bloque 1 ↔ A, 2 ↔ B, 3 y 3) | **1+1 cruzado, decidido por Lety** | — |
 | 8 Cociente P2 | cociente simple · con sumas (B3 práctica) | 1+2 | — |
-| 9 Cadena P1 | cubos · cuadrados · raíces | 1+2 (Lety lo está pensando) | — |
+| 9 Cadena P1 | cubos · cuadrados · raíces: 4 resueltos + 2 extras por tipo (B1/A, B2/B, B3/C) | **2+1 rotado, decidido por Lety** | 6 resueltos |
 | 10 Cadena P2 | raíz de potencia trig y trig de polinomio · ln y potencia de trig | 1+2 | — |
 | 11 Recta tangente | parábola hacia arriba · hacia abajo | 1+1 | 1 resuelto (con gráfica) |
 | 12 Puntos críticos | cúbico positivo · negativo | 1+2 | 2 resueltos, 2 extras |
@@ -418,6 +419,16 @@ se mezclen"*. Es el **cruzado** de Mate 1: receta `('cruzado', 1, 1)`, las versi
 llevan 1 + B y las b, d, f llevan 2 + A. Extra 2 quedó por tipo: C (con número suelto) y D, E,
 F (sin él), 3 cada uno. Las respuestas de la página van a todo lo ancho: en dos columnas el
 sitio encogía la letra de las más largas.
+**Cadena P1 lo decidió después** (22-sep-2026): *"como hay ejercicios de tres tipos, me
+gustaría hacer 6 de cada tipo, bloques con 4 ejercicios, los ejercicios extras 1 sólo 2 de
+cada tipo, y con eso completamos el banco de preguntas de este ejercicio; tomamos dos de los
+resueltos y 1 de extras 1, así tenemos los 3 ejercicios por examen; en este caso dos de estos
+estarán en la base"*. O sea 6 por tipo = **4 resueltos + 2 extras**: Bloque 1/A cubos, 2/B
+cuadrados, 3/C raíces; 18 en total, y en seis versiones sale cada uno una sola vez. El
+asistente agregó que cada versión lleve **uno de cada tipo**: dos resueltos de dos tipos y el
+extra del tercero, rotando — modo nuevo `('rotado', 2, 1)` en `seleccion.py`. Se escribieron
+6 resueltos ($3(2-5x^2)^3$, $-2(3x^2+4)^3$, $3(4x-x^2)^2$, $-2(3x^3-5x)^2$, $\sqrt[3]{8x^2+1}$,
+$\sqrt[5]{4-7x^2}$); los 18 extras que sobran quedaron en extra 2, por tipo (D, E, F).
 
 Los ejercicios nuevos, por si Lety quiere cambiar alguno: Velocidad $x(t) = 2t^2
 - 6t$ y $x(t) = 12t - 3t^2$; Senos $f(x) = 6\tan x - \frac{2}{x^5} + 5\,\mathrm{sen}\,x -

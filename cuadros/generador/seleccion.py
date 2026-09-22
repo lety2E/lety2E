@@ -180,6 +180,33 @@ def cruzado(tema, V):
                        'r_disp': sum(len(i) for _, i in R),
                        'e_disp': sum(len(i) for _, i in E)}
 
+def rotado(tema, V):
+    """Bloques por tipo (los mismos tipos en los dos lados) y cada versión lleva UNO DE
+    CADA TIPO: los primeros R tipos resueltos y los siguientes E de extras, rotando cuál
+    tipo va de extra. Lety, 22-sep-2026, para Cadena P1: cubos, cuadrados y raíces, con 4
+    resueltos y 2 extras por tipo; cada versión 2 resueltos + 1 extra, los tres de tipo
+    distinto, y en seis versiones sale cada ejercicio una sola vez. Receta ('rotado', R, E)."""
+    _, nR, nE = tema['receta'][:3]
+    R, E = tema['con_respuesta'], tema['extras']
+    nb = min(len(R), len(E))
+    usoR, usoE = [0]*len(R), [0]*len(E)
+    versiones, falta = [], 0
+    for v in range(V):
+        fila = []
+        for j in range(nR + nE):
+            k = (v + j) % nb
+            bloques, uso, origen = (R, usoR, 'respuesta') if j < nR else (E, usoE, 'extra')
+            items = bloques[k][1]
+            if uso[k] >= len(items):
+                falta += 1; continue
+            item = dict(items[uso[k]]); uso[k] += 1
+            item['origen'] = origen
+            fila.append(item)
+        versiones.append(fila)
+    return versiones, {'modo': 'rotado', 'falta': falta,
+                       'r_disp': sum(len(i) for _, i in R),
+                       'e_disp': sum(len(i) for _, i in E)}
+
 def seleccionar(tema, V):
     if tema['receta'][0] == 'bloques':
         return por_bloques(tema, V)
@@ -187,6 +214,8 @@ def seleccionar(tema, V):
         return uno_por_bloque(tema, V)
     if tema['receta'][0] == 'cruzado':
         return cruzado(tema, V)
+    if tema['receta'][0] == 'rotado':
+        return rotado(tema, V)
     _, r_pv, e_pv = tema['receta']
     n = r_pv + e_pv
     R, E = tema['con_respuesta'], tema['extras']

@@ -107,8 +107,9 @@ CURSOS = {
     ('regla-cociente-p1.html',     'Regla del cociente (P1)',         ('cruzado', 1, 1)),
     # B1 cociente simple, B2 con sumas (B3 mixto queda de práctica)
     ('regla-cociente-p2.html',     'Regla del cociente (P2)',         ('cruzado', 1, 2)),
-    # B1 cubos, B2 cuadrados, B3 raíces
-    ('regla-cadena-p1.html',       'Regla de la cadena (P1)',         ('cruzado', 1, 2)),
+    # Lety (22-sep-2026): 6 por tipo = 4 resueltos + 2 extras (B1/A cubos, B2/B
+    # cuadrados, B3/C raíces). Cada versión 2 resueltos + 1 extra, uno de cada tipo.
+    ('regla-cadena-p1.html',       'Regla de la cadena (P1)',         ('rotado', 2, 1)),
     # B1 raíz de potencia trig y trig de polinomio, B2 ln y potencia de trig
     ('regla-cadena-p2.html',       'Regla de la cadena (P2)',         ('cruzado', 1, 2)),
     # B1 parábola hacia arriba, B2 hacia abajo
