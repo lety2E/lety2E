@@ -100,7 +100,11 @@ CURSOS = {
     # Lety (22-sep-2026): "es más proceso", sólo dos al examen. Un bloque de 6
     # resueltos y uno de 6 en extra 1: uno de cada uno. Lo demás es extra 2.
     ('regla-producto-p1.html',     'Regla del producto (P1)',         ('por bloque', 1, 1)),
-    ('regla-producto-p2.html',     'Regla del producto (P2)',         ('cruzado', 1, 2)),
+    # Lety (22-sep-2026): tres tipos — monomio × trascendente, trascendente ×
+    # trascendente, raíz × trascendente —, 2 resueltos y 4 extras por tipo (B1/A,
+    # B2/B, B3/C; el Bloque 4 es práctica y no entra). Cada versión 1 resuelto + 2
+    # extras, los tres de tipo distinto.
+    ('regla-producto-p2.html',     'Regla del producto (P2)',         ('rotado', 1, 2)),
     # Lety (22-sep-2026): 1 resuelto + 1 extra, cruzados por tipo. Bloque 1 y A
     # con número suelto en el denominador, Bloque 2 y B sin él: la versión a
     # lleva 1 y B, la b lleva 2 y A, y así alternando.

@@ -558,7 +558,7 @@
   "titulo": "Regla del producto (P2)",
   "archivo": "regla-producto-p2.html",
   "receta": [
-   "cruzado",
+   "rotado",
    1,
    2
   ],
@@ -569,39 +569,25 @@
      "origen": "respuesta"
     },
     {
-     "tex": "$f(x) = -2x^5 \\ln x$",
+     "tex": "$f(x) = 5 \\operatorname{sen} x \\ln x$",
      "origen": "extra"
     },
     {
-     "tex": "$f(x) = 3 \\operatorname{sen} x \\, 4^x$",
+     "tex": "$f(x) = \\sqrt{x} \\, e^x$",
      "origen": "extra"
     }
    ],
    [
     {
-     "tex": "$f(x) = 6 \\cos x \\operatorname{sen} x$",
+     "tex": "$f(x) = 8 \\operatorname{sen} x \\tan x$",
      "origen": "respuesta"
+    },
+    {
+     "tex": "$f(x) = \\sqrt[3]{x^2} \\operatorname{sen} x$",
+     "origen": "extra"
     },
     {
      "tex": "$f(x) = -3x^2 \\cos x$",
-     "origen": "extra"
-    },
-    {
-     "tex": "$f(x) = 5 \\operatorname{sen} x \\ln x$",
-     "origen": "extra"
-    }
-   ],
-   [
-    {
-     "tex": "$f(x) = 5x^4 \\cos x$",
-     "origen": "respuesta"
-    },
-    {
-     "tex": "$f(x) = \\sqrt[5]{x^3} \\tan x$",
-     "origen": "extra"
-    },
-    {
-     "tex": "$f(x) = 7x^2 e^x$",
      "origen": "extra"
     }
    ],
@@ -611,45 +597,59 @@
      "origen": "respuesta"
     },
     {
-     "tex": "$f(x) = \\sqrt{x} \\, e^x$",
-     "origen": "extra"
-    },
-    {
      "tex": "$f(x) = 4x^3 \\tan x$",
-     "origen": "extra"
-    }
-   ],
-   [
-    {
-     "tex": "$f(x) = 6x^2 \\tan x$",
-     "origen": "respuesta"
-    },
-    {
-     "tex": "$f(x) = \\cos x \\ln x$",
-     "origen": "extra"
-    },
-    {
-     "tex": "$f(x) = \\sqrt{x} \\operatorname{sen} x$",
-     "origen": "extra"
-    }
-   ],
-   [
-    {
-     "tex": "$f(x) = \\sqrt[3]{x^4} \\ln x$",
-     "origen": "respuesta"
-    },
-    {
-     "tex": "$f(x) = \\sqrt[3]{x^2} \\operatorname{sen} x$",
      "origen": "extra"
     },
     {
      "tex": "$f(x) = 2^x \\cos x$",
      "origen": "extra"
     }
+   ],
+   [
+    {
+     "tex": "$f(x) = 5x^4 \\cos x$",
+     "origen": "respuesta"
+    },
+    {
+     "tex": "$f(x) = 3 \\operatorname{sen} x \\, 4^x$",
+     "origen": "extra"
+    },
+    {
+     "tex": "$f(x) = \\sqrt[5]{x^3} \\tan x$",
+     "origen": "extra"
+    }
+   ],
+   [
+    {
+     "tex": "$f(x) = -4 \\operatorname{sen} x \\cos x$",
+     "origen": "respuesta"
+    },
+    {
+     "tex": "$f(x) = \\sqrt{x} \\operatorname{sen} x$",
+     "origen": "extra"
+    },
+    {
+     "tex": "$f(x) = -2x^5 \\ln x$",
+     "origen": "extra"
+    }
+   ],
+   [
+    {
+     "tex": "$f(x) = \\sqrt[3]{x^5} \\, 6^x$",
+     "origen": "respuesta"
+    },
+    {
+     "tex": "$f(x) = 7x^2 e^x$",
+     "origen": "extra"
+    },
+    {
+     "tex": "$f(x) = \\cos x \\ln x$",
+     "origen": "extra"
+    }
    ]
   ],
   "info": {
-   "modo": "cruzado",
+   "modo": "rotado",
    "falta": 0,
    "r_disp": 10,
    "e_disp": 12

@@ -88,6 +88,10 @@ extras que sobran bajaron a extra 2. Con esto quedan decididas las tres "parte 1
 Y Lety formuló **el método** general, que quedó al principio de `Reglas de mis exámenes.md`:
 la página (resueltos + extra 1) es el banco, y por tema sólo se deciden cuántos resueltos y
 cuántos extras lleva cada versión, según lo elaborado del tema.
+**Producto P2**, decidido por Lety con su método: tres tipos (monomio, trascendente o raíz por
+trascendente), 1 resuelto + 2 extras por versión, uno de cada tipo (`rotado` 1+2). Bloques
+1-3 de resueltos con 2 cada uno, Bloque 4 de práctica con los 4 que sobraban, extra 1 A-C con
+4 cada uno. No hubo que escribir nada.
 
 Verificado: las 19 páginas a 390×844 sin cards desbordadas ni errores de KaTeX; las 12
 versiones en el navegador y en PDF. **Ojo** para Lety: el extra $-4x^3 + 88x^2$ de Puntos

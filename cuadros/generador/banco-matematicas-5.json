@@ -504,7 +504,7 @@
   "archivo": "regla-producto-p2.html",
   "titulo": "Regla del producto (P2)",
   "receta": [
-   "cruzado",
+   "rotado",
    1,
    2
   ],
@@ -517,10 +517,12 @@
      },
      {
       "tex": "$f(x) = 5x^4 \\cos x$"
-     },
-     {
-      "tex": "$f(x) = 6x^2 \\tan x$"
-     },
+     }
+    ]
+   ],
+   [
+    "Bloque 2",
+    [
      {
       "tex": "$f(x) = 8 \\operatorname{sen} x \\tan x$"
      },
@@ -530,22 +532,30 @@
     ]
    ],
    [
-    "Bloque 2",
+    "Bloque 3",
     [
      {
-      "tex": "$f(x) = 6 \\cos x \\operatorname{sen} x$"
+      "tex": "$f(x) = \\sqrt{x} \\ln x$"
      },
      {
-      "tex": "$f(x) = \\sqrt{x} \\ln x$"
+      "tex": "$f(x) = \\sqrt[3]{x^5} \\, 6^x$"
+     }
+    ]
+   ],
+   [
+    "Bloque 4",
+    [
+     {
+      "tex": "$f(x) = 6x^2 \\tan x$"
+     },
+     {
+      "tex": "$f(x) = 6 \\cos x \\operatorname{sen} x$"
      },
      {
       "tex": "$f(x) = \\sqrt[3]{x^4} \\ln x$"
      },
      {
       "tex": "$f(x) = \\sqrt[3]{x^4} e^x$"
-     },
-     {
-      "tex": "$f(x) = \\sqrt[3]{x^5} \\, 6^x$"
      }
     ]
    ]
@@ -558,19 +568,13 @@
       "tex": "$f(x) = -3x^2 \\cos x$"
      },
      {
-      "tex": "$f(x) = 5 \\operatorname{sen} x \\ln x$"
-     },
-     {
-      "tex": "$f(x) = \\sqrt{x} \\, e^x$"
-     },
-     {
       "tex": "$f(x) = 4x^3 \\tan x$"
      },
      {
-      "tex": "$f(x) = \\sqrt[3]{x^2} \\operatorname{sen} x$"
+      "tex": "$f(x) = -2x^5 \\ln x$"
      },
      {
-      "tex": "$f(x) = 2^x \\cos x$"
+      "tex": "$f(x) = 7x^2 e^x$"
      }
     ]
    ],
@@ -578,19 +582,30 @@
     "Bloque B",
     [
      {
-      "tex": "$f(x) = -2x^5 \\ln x$"
+      "tex": "$f(x) = 5 \\operatorname{sen} x \\ln x$"
+     },
+     {
+      "tex": "$f(x) = 2^x \\cos x$"
      },
      {
       "tex": "$f(x) = 3 \\operatorname{sen} x \\, 4^x$"
      },
      {
-      "tex": "$f(x) = \\sqrt[5]{x^3} \\tan x$"
-     },
-     {
-      "tex": "$f(x) = 7x^2 e^x$"
-     },
-     {
       "tex": "$f(x) = \\cos x \\ln x$"
+     }
+    ]
+   ],
+   [
+    "Bloque C",
+    [
+     {
+      "tex": "$f(x) = \\sqrt{x} \\, e^x$"
+     },
+     {
+      "tex": "$f(x) = \\sqrt[3]{x^2} \\operatorname{sen} x$"
+     },
+     {
+      "tex": "$f(x) = \\sqrt[5]{x^3} \\tan x$"
      },
      {
       "tex": "$f(x) = \\sqrt{x} \\operatorname{sen} x$"

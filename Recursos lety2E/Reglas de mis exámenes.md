@@ -376,7 +376,7 @@ Matemáticas 5 (versiones g-l).pdf` en `~/Downloads`, una versión por hoja.
 | 3 Senos y cosenos | un bloque de 6 resueltos; extra 1 con dos bloques de 6 **igual de largos** | **1+2, decidido por Lety** | 1 resuelto, 12 extras |
 | 4 Raíces | exponente mayor que el índice · menor · fracción con raíz abajo (un bloque de 6 por tipo, en los dos lados) | **3+3, decidido por Lety** | 6 resueltos, 6 extras |
 | 5 Producto P1 | un bloque de 6 resueltos · un bloque de 6 en extra 1 (el otro, a extra 2) | **1+1, decidido por Lety** | — |
-| 6 Producto P2 | — | 1+2 | — |
+| 6 Producto P2 | monomio × trascendente · trascendente × trascendente · raíz × trascendente: 2 resueltos + 4 extras por tipo (B4 de práctica) | **1+2 rotado, decidido por Lety** | — |
 | 7 Cociente P1 | denominador con número suelto · sin él (Bloque 1 ↔ A, 2 ↔ B, 3 y 3) | **1+1 cruzado, decidido por Lety** | — |
 | 8 Cociente P2 | cociente simple · con sumas (B3 práctica) | 1+2 | — |
 | 9 Cadena P1 | cubos · cuadrados · raíces: 4 resueltos + 2 extras por tipo (B1/A, B2/B, B3/C) | **2+1 rotado, decidido por Lety** | 6 resueltos |
@@ -455,6 +455,13 @@ asistente agregó que cada versión lleve **uno de cada tipo**: dos resueltos de
 extra del tercero, rotando — modo nuevo `('rotado', 2, 1)` en `seleccion.py`. Se escribieron
 6 resueltos ($3(2-5x^2)^3$, $-2(3x^2+4)^3$, $3(4x-x^2)^2$, $-2(3x^3-5x)^2$, $\sqrt[3]{8x^2+1}$,
 $\sqrt[5]{4-7x^2}$); los 18 extras que sobran quedaron en extra 2, por tipo (D, E, F).
+**Producto P2, decidido por Lety** (22-sep-2026): *"hay tres tipos: monomio con trascendente,
+trascendente con trascendente, raíz con trascendente; si quisiera que uno fuera resuelto y dos
+vinieran de extras, ¿cómo hacemos los bloques?"*. Es Cadena P1 al revés: **2 resueltos + 4
+extras por tipo** (Bloque 1/A, 2/B, 3/C) y receta `('rotado', 1, 2)` — cada versión lleva el
+resuelto de un tipo y los dos extras de los otros dos. No se escribió nada: los extras ya eran
+4 por tipo; de resueltos había 3, 3 y 4, y los 4 que sobran quedaron en un **Bloque 4 de
+práctica** (con respuesta, no entra), como el Bloque 3 de Reglas básicas.
 
 Los ejercicios nuevos, por si Lety quiere cambiar alguno: Velocidad $x(t) = 2t^2
 - 6t$ y $x(t) = 12t - 3t^2$; Senos $f(x) = 6\tan x - \frac{2}{x^5} + 5\,\mathrm{sen}\,x -
