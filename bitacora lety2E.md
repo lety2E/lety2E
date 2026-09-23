@@ -5,6 +5,17 @@
 
 ---
 
+## 2026-09-23 — Cuadros: la hoja resuelta, sin cuadros y con aire
+
+Lety: *"las resoluciones no requieren estar dentro del cuadro; puedes ponerlas en orden
+saltando renglón y/o poniendo una línea entre pregunta y la siguiente; esa parte es para
+ayudarme a calificar"*, y *"también para Matemáticas 1"*. `sitio.py` escribe ahora la hoja
+resuelta sin tarjetas: el nombre del tema, y cada pregunta con su resolución debajo, con aire
+y una línea antes de la siguiente. Regeneradas las 12 versiones resueltas de Mate 1 y de
+Mate 5. Las hojas en blanco (las que se imprimen) no cambian.
+
+---
+
 ## 2026-09-21 — Cuadros de Matemáticas 5: los dos exámenes, las seis versiones, resueltas
 
 Lety pidió *"reproducir lo mismo"* que en Mate 1 para Mate 5, *"todos los temas de una vez,

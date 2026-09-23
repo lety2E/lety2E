@@ -283,7 +283,10 @@ las filas, bajar `--renglon` en `generar.py`, o mover un tema al otro examen.
 
 (La hoja **resuelta** sí puede irse a dos páginas, y no importa: es la copia de
 Lety para calificar, no la que se reparte. Desde el 21-sep-2026 va **un tema por
-renglón, a lo ancho**, para que las resoluciones largas de Mate 5 no se corten.)
+renglón, a lo ancho**, para que las resoluciones largas de Mate 5 no se corten. Y desde el
+23-sep-2026, **sin cuadros**: cada pregunta con su resolución debajo y una línea antes de la
+siguiente — *"esa parte de resolución es para ayudarme a calificar, no se requiere ahorrar
+espacio, no es para imprimir y optimizar"*. Vale para todas las materias.)
 
 **Cómo mide las fórmulas** (21-sep-2026): por tokens (`ancho.py`), no por número
 de caracteres. Con las fórmulas compactas de Mate 5 —exponentes, fracciones— el

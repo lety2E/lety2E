@@ -277,7 +277,9 @@ convertir.
 - `medida.py` mide las fórmulas por tokens (`ancho.py`, calibrado a ±8 %); el aviso
   *¡NO CABE!* vuelve a ser confiable con fracciones y exponentes. La prueba final sigue
   siendo `pdf.py`.
-- La hoja **resuelta** de `cuadros/` va un tema por renglón, a lo ancho. Al cosechar
+- La hoja **resuelta** de `cuadros/` va un tema por renglón, a lo ancho y **sin tarjetas**
+  (23-sep-2026): cada pregunta con su resolución debajo y una línea antes de la siguiente.
+  Es para calificar en pantalla; ahí no se ahorra espacio. Al cosechar
   resoluciones salta `.sol-rotulo` y `.graficas-row` (los rótulos y las tablas/gráficas de
   Recta tangente).
 - Modo `cruzado` con dos extras y tres tipos: uno de cada tipo que no es el del resuelto.

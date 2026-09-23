@@ -93,6 +93,17 @@ h1{font-family:var(--font-display);font-size:1.6rem;margin:0 0 .2rem}
 .marca{display:inline-block;margin-left:.5rem;padding:.1rem .45rem;border-radius:var(--r-sm);
   background:var(--accent-light);color:var(--accent);font-size:.72rem;font-weight:600;
   vertical-align:middle}
+/* Hoja resuelta (23-sep-2026): sin tarjetas, cada pregunta y su resolución con aire y una
+   línea antes de la siguiente. Es para calificar en pantalla: no se ahorra espacio. */
+.papel.resuelta .rejilla{display:block}
+.papel.resuelta .fila{display:block}
+.tema-resuelto{margin:0 0 2rem}
+.tema-resuelto h3{font-family:var(--font-display);font-size:1.05rem;margin:0 0 .3rem;
+  padding-bottom:.35rem;border-bottom:2px solid var(--text)}
+.par-resuelto{padding:1rem 0 1.1rem;border-bottom:1px solid var(--border)}
+.par-resuelto:last-child{border-bottom:none}
+.par-resuelto .pregunta .ej-line{line-height:2.2}
+.par-resuelto .sol{margin:.7rem 0 0 1.4rem;font-size:.95rem;line-height:1.7}
 .v.par{min-width:auto;padding:.45rem .6rem;font-weight:400;font-size:.82rem}
 
 /* Al imprimir, todo en negro sobre blanco: la hoja ya lo está (el CSS de
@@ -150,23 +161,23 @@ def cuerpo_hoja(curso, sel, v, letra, plan, banco=None, numeros=None):
             % (html.escape(curso), letra, marca, ''.join(filas)))
 
 def tarjeta_resuelta(banco, tema, items, columnas, numero=0):
-    """La misma tarjeta, pero cada ejercicio con su resolución debajo."""
+    """El tema en la hoja RESUELTA: sin tarjeta y con aire. Lety, 23-sep-2026: *"las
+    resoluciones no requieren estar dentro del cuadro; puedes ponerlas en orden saltando
+    renglón y/o poniendo una línea entre pregunta y la siguiente; esa parte es para ayudarme
+    a calificar, no se requiere ahorrar espacio"*. Cada ejercicio, su resolución debajo y
+    una línea antes del siguiente. (`columnas` se ignora: aquí no hay que ahorrar.)"""
     trozos = []
     for item in items:
-        trozos.append(generar.linea(item))
         if 'tex' not in item:
-            continue
-        r = resolucion_de(banco, tema, item['tex'])
-        if r:
-            trozos.append('<div class="sol">%s</div>' % generar.enunciado(r))
+            sol = ''
         else:
-            trozos.append('<div class="sol falta">pendiente</div>')
-    clase = 'mini-card-body en-columnas' if columnas > 1 else 'mini-card-body'
-    estilo = ' style="column-count:%d"' % columnas if columnas > 1 else ''
-    return ('<div class="mini-card"><div class="mini-card-head">%s</div>'
-            '<div class="%s"%s>%s</div></div>'
-            % (generar.titulo_cuadro(tema, numero), clase, estilo, ''.join(trozos)))
-
+            r = resolucion_de(banco, tema, item['tex'])
+            sol = ('<div class="sol">%s</div>' % generar.enunciado(r) if r
+                   else '<div class="sol falta">pendiente</div>')
+        trozos.append('<div class="par-resuelto"><div class="pregunta">%s</div>%s</div>'
+                      % (generar.linea(item), sol))
+    return ('<section class="tema-resuelto"><h3>%s</h3>%s</section>'
+            % (generar.titulo_cuadro(tema, numero), ''.join(trozos)))
 
 def barra(curso, planes, letra_actual, resuelta=False):
     """Las pestañas: los dos exámenes con sus seis versiones."""
