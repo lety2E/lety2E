@@ -169,7 +169,7 @@ def _plano(tex):
     t = re.sub(r'\\(displaystyle|left|right|begin\{aligned\}|end\{aligned\}|[,;!])', '', tex or '')
     t = t.replace('\\dfrac', '\\frac').replace('\\operatorname{sen}', 'sen')
     t = re.sub(r'[\s$&{}]', '', t)
-    return t[:-1] if t.endswith('=') else t
+    return t[:-1] if t.endswith(('=', '.')) else t
 
 def _trae_la_pregunta(tex, res):
     """¿La resolución empieza con el enunciado? Entonces no se repite (Lety, 23-sep-2026)."""
@@ -183,6 +183,9 @@ def _resalta(res):
     if '\\mathbf' in res or '\\begin' in res:
         return res
     partes = re.findall(r'\$[^$]*\$', res)
+    if len(partes) == 1 and res[:res.find('$')].rstrip().endswith(':') and res.rstrip().endswith('$'):
+        i = res.find('$')                            # 'Un número impar: $2n + 1$' (Lenguaje)
+        return res[:i] + '${\\color{#FF00AA}%s}$' % partes[0][1:-1].strip()
     if not partes or re.sub(r'\$[^$]*\$|\s', '', res):
         return res                                   # hay texto suelto: se deja como está
     ultima = partes[-1][1:-1]

@@ -80,9 +80,9 @@ Lo que sigue, en orden:
   dejarlos para cuando toque ese examen. Para Reglas de exponentes quedó propuesto, sin
   revisar: 4 por versión, 1 resuelto + 1 extra de cada tipo (potencias de 10 / otras bases).
   mcm y MCD todavía no llena la versión f.
-- **Resoluciones de Mate 1**: el Examen 1 ya está completo (23-sep-2026). Del Examen 2 faltan
-  las de Reglas de exponentes, mcm y MCD, Lenguaje algebraico y Problemas de ecuaciones
-  (reparto todavía provisional). Van sólo a `cuadros/`, nunca a `math/`.
+- **Resoluciones de Mate 1**: completas, 298 de 298 (23-sep-2026). Si Lety cambia el reparto
+  del Examen 2 y entra algún extra nuevo, su resolución se escribe a mano en
+  `resoluciones-manuales.json`. Van sólo a `cuadros/`, nunca a `math/`.
 - **Matemáticas 2**, completo en el sitio y sin tocar.
 - **`cuadros/generador/propios.py`** quedó de un experimento descartado: borrarlo o dejarlo
   como registro.

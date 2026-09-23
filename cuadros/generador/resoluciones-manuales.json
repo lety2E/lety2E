@@ -135,6 +135,58 @@
    "$(3,5), (3,-5), (8,0)$": "$\\begin{aligned} a &= \\dfrac{10(5)}{2} = \\dfrac{50}{2} = \\mathbf{25 \\, u^2} \\\\ m &= \\sqrt{5^2 + 5^2} = \\sqrt{25+25} \\\\ &= \\sqrt{50} = 7.07 \\\\ n &= \\sqrt{5^2 + 5^2} = \\sqrt{25+25} \\\\ &= \\sqrt{50} = 7.07 \\\\ P &= 10 + 7.07 + 7.07 \\\\ &= \\mathbf{24.14 \\, u} \\end{aligned}$",
    "$(-4,-2), (6,-2), (1,4)$": "$\\begin{aligned} a &= \\dfrac{10(6)}{2} = \\dfrac{60}{2} = \\mathbf{30 \\, u^2} \\\\ m &= \\sqrt{5^2 + 6^2} = \\sqrt{25+36} \\\\ &= \\sqrt{61} = 7.81 \\\\ n &= \\sqrt{5^2 + 6^2} = \\sqrt{25+36} \\\\ &= \\sqrt{61} = 7.81 \\\\ P &= 10 + 7.81 + 7.81 \\\\ &= \\mathbf{25.62 \\, u} \\end{aligned}$",
    "$(2,3), (2,9), (7,6)$": "$\\begin{aligned} a &= \\dfrac{6(5)}{2} = \\dfrac{30}{2} = \\mathbf{15 \\, u^2} \\\\ m &= \\sqrt{5^2 + 3^2} = \\sqrt{25+9} \\\\ &= \\sqrt{34} = 5.83 \\\\ n &= \\sqrt{5^2 + 3^2} = \\sqrt{25+9} \\\\ &= \\sqrt{34} = 5.83 \\\\ P &= 6 + 5.83 + 5.83 \\\\ &= \\mathbf{17.66 \\, u} \\end{aligned}$"
+  },
+  "Reglas de exponentes": {
+   "$10^9 / 10^{-2} =$": "$10^9 / 10^{-2} =$ $10^{11}$",
+   "$10^3 \\cdot 10^{-5} \\cdot 10^{2} =$": "$10^3 \\cdot 10^{-5} \\cdot 10^{2} = 10^0 =$ $1$",
+   "$\\dfrac{10^8}{10^{12}} =$": "$\\dfrac{10^8}{10^{12}} = 10^{-4} =$ $0.0001$",
+   "$a^n \\cdot a^0 =$": "$a^n \\cdot a^0 = a^{n+0} =$ $a^n$",
+   "$150^0 =$": "$150^0 =$ $1$",
+   "$(x^2)^5 =$": "$(x^2)^5 = x^{2(5)} =$ $x^{10}$",
+   "$10^{-5} =$": "$10^{-5} =$ $0.00001$",
+   "$\\dfrac{10^7 \\cdot 10^{-3}}{10^4} =$": "$\\dfrac{10^7 \\cdot 10^{-3}}{10^4} = \\dfrac{10^4}{10^4} = 10^0 =$ $1$",
+   "$10^{-3} (10)^{-2} =$": "$10^{-3} (10)^{-2} = 10^{-5} =$ $0.00001$",
+   "$(4^2)^0 =$": "$(4^2)^0 =$ $1$",
+   "$(-1)^{100} =$": "$(-1)^{100} =$ $1$",
+   "$\\sqrt[4]{16} =$": "$\\sqrt[4]{16} =$ $\\pm 2$"
+  },
+  "mcm y MCD": {
+   "mcm $(45, 54, 60)$": "$\\text{mcm} = 2^2 \\cdot 3^3 \\cdot 5 = 540$",
+   "mcm $(12, 15, 20)$": "$\\text{mcm} = 2^2 \\cdot 3 \\cdot 5 = 60$",
+   "MCD $(48, 72, 84)$": "$\\text{MCD} = 2^2 \\cdot 3 = 12$",
+   "mcm $(6, 8, 10)$": "$\\text{mcm} = 2^3 \\cdot 3 \\cdot 5 = 120$",
+   "MCD $(105, 120, 150)$": "$\\text{MCD} = 3 \\cdot 5 = 15$",
+   "MCD $(32, 64, 96)$": "$\\text{MCD} = 2^5 = 32$",
+   "mcm $(24, 36, 48)$": "$\\text{mcm} = 2^4 \\cdot 3^2 = 144$",
+   "MCD $(200, 400, 600)$": "$\\text{MCD} = 2^3 \\cdot 5^2 = 200$"
+  },
+  "Lenguaje algebraico": {
+   "El triple de un número disminuido en 10.": "El triple de un número disminuido en 10: $3x - 10$",
+   "El doble del cuadrado de un número.": "El doble del cuadrado de un número: $2x^2$",
+   "El quíntuplo de un número.": "El quíntuplo de un número: $5x$",
+   "La mitad de la diferencia de dos números.": "La mitad de la diferencia de dos números: $\\dfrac{x - y}{2}$",
+   "El cociente de la suma entre la diferencia.": "El cociente de la suma entre la diferencia: $\\dfrac{x + y}{x - y}$",
+   "La suma de un número y su inverso.": "La suma de un número y su inverso: $x + \\dfrac{1}{x}$",
+   "La raíz cuadrada de un número más 7.": "La raíz cuadrada de un número más 7: $\\sqrt{x} + 7$",
+   "El cubo de la tercera parte de un número.": "El cubo de la tercera parte de un número: $\\left(\\dfrac{x}{3}\\right)^3$",
+   "El cuadrado de la diferencia de dos números.": "El cuadrado de la diferencia de dos números: $(x - y)^2$",
+   "Tres números impares consecutivos.": "Tres números impares consecutivos: $2n + 1,\\ 2n + 3,\\ 2n + 5$",
+   "La suma de dos números pares consecutivos.": "La suma de dos números pares consecutivos: $2n + (2n + 2)$",
+   "El producto de dos números consecutivos.": "El producto de dos números consecutivos: $x(x + 1)$"
+  },
+  "Problemas de ecuaciones": {
+   "Siete veces un número más tres es igual a veinticuatro.": "Siete veces un número más tres es igual a veinticuatro. $\\begin{aligned} 7x + 3 &= 24 \\\\ 7x &= 21 \\\\ x &= \\mathbf{3} \\end{aligned}$",
+   "El doble de la suma de un número más tres es igual a doce.": "El doble de la suma de un número más tres es igual a doce. $\\begin{aligned} 2(x + 3) &= 12 \\\\ x + 3 &= 6 \\\\ x &= \\mathbf{3} \\end{aligned}$",
+   "El quíntuple de un número menos diez es igual a quince.": "El quíntuple de un número menos diez es igual a quince. $\\begin{aligned} 5x - 10 &= 15 \\\\ 5x &= 25 \\\\ x &= \\mathbf{5} \\end{aligned}$",
+   "La suma de tres números consecutivos es igual a quince.": "La suma de tres números consecutivos es igual a quince. $\\begin{aligned} x + (x+1) + (x+2) &= 15 \\\\ 3x + 3 &= 15 \\\\ 3x &= 12 \\\\ x &= \\mathbf{4} \\end{aligned}$",
+   "La diferencia de un número y ocho por tres es igual a nueve.": "La diferencia de un número y ocho por tres es igual a nueve. $\\begin{aligned} 3(x - 8) &= 9 \\\\ x - 8 &= 3 \\\\ x &= \\mathbf{11} \\end{aligned}$",
+   "El cuádruple de un número es igual al mismo número más doce.": "El cuádruple de un número es igual al mismo número más doce. $\\begin{aligned} 4x &= x + 12 \\\\ 3x &= 12 \\\\ x &= \\mathbf{4} \\end{aligned}$",
+   "El cuádruple de un número menos seis es igual a dieciocho.": "El cuádruple de un número menos seis es igual a dieciocho. $\\begin{aligned} 4x - 6 &= 18 \\\\ 4x &= 24 \\\\ x &= \\mathbf{6} \\end{aligned}$",
+   "La mitad de un número aumentada en ocho es igual a doce.": "La mitad de un número aumentada en ocho es igual a doce. $\\begin{aligned} \\frac{x}{2} + 8 &= 12 \\\\ \\frac{x}{2} &= 4 \\\\ x &= \\mathbf{8} \\end{aligned}$",
+   "Un número disminuido en siete es igual a ocho.": "Un número disminuido en siete es igual a ocho. $\\begin{aligned} x - 7 &= 8 \\\\ x &= \\mathbf{15} \\end{aligned}$",
+   "El triple de un número aumentado en su mitad es veinte.": "El triple de un número aumentado en su mitad es veinte. $\\begin{aligned} 3x + \\frac{x}{2} &= 20 \\\\ 6x + x &= 40 \\\\ 7x &= 40 \\\\ x &= \\mathbf{\\frac{40}{7}} \\end{aligned}$",
+   "Cinco veces la diferencia de un número y dos es igual a veinte.": "Cinco veces la diferencia de un número y dos es igual a veinte. $\\begin{aligned} 5(x - 2) &= 20 \\\\ x - 2 &= 4 \\\\ x &= \\mathbf{6} \\end{aligned}$",
+   "El cuadrado de un número aumentado en siete es igual a dieciséis.": "El cuadrado de un número aumentado en siete es igual a dieciséis. $\\begin{aligned} x^2 + 7 &= 16 \\\\ x^2 &= 9 \\\\ x &= \\mathbf{3} \\end{aligned}$"
   }
  },
  "Matemáticas 5": {

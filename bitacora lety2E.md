@@ -5,6 +5,15 @@
 
 ---
 
+## 2026-09-23 (2) — Cuadros de Mate 1: todas las hojas resueltas completas
+
+Lety: *"resuelve lo pendiente de matemáticas 1, sobre todo los del primer examen"*. El Examen 1
+ya estaba; se escribieron las 44 del Examen 2 (Reglas de exponentes 12, mcm y MCD 8, Lenguaje
+algebraico 12, Problemas de ecuaciones 12) en `resoluciones-manuales.json`, con el formato de
+las respuestas publicadas de cada página y revisadas con sympy. Mate 1 queda en **298/298**.
+`sitio.py`: la pregunta que termina en punto ya no se repite, y en Lenguaje algebraico la
+expresión va en magenta. El reparto del Examen 2 sigue provisional.
+
 ## 2026-09-23 — Cuadros: la hoja resuelta, sin cuadros y con aire
 
 Lety: *"las resoluciones no requieren estar dentro del cuadro; puedes ponerlas en orden
