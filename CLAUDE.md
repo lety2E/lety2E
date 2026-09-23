@@ -279,7 +279,8 @@ convertir.
   siendo `pdf.py`.
 - La hoja **resuelta** de `cuadros/` va un tema por renglón, a lo ancho y **sin tarjetas**
   (23-sep-2026): cada pregunta con su resolución debajo y una línea antes de la siguiente.
-  Es para calificar en pantalla; ahí no se ahorra espacio. Al cosechar
+  Es para calificar en pantalla; ahí no se ahorra espacio. Excepción: si todas las
+  resoluciones del tema son de un renglón (Operaciones básicas), van seguidas y sin línea. Al cosechar
   resoluciones salta `.sol-rotulo` y `.graficas-row` (los rótulos y las tablas/gráficas de
   Recta tangente).
 - Modo `cruzado` con dos extras y tres tipos: uno de cada tipo que no es el del resuelto.

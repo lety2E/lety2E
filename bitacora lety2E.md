@@ -13,6 +13,10 @@ algebraico 12, Problemas de ecuaciones 12) en `resoluciones-manuales.json`, con 
 las respuestas publicadas de cada página y revisadas con sympy. Mate 1 queda en **298/298**.
 `sitio.py`: la pregunta que termina en punto ya no se repite, y en Lenguaje algebraico la
 expresión va en magenta. El reparto del Examen 2 sigue provisional.
+Después, viendo Operaciones básicas: *"a este bloque sí quítale las líneas intermedias"*. Los
+temas donde cada resolución es un solo renglón van seguidos, sin línea, como el bloque Ejemplo
+(clase `corrido`): Operaciones básicas, Monomios, Reglas de exponentes, Lenguaje algebraico y,
+en Mate 5, Senos y cosenos. Los de varios renglones o con gráfica conservan la línea.
 
 ## 2026-09-23 — Cuadros: la hoja resuelta, sin cuadros y con aire
 

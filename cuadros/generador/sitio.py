@@ -102,6 +102,7 @@ h1{font-family:var(--font-display);font-size:1.6rem;margin:0 0 .2rem}
   padding-bottom:.35rem;border-bottom:2px solid var(--text)}
 .par-resuelto{padding:1rem 0 1.1rem;border-bottom:1px solid var(--border)}
 .par-resuelto:last-child{border-bottom:none}
+.tema-resuelto.corrido .par-resuelto{padding:.35rem 0;border-bottom:none}
 .par-resuelto .pregunta .ej-line{line-height:2.2}
 .par-resuelto .pregunta{margin-bottom:.55rem}
 .par-resuelto .sol{margin:0 0 0 .2rem;font-size:1rem;line-height:1.7;color:var(--text)}
@@ -222,8 +223,11 @@ def tarjeta_resuelta(banco, tema, items, columnas, numero=0):
             else:
                 partes.append('<div class="sol falta">pendiente</div>')
         trozos.append('<div class="par-resuelto">%s</div>' % ''.join(partes))
-    return ('<section class="tema-resuelto"><h3>%s</h3>%s</section>'
-            % (generar.titulo_cuadro(tema, numero), ''.join(trozos)))
+    # Si cada ejercicio cabe en un renglón (Operaciones básicas), van seguidos, sin línea
+    # entre ellos, como el bloque Ejemplo de la página (Lety, 23-sep-2026).
+    corrido = all(t.count('<div class="') == 2 and '\\begin' not in t for t in trozos)
+    return ('<section class="tema-resuelto%s"><h3>%s</h3>%s</section>'
+            % (' corrido' if corrido else '', generar.titulo_cuadro(tema, numero), ''.join(trozos)))
 
 def barra(curso, planes, letra_actual, resuelta=False):
     """Las pestañas: los dos exámenes con sus seis versiones."""
