@@ -14,6 +14,20 @@ resuelta sin tarjetas: el nombre del tema, y cada pregunta con su resolución de
 y una línea antes de la siguiente. Regeneradas las 12 versiones resueltas de Mate 1 y de
 Mate 5. Las hojas en blanco (las que se imprimen) no cambian.
 
+Luego lo afinó: *"que no se vea ese formato redundante, algo más parecido a la resolución del
+ejemplo, incluyendo gráfica cuando es necesario"*. Ahora la pregunta **no se repite** cuando la
+resolución ya empieza con ella (sólo aparece si la resolución no la trae: incisos, vértices,
+intervalos), el **resultado va en magenta** como en las páginas, y va **la gráfica** de la
+respuesta publicada (Gráfica con tabulación, Pendiente y ordenada, Área y perímetro, los
+triángulos de ángulos, Recta tangente). `resoluciones.py` cosecha esas gráficas y
+`graficas-manuales.json` guarda las de los extras.
+
+**Pendientes del Examen 1 de Mate 1, resueltos**: los 6 extras de Pendiente y ordenada (despeje
+y recta), los 6 de Área y perímetro ($a$, $m$, $n$, $P$ y triángulo) y los 6 triángulos de
+ángulos (ecuación, valores y figura), más las gráficas de los 6 extras de Gráfica con
+tabulación. Los 6 triángulos resueltos ya se emparejan con su respuesta por su número. El
+Examen 1 de Mate 1 queda con sus seis hojas resueltas completas.
+
 ---
 
 ## 2026-09-21 — Cuadros de Matemáticas 5: los dos exámenes, las seis versiones, resueltas

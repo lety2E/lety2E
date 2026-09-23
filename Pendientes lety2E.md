@@ -80,12 +80,9 @@ Lo que sigue, en orden:
   dejarlos para cuando toque ese examen. Para Reglas de exponentes quedó propuesto, sin
   revisar: 4 por versión, 1 resuelto + 1 extra de cada tipo (potencias de 10 / otras bases).
   mcm y MCD todavía no llena la versión f.
-- **Terminar las resoluciones de los extras del Examen 1 de Mate 1** — ya están 108 de 120
-  en `resoluciones-manuales.json` (verificadas con sympy, 17-sep-2026). Faltan **Pendiente
-  y ordenada (6)** y **Área y perímetro (6)**, y los **6 triángulos de Ecuaciones con
-  ángulos**, que son figuras: hay que hacer que `sitio.py`/`resoluciones.py` los emparejen
-  por el `aria-label` del SVG (hoy los salta). El Examen 2 tiene sus propios extras sin
-  resolver. Van solo a `cuadros/` y a IEMS, nunca a `math/`.
+- **Resoluciones de Mate 1**: el Examen 1 ya está completo (23-sep-2026). Del Examen 2 faltan
+  las de Reglas de exponentes, mcm y MCD, Lenguaje algebraico y Problemas de ecuaciones
+  (reparto todavía provisional). Van sólo a `cuadros/`, nunca a `math/`.
 - **Matemáticas 2**, completo en el sitio y sin tocar.
 - **`cuadros/generador/propios.py`** quedó de un experimento descartado: borrarlo o dejarlo
   como registro.

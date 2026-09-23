@@ -16,7 +16,7 @@ haya en las carpetas de todos los cursos.
 """
 import json, os, html, re
 from acomodo import examenes, revisar as acomodo_revisar
-from resoluciones import construir as construir_resoluciones, resolucion_de
+from resoluciones import construir as construir_resoluciones, resolucion_de, grafica_de, figura_de
 from cursos import elegir, archivo, carpeta as carpeta_de, MATERIAS
 import generar
 
@@ -103,7 +103,11 @@ h1{font-family:var(--font-display);font-size:1.6rem;margin:0 0 .2rem}
 .par-resuelto{padding:1rem 0 1.1rem;border-bottom:1px solid var(--border)}
 .par-resuelto:last-child{border-bottom:none}
 .par-resuelto .pregunta .ej-line{line-height:2.2}
-.par-resuelto .sol{margin:.7rem 0 0 1.4rem;font-size:.95rem;line-height:1.7}
+.par-resuelto .pregunta{margin-bottom:.55rem}
+.par-resuelto .sol{margin:0 0 0 .2rem;font-size:1rem;line-height:1.7;color:var(--text)}
+.par-resuelto .sol .mathbf{color:#FF00AA}
+.sol-grafica{margin:.8rem 0 0 .2rem}
+.sol-grafica svg{width:100%;max-width:240px;max-height:300px;height:auto;display:block}
 .v.par{min-width:auto;padding:.45rem .6rem;font-weight:400;font-size:.82rem}
 
 /* Al imprimir, todo en negro sobre blanco: la hoja ya lo está (el CSS de
@@ -160,22 +164,61 @@ def cuerpo_hoja(curso, sel, v, letra, plan, banco=None, numeros=None):
     return ('<div class="hoja"><p class="titulo">%s%s%s</p><div class="rejilla">%s</div></div>'
             % (html.escape(curso), letra, marca, ''.join(filas)))
 
+def _plano(tex):
+    """Para comparar enunciado y resolución sin espacios ni adornos."""
+    t = re.sub(r'\\(displaystyle|left|right|begin\{aligned\}|end\{aligned\}|[,;!])', '', tex or '')
+    t = t.replace('\\dfrac', '\\frac').replace('\\operatorname{sen}', 'sen')
+    t = re.sub(r'[\s$&{}]', '', t)
+    return t[:-1] if t.endswith('=') else t
+
+def _trae_la_pregunta(tex, res):
+    """¿La resolución empieza con el enunciado? Entonces no se repite (Lety, 23-sep-2026)."""
+    q, r = _plano(tex), _plano(res)
+    return bool(q) and q in r[:len(q) + 12]
+
+def _resalta(res):
+    """El resultado en magenta, como en la página. Si ya trae \\mathbf lo pinta el CSS. Si no
+    (Operaciones básicas y parecidos): o el resultado viene aparte ('$… =$ $-1$', el <strong> de
+    la página) y se pinta esa fórmula, o se pinta lo que va tras el último = de la cadena."""
+    if '\\mathbf' in res or '\\begin' in res:
+        return res
+    partes = re.findall(r'\$[^$]*\$', res)
+    if not partes or re.sub(r'\$[^$]*\$|\s', '', res):
+        return res                                   # hay texto suelto: se deja como está
+    ultima = partes[-1][1:-1]
+    if len(partes) > 1 and partes[-2].rstrip('$ ').endswith('='):
+        return res[:res.rfind(partes[-1])] + '${\\color{#FF00AA}%s}$' % ultima.strip()
+    i = ultima.rfind('=')
+    if i < 0: return res
+    return res[:res.rfind(partes[-1])] + '$%s= {\\color{#FF00AA}%s}$' % (ultima[:i], ultima[i + 1:].strip())
+
 def tarjeta_resuelta(banco, tema, items, columnas, numero=0):
-    """El tema en la hoja RESUELTA: sin tarjeta y con aire. Lety, 23-sep-2026: *"las
-    resoluciones no requieren estar dentro del cuadro; puedes ponerlas en orden saltando
-    renglón y/o poniendo una línea entre pregunta y la siguiente; esa parte es para ayudarme
-    a calificar, no se requiere ahorrar espacio"*. Cada ejercicio, su resolución debajo y
-    una línea antes del siguiente. (`columnas` se ignora: aquí no hay que ahorrar.)"""
+    """El tema en la hoja RESUELTA, para calificar en pantalla (Lety, 23-sep-2026): sin tarjeta,
+    cada ejercicio con aire y una línea antes del siguiente; "más parecido a la resolución del
+    ejemplo": la pregunta no se repite si la resolución ya empieza con ella, el resultado va en
+    magenta, y va la gráfica de la respuesta publicada cuando la hay."""
     trozos = []
     for item in items:
-        if 'tex' not in item:
-            sol = ''
+        partes = []
+        if 'tex' not in item:                          # la pregunta es una figura
+            fig = figura_de(banco, tema, item)
+            if fig:
+                partes += ['<div class="sol-grafica">%s</div>' % fig[1],
+                           '<div class="sol">%s</div>' % generar.enunciado(fig[0])]
+            else:
+                partes += ['<div class="pregunta">%s</div>' % generar.linea(item),
+                           '<div class="sol falta">pendiente</div>']
         else:
             r = resolucion_de(banco, tema, item['tex'])
-            sol = ('<div class="sol">%s</div>' % generar.enunciado(r) if r
-                   else '<div class="sol falta">pendiente</div>')
-        trozos.append('<div class="par-resuelto"><div class="pregunta">%s</div>%s</div>'
-                      % (generar.linea(item), sol))
+            if not r or not _trae_la_pregunta(item['tex'], r):
+                partes.append('<div class="pregunta">%s</div>' % generar.linea(item))
+            if r:
+                partes.append('<div class="sol">%s</div>' % generar.enunciado(_resalta(r)))
+                g = grafica_de(banco, tema, item)
+                if g: partes.append('<div class="sol-grafica">%s</div>' % g)
+            else:
+                partes.append('<div class="sol falta">pendiente</div>')
+        trozos.append('<div class="par-resuelto">%s</div>' % ''.join(partes))
     return ('<section class="tema-resuelto"><h3>%s</h3>%s</section>'
             % (generar.titulo_cuadro(tema, numero), ''.join(trozos)))
 

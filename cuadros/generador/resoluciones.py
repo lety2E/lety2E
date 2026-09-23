@@ -99,6 +99,8 @@ def _de_tarjeta(clase, cuerpo):
                 trozos.append(texs[j]); j += 1
                 if not texs[j-1].startswith('='): break
             trozos = [t.replace('\\;', '\\,') for t in trozos]
+            if ini in ('a =', 'P =') and len(trozos) >= 2:     # el resultado, resaltado (23-sep-2026)
+                trozos[-1] = '\\mathbf{%s}' % trozos[-1]
             # en dos renglones para que quepa en la tarjeta angosta de la hoja
             if len(trozos) >= 3:
                 lineas.append(_con_amp(' '.join(trozos[:-1])))
@@ -170,6 +172,42 @@ def cosechar(ruta_html):
                 if resp: out[norm(tex)] = resp
     return out
 
+# ── Gráficas de las respuestas publicadas (23-sep-2026) ──────────────────────
+# Lety quiere la hoja resuelta "más parecida a la resolución del ejemplo, incluyendo gráfica
+# cuando es necesario". Se toma la gráfica que ya publica la página junto a cada respuesta.
+RE_SVG = re.compile(r'<svg\b[^>]*\brole="img"[^>]*>.*?</svg>', re.S)
+
+def graficas(ruta_html):
+    """({clave del ejercicio: svg}, {número de figura: [resolución, svg]}).
+    Tarjetas (tri-block, tabulacion-block…): la clave es la misma de la cosecha.
+    Triángulos de ángulos: el ejercicio es una figura, se empareja por 'Triángulo N'.
+    Listas paralelas (Recta tangente): la n-ésima respuesta es del n-ésimo ejercicio."""
+    html = open(ruta_html, encoding='utf-8').read()
+    sec = _seccion_respuestas(html)
+    if not RE_SVG.search(sec):
+        return {}, {}
+    por_clave, por_figura = {}, {}
+    for clase in CONTENEDORES:
+        for cuerpo in sec.split('<div class="%s">' % clase)[1:]:
+            svg = RE_SVG.search(cuerpo)
+            if not svg: continue
+            fig = re.search(r'aria-label="Tri[aá]ngulo (\d+) — respuesta"', svg.group(0))
+            if fig:
+                texs = [t.strip().replace('&amp;', '&') for t in RE_TEX.findall(cuerpo)]
+                res = ' '.join('$%s$' % t for t in texs[:1] + texs[2:])
+                por_figura[fig.group(1)] = [res, svg.group(0)]
+                continue
+            r = _de_tarjeta(clase, cuerpo)
+            if r: por_clave[norm(r[0])] = svg.group(0)
+    if not por_clave and not por_figura:
+        pagina = parse_html(html)
+        ejercicios = [x for s_ in secciones(pagina, NOMBRES_EJERCICIOS) for c in s_['cards'] for x in c['items']]
+        trozos = sec.split('<div class="sol">')[1:]
+        for tex, trozo in zip(ejercicios, trozos):
+            svg = RE_SVG.search(trozo)
+            if svg: por_clave[norm(tex)] = svg.group(0)
+    return por_clave, por_figura
+
 def manuales():
     if not os.path.exists(MANUALES):
         json.dump({}, open(MANUALES, 'w'), ensure_ascii=False, indent=1)
@@ -183,10 +221,32 @@ def construir(curso):
     for archivo, titulo, _receta in archivos:
         ruta = os.path.join(base, archivo)
         if not os.path.exists(ruta): continue
-        banco[titulo] = {'cosechadas': cosechar(ruta), 'manuales': {}}
+        g, f = graficas(ruta)
+        banco[titulo] = {'cosechadas': cosechar(ruta), 'manuales': {}, 'graficas': g, 'figuras': f}
+    # gráficas y figuras de los extras, dibujadas aparte (23-sep-2026)
+    ruta_g = 'graficas-manuales.json'
+    if os.path.exists(ruta_g):
+        for titulo, d in json.load(open(ruta_g)).get(curso, {}).items():
+            t = banco.setdefault(titulo, {'cosechadas': {}, 'manuales': {}, 'graficas': {}, 'figuras': {}})
+            t.setdefault('graficas', {}).update({norm(k): v for k, v in d.get('graficas', {}).items()})
+            t.setdefault('figuras', {}).update(d.get('figuras', {}))
     for titulo, res in manuales().get(curso, {}).items():
         banco.setdefault(titulo, {'cosechadas': {}, 'manuales': {}})['manuales'] = res
     return banco
+
+def grafica_de(banco, tema, item):
+    """La gráfica de la respuesta publicada, si la hay."""
+    t = banco.get(tema, {})
+    if 'tex' in item:
+        return t.get('graficas', {}).get(norm(item['tex']))
+    return None
+
+def figura_de(banco, tema, item):
+    """[resolución, svg] de un ejercicio que es una figura (triángulos de ángulos)."""
+    m = re.search(r'aria-label="(Tri[aá]ngulo \d+|Extra \d+)[:\s]', item.get('svg', ''))
+    if not m: return None
+    figs = banco.get(tema, {}).get('figuras', {})
+    return figs.get(m.group(1)) or figs.get(m.group(1).split()[-1])
 
 def resolucion_de(banco, tema, tex):
     """La resolución escrita a mano gana: es la que Lety revisó."""

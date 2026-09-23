@@ -119,6 +119,22 @@
    "$3x+y=9$": "$\\begin{aligned} y &= 9 - 3x \\\\ \\mathbf{y} &= \\mathbf{9 - 3x} \\\\ &(-2,15), (-1,12), (0,9), (1,6), (2,3) \\end{aligned}$",
    "$4x-y=8$": "$\\begin{aligned} -y &= 8 - 4x \\\\ \\mathbf{y} &= \\mathbf{-8 + 4x} \\\\ &(-2,-16), (-1,-12), (0,-8), (1,-4), (2,0) \\end{aligned}$",
    "$10x+5y=20$": "$\\begin{aligned} 5y &= 20 - 10x \\\\ y &= \\dfrac{20 - 10x}{5} \\\\ \\mathbf{y} &= \\mathbf{4 - 2x} \\\\ &(-2,8), (-1,6), (0,4), (1,2), (2,0) \\end{aligned}$"
+  },
+  "Pendiente y ordenada": {
+   "$6x+5y-15=0$": "$\\begin{aligned} 5y &= -6x + 15 \\\\ \\mathbf{y} &\\mathbf{= -\\tfrac{6}{5}x + 3} \\end{aligned}$",
+   "$7x-3y+9=0$": "$\\begin{aligned} -3y &= -7x - 9 \\\\ \\mathbf{y} &\\mathbf{= \\tfrac{7}{3}x + 3} \\end{aligned}$",
+   "$-3x-4y+8=0$": "$\\begin{aligned} -4y &= 3x - 8 \\\\ \\mathbf{y} &\\mathbf{= -\\tfrac{3}{4}x + 2} \\end{aligned}$",
+   "$3x+2y+4=0$": "$\\begin{aligned} 2y &= -3x - 4 \\\\ \\mathbf{y} &\\mathbf{= -\\tfrac{3}{2}x - 2} \\end{aligned}$",
+   "$3x-2y-6=0$": "$\\begin{aligned} -2y &= -3x + 6 \\\\ \\mathbf{y} &\\mathbf{= \\tfrac{3}{2}x - 3} \\end{aligned}$",
+   "$-8x+3y+9=0$": "$\\begin{aligned} 3y &= 8x - 9 \\\\ \\mathbf{y} &\\mathbf{= \\tfrac{8}{3}x - 3} \\end{aligned}$"
+  },
+  "Área y perímetro": {
+   "$(2,3), (8,3), (5,9)$": "$\\begin{aligned} a &= \\dfrac{6(6)}{2} = \\dfrac{36}{2} = \\mathbf{18 \\, u^2} \\\\ m &= \\sqrt{3^2 + 6^2} = \\sqrt{9+36} \\\\ &= \\sqrt{45} = 6.71 \\\\ n &= \\sqrt{3^2 + 6^2} = \\sqrt{9+36} \\\\ &= \\sqrt{45} = 6.71 \\\\ P &= 6 + 6.71 + 6.71 \\\\ &= \\mathbf{19.42 \\, u} \\end{aligned}$",
+   "$(4,6), (4,1), (9,4)$": "$\\begin{aligned} a &= \\dfrac{5(5)}{2} = \\dfrac{25}{2} = \\mathbf{12.5 \\, u^2} \\\\ m &= \\sqrt{5^2 + 2^2} = \\sqrt{25+4} \\\\ &= \\sqrt{29} = 5.39 \\\\ n &= \\sqrt{5^2 + 3^2} = \\sqrt{25+9} \\\\ &= \\sqrt{34} = 5.83 \\\\ P &= 5 + 5.39 + 5.83 \\\\ &= \\mathbf{16.22 \\, u} \\end{aligned}$",
+   "$(0,2), (7,2), (3,8)$": "$\\begin{aligned} a &= \\dfrac{7(6)}{2} = \\dfrac{42}{2} = \\mathbf{21 \\, u^2} \\\\ m &= \\sqrt{3^2 + 6^2} = \\sqrt{9+36} \\\\ &= \\sqrt{45} = 6.71 \\\\ n &= \\sqrt{4^2 + 6^2} = \\sqrt{16+36} \\\\ &= \\sqrt{52} = 7.21 \\\\ P &= 7 + 6.71 + 7.21 \\\\ &= \\mathbf{20.92 \\, u} \\end{aligned}$",
+   "$(3,5), (3,-5), (8,0)$": "$\\begin{aligned} a &= \\dfrac{10(5)}{2} = \\dfrac{50}{2} = \\mathbf{25 \\, u^2} \\\\ m &= \\sqrt{5^2 + 5^2} = \\sqrt{25+25} \\\\ &= \\sqrt{50} = 7.07 \\\\ n &= \\sqrt{5^2 + 5^2} = \\sqrt{25+25} \\\\ &= \\sqrt{50} = 7.07 \\\\ P &= 10 + 7.07 + 7.07 \\\\ &= \\mathbf{24.14 \\, u} \\end{aligned}$",
+   "$(-4,-2), (6,-2), (1,4)$": "$\\begin{aligned} a &= \\dfrac{10(6)}{2} = \\dfrac{60}{2} = \\mathbf{30 \\, u^2} \\\\ m &= \\sqrt{5^2 + 6^2} = \\sqrt{25+36} \\\\ &= \\sqrt{61} = 7.81 \\\\ n &= \\sqrt{5^2 + 6^2} = \\sqrt{25+36} \\\\ &= \\sqrt{61} = 7.81 \\\\ P &= 10 + 7.81 + 7.81 \\\\ &= \\mathbf{25.62 \\, u} \\end{aligned}$",
+   "$(2,3), (2,9), (7,6)$": "$\\begin{aligned} a &= \\dfrac{6(5)}{2} = \\dfrac{30}{2} = \\mathbf{15 \\, u^2} \\\\ m &= \\sqrt{5^2 + 3^2} = \\sqrt{25+9} \\\\ &= \\sqrt{34} = 5.83 \\\\ n &= \\sqrt{5^2 + 3^2} = \\sqrt{25+9} \\\\ &= \\sqrt{34} = 5.83 \\\\ P &= 6 + 5.83 + 5.83 \\\\ &= \\mathbf{17.66 \\, u} \\end{aligned}$"
   }
  },
  "Matemáticas 5": {
