@@ -333,9 +333,9 @@ Cosas que salieron al armar los exámenes y que conviene revisar en cada tema:
   de 4 por versión (1 resuelto + 1 extra de cada tipo: base 10 y otras bases);
   no la revisó.
 - **Matemáticas 5**: los dos exámenes quedaron armados el 21-sep-2026 (§13b)
-  con el reparto decidido por el asistente calcando Mate 1; Lety no lo revisó
-  tema por tema. Cualquier tema se puede subir o bajar de 1+1 a 1+2 (o al
-  revés) cambiando su receta en `banco.py`.
+  con el reparto del asistente calcando Mate 1. El 22-sep **Lety revisó tema por
+  tema el Examen 1 (temas 1 a 10)** y de ahí salió *"El método"*. **Falta el
+  Examen 2 (temas 11 a 19)**, que sigue con el reparto del asistente.
 - **Matemáticas 2**, completo en el sitio y sin tocar.
 
 ## 13. Estado al 17 de septiembre de 2026
@@ -359,6 +359,11 @@ las seis versiones completas, al 80 % de la hoja. El PDF para imprimir
 Examen 2 (los cuatro restantes): sin definir, con reparto provisional.
 
 ## 13b. Matemáticas 5 al 21 de septiembre de 2026
+
+> **Al 22-sep-2026:** Lety revisó uno por uno los diez temas del Examen 1 con su método
+> (ver *"El método"*, al principio). En la tabla, lo marcado **decidido por Lety** es suyo;
+> los temas 11 a 19 (Examen 2) todavía traen el reparto del asistente. El Examen 1 quedó al
+> 90 % de la hoja.
 
 **Los dos exámenes de Matemáticas 5 están armados**, las seis versiones de cada
 uno, en blanco y resueltas (294 de 294 resoluciones, verificadas con sympy dos

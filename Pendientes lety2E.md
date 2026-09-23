@@ -57,14 +57,18 @@ trabajar esto: un tema a la vez, mostrarle, que ella decida).
 versiones completas, PDF en `~/Downloads` (`python3 pdf.py`).
 
 **Matemáticas 5: los dos exámenes armados el 21-sep-2026**, seis versiones cada uno, en
-blanco y resueltas al 100 %, PDF en `~/Downloads`. El reparto lo calcó el asistente de Mate 1
-(Lety pidió todo de una vez); la tabla y los ejercicios nuevos están en `Reglas de mis
-exámenes.md` §13b. Queda para Lety:
+blanco y resueltas al 100 %, PDF en `~/Downloads`. El 22-sep Lety **revisó tema por tema todo
+el Examen 1** (temas 1 a 10) con su método — ver *"El método"* al principio de `Reglas de mis
+exámenes.md` y la tabla de §13b. Queda para Lety:
 
-- **Revisar el reparto y los ejercicios nuevos** (§13b) y decir si algún tema sube o baja
-  de 1+2 a 1+1: es cambiar su receta en `banco.py` y correr `seleccion.py` →
-  `resoluciones.py` → `generar.py` → `sitio.py` (→ `pdf.py`). Reglas básicas ya lo decidió
-  ella (2+2, la noche del 21-sep); faltan los otros 18.
+- **Revisar el Examen 2** (temas 11 a 19: Recta tangente, Puntos críticos, Optimización,
+  Integrales indefinidas y definidas, Área bajo la curva P1 y P2, Derivada por definición,
+  Riemann), un tema a la vez con las dos preguntas del método: **qué tipos** y **cuántos
+  resueltos y cuántos extras 1 por versión**. Hoy siguen con el reparto del asistente.
+- **De pasada, extra 2** en los temas que no tienen: Integrales indefinidas e Integrales
+  definidas (una tanda de 4 por tipo, sin respuesta).
+- **Pregunta abierta**: Velocidad media y Puntos críticos tienen un extra 2 de sólo 2
+  ejercicios. ¿Se les agrega una tanda por tipo?
 - **Imprimir una hoja de cada examen** y mirarla en papel, como con Mate 1.
 - **El extra $-4x^3 + 88x^2$ de Puntos críticos** (así viene del doc) da $x = 44/3$; quedó
   en extra 2. Si es errata de $8x^2$, corregirlo en la página.

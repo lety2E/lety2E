@@ -80,6 +80,13 @@ Qué le puedes pedir al chat:
 - **«Escribe las resoluciones de Jerarquía»** — las de los extras, que no existen en ningún
   lado; se verifican resolviéndolas.
 
+**Tu método** (lo formulaste el 22-sep-2026, revisando Mate 5): el banco de preguntas de
+cada tema son sus *Ejercicios* resueltos más sus *Ejercicios extra 1*. Para cada tema sólo
+decides **qué tipos de ejercicio hay** y **cuántos resueltos y cuántos extras lleva cada
+versión** (menos si el tema es de mucho proceso). Con eso Claude arma bloques de 6, uno por
+versión, mezcla los tipos en cada versión, escribe lo que falte y cuida que la hoja quepa. Lo
+que sobra baja a *extra 2*, que es repaso y nunca entra; y todo tema tiene su extra 2.
+
 Lo que decidiste sobre cómo son tus exámenes vive en
 **`Recursos lety2E/Reglas de mis exámenes.md`** — ése es el documento que manda. Los
 exámenes listos para imprimir se siguen guardando también en **IEMS**
