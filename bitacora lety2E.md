@@ -5,6 +5,10 @@
 
 ---
 
+## 2026-09-29 — Mate 1: sube Decimales como tema 15
+
+Al final del curso, después de Sistemas de numeración (card en el índice y botones anterior/siguiente). Todavía no entra a ningún examen de `cuadros/`.
+
 ## 2026-09-29 — Mate 5, Velocidad: subíndices en todo el tema · Mate 3: sube la ecuación de la hipérbola
 
 Ejemplo, preguntas y respuestas de Velocidad con $t_i, t_f$, $x_i, x_f$ y $v(t) = x'(t)$; también las resoluciones manuales de los extras, y se regeneraron los exámenes de Mate 5 (318/318). Hipérbola general (tema 21) publicada con su card y el botón desde Regreso de la elipse.
