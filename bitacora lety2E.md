@@ -5,6 +5,10 @@
 
 ---
 
+## 2026-09-29 — Mate 5, Velocidad: Apuntes con subíndices i/f y sin límite
+
+Velocidad media con $x_i, x_f, t_i, t_f$ y el renglón que dice qué es cada uno; velocidad instantánea explicada con palabras (el velocímetro) y solo $v(t) = x'(t)$, sin la definición por límite.
+
 ## 2026-09-29 — Examen muestra de Temario Biológicas cotejado contra la guía UNAM
 
 - Alumnos reportaron errores. Se comparó con la guía oficial (`☁️ Nube-Mac/biologicas.pdf`): 29 claves estaban mal y varias preguntas tenían opciones mal copiadas; se copiaron tal cual de la guía.
