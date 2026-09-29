@@ -5,6 +5,11 @@
 
 ---
 
+## 2026-09-29 — Examen muestra de Temario Biológicas cotejado contra la guía UNAM
+
+- Alumnos reportaron errores. Se comparó con la guía oficial (`☁️ Nube-Mac/biologicas.pdf`): 29 claves estaban mal y varias preguntas tenían opciones mal copiadas; se copiaron tal cual de la guía.
+- Se quitaron 6 preguntas que no se pueden copiar fielmente (25 y 30 son dibujos; 55, 62, 64 y 65 fórmulas ilegibles en el PDF). Quedan 114, todas con la clave oficial.
+
 ## 2026-09-23 (2) — Cuadros de Mate 1: todas las hojas resueltas completas
 
 Lety: *"resuelve lo pendiente de matemáticas 1, sobre todo los del primer examen"*. El Examen 1
