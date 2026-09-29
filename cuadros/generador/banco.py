@@ -72,6 +72,8 @@ CURSOS = {
     ('mcm-mcd.html',               'mcm y MCD',                 ('ejercicios', 1, 2)),
     ('lenguaje-algebraico.html',   'Lenguaje algebraico',       ('ejercicios', 1, 2)),
     ('problemas-ecuaciones.html',  'Problemas de ecuaciones',   ('ejercicios', 1, 2)),
+    # tema 15, agregado al Examen 2 el 29-sep-2026
+    ('decimales.html',             'Decimales',                 ('ejercicios', 1, 2)),
  ]),
  # Matemáticas 5 (21-sep-2026). Lety pidió reproducir los patrones de Mate 1 en
  # los 19 temas de una vez: bloques por tipo en el mismo orden en los dos lados

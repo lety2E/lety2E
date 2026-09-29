@@ -187,6 +187,20 @@
    "El triple de un número aumentado en su mitad es veinte.": "El triple de un número aumentado en su mitad es veinte. $\\begin{aligned} 3x + \\frac{x}{2} &= 20 \\\\ 6x + x &= 40 \\\\ 7x &= 40 \\\\ x &= \\mathbf{\\frac{40}{7}} \\end{aligned}$",
    "Cinco veces la diferencia de un número y dos es igual a veinte.": "Cinco veces la diferencia de un número y dos es igual a veinte. $\\begin{aligned} 5(x - 2) &= 20 \\\\ x - 2 &= 4 \\\\ x &= \\mathbf{6} \\end{aligned}$",
    "El cuadrado de un número aumentado en siete es igual a dieciséis.": "El cuadrado de un número aumentado en siete es igual a dieciséis. $\\begin{aligned} x^2 + 7 &= 16 \\\\ x^2 &= 9 \\\\ x &= \\mathbf{3} \\end{aligned}$"
+  },
+  "Decimales": {
+   "$(0.25)(0.4) =$": "$(25)(4) = 100$ $(0.25)(0.4) =$ $0.1$",
+   "$2.5 + 3.75 - 1.8 =$": "$2.5 + 3.75 - 1.8 = 2.50 + 3.75 - 1.80 = 6.25 - 1.80 =$ $4.45$",
+   "$7.3 + 5.68 =$": "$7.3 + 5.68 = 7.30 + 5.68 =$ $12.98$",
+   "$10 - 4.6 - 2.35 =$": "$10 - 4.6 - 2.35 = 10.00 - 4.60 - 2.35 = 5.40 - 2.35 =$ $3.05$",
+   "$9 - 3.42 =$": "$9 - 3.42 = 9.00 - 3.42 =$ $5.58$",
+   "$(7.1)(1.2) =$": "$(71)(12) = 852$ $(7.1)(1.2) =$ $8.52$",
+   "$9.6 \\div 1.2 =$": "$9.6 \\div 1.2 = 96 \\div 12 =$ $8$",
+   "$(0.5)(0.5)(0.5) =$": "$(5)(5)(5) = 125$ $(0.5)(0.5)(0.5) =$ $0.125$",
+   "$12.05 + 0.9 =$": "$12.05 + 0.9 = 12.05 + 0.90 =$ $12.95$",
+   "$(2.4)(0.25) =$": "$(24)(25) = 600$ $(2.4)(0.25) =$ $0.6$",
+   "$6.4 - 2.85 =$": "$6.4 - 2.85 = 6.40 - 2.85 =$ $3.55$",
+   "$0.84 \\div 0.4 =$": "$0.84 \\div 0.4 = 8.4 \\div 4 =$ $2.1$"
   }
  },
  "Matemáticas 5": {

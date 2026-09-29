@@ -1627,5 +1627,108 @@
    "r_disp": 14,
    "e_disp": 24
   }
+ },
+ {
+  "titulo": "Decimales",
+  "archivo": "decimales.html",
+  "receta": [
+   "ejercicios",
+   1,
+   2
+  ],
+  "versiones": [
+   [
+    {
+     "tex": "$4.6 + 12.35 =$",
+     "origen": "respuesta"
+    },
+    {
+     "tex": "$(0.25)(0.4) =$",
+     "origen": "extra"
+    },
+    {
+     "tex": "$2.5 + 3.75 - 1.8 =$",
+     "origen": "extra"
+    }
+   ],
+   [
+    {
+     "tex": "$7.3 + 5.68 =$",
+     "origen": "extra"
+    },
+    {
+     "tex": "$15.2 - 8.67 =$",
+     "origen": "respuesta"
+    },
+    {
+     "tex": "$10 - 4.6 - 2.35 =$",
+     "origen": "extra"
+    }
+   ],
+   [
+    {
+     "tex": "$9 - 3.42 =$",
+     "origen": "extra"
+    },
+    {
+     "tex": "$(7.1)(1.2) =$",
+     "origen": "extra"
+    },
+    {
+     "tex": "$8.4 \\div 0.7 =$",
+     "origen": "respuesta"
+    }
+   ],
+   [
+    {
+     "tex": "$20 - 7.48 =$",
+     "origen": "respuesta"
+    },
+    {
+     "tex": "$9.6 \\div 1.2 =$",
+     "origen": "extra"
+    },
+    {
+     "tex": "$(0.5)(0.5)(0.5) =$",
+     "origen": "extra"
+    }
+   ],
+   [
+    {
+     "tex": "$12.05 + 0.9 =$",
+     "origen": "extra"
+    },
+    {
+     "tex": "$(2.6)(1.4) =$",
+     "origen": "respuesta"
+    },
+    {
+     "tex": "$(2.4)(0.25) =$",
+     "origen": "extra"
+    }
+   ],
+   [
+    {
+     "tex": "$6.4 - 2.85 =$",
+     "origen": "extra"
+    },
+    {
+     "tex": "$0.84 \\div 0.4 =$",
+     "origen": "extra"
+    },
+    {
+     "tex": "$1.25 \\div 0.5 =$",
+     "origen": "respuesta"
+    }
+   ]
+  ],
+  "info": {
+   "modo": "ejercicios",
+   "r_uso": 6,
+   "e_uso": 12,
+   "falta": 0,
+   "r_disp": 10,
+   "e_disp": 20
+  }
  }
 ]

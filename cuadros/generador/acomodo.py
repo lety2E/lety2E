@@ -55,6 +55,7 @@ EXAMENES = {
      'filas': [
        ['Reglas de exponentes', 'mcm y MCD'],
        ['Problemas de ecuaciones', 'Lenguaje algebraico'],
+       ['Decimales'],
      ],
    },
  ],

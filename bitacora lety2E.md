@@ -5,6 +5,10 @@
 
 ---
 
+## 2026-09-29 — Cuadros Mate 1: Decimales entra al Examen 2
+
+Receta `ejercicios 1+2` como sus vecinos, renglón propio en la hoja; resoluciones de los 12 extras escritas a mano en `resoluciones-manuales.json`. Examen 1 sin cambios.
+
 ## 2026-09-29 — Mate 1: sube Decimales como tema 15
 
 Al final del curso, después de Sistemas de numeración (card en el índice y botones anterior/siguiente). Todavía no entra a ningún examen de `cuadros/`.
