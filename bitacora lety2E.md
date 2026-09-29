@@ -5,6 +5,10 @@
 
 ---
 
+## 2026-09-29 — Mate 5, Velocidad: subíndices en todo el tema · Mate 3: sube la ecuación de la hipérbola
+
+Ejemplo, preguntas y respuestas de Velocidad con $t_i, t_f$, $x_i, x_f$ y $v(t) = x'(t)$; también las resoluciones manuales de los extras, y se regeneraron los exámenes de Mate 5 (318/318). Hipérbola general (tema 21) publicada con su card y el botón desde Regreso de la elipse.
+
 ## 2026-09-29 — Mate 5, Velocidad: Apuntes con subíndices i/f y sin límite
 
 Velocidad media con $x_i, x_f, t_i, t_f$ y el renglón que dice qué es cada uno; velocidad instantánea explicada con palabras (el velocímetro) y solo $v(t) = x'(t)$, sin la definición por límite.
