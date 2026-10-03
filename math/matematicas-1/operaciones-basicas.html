@@ -134,6 +134,20 @@
     @media (max-width: 700px) { .bloques-3 { grid-template-columns: repeat(2, 1fr); } }
     @media (max-width: 480px) { .bloques-3 { grid-template-columns: 1fr; } }
 
+    /* ── Enlace a la práctica en línea ── */
+    .practica-cta {
+      display: flex; align-items: center; gap: 1rem;
+      margin: 0 0 2.5rem; padding: 1rem 1.25rem;
+      background: var(--bg-card); border: 1.5px solid var(--T);
+      border-radius: var(--r-md); color: var(--text); text-decoration: none;
+      transition: border-color .2s, transform .18s;
+    }
+    .practica-cta:hover { border-color: var(--M); color: var(--text); transform: translateX(3px); }
+    .practica-cta-txt { display: flex; flex-direction: column; gap: .2rem; min-width: 0; }
+    .practica-cta-txt strong { color: var(--P); font-size: 1rem; }
+    .practica-cta-txt span { font-size: .88rem; color: var(--text-2); }
+    .practica-cta-flecha { margin-left: auto; font-weight: 700; font-size: 1.2rem; color: var(--M); }
+
     /* ── Nav ── */
     .topic-nav-btns {
       display: flex; justify-content: flex-end;
@@ -253,6 +267,15 @@ M834 80h400000v40h-400000z'/></svg></span></span></span><span class="vlist-s">�
         <div class="ej-line"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>4</mn><mo stretchy="false">(</mo><mo>−</mo><mn>5</mn><msup><mo stretchy="false">)</mo><mn>2</mn></msup><mo>=</mo><mn>4</mn><mo stretchy="false">(</mo><mo>−</mo><mn>5</mn><mo stretchy="false">)</mo><mo stretchy="false">(</mo><mo>−</mo><mn>5</mn><mo stretchy="false">)</mo><mo>=</mo><mn>4</mn><mo stretchy="false">(</mo><mn>25</mn><mo stretchy="false">)</mo><mo>=</mo></mrow><annotation encoding="application/x-tex">4(-5)^2 = 4(-5)(-5) = 4(25) =</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.0641em;vertical-align:-0.25em;"></span><span class="mord">4</span><span class="mopen">(</span><span class="mord">−</span><span class="mord">5</span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">4</span><span class="mopen">(</span><span class="mord">−</span><span class="mord">5</span><span class="mclose">)</span><span class="mopen">(</span><span class="mord">−</span><span class="mord">5</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">4</span><span class="mopen">(</span><span class="mord">25</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span></span></span></span> <strong><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>100</mn></mrow><annotation encoding="application/x-tex">100</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">100</span></span></span></span></strong></div>
       </div>
     </section>
+
+    <!-- ══════════ PRÁCTICA EN LÍNEA (fuera de section-block: el generador de exámenes no la lee) ══════════ -->
+    <a class="practica-cta" href="practica/regla-de-signos.html">
+      <span class="practica-cta-txt">
+        <strong>Practica la regla de signos</strong>
+        <span>Series de operaciones al azar. Ves al momento si quedó bien.</span>
+      </span>
+      <span class="practica-cta-flecha" aria-hidden="true">→</span>
+    </a>
 
     <!-- ══════════ EJERCICIOS (siempre visibles) ══════════ -->
     <section class="section-block">

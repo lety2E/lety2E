@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Regla de signos (práctica) — Matemáticas 1 — LetyMath</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../../../favicon.ico">
+  <meta name="description" content="Práctica en línea de la regla de signos: series de operaciones con enteros al azar, con revisión al momento." />
+  <link rel="stylesheet" href="../../../style.css">
+  <link rel="stylesheet" href="../../../assets/katex/katex.min.css" />
+
+  <style>
+    .topic-tag {
+      display: inline-flex; align-items: center; gap: .35rem;
+      padding: .22rem .75rem; border-radius: 99px;
+      background: var(--accent-light); color: var(--accent);
+      font-size: .78rem; font-weight: 700; letter-spacing: .03em;
+      margin-bottom: .55rem;
+    }
+    .topic-tag::before {
+      content: ''; width: 7px; height: 7px; border-radius: 50%;
+      background: var(--accent); display: inline-block;
+    }
+
+    /* ── Práctica ── */
+    .pr-intro { line-height: 1.75; margin-bottom: 1.1rem; max-width: 62ch; color: var(--text); }
+    .pr-intro a { color: var(--P); font-weight: 700; }
+
+    .pr-tipos { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 1.5rem; }
+    .pr-tipo {
+      font: inherit; font-weight: 700; font-size: .88rem;
+      min-height: 44px; padding: 0 1.1rem; border-radius: 99px; cursor: pointer;
+      border: 1.5px solid var(--border); background: var(--bg-card); color: var(--text);
+      transition: border-color .2s, background .2s;
+    }
+    .pr-tipo:hover { border-color: var(--P); }
+    .pr-tipo[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+    .pr-lista {
+      list-style: none; margin: 0; padding: 0;
+      display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .75rem;
+    }
+    @media (max-width: 640px) { .pr-lista { grid-template-columns: 1fr; } }
+
+    .pr-item {
+      display: grid; grid-template-columns: minmax(0, 1fr) auto auto;
+      align-items: center; column-gap: .75rem; row-gap: .2rem;
+      background: var(--bg-card); border: 1.5px solid var(--border);
+      border-radius: var(--r-md); padding: .6rem .9rem;
+      transition: border-color .2s;
+    }
+    .pr-item.bien { border-color: var(--T); }
+    .pr-item.mal  { border-color: var(--M); }
+
+    .pr-op {
+      font-family: KaTeX_Main, 'Times New Roman', serif;
+      font-size: 1.3rem; white-space: nowrap; text-align: right; color: var(--text);
+      min-width: 0;
+    }
+    .pr-input {
+      width: 5.4rem; min-height: 44px; padding: .3rem .4rem;
+      font-family: KaTeX_Main, 'Times New Roman', serif; font-size: 1.2rem; text-align: center;
+      border: 1.5px solid var(--border); border-radius: var(--r-sm);
+      background: var(--bg-card); color: var(--text);
+      -moz-appearance: textfield; appearance: textfield;
+    }
+    .pr-input::-webkit-outer-spin-button,
+    .pr-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+
+    .pr-marca {
+      width: 28px; height: 28px; border-radius: 50%;
+      display: grid; place-items: center; visibility: hidden;
+    }
+    .pr-marca svg { width: 16px; height: 16px; fill: none; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+    .pr-item.bien .pr-marca { visibility: visible; background: var(--T); }
+    .pr-item.bien .pr-marca svg { stroke: var(--dark); }
+    .pr-item.mal .pr-marca  { visibility: visible; background: var(--M); }
+    .pr-item.mal .pr-marca svg  { stroke: #fff; }
+    .pr-item.bien .pr-no, .pr-item.mal .pr-si { display: none; }
+
+    .pr-resp {
+      grid-column: 1 / -1;
+      margin-top: .45rem; padding-top: .5rem; border-top: 1px dashed var(--border);
+      font-size: .86rem; line-height: 1.6; color: var(--text-2);
+    }
+    .pr-resp .m { font-family: KaTeX_Main, 'Times New Roman', serif; font-size: 1.08em; white-space: nowrap; color: var(--text); }
+    .pr-resp-num { display: block; font-weight: 700; color: var(--P); }
+    .pr-resp-num .m { color: var(--P); font-size: 1.15em; font-weight: 400; }
+    .pr-fb { display: block; }
+    /* marcatextos: el amarillo de .formula-pill, la única excepción a la paleta en Math */
+    /* el «+» que normalmente no se escribe, en gris para que se note que se agregó */
+    .pr-resp .implicito { color: var(--text-3); }
+    /* en las multiplicaciones resalta el signo (magenta y negritas) y el número va en gris claro */
+    /* «se suman» / «se restan» resaltados como los signos */
+    .pr-resp .enfasis { color: var(--M); font-weight: 700; }
+    /* los + y − de la tipografía de fórmulas son finos aun en negritas: el contorno del mismo color los engruesa */
+    .pr-resp .signo {
+      color: var(--M); font-weight: 700; font-size: 1.3em; line-height: 1;
+      -webkit-text-stroke: 1.1px currentColor; paint-order: stroke fill;
+    }
+    .pr-resp .valor { color: var(--text-3); opacity: .75; }
+    /* en sumas y restas: el signo del número marcado y el del resultado */
+    .pr-resp .signo-fuerte {
+      color: var(--M); font-weight: 700; font-size: 1.15em; line-height: 1;
+      -webkit-text-stroke: .9px currentColor; paint-order: stroke fill;
+    }
+    .pr-resp .parentesis { color: var(--M); font-weight: 700; -webkit-text-stroke: .5px currentColor; }
+    .pr-resp .marcador { background: #FFF1A8; box-shadow: inset 0 -2px 0 #F5DC6A; border-radius: 3px; padding: 0 .22em; }
+
+    .pr-pie {
+      display: flex; flex-wrap: wrap; align-items: center; gap: .75rem 1rem;
+      margin-top: 1.4rem;
+    }
+    .pr-cuenta { font-weight: 700; color: var(--P); margin-right: auto; font-variant-numeric: tabular-nums; }
+    .pr-btn {
+      font: inherit; font-weight: 700; font-size: .9rem;
+      min-height: 44px; padding: 0 1.4rem; border-radius: 99px; cursor: pointer;
+      border: 1.5px solid var(--accent); transition: background .2s, color .2s;
+    }
+    .pr-btn.principal { background: var(--accent); color: #fff; }
+    .pr-btn.principal:hover { background: var(--M); border-color: var(--M); }
+    .pr-btn.secundario { background: transparent; color: var(--accent); }
+    .pr-btn.secundario:hover { background: var(--accent-light); }
+    .pr-final {
+      margin-top: 1rem; padding: .8rem 1rem;
+      background: var(--accent-light); border-radius: var(--r-md);
+      color: var(--P); font-weight: 700;
+    }
+
+    .pr-tipo:focus-visible, .pr-btn:focus-visible, .pr-input:focus-visible, .btn-anterior:focus-visible {
+      outline: 2px solid var(--M); outline-offset: 2px;
+    }
+
+    @media (max-width: 420px) {
+      .pr-op { font-size: 1.15rem; }
+      .pr-input { width: 4.8rem; }
+    }
+
+    /* ── Nav ── */
+    .topic-nav-btns {
+      display: flex; justify-content: flex-start;
+      margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border);
+    }
+    .btn-anterior {
+      display: inline-flex; align-items: center; gap: .5rem;
+      padding: .65rem 1.4rem; border-radius: 99px;
+      font-weight: 700; font-size: .9rem; transition: background .2s, transform .18s;
+      background: var(--accent); color: #fff;
+    }
+    .btn-anterior:hover { background: var(--M); color: #fff; transform: translateX(-3px); }
+
+    @media (prefers-reduced-motion: reduce) {
+      .pr-tipo, .pr-item, .pr-btn, .btn-anterior { transition: none; }
+    }
+  </style>
+</head>
+<body data-section="math">
+  <main class="topic-content">
+
+    <header class="topic-header">
+      <p class="breadcrumb">
+        <a href="../../index.html">Inicio</a> ›
+        <a href="../index.html">Matemáticas 1</a> ›
+        <a href="../operaciones-basicas.html">Operaciones básicas</a> ›
+        Práctica
+      </p>
+      <div class="topic-tag">Matemáticas 1 · Práctica</div>
+      <h1>Regla de signos</h1>
+    </header>
+
+    <p class="pr-intro">
+      Escribe el resultado de cada operación. Al pasar a la siguiente cajita ves si quedó bien.
+      Si tienes dudas, repasa las reglas en <a href="../operaciones-basicas.html">Operaciones básicas</a>.
+    </p>
+
+    <div class="pr-tipos" role="group" aria-label="Qué practicar">
+      <button type="button" class="pr-tipo" data-tipo="combinadas" aria-pressed="true">Combinadas</button>
+      <button type="button" class="pr-tipo" data-tipo="sumas" aria-pressed="false">Sumas y restas</button>
+      <button type="button" class="pr-tipo" data-tipo="multiplicaciones" aria-pressed="false">Multiplicaciones</button>
+    </div>
+
+    <ol class="pr-lista" id="pr-lista"></ol>
+
+    <div class="pr-pie">
+      <p class="pr-cuenta" id="pr-cuenta" aria-live="polite">Bien: 0 de 16</p>
+      <button type="button" class="pr-btn secundario" id="pr-ver">Ver respuestas</button>
+      <button type="button" class="pr-btn principal" id="pr-otra">Seguir practicando</button>
+    </div>
+    <p class="pr-final" id="pr-final" aria-live="polite" hidden></p>
+
+    <div class="topic-nav-btns">
+      <a href="../operaciones-basicas.html" class="btn-anterior">← Operaciones básicas</a>
+    </div>
+
+  </main>
+
+  <script>
+  (function () {
+    var MENOS = '−';
+    var tipo = 'combinadas';
+    var serie = [];
+    var primerIntento = [];
+    var verResp = false;
+
+    var lista = document.getElementById('pr-lista');
+    var cuenta = document.getElementById('pr-cuenta');
+    var final = document.getElementById('pr-final');
+    var btnVer = document.getElementById('pr-ver');
+
+    function rnd(a, b) { return a + Math.floor(Math.random() * (b - a + 1)); }
+    function num(n) { return n < 0 ? MENOS + (-n) : String(n); }
+    function par(n) { return '(' + num(n) + ')'; }
+    function signoDe(n) { return n < 0 ? MENOS : '+'; }
+
+    /* Retroalimentación: trozos de texto (t) y de matemática (m), con las frases de los Apuntes */
+    function M(s) { return { m: s }; }
+    function T(s) { return { t: s }; }
+    function MKS(sg, resto) { return { mk: resto, sg: sg }; }   /* número marcado, con su signo en rosa fuerte */
+    function RES(n) { return { res: n }; }                    /* « = resultado», con su signo en rosa fuerte */
+    function E(s) { return { e: s }; }
+    var MAS_IMPLICITO = '\uE000';   /* se pinta como «+» gris */
+    function conSigno(n) { return n > 0 ? MAS_IMPLICITO + n : num(n); }
+
+    /* Suma o resta de dos números: 3 + 5, -3 - 5, 8 - 3, -8 + 3 */
+    function suma(a, b) {
+      var txt = num(a) + (b > 0 ? ' + ' + b : ' ' + MENOS + ' ' + (-b));
+      var val = a + b, A = Math.abs(a), B = Math.abs(b), fb;
+      var segundo = b > 0 ? '+ ' + b : MENOS + ' ' + (-b);
+      /* Se repite la operación con el número más grande marcado y todos los signos explícitos:
+         −12 + 3 = −9 ; +2 − 3 = −1 ; −11 − 7 = −18 */
+      var regla = (a > 0) === (b > 0)
+        ? [T('Signos iguales '), E('se suman'), T(' y se conserva el signo: ')]
+        : [T('Signos diferentes '), E('se restan'), T(': ')];
+      /* el signo del número marcado y el del resultado van en rosa fuerte */
+      if (A > B) {
+        fb = regla.concat([MKS(a > 0 ? '+' : MENOS, String(A)), M(' ' + segundo), RES(val)]);
+      } else {
+        fb = regla.concat([M(conSigno(a) + ' '), MKS(b > 0 ? '+' : MENOS, ' ' + B), RES(val)]);
+      }
+      return { txt: txt, val: val, fb: fb };
+    }
+
+    /* Multiplicación de dos números, solo con paréntesis: 4(7), -4(7), 4(-7), -4(-7) */
+    function producto(a, b) {
+      var val = a * b;
+      return {
+        txt: num(a) + par(b), val: val,
+        /* (+3)(−2) = (−6): los signos en magenta y negritas, los números en gris, para que resalte la regla */
+        fb: [E('Multiplicación'), T(': '), { f: [a, b, val] }]
+      };
+    }
+
+    /* s1 y s2 son los signos de los dos números (1 o -1). Nunca empatan. Con signos diferentes,
+       «gana» dice cuál tiene el valor más grande, el positivo o el negativo. */
+    function sumaCon(s1, s2, gana) {
+      var x = rnd(1, 12), y = rnd(1, 12);
+      while (x === y) y = rnd(1, 12);   /* siempre hay uno más grande */
+      if (s1 === s2) return suma(s1 * x, s2 * y);
+      var grande = Math.max(x, y), chico = Math.min(x, y);
+      var mPos = gana === 'positivo' ? grande : chico;
+      var mNeg = gana === 'positivo' ? chico : grande;
+      return suma(s1 > 0 ? mPos : -mNeg, s2 > 0 ? mPos : -mNeg);
+    }
+    function productoCon(s1, s2) { return producto(s1 * rnd(2, 10), s2 * rnd(2, 10)); }
+
+    /* Ocho de cada clase, dos por cada combinación de signos.
+       Sumas y restas: ++, --, +-, -+ ; en las de signos diferentes una la gana el positivo y otra el negativo.
+       Multiplicaciones: (+)(+), (-)(+), (+)(-), (-)(-). */
+    function ochoSumas() {
+      return [
+        function () { return sumaCon(1, 1); },
+        function () { return sumaCon(1, 1); },
+        function () { return sumaCon(-1, -1); },
+        function () { return sumaCon(-1, -1); },
+        function () { return sumaCon(1, -1, 'positivo'); },
+        function () { return sumaCon(1, -1, 'negativo'); },
+        function () { return sumaCon(-1, 1, 'positivo'); },
+        function () { return sumaCon(-1, 1, 'negativo'); }
+      ];
+    }
+    function ochoProductos() {
+      return [[1, 1], [1, 1], [-1, 1], [-1, 1], [1, -1], [1, -1], [-1, -1], [-1, -1]].map(function (s) {
+        return function () { return productoCon(s[0], s[1]); };
+      });
+    }
+
+    var RECETAS = {
+      combinadas: function () { return ochoSumas().concat(ochoProductos()); },
+      sumas: function () { return ochoSumas().concat(ochoSumas()); },
+      multiplicaciones: function () { return ochoProductos().concat(ochoProductos()); }
+    };
+
+    function generar() {
+      var vistos = {}, out = [];
+      RECETAS[tipo]().forEach(function (hacer) {
+        var e = hacer(), intentos = 0;
+        while (vistos[e.txt] && intentos < 50) { e = hacer(); intentos++; }
+        vistos[e.txt] = true;
+        out.push(e);
+      });
+      for (var i = out.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var t = out[i]; out[i] = out[j]; out[j] = t;
+      }
+      return out;
+    }
+
+    var MARCA = '<svg class="pr-si" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>' +
+                '<svg class="pr-no" viewBox="0 0 24 24"><path d="M7 7l10 10M17 7L7 17"/></svg>';
+
+    function signoFuerte(s) {
+      var x = document.createElement('span');
+      x.className = 'signo-fuerte';
+      x.textContent = s;
+      return x;
+    }
+
+    function trozo(pz) {
+      if (pz.t !== undefined) return document.createTextNode(pz.t);
+      if (pz.e !== undefined) {
+        var se = document.createElement('span');
+        se.className = 'enfasis';
+        se.textContent = pz.e;
+        return se;
+      }
+      if (pz.f !== undefined) {
+        var spf = document.createElement('span');
+        spf.className = 'm';
+        pz.f.forEach(function (n, k) {
+          if (k === 2) {
+            var igual = document.createElement('span');
+            igual.className = 'signo';
+            igual.textContent = '=';
+            spf.appendChild(document.createTextNode(' '));
+            spf.appendChild(igual);
+            spf.appendChild(document.createTextNode(' '));
+          }
+          var abre = document.createElement('span');
+          abre.className = 'parentesis';
+          abre.textContent = '(';
+          spf.appendChild(abre);
+          var sg = document.createElement('span');
+          sg.className = 'signo';
+          sg.textContent = signoDe(n);
+          var vl = document.createElement('span');
+          vl.className = 'valor';
+          vl.textContent = String(Math.abs(n));
+          spf.appendChild(sg);
+          spf.appendChild(vl);
+          var cierra = document.createElement('span');
+          cierra.className = 'parentesis';
+          cierra.textContent = ')';
+          spf.appendChild(cierra);
+        });
+        return spf;
+      }
+      if (pz.res !== undefined) {
+        var sr = document.createElement('span');
+        sr.className = 'm';
+        sr.appendChild(document.createTextNode(' = '));
+        sr.appendChild(signoFuerte(pz.res < 0 ? MENOS : '+'));
+        sr.appendChild(document.createTextNode(String(Math.abs(pz.res))));
+        return sr;
+      }
+      if (pz.sg !== undefined) {
+        var sm = document.createElement('span');
+        sm.className = 'm marcador';
+        sm.appendChild(signoFuerte(pz.sg));
+        sm.appendChild(document.createTextNode(pz.mk));
+        return sm;
+      }
+      var sp = document.createElement('span');
+      sp.className = pz.mk !== undefined ? 'm marcador' : 'm';
+      var partes = (pz.mk !== undefined ? pz.mk : pz.m).split(MAS_IMPLICITO);
+      partes.forEach(function (parte, k) {
+        if (k > 0) {
+          var mas = document.createElement('span');
+          mas.className = 'implicito';
+          mas.textContent = '+';
+          sp.appendChild(mas);
+        }
+        if (parte) sp.appendChild(document.createTextNode(parte));
+      });
+      return sp;
+    }
+
+    function pintar() {
+      serie = generar();
+      primerIntento = serie.map(function () { return null; });
+      verResp = false;
+      btnVer.textContent = 'Ver respuestas';
+      lista.textContent = '';
+
+      serie.forEach(function (e, i) {
+        var li = document.createElement('li');
+        li.className = 'pr-item';
+
+        var op = document.createElement('span');
+        op.className = 'pr-op';
+        op.textContent = e.txt + ' =';
+
+        var inp = document.createElement('input');
+        inp.className = 'pr-input';
+        inp.type = 'number';
+        inp.step = '1';
+        inp.id = 'pr-r' + i;
+        inp.autocomplete = 'off';
+        inp.setAttribute('enterkeyhint', i < serie.length - 1 ? 'next' : 'done');
+        inp.setAttribute('aria-label', 'Resultado de ' + e.txt.split(MENOS).join('menos '));
+
+        var marca = document.createElement('span');
+        marca.className = 'pr-marca';
+        marca.setAttribute('aria-hidden', 'true');
+        marca.innerHTML = MARCA;
+
+        var resp = document.createElement('div');
+        resp.className = 'pr-resp';
+        var linea = document.createElement('span');
+        linea.className = 'pr-resp-num';
+        linea.appendChild(document.createTextNode('Respuesta: '));
+        linea.appendChild(trozo(M(num(e.val))));
+        var fb = document.createElement('span');
+        fb.className = 'pr-fb';
+        e.fb.forEach(function (pz) { fb.appendChild(trozo(pz)); });
+        resp.appendChild(linea);
+        resp.appendChild(fb);
+        resp.hidden = true;
+
+        li.appendChild(op);
+        li.appendChild(inp);
+        li.appendChild(marca);
+        li.appendChild(resp);
+        lista.appendChild(li);
+
+        inp.addEventListener('change', function () { revisar(i); });
+        inp.addEventListener('input', function () {
+          li.classList.remove('bien', 'mal');
+          inp.removeAttribute('aria-invalid');
+        });
+        inp.addEventListener('keydown', function (ev) {
+          if (ev.key !== 'Enter') return;
+          ev.preventDefault();
+          revisar(i);
+          var sig = document.getElementById('pr-r' + (i + 1));
+          if (sig) sig.focus(); else inp.blur();
+        });
+        /* que la ruedita del mouse no cambie el número */
+        inp.addEventListener('wheel', function () {
+          if (document.activeElement === inp) inp.blur();
+        }, { passive: true });
+      });
+
+      actualizarCuenta();
+    }
+
+    function revisar(i) {
+      var inp = document.getElementById('pr-r' + i);
+      var li = inp.parentNode;
+      var v = inp.value.trim();
+      li.classList.remove('bien', 'mal');
+      if (v === '') {
+        inp.removeAttribute('aria-invalid');
+        actualizarCuenta();
+        return;
+      }
+      var ok = Number(v) === serie[i].val;
+      li.classList.add(ok ? 'bien' : 'mal');
+      inp.setAttribute('aria-invalid', ok ? 'false' : 'true');
+      if (primerIntento[i] === null) primerIntento[i] = ok;
+      actualizarCuenta();
+    }
+
+    function actualizarCuenta() {
+      var bien = lista.querySelectorAll('.pr-item.bien').length;
+      cuenta.textContent = 'Bien: ' + bien + ' de ' + serie.length;
+      var contestadas = primerIntento.filter(function (x) { return x !== null; }).length;
+      if (contestadas === serie.length) {
+        var alPrimero = primerIntento.filter(function (x) { return x === true; }).length;
+        final.textContent = 'Terminaste la serie. Al primer intento: ' + alPrimero + ' de ' + serie.length + '.';
+        final.hidden = false;
+      } else {
+        final.hidden = true;
+      }
+    }
+
+    document.querySelectorAll('.pr-tipo').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        tipo = btn.getAttribute('data-tipo');
+        document.querySelectorAll('.pr-tipo').forEach(function (b) {
+          b.setAttribute('aria-pressed', b === btn ? 'true' : 'false');
+        });
+        pintar();
+      });
+    });
+
+    document.getElementById('pr-otra').addEventListener('click', function () {
+      pintar();
+      var suave = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+      lista.scrollIntoView({ behavior: suave, block: 'start' });
+    });
+
+    btnVer.addEventListener('click', function () {
+      verResp = !verResp;
+      lista.querySelectorAll('.pr-resp').forEach(function (r) { r.hidden = !verResp; });
+      btnVer.textContent = verResp ? 'Ocultar respuestas' : 'Ver respuestas';
+    });
+
+    pintar();
+  })();
+  </script>
+  <script src="../../../nav.js"></script>
+  <script src="../../../footer.js"></script>
+</body>
+</html>
