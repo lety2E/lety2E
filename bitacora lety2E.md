@@ -5,6 +5,10 @@
 
 ---
 
+## 2026-10-02 — Math: barra de acceso a la práctica de signos en el índice
+
+En `math/index.html`, entre el texto de bienvenida y las tarjetas de los cursos: tarjeta baja en forma de barra (filo morado de Mate 1, ícono de más y menos, «Practica la regla de signos», flecha magenta), más compacta en celular. A petición de Lety se quitó el enlace que estaba en Operaciones básicas: esa página quedó idéntica a como estaba antes de la práctica.
+
 ## 2026-10-02 — Mate 1: práctica en línea de la regla de signos
 
 Página nueva `math/matematicas-1/practica/regla-de-signos.html`, al estilo de la de letymath.com (Combinadas): series de 16 operaciones de dos números al azar, 8 sumas y restas y 8 multiplicaciones, dos de cada combinación de signos (en las de signos diferentes una la gana el positivo y otra el negativo; sin empates, sin 0 ni 1 como factor). Botones Combinadas · Sumas y restas · Multiplicaciones. Palomita o tache al pasar de cajita, cuenta de aciertos y «al primer intento» al terminar. «Ver respuestas» trae retroalimentación con las frases de los Apuntes: en sumas y restas se repite la operación con el número más grande en amarillo, «se suman»/«se restan» y los signos del marcado y del resultado en magenta, los «+» que no se escriben en gris; en multiplicaciones (+3)(−2) = (−6) con signos, igual y paréntesis en magenta y los números en gris. Vive en la subcarpeta `practica/` para que `extraer.py` no la lea (se comprobó: los exámenes salen igual). Enlace «Practica la regla de signos» en Operaciones básicas, entre el ejemplo y los ejercicios, fuera de los `section-block`.

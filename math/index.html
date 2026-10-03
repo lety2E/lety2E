@@ -8,6 +8,32 @@
   <link rel="icon" href="../favicon.ico">
   <meta name="description" content="Aprende matemáticas con apuntes, videos y ejercicios. 5 cursos, más de 80 temas, explicados paso a paso por Lety.">
   <link rel="stylesheet" href="../style.css">
+  <style>
+    /* ── Barra de acceso a la práctica en línea (tarjeta baja, del ancho de los cursos) ── */
+    .practica-barra {
+      display: flex; align-items: center; gap: 1rem;
+      margin: 0 0 -1rem; padding: 1rem 1.5rem;
+      background: var(--bg-card); color: var(--text); text-decoration: none;
+      border: 2px solid transparent; border-left: 5px solid var(--course-1);
+      border-radius: 12px;
+      transition: box-shadow .3s ease, transform .3s ease;
+    }
+    .practica-barra:hover { box-shadow: 0 8px 24px rgba(74, 0, 128, 0.12); transform: translateY(-3px); color: var(--text); }
+    .practica-barra:focus-visible { outline: 2px solid var(--M); outline-offset: 3px; }
+    .practica-barra-icono { flex: none; width: 2.4rem; height: 2.4rem; }
+    .practica-barra-icono svg { width: 100%; height: 100%; fill: none; stroke: var(--course-1); stroke-width: 2.4; stroke-linecap: round; }
+    .practica-barra-txt { display: flex; flex-direction: column; gap: .15rem; min-width: 0; }
+    .practica-barra-txt strong { font-family: var(--font-display); font-size: 1.2rem; color: var(--text); }
+    .practica-barra-txt span { font-size: .9rem; color: var(--text-2); }
+    .practica-barra-flecha { margin-left: auto; flex: none; font-weight: 700; font-size: 1.3rem; color: var(--M); }
+    @media (max-width: 600px) {
+      .practica-barra { gap: .75rem; padding: .8rem 1rem; }
+      .practica-barra-icono { width: 1.9rem; height: 1.9rem; }
+      .practica-barra-txt strong { font-size: 1.05rem; }
+      .practica-barra-txt span { font-size: .82rem; }
+    }
+    @media (prefers-reduced-motion: reduce) { .practica-barra { transition: none; } }
+  </style>
 </head>
 <body data-section="math">
 
@@ -18,6 +44,17 @@
       <h1>Math</h1>
       <p>Apuntes, videos y ejercicios resueltos para que domines cada tema a tu ritmo.</p>
     </section>
+
+    <a href="matematicas-1/practica/regla-de-signos.html" class="practica-barra">
+      <span class="practica-barra-icono" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M7 4v8M3 8h8"/><path d="M13 16h8"/><path d="M19 4L5 20"/></svg>
+      </span>
+      <span class="practica-barra-txt">
+        <strong>Practica la regla de signos</strong>
+        <span>Matemáticas 1 · Operaciones al azar con revisión al momento</span>
+      </span>
+      <span class="practica-barra-flecha" aria-hidden="true">→</span>
+    </a>
 
     <div class="course-grid">
       <a href="matematicas-1/index.html" class="course-card" style="--card-accent: #4A0080;">
