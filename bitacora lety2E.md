@@ -5,6 +5,10 @@
 
 ---
 
+## 2026-10-05 — Docencia: la guía de aulas queda doble con GICAIA
+
+- Decisión de Lety: la guía vive en los dos lados. La principal es la de GICAIA; al cambiarla allá, se copia a `docencia/primeros-pasos.html`. Crédito al grupo al pie. Quedó anotado en `CLAUDE.md` (§ Docencia).
+
 ## 2026-10-05 — Docencia: «Primeros pasos» con las dos partes de GICAIA
 
 - `docencia/primeros-pasos.html` reescrita con la guía actualizada del grupo: Parte 1 «Abrir tu aula» (carpeta = sitio con subcarpeta por materia, CLAUDE.md/bitácora/pendientes, paleta, esqueleto con todas las materias, primer tema) y Parte 2 «Publicar tu aula» (cuenta, Git + gh, «súbelo», plan B GitHub Desktop). Misma dirección; card del índice actualizada.
