@@ -330,7 +330,7 @@ directorio ligero y su pestaña Recursos **enlaza hacia `lety2e.com/docencia`**.
 
 - El cuerpo de trabajo de Lety vive **aquí**, no allá — no se va con el grupo si el grupo se enfría.
 - **No mover Docencia a GICAIA** ni proponer replicar su contenido allá.
-- **Excepción (5-oct-2026, decisión de Lety):** la guía de aulas está **doble**. Lety la siente suya (la hizo con Claude) y del grupo a la vez: `docencia/primeros-pasos.html` lleva las dos partes de GICAIA (`abrir-tu-aula.html` + `publicar-tu-aula.html`). **La principal es la de GICAIA**: cuando Lety la cambie allá, copiar el cambio aquí.
+- **Excepción (5-oct-2026, decisión de Lety):** la guía de aulas está **doble**. Lety la siente suya (la hizo con Claude) y del grupo a la vez: `docencia/abrir-tu-aula.html` y `publicar-tu-aula.html` son copia de las dos partes de GICAIA (mismos nombres). **La principal es la de GICAIA**: cuando Lety la cambie allá, copiar el cambio aquí.
 - `docencia/index.html` no se borra ni se renombra: hay un enlace externo apuntándole.
   GitHub Pages redirige `/docencia` → `/docencia/`, así que el enlace sin barra final funciona.
 - El enlace es de **ida y vuelta**: el índice de Docencia devuelve a GICAIA con la card
