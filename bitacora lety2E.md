@@ -5,6 +5,10 @@
 
 ---
 
+## 2026-10-05 — Docencia: «Primeros pasos» con las dos partes de GICAIA
+
+- `docencia/primeros-pasos.html` reescrita con la guía actualizada del grupo: Parte 1 «Abrir tu aula» (carpeta = sitio con subcarpeta por materia, CLAUDE.md/bitácora/pendientes, paleta, esqueleto con todas las materias, primer tema) y Parte 2 «Publicar tu aula» (cuenta, Git + gh, «súbelo», plan B GitHub Desktop). Misma dirección; card del índice actualizada.
+
 ## 2026-10-02 — Math: barra de acceso a la práctica de signos en el índice
 
 En `math/index.html`, entre el texto de bienvenida y las tarjetas de los cursos: tarjeta baja en forma de barra (filo morado de Mate 1, ícono de más y menos, «Practica la regla de signos», flecha magenta), más compacta en celular. A petición de Lety se quitó el enlace que estaba en Operaciones básicas: esa página quedó idéntica a como estaba antes de la práctica.

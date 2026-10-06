@@ -6,7 +6,7 @@
   <title>Primeros pasos — Docencia — lety2E</title>
   <link rel="icon" href="../favicon.svg" type="image/svg+xml">
   <link rel="icon" href="../favicon.ico">
-  <meta name="description" content="Cómo montar tu primera página de clase con un agente de IA y publicarla en internet, desde cero y sin saber programar. Guía para docentes.">
+  <meta name="description" content="Cómo armar tu aula con un agente de IA y publicarla en internet, en dos partes y sin saber programar. Guía para docentes.">
   <link rel="stylesheet" href="../style.css">
 
   <style>
@@ -168,6 +168,22 @@
       margin: .9rem 0 0;
     }
 
+    /* ── Separador de parte (1 de 2, 2 de 2) ───── */
+    .parte {
+      border-top: 3px solid var(--M);
+      padding-top: 1.4rem;
+      margin: 3.5rem 0 2.2rem;
+    }
+    .parte:first-of-type { margin-top: 0; }
+    .parte-num {
+      font-size: .78rem; font-weight: 700; letter-spacing: .08em;
+      text-transform: uppercase; color: var(--M);
+    }
+    .parte h2 { margin: .3rem 0 .5rem; font-size: 1.8rem; color: var(--P); }
+    .parte p { margin: 0; color: var(--text-2); }
+    .paso ul, .paso ol, .cierre ol { padding-left: 1.3rem; line-height: 1.65; }
+    .paso li, .cierre li { margin-bottom: .4rem; }
+
     /* ── Cierre ────────────────────────────────── */
     .cierre {
       border-top: 2px solid var(--border-s);
@@ -208,221 +224,236 @@
     </p>
     <div class="topic-tag">Guía</div>
     <h1 style="text-align:left; margin-bottom:.6rem;">Primeros pasos</h1>
-    <p style="margin:0; max-width:none;">Tu primera página de clase, en línea y desde cero.</p>
+    <p style="margin:0; max-width:none;">Tu aula en dos partes: armarla en tu computadora y publicarla en internet.</p>
   </header>
 
-  <!-- ══════════ ANTES DE EMPEZAR ══════════ -->
   <div class="previa">
     <h2>Antes de empezar</h2>
     <ul>
       <li>Descarga la app de Claude en
       <a href="https://claude.com/download" target="_blank" rel="noopener">claude.com/download</a>
-      — la de escritorio, para tu computadora. Es una sola app y el agente ya viene
-      adentro: no hay que instalar nada más.</li>
-      <li>Tiene una suscripción mensual, unos <strong>20 dólares</strong>. Cada quien
-      la suya. El plan gratuito no incluye al agente.</li>
-      <li>Ve pensando <strong>el nombre de tu sitio</strong>: ese mismo va a ser el
-      nombre de tu carpeta, tu usuaria de GitHub y tu dirección. Sólo letras y números
-      —sin acentos, sin espacios y sin guion bajo, que GitHub no lo acepta—. En esta
-      guía el ejemplo es <span class="nombre">profelety</span>.</li>
+      — la de escritorio. Tiene una suscripción mensual, unos <strong>20 dólares</strong>;
+      el plan gratuito no incluye al agente.</li>
+      <li>Son <strong>dos partes</strong>, una por sesión: primero armas tu aula en tu
+      computadora y después la subes a internet.</li>
     </ul>
-
   </div>
 
-  <!-- ══════════ 1 ══════════ -->
+  <div class="parte">
+    <span class="parte-num">Parte 1 de 2</span>
+    <h2>Abrir tu aula</h2>
+    <p>De la carpeta vacía a tu aula armada en tu computadora: el agente, los colores, el menú, tu primer tema.</p>
+  </div>
+
   <section class="paso">
     <div class="paso-head">
       <span class="paso-num">1</span>
-      <h2>La carpeta en el escritorio</h2>
+      <h2>Abre Claude y crea tu carpeta</h2>
     </div>
-
-    <p>Crea una carpeta en tu escritorio y ponle <strong>el nombre que pensaste para
-    tu sitio</strong> — en el ejemplo, <span class="nombre">profelety</span>.
-    Ahí van a vivir todos los archivos de tu página.
-    <strong>Eso es tu proyecto.</strong></p>
-
-    <p>Ahora abre la app de <strong>Claude</strong> en tu computadora y entra a la
-    pestaña <strong>Code</strong>: ésa es la que trabaja con tus archivos. Te va a pedir que escojas una carpeta — escoge la que
-    acabas de crear.</p>
-
-    <p>Es lo más importante de este paso: <strong>el agente sólo ve la carpeta que le
-    señalaste.</strong> Si le das otra, va a escribir en otra.</p>
-
-    <p>Cada vez que quieras trabajar en tu página, el movimiento es el mismo: abrir
-    la app en esa carpeta. Siempre esa.</p>
-
-    <div class="atoron">
-      <p>La primera vez, tu computadora va a preguntarte si le das permiso al agente
-      para ver tus archivos. Hay que decirle que sí — sin ese permiso no puede
-      escribir nada y todo lo demás se queda parado.</p>
-    </div>
+    <p>Abre la app de <strong>Claude</strong> y entra a la pestaña <strong>Code</strong>.</p>
+    <p>En el <strong>Escritorio</strong>, crea una carpeta con el nombre de tu aula (por
+    ejemplo, <em>Aula de Matemáticas</em>). Puedes cambiarlo después. <strong>Esta carpeta es
+    tu sitio</strong>, y adentro cada materia tendrá su subcarpeta. No tienes que crearlas tú:
+    el agente las arma conforme las vayas agregando.</p>
+    <p>En Claude, elige esa carpeta para trabajar. Todo lo que haga el agente va a quedar ahí
+    adentro.</p>
   </section>
 
-  <!-- ══════════ 2 ══════════ -->
   <section class="paso">
     <div class="paso-head">
       <span class="paso-num">2</span>
-      <h2>El contexto</h2>
+      <h2>Que el agente arme su casa</h2>
     </div>
-
-    <p>Antes de pedirle nada, hay que decirle quién eres y qué estás haciendo. Eso es
-    el contexto, y vive en un archivo que se llama <strong>CLAUDE.md</strong>. Se lo
-    <strong>dictas con tus palabras</strong> y él lo guarda ahí.</p>
-
-    <p>Este es el ejemplo. Lo que va <span class="br">en rosa</span> lo cambias por lo
-    tuyo; lo que va <span class="tq">en turquesa</span> no se escribe, es para que lo
-    pienses. Lo demás se dicta tal cual:</p>
-
-    <div class="contexto">
-
-      <div class="ctx-bloque">
-        <h4>Quién soy</h4>
-        <p class="ctx-que">Quién eres y qué das.</p>
-        <p><span class="br">Soy Lety, profesora de matemáticas a nivel
-        bachillerato.</span> No soy técnica: nunca he hecho una página web ni sé
-        programar.</p>
-      </div>
-
-      <div class="ctx-bloque">
-        <h4>Qué es esto</h4>
-        <p class="ctx-que">Para qué es el sitio y qué quieres que encuentren tus
-        alumnos.</p>
-        <p><span class="br">Es mi sitio de clase. Quiero que mis alumnos lo abran desde
-        su celular y encuentren el tema que estamos viendo.</span></p>
-      </div>
-
-      <div class="ctx-bloque">
-        <h4>Cómo está armada la carpeta</h4>
-        <p class="ctx-que">Qué hay en tu carpeta y para qué sirve cada cosa. El primer
-        día está vacía y se llena sola.</p>
-        <p>Por ahora está vacía. Conforme vayamos creando archivos, anota aquí qué es
-        cada uno y para qué sirve, para que la próxima vez que abramos ya sepas dónde
-        está todo.</p>
-      </div>
-
-      <div class="ctx-bloque">
-        <h4>Cómo quiero que me hables</h4>
-        <p class="ctx-que">Cómo quieres que el agente se dirija a ti y trabaje contigo.
-        ¿Corto o con detalle? ¿Te pregunta antes de hacer algo, o lo hace y luego te
-        cuenta? ¿Te avisa cuando algo no se puede? Éste es el único bloque sin ejemplo:
-        es a propósito, para que lo escribas con tus palabras.</p>
-      </div>
-
-      <div class="ctx-bloque">
-        <h4>Qué no hacer</h4>
-        <p class="ctx-que">Los límites: lo que no quieres que haga nunca.</p>
-        <p>No inventes contenido para rellenar: si algo todavía no existe, márcalo
-        como pendiente y dímelo. No borres nada sin preguntarme. No cambies páginas
-        que ya di por buenas. <span class="br">No pongas nombres de mis alumnos en
-        ningún lado.</span></p>
-      </div>
-
-    </div>
-
-    <p>Cuando termines de dictárselo, dile esto:</p>
-
-    <p class="cita">«Guarda esto en un archivo que se llame CLAUDE.md, en mi carpeta,
-    y léelo cada vez que empecemos a trabajar aquí.»</p>
-
-    <p class="ctx-nota">Se escribe así, con mayúsculas y con “a”: <strong>CLAUDE.md</strong>.
-    Es el único archivo de toda la guía que te conviene conocer por su nombre. Vive en
-    tu carpeta, es texto normal, y lo puedes abrir y editar tú cuando quieras. El agente
-    lo lee solo al empezar cada sesión.</p>
+    <p>Antes de la página, el agente necesita tres archivos para no empezar de cero cada vez que
+    lo abras:</p>
+    <ul>
+      <li><strong>CLAUDE.md</strong>: quién eres, qué materia das, cómo te gusta trabajar. Es su manual.</li>
+      <li><strong>bitacora.md</strong>: lo que se hizo y se decidió, con fecha. Es la memoria.</li>
+      <li><strong>Pendientes.md</strong>: lo que queda por hacer.</li>
+    </ul>
+    <p class="cita">«Soy docente de <span class="br">[materia]</span> en el IEMS. En esta carpeta vamos a construir mi aula invertida, una página web para mis estudiantes. Esta carpeta es mi sitio: cada materia que doy va en su propia subcarpeta. Antes de empezar, crea un CLAUDE.md con lo que necesitas saber de mí (hazme preguntas), una bitacora.md y un Pendientes.md.»</p>
   </section>
 
-  <!-- ══════════ 3 ══════════ -->
   <section class="paso">
     <div class="paso-head">
       <span class="paso-num">3</span>
-      <h2>Tu página</h2>
+      <h2>Elige la cara de tu aula</h2>
     </div>
-
-    <p>Ahora sí, pídele tu página. Con tus palabras, como se lo dirías a alguien:</p>
-
-    <p class="cita">
-    «Hazme una página con el tema de <span class="br">[fracciones]</span>: una
-    explicación corta, tres ejemplos resueltos y cinco ejercicios con sus respuestas.
-    Que se vea bien en celular.»</p>
-
-    <p>Y si ya tienes material hecho —tus apuntes, una lista de ejercicios, el examen
-    del semestre pasado, fotos de lo que escribiste en el pizarrón— no empieces de
-    cero: <strong>mete esos archivos en tu carpeta</strong> y dile que se base en ellos.
-    Los lee y arma la página con tu contenido, no con contenido inventado.</p>
-
-    <p>El agente escribe la página —un archivo HTML, que es el idioma en el que están
-    hechas todas las páginas web— y te dice cómo verla. Ábrela y <strong>léela como
-    si fueras tu alumno</strong>. Lo que no te guste, se lo dices igual de simple: «esto
-    no se entiende», «los ejercicios están muy fáciles», «la letra está chica»,
-    «quítale ese color». Lo corrige las veces que haga falta y no se cansa.</p>
-
-    <p>Quédate en este paso hasta que la página te guste de verdad. Es la parte
-    divertida y es donde más se aprende a hablarle.</p>
-
-    <p>Ya tienes tu página — pero vive nada más en tu computadora. Nadie más puede
-    verla todavía. Eso es lo que arreglan los dos pasos que siguen.</p>
+    <p>Antes de llenar temas, decide cómo se va a ver. Pídele al agente que te muestre opciones
+    y escoge; no tienes que saber de diseño, solo decir qué te gusta.</p>
+    <ul>
+      <li><strong>Paleta de colores:</strong> que te proponga tres o cuatro y te las enseñe
+      aplicadas. Puedes partir de algo tuyo: los colores de tu materia, de tu salón, de una
+      imagen que te guste.</li>
+      <li><strong>Letra:</strong> una para títulos y otra para el texto. Que se lea bien en el celular.</li>
+    </ul>
+    <p class="cita">«Muéstrame tres paletas de colores distintas para mi aula, cada una aplicada a una página de muestra, para que pueda elegir. Mi materia es <span class="br">[materia]</span> y me gustaría que se sintiera <span class="br">[cercana, seria, alegre…]</span>.»</p>
   </section>
 
-  <!-- ══════════ 4 ══════════ -->
   <section class="paso">
     <div class="paso-head">
       <span class="paso-num">4</span>
-      <h2>La cuenta de GitHub</h2>
+      <h2>Arma el esqueleto: cabecera, menú y pie</h2>
     </div>
-
-    <p>GitHub es el lugar donde va a vivir tu página para que el mundo la vea.
-    Es gratis.</p>
-
-    <p>Crea tu cuenta con <strong>el nombre que ya pensaste</strong>. Ese nombre de
-    usuaria es tu dirección: si te registras como <span class="nombre">profelety</span>,
-    tu página va a vivir en <span class="nombre">profelety.github.io</span> — con punto
-    io, no punto com.</p>
-
+    <p>Son las partes que se repiten en todas las páginas de tu aula. Decídelas una vez y ya quedan.</p>
+    <ul>
+      <li><strong>Cabecera:</strong> el nombre de tu aula, tu nombre, la materia. ¿Lleva imagen o logotipo?</li>
+      <li><strong>Menú:</strong> las secciones. Por ejemplo: Inicio, Temas, Actividades, Sobre mí.
+      Pon <strong>todas las materias que das</strong>, aunque hoy solo vayas a trabajar una: las
+      que todavía no armas quedan marcadas como «Próximamente». Empieza por la que estás dando
+      este semestre.</li>
+      <li><strong>Pie de página:</strong> plantel, ciclo escolar, un contacto si quieres.</li>
+    </ul>
+    <p>Para ver cómo va, haz doble clic en <strong>index.html</strong> desde tu carpeta: se abre
+    en el navegador. Revísala también en el celular o haciendo angosta la ventana; tus
+    estudiantes la van a abrir ahí.</p>
   </section>
 
-  <!-- ══════════ 5 ══════════ -->
   <section class="paso">
     <div class="paso-head">
       <span class="paso-num">5</span>
-      <h2>El repositorio</h2>
+      <h2>Tu primer tema</h2>
     </div>
-
-    <p>Un repositorio es la copia de tu carpeta que vive dentro de GitHub. Esa copia
-    es la que el mundo ve.</p>
-
-    <h3 class="quien">Lo que haces tú</h3>
-
-    <p>En GitHub, crea un repositorio nuevo. Sólo dos cosas importan: que se llame
-    <strong>exactamente igual que tu dirección</strong> —o sea
-    <span class="nombre">profelety.github.io</span>, con el punto io incluido— y que
-    sea <strong>público</strong>.</p>
-
-
-    <h3 class="quien">Lo que le pides al agente</h3>
-
-    <p class="cita">«Conecta mi carpeta con mi repositorio
-    <span class="nombre">profelety.github.io</span> y publica lo que hay dentro.
-    Avísame cuando ya se pueda abrir.»</p>
-
-    <div class="atoron">
-      <p>En algún momento el agente te va a pedir que autorices GitHub desde el
-      navegador. Es el único paso que no puede hacer solo: necesita que tú digas
-      que sí. Puede que también te pida instalar algo que le falta a tu computadora;
-      acéptalo.</p>
-    </div>
-
+    <p>Escoge <strong>un</strong> tema que se atore en clase y llévalo a una página. No el curso
+    entero: uno. Trae tu material —tus notas, fotos de un ejercicio, la hoja que ya usas— y
+    pídele al agente que lo convierta en algo que el estudiante <em>haga</em>, no solo que lea.</p>
+    <p class="cita">«Este es mi material del tema <span class="br">[tema]</span> (te mando fotos). Quiero una página donde el estudiante trabaje el tema antes de la clase: que explore, que conteste, que se equivoque y vea por qué.»</p>
   </section>
 
-  <!-- ══════════ CIERRE ══════════ -->
+  <section class="paso">
+    <div class="paso-head">
+      <span class="paso-num">6</span>
+      <h2>Antes de cerrar</h2>
+    </div>
+    <p>Pídele al agente que anote en la bitácora lo que hicieron y lo que sigue. Así la próxima
+    vez retoma solo. Lo que quedó a medias va a los pendientes.</p>
+    <p>Tu aula todavía vive solo en tu computadora, y está bien. Subirla a internet es la
+    parte 2, en la siguiente sesión.</p>
+    <div class="atoron">
+      <p><strong>Tarea para la siguiente sesión: crea tu cuenta de GitHub.</strong> Entra a <a href="https://github.com" target="_blank" rel="noopener">github.com</a> y crea tu cuenta; son unos minutos. Piensa con calma el <strong>nombre de usuario</strong>, porque va a ser la dirección de tu aula (<span class="nombre">MateConAna</span> → <span class="nombre">mateconana.github.io</span>).</p>
+    </div>
+  </section>
+
+  <section class="paso">
+    <h3 class="quien">Para trabajar con tu agente</h3>
+    <ul>
+      <li><strong>Pide en lenguaje simple.</strong> Describe lo que quieres ver como se lo explicarías a una colega.</li>
+      <li><strong>Manda fotos.</strong> Un ejercicio de tu cuaderno, una hoja de trabajo, una página que te guste.</li>
+      <li><strong>Sé específica.</strong> «Quiero el título más grande» llega más rápido que «mejóralo».</li>
+      <li><strong>Tu avance queda guardado</strong> en la bitácora y en CLAUDE.md: la próxima vez retoma donde se quedaron.</li>
+    </ul>
+  </section>
+
+  <div class="parte">
+    <span class="parte-num">Parte 2 de 2</span>
+    <h2>Publicar tu aula</h2>
+    <p>Tu aula ya existe en tu computadora; ahora la subimos a internet con GitHub. Sirve igual en Mac que en Windows.</p>
+  </div>
+
+  <p><strong>La idea:</strong> se prepara una sola vez, y de ahí en adelante tú cambias lo que
+  quieras con tu agente y cuando esté listo le dices <strong>«súbelo»</strong>. Él se encarga de
+  subirlo a internet. La preparación toma una sesión; la haces con tu agente, que te va guiando.</p>
+
+  <section class="paso">
+    <div class="paso-head">
+      <span class="paso-num">1</span>
+      <h2>La cuenta de GitHub</h2>
+    </div>
+    <p>¿Ya la creaste de tarea? Pasa al paso 2. Este paso es <strong>tuyo, no del agente</strong>:
+    la cuenta lleva tu correo y tu contraseña. Entra a
+    <a href="https://github.com" target="_blank" rel="noopener">github.com</a> y crea una cuenta.
+    Piensa bien el <strong>nombre de usuario</strong>: va a ser la dirección de tu aula. Si te
+    llamas <span class="nombre">MateConAna</span>, tu página será
+    <span class="nombre">mateconana.github.io</span>.</p>
+    <p>Si el nombre que querías ya está ocupado, pruébale una variante; es normal.</p>
+    <div class="atoron">
+      <p><strong>Solo crea la cuenta.</strong> Al terminar, GitHub te va a ofrecer crear cosas nuevas: no le muevas. El espacio donde vivirá tu aula (se llama <em>repositorio</em>) lo crea tu agente en el paso 4.</p>
+    </div>
+  </section>
+
+  <section class="paso">
+    <div class="paso-head">
+      <span class="paso-num">2</span>
+      <h2>Las dos herramientas del agente</h2>
+    </div>
+    <p>Para subir tu aula, el agente usa dos programas: <strong>Git</strong> (guarda las
+    versiones) y <strong>GitHub CLI</strong> (habla con tu cuenta). Pídele que revise si ya los
+    tienes y que te diga cómo instalar lo que falte.</p>
+    <p class="cita">«Quiero que tú te encargues de subir mi aula a GitHub. Revisa si en esta computadora tengo Git y GitHub CLI (gh). Si falta alguno, guíame paso a paso para instalarlo; yo le doy clic a lo que haga falta.»</p>
+    <ul>
+      <li><em>En Windows:</em> se instalan con sus instaladores normales
+      (<a href="https://git-scm.com" target="_blank" rel="noopener">git-scm.com</a> y
+      <a href="https://cli.github.com" target="_blank" rel="noopener">cli.github.com</a>),
+      dándole <em>Siguiente</em> a todo.</li>
+      <li><em>En Mac:</em> Git viene con las «herramientas de desarrollador» de Apple; el agente
+      te dirá cómo pedirlas. GitHub CLI se baja de
+      <a href="https://cli.github.com" target="_blank" rel="noopener">cli.github.com</a>
+      (el instalador .pkg).</li>
+    </ul>
+    <div class="atoron">
+      <p><strong>En Mac: si la instalación de las herramientas de Apple falla,</strong> no es tu computadora: a veces el servidor de Apple está caído. Inténtalo otro día, o usa el plan B de abajo mientras tanto.</p>
+    </div>
+  </section>
+
+  <section class="paso">
+    <div class="paso-head">
+      <span class="paso-num">3</span>
+      <h2>Conecta a tu agente con tu cuenta (una sola vez)</h2>
+    </div>
+    <p>El agente te va a dar un <strong>código de 8 letras</strong> y abrirá tu navegador en
+    GitHub. Tú entras con tu cuenta, pegas el código y autorizas. Tu contraseña la escribes tú en
+    GitHub, nunca en el chat.</p>
+    <p class="cita">«Conéctate a mi cuenta de GitHub con gh auth login, por el navegador, y deja Git configurado para usar esa sesión.»</p>
+  </section>
+
+  <section class="paso">
+    <div class="paso-head">
+      <span class="paso-num">4</span>
+      <h2>Tu agente publica tu aula</h2>
+    </div>
+    <p class="cita">«Crea el repositorio público tuusuario.github.io con lo que hay en esta carpeta y súbelo, para que mi aula quede en https://tuusuario.github.io»</p>
+    <p>En unos minutos tu aula está en <span class="nombre">tuusuario.github.io</span> (tu
+    usuario, en minúsculas). Tiene que ser <strong>público</strong> para que la página sea gratis.</p>
+    <div class="atoron">
+      <p><strong>En Mac: si sale un aviso de que no se puede acceder a la carpeta del Escritorio,</strong> dale <em>Permitir</em>. Si ya le diste «No permitir», se arregla en Configuración del Sistema → Privacidad y seguridad → Archivos y carpetas.</p>
+    </div>
+  </section>
+
+  <section class="paso">
+    <div class="paso-head">
+      <span class="paso-num">5</span>
+      <h2>Que se quede como regla</h2>
+    </div>
+    <p>Para que tu agente lo recuerde siempre, pídele que lo anote en su manual:</p>
+    <p class="cita">«Anota en el CLAUDE.md: cuando yo diga «súbelo», guardas los cambios con una descripción corta en español, los subes a GitHub y me confirmas cuando la página ya esté actualizada. Nunca subas nada sin que yo lo pida.»</p>
+  </section>
+
+  <section class="paso">
+    <h3 class="quien">Plan B: GitHub Desktop</h3>
+    <p>Si en tu computadora no se pudo instalar Git o GitHub CLI, puedes subir tu aula tú misma
+    con <strong>GitHub Desktop</strong>
+    (<a href="https://desktop.github.com" target="_blank" rel="noopener">desktop.github.com</a>),
+    un programa con botones que no necesita nada más.</p>
+    <ol>
+      <li><em>En Mac:</em> mueve la app a <strong>Aplicaciones</strong> antes de abrirla.</li>
+      <li>Inicia sesión, luego <strong>File → Add Local Repository…</strong> → tu carpeta →
+      <strong>Create Repository</strong>.</li>
+      <li><strong>Publish repository</strong> con el nombre <span class="nombre">tuusuario.github.io</span>
+      y <strong>desmarcando</strong> <em>Keep this code private</em>.</li>
+      <li>Para cada cambio: escribe qué cambió en <strong>Summary</strong>,
+      <strong>Commit to main</strong> y luego <strong>Push origin</strong>.</li>
+    </ol>
+    <p>Cuando ya funcionen Git y GitHub CLI, tu agente puede tomar la estafeta desde el paso 3.</p>
+  </section>
+
   <section class="cierre">
-    <h2>Ya está</h2>
-
-    <p>Abre tu dirección desde el celular. Si ahí está tu tema, terminaste.</p>
-
-    <p>De aquí en adelante el movimiento siempre es el mismo: abres la app en tu
-    carpeta, le dices qué quieres cambiar, y le pides que lo publique. Nada más
-    que eso.</p>
-
-
+    <h2>De aquí en adelante</h2>
+    <ol>
+      <li>Pídele al agente el cambio que quieras.</li>
+      <li>Revísalo en tu computadora (doble clic en index.html).</li>
+      <li>Cuando te guste, dile: <strong>«súbelo»</strong>.</li>
+      <li>Espera de 1 a 3 minutos y recarga tu página.</li>
+    </ol>
     <p class="firma">Lety · lety2e.com</p>
   </section>
 
