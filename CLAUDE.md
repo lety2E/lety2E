@@ -29,11 +29,11 @@
 - **Cuidado con duplicados:** ocasionalmente una sección tiene contenido copy/paste del tema previo (header dice X pero el `\textbf{...}` interno dice Y). Si discrepa, **avisar a Lety y saltar el tema** hasta que ella lo arregle. Nunca inventar para llenar.
 
 ### 2. Capturas — referencia visual
-- Ruta: `~/Desktop/☁️ Nube-Mac/capturas/matematicas N/M tema-nombre/`
+- Ruta: `~/Desktop/capturas/matematicas N/M tema-nombre/`
 - Si el doc LaTeX y la captura difieren, **prevalece el LaTeX**.
 
 ### 3. CSV de videos de YouTube
-- Ruta: `~/Desktop/☁️ Nube-Mac/capturas/lista_videos_youtube.csv`
+- Ruta: `~/Desktop/capturas/lista_videos_youtube.csv`
 - Si un tema no aparece: **omitir sección de Video** (no es error).
 - Lety pasa videos nuevos directo en chat. **No hacer fetch a `letymath.com`** (bloqueado, desperdicia tokens).
 
@@ -551,7 +551,7 @@ Verificar en **incógnito**. Si el favicon no aparece: `lety2e.com/favicon.svg?v
 | Tema duplicado en doc | Saltar y avisar |
 | Fórmulas | Pre-renderizadas antes de publicar (las páginas no cargan KaTeX JS) |
 | Doc fuente | Drive `1hTzKA2zC98FwfSiR9nR21gExC2hT4nrea-BANrbkd4I` |
-| Videos | CSV en `~/Desktop/☁️ Nube-Mac/capturas/lista_videos_youtube.csv` |
+| Videos | CSV en `~/Desktop/capturas/lista_videos_youtube.csv` |
 
 ---
 

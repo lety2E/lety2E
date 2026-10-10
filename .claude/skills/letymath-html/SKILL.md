@@ -35,7 +35,7 @@ Si el usuario ya te dio el contenido directo (pegado o en archivo), usar ese.
 ### 2. Video (si aplica)
 
 No todos los temas tienen video:
-1. Buscar el slug del tema en `~/Desktop/☁️ Nube-Mac/capturas/lista_videos_youtube.csv`.
+1. Buscar el slug del tema en `~/Desktop/capturas/lista_videos_youtube.csv`.
 2. Si no aparece, preguntar al usuario: "¿Este tema tiene video de YouTube? Si sí, pásame el link." (Lety a veces los pasa directo en el chat.)
 3. Si no hay video, omitir la sección de Video — no es error.
 

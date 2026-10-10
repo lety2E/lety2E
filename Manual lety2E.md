@@ -46,7 +46,7 @@ Habrá temas que **no** vengan de capturas, sino que los hagamos **desde cero**
 entre los dos. Mismo formato y mismo cierre (Claude arma el HTML y lo sube).
 
 > Fuentes de verdad para Math: doc en Drive (manda) · capturas en
-> `~/Desktop/☁️ Nube-Mac/capturas/` · CSV de videos. Si el doc y la captura difieren, gana el doc.
+> `~/Desktop/capturas/` · CSV de videos. Si el doc y la captura difieren, gana el doc.
 
 ---
 
