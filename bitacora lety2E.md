@@ -5,6 +5,10 @@
 
 ---
 
+## 2026-10-10 — Capturas de Math se mudan a ☁️ Nube-Mac
+
+`~/Desktop/capturas` ahora vive en `~/Desktop/☁️ Nube-Mac/capturas` (para despejar el escritorio). Ruta actualizada en CLAUDE.md, Manual, Pendientes y la skill letymath-html.
+
 ## 2026-10-09 — Pie de página: canal de WhatsApp de lety2E
 
 Botón de WhatsApp junto al de Facebook en la barra de abajo (`footer.js`), en todas las páginas. Es el canal del sitio; el de Math sigue en su página.

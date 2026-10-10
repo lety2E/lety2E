@@ -3,12 +3,12 @@
 **Matemáticas 3: faltan 3 temas** — el 8-sep-2026 se publicaron **la ecuación general de la elipse
 y su regreso**, así que el curso va en **20 de 23**. Faltan **ecuación general de la hipérbola**
 (escrita ya, sin publicar por decisión de Lety), **regreso de la hipérbola** e **historia**: las
-carpetas 21 a 23 de `~/Desktop/capturas/matemáticas 3/` están **vacías**. En cuanto Lety suba esas capturas se arman igual que los demás; para las cónicas ya están
+carpetas 21 a 23 de `~/Desktop/☁️ Nube-Mac/capturas/matemáticas 3/` están **vacías**. En cuanto Lety suba esas capturas se arman igual que los demás; para las cónicas ya están
 los generadores de SVG en `Recursos lety2E/` (circunferencias y parábolas sirven de molde para la
 elipse y la hipérbola). El índice del curso sigue con su `.proximamente-nota` hasta entonces.
 
 **Migrar Matemáticas 4** — es el único curso que queda. Hay que ver primero si tiene capturas
-(`~/Desktop/capturas/matemáticas 4/` existe) o si Lety pasa el LaTeX. El flujo de Math 3 —capturas →
+(`~/Desktop/☁️ Nube-Mac/capturas/matemáticas 4/` existe) o si Lety pasa el LaTeX. El flujo de Math 3 —capturas →
 verificar aritmética → armar con `Recursos lety2E/generador-paginas-math3.py`— sirve tal cual.
 
 **Math 5 se queda como está** — letymath.com tiene un tema más, *"Dx. Con x en el
