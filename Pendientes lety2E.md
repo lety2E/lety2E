@@ -1,6 +1,6 @@
 # Pendientes — lety2E
 
-**Mudar `~/Desktop/capturas` a `☁️ Nube-Mac`** — cuando terminemos Math 3 y Math 4 (decisión de Lety, 10-oct-2026: en iCloud pueden tardar en abrir). Al moverla, actualizar la ruta en CLAUDE.md, el Manual, estos Pendientes y la skill letymath-html.
+**Mudar `~/Desktop/capturas` a `☁️ Nube-Mac`** — cuando estén publicados **todos** los temas de todos los cursos (decisión de Lety, 10-oct-2026: en iCloud pueden tardar en abrir). Al moverla, actualizar la ruta en CLAUDE.md, el Manual, estos Pendientes y la skill letymath-html.
 
 **Matemáticas 3: faltan 3 temas** — el 8-sep-2026 se publicaron **la ecuación general de la elipse
 y su regreso**, así que el curso va en **20 de 23**. Faltan **ecuación general de la hipérbola**
