@@ -333,10 +333,7 @@ directorio ligero y su pestaña Recursos **enlaza hacia `lety2e.com/docencia`**.
 - **Excepción (5-oct-2026, decisión de Lety):** la guía de aulas está **doble**. Lety la siente suya (la hizo con Claude) y del grupo a la vez: `docencia/abrir-tu-aula.html` y `publicar-tu-aula.html` son copia de las dos partes de GICAIA (mismos nombres). **La principal es la de GICAIA**: cuando Lety la cambie allá, copiar el cambio aquí.
 - `docencia/index.html` no se borra ni se renombra: hay un enlace externo apuntándole.
   GitHub Pages redirige `/docencia` → `/docencia/`, así que el enlace sin barra final funciona.
-- El enlace es de **ida y vuelta**: el índice de Docencia devuelve a GICAIA con la card
-  `.enlace-grupo` — card clara y baja, con **contorno magenta completo** (las demás sólo llevan
-  filo arriba) y flecha ↗ a la derecha. Se ve distinta a propósito porque lleva fuera del sitio,
-  pero sin fondo oscuro: se probó con `--dark` y a Lety no le gustó. Texto corto, dos renglones.
+- El enlace es **de ida solamente** (9-oct-2026, decisión de Lety): GICAIA enlaza hacia acá, pero lety2E ya no lleva tarjeta hacia GICAIA — el sitio es personal y la tarjeta se sentía grupal. Lo único que queda del grupo es el crédito discreto al pie de las dos partes de la guía. No volver a poner la card `.enlace-grupo` (se borró también su CSS).
 - **Ojo con el texto del enlace allá:** en la pestaña Recursos de GICAIA el enlace se llama
   *"Aula propia — la guía para arrancar"*, o sea promete la guía, no el índice de la sección.
   Mientras la guía siga en `próximamente`, quien llega de allá encuentra menos de lo que

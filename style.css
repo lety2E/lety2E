@@ -1721,63 +1721,6 @@ body[data-section="relatos"].relato-morado .topic-header h1 {
 }
 
 /* ================================================
-   ENLACE AL GRUPO (Docencia → GICAIA)
-   Card deliberadamente distinta a las demás: fondo
-   oscuro (la misma superficie del nav y el footer)
-   porque lleva FUERA del sitio. Es una relación de
-   ida y vuelta — GICAIA enlaza de regreso hacia acá.
-   ================================================ */
-.enlace-grupo {
-  display: flex;
-  align-items: center;
-  gap: 1.25rem;
-  background: var(--bg-card);
-  border: 2px solid var(--M);
-  border-radius: 14px;
-  padding: 1.25rem 1.5rem;
-  margin-top: 2rem;
-  text-decoration: none;
-  transition: transform .25s ease, box-shadow .25s ease, border-color .25s;
-}
-.enlace-grupo:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 28px rgba(255, 0, 170, 0.16);
-  border-color: var(--T);
-}
-.enlace-grupo-txt { flex: 1; min-width: 0; }
-.enlace-grupo h3 {
-  font-family: var(--font-display);
-  font-style: italic; font-weight: 900;
-  font-size: 1.4rem;
-  color: var(--M);
-  margin: 0;
-  line-height: 1.2;
-  transition: color .2s;
-}
-.enlace-grupo:hover h3 { color: var(--T); }
-.enlace-grupo p {
-  margin: 0.15rem 0 0;
-  font-size: 0.9rem;
-  color: var(--text-2);
-  line-height: 1.45;
-}
-.enlace-grupo-flecha {
-  flex-shrink: 0;
-  font-size: 1.3rem;
-  color: var(--M);
-  transition: color .2s, transform .25s ease;
-}
-.enlace-grupo:hover .enlace-grupo-flecha {
-  color: var(--T);
-  transform: translate(3px, -3px);
-}
-
-@media (max-width: 600px) {
-  .enlace-grupo { padding: 1.1rem 1.2rem; gap: 0.9rem; }
-  .enlace-grupo h3 { font-size: 1.25rem; }
-}
-
-/* ================================================
    ENLACE AL CANAL DE WHATSAPP (índices de Math)
    A propósito discreto: una pastilla al pie del
    índice del curso, para que no compita con las

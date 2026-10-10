@@ -5,6 +5,10 @@
 
 ---
 
+## 2026-10-09 — Docencia: fuera la tarjeta de GICAIA
+
+- Decisión de Lety: su página es personal y la tarjeta se sentía grupal. Se quitó la card y su CSS; se queda el crédito al pie de la guía. GICAIA sigue enlazando hacia acá.
+
 ## 2026-10-09 — Apuntes: se retira el simulador COMIPEMS
 
 - Decisión de Lety: fuera de lety2E. Copia guardada en `~/Downloads/comipems-simulador/`. El grupo «Ingreso» queda sólo con la tarjeta de UNAM.
