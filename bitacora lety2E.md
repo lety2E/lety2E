@@ -5,6 +5,10 @@
 
 ---
 
+## 2026-10-09 — Pie de página: canal de WhatsApp de lety2E
+
+Botón de WhatsApp junto al de Facebook en la barra de abajo (`footer.js`), en todas las páginas. Es el canal del sitio; el de Math sigue en su página.
+
 ## 2026-10-09 — Docencia: fuera la tarjeta de GICAIA
 
 - Decisión de Lety: su página es personal y la tarjeta se sentía grupal. Se quitó la card y su CSS; se queda el crédito al pie de la guía. GICAIA sigue enlazando hacia acá.

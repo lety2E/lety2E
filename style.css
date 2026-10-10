@@ -776,6 +776,10 @@ body[data-section="home"] main {
   color: var(--section-color);
   font-size: 0.85rem;
 }
+.footer-socials {
+  display: flex;
+  gap: .6rem;
+}
 .footer-social {
   display: flex;
   align-items: center;
