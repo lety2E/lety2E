@@ -4,6 +4,11 @@
 # El generador de exámenes sí va al repo: es la maquinaria de cuadros/
 # y su única copia estaría en la Mac (8-sep-2026).
 !cuadros/generador/*.py
+# Scripts de Recursos lety2E: solo vivían en la Mac/iCloud (10-oct-2026).
+!Recursos lety2E/generador-paginas-math4.py
+!Recursos lety2E/hoja-practica-generador.py
+!Recursos lety2E/puntos-recta-svg-math.py
+!Recursos lety2E/subset-fuentes.py
 *.csv
 
 # Cowork / Claude Code: generados por sesión local, no van al repo
