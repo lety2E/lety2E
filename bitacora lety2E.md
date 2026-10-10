@@ -5,6 +5,10 @@
 
 ---
 
+## 2026-10-09 — Psicología: los conceptos de las cuatro materias
+
+- Copiados de sus artefactos de claude.ai (Sistema, Filogenia y Ontogenia, Ética, Metodología) a `apuntes/psicologia/` con la barra `.l2e-volver`. No se sincronizan: si cambia el artefacto, hay que volver a copiarlo.
+
 ## 2026-10-09 — Apuntes: nace la subsección Psicología
 
 - `apuntes/psicologia/` con índice vacío (nota de próximamente) y su grupo en el índice de Apuntes. Decisión de Lety: por ahora sus notas y audios de la carrera son apuntes; si luego genera material propio, se sube a sección aparte. Docencia se queda como sección propia (le habla a colegas, no a alumnos).
