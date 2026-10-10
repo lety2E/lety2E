@@ -5,6 +5,10 @@
 
 ---
 
+## 2026-10-09 — Apuntes: nace la subsección Psicología
+
+- `apuntes/psicologia/` con índice vacío (nota de próximamente) y su grupo en el índice de Apuntes. Decisión de Lety: por ahora sus notas y audios de la carrera son apuntes; si luego genera material propio, se sube a sección aparte. Docencia se queda como sección propia (le habla a colegas, no a alumnos).
+
 ## 2026-10-05 — Docencia: la guía de aulas queda doble con GICAIA
 
 - Decisión de Lety: la guía vive en los dos lados. La principal es la de GICAIA; al cambiarla allá, se copia a `docencia/abrir-tu-aula.html`. Crédito al grupo al pie. Quedó anotado en `CLAUDE.md` (§ Docencia).
