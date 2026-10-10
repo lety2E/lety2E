@@ -34,11 +34,9 @@
     }
     @media (prefers-reduced-motion: reduce) { .practica-barra { transition: none; } }
 
-    /* ── Video de cómo evalúo (facade .yt-lite de footer.js) ── */
-    .eval-video { max-width: 720px; margin: 2.5rem auto 2rem; }
-    .eval-video h2 { font-family: var(--font-display); font-size: 1.3rem; margin: 0 0 .3rem; color: var(--P); }
-    .eval-video p { margin: 0 0 .8rem; color: var(--text-2); font-size: .95rem; }
-    .video-wrapper { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: var(--r-md); background: #000; }
+    /* ── Enlace al video de cómo evalúo (abre YouTube, no se incrusta) ── */
+    .practica-barra.eval-enlace { margin: 1.5rem 0 -1rem; border-left-color: var(--M); }
+    .eval-enlace .practica-barra-icono svg { stroke: var(--M); }
   </style>
 </head>
 <body data-section="math">
@@ -62,11 +60,16 @@
       <span class="practica-barra-flecha" aria-hidden="true">→</span>
     </a>
 
-    <section class="eval-video">
-      <h2>Así te evalúo</h2>
-      <p>Cómo se califica el curso y qué cuenta en tu calificación.</p>
-      <div class="video-wrapper"><button type="button" class="yt-lite" data-yt="sNI5g9UfR_k" data-title="Mi metodología de evaluación" aria-label="Reproducir video: Mi metodología de evaluación"></button></div>
-    </section>
+    <a href="https://www.youtube.com/watch?v=sNI5g9UfR_k" target="_blank" rel="noopener" class="practica-barra eval-enlace">
+      <span class="practica-barra-icono" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M10 8.5l5 3.5-5 3.5z"/></svg>
+      </span>
+      <span class="practica-barra-txt">
+        <strong>Así te evalúo</strong>
+        <span>Video · Cómo se califica el curso y qué cuenta en tu calificación</span>
+      </span>
+      <span class="practica-barra-flecha" aria-hidden="true">↗</span>
+    </a>
     <div class="course-grid">
       <a href="matematicas-1/index.html" class="course-card" style="--card-accent: #4A0080;">
         <span class="card-number">📐</span>
