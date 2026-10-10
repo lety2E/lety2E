@@ -5,6 +5,10 @@
 
 ---
 
+## 2026-10-09 — Apuntes: se retira el simulador COMIPEMS
+
+- Decisión de Lety: fuera de lety2E. Copia guardada en `~/Downloads/comipems-simulador/`. El grupo «Ingreso» queda sólo con la tarjeta de UNAM.
+
 ## 2026-10-09 — Apuntes: Ingreso vuelve a una sola tarjeta
 
 - Se revirtió el cambio que sacaba materias, simulador y temario al índice de Apuntes: Ingreso a licenciatura queda escondido en una tarjeta, igual que Psicología (decisión de Lety).

@@ -468,7 +468,7 @@ Desde el **7-sep-2026 las fórmulas se convierten a HTML aquí**, con
   cada fórmula, así que se puede recuperar para reeditar.
 - Consecuencia: los `.html` de Math pesan ~4x más en disco y sus diffs son ruidosos. Es a
   propósito — lo que importa es lo que baja el alumno, y eso cayó 86%.
-- **No pre-renderizar los simuladores** (`apuntes/unam-simulador/`, `apuntes/comipems-simulador/`):
+- **No pre-renderizar los simuladores** (`apuntes/unam-simulador/`; el de COMIPEMS se retiró el 9-oct-2026 y vive en ~/Downloads/comipems-simulador):
   arman las preguntas con JS desde `data.js`, no tienen fórmulas en el HTML estático y quitarles
   KaTeX las rompe. El script los detecta y los salta solo. Ahí KaTeX se carga **bajo demanda**
   (`cargarKatex()` + `requestIdleCallback`), porque su `<main id="app">` arranca vacío y antes
