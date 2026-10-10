@@ -5,6 +5,10 @@
 
 ---
 
+## 2026-10-09 — Apuntes: Ingreso vuelve a una sola tarjeta
+
+- Se revirtió el cambio que sacaba materias, simulador y temario al índice de Apuntes: Ingreso a licenciatura queda escondido en una tarjeta, igual que Psicología (decisión de Lety).
+
 ## 2026-10-09 — Video «Mi metodología de evaluación» en Math y Docencia
 
 - El mismo video (facade `.yt-lite`) en `math/index.html` («Así te evalúo», para alumnos) y en `docencia/index.html` (grupo «Cómo evalúo», para colegas).
