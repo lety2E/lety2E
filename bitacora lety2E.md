@@ -5,6 +5,10 @@
 
 ---
 
+## 2026-10-31 — Pie de página: canal de YouTube de lety2E
+
+Botón de YouTube (@lety2e) junto a Facebook y WhatsApp en `footer.js`, en todas las páginas. Los canales por sección siguen en sus páginas.
+
 ## 2026-10-09 — Pie de página: canal de WhatsApp de lety2E
 
 Botón de WhatsApp junto al de Facebook en la barra de abajo (`footer.js`), en todas las páginas. Es el canal del sitio; el de Math sigue en su página.
