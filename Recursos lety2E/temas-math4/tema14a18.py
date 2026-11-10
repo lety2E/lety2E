@@ -97,7 +97,7 @@ G.pagina("sucesiones-series", 14, "Sucesiones y series",
           G.seccion("Ejercicios extra", "extra", f'      <p class="enunciado">{PIDE14}</p>\n'
                     + G.grid([card("Bloque 1", [fila14(*e) for e in X14[:5]]), card("Bloque 2", [fila14(*e) for e in X14[5:]])], 2),
                     colapsable=True)],
-         prev=("ecuaciones-exponenciales-logaritmicas.html", "Ecuaciones exponenciales y logarítmicas"),
+         prev=("transformacion-funciones.html", "Transformación de funciones"),
          sig=("notacion-sigma.html", "Notación sigma"), css_extra=CSS)
 print("ok tema 14")
 

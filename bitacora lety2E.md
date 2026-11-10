@@ -5,6 +5,15 @@
 
 ---
 
+## 2026-11-09 (4) — Math 4, tema 13: "Transformación de funciones" con graficador
+
+Primera página de Math con una app adentro (idea de Lety: que el alumno grafique sabiendo la forma). Reemplaza a Desmos de la página vieja.
+
+- **`math/matematicas-4/transformacion-funciones.html`** — apuntes; **Explora** (8 familias, controles de subir/bajar, izquierda/derecha, comprimir/estirar y reflejar); **Práctica** con objetivo (encimar la gráfica morada); **Ejercicios** = la lista de la página vieja, para esbozar en el cuaderno y verificar después; **Evaluación** de 10 reactivos al azar (5 de acomodar dada la regla, 5 de elegir la regla entre cinco), revisada sólo al final, se pasa con 8.
+- Decisiones de Lety: los reactivos de "encimar" son práctica, no examen (se pueden tantear); el examen no deja ajustar la respuesta; ella evalúa uno a uno en su cubículo y además pide la infografía.
+- JS propio, sin librerías, en `Recursos lety2E/temas-math4/tema13.js` (se incrusta al generar). La página **no lleva `$…$`**: las fórmulas se arman en HTML con las tipografías de KaTeX, así que `prerender-katex.js` no la toca. Se califica comparando las gráficas, no los números. No guarda nada.
+- El curso queda en **18 de 20** (faltan 19 y 20, sin capturas).
+
 ## 2026-11-09 (3) — Math 4, tema 5: "Función inversa"
 
 - **`math/matematicas-4/funcion-inversa.html`** — el ejemplo salió de la página vieja (letymath.com, Lety pasó el enlace) y los ejercicios de la hoja de capturas. El segundo conjunto de la hoja es el del ejemplo, así que no se repite: quedan 4 ejercicios y 10 extras. Sin Respuestas (no hay hoja de resueltos) y sin video.

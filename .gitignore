@@ -13,6 +13,7 @@
 !Recursos lety2E/funciones-svg-math.py
 !Recursos lety2E/temas-math4/
 !Recursos lety2E/temas-math4/*.py
+!Recursos lety2E/temas-math4/*.js
 *.csv
 
 # Cowork / Claude Code: generados por sesión local, no van al repo

@@ -201,5 +201,5 @@ G.pagina("ecuaciones-exponenciales-logaritmicas", 12, "Ecuaciones exponenciales 
          "Ecuaciones exponenciales y logarítmicas: leyes de exponentes, definición de logaritmo, ejemplos y ejercicios resueltos.",
          [ap, ej1, ej2, ejercicios, respuestas, extras],
          prev=("dominio-maximo.html", "Dominio máximo"),
-         sig=("sucesiones-series.html", "Sucesiones y series"), css_extra=CSS)
+         sig=("transformacion-funciones.html", "Transformación de funciones"), css_extra=CSS)
 print("ok tema 12")

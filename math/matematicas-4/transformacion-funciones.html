@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Transformación de funciones — Matemáticas 4 — LetyMath</title>
+  <meta name="description" content="Transformación de funciones: mueve, refleja, estira y comprime la gráfica con un graficador, y presenta la evaluación." />
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../../favicon.ico">
+  <link rel="stylesheet" href="../../style.css">
+  <link rel="stylesheet" href="../../assets/katex/katex.min.css" />
+
+  <style>
+    .topic-tag {
+      display: inline-flex; align-items: center; gap: .35rem;
+      padding: .22rem .75rem; border-radius: 99px;
+      background: var(--accent-light); color: var(--accent);
+      font-size: .78rem; font-weight: 700; letter-spacing: .03em;
+      margin-bottom: .55rem;
+    }
+    .topic-tag::before {
+      content: ''; width: 7px; height: 7px; border-radius: 50%;
+      background: var(--accent); display: inline-block;
+    }
+
+    .section-block { margin-bottom: 2.5rem; }
+    .section-block:last-child { margin-bottom: 0; }
+
+    .sec-head { display: flex; align-items: center; gap: .65rem; margin-bottom: 1.1rem; }
+    .sec-head h2 { margin: 0; font-size: 1.2rem; line-height: 1; }
+    .sec-icon {
+      width: 30px; height: 30px; border-radius: 8px;
+      display: grid; place-items: center; flex-shrink: 0;
+      background: var(--accent);
+    }
+    .sec-icon svg { width: 15px; height: 15px; stroke: #fff; fill: none; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+
+    .sec-toggle {
+      display: flex; align-items: center; gap: .65rem;
+      cursor: pointer; user-select: none;
+      padding: .8rem 0; margin: 0 0 .4rem;
+    }
+    .sec-toggle h2 { margin: 0; font-size: 1.2rem; line-height: 1; }
+    .sec-toggle .chev { margin-left: auto; font-size: .75rem; color: var(--text-3); transition: transform .25s; }
+    .sec-toggle.open .chev { transform: rotate(180deg); }
+    .collapsible { max-height: 0; overflow: hidden; transition: max-height .4s ease, padding .3s ease; padding: 0; }
+    .collapsible.show { max-height: 40000px; padding: .8rem 0; }
+
+    /* ── Video ── */
+    .video-single { max-width: 720px; margin: 0 auto; }
+    .video-wrapper {
+      position: relative; padding-bottom: 56.25%; height: 0;
+      overflow: hidden; border-radius: var(--r-md); background: #000;
+    }
+    .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+
+    /* ── Ejemplo ── */
+    .ejemplo-section { margin: 2rem 0 2.5rem; }
+    .ejemplo-head { display: flex; align-items: center; gap: .65rem; margin-bottom: 1rem; }
+    .ejemplo-head h3 {
+      margin: 0; font-family: var(--font-display);
+      font-size: 1.2rem; line-height: 1; color: var(--M); font-style: italic;
+    }
+    .ejemplo-block {
+      padding: 1.6rem 1.5rem; background: var(--bg-card);
+      border: 1.5px solid var(--border); border-radius: var(--r-md);
+      color: var(--text);
+    }
+    .paso-titulo { font-size: .8rem; font-weight: 700; color: var(--course-1); margin-bottom: .25rem; text-align: center; }
+    .paso-titulo.izq { color: #7B2CBF; }
+    .paso-titulo.der { color: var(--M); }
+    .sistema-mult { text-align: center; }
+
+    /* ── Pills ── */
+    .resultado-pill {
+      display: inline-block; background: #FFD0E5;
+      padding: .25rem .75rem; border-radius: 99px;
+      font-size: .9rem; font-weight: 700; color: var(--M);
+      margin: .25rem .2rem; border: 1.5px solid #FF8AC0;
+    }
+
+    /* ── Mini card (ejercicio) ── */
+    .mini-card {
+      background: var(--bg-card); border: 1.5px solid var(--border);
+      border-radius: var(--r-md); overflow: hidden;
+    }
+    .mini-card-head {
+      padding: .4rem .8rem; background: var(--course-1);
+      font-family: var(--font-display); font-size: .85rem; color: #fff; font-weight: 700;
+    }
+    .mini-card-body { padding: .8rem 1rem; font-size: .9rem; line-height: 1.6; color: var(--text); text-align: center; }
+    .mini-card-body .ej-line { padding: .55rem 0; border-bottom: 1px solid var(--border-s); }
+    .mini-card-body .ej-line:first-child { padding-top: .1rem; }
+    .mini-card-body .ej-line:last-child { border-bottom: none; padding-bottom: .1rem; }
+    .bloques-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2rem; }
+    @media (max-width: 700px) { .bloques-2 { grid-template-columns: 1fr; } }
+
+    /* ── Resoluciones ── */
+    .resol-grid { display: grid; grid-template-columns: 1fr; gap: 1.2rem; }
+    .resol-item {
+      background: var(--bg-card); border: 1.5px solid var(--border);
+      border-radius: var(--r-md); padding: .9rem 1.1rem;
+    }
+    .resol-num {
+      font-size: .75rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .06em; color: var(--course-1); margin-bottom: .1rem;
+    }
+
+    /* ── Doble columna del método ── */
+    .elim-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem;
+      margin-top: .6rem;
+    }
+    .elim-grid > div + div { border-left: 1px solid var(--border-s); padding-left: 1.2rem; }
+    @media (max-width: 700px) {
+      .elim-grid { grid-template-columns: 1fr; gap: .6rem; }
+      .elim-grid > div + div { border-left: none; padding-left: 0; border-top: 1px solid var(--border-s); padding-top: .8rem; }
+    }
+    .elim-col { text-align: center; }
+    .comprob { margin-top: 1rem; padding-top: .8rem; border-top: 1px solid var(--border-s); }
+    .comprob-titulo {
+      font-family: var(--font-display); font-size: .95rem; font-style: italic;
+      color: var(--M); margin: 0 0 .3rem; text-align: center;
+    }
+
+    .extras-titulo {
+      font-family: var(--font-display); font-size: 1rem; font-style: italic;
+      color: var(--M); margin: 1.4rem 0 .8rem;
+    }
+    .extras-titulo:first-child { margin-top: 0; }
+
+    /* ── Navegación ── */
+    .topic-nav-btns {
+      display: flex; justify-content: space-between; gap: 1rem;
+      margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border);
+    }
+    .btn-anterior, .btn-siguiente {
+      display: inline-flex; align-items: center; gap: .5rem;
+      padding: .65rem 1.4rem; border-radius: 99px;
+      font-weight: 700; font-size: .9rem; transition: background .2s, transform .18s;
+    }
+    .btn-anterior { background: transparent; color: var(--accent); border: 2px solid var(--accent); }
+    .btn-anterior:hover { background: var(--accent-light); transform: translateX(-3px); }
+    .btn-siguiente { background: var(--accent); color: #fff; }
+    .btn-siguiente:hover { background: var(--M); color: #fff; transform: translateX(3px); }
+
+    /* ── Apuntes ── */
+    .regla-unica {
+      background: var(--bg-card); border: 1.5px solid var(--border);
+      border-radius: var(--r-md); padding: 1.4rem 1.5rem;
+      text-align: center; color: var(--text);
+    }
+    .regla-unica p { margin: 0 0 .4rem; line-height: 1.75; color: var(--text-2); font-size: .95rem; }
+    .regla-unica p:not(:first-child) { margin-top: .6rem; }
+    .enunciado {
+      margin: 0 0 1rem; font-size: .95rem; line-height: 1.8;
+      color: var(--text-2); text-align: center;
+    }
+    .parte-titulo {
+      font-size: .78rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em;
+      color: var(--course-1); text-align: center; margin: 1.6rem 0 .3rem;
+    }
+    .parte-titulo:first-of-type { margin-top: .2rem; }
+    .bloques-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    @media (max-width: 700px) { .bloques-3 { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 480px) { .bloques-3 { grid-template-columns: 1fr; } }
+    .video-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    @media (max-width: 700px) { .video-pair { grid-template-columns: 1fr; } }
+    .resol-2col { display: grid; grid-template-columns: 1fr auto; gap: 1.3rem; align-items: center; }
+    @media (max-width: 700px) { .resol-2col { grid-template-columns: 1fr; justify-items: center; } }
+    .dato { padding: .3rem 0; text-align: center; }
+    .dato .et {
+      display: block; font-size: .7rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .06em; color: var(--text-3); margin-bottom: .1rem;
+    }
+    .graf-wrap { text-align: center; }
+    .graf-svg { max-width: 240px; max-height: 380px; height: auto; }
+    .mini-card-body { text-align: center; }
+
+    /* ── fórmulas en HTML, con las tipografías de KaTeX del sitio ── */
+    .tf-formula { font-family: KaTeX_Main, 'Times New Roman', serif; font-size: 1.3rem; line-height: 1.5;
+                  text-align: center; color: var(--text); white-space: nowrap; min-height: 2.4rem; }
+    .tf-formula i { font-family: KaTeX_Math, KaTeX_Main, serif; font-style: italic; }
+    .tf-formula sup { font-size: .7em; }
+    .tf-formula.tf-enlinea { display: inline-block; font-size: 1.1em; min-height: 0; line-height: 1.2; }
+    .tf-formula .fr { display: inline-flex; flex-direction: column; vertical-align: middle; text-align: center; margin: 0 .15em; line-height: 1.15; }
+    .tf-formula .fr > span:first-child { border-bottom: 1px solid currentColor; padding: 0 .25em; }
+    .tf-formula .fr > span:last-child { padding: 0 .25em; }
+    .tf-formula .rz > span { border-top: 1px solid currentColor; padding: 0 .12em; margin-left: -.05em; }
+
+    .tf-reglas { display: grid; gap: .1rem; margin: .8rem auto; max-width: 30rem; text-align: left; }
+    .tf-regla { display: grid; grid-template-columns: 1fr 1.2fr; gap: .8rem; align-items: center;
+                padding: .35rem .2rem; border-bottom: 1px solid var(--border-s); font-size: .93rem; color: var(--text-2); }
+    .tf-regla:last-child { border-bottom: none; }
+    .tf-regla > span:first-child { text-align: right; white-space: normal; }
+    @media (max-width: 480px) { .tf-regla { grid-template-columns: 1fr; gap: 0; text-align: center; }
+                                .tf-regla > span:first-child { text-align: center; } }
+
+    .tf-caja { background: var(--bg-card); border: 1.5px solid var(--border); border-radius: var(--r-md); padding: 1.1rem; }
+    .tf-fams, .tf-lista { display: flex; flex-wrap: wrap; gap: .4rem; justify-content: center; }
+    .tf-fams { margin-bottom: .8rem; }
+    .tf-chip, .tf-fn { border: 1.5px solid var(--border); background: var(--bg-card); color: var(--text-2);
+                       border-radius: 99px; padding: .35rem .8rem; font: inherit; font-size: .88rem; cursor: pointer; }
+    .tf-chip[aria-pressed="true"], .tf-fn[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .tf-fn { font-family: KaTeX_Main, 'Times New Roman', serif; font-size: 1.02rem; border-radius: 12px; white-space: nowrap; color: var(--text); }
+    .tf-fn i { font-family: KaTeX_Math, KaTeX_Main, serif; }
+    .tf-fn sup { font-size: .7em; }
+    .tf-fn .fr { display: inline-flex; flex-direction: column; vertical-align: middle; text-align: center; margin: 0 .15em; line-height: 1.1; }
+    .tf-fn .fr > span:first-child { border-bottom: 1px solid currentColor; padding: 0 .2em; }
+    .tf-fn .rz > span { border-top: 1px solid currentColor; padding: 0 .12em; }
+    .tf-ver { margin-top: .9rem; text-align: center; }
+
+    .tf-plano, .tf-ver { text-align: center; }
+    .tf-svg { width: 100%; max-width: 380px; height: auto; background: var(--bg-card); }
+    .tf-mov { text-align: center; font-size: .85rem; color: var(--text-3); min-height: 1.4rem; margin: .2rem 0 .5rem; }
+    .tf-ctls { display: grid; gap: .5rem; max-width: 420px; margin: 0 auto; }
+    .tf-ctl { display: grid; grid-template-columns: 2.2rem 1fr 2.2rem 2rem; gap: .4rem; align-items: center; }
+    .tf-ctl-n { grid-column: 1 / -1; font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em;
+                color: var(--text-3); margin-bottom: -.3rem; }
+    .tf-ctl input[type=range] { width: 100%; accent-color: var(--M); min-width: 0; }
+    .tf-ctl output { font-weight: 700; color: var(--accent); text-align: center; }
+    .tf-paso { width: 2.2rem; height: 2.2rem; border-radius: 50%; border: 1.5px solid var(--border); background: var(--bg-card);
+               color: var(--accent); font-size: 1.2rem; line-height: 1; cursor: pointer; }
+    .tf-ctl-ref { grid-template-columns: 1fr 1fr; margin-top: .3rem; }
+    .tf-ref, .tf-cero { border: 1.5px solid var(--border); background: var(--bg-card); color: var(--text-2); border-radius: 99px;
+                        padding: .5rem .6rem; font: inherit; font-size: .88rem; cursor: pointer; }
+    .tf-ref[aria-pressed="true"] { background: var(--M); border-color: var(--M); color: #fff; }
+
+    .tf-modos { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: .4rem 0 .8rem; }
+    @media (max-width: 620px) { .tf-modos { grid-template-columns: 1fr; } }
+    .tf-modo { border: 1px solid var(--border-s); border-radius: var(--r-md); padding: 1rem; text-align: center; display: flex; flex-direction: column; gap: .5rem; }
+    .tf-modo h3 { margin: 0; color: var(--accent); font-size: 1.05rem; }
+    .tf-modo p { margin: 0; font-size: .9rem; color: var(--text-2); line-height: 1.6; flex: 1; }
+    .tf-lbl { font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--text-3); }
+    .tf-nombre { font: inherit; padding: .5rem .7rem; border: 1.5px solid var(--border); border-radius: 10px; text-align: center; width: 100%; box-sizing: border-box; }
+    .tf-btn { border: none; background: var(--accent); color: #fff; border-radius: 99px; padding: .65rem 1.4rem; font: inherit; font-weight: 600; cursor: pointer; }
+    .tf-btn:hover { background: var(--M); }
+    .tf-acciones { text-align: center; margin-top: 1rem; }
+    .tf-num { margin: 0; text-align: center; font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--course-1); }
+    .tf-fam { margin: .2rem 0 0; text-align: center; font-weight: 700; color: var(--accent); }
+    .tf-pide { margin: .3rem 0 .7rem; text-align: center; color: var(--text-2); line-height: 2; }
+    .tf-morada { color: #7B2CBF; }
+    .tf-aviso { text-align: center; margin: .8rem 0 0; padding: .6rem; border-radius: 12px; line-height: 2; }
+    .tf-bien { color: var(--accent); }
+    .tf-mal { color: var(--M); }
+    .tf-aviso.tf-bien, .tf-aviso.tf-mal { background: var(--accent-light); }
+    .tf-aviso.tf-pend { color: var(--text-3); font-size: .9rem; }
+    .tf-aviso.tf-bien { font-weight: 700; }
+    .tf-arranque { display: grid; gap: .5rem; max-width: 20rem; margin: 1rem auto .6rem; text-align: center; }
+    .tf-ops { display: grid; gap: .5rem; max-width: 22rem; margin: .8rem auto 0; }
+    .tf-op { border: 1.5px solid var(--border); background: var(--bg-card); color: var(--text); border-radius: 14px;
+             padding: .55rem .8rem; cursor: pointer; font-family: KaTeX_Main, 'Times New Roman', serif; font-size: 1.15rem; white-space: nowrap; }
+    .tf-op i { font-family: KaTeX_Math, KaTeX_Main, serif; }
+    .tf-op sup { font-size: .7em; }
+    .tf-op .fr { display: inline-flex; flex-direction: column; vertical-align: middle; text-align: center; margin: 0 .15em; line-height: 1.1; }
+    .tf-op .fr > span:first-child { border-bottom: 1px solid currentColor; padding: 0 .2em; }
+    .tf-op .rz > span { border-top: 1px solid currentColor; padding: 0 .12em; }
+    .tf-op[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
+    [hidden] { display: none !important; }
+    .tf-mov-in { font-size: .85rem; color: var(--text-3); }
+    .tf-quien { text-align: center; margin: 0; color: var(--text-3); font-size: .9rem; }
+    .tf-marca { text-align: center; margin: .2rem 0 0; font-family: 'Playfair Display', serif; font-size: 3rem; font-weight: 700; color: var(--accent); line-height: 1.2; }
+    .tf-veredicto { text-align: center; margin: 0 0 1rem; font-weight: 700; font-size: 1.15rem; }
+    .tf-tabla { display: grid; gap: .1rem; max-width: 30rem; margin: 0 auto; }
+    .tf-fila { display: grid; grid-template-columns: 1.6rem 1fr 1.6rem; gap: .5rem; align-items: center; padding: .45rem .2rem; border-bottom: 1px solid var(--border-s); }
+    .tf-fila .tf-n { font-weight: 700; color: var(--text-3); font-size: .85rem; }
+    .tf-fila .tf-que { color: var(--text); display: flex; flex-direction: column; }
+    .tf-fila small { color: var(--text-3); font-size: .78rem; }
+    .tf-fila .tf-res { font-weight: 700; font-size: 1.1rem; text-align: right; }
+    .enunciado.nota { margin: .4rem 0 0; color: var(--text-3); font-size: .88rem; }
+
+  </style>
+</head>
+<body data-section="math">
+  <main class="topic-content">
+
+    <header class="topic-header">
+      <p class="breadcrumb">
+        <a href="../index.html">Inicio</a> ›
+        <a href="index.html">Matemáticas 4</a> ›
+        Transformación de funciones
+      </p>
+      <div class="topic-tag">Matemáticas 4 · Tema 13</div>
+      <h1>Transformación de funciones</h1>
+    </header>
+
+    <section class="section-block">
+      <div class="sec-head">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+        </div>
+        <h2>Apuntes</h2>
+      </div>
+      <div class="regla-unica">
+        <p>Cada familia de funciones tiene una <strong>forma</strong>. Si conoces la forma de la función base, los números de la regla te dicen cómo se <strong>mueve</strong> la gráfica.</p>
+        <div class="tf-reglas">
+          <div class="tf-regla"><span><span class="tf-formula tf-enlinea"><i>f</i>(<i>x</i>) + <i>k</i></span></span><span>sube <i>k</i> unidades</span></div>
+          <div class="tf-regla"><span><span class="tf-formula tf-enlinea"><i>f</i>(<i>x</i>) − <i>k</i></span></span><span>baja <i>k</i> unidades</span></div>
+          <div class="tf-regla"><span><span class="tf-formula tf-enlinea"><i>f</i>(<i>x</i> − <i>h</i>)</span></span><span>se mueve <i>h</i> unidades a la <strong>derecha</strong></span></div>
+          <div class="tf-regla"><span><span class="tf-formula tf-enlinea"><i>f</i>(<i>x</i> + <i>h</i>)</span></span><span>se mueve <i>h</i> unidades a la <strong>izquierda</strong></span></div>
+          <div class="tf-regla"><span><span class="tf-formula tf-enlinea">−<i>f</i>(<i>x</i>)</span></span><span>se refleja respecto al eje <i>x</i></span></div>
+          <div class="tf-regla"><span><span class="tf-formula tf-enlinea"><i>a</i> <i>f</i>(<i>x</i>), con <i>a</i> mayor que 1</span></span><span>se estira</span></div>
+          <div class="tf-regla"><span><span class="tf-formula tf-enlinea"><i>a</i> <i>f</i>(<i>x</i>), con <i>a</i> entre 0 y 1</span></span><span>se comprime</span></div>
+        </div>
+        <p>Ojo: lo que está <strong>dentro</strong> con la <i>x</i> se mueve al revés de lo que parece — <span class="tf-formula tf-enlinea">(<i>x</i> − 3)</span> va a la derecha y <span class="tf-formula tf-enlinea">(<i>x</i> + 3)</span> a la izquierda.</p>
+      </div>
+    </section>
+
+    <section class="section-block">
+      <div class="sec-head">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><path d="M3 17c4-12 6-12 9 0s5 12 9 0"/></svg>
+        </div>
+        <h2>Explora</h2>
+      </div>
+      <p class="enunciado">Elige una familia y mueve los controles. La línea punteada es la función base.</p>
+      <div id="tf-explorador" class="tf-caja">
+        <div class="tf-fams"></div>
+        <div class="tf-lab"></div>
+      </div>
+    </section>
+
+    <section class="section-block">
+      <div class="sec-head">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        </div>
+        <h2>Práctica: llega a la gráfica morada</h2>
+      </div>
+      <p class="enunciado">Ahora hay un <strong>objetivo</strong>: mueve tu gráfica rosa hasta que quede exactamente encima de la <strong class="tf-morada">morada</strong>. Cuando llegues, lee la regla que se formó.</p>
+      <div id="tf-practica" class="tf-caja">
+        <p class="tf-fam"></p>
+        <div class="tf-lab"></div>
+        <p class="tf-aviso tf-pend"></p>
+        <div class="tf-acciones"><button type="button" class="tf-btn tf-otra-meta">Otra gráfica</button></div>
+      </div>
+    </section>
+
+    <section class="section-block">
+      <div class="sec-head">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+        </div>
+        <h2>Ejercicios</h2>
+      </div>
+      <p class="enunciado">Ahora sin controles: con los movimientos que ya conoces, haz el esbozo de cada función <strong>en tu cuaderno</strong>. Toca la función <strong>sólo después</strong> de dibujarla, para verificar.</p>
+      <div id="tf-ejercicios" class="bloques-2"></div>
+    </section>
+
+    <section class="section-block">
+      <div class="sec-head">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <h2>Evaluación</h2>
+      </div>
+      <div id="tf-evalua" class="tf-caja">
+        <div class="tf-inicio">
+          <p class="enunciado">Son <strong>10 reactivos</strong> al azar con todos los movimientos:</p>
+          <div class="tf-modos">
+            <div class="tf-modo">
+              <h3>5 de acomodar</h3>
+              <p>Aparece la regla de correspondencia y tú acomodas la gráfica con los controles, sin ver la respuesta.</p>
+            </div>
+            <div class="tf-modo">
+              <h3>5 de elegir</h3>
+              <p>Aparece la gráfica ya transformada y eliges su regla de correspondencia entre cinco opciones.</p>
+            </div>
+          </div>
+          <p class="enunciado">La revisión es <strong>hasta el final</strong>. Se pasa con <strong>8 de 10</strong> y se presenta con tu profesora.</p>
+          <div class="tf-arranque">
+            <label class="tf-lbl" for="tf-nombre">Tu nombre</label>
+            <input id="tf-nombre" class="tf-nombre" type="text" autocomplete="off" maxlength="60">
+            <button type="button" class="tf-btn tf-go-eval">Presentar evaluación</button>
+          </div>
+          <p class="enunciado nota">Para acreditar el tema también se entrega la <strong>infografía</strong> sobre transformación de funciones.</p>
+        </div>
+        <div class="tf-corre" hidden>
+          <p class="tf-num"></p>
+          <p class="tf-fam"></p>
+          <p class="tf-pide"></p>
+          <div class="tf-lab"></div>
+          <div class="tf-elige" hidden>
+            <div class="tf-plano"></div>
+            <div class="tf-ops"></div>
+          </div>
+          <div class="tf-acciones"><button type="button" class="tf-btn tf-sig">Siguiente</button></div>
+        </div>
+        <div class="tf-fin" hidden>
+          <div class="tf-resultado"></div>
+          <div class="tf-acciones"><button type="button" class="tf-btn tf-otra">Nuevo intento</button></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ NAVEGACIÓN ══════════ -->
+    <div class="topic-nav-btns">
+      <a href="ecuaciones-exponenciales-logaritmicas.html" class="btn-anterior">← Ecuaciones exponenciales y logarítmicas</a>
+      <a href="sucesiones-series.html" class="btn-siguiente">Sucesiones y series →</a>
+    </div>
+
+  </main>
+  <script>
+/* Tema 13 · Transformación de funciones — graficador, ejercicios y evaluación.
+   f(x) = a·base(x − h) + k.  Sin librerías; las fórmulas se arman en HTML. */
+(function () {
+  'use strict';
+  var V = '<i>x</i>';
+  var FAM = {
+    lin: { n: 'Lineal',         f: function (u) { return u; } },
+    cua: { n: 'Cuadrática',     f: function (u) { return u * u; } },
+    abs: { n: 'Valor absoluto', f: function (u) { return Math.abs(u); } },
+    rad: { n: 'Con radical',    f: function (u) { return u < 0 ? NaN : Math.sqrt(u); } },
+    rac: { n: 'Racional',       f: function (u) { return u === 0 ? NaN : 1 / u; } },
+    exp: { n: 'Exponencial',    f: function (u, p) { return Math.pow(p.b || 2, u); } },
+    sen: { n: 'Seno',           f: function (u) { return Math.sin(u); } },
+    cos: { n: 'Coseno',         f: function (u) { return Math.cos(u); } }
+  };
+  var ORDEN = ['lin', 'cua', 'abs', 'rad', 'rac', 'exp', 'sen', 'cos'];
+  var AV = [0.5, 1, 2, 3];                       /* comprimir … estirar */
+
+  function val(p, x) {
+    var u = (p.fx ? -1 : 1) * (x - (p.h || 0));
+    if (Math.abs(u) < 1e-9) u = 0;
+    return p.a * FAM[p.fam].f(u, p) + (p.k || 0);
+  }
+  function base(fam, p) { return { fam: fam, a: 1, h: 0, k: 0, b: p && p.b, fx: false }; }
+
+  /* ── fórmula en HTML ── */
+  function coef(a) {
+    var m = Math.abs(a);
+    if (m === 1) return '';
+    if (m === 0.5) return '½';
+    if (Math.abs(m - 1 / 3) < 1e-9) return '⅓';
+    return String(m);
+  }
+  function frac(n, d) { return '<span class="fr"><span>' + n + '</span><span>' + d + '</span></span>'; }
+  function formula(p) {
+    var h = p.h || 0, k = p.k || 0, c = coef(p.a), s = p.a < 0 ? '−' : '';
+    var inner = (p.fx ? '−' + V : V) + (h > 0 ? ' − ' + h : h < 0 ? ' + ' + (-h) : '');
+    var par = '(' + inner + ')', b;
+    switch (p.fam) {
+      case 'lin': b = h ? ((c || s) ? c + par : inner) : c + V; break;
+      case 'cua': b = c + (h ? par : V) + '<sup>2</sup>'; break;
+      case 'abs': b = c + '|' + inner + '|'; break;
+      case 'rad': b = c + '<span class="rz">√<span>' + inner + '</span></span>'; break;
+      case 'rac':
+        var m = Math.abs(p.a);
+        b = m >= 1 ? frac(m, inner) : frac(1, Math.round(1 / m) + (h ? par : V));
+        break;
+      case 'exp': b = (p.b || 2) + '<sup>' + inner + '</sup>'; if (c) b = c + '(' + b + ')'; break;
+      default: b = (c ? c + ' ' : '') + p.fam + (h ? par : ' ' + V);
+    }
+    return '<i>f</i>(' + V + ') = ' + s + b + (k > 0 ? ' + ' + k : k < 0 ? ' − ' + (-k) : '');
+  }
+  function describe(p) {
+    var t = [], h = p.h || 0, k = p.k || 0, m = Math.abs(p.a);
+    if (p.a < 0) t.push('reflejada');
+    if (m > 1) t.push(m === 2 ? 'estirada al doble' : m === 3 ? 'estirada al triple' : 'estirada');
+    if (m < 1) t.push('comprimida a la mitad');
+    if (h > 0) t.push('derecha ' + h);
+    if (h < 0) t.push('izquierda ' + (-h));
+    if (k > 0) t.push('sube ' + k);
+    if (k < 0) t.push('baja ' + (-k));
+    return t.length ? t.join(' · ') : 'sin movimientos';
+  }
+
+  /* ── plano: 1 cuadro = 1 unidad, de −8 a 8 ── */
+  var U = 20, R = 8.5, T = 2 * R * U;
+  function X(x) { return (x + R) * U; }
+  function Y(y) { return (R - y) * U; }
+  var FONDO = (function () {
+    var o = '', i;
+    for (i = -8; i <= 8; i++) {
+      o += '<line x1="' + X(i) + '" y1="0" x2="' + X(i) + '" y2="' + T + '" stroke="#E0C4BC" stroke-width="0.5"/>';
+      o += '<line x1="0" y1="' + Y(i) + '" x2="' + T + '" y2="' + Y(i) + '" stroke="#E0C4BC" stroke-width="0.5"/>';
+    }
+    o += '<line x1="0" y1="' + Y(0) + '" x2="' + T + '" y2="' + Y(0) + '" stroke="#7B5A50" stroke-width="1.2"/>';
+    o += '<line x1="' + X(0) + '" y1="0" x2="' + X(0) + '" y2="' + T + '" stroke="#7B5A50" stroke-width="1.2"/>';
+    for (i = -8; i <= 8; i++) {
+      if (!i) continue;
+      o += '<text x="' + X(i) + '" y="' + (Y(0) + 11) + '" text-anchor="middle" font-size="8" fill="#7B5A50">' + i + '</text>';
+      o += '<text x="' + (X(0) - 4) + '" y="' + (Y(i) + 3) + '" text-anchor="end" font-size="8" fill="#7B5A50">' + i + '</text>';
+    }
+    return o;
+  })();
+  function trazo(p) {
+    var d = '', abierto = false, py = null, i, x, y;
+    for (i = 0; i <= 850; i++) {
+      x = Math.round((-R + i * 0.02) * 100) / 100;
+      y = val(p, x);
+      if (!isFinite(y) || (p.fam === 'rac' && py !== null && Math.abs(y - py) > 6)) { abierto = false; py = null; continue; }
+      py = y;
+      y = Math.max(-30, Math.min(30, y));
+      d += (abierto ? 'L' : 'M') + X(x).toFixed(1) + ' ' + Y(y).toFixed(1);
+      abierto = true;
+    }
+    return d;
+  }
+  function plano(capas, etiqueta) {
+    var o = '<svg class="tf-svg" viewBox="0 0 ' + T + ' ' + T + '" width="' + T + '" height="' + T +
+            '" role="img" aria-label="' + etiqueta + '">' + FONDO;
+    capas.forEach(function (c) {
+      if (!c) return;
+      o += '<path d="' + trazo(c.p) + '" fill="none" stroke="' + c.color + '" stroke-width="' + c.w +
+           '" stroke-linecap="round" stroke-linejoin="round"' + (c.dash ? ' stroke-dasharray="' + c.dash + '"' : '') +
+           (c.op ? ' opacity="' + c.op + '"' : '') + '/>';
+    });
+    return o + '</svg>';
+  }
+  var C_BASE = { color: '#7B5A50', w: 1.2, dash: '4 3' };
+  var C_META = { color: '#7B2CBF', w: 6, op: 0.38 };
+  var C_MIA  = { color: '#FF00AA', w: 2.4 };
+  function capa(estilo, p) { return { p: p, color: estilo.color, w: estilo.w, dash: estilo.dash, op: estilo.op }; }
+
+  /* ── laboratorio: plano + deslizadores ── */
+  function ctl(nombre, clave, min, max) {
+    return '<div class="tf-ctl"><span class="tf-ctl-n">' + nombre + '</span>' +
+      '<button type="button" class="tf-paso" data-c="' + clave + '" data-d="-1" aria-label="' + nombre + ': menos">−</button>' +
+      '<input type="range" min="' + min + '" max="' + max + '" step="1" data-c="' + clave + '" aria-label="' + nombre + '">' +
+      '<button type="button" class="tf-paso" data-c="' + clave + '" data-d="1" aria-label="' + nombre + ': más">+</button>' +
+      '<output data-o="' + clave + '"></output></div>';
+  }
+  function Lab(raiz) {
+    var est = { fam: 'cua', k: 0, h: 0, ai: 1, ref: false }, meta = null, verFormula = true, alCambiar = null;
+    raiz.innerHTML =
+      '<div class="tf-formula" aria-live="polite"></div>' +
+      '<div class="tf-plano"></div>' +
+      '<div class="tf-mov"></div>' +
+      '<div class="tf-ctls">' + ctl('Subir / bajar', 'k', -6, 6) + ctl('Izquierda / derecha', 'h', -6, 6) +
+        ctl('Comprimir / estirar', 'ai', 0, 3) +
+        '<div class="tf-ctl tf-ctl-ref"><button type="button" class="tf-ref" aria-pressed="false">Reflejar</button>' +
+        '<button type="button" class="tf-cero">Regresar al inicio</button></div></div>';
+    var q = function (s) { return raiz.querySelector(s); };
+    function p() { return { fam: est.fam, a: (est.ref ? -1 : 1) * AV[est.ai], h: est.h, k: est.k, b: est.b, fx: false }; }
+    function pinta() {
+      var yo = p();
+      q('.tf-plano').innerHTML = plano([capa(C_BASE, base(est.fam, est)), meta && capa(C_META, meta), capa(C_MIA, yo)],
+                                       'Gráfica de la función');
+      q('.tf-formula').innerHTML = verFormula ? formula(yo) : '';
+      q('.tf-formula').style.display = verFormula ? '' : 'none';
+      q('.tf-mov').textContent = verFormula ? describe(yo) : '';
+      q('.tf-mov').style.display = verFormula ? '' : 'none';
+      ['k', 'h', 'ai'].forEach(function (c) {
+        raiz.querySelector('input[data-c="' + c + '"]').value = est[c];
+        raiz.querySelector('output[data-o="' + c + '"]').textContent = c === 'ai' ? (est.ai === 0 ? '½' : AV[est.ai]) : est[c];
+      });
+      q('.tf-ref').setAttribute('aria-pressed', est.ref ? 'true' : 'false');
+      if (alCambiar) alCambiar(yo);
+    }
+    raiz.addEventListener('input', function (e) {
+      var c = e.target.getAttribute && e.target.getAttribute('data-c');
+      if (c && e.target.type === 'range') { est[c] = +e.target.value; pinta(); }
+    });
+    raiz.addEventListener('click', function (e) {
+      var b = e.target.closest ? e.target.closest('button') : null;
+      if (!b) return;
+      if (b.classList.contains('tf-paso')) {
+        var c = b.getAttribute('data-c'), inp = raiz.querySelector('input[data-c="' + c + '"]');
+        est[c] = Math.max(+inp.min, Math.min(+inp.max, est[c] + (+b.getAttribute('data-d'))));
+        pinta();
+      } else if (b.classList.contains('tf-ref')) { est.ref = !est.ref; pinta(); }
+      else if (b.classList.contains('tf-cero')) { api.cero(); }
+    });
+    var api = {
+      familia: function (f, b) { est.fam = f; est.b = b; api.cero(); },
+      cero: function () { est.k = 0; est.h = 0; est.ai = 1; est.ref = false; pinta(); },
+      valor: p,
+      meta: function (m) { meta = m; pinta(); },
+      formula: function (v) { verFormula = v; pinta(); },
+      alCambiar: function (f) { alCambiar = f; }
+    };
+    pinta();
+    return api;
+  }
+
+  /* ══ 1 · Explorador ══ */
+  var exp = document.getElementById('tf-explorador');
+  if (exp) {
+    var chips = exp.querySelector('.tf-fams'), lab = Lab(exp.querySelector('.tf-lab'));
+    chips.innerHTML = ORDEN.map(function (f, i) {
+      return '<button type="button" class="tf-chip" data-f="' + f + '" aria-pressed="' + (f === 'cua') + '">' +
+             FAM[f].n + '</button>';
+    }).join('');
+    chips.addEventListener('click', function (e) {
+      var b = e.target.closest('button'); if (!b) return;
+      [].forEach.call(chips.children, function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+      lab.familia(b.getAttribute('data-f'));
+    });
+  }
+
+  /* ══ 2 · Ejercicios: la lista de Lety, con "ver gráfica" ══ */
+  function P(fam, a, h, k, extra) { var o = { fam: fam, a: a, h: h || 0, k: k || 0 }; if (extra) for (var z in extra) o[z] = extra[z]; return o; }
+  var LISTA = [
+    ['Lineales', [P('lin', 1), P('lin', -1), P('lin', 1, 0, -4), P('lin', 1, 0, 3), P('lin', 0.5), P('lin', 3),
+                  P('lin', -1, 0, 3), P('lin', -1, 0, -1), P('lin', -4), P('lin', -2, 0, 5), P('lin', -1 / 3, 0, 2),
+                  P('lin', -1, 0, 2, { lbl: '<i>f</i>(' + V + ') = 2 − ' + V })]],
+    ['Cuadráticas', [P('cua', 1, 0, -3), P('cua', 1, 0, 1), P('cua', -1), P('cua', -1, 0, 4), P('cua', 1, -4), P('cua', 1, 1),
+                     P('cua', -1, -1), P('cua', -1, 4), P('cua', 1, -2, 4), P('cua', 1, 1, -3), P('cua', -1, 1, 1), P('cua', -1, -2, -3)]],
+    ['Valor absoluto', [P('abs', 1), P('abs', -1), P('abs', 1, 0, 2), P('abs', -1, 0, -3), P('abs', 1, 4), P('abs', -1, -1),
+                        P('abs', 1, -3, -2), P('abs', -1, 2, 3)]],
+    ['Trigonométricas', [P('sen', 1), P('cos', 1), P('sen', -1), P('cos', -1), P('sen', 1, 0, 1), P('sen', 1, 0, -3),
+                         P('cos', 1, 0, -3), P('cos', 1, 0, 4)]],
+    ['Racionales', [P('rac', 1, 4, 1), P('rac', 1, -3, 2), P('rac', 1, 1, -2), P('rac', 1, -2, -3), P('rac', 1, -4, -5)]],
+    ['Exponenciales', [P('exp', 1), P('exp', -1), P('exp', 1, 0, 0, { fx: true }), P('exp', 1, 0, 0, { b: 3 }),
+                       P('exp', -1, 0, 0, { b: 3 }), P('exp', 1, 0, 0, { b: 3, fx: true })]],
+    ['Con radicales', [P('rad', 1, 0, 2), P('rad', -1, 0, -3), P('rad', 1, -1), P('rad', -1, 5), P('rad', 1, 4, 3), P('rad', -1, -1, -4)]]
+  ];
+  var ej = document.getElementById('tf-ejercicios');
+  if (ej) {
+    ej.innerHTML = LISTA.map(function (g, gi) {
+      return '<div class="mini-card"><div class="mini-card-head">' + g[0] + '</div><div class="mini-card-body">' +
+        '<div class="tf-lista">' + g[1].map(function (p, i) {
+          return '<button type="button" class="tf-fn" data-g="' + gi + '" data-i="' + i + '">' + (p.lbl || formula(p)) + '</button>';
+        }).join('') + '</div><div class="tf-ver" hidden></div></div></div>';
+    }).join('');
+    ej.addEventListener('click', function (e) {
+      var b = e.target.closest('.tf-fn'); if (!b) return;
+      var cuerpo = b.closest('.mini-card-body'), ver = cuerpo.querySelector('.tf-ver');
+      var ya = b.getAttribute('aria-pressed') === 'true';
+      [].forEach.call(cuerpo.querySelectorAll('.tf-fn'), function (x) { x.setAttribute('aria-pressed', 'false'); });
+      if (ya) { ver.hidden = true; ver.innerHTML = ''; return; }
+      var p = LISTA[+b.getAttribute('data-g')][1][+b.getAttribute('data-i')];
+      b.setAttribute('aria-pressed', 'true');
+      ver.hidden = false;
+      ver.innerHTML = '<div class="tf-formula">' + (p.lbl || formula(p)) + '</div>' +
+        plano([capa(C_BASE, base(p.fam, p)), capa(C_MIA, p)], 'Gráfica de la función elegida') +
+        '<div class="tf-mov">punteada: la función base</div>';
+    });
+  }
+
+  /* ══ 3 · Reactivos al azar (sirven a la práctica y a la evaluación) ══ */
+  function azar(n) { return Math.floor(Math.random() * n); }
+  function revuelve(a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = azar(i + 1), t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  var SIN_H = { lin: 1, sen: 1, cos: 1 }, SIN_A = { exp: 1 };
+  function arma() {
+    var simples = revuelve([['k+'], ['k-'], ['h+'], ['h-'], ['ref'], ['est'], ['com']]);
+    var dobles = revuelve([['h+', 'k-'], ['ref', 'k+'], ['h-', 'est'], ['ref', 'h+', 'k+'], ['com', 'k-'], ['ref', 'h-'], ['est', 'k+']]).slice(0, 3);
+    var recetas = simples.concat(dobles), tipos = revuelve(['B', 'B', 'B', 'B', 'B', 'C', 'C', 'C', 'C', 'C']);
+    var bolsa = [];
+    return recetas.map(function (rec, n) {
+      var sirve = function (f) {
+        return !rec.some(function (m) { return (m.charAt(0) === 'h' && SIN_H[f]) || ((m === 'est' || m === 'com') && SIN_A[f]); });
+      };
+      if (!bolsa.some(sirve)) bolsa = bolsa.concat(revuelve(ORDEN));
+      var fam = bolsa.filter(sirve)[0];
+      bolsa.splice(bolsa.indexOf(fam), 1);
+      var p = { fam: fam, a: 1, h: 0, k: 0 };
+      rec.forEach(function (m) {
+        if (m === 'k+') p.k = 1 + azar(4);
+        if (m === 'k-') p.k = -(1 + azar(4));
+        if (m === 'h+') p.h = 1 + azar(4);
+        if (m === 'h-') p.h = -(1 + azar(4));
+        if (m === 'est') p.a *= 2 + azar(2);
+        if (m === 'com') p.a *= 0.5;
+        if (m === 'ref') p.a *= -1;
+      });
+      var it = { tipo: tipos[n], p: p };
+      if (it.tipo === 'C') it.ops = opciones(p);
+      return it;
+    });
+  }
+  function iguales(p, q) {
+    for (var x = -8; x <= 8; x += 0.25) {
+      var a = val(p, x), b = val(q, x), fa = isFinite(a), fb = isFinite(b);
+      if (fa !== fb) return false;
+      if (fa && Math.abs(a - b) > 1e-6) return false;
+    }
+    return true;
+  }
+  /* Cinco reglas: la correcta y cuatro con los errores típicos (signo de h, signo de k,
+     h y k cambiados, reflejo, estirar por comprimir). Ninguna da la misma gráfica que otra. */
+  function opciones(p) {
+    function c(d) { var o = { fam: p.fam, a: p.a, h: p.h, k: p.k }; for (var z in d) o[z] = d[z]; return o; }
+    var m = Math.abs(p.a), s = p.a < 0 ? -1 : 1, otro = m === 2 ? 0.5 : m === 0.5 ? 2 : m === 3 ? 0.5 : 2;
+    var cand = [c({ h: -p.h }), c({ k: -p.k }), c({ a: -p.a }), c({ h: p.k, k: p.h }), c({ h: -p.h, k: -p.k }),
+                c({ a: s * otro }), c({ a: -p.a, k: -p.k }), c({ h: -p.k, k: -p.h }), c({ a: -p.a, h: -p.h })];
+    cand = revuelve(cand.filter(function (q) { return !(SIN_H[q.fam] && q.h) && !(SIN_A[q.fam] && Math.abs(q.a) !== 1); }));
+    var lista = [p], guarda = 0;
+    function mete(q) {
+      if (lista.length < 5 && Math.abs(q.h) <= 6 && Math.abs(q.k) <= 6 &&
+          !lista.some(function (r) { return iguales(r, q); })) lista.push(q);
+    }
+    cand.forEach(mete);
+    while (lista.length < 5 && guarda++ < 200) {
+      var d = { k: p.k + (azar(2) ? 1 : -1) * (1 + azar(3)) };
+      if (azar(2)) d.a = (azar(2) ? 1 : -1) * (SIN_A[p.fam] ? 1 : AV[azar(4)]);
+      if (!SIN_H[p.fam] && azar(2)) d.h = p.h + (azar(2) ? 1 : -1) * (1 + azar(2));
+      mete(c(d));
+    }
+    return revuelve(lista);
+  }
+
+  /* ══ 4 · Práctica: llegar a la gráfica morada ══ */
+  var pr = document.getElementById('tf-practica');
+  if (pr) {
+    var labP = Lab(pr.querySelector('.tf-lab')), objetivo = null, avisoP = pr.querySelector('.tf-aviso'), logradas = 0;
+    function otra() {
+      var it = arma()[azar(10)];
+      objetivo = it.p;
+      pr.querySelector('.tf-fam').textContent = FAM[objetivo.fam].n;
+      labP.familia(objetivo.fam);
+      labP.meta(objetivo);
+    }
+    labP.alCambiar(function (yo) {
+      if (!objetivo) return;
+      var ok = iguales(yo, objetivo);
+      avisoP.className = 'tf-aviso ' + (ok ? 'tf-bien' : 'tf-pend');
+      avisoP.innerHTML = ok ? '✓ ¡Llegaste! Lee tu regla y fíjate qué número hizo cada movimiento.'
+                            : 'Mueve los controles hasta que la rosa quede encima de la morada.';
+    });
+    pr.addEventListener('click', function (e) {
+      var b = e.target.closest('.tf-otra-meta'); if (b) otra();
+    });
+    otra();
+  }
+
+  /* ══ 5 · Evaluación: 5 de acomodar + 5 de elegir la regla; se revisa hasta el final ══ */
+  var ev = document.getElementById('tf-evalua');
+  if (ev) {
+    var inicio = ev.querySelector('.tf-inicio'), corre = ev.querySelector('.tf-corre'), fin = ev.querySelector('.tf-fin');
+    var cajaLab = corre.querySelector('.tf-lab'), cajaElige = corre.querySelector('.tf-elige');
+    var labE = Lab(cajaLab), S = null;
+    function muestra(panel) { [inicio, corre, fin].forEach(function (x) { x.hidden = x !== panel; }); }
+    function reactivo() {
+      var it = S.items[S.i], esB = it.tipo === 'B';
+      corre.querySelector('.tf-num').textContent = 'Evaluación · reactivo ' + (S.i + 1) + ' de 10';
+      corre.querySelector('.tf-fam').textContent = FAM[it.p.fam].n;
+      cajaLab.hidden = !esB; cajaElige.hidden = esB;
+      if (esB) {
+        corre.querySelector('.tf-pide').innerHTML = 'Acomoda la gráfica de <span class="tf-formula tf-enlinea">' + formula(it.p) + '</span>';
+        labE.formula(false); labE.familia(it.p.fam); labE.meta(null);
+      } else {
+        corre.querySelector('.tf-pide').innerHTML = 'La punteada es la función base y la rosa es la transformada. ' +
+          '<strong>Elige la regla de correspondencia de la rosa.</strong>';
+        cajaElige.querySelector('.tf-plano').innerHTML =
+          plano([capa(C_BASE, base(it.p.fam, it.p)), capa(C_MIA, it.p)], 'Función base y función transformada');
+        cajaElige.querySelector('.tf-ops').innerHTML = it.ops.map(function (o, i) {
+          return '<button type="button" class="tf-op" data-i="' + i + '" aria-pressed="false">' + formula(o) + '</button>';
+        }).join('');
+        it.sel = null;
+      }
+      corre.querySelector('.tf-sig').textContent = S.i === 9 ? 'Terminar' : 'Siguiente';
+    }
+    function siguiente() {
+      var it = S.items[S.i];
+      it.resp = it.tipo === 'B' ? labE.valor() : (it.sel === null ? null : it.ops[it.sel]);
+      it.ok = !!it.resp && iguales(it.resp, it.p);
+      S.i++;
+      if (S.i < 10) { reactivo(); corre.scrollIntoView({ block: 'start' }); } else termina();
+    }
+    function termina() {
+      var buenas = S.items.filter(function (x) { return x.ok; }).length, pasa = buenas >= 8, f = new Date();
+      var h = '<p class="tf-quien">' + (S.nombre ? S.nombre.replace(/[<>&]/g, '') + ' · ' : '') +
+              f.toLocaleDateString('es-MX', { day: 'numeric', month: 'long', year: 'numeric' }) + ' · ' +
+              f.toLocaleTimeString('es-MX', { hour: '2-digit', minute: '2-digit' }) + '</p>' +
+              '<p class="tf-marca">' + buenas + ' de 10</p>' +
+              '<p class="tf-veredicto ' + (pasa ? 'tf-bien' : 'tf-mal') + '">' +
+              (pasa ? 'Pasaste tu evaluación' : 'Todavía no: necesitas 8 de 10') + '</p>';
+      h += '<div class="tf-tabla">' + S.items.map(function (it, n) {
+        return '<div class="tf-fila ' + (it.ok ? 'tf-bien' : 'tf-mal') + '"><span class="tf-n">' + (n + 1) + '</span>' +
+          '<span class="tf-que"><span class="tf-formula tf-enlinea">' + formula(it.p) + '</span><small>' +
+          (it.tipo === 'B' ? 'acomodar' : 'elegir la regla') + ' · ' + describe(it.p) + '</small>' +
+          (it.ok ? '' : '<small class="tf-tuya">tu respuesta: ' + (it.resp
+              ? '<span class="tf-formula tf-enlinea">' + formula(it.resp) + '</span>' : 'sin contestar') + '</small>') +
+          '</span><span class="tf-res">' + (it.ok ? '✓' : '✗') + '</span></div>';
+      }).join('') + '</div>';
+      fin.querySelector('.tf-resultado').innerHTML = h;
+      muestra(fin);
+      fin.scrollIntoView({ block: 'start' });
+    }
+    ev.addEventListener('click', function (e) {
+      var b = e.target.closest('button'); if (!b) return;
+      if (b.classList.contains('tf-go-eval')) {
+        S = { items: arma(), i: 0, nombre: (ev.querySelector('.tf-nombre').value || '').trim() };
+        muestra(corre); reactivo(); corre.scrollIntoView({ block: 'start' });
+      } else if (b.classList.contains('tf-op')) {
+        var it = S.items[S.i]; it.sel = +b.getAttribute('data-i');
+        [].forEach.call(cajaElige.querySelectorAll('.tf-op'), function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+      } else if (b.classList.contains('tf-sig')) siguiente();
+      else if (b.classList.contains('tf-otra')) { muestra(inicio); ev.scrollIntoView({ block: 'start' }); }
+    });
+    muestra(inicio);
+  }
+  window.__tf = { arma: arma, iguales: iguales, formula: formula, describe: describe, val: val, LISTA: LISTA, opciones: opciones };
+})();
+  </script>
+  <script src="../../nav.js"></script>
+  <script src="../../footer.js"></script>
+</body>
+</html>

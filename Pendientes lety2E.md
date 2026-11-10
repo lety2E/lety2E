@@ -9,9 +9,8 @@ carpetas 21 a 23 de `~/Desktop/capturas/matemáticas 3/` están **vacías**. En 
 los generadores de SVG en `Recursos lety2E/` (circunferencias y parábolas sirven de molde para la
 elipse y la hipérbola). El índice del curso sigue con su `.proximamente-nota` hasta entonces.
 
-**Migrar Matemáticas 4** — **publicados 17 de 20** (9-nov-2026): 1 a 12 y 14 a 18. Faltan
-**13, 19 y 20**, sin capturas (si existen en letymath.com, Lety puede pasar el enlace, como hizo
-con el 5).
+**Migrar Matemáticas 4** — **publicados 18 de 20** (9-nov-2026): 1 a 18. Faltan **19 (modelo
+matemático) y 20 (historia)**, sin capturas (si existen en letymath.com, Lety puede pasar el enlace).
 
 Lo que Lety todavía tiene que decidir (ya está publicado así):
 - **Tema 12, cuatro logarítmicas de su hoja de resueltos dan una x que no sirve** (deja un
