@@ -8,7 +8,7 @@
 - ventana: opcional; si falta se calcula de los puntos y las curvas.
 - paso_y / paso_x: cada cuántas unidades va una línea del grid (1 por omisión). Cuando
   el rango es muy grande se sube a 2, 4 o 5 y la escala se encoge en ese eje.
-- punteadas: lista de ("v", x) o ("h", y) — asíntotas o rectas guía.
+- punteadas: lista de ("v", x), ("h", y) o ("d", 0) — asíntotas, rectas guía o la diagonal y = x.
 
 Reglas del proyecto: 1 cuadro = 1 unidad, grid #E0C4BC, ejes #7B5A50,
 curva #FF00AA 2.2, puntos #1A0828 r=3.
@@ -68,7 +68,10 @@ def grafica(curvas=(), puntos=(), ventana=None, paso_x=1, paso_y=1, punteadas=()
             o.append(f'<line x1="{_n(X(ex) - 2.5)}" y1="{_n(Y(y))}" x2="{_n(X(ex) + 2.5)}" y2="{_n(Y(y))}" stroke="{EJE}" stroke-width="1"/>')
             o.append(f'<text x="{_n(X(ex) - 5)}" y="{_n(Y(y) + 3)}" text-anchor="end" font-size="8" fill="{EJE}">{y}</text>')
     for tipo, v in punteadas:
-        if tipo == "v":
+        if tipo == "d":                       # la diagonal y = x, recortada a la ventana
+            a, b = max(x0, y0), min(x1, y1)
+            o.append(f'<line x1="{_n(X(a))}" y1="{_n(Y(a))}" x2="{_n(X(b))}" y2="{_n(Y(b))}" stroke="{EJE}" stroke-width="1" stroke-dasharray="4 3"/>')
+        elif tipo == "v":
             o.append(f'<line x1="{_n(X(v))}" y1="{_n(Y(y1))}" x2="{_n(X(v))}" y2="{_n(Y(y0))}" stroke="{EJE}" stroke-width="1" stroke-dasharray="4 3"/>')
         else:
             o.append(f'<line x1="{_n(X(x0))}" y1="{_n(Y(v))}" x2="{_n(X(x1))}" y2="{_n(Y(v))}" stroke="{EJE}" stroke-width="1" stroke-dasharray="4 3"/>')

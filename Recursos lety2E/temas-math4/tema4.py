@@ -162,5 +162,5 @@ CSS = CSS_COMUN + """
 g.pagina("funcion-cuadratica", 4, "Función cuadrática",
          "Función cuadrática: dominio, rango, máximos, mínimos, raíces, crecimiento y signo a partir de su gráfica.",
          [video, ejemplo, ejercicios, respuestas, extras],
-         prev=("funcion-escalonada.html", "Función escalonada"), sig=("area-funcion-longitud.html", "Área como función de la longitud"), css_extra=CSS)
+         prev=("funcion-escalonada.html", "Función escalonada"), sig=("funcion-inversa.html", "Función inversa"), css_extra=CSS)
 print("ok tema 4")

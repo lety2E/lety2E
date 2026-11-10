@@ -137,5 +137,5 @@ CSS = CSS_COMUN + """
 g.pagina("area-funcion-longitud", 6, "Área como función de la longitud",
          "Área de un rectángulo como función de la longitud: expresión del área, dominio y área máxima a partir de la gráfica.",
          [ejemplo, ejercicios, respuestas, extras],
-         prev=("funcion-cuadratica.html", "Función cuadrática"), sig=("analisis-funcion.html", "Análisis de una función"), css_extra=CSS)
+         prev=("funcion-inversa.html", "Función inversa"), sig=("analisis-funcion.html", "Análisis de una función"), css_extra=CSS)
 print("ok tema 6")

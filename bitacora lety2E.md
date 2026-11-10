@@ -5,6 +5,12 @@
 
 ---
 
+## 2026-11-09 (3) — Math 4, tema 5: "Función inversa"
+
+- **`math/matematicas-4/funcion-inversa.html`** — el ejemplo salió de la página vieja (letymath.com, Lety pasó el enlace) y los ejercicios de la hoja de capturas. El segundo conjunto de la hoja es el del ejemplo, así que no se repite: quedan 4 ejercicios y 10 extras. Sin Respuestas (no hay hoja de resueltos) y sin video.
+- Va entre Función cuadrática y Área como función de la longitud; el curso queda en **17 de 20** (faltan 13, 19 y 20).
+- `funciones-svg-math.py` ahora dibuja la diagonal y = x (`punteadas=[("d", 0)]`) y una segunda curva en otro color.
+
 ## 2026-11-09 (2) — Math 4: temas 7 a 12 y 14 a 18
 
 Once temas más desde las capturas; el curso queda en **16 de 20** (faltan el 5, sin enunciado, y 13, 19, 20, sin capturas).
