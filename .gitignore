@@ -9,6 +9,10 @@
 !Recursos lety2E/hoja-practica-generador.py
 !Recursos lety2E/puntos-recta-svg-math.py
 !Recursos lety2E/subset-fuentes.py
+!Recursos lety2E/escalonadas-svg-math.py
+!Recursos lety2E/funciones-svg-math.py
+!Recursos lety2E/temas-math4/
+!Recursos lety2E/temas-math4/*.py
 *.csv
 
 # Cowork / Claude Code: generados por sesión local, no van al repo

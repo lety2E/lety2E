@@ -5,6 +5,17 @@
 
 ---
 
+## 2026-11-09 (2) — Math 4: temas 7 a 12 y 14 a 18
+
+Once temas más desde las capturas; el curso queda en **16 de 20** (faltan el 5, sin enunciado, y 13, 19, 20, sin capturas).
+
+- **7 Análisis, 8 Esbozo gráfico, 9 Operaciones, 10 Composición, 11 Dominio máximo, 17 Derivadas** — con respuestas, cotejadas con las hojas de resueltos.
+- **12 Exponenciales y logarítmicas** — respuestas sólo de las logarítmicas (las exponenciales no traen hoja). Cuatro logarítmicas de la hoja dan una x no válida; se publicaron como vienen y quedó en Pendientes.
+- **14 Sucesiones, 15 Notación sigma, 16 Límites, 18 Sumas de Riemann** — sin hoja de resueltos: ejemplos + ejercicios, sin sección de Respuestas.
+- **Errores de las hojas corregidos**: tema 8 (crecimiento del ejemplo), tema 9 (`+3x` en bloque 1; exponentes negativos en `p/m` de bloques 3 y 4), tema 15 (sumas 1 y 1395), tema 18 (`125/(6n²)`), tema 17 (paréntesis en −5x²).
+- Las gráficas de 7 y 8 se trazan desde sus nodos (extremos, máximos, mínimos, raíces) con `funciones-svg-math.py`.
+- Scripts de cada tema y generadores nuevos ya entran al repo (`Recursos lety2E/temas-math4/`, excepciones en `.gitignore`).
+
 ## 2026-11-09 — Math 4: temas 3, 4 y 6 (escalonada, cuadrática, área como función)
 
 Tres temas nuevos desde las capturas; el curso va en **5 de 20**. Respuestas comparadas con las hojas de resueltos: sin errores aritméticos.

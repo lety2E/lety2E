@@ -9,12 +9,23 @@ carpetas 21 a 23 de `~/Desktop/capturas/matemáticas 3/` están **vacías**. En 
 los generadores de SVG en `Recursos lety2E/` (circunferencias y parábolas sirven de molde para la
 elipse y la hipérbola). El índice del curso sigue con su `.proximamente-nota` hasta entonces.
 
-**Migrar Matemáticas 4** — van **5 de 20** (9-nov-2026): 1, 2, 3 (escalonada), 4 (cuadrática) y
-6 (área como función de la longitud). Los temas 3, 4 y 6 están armados **sin publicar**, esperando
-la revisión de Lety. **El 5 (función inversa) se saltó**: su carpeta sólo trae una hoja de
-ejercicios, sin ejemplo ni resueltos, y no dice qué se pide — falta que Lety lo diga o suba el
-ejemplo. Siguen 7 a 12 y 14 a 18 (con capturas); 13, 19 y 20 no tienen nada. El script de cada tema
-queda en `Recursos lety2E/temas-math4/` (se corre desde esa carpeta, luego `prerender-katex.js`).
+**Migrar Matemáticas 4** — **publicados 16 de 20** (9-nov-2026): 1 a 4, 6 a 12 y 14 a 18. Faltan el **5 (función
+inversa)** —sólo hay una hoja de ejercicios, sin ejemplo ni resueltos: falta que Lety diga qué se
+pide— y **13, 19 y 20**, que no tienen capturas.
+
+Lo que Lety todavía tiene que decidir (ya está publicado así):
+- **Tema 12, cuatro logarítmicas de su hoja de resueltos dan una x que no sirve** (deja un
+  logaritmo de número negativo o de cero): `log₃(3x+5) = log₃(x−4)`, `log₆(x−8) = log₆(5x+2)`,
+  `log₂(2x−3) − log₂4 = log₂(4x−1)` y `log₄(8x+4) − log₄5 = log₄(2x+1)`. Están publicadas tal
+  como vienen en su hoja; hay que decidir si se cambian los ejercicios o se dice "sin solución".
+- **Temas sin hoja de resueltos** (14, 15, 16, 18 y las exponenciales del 12): llevan ejemplos y
+  ejercicios **sin sección de Respuestas**. Las exponenciales del 12 ya están resueltas en
+  `tema12.py` (lista `EXPS`), sólo no se publican. Si las quiere, se calculan y se agregan.
+- **Tema 17**: no hay hoja de ejemplos; los tres ejemplos son funciones nuevas con los mismos pasos.
+- **Tema 9**: `p(x)/m(x)` de los bloques 3 y 4 da exponentes negativos (su hoja los pone positivos).
+
+El script de cada tema queda en `Recursos lety2E/temas-math4/` (se corre desde esa carpeta, luego
+`prerender-katex.js`; `enlaza.py` pone las tarjetas del índice).
 
 **Math 5 se queda como está** — letymath.com tiene un tema más, *"Dx. Con x en el
 denominador"*, que **no se va a migrar**: Lety lo dio por incorporado dentro de
