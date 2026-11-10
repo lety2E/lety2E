@@ -5,6 +5,18 @@
 
 ---
 
+## 2026-11-09 — Math 4: temas 3, 4 y 6 (escalonada, cuadrática, área como función)
+
+Tres temas nuevos desde las capturas; el curso va en **5 de 20**. Respuestas comparadas con las hojas de resueltos: sin errores aritméticos.
+
+- **Tema 3 · Función escalonada** — 2 videos, apuntes, 2 ejemplos, 8 ejercicios con respuesta, 12 extras. Generador nuevo `Recursos lety2E/escalonadas-svg-math.py`.
+- **Tema 4 · Función cuadrática** — 1 video, ejemplo, 3 bloques con respuesta y gráfica, 12 extras. Donde la captura dice "es negativa en todo su dominio" se publicó el intervalo abierto (en los extremos vale 0).
+- **Tema 6 · Área como función de la longitud** — sin video; ejemplo en 3 pasos, 4 ejercicios con respuesta, 10 extras. Las evaluaciones van en dos renglones para caber en celular.
+- **Tema 5 (función inversa) saltado**: sólo hay una hoja de ejercicios, sin ejemplo ni resueltos.
+- **Arreglo en el tema 2**: faltaban paréntesis en 23 fórmulas (`33 − 7` → `3(3) − 7`).
+- Generador nuevo `funciones-svg-math.py` (cualquier función, ejes numerados). El script de cada tema queda en `Recursos lety2E/temas-math4/`.
+- Ojo: el tamaño de un `$$…$$` en celular se cambia en `.katex-display`, no en `.katex` (style.css fija `.katex-display > .katex` en 1.21em).
+
 ## 2026-10-31 — Pie de página: canal de YouTube de lety2E
 
 Botón de YouTube (@lety2e) junto a Facebook y WhatsApp en `footer.js`, en todas las páginas. Los canales por sección siguen en sus páginas.

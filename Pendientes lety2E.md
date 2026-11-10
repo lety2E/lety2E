@@ -9,9 +9,12 @@ carpetas 21 a 23 de `~/Desktop/capturas/matemáticas 3/` están **vacías**. En 
 los generadores de SVG en `Recursos lety2E/` (circunferencias y parábolas sirven de molde para la
 elipse y la hipérbola). El índice del curso sigue con su `.proximamente-nota` hasta entonces.
 
-**Migrar Matemáticas 4** — es el único curso que queda. Hay que ver primero si tiene capturas
-(`~/Desktop/capturas/matemáticas 4/` existe) o si Lety pasa el LaTeX. El flujo de Math 3 —capturas →
-verificar aritmética → armar con `Recursos lety2E/generador-paginas-math3.py`— sirve tal cual.
+**Migrar Matemáticas 4** — van **5 de 20** (9-nov-2026): 1, 2, 3 (escalonada), 4 (cuadrática) y
+6 (área como función de la longitud). Los temas 3, 4 y 6 están armados **sin publicar**, esperando
+la revisión de Lety. **El 5 (función inversa) se saltó**: su carpeta sólo trae una hoja de
+ejercicios, sin ejemplo ni resueltos, y no dice qué se pide — falta que Lety lo diga o suba el
+ejemplo. Siguen 7 a 12 y 14 a 18 (con capturas); 13, 19 y 20 no tienen nada. El script de cada tema
+queda en `Recursos lety2E/temas-math4/` (se corre desde esa carpeta, luego `prerender-katex.js`).
 
 **Math 5 se queda como está** — letymath.com tiene un tema más, *"Dx. Con x en el
 denominador"*, que **no se va a migrar**: Lety lo dio por incorporado dentro de
