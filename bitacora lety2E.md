@@ -5,6 +5,15 @@
 
 ---
 
+## 2026-11-10 — Math 4, tema 13: práctica con a, b, c y examen de 15
+
+Ajustes de Lety al graficador de Transformación de funciones.
+
+- **Práctica**: ya no usa controles de "subir/bajar". Muestra la forma general con letras (`f(x) = a(x + b)² + c`), la regla ya sustituida y, aparte, `a =`, `b =`, `c =` con flechitas. Siempre parte de la función básica (a = 1, b = 0, c = 0) y al encimar la morada dice sus parámetros. Las tres letras van en **turquesa**.
+- **Evaluación**: sube a **15 reactivos** (5 de acomodar, 5 de elegir la regla, 5 nuevos de dar a, b, c) y **se pasa con 12**. En los de parámetros la gráfica del alumno no se dibuja, para que no pueda tantear.
+- **Resultados**: sólo aciertos de 15, veredicto y cada regla con ✓ o ✗ (sin numerar ni explicación).
+- Ojo: `b` es el número de adentro tal como se escribe (`x + b`); internamente es `−h`.
+
 ## 2026-11-09 (4) — Math 4, tema 13: "Transformación de funciones" con graficador
 
 Primera página de Math con una app adentro (idea de Lety: que el alumno grafique sabiendo la forma). Reemplaza a Desmos de la página vieja.

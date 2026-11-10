@@ -118,8 +118,44 @@
       '<button type="button" class="tf-paso" data-c="' + clave + '" data-d="1" aria-label="' + nombre + ': más">+</button>' +
       '<output data-o="' + clave + '"></output></div>';
   }
-  function Lab(raiz) {
-    var est = { fam: 'cua', k: 0, h: 0, ai: 1, ref: false }, meta = null, verFormula = true, alCambiar = null;
+  /* La regla con sus números en cajitas: cada una se cambia con sus flechas. Los números van
+     COMO SE ESCRIBEN en la regla (adentro es x + c, con c = −h), para que se vea la relación. */
+  var AS = [-3, -2, -1, -0.5, 0.5, 1, 2, 3], SIN_C = { lin: 1, sen: 1, cos: 1 };
+  /* Práctica: la forma general con letras a, b, c de colores; la regla ya sustituida, limpia;
+     y aparte "a = 2" con flechitas. Internamente: a = coeficiente, b = −h (adentro es x + b), c = k. */
+  function letra(l) { return '<i class="tf-l tf-l-' + l + '">' + l + '</i>'; }
+  function general(fam, p) {
+    var inner = V + (SIN_C[fam] ? '' : ' + ' + letra('b')), A = letra('a'), g;
+    switch (fam) {
+      case 'lin': g = A + V; break;
+      case 'cua': g = A + '(' + inner + ')<sup>2</sup>'; break;
+      case 'abs': g = A + '|' + inner + '|'; break;
+      case 'rad': g = A + '<span class="rz">√<span>' + inner + '</span></span>'; break;
+      case 'rac': g = frac(A, inner); break;
+      case 'exp': g = A + '(' + (p.b || 2) + '<sup>' + inner + '</sup>)'; break;
+      default: g = A + ' ' + fam + (SIN_C[fam] ? ' ' + V : '(' + inner + ')');
+    }
+    return '<i>f</i>(' + V + ') = ' + g + ' + ' + letra('c');
+  }
+  function num(n) { var m = Math.abs(n); return (n < 0 ? '−' : '') + (m === 0.5 ? '½' : m); }
+  function paso(l, par, valor) {
+    return '<span class="tf-par">' + letra(l) + ' = <b>' + num(valor) + '</b><span class="tf-fls">' +
+      '<button type="button" class="tf-fl" data-p="' + par + '" data-d="1" aria-label="' + l + ': aumentar">▲</button>' +
+      '<button type="button" class="tf-fl" data-p="' + par + '" data-d="-1" aria-label="' + l + ': disminuir">▼</button></span></span>';
+  }
+  function valores(p) {
+    return '<span class="tf-vals">' + letra('a') + ' = ' + num(p.a) + (SIN_C[p.fam] ? '' : ', ' + letra('b') + ' = ' + num(-(p.h || 0))) +
+           ', ' + letra('c') + ' = ' + num(p.k || 0) + '</span>';
+  }
+  function editor(p, sinRegla) {
+    return '<div class="tf-forma">' + general(p.fam, p) + '</div>' +
+           (sinRegla ? '' : '<div class="tf-real">' + formula(p) + '</div>') +
+           '<div class="tf-pars">' + paso('a', 'a', p.a) + (SIN_C[p.fam] ? '' : paso('b', 'c', -(p.h || 0))) +
+           paso('c', 'k', p.k || 0) + '</div>';
+  }
+  function Lab(raiz, modo) {
+    if (modo === 'regla') raiz.classList.add('tf-modo-regla');
+    var est = { fam: 'cua', k: 0, h: 0, ai: 1, ref: false }, meta = null, verFormula = true, alCambiar = null, ciego = false;
     raiz.innerHTML =
       '<div class="tf-formula" aria-live="polite"></div>' +
       '<div class="tf-plano"></div>' +
@@ -127,17 +163,17 @@
       '<div class="tf-ctls">' + ctl('Subir / bajar', 'k', -6, 6) + ctl('Izquierda / derecha', 'h', -6, 6) +
         ctl('Comprimir / estirar', 'ai', 0, 3) +
         '<div class="tf-ctl tf-ctl-ref"><button type="button" class="tf-ref" aria-pressed="false">Reflejar</button>' +
-        '<button type="button" class="tf-cero">Regresar al inicio</button></div></div>';
+        '<button type="button" class="tf-cero">' + (modo === 'regla' ? 'Volver a la función básica' : 'Regresar al inicio') + '</button></div></div>';
     var q = function (s) { return raiz.querySelector(s); };
     function p() { return { fam: est.fam, a: (est.ref ? -1 : 1) * AV[est.ai], h: est.h, k: est.k, b: est.b, fx: false }; }
     function pinta() {
       var yo = p();
-      q('.tf-plano').innerHTML = plano([capa(C_BASE, base(est.fam, est)), meta && capa(C_META, meta), capa(C_MIA, yo)],
+      q('.tf-plano').innerHTML = plano([capa(C_BASE, base(est.fam, est)), meta && capa(C_META, meta), !ciego && capa(C_MIA, yo)],
                                        'Gráfica de la función');
-      q('.tf-formula').innerHTML = verFormula ? formula(yo) : '';
+      q('.tf-formula').innerHTML = !verFormula ? '' : modo === 'regla' ? editor(yo, ciego) : formula(yo);
       q('.tf-formula').style.display = verFormula ? '' : 'none';
-      q('.tf-mov').textContent = verFormula ? describe(yo) : '';
-      q('.tf-mov').style.display = verFormula ? '' : 'none';
+      q('.tf-mov').textContent = verFormula && !ciego ? describe(yo) : '';
+      q('.tf-mov').style.display = verFormula && !ciego ? '' : 'none';
       ['k', 'h', 'ai'].forEach(function (c) {
         raiz.querySelector('input[data-c="' + c + '"]').value = est[c];
         raiz.querySelector('output[data-o="' + c + '"]').textContent = c === 'ai' ? (est.ai === 0 ? '½' : AV[est.ai]) : est[c];
@@ -156,6 +192,17 @@
         var c = b.getAttribute('data-c'), inp = raiz.querySelector('input[data-c="' + c + '"]');
         est[c] = Math.max(+inp.min, Math.min(+inp.max, est[c] + (+b.getAttribute('data-d'))));
         pinta();
+      } else if (b.classList.contains('tf-fl')) {
+        var par = b.getAttribute('data-p'), d = +b.getAttribute('data-d');
+        if (par === 'k') est.k = Math.max(-6, Math.min(6, est.k + d));
+        if (par === 'c') est.h = Math.max(-6, Math.min(6, est.h - d));
+        if (par === 'a') {
+          var i = Math.max(0, Math.min(AS.length - 1, AS.indexOf((est.ref ? -1 : 1) * AV[est.ai]) + d));
+          est.ref = AS[i] < 0; est.ai = AV.indexOf(Math.abs(AS[i]));
+        }
+        pinta();
+        var foco = raiz.querySelector('.tf-fl[data-p="' + par + '"][data-d="' + d + '"]');
+        if (foco) foco.focus();
       } else if (b.classList.contains('tf-ref')) { est.ref = !est.ref; pinta(); }
       else if (b.classList.contains('tf-cero')) { api.cero(); }
     });
@@ -165,6 +212,7 @@
       valor: p,
       meta: function (m) { meta = m; pinta(); },
       formula: function (v) { verFormula = v; pinta(); },
+      ciego: function (v) { ciego = v; raiz.classList.toggle('tf-ciego', v); pinta(); },
       alCambiar: function (f) { alCambiar = f; }
     };
     pinta();
@@ -232,8 +280,8 @@
   var SIN_H = { lin: 1, sen: 1, cos: 1 }, SIN_A = { exp: 1 };
   function arma() {
     var simples = revuelve([['k+'], ['k-'], ['h+'], ['h-'], ['ref'], ['est'], ['com']]);
-    var dobles = revuelve([['h+', 'k-'], ['ref', 'k+'], ['h-', 'est'], ['ref', 'h+', 'k+'], ['com', 'k-'], ['ref', 'h-'], ['est', 'k+']]).slice(0, 3);
-    var recetas = simples.concat(dobles), tipos = revuelve(['B', 'B', 'B', 'B', 'B', 'C', 'C', 'C', 'C', 'C']);
+    var todasDobles = revuelve([['h+', 'k-'], ['ref', 'k+'], ['h-', 'est'], ['ref', 'h+', 'k+'], ['com', 'k-'], ['ref', 'h-'], ['est', 'k+'], ['com', 'h+']]);
+    var recetas = revuelve(simples.concat(todasDobles)), tipos = revuelve('BBBBBCCCCCDDDDD'.split(''));
     var bolsa = [];
     return recetas.map(function (rec, n) {
       var sirve = function (f) {
@@ -291,9 +339,9 @@
   /* ══ 4 · Práctica: llegar a la gráfica morada ══ */
   var pr = document.getElementById('tf-practica');
   if (pr) {
-    var labP = Lab(pr.querySelector('.tf-lab')), objetivo = null, avisoP = pr.querySelector('.tf-aviso'), logradas = 0;
+    var labP = Lab(pr.querySelector('.tf-lab'), 'regla'), objetivo = null, avisoP = pr.querySelector('.tf-aviso'), logradas = 0;
     function otra() {
-      var it = arma()[azar(10)];
+      var it = arma()[azar(15)];
       objetivo = it.p;
       pr.querySelector('.tf-fam').textContent = FAM[objetivo.fam].n;
       labP.familia(objetivo.fam);
@@ -303,8 +351,11 @@
       if (!objetivo) return;
       var ok = iguales(yo, objetivo);
       avisoP.className = 'tf-aviso ' + (ok ? 'tf-bien' : 'tf-pend');
-      avisoP.innerHTML = ok ? '✓ ¡Llegaste! Lee tu regla y fíjate qué número hizo cada movimiento.'
-                            : 'Mueve los controles hasta que la rosa quede encima de la morada.';
+      var enBase = iguales(yo, base(objetivo.fam, objetivo));
+      avisoP.innerHTML = ok
+        ? '✓ ¡Llegaste! Los parámetros de la morada son ' + valores(objetivo) + '.'
+        : (enBase ? 'Estás en la función básica: ' + valores(base(objetivo.fam, objetivo)) + '. ' : '') +
+          'Cambia ' + (SIN_C[objetivo.fam] ? 'a y c' : 'a, b y c') + ' hasta llegar a los parámetros de la morada.';
     });
     pr.addEventListener('click', function (e) {
       var b = e.target.closest('.tf-otra-meta'); if (b) otra();
@@ -312,19 +363,25 @@
     otra();
   }
 
-  /* ══ 5 · Evaluación: 5 de acomodar + 5 de elegir la regla; se revisa hasta el final ══ */
+  /* ══ 5 · Evaluación: 5 de acomodar + 5 de elegir la regla + 5 de parámetros a, b, c; se revisa hasta el final ══ */
   var ev = document.getElementById('tf-evalua');
   if (ev) {
     var inicio = ev.querySelector('.tf-inicio'), corre = ev.querySelector('.tf-corre'), fin = ev.querySelector('.tf-fin');
     var cajaLab = corre.querySelector('.tf-lab'), cajaElige = corre.querySelector('.tf-elige');
-    var labE = Lab(cajaLab), S = null;
+    var cajaPar = corre.querySelector('.tf-labp'), labE = Lab(cajaLab), labD = Lab(cajaPar, 'regla'), S = null, TOTAL = 15, PASA = 12;
+    var NOMBRE = { B: 'acomodar', C: 'elegir la regla', D: 'parámetros a, b, c' };
+    labD.ciego(true);
     function muestra(panel) { [inicio, corre, fin].forEach(function (x) { x.hidden = x !== panel; }); }
     function reactivo() {
-      var it = S.items[S.i], esB = it.tipo === 'B';
-      corre.querySelector('.tf-num').textContent = 'Evaluación · reactivo ' + (S.i + 1) + ' de 10';
+      var it = S.items[S.i], esB = it.tipo === 'B', esD = it.tipo === 'D';
+      corre.querySelector('.tf-num').textContent = 'Evaluación · reactivo ' + (S.i + 1) + ' de ' + TOTAL;
       corre.querySelector('.tf-fam').textContent = FAM[it.p.fam].n;
-      cajaLab.hidden = !esB; cajaElige.hidden = esB;
-      if (esB) {
+      cajaLab.hidden = !esB; cajaPar.hidden = !esD; cajaElige.hidden = esB || esD;
+      if (esD) {
+        corre.querySelector('.tf-pide').innerHTML = 'La punteada es la función básica y la <strong class="tf-morada">morada</strong> es la transformada. ' +
+          '<strong>Escribe los parámetros de la morada</strong> con las flechas. Aquí tu gráfica no se dibuja.';
+        labD.familia(it.p.fam); labD.meta(it.p);
+      } else if (esB) {
         corre.querySelector('.tf-pide').innerHTML = 'Acomoda la gráfica de <span class="tf-formula tf-enlinea">' + formula(it.p) + '</span>';
         labE.formula(false); labE.familia(it.p.fam); labE.meta(null);
       } else {
@@ -337,30 +394,27 @@
         }).join('');
         it.sel = null;
       }
-      corre.querySelector('.tf-sig').textContent = S.i === 9 ? 'Terminar' : 'Siguiente';
+      corre.querySelector('.tf-sig').textContent = S.i === TOTAL - 1 ? 'Terminar' : 'Siguiente';
     }
     function siguiente() {
       var it = S.items[S.i];
-      it.resp = it.tipo === 'B' ? labE.valor() : (it.sel === null ? null : it.ops[it.sel]);
+      it.resp = it.tipo === 'B' ? labE.valor() : it.tipo === 'D' ? labD.valor() : (it.sel === null ? null : it.ops[it.sel]);
       it.ok = !!it.resp && iguales(it.resp, it.p);
       S.i++;
-      if (S.i < 10) { reactivo(); corre.scrollIntoView({ block: 'start' }); } else termina();
+      if (S.i < TOTAL) { reactivo(); corre.scrollIntoView({ block: 'start' }); } else termina();
     }
     function termina() {
-      var buenas = S.items.filter(function (x) { return x.ok; }).length, pasa = buenas >= 8, f = new Date();
+      var buenas = S.items.filter(function (x) { return x.ok; }).length, pasa = buenas >= PASA, f = new Date();
       var h = '<p class="tf-quien">' + (S.nombre ? S.nombre.replace(/[<>&]/g, '') + ' · ' : '') +
               f.toLocaleDateString('es-MX', { day: 'numeric', month: 'long', year: 'numeric' }) + ' · ' +
               f.toLocaleTimeString('es-MX', { hour: '2-digit', minute: '2-digit' }) + '</p>' +
-              '<p class="tf-marca">' + buenas + ' de 10</p>' +
+              '<p class="tf-marca">' + buenas + ' de ' + TOTAL + '</p>' +
               '<p class="tf-veredicto ' + (pasa ? 'tf-bien' : 'tf-mal') + '">' +
-              (pasa ? 'Pasaste tu evaluación' : 'Todavía no: necesitas 8 de 10') + '</p>';
-      h += '<div class="tf-tabla">' + S.items.map(function (it, n) {
-        return '<div class="tf-fila ' + (it.ok ? 'tf-bien' : 'tf-mal') + '"><span class="tf-n">' + (n + 1) + '</span>' +
-          '<span class="tf-que"><span class="tf-formula tf-enlinea">' + formula(it.p) + '</span><small>' +
-          (it.tipo === 'B' ? 'acomodar' : 'elegir la regla') + ' · ' + describe(it.p) + '</small>' +
-          (it.ok ? '' : '<small class="tf-tuya">tu respuesta: ' + (it.resp
-              ? '<span class="tf-formula tf-enlinea">' + formula(it.resp) + '</span>' : 'sin contestar') + '</small>') +
-          '</span><span class="tf-res">' + (it.ok ? '✓' : '✗') + '</span></div>';
+              (pasa ? 'Pasaste tu evaluación' : 'Todavía no: necesitas ' + PASA + ' de ' + TOTAL) + '</p>';
+      h += '<div class="tf-tabla">' + S.items.map(function (it) {
+        return '<div class="tf-fila ' + (it.ok ? 'tf-bien' : 'tf-mal') + '">' +
+          '<span class="tf-formula tf-enlinea">' + formula(it.p) + '</span>' +
+          '<span class="tf-res" aria-label="' + (it.ok ? 'correcto' : 'incorrecto') + '">' + (it.ok ? '✓' : '✗') + '</span></div>';
       }).join('') + '</div>';
       fin.querySelector('.tf-resultado').innerHTML = h;
       muestra(fin);

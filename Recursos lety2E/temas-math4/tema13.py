@@ -3,9 +3,10 @@
 Fuente: letymath.com/matemáticas-4/transformación-de-funciones-y-clasificacion (la lista de
 funciones de la Actividad 2) + lo acordado con Lety el 9-nov-2026: explorador con deslizadores
 (subir/bajar, izquierda/derecha, reflejar, estirar/comprimir), sus ejercicios con "ver gráfica",
-una práctica con objetivo (encimar la gráfica morada) y una evaluación de 10 reactivos al azar
-(5 de acomodar la gráfica dada la regla, 5 de elegir la regla entre cinco opciones) que sólo dice el
-resultado al final; pasa con 8. Ella evalúa uno a uno en su cubículo.
+una práctica con objetivo (encimar la gráfica morada) y una evaluación de 15 reactivos al azar
+(5 de acomodar la gráfica dada la regla, 5 de elegir la regla entre cinco opciones y 5 de dar los
+parámetros a, b, c de una gráfica, sin ver la propia) que sólo dice el
+resultado al final; pasa con 12 de 15. Ella evalúa uno a uno en su cubículo.
 
 El JS vive en tema13.js (junto a este archivo) y se incrusta en la página: sin librerías. La
 página NO lleva fórmulas en $…$ — se arman en HTML desde el JS, con las tipografías de KaTeX
@@ -44,8 +45,9 @@ explorador = G.seccion("Explora", "video",
           '<path d="M3 17c4-12 6-12 9 0s5 12 9 0"/>')
 
 practica = G.seccion("Práctica: llega a la gráfica morada", "ejemplo",
-    '      <p class="enunciado">Ahora hay un <strong>objetivo</strong>: mueve tu gráfica rosa hasta que quede '
-    'exactamente encima de la <strong class="tf-morada">morada</strong>. Cuando llegues, lee la regla que se formó.</p>\n'
+    '      <p class="enunciado">Ahora hay un <strong>objetivo</strong>. Siempre partes de la <strong>función básica</strong> '
+    '(la punteada), con <i class="tf-l tf-l-a">a</i> = 1, <i class="tf-l tf-l-b">b</i> = 0 y <i class="tf-l tf-l-c">c</i> = 0. Cambia esos valores hasta que tu gráfica rosa quede exactamente encima de la '
+    '<strong class="tf-morada">morada</strong>: así descubres los parámetros de la morada.</p>\n'
     '      <div id="tf-practica" class="tf-caja">\n        <p class="tf-fam"></p>\n        <div class="tf-lab"></div>\n'
     '        <p class="tf-aviso tf-pend"></p>\n'
     '        <div class="tf-acciones"><button type="button" class="tf-btn tf-otra-meta">Otra gráfica</button></div>\n      </div>')
@@ -58,14 +60,16 @@ ejercicios = G.seccion("Ejercicios", "ejercicios",
 evalua = G.seccion("Evaluación", "respuestas",
     '      <div id="tf-evalua" class="tf-caja">\n'
     '        <div class="tf-inicio">\n'
-    '          <p class="enunciado">Son <strong>10 reactivos</strong> al azar con todos los movimientos:</p>\n'
+    '          <p class="enunciado">Son <strong>15 reactivos</strong> al azar con todos los movimientos:</p>\n'
     '          <div class="tf-modos">\n'
     '            <div class="tf-modo">\n              <h3>5 de acomodar</h3>\n'
     '              <p>Aparece la regla de correspondencia y tú acomodas la gráfica con los controles, sin ver la respuesta.</p>\n            </div>\n'
     '            <div class="tf-modo">\n              <h3>5 de elegir</h3>\n'
     '              <p>Aparece la gráfica ya transformada y eliges su regla de correspondencia entre cinco opciones.</p>\n            </div>\n'
+    '            <div class="tf-modo">\n              <h3>5 de parámetros</h3>\n'
+    '              <p>Aparece la gráfica transformada y tú das los valores de a, b y c con las flechas, sin ver tu gráfica.</p>\n            </div>\n'
     '          </div>\n'
-    '          <p class="enunciado">La revisión es <strong>hasta el final</strong>. Se pasa con <strong>8 de 10</strong> y se presenta con tu profesora.</p>\n'
+    '          <p class="enunciado">La revisión es <strong>hasta el final</strong>. Se pasa con <strong>12 de 15</strong> y se presenta con tu profesora.</p>\n'
     '          <div class="tf-arranque">\n'
     '            <label class="tf-lbl" for="tf-nombre">Tu nombre</label>\n'
     '            <input id="tf-nombre" class="tf-nombre" type="text" autocomplete="off" maxlength="60">\n'
@@ -74,7 +78,7 @@ evalua = G.seccion("Evaluación", "respuestas",
     '        </div>\n'
     '        <div class="tf-corre" hidden>\n'
     '          <p class="tf-num"></p>\n          <p class="tf-fam"></p>\n          <p class="tf-pide"></p>\n'
-    '          <div class="tf-lab"></div>\n'
+    '          <div class="tf-lab"></div>\n          <div class="tf-labp" hidden></div>\n'
     '          <div class="tf-elige" hidden>\n            <div class="tf-plano"></div>\n            <div class="tf-ops"></div>\n          </div>\n'
     '          <div class="tf-acciones"><button type="button" class="tf-btn tf-sig">Siguiente</button></div>\n'
     '        </div>\n'
@@ -133,7 +137,7 @@ CSS = CSS_COMUN + """
                         padding: .5rem .6rem; font: inherit; font-size: .88rem; cursor: pointer; }
     .tf-ref[aria-pressed="true"] { background: var(--M); border-color: var(--M); color: #fff; }
 
-    .tf-modos { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: .4rem 0 .8rem; }
+    .tf-modos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin: .4rem 0 .8rem; }
     @media (max-width: 620px) { .tf-modos { grid-template-columns: 1fr; } }
     .tf-modo { border: 1px solid var(--border-s); border-radius: var(--r-md); padding: 1rem; text-align: center; display: flex; flex-direction: column; gap: .5rem; }
     .tf-modo h3 { margin: 0; color: var(--accent); font-size: 1.05rem; }
@@ -164,16 +168,34 @@ CSS = CSS_COMUN + """
     .tf-op .rz > span { border-top: 1px solid currentColor; padding: 0 .12em; }
     .tf-op[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
     [hidden] { display: none !important; }
+    /* ── práctica: forma general con a, b, c + la regla + los valores con flechitas ── */
+    .tf-modo-regla .tf-ctl:not(.tf-ctl-ref), .tf-modo-regla .tf-ref { display: none; }
+    .tf-modo-regla .tf-ctl-ref { grid-template-columns: 1fr; max-width: 14rem; margin: .3rem auto 0; }
+    .tf-modo-regla .tf-formula { white-space: normal; }
+    .tf-forma { font-size: 1.05rem; color: var(--text-3); }
+    .tf-real { font-size: 1.45rem; min-height: 2.6rem; }
+    .tf-l { font-weight: 700; font-style: italic; font-family: KaTeX_Math, KaTeX_Main, serif; }
+    .tf-vals { white-space: nowrap; }
+    .tf-ciego .tf-ctl-ref { display: none; }
+    .tf-ciego .tf-forma { font-size: 1.35rem; color: var(--text); min-height: 2.6rem; }
+    .tf-l-a, .tf-l-b, .tf-l-c { color: var(--T); }   /* los tres parámetros en turquesa (Lety, 10-nov-2026) */
+    .tf-pars { display: flex; flex-wrap: wrap; justify-content: center; gap: .5rem 1.1rem; margin: .5rem 0 .6rem; font-size: 1.15rem; }
+    .tf-par { display: inline-flex; align-items: center; gap: .3em; border: 1.5px solid var(--border); border-radius: 12px; padding: .15rem .3rem .15rem .6rem; background: var(--bg-card); }
+    .tf-par b { font-weight: 400; min-width: 1.6em; text-align: center; }
+    .tf-fls { display: inline-flex; flex-direction: column; gap: 2px; }
+    .tf-fl { width: 1.9rem; height: 1.25rem; border: none; border-radius: 6px; background: var(--accent-light); color: var(--accent);
+             font-size: .6rem; line-height: 1; cursor: pointer; padding: 0; }
+    .tf-fl:hover { background: var(--accent); color: #fff; }
+    @media (max-width: 420px) { .tf-pars { gap: .4rem; font-size: 1rem; } .tf-par { padding-left: .4rem; gap: .2em; } .tf-par b { min-width: 1.3em; } .tf-fl { width: 1.6rem; } }
+    /* ── pantalla de resultados ── */
     .tf-mov-in { font-size: .85rem; color: var(--text-3); }
     .tf-quien { text-align: center; margin: 0; color: var(--text-3); font-size: .9rem; }
     .tf-marca { text-align: center; margin: .2rem 0 0; font-family: 'Playfair Display', serif; font-size: 3rem; font-weight: 700; color: var(--accent); line-height: 1.2; }
     .tf-veredicto { text-align: center; margin: 0 0 1rem; font-weight: 700; font-size: 1.15rem; }
-    .tf-tabla { display: grid; gap: .1rem; max-width: 30rem; margin: 0 auto; }
-    .tf-fila { display: grid; grid-template-columns: 1.6rem 1fr 1.6rem; gap: .5rem; align-items: center; padding: .45rem .2rem; border-bottom: 1px solid var(--border-s); }
-    .tf-fila .tf-n { font-weight: 700; color: var(--text-3); font-size: .85rem; }
-    .tf-fila .tf-que { color: var(--text); display: flex; flex-direction: column; }
-    .tf-fila small { color: var(--text-3); font-size: .78rem; }
-    .tf-fila .tf-res { font-weight: 700; font-size: 1.1rem; text-align: right; }
+    .tf-tabla { display: grid; gap: .1rem; max-width: 20rem; margin: 0 auto; }
+    .tf-fila { display: flex; justify-content: space-between; gap: 1rem; align-items: center; padding: .45rem .5rem; border-bottom: 1px solid var(--border-s); }
+    .tf-fila .tf-formula { color: var(--text); }
+    .tf-fila .tf-res { font-weight: 700; font-size: 1.15rem; }
     .enunciado.nota { margin: .4rem 0 0; color: var(--text-3); font-size: .88rem; }
 """
 
