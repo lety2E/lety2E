@@ -59,6 +59,21 @@ EXAMENES = {
      ],
    },
  ],
+ # Matemáticas 2 (10-nov-2026, borrador): fracciones y la cuadrática en el
+ # Examen 1; rectas, triángulos y proporcionalidad en el Examen 2.
+ 'Matemáticas 2': [
+   {'nombre': 'Examen 1', 'letras': 'abcdef', 'filas': [
+       [('Operaciones con fracciones', 1, 2), 'Jerarquía con fracciones'],
+       ['Álgebra de fracciones', 'Ecuaciones con fracciones'],
+       ['Gráfica de una cuadrática'],
+       ['Representación de fracciones'],
+   ]},
+   {'nombre': 'Examen 2', 'letras': 'ghijkl', 'filas': [
+       ['Recta por dos puntos', 'Pendiente y ordenada'],
+       ['Teorema de Pitágoras', 'Razones trigonométricas'],
+       ['Proporcionalidad'],
+   ]},
+ ],
  # Matemáticas 5 (21-sep-2026). Corte: las reglas de derivación (temas 1 a 10)
  # en el Examen 1; recta tangente, máximos y mínimos e integrales (11 a 19) en el
  # Examen 2. Cada tema aporta 2 ejercicios (1 resuelto + 1 extra). Las filas se

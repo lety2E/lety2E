@@ -5,7 +5,7 @@ Por cada tema guarda dos listas: los ejercicios que en la pagina traen respuesta
 (seccion "Ejercicios") y los que no (seccion "Ejercicios extra"), conservando
 los bloques tal como estan en el sitio.
 """
-import os, json
+import os, json, re
 from extraer import P, walk, text, clean, items_of
 from propios import PROPIOS
 from cursos import elegir, archivo
@@ -74,6 +74,29 @@ CURSOS = {
     ('problemas-ecuaciones.html',  'Problemas de ecuaciones',   ('ejercicios', 1, 2)),
     # tema 15, agregado al Examen 2 el 29-sep-2026
     ('decimales.html',             'Decimales',                 ('ejercicios', 1, 2)),
+ ]),
+ # Matemáticas 2 (10-nov-2026). Borrador del asistente con el método de Mate 5
+ # (Lety lo revisa después tema por tema). Las páginas aún no parten los extras en
+ # 1 y 2: el examen sale de "Ejercicios extra". Fuera por ahora: Problemas con fracciones (sin extras) y Semejanza
+ # (sus ejercicios dependen de figuras que el extractor no ve).
+ 'Matemáticas 2': ('../../math/matematicas-2', [
+    ('operaciones-fracciones.html', 'Operaciones con fracciones',   ('ejercicios', 3, 3)),
+    # Lety (10-nov-2026): 2 resueltos + 2 de extra 1. Resueltos Bloques 1-3 y
+    # extra 1 A-C, de 4 cada uno, cortados de 2 en 2 en orden (el Bloque 4 de
+    # resueltos queda de práctica; extra 2 D-F también).
+    # Lety (10-nov-2026): 6 tablas de 5 renglones, cada versión lleva UNA tabla
+    # (resuelta en el sitio). Los extras (lista de mixtos) no entran.
+    ('representacion-fracciones.html','Representación de fracciones', ('ejercicios', 1, 0)),
+    ('jerarquia-fracciones.html',   'Jerarquía con fracciones',     ('bloques', 1, 1, 2)),
+    ('algebra-fracciones.html',     'Álgebra de fracciones',        ('ejercicios', 2, 2)),
+    ('ecuaciones-fracciones.html',  'Ecuaciones con fracciones',    ('ejercicios', 1, 1)),
+    ('grafica-cuadratica.html',     'Gráfica de una cuadrática',    ('ejercicios', 1, 1)),
+    ('recta-dos-puntos.html',       'Recta por dos puntos',         ('ejercicios', 1, 1)),
+    ('pendiente-ordenada.html',     'Pendiente y ordenada',         ('ejercicios', 1, 2)),
+    ('pitagoras.html',              'Teorema de Pitágoras',         ('ejercicios', 1, 1)),
+    # Lety (10-nov-2026): se escribieron los resueltos 5 y 6 para que alcancen
+    ('razones-trigonometricas.html','Razones trigonométricas',      ('ejercicios', 1, 1)),
+    ('proporcionalidad.html',       'Proporcionalidad',             ('ejercicios', 2, 2)),
  ]),
  # Matemáticas 5 (21-sep-2026). Lety pidió reproducir los patrones de Mate 1 en
  # los 19 temas de una vez: bloques por tipo en el mismo orden en los dos lados
@@ -207,6 +230,11 @@ def reactivos(sec):
             if figs and len(figs) == len(it):
                 for r, svg in zip(it, figs):
                     if svg: r['svg'] = svg
+            if not it and body is not None:
+                # tarjeta que es sólo una figura (triángulos de Pitágoras y
+                # razones trigonométricas, Mate 2): la figura es el reactivo
+                svg = figura_de(body)
+                if svg: it = [{'svg': svg}]
             if it: bloques.append((head, it))
         return bloques
     figs = [x for x in walk(sec) if not isinstance(x,str) and 'ejer-card-body' in x.cls()]
@@ -216,6 +244,10 @@ def reactivos(sec):
             svg = next((raw(x) for x in walk(f) if not isinstance(x,str) and x.tag=='svg'), None)
             if svg: it.append({'svg': svg})
         if it: return [('', it)]
+    # lista suelta de extras (<ul class="extras-grid"><li>), Álgebra de fracciones
+    lis = [clean(text(x)) for x in walk(sec) if not isinstance(x,str) and x.tag=='li']
+    lis = [l for l in lis if l]
+    if lis: return [('', [{'tex': l} for l in lis])]
     rows = [clean(text(x)) for x in walk(sec) if not isinstance(x,str) and 'ej-row' in x.cls()]
     rows = [r for r in rows if r]
     if rows: return [('', [{'tex': r} for r in rows])]
@@ -233,6 +265,20 @@ def agregar_propios(tema, curso):
             n += len(nuevos)
     return n
 
+RE_TABLA = re.compile(r'<div class="rep-bloque">.*?</table></div></div>', re.S)
+
+def tablas_de(path):
+    """Las tablas para completar (Representación de fracciones, Mate 2): cada
+    tabla del sitio es UN reactivo; su resolución es la tabla llena de la sección
+    Resoluciones, en el mismo orden."""
+    s = open(path, encoding='utf-8').read()
+    i = s.find('<h2>Ejercicios</h2>'); r = s.find('<h2>Resoluciones</h2>')
+    if i < 0 or r < 0: return []
+    vacias = RE_TABLA.findall(s[i:r]); llenas = RE_TABLA.findall(s[r:s.find('</section>', r)])
+    if not vacias or len(vacias) != len(llenas): return []
+    return [('Tabla %d' % (k+1), [{'tabla': v, 'resuelta': l}])
+            for k, (v, l) in enumerate(zip(vacias, llenas))]
+
 def construir(curso):
     carpeta, temas = CURSOS[curso]
     carpeta = os.path.expanduser(carpeta)
@@ -246,6 +292,8 @@ def construir(curso):
             'extras':        reactivos(sec_extra) if sec_extra is not None else [],
             'fuente_extra':  de_donde,
         }
+        tabs = tablas_de(os.path.join(carpeta, arch))
+        if tabs: tema['con_respuesta'] = tabs
         tema['propios'] = agregar_propios(tema, curso)
         banco.append(tema)
     return banco

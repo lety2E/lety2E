@@ -38,6 +38,7 @@ COLUMNA  = 19.2                    # column-gap (1.2rem)
 ALTO_FORMULA = 36.0                # .9rem x --renglon 2.5 (17-sep-2026; era 2.3)
 ALTO_LIBRE   = 21.6                # .9rem x 1.5
 ALTO_FIGURA  = 110.0               # svg max-height (110 desde el 17-sep-2026)
+ALTO_TABLA   = 340.0               # tabla de 5 renglones de 60px + encabezado
 MARGEN_LIBRE = 6.4                 # .4rem arriba y abajo, que se colapsan
 
 # Caracteres de texto corrido que caben en un renglón, por píxel de ancho.
@@ -49,7 +50,7 @@ EM_FORMULA = 16 * 0.9 * 0.95 * 1.21   # 16.55 px
 
 
 def _visuales(tipo, texto, ancho_px):
-    if tipo == 'figura':
+    if tipo in ('figura', 'tabla'):
         return 1
     if tipo == 'formula':
         return max(1, math.ceil(ancho.ancho_em(texto) * EM_FORMULA / max(1, ancho_px)))
@@ -66,6 +67,8 @@ def alto_tarjeta(lineas, ancho, columnas=1):
         v = _visuales(tipo, texto, ancho_col)
         if tipo == 'figura':
             altos.append(ALTO_FIGURA)
+        elif tipo == 'tabla':
+            altos.append(ALTO_TABLA)
         elif tipo == 'libre':
             altos.append(ALTO_LIBRE * v)
         else:

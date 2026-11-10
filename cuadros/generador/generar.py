@@ -124,6 +124,18 @@ body{margin:0;background:#fff;color:var(--text);font-family:var(--font-body);fon
 .figura svg [fill]:not([fill="none"]){fill:#000}
 .figura svg [fill="#FBF2EF"]{fill:#FFF}
 
+/* Tablas para completar (Representación de fracciones, Mate 2): la tabla entera
+   es el reactivo. Celdas vacías altas para escribir y dibujar. */
+.tabla .rep-titulo{display:none}
+.tabla table{border-collapse:collapse;width:100%;font-size:.85rem}
+.tabla th,.tabla td{border:1px solid #000;padding:.25rem;text-align:center;vertical-align:middle}
+.tabla th{font-weight:600;font-size:.75rem}
+.tabla td{height:60px}
+.tabla td svg{display:block;margin:0 auto}
+.tabla svg [fill="#FF00AA"]{fill:#000}
+.tabla svg [stroke="#4A6FA5"]{stroke:#000}
+.tabla svg [fill="#555"]{fill:#000}
+
 @page{size:letter;margin:.9cm}
 @media print{
   .hoja{padding:0;max-width:none}
@@ -175,6 +187,8 @@ def partes_linea(item):
     """(tipo, texto plano, html). El tipo lo usa medida.py para la altura.
     Un reactivo con figura Y texto (Optimizacion: el rectangulo y su perimetro)
     devuelve dos partes; por eso partes() es lo que se usa desde afuera."""
+    if 'tabla' in item:
+        return 'tabla', '', '<div class="ej-line libre tabla">%s</div>' % item['tabla']
     if 'svg' in item and 'tex' not in item:
         return 'figura', '', '<div class="ej-line libre figura">%s</div>' % item['svg']
     cuerpo = enunciado(item['tex'])

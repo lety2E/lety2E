@@ -204,7 +204,9 @@ def tarjeta_resuelta(banco, tema, items, columnas, numero=0):
     trozos = []
     for item in items:
         partes = []
-        if 'tex' not in item:                          # la pregunta es una figura
+        if 'tabla' in item:                            # tabla para completar
+            partes.append('<div class="sol tabla">%s</div>' % item['resuelta'])
+        elif 'tex' not in item:                        # la pregunta es una figura
             fig = figura_de(banco, tema, item)
             if fig:
                 partes += ['<div class="sol-grafica">%s</div>' % fig[1],

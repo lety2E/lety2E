@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Matemáticas 2j</title>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../style.css">
+<link rel="stylesheet" href="../cuadros.css">
+<style>
+/* El examen se imprime y se fotocopia por decenas: va en NEGRO SOBRE BLANCO,
+   sin un solo color. Regla de Lety (8-sep-2026): gasta menos tinta y el
+   fotocopiado sale limpio. Los rosas del sitio (#3D2525, #E0C4BC) salían
+   grises y lavados al fotocopiar. */
+:root{
+  --bg-card:#FFFFFF;
+  --text:#000000;
+  --border:#000000;
+  --r-md:12px;
+  --font-body:'DM Sans',system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
+  --font-display:'Playfair Display',Georgia,serif;
+  /* Aire entre renglones (el sitio usa 2.4). Es la palanca para que
+     el examen quepa en UNA hoja carta; la otra es el acomodo (ver acomodo.py).
+     Con 49 ejercicios el examen ocupa ~97%% de la hoja: 2.4 lo dejaba justo en el
+     borde y cualquier impresora lo pasaba a dos hojas. */
+  --renglon:2.5;
+}
+*{box-sizing:border-box}
+/* 12pt desde el 17-sep-2026: Lety imprimió la hoja a 10pt y la vio chica; con el
+   Examen 1 al 80%% habia aire para crecer. A 12pt las seis versiones siguen en una hoja. */
+body{margin:0;background:#fff;color:var(--text);font-family:var(--font-body);font-size:12pt}
+.hoja{max-width:20.4cm;margin:0 auto;padding:.8cm}
+
+.titulo{font-family:var(--font-display);font-size:.95rem;font-weight:700;
+        margin:0 0 .5rem;letter-spacing:.01em;text-align:right}
+
+/* La hoja se arma por filas, como los minipages: en cada fila los temas se
+   reparten el ancho segun su peso (ver acomodo.py). */
+.rejilla{display:flex;flex-direction:column;gap:.6rem}
+.fila{display:grid;gap:.6rem;align-items:start;
+      break-inside:avoid;-webkit-column-break-inside:avoid;page-break-inside:avoid}
+@media (max-width:640px){.fila{grid-template-columns:1fr !important}}
+
+.mini-card{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:var(--r-md);overflow:hidden;
+  break-inside:avoid;-webkit-column-break-inside:avoid;page-break-inside:avoid;
+  width:100%;min-width:0;
+}
+/* tarjeta ancha con muchos ejercicios cortos: se parten en columnas adentro */
+.mini-card-body.en-columnas{column-gap:1.2rem}
+.mini-card-body.en-columnas .ej-line{break-inside:avoid}
+/* Titulo del tema: discreto y en negritas. Sin pestana de color: una barra
+   solida en cada tarjeta gasta tinta de mas al fotocopiar. */
+.mini-card-head{
+  padding:.35rem .6rem 0;
+  font-family:var(--font-display);font-size:.82rem;font-weight:700;
+  line-height:1.25;
+}
+.mini-card-body{padding:.35rem .6rem .5rem;font-size:.9rem;line-height:var(--renglon)}
+/* En el sitio los renglones son nowrap con scroll; en papel no hay scroll, asi
+   que aqui las formulas largas se parten solas en sus operadores. La sangria
+   francesa hace evidente que el renglon viene continuado. */
+.ej-line{white-space:normal;padding-left:1.1em;text-indent:-1.1em}
+.ej-line.libre{line-height:1.5;margin:.4rem 0;padding-left:0;text-indent:0}
+.mini-card-body .katex,.mini-card-body .katex-html{white-space:normal}
+.mini-card-body .katex{font-size:.95em}
+/* Figuras a 110px (eran 80): impresas a 80 los angulos casi no se leian. Y las
+   etiquetas de los triangulos crecen en sus propias unidades (font-size del svg). */
+.figura svg{max-width:100%;height:auto;max-height:110px;display:block;margin:.2rem auto}
+.con-figura{display:flex;align-items:center;gap:.8rem;break-inside:avoid;-webkit-column-break-inside:avoid;page-break-inside:avoid}
+.con-figura .figura{flex:0 0 auto;padding-left:0;text-indent:0}
+/* en flex el svg sin medidas colapsa a 0x0: se le fija la altura y el ancho sale del viewBox */
+.con-figura .figura svg{margin:.2rem 0;height:110px;width:auto;max-width:none}
+.pegado,.pegado .katex,.pegado .katex-html{white-space:nowrap}
+.figura svg text{font-size:15px;font-weight:700}
+/* Las figuras llegan del sitio con su tinta de color (magentas y morados). En
+   el examen van en escala de grises: la cuadricula clarita, los ejes gris
+   medio y todo lo demas en negro. El relleno conserva su fill-opacity, asi que
+   los triangulos quedan con un gris apenas visible. */
+.figura svg [stroke]{stroke:#000}
+.figura svg [stroke="#E0C4BC"]{stroke:#CCC}
+.figura svg [stroke="#7B5A50"]{stroke:#555}
+.figura svg [fill]:not([fill="none"]){fill:#000}
+.figura svg [fill="#FBF2EF"]{fill:#FFF}
+
+/* Tablas para completar (Representación de fracciones, Mate 2): la tabla entera
+   es el reactivo. Celdas vacías altas para escribir y dibujar. */
+.tabla .rep-titulo{display:none}
+.tabla table{border-collapse:collapse;width:100%;font-size:.85rem}
+.tabla th,.tabla td{border:1px solid #000;padding:.25rem;text-align:center;vertical-align:middle}
+.tabla th{font-weight:600;font-size:.75rem}
+.tabla td{height:60px}
+.tabla td svg{display:block;margin:0 auto}
+.tabla svg [fill="#FF00AA"]{fill:#000}
+.tabla svg [stroke="#4A6FA5"]{stroke:#000}
+.tabla svg [fill="#555"]{fill:#000}
+
+@page{size:letter;margin:.9cm}
+@media print{
+  .hoja{padding:0;max-width:none}
+}
+</style>
+</head>
+<body><div class="barra"><div class="interior"><a class="grupo" href="index.html" style="text-decoration:none">← Matemáticas 2</a><span class="sep"></span><span class="grupo">Examen 1</span><a class="v" href="a.html">a</a><a class="v" href="b.html">b</a><a class="v" href="c.html">c</a><a class="v" href="d.html">d</a><a class="v" href="e.html">e</a><a class="v" href="f.html">f</a><span class="sep"></span><span class="grupo">Examen 2</span><a class="v" href="g.html">g</a><a class="v" href="h.html">h</a><a class="v" href="i.html">i</a><a class="v actual" href="j.html">j</a><a class="v" href="k.html">k</a><a class="v" href="l.html">l</a><span class="sep"></span><a class="v par" href="j-resuelta.html">ver resuelta</a><button class="imprimir" onclick="window.print()">Imprimir</button></div></div><div class="papel"><div class="hoja"><p class="titulo">Matemáticas 2j</p><div class="rejilla"><div class="fila" style="grid-template-columns:1fr 1fr"><div class="mini-card"><div class="mini-card-head">7. Recta por dos puntos</div><div class="mini-card-body"><div class="ej-line"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mo stretchy="false">(</mo><mo>−</mo><mn>5</mn><mo separator="true">,</mo><mo>−</mo><mn>5</mn><mo stretchy="false">)</mo><mo separator="true">,</mo><mspace width="1em"/><mi>B</mi><mo stretchy="false">(</mo><mn>5</mn><mo separator="true">,</mo><mn>5</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">A(-5, -5), \quad B(5, 5)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">A</span><span class="mopen">(</span><span class="mord">−</span><span class="mord">5</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">−</span><span class="mord">5</span><span class="mclose">)</span><span class="mpunct">,</span><span class="mspace" style="margin-right:1em;"></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mopen">(</span><span class="mord">5</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">5</span><span class="mclose">)</span></span></span></span></div><div class="ej-line"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mo stretchy="false">(</mo><mo>−</mo><mn>2</mn><mo separator="true">,</mo><mn>6</mn><mo stretchy="false">)</mo><mo separator="true">,</mo><mspace width="1em"/><mi>B</mi><mo stretchy="false">(</mo><mn>5</mn><mo separator="true">,</mo><mn>2</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">A(-2, 6), \quad B(5, 2)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">A</span><span class="mopen">(</span><span class="mord">−</span><span class="mord">2</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">6</span><span class="mclose">)</span><span class="mpunct">,</span><span class="mspace" style="margin-right:1em;"></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mopen">(</span><span class="mord">5</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">2</span><span class="mclose">)</span></span></span></span></div></div></div><div class="mini-card"><div class="mini-card-head">8. Pendiente y ordenada</div><div class="mini-card-body"><div class="ej-line"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>−</mo><mn>4</mn><mi>x</mi><mo>−</mo><mn>3</mn><mi>y</mi><mo>+</mo><mn>9</mn><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">-4x-3y+9=0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">−</span><span class="mord">4</span><span class="mord mathnormal">x</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8389em;vertical-align:-0.1944em;"></span><span class="mord">3</span><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">9</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0</span></span></span></span></div><div class="ej-line"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>−</mo><mn>4</mn><mi>x</mi><mo>+</mo><mn>6</mn><mi>y</mi><mo>+</mo><mn>12</mn><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">-4x+6y+12=0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">−</span><span class="mord">4</span><span class="mord mathnormal">x</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8389em;vertical-align:-0.1944em;"></span><span class="mord">6</span><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">12</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0</span></span></span></span></div><div class="ej-line"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>4</mn><mi>x</mi><mo>−</mo><mn>7</mn><mi>y</mi><mo>−</mo><mn>21</mn><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">4x-7y-21=0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">4</span><span class="mord mathnormal">x</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8389em;vertical-align:-0.1944em;"></span><span class="mord">7</span><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">21</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0</span></span></span></span></div></div></div></div><div class="fila" style="grid-template-columns:1fr 1fr"><div class="mini-card"><div class="mini-card-head">9. Teorema de Pitágoras</div><div class="mini-card-body"><div class="ej-line libre figura"><svg viewbox="0 0 194 90" width="194" height="90" xmlns="http://www.w3.org/2000/svg" class="tri-svg" role="img" aria-label="Triángulo rectángulo con cateto 5, base 12 e hipotenusa y"><polygon points="30.0,66.2 160.0,66.2 30.0,12.0" fill="#FF00AA" fill-opacity="0.12" stroke="#FF00AA" stroke-width="2" stroke-linejoin="round"></polygon><polyline points="30.0,57.2 39.0,57.2 39.0,66.2" fill="none" stroke="#7B5A50" stroke-width="1"></polyline><text x="22.0" y="43.1" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="end">5</text><text x="95.0" y="83.2" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="middle">12</text><text x="111.0" y="35.1" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" font-style="italic" text-anchor="start">y</text><text x="144.0" y="59.2" font-family="DM Sans, sans-serif" font-size="13" fill="#7B2CBF" text-anchor="middle">β</text></svg></div><div class="ej-line libre figura"><svg viewbox="0 0 214 112" width="214" height="112" xmlns="http://www.w3.org/2000/svg" class="tri-svg" role="img" aria-label="Triángulo rectángulo con cateto 9, base x e hipotenusa 20"><polygon points="30.0,87.6 180.0,87.6 30.0,12.0" fill="#FF00AA" fill-opacity="0.12" stroke="#FF00AA" stroke-width="2" stroke-linejoin="round"></polygon><polyline points="30.0,78.6 39.0,78.6 39.0,87.6" fill="none" stroke="#7B5A50" stroke-width="1"></polyline><text x="22.0" y="53.8" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="end">9</text><text x="105.0" y="104.6" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" font-style="italic" text-anchor="middle">x</text><text x="121.0" y="45.8" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="start">20</text><text x="39.0" y="32.0" font-family="DM Sans, sans-serif" font-size="13" fill="#7B2CBF" text-anchor="middle">α</text><text x="164.0" y="80.6" font-family="DM Sans, sans-serif" font-size="13" fill="#7B2CBF" text-anchor="middle">β</text></svg></div></div></div><div class="mini-card"><div class="mini-card-head">10. Razones trigonométricas</div><div class="mini-card-body"><div class="ej-line libre figura"><svg viewbox="0 0 165 133" width="165" height="133" xmlns="http://www.w3.org/2000/svg" class="tri-svg" role="img" aria-label="Triángulo rectángulo con cateto 8, base y e hipotenusa z"><polygon points="30.0,109.0 125.0,109.0 30.0,14.0" fill="#FF00AA" fill-opacity="0.12" stroke="#FF00AA" stroke-width="2" stroke-linejoin="round"></polygon><polyline points="30.0,100.0 39.0,100.0 39.0,109.0" fill="none" stroke="#7B5A50" stroke-width="1"></polyline><path d="M 109.0,109.0 A 16.0,16.0 0 0 1 113.7,97.7" fill="none" stroke="#7B2CBF" stroke-width="1.2"></path><text x="106.0" y="104.0" font-family="DM Sans, sans-serif" font-size="12" fill="#7B2CBF" text-anchor="end">45°</text><text x="22.0" y="65.5" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="end">8</text><text x="77.5" y="126.0" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" font-style="italic" text-anchor="middle">y</text><text x="92.5" y="58.5" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" font-style="italic" text-anchor="start">z</text></svg></div><div class="ej-line libre figura"><svg viewbox="0 0 240 117" width="240" height="117" xmlns="http://www.w3.org/2000/svg" class="tri-svg" role="img" aria-label="Triángulo rectángulo con cateto 9, base x e hipotenusa y"><polygon points="30.0,93.3 200.0,93.3 30.0,14.0" fill="#FF00AA" fill-opacity="0.12" stroke="#FF00AA" stroke-width="2" stroke-linejoin="round"></polygon><polyline points="30.0,84.3 39.0,84.3 39.0,93.3" fill="none" stroke="#7B5A50" stroke-width="1"></polyline><path d="M 184.0,93.3 A 16.0,16.0 0 0 1 185.5,86.5" fill="none" stroke="#7B2CBF" stroke-width="1.2"></path><text x="181.0" y="88.3" font-family="DM Sans, sans-serif" font-size="12" fill="#7B2CBF" text-anchor="end">25°</text><path d="M 30.0,30.0 A 16.0,16.0 0 0 0 44.5,20.8" fill="none" stroke="#7B2CBF" stroke-width="1.2"></path><text x="49.0" y="39.0" font-family="DM Sans, sans-serif" font-size="12" fill="#7B2CBF" text-anchor="start">α</text><text x="22.0" y="57.6" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" text-anchor="end">9</text><text x="115.0" y="110.3" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" font-style="italic" text-anchor="middle">x</text><text x="130.0" y="50.6" font-family="DM Sans, sans-serif" font-size="12" fill="#1A0828" font-style="italic" text-anchor="start">y</text></svg></div></div></div></div><div class="fila" style="grid-template-columns:1fr"><div class="mini-card"><div class="mini-card-head">11. Proporcionalidad</div><div class="mini-card-body"><div class="ej-line libre">Calcula el 18% de 350.</div><div class="ej-line libre">Una televisión costaba <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>8500.</mn><mi>S</mi><mi>i</mi><mi>d</mi><mi>e</mi><mi>s</mi><mi>c</mi><mi>o</mi><mi>n</mi><mi>t</mi><mi>a</mi><mi>r</mi><mi>o</mi><mi>n</mi></mrow><annotation encoding="application/x-tex">8500. Si descontaron </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord">8500.</span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="mord mathnormal">i</span><span class="mord mathnormal">d</span><span class="mord mathnormal">esco</span><span class="mord mathnormal">n</span><span class="mord mathnormal">t</span><span class="mord mathnormal">a</span><span class="mord mathnormal">ro</span><span class="mord mathnormal">n</span></span></span></span>1200 ¿qué porcentaje descontaron?</div><div class="ej-line libre">6 grifos llenan una alberca en 4 horas. ¿Cuánto tardarán 10 grifos?</div><div class="ej-line">Un celular costaba <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>3500.</mn><mi>S</mi><mi>i</mi><mi>d</mi><mi>e</mi><mi>s</mi><mi>c</mi><mi>o</mi><mi>n</mi><mi>t</mi><mi>a</mi><mi>r</mi><mi>o</mi><mi>n</mi></mrow><annotation encoding="application/x-tex">3500. Si descontaron </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord">3500.</span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="mord mathnormal">i</span><span class="mord mathnormal">d</span><span class="mord mathnormal">esco</span><span class="mord mathnormal">n</span><span class="mord mathnormal">t</span><span class="mord mathnormal">a</span><span class="mord mathnormal">ro</span><span class="mord mathnormal">n</span></span></span></span>250 ¿cuál fue el porcentaje del descuento?</div></div></div></div></div></div></div></body></html>

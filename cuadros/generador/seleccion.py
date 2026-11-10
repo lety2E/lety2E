@@ -276,7 +276,7 @@ def seleccionar(tema, V):
     return versiones, {'modo': 'ejercicios', 'r_uso': r_uso, 'e_uso': e_uso,
                        'falta': falta, 'r_disp': r_disp, 'e_disp': e_disp}
 
-def clave(x): return x.get('tex') or x.get('svg')
+def clave(x): return x.get('tex') or x.get('svg') or x.get('tabla')
 
 def construir(banco, V):
     # Un reactivo que ya esta en "Ejercicios" no puede volver a contarse como

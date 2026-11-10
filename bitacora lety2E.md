@@ -5,6 +5,17 @@
 
 ---
 
+## 2026-11-10 — Cuadros: exámenes de Matemáticas 2
+
+Primer armado de los dos exámenes de Mate 2 (6 versiones cada uno), con el método de Mate 5. Lety revisa el reparto tema por tema.
+
+- **Examen 1 (a–f, 94 %)**: Operaciones (3+3), Representación (una tabla), Jerarquía (2+2), Álgebra (2+2), Ecuaciones (1+1), Gráfica de la cuadrática (1+1). **Examen 2 (g–l, 64 %)**: Recta por dos puntos (1+1), Pendiente y ordenada (1+2), Pitágoras (1+1), Razones trigonométricas (1+1), Proporcionalidad (2+2).
+- **Representación de fracciones**: 6 tablas de 5 renglones con sus resoluciones (en cada renglón viene una representación); el examen lleva una tabla por versión. Rectas numéricas más largas y con las divisiones de cada segmento marcadas, también en Ejemplos. Generador en `Recursos lety2E/representacion-fracciones-math2.py`.
+- **Jerarquía con fracciones**: extras partidos en extra 1 (A–C) y extra 2 (D–F, dos bloques nuevos), sin resultado. Cinco resultados del viejo Bloque A estaban mal; los correctos van en la hoja resuelta.
+- **Razones trigonométricas**: resueltos 5 y 6 nuevos.
+- Generador: lee tarjetas que son sólo figura, listas `<li>` de extras y tablas para completar.
+- Fuera por ahora: Problemas con fracciones y Semejanza. Faltan ~93 resoluciones en las hojas resueltas.
+
 ## 2026-11-10 — Math 4, tema 13: práctica con a, b, c y examen de 15
 
 Ajustes de Lety al graficador de Transformación de funciones.
