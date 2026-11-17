@@ -5,6 +5,14 @@
 
 ---
 
+## 2026-11-17 — Math 2, Pendiente y ordenada: video, simulador y resueltos completos
+
+- **Video** al inicio del tema: «Graficar una recta con pendiente y ordenada al origen» (qBg_IMux4rI), con el facade `.yt-lite`.
+- **Comprueba tu gráfica**: simulador nuevo `assets/graficador-rectas.js` (reutilizable con `<div class="graficador-recta">`). Arriba y = mx + b y m = Δy/Δx; botones positiva/negativa; deslizadores Δy y Δx (1 a 5) y b (−5 a 5); regla de correspondencia; la gráfica se forma escalón por escalón. Colores del video: alto magenta, ancho turquesa, recta morada.
+- **Gráficas del Ejemplo y los 6 resueltos** rehechas en formato escalera con `Recursos lety2E/escalera-recta-svg-math.py` (siguen siendo SVG fijos con `role="img"`, que cosecha `cuadros/`). Más grandes y siempre debajo del despeje.
+- **Resueltos sin saltar pasos**: se agregó el paso de dividir entre el coeficiente de y, y la línea m · b, como en el Ejemplo.
+- La **comprobación de puntos** va dentro de la tarjeta de su ejercicio (línea punteada), y la **recta a graficar** se resalta al inicio de cada tarjeta.
+
 ## 2026-11-10 — Cuadros: exámenes de Matemáticas 2
 
 Primer armado de los dos exámenes de Mate 2 (6 versiones cada uno), con el método de Mate 5. Lety revisa el reparto tema por tema.
