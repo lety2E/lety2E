@@ -457,18 +457,12 @@
    "$\\dfrac{4}{3} - \\left[\\dfrac{1}{2}\\cdot\\left(\\dfrac{1}{4} + \\dfrac{1}{3}\\right)\\right]$": "$\\dfrac{4}{3} - \\left[\\dfrac{1}{2}\\cdot\\left(\\dfrac{1}{4} + \\dfrac{1}{3}\\right)\\right] = \\mathbf{\\dfrac{25}{24}}$"
   },
   "Pendiente y ordenada": {
-   "$2x-5y-10=0$": "$\\begin{aligned}\n-5y &= -2x + 10 \\\\\ny &= \\frac{-2x + 10}{-5} \\\\\n\\mathbf{y} &\\mathbf{= \\tfrac{2}{5}x - 2}\n\\end{aligned}$",
-   "$-3x+8y+16=0$": "$\\begin{aligned}\n8y &= 3x - 16 \\\\\ny &= \\frac{3x - 16}{8} \\\\\n\\mathbf{y} &\\mathbf{= \\tfrac{3}{8}x - 2}\n\\end{aligned}$",
+   "$7x-3y+9=0$": "$\\begin{aligned}\n-3y &= -7x - 9 \\\\\ny &= \\frac{-7x - 9}{-3} \\\\\n\\mathbf{y} &\\mathbf{= \\tfrac{7}{3}x + 3}\n\\end{aligned}$",
+   "$6x+5y-15=0$": "$\\begin{aligned}\n5y &= -6x + 15 \\\\\ny &= \\frac{-6x + 15}{5} \\\\\n\\mathbf{y} &\\mathbf{= -\\tfrac{6}{5}x + 3}\n\\end{aligned}$",
+   "$3x-2y-6=0$": "$\\begin{aligned}\n-2y &= -3x + 6 \\\\\ny &= \\frac{-3x + 6}{-2} \\\\\n\\mathbf{y} &\\mathbf{= \\tfrac{3}{2}x - 3}\n\\end{aligned}$",
    "$3x+2y+4=0$": "$\\begin{aligned}\n2y &= -3x - 4 \\\\\ny &= \\frac{-3x - 4}{2} \\\\\n\\mathbf{y} &\\mathbf{= -\\tfrac{3}{2}x - 2}\n\\end{aligned}$",
-   "$-8x+3y+9=0$": "$\\begin{aligned}\n3y &= 8x - 9 \\\\\ny &= \\frac{8x - 9}{3} \\\\\n\\mathbf{y} &\\mathbf{= \\tfrac{8}{3}x - 3}\n\\end{aligned}$",
-   "$5x+3y-6=0$": "$\\begin{aligned}\n3y &= -5x + 6 \\\\\ny &= \\frac{-5x + 6}{3} \\\\\n\\mathbf{y} &\\mathbf{= -\\tfrac{5}{3}x + 2}\n\\end{aligned}$",
-   "$3x-7y+14=0$": "$\\begin{aligned}\n-7y &= -3x - 14 \\\\\ny &= \\frac{-3x - 14}{-7} \\\\\n\\mathbf{y} &\\mathbf{= \\tfrac{3}{7}x + 2}\n\\end{aligned}$",
-   "$-4x+6y+12=0$": "$\\begin{aligned}\n6y &= 4x - 12 \\\\\ny &= \\frac{4x - 12}{6} \\\\\n\\mathbf{y} &\\mathbf{= \\tfrac{2}{3}x - 2}\n\\end{aligned}$",
-   "$4x-7y-21=0$": "$\\begin{aligned}\n-7y &= -4x + 21 \\\\\ny &= \\frac{-4x + 21}{-7} \\\\\n\\mathbf{y} &\\mathbf{= \\tfrac{4}{7}x - 3}\n\\end{aligned}$",
-   "$-5x+4y-8=0$": "$\\begin{aligned}\n4y &= 5x + 8 \\\\\ny &= \\frac{5x + 8}{4} \\\\\n\\mathbf{y} &\\mathbf{= \\tfrac{5}{4}x + 2}\n\\end{aligned}$",
-   "$10x-9y-27=0$": "$\\begin{aligned}\n-9y &= -10x + 27 \\\\\ny &= \\frac{-10x + 27}{-9} \\\\\n\\mathbf{y} &\\mathbf{= \\tfrac{10}{9}x - 3}\n\\end{aligned}$",
-   "$-2x+9y+18=0$": "$\\begin{aligned}\n9y &= 2x - 18 \\\\\ny &= \\frac{2x - 18}{9} \\\\\n\\mathbf{y} &\\mathbf{= \\tfrac{2}{9}x - 2}\n\\end{aligned}$",
-   "$-6x+5y+10=0$": "$\\begin{aligned}\n5y &= 6x - 10 \\\\\ny &= \\frac{6x - 10}{5} \\\\\n\\mathbf{y} &\\mathbf{= \\tfrac{6}{5}x - 2}\n\\end{aligned}$"
+   "$-3x-4y+8=0$": "$\\begin{aligned}\n-4y &= 3x - 8 \\\\\ny &= \\frac{3x - 8}{-4} \\\\\n\\mathbf{y} &\\mathbf{= -\\tfrac{3}{4}x + 2}\n\\end{aligned}$",
+   "$-8x+3y+9=0$": "$\\begin{aligned}\n3y &= 8x - 9 \\\\\ny &= \\frac{8x - 9}{3} \\\\\n\\mathbf{y} &\\mathbf{= \\tfrac{8}{3}x - 3}\n\\end{aligned}$"
   }
  }
 }

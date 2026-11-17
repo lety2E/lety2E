@@ -92,7 +92,8 @@ CURSOS = {
     ('ecuaciones-fracciones.html',  'Ecuaciones con fracciones',    ('ejercicios', 1, 1)),
     ('grafica-cuadratica.html',     'Gráfica de una cuadrática',    ('ejercicios', 1, 1)),
     ('recta-dos-puntos.html',       'Recta por dos puntos',         ('ejercicios', 1, 1)),
-    ('pendiente-ordenada.html',     'Pendiente y ordenada',         ('ejercicios', 1, 2)),
+    ('pendiente-ordenada.html',     'Pendiente y ordenada',         ('ejercicios', 1, 1)),
+    # 1 resuelto + 1 de "Ejercicios extra 1" (Lety, 17-nov-2026), igual que en Mate 1.
     ('pitagoras.html',              'Teorema de Pitágoras',         ('ejercicios', 1, 1)),
     # Lety (10-nov-2026): se escribieron los resueltos 5 y 6 para que alcancen
     ('razones-trigonometricas.html','Razones trigonométricas',      ('ejercicios', 1, 1)),
