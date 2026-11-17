@@ -139,6 +139,17 @@ Generadores listos en `Recursos lety2E/` (salieron de Math 3, sirven para Math 4
 `triangulos-svg-math.py`, `rectas-svg-math.py` (dos rectas y su punto de corte),
 `parabolas-svg-math.py` (por vértice y por foco-directriz), `rectas-numericas-svg-math.py`
 (intervalos), `regiones-svg-math.py` (semiplano sombreado) y `circunferencias-svg-math.py`.
+`escalera-recta-svg-math.py` (17-nov-2026) rehace las gráficas `y = mx + b` de una página en **formato
+escalera**: Δy magenta, Δx turquesa, recta y ordenada moradas, conservando los puntos de la comprobación.
+
+### Simulador de rectas (`assets/graficador-rectas.js`, 17-nov-2026)
+
+Simulador reutilizable de `y = mx + b`: botones positiva/negativa, deslizadores Δy y Δx (1 a 5) y b (−5 a 5),
+la regla de correspondencia y la gráfica que se forma escalón por escalón, con los colores del video de rectas.
+Se pone en cualquier tema con `<div class="graficador-recta"></div>` y
+`<script src="../../assets/graficador-rectas.js?v=5"></script>` al final (subir la `?v=` al cambiar el archivo,
+o los navegadores siguen con la versión vieja). Primera página: Math 2, *Pendiente y ordenada*
+(sección «Comprueba tu gráfica»).
 
 ### Reglas
 - **1 cuadro = 1 unidad** en ambos ejes (viewBox proporcional al rango). Excepción: cuando el
