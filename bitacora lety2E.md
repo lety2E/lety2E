@@ -12,6 +12,7 @@
 - **Gráficas del Ejemplo y los 6 resueltos** rehechas en formato escalera con `Recursos lety2E/escalera-recta-svg-math.py` (siguen siendo SVG fijos con `role="img"`, que cosecha `cuadros/`). Más grandes y siempre debajo del despeje.
 - **Resueltos sin saltar pasos**: se agregó el paso de dividir entre el coeficiente de y, y la línea m · b, como en el Ejemplo.
 - La **comprobación de puntos** va dentro de la tarjeta de su ejercicio (línea punteada), y la **recta a graficar** se resalta al inicio de cada tarjeta.
+- «Comprueba tu gráfica» se movió **después de los Ejercicios resueltos** (Lety: antes de eso el alumno todavía no ha visto los despejes).
 - **Examen 2 de Mate 2, Pendiente y ordenada: 1 resuelto + 1 de «Ejercicios extra 1»** (Lety). La página separa los extras igual que Mate 1: 6 en Extra 1 (Bloque A y B) y 14 en Extra 2. Receta en `banco.py` a 1+1; se rehízo la selección (solo cambió este tema) y se escribieron a mano las 6 resoluciones de los extras usados, con su gráfica de escalera. Hojas al 60–62 %.
 
 ## 2026-11-10 — Cuadros: exámenes de Matemáticas 2
