@@ -5,6 +5,12 @@
 
 ---
 
+## 2026-11-17 — Math 1 Pendiente y ordenada igual que Math 2, y el video en Math 3
+
+- **Math 1, Pendiente y ordenada**: lo mismo que Math 2 — video al inicio, gráficas de escalera (Ejemplo y 9 resueltos), paso de dividir entre el coeficiente y línea m · b en los resueltos, recta a graficar resaltada, comprobación dentro de su tarjeta y «Comprueba tu gráfica» después de los resueltos.
+- Cuadros Mate 1: las 6 resoluciones manuales de los extras de Pendiente con el paso de dividir y gráfica de escalera; hojas regeneradas (solo cambian las resueltas del Examen 1 en contenido; las demás páginas reciben el CSS de tablas que el generador agregó el 10-nov). No se tocó la selección.
+- **Math 3, Método gráfico**: sección «Recuerda» al inicio con el video de graficar con pendiente y ordenada.
+
 ## 2026-11-17 — Math 2, Pendiente y ordenada: video, simulador y resueltos completos
 
 - **Video** al inicio del tema: «Graficar una recta con pendiente y ordenada al origen» (qBg_IMux4rI), con el facade `.yt-lite`.

@@ -121,12 +121,12 @@
    "$10x+5y=20$": "$\\begin{aligned} 5y &= 20 - 10x \\\\ y &= \\dfrac{20 - 10x}{5} \\\\ \\mathbf{y} &= \\mathbf{4 - 2x} \\\\ &(-2,8), (-1,6), (0,4), (1,2), (2,0) \\end{aligned}$"
   },
   "Pendiente y ordenada": {
-   "$6x+5y-15=0$": "$\\begin{aligned} 5y &= -6x + 15 \\\\ \\mathbf{y} &\\mathbf{= -\\tfrac{6}{5}x + 3} \\end{aligned}$",
-   "$7x-3y+9=0$": "$\\begin{aligned} -3y &= -7x - 9 \\\\ \\mathbf{y} &\\mathbf{= \\tfrac{7}{3}x + 3} \\end{aligned}$",
-   "$-3x-4y+8=0$": "$\\begin{aligned} -4y &= 3x - 8 \\\\ \\mathbf{y} &\\mathbf{= -\\tfrac{3}{4}x + 2} \\end{aligned}$",
-   "$3x+2y+4=0$": "$\\begin{aligned} 2y &= -3x - 4 \\\\ \\mathbf{y} &\\mathbf{= -\\tfrac{3}{2}x - 2} \\end{aligned}$",
-   "$3x-2y-6=0$": "$\\begin{aligned} -2y &= -3x + 6 \\\\ \\mathbf{y} &\\mathbf{= \\tfrac{3}{2}x - 3} \\end{aligned}$",
-   "$-8x+3y+9=0$": "$\\begin{aligned} 3y &= 8x - 9 \\\\ \\mathbf{y} &\\mathbf{= \\tfrac{8}{3}x - 3} \\end{aligned}$"
+   "$6x+5y-15=0$": "$\\begin{aligned}\n5y &= -6x + 15 \\\\\ny &= \\frac{-6x + 15}{5} \\\\\n\\mathbf{y} &\\mathbf{= -\\tfrac{6}{5}x + 3}\n\\end{aligned}$",
+   "$7x-3y+9=0$": "$\\begin{aligned}\n-3y &= -7x - 9 \\\\\ny &= \\frac{-7x - 9}{-3} \\\\\n\\mathbf{y} &\\mathbf{= \\tfrac{7}{3}x + 3}\n\\end{aligned}$",
+   "$-3x-4y+8=0$": "$\\begin{aligned}\n-4y &= 3x - 8 \\\\\ny &= \\frac{3x - 8}{-4} \\\\\n\\mathbf{y} &\\mathbf{= -\\tfrac{3}{4}x + 2}\n\\end{aligned}$",
+   "$3x+2y+4=0$": "$\\begin{aligned}\n2y &= -3x - 4 \\\\\ny &= \\frac{-3x - 4}{2} \\\\\n\\mathbf{y} &\\mathbf{= -\\tfrac{3}{2}x - 2}\n\\end{aligned}$",
+   "$3x-2y-6=0$": "$\\begin{aligned}\n-2y &= -3x + 6 \\\\\ny &= \\frac{-3x + 6}{-2} \\\\\n\\mathbf{y} &\\mathbf{= \\tfrac{3}{2}x - 3}\n\\end{aligned}$",
+   "$-8x+3y+9=0$": "$\\begin{aligned}\n3y &= 8x - 9 \\\\\ny &= \\frac{8x - 9}{3} \\\\\n\\mathbf{y} &\\mathbf{= \\tfrac{8}{3}x - 3}\n\\end{aligned}$"
   },
   "Área y perímetro": {
    "$(2,3), (8,3), (5,9)$": "$\\begin{aligned} a &= \\dfrac{6(6)}{2} = \\dfrac{36}{2} = \\mathbf{18 \\, u^2} \\\\ m &= \\sqrt{3^2 + 6^2} = \\sqrt{9+36} \\\\ &= \\sqrt{45} = 6.71 \\\\ n &= \\sqrt{3^2 + 6^2} = \\sqrt{9+36} \\\\ &= \\sqrt{45} = 6.71 \\\\ P &= 6 + 6.71 + 6.71 \\\\ &= \\mathbf{19.42 \\, u} \\end{aligned}$",
